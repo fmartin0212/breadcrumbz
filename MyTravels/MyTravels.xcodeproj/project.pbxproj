@@ -1,0 +1,444 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CB42020D19500818430 /* AppDelegate.swift */; };
+		B7C10CB72020D19500818430 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CB62020D19500818430 /* CreateAccountViewController.swift */; };
+		B7C10CBA2020D19500818430 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7C10CB82020D19500818430 /* Main.storyboard */; };
+		B7C10CBD2020D19500818430 /* MyTravels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CBB2020D19500818430 /* MyTravels.xcdatamodeld */; };
+		B7C10CBF2020D19500818430 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7C10CBE2020D19500818430 /* Assets.xcassets */; };
+		B7C10CC22020D19500818430 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7C10CC02020D19500818430 /* LaunchScreen.storyboard */; };
+		B7C10CCB2020EDB400818430 /* TripsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CCA2020EDB400818430 /* TripsListViewController.swift */; };
+		B7C10CCD2020EFB000818430 /* TripPlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CCC2020EFB000818430 /* TripPlaceTableViewCell.swift */; };
+		B7C10CCF2020FD4B00818430 /* TripController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CCE2020FD4B00818430 /* TripController.swift */; };
+		B7C10CD12020FD5500818430 /* PlaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CD02020FD5500818430 /* PlaceController.swift */; };
+		B7C10CD3202111A300818430 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CD2202111A300818430 /* CoreDataStack.swift */; };
+		B7C10CD720214D4700818430 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C10CD620214D4700818430 /* CloudKit.framework */; };
+		B7C10CD920214F3C00818430 /* Trip + Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CD820214F3C00818430 /* Trip + Convenience.swift */; };
+		B7C10CDE20214F9A00818430 /* Place + Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CDD20214F9A00818430 /* Place + Convenience.swift */; };
+		B7C10CE02021539700818430 /* CreateTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CDF2021539700818430 /* CreateTripViewController.swift */; };
+		B7C10CE2202226ED00818430 /* TripPlacesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CE1202226ED00818430 /* TripPlacesListViewController.swift */; };
+		B7C10CE420222E1800818430 /* CreateNewPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CE320222E1800818430 /* CreateNewPlaceViewController.swift */; };
+		B7C10CE620222E2C00818430 /* PlaceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CE520222E2C00818430 /* PlaceDetailViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B7C10CB12020D19500818430 /* MyTravels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTravels.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7C10CB42020D19500818430 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B7C10CB62020D19500818430 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		B7C10CB92020D19500818430 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B7C10CBC2020D19500818430 /* MyTravels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyTravels.xcdatamodel; sourceTree = "<group>"; };
+		B7C10CBE2020D19500818430 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B7C10CC12020D19500818430 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B7C10CC32020D19500818430 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7C10CCA2020EDB400818430 /* TripsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsListViewController.swift; sourceTree = "<group>"; };
+		B7C10CCC2020EFB000818430 /* TripPlaceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripPlaceTableViewCell.swift; sourceTree = "<group>"; };
+		B7C10CCE2020FD4B00818430 /* TripController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripController.swift; sourceTree = "<group>"; };
+		B7C10CD02020FD5500818430 /* PlaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceController.swift; sourceTree = "<group>"; };
+		B7C10CD2202111A300818430 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		B7C10CD420214D4200818430 /* MyTravels.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyTravels.entitlements; sourceTree = "<group>"; };
+		B7C10CD620214D4700818430 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		B7C10CD820214F3C00818430 /* Trip + Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip + Convenience.swift"; sourceTree = "<group>"; };
+		B7C10CDD20214F9A00818430 /* Place + Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Place + Convenience.swift"; sourceTree = "<group>"; };
+		B7C10CDF2021539700818430 /* CreateTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripViewController.swift; sourceTree = "<group>"; };
+		B7C10CE1202226ED00818430 /* TripPlacesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripPlacesListViewController.swift; sourceTree = "<group>"; };
+		B7C10CE320222E1800818430 /* CreateNewPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewPlaceViewController.swift; sourceTree = "<group>"; };
+		B7C10CE520222E2C00818430 /* PlaceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B7C10CAE2020D19500818430 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7C10CD720214D4700818430 /* CloudKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B7C10CA82020D19500818430 = {
+			isa = PBXGroup;
+			children = (
+				B7C10CB32020D19500818430 /* MyTravels */,
+				B7C10CC92020D24300818430 /* Resources */,
+				B7C10CB22020D19500818430 /* Products */,
+				B7C10CD520214D4700818430 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B7C10CB22020D19500818430 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B7C10CB12020D19500818430 /* MyTravels.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B7C10CB32020D19500818430 /* MyTravels */ = {
+			isa = PBXGroup;
+			children = (
+				B7C10CD420214D4200818430 /* MyTravels.entitlements */,
+				B7C10CDB20214F6900818430 /* Model */,
+				B7C10CDA20214F5400818430 /* UI */,
+				B7C10CDC20214F7200818430 /* Controller */,
+			);
+			path = MyTravels;
+			sourceTree = "<group>";
+		};
+		B7C10CC92020D24300818430 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B7C10CB42020D19500818430 /* AppDelegate.swift */,
+				B7C10CBE2020D19500818430 /* Assets.xcassets */,
+				B7C10CC02020D19500818430 /* LaunchScreen.storyboard */,
+				B7C10CC32020D19500818430 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B7C10CD520214D4700818430 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B7C10CD620214D4700818430 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B7C10CDA20214F5400818430 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				B7C10CB62020D19500818430 /* CreateAccountViewController.swift */,
+				B7C10CDF2021539700818430 /* CreateTripViewController.swift */,
+				B7C10CCA2020EDB400818430 /* TripsListViewController.swift */,
+				B7C10CE320222E1800818430 /* CreateNewPlaceViewController.swift */,
+				B7C10CE1202226ED00818430 /* TripPlacesListViewController.swift */,
+				B7C10CE520222E2C00818430 /* PlaceDetailViewController.swift */,
+				B7C10CCC2020EFB000818430 /* TripPlaceTableViewCell.swift */,
+				B7C10CB82020D19500818430 /* Main.storyboard */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		B7C10CDB20214F6900818430 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B7C10CBB2020D19500818430 /* MyTravels.xcdatamodeld */,
+				B7C10CD2202111A300818430 /* CoreDataStack.swift */,
+				B7C10CD820214F3C00818430 /* Trip + Convenience.swift */,
+				B7C10CDD20214F9A00818430 /* Place + Convenience.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B7C10CDC20214F7200818430 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B7C10CCE2020FD4B00818430 /* TripController.swift */,
+				B7C10CD02020FD5500818430 /* PlaceController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B7C10CB02020D19500818430 /* MyTravels */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B7C10CC62020D19500818430 /* Build configuration list for PBXNativeTarget "MyTravels" */;
+			buildPhases = (
+				B7C10CAD2020D19500818430 /* Sources */,
+				B7C10CAE2020D19500818430 /* Frameworks */,
+				B7C10CAF2020D19500818430 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyTravels;
+			productName = MyTravels;
+			productReference = B7C10CB12020D19500818430 /* MyTravels.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B7C10CA92020D19500818430 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Frank Martin Jr";
+				TargetAttributes = {
+					B7C10CB02020D19500818430 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = B7C10CAC2020D19500818430 /* Build configuration list for PBXProject "MyTravels" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B7C10CA82020D19500818430;
+			productRefGroup = B7C10CB22020D19500818430 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B7C10CB02020D19500818430 /* MyTravels */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B7C10CAF2020D19500818430 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7C10CC22020D19500818430 /* LaunchScreen.storyboard in Resources */,
+				B7C10CBF2020D19500818430 /* Assets.xcassets in Resources */,
+				B7C10CBA2020D19500818430 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B7C10CAD2020D19500818430 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7C10CCF2020FD4B00818430 /* TripController.swift in Sources */,
+				B7C10CBD2020D19500818430 /* MyTravels.xcdatamodeld in Sources */,
+				B7C10CCB2020EDB400818430 /* TripsListViewController.swift in Sources */,
+				B7C10CE2202226ED00818430 /* TripPlacesListViewController.swift in Sources */,
+				B7C10CDE20214F9A00818430 /* Place + Convenience.swift in Sources */,
+				B7C10CB72020D19500818430 /* CreateAccountViewController.swift in Sources */,
+				B7C10CE02021539700818430 /* CreateTripViewController.swift in Sources */,
+				B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */,
+				B7C10CD920214F3C00818430 /* Trip + Convenience.swift in Sources */,
+				B7C10CE620222E2C00818430 /* PlaceDetailViewController.swift in Sources */,
+				B7C10CD12020FD5500818430 /* PlaceController.swift in Sources */,
+				B7C10CCD2020EFB000818430 /* TripPlaceTableViewCell.swift in Sources */,
+				B7C10CE420222E1800818430 /* CreateNewPlaceViewController.swift in Sources */,
+				B7C10CD3202111A300818430 /* CoreDataStack.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B7C10CB82020D19500818430 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B7C10CB92020D19500818430 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B7C10CC02020D19500818430 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B7C10CC12020D19500818430 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B7C10CC42020D19500818430 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B7C10CC52020D19500818430 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B7C10CC72020D19500818430 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MyTravels/MyTravels.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W53Z73CT67;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.frankmartin.MyTravels;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B7C10CC82020D19500818430 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MyTravels/MyTravels.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W53Z73CT67;
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.frankmartin.MyTravels;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B7C10CAC2020D19500818430 /* Build configuration list for PBXProject "MyTravels" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B7C10CC42020D19500818430 /* Debug */,
+				B7C10CC52020D19500818430 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B7C10CC62020D19500818430 /* Build configuration list for PBXNativeTarget "MyTravels" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B7C10CC72020D19500818430 /* Debug */,
+				B7C10CC82020D19500818430 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B7C10CBB2020D19500818430 /* MyTravels.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B7C10CBC2020D19500818430 /* MyTravels.xcdatamodel */,
+			);
+			currentVersion = B7C10CBC2020D19500818430 /* MyTravels.xcdatamodel */;
+			path = MyTravels.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = B7C10CA92020D19500818430 /* Project object */;
+}
