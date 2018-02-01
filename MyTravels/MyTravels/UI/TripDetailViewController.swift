@@ -10,32 +10,30 @@ import UIKit
 import CoreData
 
 class TripDetailViewController: UIViewController, NSFetchedResultsControllerDelegate {
-
+    
+    // MARK: - Properties
+    var trip: Trip? {
+        didSet {
+            print("Trip name: \(trip?.location)")
+        }
+    }
+    
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
-    
-    
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
         // Delegates
         tableView.delegate = self
         tableView.dataSource = self
         PlaceController.shared.frc.delegate = self
         
-        // Perform fetch request
-        do {
-            try PlaceController.shared.frc.performFetch()
-        } catch {
-            NSLog("Error starting fetched results controller")
-            
-            
-        }
+        tableView.reloadData()
+    
     }
     
-    // MARK: - Fetched  resuts controller observer
+    // MARK: - Fetched  Resuts Controller Delegate methods
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         switch type {
@@ -56,33 +54,50 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         }
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
+     // MARK: - Navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       
+        if segue.identifier == "toCreateNewPlaceSegue" {
+            guard let destinationVC = segue.destination as? CreateNewPlaceViewController,
+                let trip = self.trip
+                else { return }
+
+            destinationVC.trip = trip
+            
+        }
+     }
+
 }
 
 extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let places = PlaceController.shared.frc.fetchedObjects else { return 0 }
+        
+        guard let trip = trip,
+            let places = trip.places else { return 0 }
+        print(places.count)
         return places.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath) as! TripPlaceTableViewCell
-        guard let places = PlaceController.shared.frc.fetchedObjects else { return UITableViewCell() }
-        let place = places[indexPath.row]
+        
+        guard let trip = trip,
+            let places = trip.places else { return UITableViewCell() }
+        
+        let placesArray = places.allObjects
+        print(placesArray.count)
+        guard let place = placesArray[indexPath.row] as? Place else { return UITableViewCell() }
+        
         cell.place = place
         
         return cell
+        
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }

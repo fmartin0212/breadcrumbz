@@ -14,6 +14,11 @@ class CreateNewPlaceViewController: UIViewController, UIImagePickerControllerDel
     let imagePickerController = UIImagePickerController()
     var photo: Data?
     var imageWasUploaded = false
+    var trip: Trip? {
+        didSet {
+            print("hello")
+        }
+    }
     
     // MARK: - IBOutlets
     @IBOutlet weak var addPhotoButton: UIButton!
@@ -44,14 +49,14 @@ class CreateNewPlaceViewController: UIViewController, UIImagePickerControllerDel
         guard let name = nameTextField.text,
             let type = typeTextField.text,
             let address = addressTextField.text,
-            let comments = commentsTextView.text
+            let comments = commentsTextView.text,
+            let trip = self.trip
             else { return }
         
         if imageWasUploaded == false {
             guard let photo = UIImage(named: "world") else { return }
             guard let photoAsData = UIImageJPEGRepresentation(photo, 11.0) else { return }
-            let _ = Place(name: name, type: type, address: address, comments: comments, recommendation: true, photo: photoAsData)
-            PlaceController.shared.create()
+            PlaceController.shared.create(name: name, type: type, address: address, comments: comments, recommendation: true, photo: photoAsData, trip: trip)
             
             dismiss(animated: true, completion: nil)
         }

@@ -22,7 +22,7 @@
 		B7C10CD920214F3C00818430 /* Trip + Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CD820214F3C00818430 /* Trip + Convenience.swift */; };
 		B7C10CDE20214F9A00818430 /* Place + Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CDD20214F9A00818430 /* Place + Convenience.swift */; };
 		B7C10CE02021539700818430 /* CreateTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CDF2021539700818430 /* CreateTripViewController.swift */; };
-		B7C10CE2202226ED00818430 /* TripPlacesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CE1202226ED00818430 /* TripPlacesListViewController.swift */; };
+		B7C10CE2202226ED00818430 /* TripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CE1202226ED00818430 /* TripDetailViewController.swift */; };
 		B7C10CE420222E1800818430 /* CreateNewPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CE320222E1800818430 /* CreateNewPlaceViewController.swift */; };
 		B7C10CE620222E2C00818430 /* PlaceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CE520222E2C00818430 /* PlaceDetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -46,7 +46,7 @@
 		B7C10CD820214F3C00818430 /* Trip + Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip + Convenience.swift"; sourceTree = "<group>"; };
 		B7C10CDD20214F9A00818430 /* Place + Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Place + Convenience.swift"; sourceTree = "<group>"; };
 		B7C10CDF2021539700818430 /* CreateTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripViewController.swift; sourceTree = "<group>"; };
-		B7C10CE1202226ED00818430 /* TripPlacesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripPlacesListViewController.swift; sourceTree = "<group>"; };
+		B7C10CE1202226ED00818430 /* TripDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailViewController.swift; sourceTree = "<group>"; };
 		B7C10CE320222E1800818430 /* CreateNewPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewPlaceViewController.swift; sourceTree = "<group>"; };
 		B7C10CE520222E2C00818430 /* PlaceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,8 +117,8 @@
 				B7C10CB62020D19500818430 /* CreateAccountViewController.swift */,
 				B7C10CDF2021539700818430 /* CreateTripViewController.swift */,
 				B7C10CCA2020EDB400818430 /* TripsListViewController.swift */,
+				B7C10CE1202226ED00818430 /* TripDetailViewController.swift */,
 				B7C10CE320222E1800818430 /* CreateNewPlaceViewController.swift */,
-				B7C10CE1202226ED00818430 /* TripPlacesListViewController.swift */,
 				B7C10CE520222E2C00818430 /* PlaceDetailViewController.swift */,
 				B7C10CCC2020EFB000818430 /* TripPlaceTableViewCell.swift */,
 				B7C10CB82020D19500818430 /* Main.storyboard */,
@@ -229,7 +229,7 @@
 				B7C10CCF2020FD4B00818430 /* TripController.swift in Sources */,
 				B7C10CBD2020D19500818430 /* MyTravels.xcdatamodeld in Sources */,
 				B7C10CCB2020EDB400818430 /* TripsListViewController.swift in Sources */,
-				B7C10CE2202226ED00818430 /* TripPlacesListViewController.swift in Sources */,
+				B7C10CE2202226ED00818430 /* TripDetailViewController.swift in Sources */,
 				B7C10CDE20214F9A00818430 /* Place + Convenience.swift in Sources */,
 				B7C10CB72020D19500818430 /* CreateAccountViewController.swift in Sources */,
 				B7C10CE02021539700818430 /* CreateTripViewController.swift in Sources */,
