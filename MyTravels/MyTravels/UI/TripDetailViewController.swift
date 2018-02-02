@@ -166,12 +166,11 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let trip = trip,
-                let places = trip.places else { return }
-            
-            let placesArray = places.allObjects
-            guard let place = placesArray[indexPath.row] as? Place else { return }
+            guard let placeArray = array as? [[Place]] else { return }
+            let place = placeArray[indexPath.section][indexPath.row]
             PlaceController.shared.delete(place: place)
+            setUpArrays()
+
         }
     }
     
