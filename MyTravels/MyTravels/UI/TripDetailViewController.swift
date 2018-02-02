@@ -18,7 +18,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         }
     }
     var array: Array<Any>?
-    
+    var i = 0
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
     
@@ -34,9 +34,17 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         // Table view properties
         tableView.separatorStyle = .none
         
-        tableView.reloadData()
+        setUpArrays()
+       
         
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setUpArrays()
+    }
+    
+    // MARK: - Functions
+    func setUpArrays() {
         guard let trip = trip,
             let places = trip.places
             else { return }
@@ -47,27 +55,22 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         var restaurantsArray: [Place] = []
         var activitiesArray: [Place] = []
         
-        var lodgingCounter = 0
-        var restaurantCounter = 0
-        var activitiesCounter = 0
-        
         for place in placesArray {
             
             guard let placeAsPlace = place as? Place else { return }
-
+            
             if placeAsPlace.type == "Lodging" {
                 lodgingArray.append(placeAsPlace)
-                lodgingCounter += 1
+                
             } else if placeAsPlace.type == "Restaurant" {
                 restaurantsArray.append(placeAsPlace)
-                restaurantCounter += 1
+                
             } else if placeAsPlace.type == "Activity" {
                 activitiesArray.append(placeAsPlace)
-                activitiesCounter += 1
             }
             
-            }
-       
+        }
+        
         if lodgingArray.count > 0 {
             array.append(lodgingArray)
         }
@@ -83,10 +86,6 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         print("Array count: \(array.count)")
         print("Full array: \(array)")
         self.array = array
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
     }
     
@@ -136,32 +135,28 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let placeArray = array else { return "Section" }
-        for array in placeArray {
-            
-        }
-        return "section"
+        guard let placeArray = array as? [[Place]] else { return "Section" }
+        
+         return placeArray[section].first?.type
     }
+
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        guard let trip = trip,
-            let places = trip.places else { return 0 }
-//        print(places.count)
-        return places.count
-        
+        guard let placeArray = array as? [[Place]] else { return 0 }
+        return placeArray[section].count
     }
+    
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath) as! TripPlaceTableViewCell
         
-        guard let trip = trip,
-            let places = trip.places else { return UITableViewCell() }
+        guard let placeArray = array as? [[Place]] else { return UITableViewCell() }
+        let place = placeArray[indexPath.section][indexPath.row]
         
-        let placesArray = places.allObjects
-//        print(placesArray.count)
-        guard let place = placesArray[indexPath.row] as? Place else { return UITableViewCell() }
         
         cell.place = place
         
