@@ -35,7 +35,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         tableView.separatorStyle = .none
         
         setUpArrays()
-       
+        
         
     }
     
@@ -48,8 +48,8 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         guard let trip = trip,
             let places = trip.places
             else { return }
-        let placesArray = places.allObjects
-        print(placesArray.count)
+        guard let placesArray = places.allObjects as? [Place] else { return }
+        
         var array: [[Place]] = []
         var lodgingArray: [Place] = []
         var restaurantsArray: [Place] = []
@@ -57,16 +57,14 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         
         for place in placesArray {
             
-            guard let placeAsPlace = place as? Place else { return }
-            
-            if placeAsPlace.type == "Lodging" {
-                lodgingArray.append(placeAsPlace)
+            if place.type == "Lodging" {
+                lodgingArray.append(place)
                 
-            } else if placeAsPlace.type == "Restaurant" {
-                restaurantsArray.append(placeAsPlace)
+            } else if place.type == "Restaurant" {
+                restaurantsArray.append(place)
                 
-            } else if placeAsPlace.type == "Activity" {
-                activitiesArray.append(placeAsPlace)
+            } else if place.type == "Activity" {
+                activitiesArray.append(place)
             }
             
         }
@@ -111,23 +109,23 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
     }
     
     
-     // MARK: - Navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "toCreateNewPlaceSegue" {
             guard let destinationVC = segue.destination as? CreateNewPlaceViewController,
                 let trip = self.trip
                 else { return }
-
+            
             destinationVC.trip = trip
             
         }
-     }
-
+    }
+    
 }
 
 extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let array = array else { return 0 }
         
@@ -137,10 +135,10 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let placeArray = array as? [[Place]] else { return "Section" }
         
-         return placeArray[section].first?.type
+        return placeArray[section].first?.type
     }
-
-
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -170,7 +168,6 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
             let place = placeArray[indexPath.section][indexPath.row]
             PlaceController.shared.delete(place: place)
             setUpArrays()
-
         }
     }
     

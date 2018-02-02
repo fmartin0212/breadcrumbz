@@ -33,7 +33,6 @@ class CreateNewPlaceViewController: UIViewController, UIImagePickerControllerDel
         
         // Delegates
         imagePickerController.delegate = self
-        
     }
 
     // MARK: - IBActions
@@ -90,14 +89,20 @@ class CreateNewPlaceViewController: UIViewController, UIImagePickerControllerDel
         view.endEditing(true)
     }
     
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toTypeSelectionViewController" {
+            guard let destinationVC = segue.destination as? TypeSelectionViewController else { return }
+            destinationVC.delegate = self
+        }
     }
-    */
 
+}
+
+extension CreateNewPlaceViewController: TypeSelectionViewControllerDelegate {
+    func set(type: String) {
+        typeTextField.text = type
+    }
 }
