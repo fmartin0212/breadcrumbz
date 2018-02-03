@@ -162,14 +162,7 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return UIView()
     }
-    
-    func sectionHeaderLabelWith(text: String) -> UILabel {
-        let headerLabel = UILabel()
-        headerLabel.font = UIFont(name: "AvenirNext-Bold", size: 25)
-        headerLabel.text = text
-        return headerLabel
-    }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         guard let placeArray = array as? [[Place]] else { return 0 }

@@ -35,22 +35,18 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     }
     
     // MARK: - IBActions
-    
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+           dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func addPhotoButtonTapped(_ sender: UIButton) {
-        present(imagePickerController, animated: true, completion: nil)
-    }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         guard let trip = self.trip,
-        let name = nameTextField.text,
-        let type = typeTextField.text,
-        let address = addressTextField.text,
-        let comments = commentTextView.text
-        else { return }
+            let name = nameTextField.text,
+            let type = typeTextField.text,
+            let address = addressTextField.text,
+            let comments = commentTextView.text
+            else { return }
         
         if imageWasUploaded == false {
             guard let photo = UIImage(named: "London") else { return }
@@ -62,65 +58,34 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         
     }
     
-    @IBAction func typeSelectorButtonTapped(_ sender: UIButton) {
+    @IBAction func addPhotoButtonTapped(_ sender: UIButton) {
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    @IBAction func typeTapGestureRecognized(_ sender: Any) {
+        print("adsf")
+        performSegue(withIdentifier: "toTypeSelectionViewController", sender: self)
         
     }
     
     // MARK: - Table view data source
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+  
+        if section == 1 {
+      return sectionHeaderLabelWith(text: "Add a new place")
+        }
+        return UILabel()
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    
+  
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       
         if segue.identifier == "toTypeSelectionViewController" {
             guard let destinationVC = segue.destination as? TypeSelectionViewController else { return }
             destinationVC.delegate = self
-            
         }
+        
     }
 
 }
