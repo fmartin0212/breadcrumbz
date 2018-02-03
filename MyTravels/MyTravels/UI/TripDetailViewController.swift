@@ -113,7 +113,6 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         }
     }
     
-    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -132,14 +131,16 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
 extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
+      
         guard let array = array else { return 0 }
         
         return array.count
     }
     
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 40
-//    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     
         guard let placeArray = array as? [[Place]],
@@ -164,26 +165,16 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func sectionHeaderLabelWith(text: String) -> UILabel {
         let headerLabel = UILabel()
-        headerLabel.font = UIFont(name: "Avenir Next", size: 25)
+        headerLabel.font = UIFont(name: "AvenirNext-Bold", size: 25)
         headerLabel.text = text
         return headerLabel
     }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let placeArray = array as? [[Place]] else { return "Section" }
-
-        return placeArray[section].first?.type
-    }
-    
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         guard let placeArray = array as? [[Place]] else { return 0 }
         return placeArray[section].count
     }
-    
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -192,7 +183,6 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
         guard let placeArray = array as? [[Place]] else { return UITableViewCell() }
         let place = placeArray[indexPath.section][indexPath.row]
         
-        
         cell.place = place
         
         return cell
@@ -200,12 +190,14 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+       
         if editingStyle == .delete {
             guard let placeArray = array as? [[Place]] else { return }
             let place = placeArray[indexPath.section][indexPath.row]
             PlaceController.shared.delete(place: place)
             setUpArrays()
         }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
