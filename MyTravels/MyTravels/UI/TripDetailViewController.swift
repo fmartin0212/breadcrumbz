@@ -26,6 +26,11 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         
         super.viewDidLoad()
         
+        // Set navigation bar title/properties
+        guard let trip = trip else { return }
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedStringKey.font: UIFont(name: "Avenir Next", size: 20)!]
+        self.title = trip.location
+        
         // Delegates
         tableView.delegate = self
         tableView.dataSource = self
@@ -33,7 +38,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         
         // Table view properties
         tableView.separatorStyle = .none
-        
+//        tableView.s
         setUpArrays()
         
         
@@ -112,8 +117,8 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "toCreateNewPlaceSegue" {
-            guard let destinationVC = segue.destination as? CreateNewPlaceViewController,
+        if segue.identifier == "toCreateNewPlaceTableViewControllerSegue" {
+            guard let destinationVC = segue.destination as? CreateNewPlaceTableViewController,
                 let trip = self.trip
                 else { return }
             
@@ -132,9 +137,41 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
         return array.count
     }
     
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 40
+//    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    
+        guard let placeArray = array as? [[Place]],
+        let firstItemInArray = placeArray[section].first,
+            let firstItemInArrayType = firstItemInArray.type
+        else { return UIView() }
+        
+        if firstItemInArrayType == "Lodging" {
+            let text = "Lodging"
+            return sectionHeaderLabelWith(text: text)
+            
+        } else if firstItemInArrayType == "Restaurant" {
+            let text = "Restaurants"
+            return sectionHeaderLabelWith(text: text)
+            
+        } else if firstItemInArrayType == "Activity" {
+            let text = "Activities"
+            return sectionHeaderLabelWith(text: text)
+        }
+        return UIView()
+    }
+    
+    func sectionHeaderLabelWith(text: String) -> UILabel {
+        let headerLabel = UILabel()
+        headerLabel.font = UIFont(name: "Avenir Next", size: 25)
+        headerLabel.text = text
+        return headerLabel
+    }
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let placeArray = array as? [[Place]] else { return "Section" }
-        
+
         return placeArray[section].first?.type
     }
     
@@ -150,7 +187,7 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath) as! TripPlaceTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath) as! PlaceTableViewCell
         
         guard let placeArray = array as? [[Place]] else { return UITableViewCell() }
         let place = placeArray[indexPath.section][indexPath.row]
@@ -172,7 +209,7 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+        return 106
     }
     
 }

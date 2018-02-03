@@ -83,7 +83,7 @@ extension TripsListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TripCell", for: indexPath) as! TripPlaceTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TripCell", for: indexPath) as! TripTableViewCell
         guard let trips = TripController.shared.frc.fetchedObjects else { return UITableViewCell() }
         let trip = trips[indexPath.row]
         cell.trip = trip

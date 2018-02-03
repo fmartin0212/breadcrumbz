@@ -1,5 +1,5 @@
 //
-//  TripPlaceTableViewCell
+//  TripTableViewCell
 //  MyTravels
 //
 //  Created by Frank Martin Jr on 1/30/18.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class TripPlaceTableViewCell: UITableViewCell {
+class TripTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     var trip: Trip? {
         didSet {
-            updateViewsForTrip()
+            updateViews()
         }
     }
     var place: Place? {
@@ -39,7 +39,7 @@ class TripPlaceTableViewCell: UITableViewCell {
     }
     
     // MARK: - Functions
-    func updateViewsForTrip() {
+    func updateViews() {
         tripRecommendationImageView.isHidden = true
         tripImageView.layer.cornerRadius = 8
         tripImageView.clipsToBounds = true

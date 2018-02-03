@@ -42,10 +42,10 @@ class TypeSelectionViewController: UIViewController {
     @IBAction func lodgingButtonTapped(_ sender: UIButton) {
         
         //FIXME: - refactor to use function, pass in button text
-        UIView.animate(withDuration: 0.05, animations: {
+        UIView.animate(withDuration: 0.10, animations: {
             self.lodgingButton.transform = CGAffineTransform(scaleX: 0.90, y: 0.90)
         }) { (_) in
-            UIView.animate(withDuration: 0.05, animations: {
+            UIView.animate(withDuration: 0.10, animations: {
                     self.lodgingButton.transform = CGAffineTransform.identity
                 }, completion: { (_) in
                     self.delegate?.set(type: "Lodging")
@@ -57,10 +57,10 @@ class TypeSelectionViewController: UIViewController {
     
     @IBAction func restaurantButtonTapped(_ sender: UIButton) {
        
-        UIView.animate(withDuration: 0.05, animations: {
+        UIView.animate(withDuration: 0.10, animations: {
             self.restaurantButton.transform = CGAffineTransform(scaleX: 0.90, y: 0.90)
         }) { (_) in
-            UIView.animate(withDuration: 0.05, animations: {
+            UIView.animate(withDuration: 0.10, animations: {
                 self.restaurantButton.transform = CGAffineTransform.identity
             }, completion: { (_) in
                 self.delegate?.set(type: "Restaurant")
@@ -71,10 +71,10 @@ class TypeSelectionViewController: UIViewController {
     
     @IBAction func activityButtonTapped(_ sender: UIButton) {
 
-        UIView.animate(withDuration: 0.05, animations: {
+        UIView.animate(withDuration: 0.10, animations: {
             self.activityButton.transform = CGAffineTransform(scaleX: 0.90, y: 0.90)
         }) { (_) in
-            UIView.animate(withDuration: 0.05, animations: {
+            UIView.animate(withDuration: 0.10, animations: {
                 self.activityButton.transform = CGAffineTransform.identity
             }, completion: { (_) in
                 self.delegate?.set(type: "Activity")

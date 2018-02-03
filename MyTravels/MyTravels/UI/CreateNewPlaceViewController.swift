@@ -45,6 +45,7 @@ class CreateNewPlaceViewController: UIViewController, UIImagePickerControllerDel
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
+      
         guard let name = nameTextField.text,
             let type = typeTextField.text,
             let address = addressTextField.text,
