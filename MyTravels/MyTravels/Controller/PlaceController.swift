@@ -23,8 +23,8 @@ class PlaceController {
     // CRUD Functions
     
     // Create
-    func create(name: String, type: String, address: String, comments: String, recommendation: Bool, photo: Data, trip: Trip) {
-        let newPlace = Place(name: name, type: type, address: address, comments: comments, recommendation: recommendation, photo: photo, trip: trip)
+    func create(name: String, type: String, address: String, comments: String, rating: Int16, photo: Data, trip: Trip) {
+        let newPlace = Place(name: name, type: type, address: address, comments: comments, rating: rating, photo: photo, trip: trip)
         saveToPersistentStore()
         
     }

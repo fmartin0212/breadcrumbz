@@ -43,4 +43,14 @@ class PlaceTableViewCell: UITableViewCell {
         placeAddressLabel.text = place.address
         
     }
+    
+    func updateStarsImageViews() {
+        let starImageViewsArray = [starOne, starTwo, starThree, starFour, starFive]
+        guard let place = place else { return }
+        if place.rating == 0 {
+            for starImageView in starImageViewsArray {
+                starImageView?.image = UIImage(named: )
+            }
+        }
+    }
 }

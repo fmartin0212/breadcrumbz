@@ -5,7 +5,7 @@
         <attribute name="comments" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="recommendation" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="rating" optional="YES" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="places" inverseEntity="Trip" syncable="YES"/>
     </entity>
@@ -15,7 +15,7 @@
         <relationship name="places" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Place" inverseName="trip" inverseEntity="Place" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Place" positionX="-99" positionY="117" width="128" height="150"/>
         <element name="Trip" positionX="-506" positionY="26" width="128" height="88"/>
-        <element name="Place" positionX="-99" positionY="117" width="128" height="148"/>
     </elements>
 </model>

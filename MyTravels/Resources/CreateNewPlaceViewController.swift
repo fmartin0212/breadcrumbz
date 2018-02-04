@@ -56,7 +56,7 @@ class CreateNewPlaceViewController: UIViewController, UIImagePickerControllerDel
         if imageWasUploaded == false {
             guard let photo = UIImage(named: "world") else { return }
             guard let photoAsData = UIImageJPEGRepresentation(photo, 11.0) else { return }
-            PlaceController.shared.create(name: name, type: type, address: address, comments: comments, recommendation: true, photo: photoAsData, trip: trip)
+            PlaceController.shared.create(name: name, type: type, address: address, comments: comments, rating: 30, photo: photoAsData, trip: trip)
             
             dismiss(animated: true, completion: nil)
         }

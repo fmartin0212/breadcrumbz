@@ -52,10 +52,10 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
     
     // MARK: - Functions
     func setUpArrays() {
+        
         guard let trip = trip,
-            let places = trip.places
-            else { return }
-        guard let placesArray = places.allObjects as? [Place] else { return }
+            let places = trip.places,
+            let placesArray = places.allObjects as? [Place] else { return }
         
         var array: [[Place]] = []
         var lodgingArray: [Place] = []
@@ -91,7 +91,9 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         print("Array count: \(array.count)")
         print("Full array: \(array)")
         self.array = array
+        
         tableView.reloadData()
+        
     }
     
     // MARK: - Fetched  Resuts Controller Delegate methods
@@ -119,6 +121,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "toCreateNewPlaceTableViewControllerSegue" {
+            
             guard let destinationVC = segue.destination as? CreateNewPlaceTableViewController,
                 let trip = self.trip
                 else { return }
@@ -126,6 +129,20 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
             destinationVC.trip = trip
             
         }
+        
+        if segue.identifier == "toPlaceDetailTableViewController" {
+           
+            guard let destinationVC = segue.destination as? PlaceDetailTableViewController,
+                let indexPath = tableView.indexPathForSelectedRow,
+                let placeArray = array as? [[Place]]
+                else { return }
+            
+            let place = placeArray[indexPath.section][indexPath.row]
+            destinationVC.place = place
+            
+
+        }
+        
     }
     
 }
