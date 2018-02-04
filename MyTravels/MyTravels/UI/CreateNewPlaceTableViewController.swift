@@ -31,16 +31,18 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         
         // Delegates
         imagePickerController.delegate = self
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "AvenirNext", size: 20)!]
+        
 
     }
     
     // MARK: - IBActions
-    @IBAction func cancelButtonTapped(_ sender: UIButton) {
+    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
            dismiss(animated: true, completion: nil)
     }
     
     
-    @IBAction func saveButtonTapped(_ sender: UIButton) {
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         guard let trip = self.trip,
             let name = nameTextField.text,
             let type = typeTextField.text,
@@ -69,7 +71,7 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     }
     
     // MARK: - Table view data source
-
+/*
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
   
         if section == 1 {
@@ -77,7 +79,8 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         }
         return UILabel()
     }
-  
+ 
+ */
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        

@@ -21,6 +21,11 @@ class PlaceTableViewCell: UITableViewCell {
     @IBOutlet weak var placeImageView: UIImageView!
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var placeAddressLabel: UILabel!
+    @IBOutlet weak var starOne: UIImageView!
+    @IBOutlet weak var starTwo: UIImageView!
+    @IBOutlet weak var starThree: UIImageView!
+    @IBOutlet weak var starFour: UIImageView!
+    @IBOutlet weak var starFive: UIImageView!
     
     // MARK: - Functions
     func updateViews() {
@@ -35,6 +40,7 @@ class PlaceTableViewCell: UITableViewCell {
         let photo = UIImage(data: photoAsData)
         placeImageView.image = photo
         placeNameLabel.text = place.name
+        placeAddressLabel.text = place.address
         
     }
 }

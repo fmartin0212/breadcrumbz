@@ -18,9 +18,11 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         }
     }
     var array: Array<Any>?
-    var i = 0
+    
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
+ 
+    
     
     override func viewDidLoad() {
         
@@ -138,7 +140,7 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 30
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -149,15 +151,15 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
         else { return UIView() }
         
         if firstItemInArrayType == "Lodging" {
-            let text = "Lodging"
+            let text = "   Lodging"
             return sectionHeaderLabelWith(text: text)
             
         } else if firstItemInArrayType == "Restaurant" {
-            let text = "Restaurants"
+            let text = "   Restaurants"
             return sectionHeaderLabelWith(text: text)
             
         } else if firstItemInArrayType == "Activity" {
-            let text = "Activities"
+            let text = "   Activities"
             return sectionHeaderLabelWith(text: text)
         }
         return UIView()
@@ -172,6 +174,7 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath) as! PlaceTableViewCell
+        cell.selectionStyle = .none
         
         guard let placeArray = array as? [[Place]] else { return UITableViewCell() }
         let place = placeArray[indexPath.section][indexPath.row]
