@@ -9,36 +9,84 @@
 import UIKit
 
 class CreateTripTableViewController: UITableViewController {
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var chooseStartDateTextField: UITextField!
-    @IBOutlet weak var chooseEndDateTextField: UITextField!
+    
+    // MARK: - Properties
+    var startDate: Date?
+    var endDate: Date?
+    var isEndDate: Bool = false
+    
+    // MARK: - IBOutlets
+    @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var startDateTextField: UITextField!
+    @IBOutlet weak var endDateTextField: UITextField!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
-    // MARK: - Tap gesture recognizer functions
     
-    @IBAction func chooseStartDateTapped(_ sender: UITapGestureRecognizer) {
-            
-    }
-    
-    @IBAction func chooseEndDateTapped(_ sender: UITapGestureRecognizer) {
+    // MARK: - IBActions
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        
+        guard let location = locationTextField.text,
+            let startDate = startDate,
+            let endDate = endDate
+            else { return }
+        
+        // FIX ME: - update to be actual trip photo once collection view/picker added
+        guard let photo = UIImage(named: "London"),
+            let photoAsData = UIImagePNGRepresentation(photo) else { return }
+        
+        let newTrip = Trip(location: location, startDate: startDate, endDate: endDate, photo: photoAsData)
+        TripController.shared.create(trip: newTrip)
+        
+        dismiss(animated: true, completion: nil)
         
     }
     
-    // MARK: - Table view data source
     
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "toChooseStartDateViewControllerSegue" {
+            guard let destinationVC = segue.destination as? ChooseDateViewController
+                else { return }
+            
+            isEndDate = false
+            destinationVC.isEndDate = isEndDate
+            destinationVC.delegate = self
+        }
+        
+        if segue.identifier == "toChooseEndDateViewControllerSegue" {
+            guard let destinationVC = segue.destination as? ChooseDateViewController
+                else { return }
+            
+            isEndDate = true
+            destinationVC.isEndDate = isEndDate
+            destinationVC.delegate = self
+        }
     }
-    */
+    
+}
 
+extension CreateTripTableViewController: ChooseDateViewControllerDelegate {
+    
+    func set(date: Date) {
+       
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        let dateAsString = dateFormatter.string(from: date)
+        
+        if isEndDate == false {
+            startDateTextField.text = dateAsString
+            startDate = date
+            
+        } else {
+            endDateTextField.text = dateAsString
+            endDate = date
+        }
+        
+    }
+    
 }
 

@@ -12,6 +12,8 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
 
     // MARK: - Properties
     let imagePicker = UIImagePickerController()
+    var startDate: Date?
+    var endDate: Date?
     var photoAsData: Data?
     
     // MARK: - IBOutlets
@@ -54,9 +56,11 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
         }
         
         guard let location = locationTextField.text,
+            let startDate = startDate,
+            let endDate = endDate,
             let photo = self.photoAsData
             else { return }
-        let newTrip = Trip(location: location, photo: photo)
+        let newTrip = Trip(location: location, startDate: startDate, endDate: startDate, photo: photo)
         TripController.shared.create(trip: newTrip)
         
         dismiss(animated: true, completion: nil)

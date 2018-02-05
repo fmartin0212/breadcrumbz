@@ -25,13 +25,8 @@ class TypeSelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Format overlay view properties
-        overlayView.layer.shadowColor = UIColor.black.cgColor
-        overlayView.layer.shadowOpacity = 0.5
-        overlayView.layer.shadowOffset = CGSize.zero
-        overlayView.layer.shadowRadius = 10
-        overlayView.layer.cornerRadius = 8
+    
+        setPropertiesFor(overlayView: overlayView)
         
         // Format button properties
         lodgingButton.layer.cornerRadius = 8

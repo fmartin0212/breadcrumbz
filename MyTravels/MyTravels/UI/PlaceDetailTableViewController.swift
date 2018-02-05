@@ -14,9 +14,6 @@ class PlaceDetailTableViewController: UITableViewController {
     var place: Place? {
         didSet {
             guard let place = place else { return }
-//            placeNameLabel.text = place.name
-//            placeAddressLabel.text = place.address
-//            tableView.reloadData()
         }
     }
     

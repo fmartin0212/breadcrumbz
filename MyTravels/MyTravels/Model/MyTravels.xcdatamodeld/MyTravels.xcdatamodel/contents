@@ -10,12 +10,14 @@
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="places" inverseEntity="Trip" syncable="YES"/>
     </entity>
     <entity name="Trip" representedClassName="Trip" syncable="YES" codeGenerationType="class">
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photo" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="places" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Place" inverseName="trip" inverseEntity="Place" syncable="YES"/>
     </entity>
     <elements>
         <element name="Place" positionX="-99" positionY="117" width="128" height="150"/>
-        <element name="Trip" positionX="-506" positionY="26" width="128" height="88"/>
+        <element name="Trip" positionX="-506" positionY="26" width="128" height="120"/>
     </elements>
 </model>

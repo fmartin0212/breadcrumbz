@@ -11,9 +11,11 @@ import CoreData
 
 extension Trip {
     
-    convenience init(location: String, photo: Data, context: NSManagedObjectContext = CoreDataStack.context) {
+    convenience init(location: String, startDate: Date, endDate: Date, photo: Data, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
         self.location = location
+        self.startDate = startDate
+        self.endDate = endDate
         self.photo = photo
     }
     

@@ -17,4 +17,19 @@ extension UIViewController {
         return headerLabel
     }
     
+    func setPropertiesFor(overlayView: UIView) {
+      
+        overlayView.layer.shadowColor = UIColor.black.cgColor
+        overlayView.layer.shadowOpacity = 0.5
+        overlayView.layer.shadowOffset = CGSize.zero
+        overlayView.layer.shadowRadius = 5
+        overlayView.layer.cornerRadius = 8
+        
+    }
+    
+    func setPropertiesFor(button: UIButton) {
+        button.backgroundColor = #colorLiteral(red: 1, green: 0.7723504523, blue: 0.6153716984, alpha: 1)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.cornerRadius = 8
+    }
 }
