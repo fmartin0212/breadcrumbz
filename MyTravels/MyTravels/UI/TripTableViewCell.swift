@@ -21,20 +21,39 @@ class TripTableViewCell: UITableViewCell {
     // Trip
     @IBOutlet weak var tripImageView: UIImageView!
     @IBOutlet weak var tripNameLabel: UILabel!
-    @IBOutlet weak var tripRecommendationImageView: UIImageView!
+    @IBOutlet weak var tripDatesLabel: UILabel!
+    @IBOutlet weak var tripStartDateLabel: UILabel!
+    @IBOutlet weak var tripEndDateLabel: UILabel!
     
     // MARK: - Functions
     func updateViews() {
-        tripImageView.layer.cornerRadius = 8
+        
+        tripImageView.layer.cornerRadius = 4
         tripImageView.clipsToBounds = true
+        
         guard let trip = trip,
-            let photoAsData = trip.photo
+            let photoAsData = trip.photo,
+            let startDate = trip.startDate,
+            let endDate = trip.endDate
             else { return }
+        
         let photo = UIImage(data: photoAsData)
         tripImageView.image = photo
         tripNameLabel.text = trip.location
         
+        tripStartDateLabel.text = "\(shortDateString(date: startDate)) -"
+        tripEndDateLabel.text = shortDateString(date: endDate)
+    
+    }
+    
+    func shortDateString(date: Date) -> String {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        let date = dateFormatter.string(from: date)
+        
+        return date
+        
     }
 
-    
 }

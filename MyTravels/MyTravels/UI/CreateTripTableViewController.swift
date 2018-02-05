@@ -8,40 +8,72 @@
 
 import UIKit
 
-class CreateTripTableViewController: UITableViewController {
+class CreateTripTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // MARK: - Properties
     var startDate: Date?
     var endDate: Date?
     var isEndDate: Bool = false
+    var photo: Data?
+    let imagePickerController = UIImagePickerController()
     
     // MARK: - IBOutlets
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var startDateTextField: UITextField!
     @IBOutlet weak var endDateTextField: UITextField!
-    
+    @IBOutlet weak var photoImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Delegates
+        imagePickerController.delegate = self
+        
+        // Photo properties
+        photoImageView.layer.cornerRadius = 4
+        
     }
     
     // MARK: - IBActions
+    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         
         guard let location = locationTextField.text,
             let startDate = startDate,
-            let endDate = endDate
+            let endDate = endDate,
+            let photo = photo
             else { return }
         
-        // FIX ME: - update to be actual trip photo once collection view/picker added
-        guard let photo = UIImage(named: "London"),
-            let photoAsData = UIImagePNGRepresentation(photo) else { return }
-        
-        let newTrip = Trip(location: location, startDate: startDate, endDate: endDate, photo: photoAsData)
+        let newTrip = Trip(location: location, startDate: startDate, endDate: endDate, photo: photo)
         TripController.shared.create(trip: newTrip)
         
         dismiss(animated: true, completion: nil)
         
+    }
+    
+    @IBAction func addPhotoGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    // MARK: - Image picker controller delegate methods
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        picker.allowsEditing = true
+        guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage,
+            let photoAsData = UIImagePNGRepresentation(photo)
+            else { return }
+        self.photo = photoAsData
+        
+        photoImageView.image = photo
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
     
     

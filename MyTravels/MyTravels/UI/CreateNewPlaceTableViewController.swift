@@ -20,25 +20,30 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     var photo: Data?
     var imageWasUploaded = false
     var rating: Int16 = 0
+    var mockPhotoData: [Data]?
     
     // MARK: - IBOutlets
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var typeTextField: UITextField!
-    @IBOutlet weak var addressTextField: UITextField!
-    @IBOutlet weak var commentTextView: UITextView!
-    
     @IBOutlet weak var starOne: UIImageView!
     @IBOutlet weak var starTwo: UIImageView!
     @IBOutlet weak var starThree: UIImageView!
     @IBOutlet weak var starFour: UIImageView!
     @IBOutlet weak var starFive: UIImageView!
     
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var typeTextField: UITextField!
+    @IBOutlet weak var addressTextField: UITextField!
+    @IBOutlet weak var commentTextView: UITextView!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Delegates
         imagePickerController.delegate = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "AvenirNext", size: 20)!]
         
 
@@ -48,7 +53,6 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
            dismiss(animated: true, completion: nil)
     }
-    
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         guard let trip = self.trip,
@@ -232,4 +236,44 @@ extension CreateNewPlaceTableViewController: TypeSelectionViewControllerDelegate
     func set(type: String) {
         typeTextField.text = type
     }
+}
+
+extension CreateNewPlaceTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let image = UIImage(named: "AddTripPhoto256"),
+        let photo = UIImagePNGRepresentation(image)
+        else { return 0 }
+        guard let image1 = UIImage(named: "London"),
+            let image2 = UIImage(named: "world"),
+            let image1AsData = UIImagePNGRepresentation(image1),
+            let image2AsData = UIImagePNGRepresentation(image2)
+            else { return 0 }
+        var mockPhotoData = [image1AsData, image2AsData]
+        self.mockPhotoData = mockPhotoData
+        guard var mockPhotoDataUnwrapped = self.mockPhotoData else { return 0 }
+        mockPhotoDataUnwrapped.insert(photo, at: 0)
+        self.mockPhotoData = mockPhotoDataUnwrapped
+        
+        return mockPhotoDataUnwrapped.count
+
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
+        guard let mockPhotoData = self.mockPhotoData else { return UICollectionViewCell() }
+        if indexPath.row == 0 {
+            guard let photo = UIImage(named: "AddTripPhoto256"),
+                let photoAsData = UIImagePNGRepresentation(photo)
+                else { return UICollectionViewCell() }
+            cell.photo = photoAsData
+            return cell
+        } else if indexPath.row > 0 {
+            let photo = mockPhotoData[indexPath.row]
+            cell.photo = photo
+
+            return cell
+        }
+        return UICollectionViewCell()
+    }
+    
 }

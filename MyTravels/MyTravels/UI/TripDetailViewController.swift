@@ -28,7 +28,6 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         
         // Set navigation bar title/properties
         guard let trip = trip else { return }
-        self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedStringKey.font: UIFont(name: "Avenir Next", size: 20)!]
         self.title = trip.location
         
         // Delegates
@@ -38,7 +37,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         
         // Table view properties
         tableView.separatorStyle = .none
-//        tableView.s
+        
         setUpArrays()
         
         

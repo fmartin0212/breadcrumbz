@@ -11,10 +11,13 @@ import UIKit
 extension UIViewController {
     
     func sectionHeaderLabelWith(text: String) -> UILabel {
+     
         let headerLabel = UILabel()
         headerLabel.font = UIFont(name: "AvenirNext-Bold", size: 25)
         headerLabel.text = text
+        
         return headerLabel
+        
     }
     
     func setPropertiesFor(overlayView: UIView) {
@@ -28,8 +31,11 @@ extension UIViewController {
     }
     
     func setPropertiesFor(button: UIButton) {
+       
         button.backgroundColor = #colorLiteral(red: 1, green: 0.7723504523, blue: 0.6153716984, alpha: 1)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.cornerRadius = 8
+        
     }
+
 }

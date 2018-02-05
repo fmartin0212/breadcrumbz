@@ -57,6 +57,7 @@ class PlaceDetailTableViewController: UITableViewController {
             }
         } else if place.rating > 0 {
             var i = 0
+            
             while i < Int(place.rating) {
                 starImageViewsArray[i]?.image = UIImage(named: "star-black-16")
                 i += 1
