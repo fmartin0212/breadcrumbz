@@ -34,6 +34,8 @@ class PlaceDetailTableViewController: UITableViewController {
         super.viewDidLoad()
 //        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
 //         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        self.title = place?.name
+            
         updateViews()
     }
     
