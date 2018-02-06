@@ -34,9 +34,13 @@ class PlaceTableViewCell: UITableViewCell {
         placeImageView.layer.cornerRadius = 5
         placeImageView.clipsToBounds = true
         
-        guard let place = place
+        guard let place = place,
+        let photosAsSet = place.photos,
+        let photosArray = photosAsSet.allObjects as? [Photo],
+        let photo = photosArray[0].photo
             else { return }
-//        placeImageView.image = photo
+        guard let image = UIImage(data: photo) else { return }
+        placeImageView.image = image
         placeNameLabel.text = place.name
         placeAddressLabel.text = place.address
         updateStarsImageViews(place: place)

@@ -22,8 +22,11 @@ class PhotoController {
     }()
     
     // Add photo to place
-    func add(photo: Data, place: Place) {
-        let newPhoto = Photo(photo: photo, place: place, trip: nil)
+    func add(photos: [Data], place: Place) {
+        for photo in photos {
+            let newPhoto = Photo(photo: photo, place: place, trip: nil)
+            print(newPhoto)
+        }
         saveToPersistentStore()
     }
     

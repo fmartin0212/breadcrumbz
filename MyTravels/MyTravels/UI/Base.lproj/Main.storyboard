@@ -938,7 +938,6 @@
                                                                     </imageView>
                                                                 </subviews>
                                                             </view>
-                                                            <color key="backgroundColor" red="1" green="0.77235045229999999" blue="0.61537169839999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <connections>
                                                                 <outlet property="photoImageView" destination="bZo-tL-CBg" id="AYy-RK-jGM"/>
                                                             </connections>

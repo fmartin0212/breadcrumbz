@@ -11,8 +11,6 @@ import CoreData
 
 class TripController {
     
-    var trip: Trip?
-    
     // MARK: - Properties
     static var shared = TripController()
     var frc: NSFetchedResultsController<Trip> = {
@@ -22,6 +20,7 @@ class TripController {
         
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
     }()
+    var trip: Trip?
     
     // MARK: - CRUD Functions
     

@@ -21,6 +21,7 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     var imageWasUploaded = false
     var rating: Int16 = 0
     var mockPhotoData: [Data]?
+    var photos: [Data] = []
     
     // MARK: - IBOutlets
     @IBOutlet weak var starOne: UIImageView!
@@ -38,14 +39,17 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        guard let addPhotoImage = UIImage(named: "AddTripPhoto256"),
+            let addPhotoImageAsData = UIImagePNGRepresentation(addPhotoImage) else { return }
+        self.photos.insert(addPhotoImageAsData, at: 0)
+
         // Delegates
         imagePickerController.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "AvenirNext", size: 20)!]
-        
 
     }
     
@@ -62,13 +66,20 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
             let comments = commentTextView.text
             else { return }
         
+        self.photos.remove(at: 0)
+        
         if imageWasUploaded == false {
             guard let photo = UIImage(named: "London") else { return }
             guard let photoAsData = UIImageJPEGRepresentation(photo, 11.0) else { return }
-            PlaceController.shared.create(name: name, type: type, address: address, comments: comments, rating: rating, photo: photoAsData, trip: trip)
-            
+            PlaceController.shared.create(name: name, type: type, address: address, comments: comments, rating: rating, trip: trip)
+        
             dismiss(animated: true, completion: nil)
         }
+        
+        PlaceController.shared.create(name: name, type: type, address: address, comments: comments, rating: rating, trip: trip)
+        guard let place = PlaceController.shared.place else { return }
+        PhotoController.shared.add(photos: self.photos, place: place)
+        dismiss(animated: true, completion: nil)
         
     }
     
@@ -215,7 +226,19 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+      
         imagePickerController.allowsEditing = true
+        guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage,
+            let photoAsData = UIImagePNGRepresentation(photo)
+            else { return }
+        
+        self.photos.append(photoAsData)
+       
+        if self.photos.count > 1 {
+            imageWasUploaded = true
+        }
+        
+        dismiss(animated: true, completion: collectionView.reloadData)
         
     }
     
@@ -238,44 +261,21 @@ extension CreateNewPlaceTableViewController: TypeSelectionViewControllerDelegate
 }
 
 extension CreateNewPlaceTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let image = UIImage(named: "AddTripPhoto256"),
-        let photo = UIImagePNGRepresentation(image)
-        else { return 0 }
-        guard let image1 = UIImage(named: "London"),
-            let image2 = UIImage(named: "world"),
-            let image1AsData = UIImagePNGRepresentation(image1),
-            let image2AsData = UIImagePNGRepresentation(image2)
-            else { return 0 }
-        var mockPhotoData = [image1AsData, image2AsData]
-        self.mockPhotoData = mockPhotoData
-        guard var mockPhotoDataUnwrapped = self.mockPhotoData else { return 0 }
-        mockPhotoDataUnwrapped.insert(photo, at: 0)
-        self.mockPhotoData = mockPhotoDataUnwrapped
-        
-        return mockPhotoDataUnwrapped.count
-
+        return photos.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
-        guard let mockPhotoData = self.mockPhotoData else { return UICollectionViewCell() }
-        if indexPath.row == 0 {
-            guard let photo = UIImage(named: "AddTripPhoto256"),
-                let photoAsData = UIImagePNGRepresentation(photo)
-                else { return UICollectionViewCell() }
-            cell.photo = photoAsData
+            cell.photo = photos[indexPath.row]
             return cell
-        } else if indexPath.row > 0 {
-            let photo = mockPhotoData[indexPath.row]
-            cell.photo = photo
-
-            return cell
-        }
-        return UICollectionViewCell()
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      
         if indexPath.row == 0 {
             present(imagePickerController, animated: true, completion: nil)
         }

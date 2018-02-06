@@ -19,12 +19,14 @@ class PlaceController {
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
     
     }()
+    var place: Place?
     
     // CRUD Functions
     
     // Create
-    func create(name: String, type: String, address: String, comments: String, rating: Int16, photo: Data, trip: Trip) {
+    func create(name: String, type: String, address: String, comments: String, rating: Int16, trip: Trip) {
         let newPlace = Place(name: name, type: type, address: address, comments: comments, rating: rating, trip: trip)
+        self.place = newPlace
         saveToPersistentStore()
         
     }
