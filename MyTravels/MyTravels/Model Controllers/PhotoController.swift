@@ -11,6 +11,7 @@ import CoreData
 
 class PhotoController {
     
+    // MARK: - Properties
     static var shared = PhotoController()
     
     var frc: NSFetchedResultsController<Photo> = {
@@ -21,6 +22,7 @@ class PhotoController {
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
     }()
     
+    // CRUD Functions
     // Add photo to place
     func add(photos: [Data], place: Place) {
         for photo in photos {

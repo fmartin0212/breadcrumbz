@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B7BDA845202A29F50080B81B /* EditPlaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */; };
 		B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CB42020D19500818430 /* AppDelegate.swift */; };
 		B7C10CB72020D19500818430 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CB62020D19500818430 /* CreateAccountViewController.swift */; };
 		B7C10CBA2020D19500818430 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7C10CB82020D19500818430 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlaceTableViewController.swift; sourceTree = "<group>"; };
 		B7C10CB12020D19500818430 /* MyTravels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTravels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7C10CB42020D19500818430 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7C10CB62020D19500818430 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				B7C10CCA2020EDB400818430 /* TripsListViewController.swift */,
 				B7C10CE1202226ED00818430 /* TripDetailViewController.swift */,
 				B7D652402026DF0E00E975F1 /* PlaceDetailTableViewController.swift */,
+				B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */,
 				B7D652382024E24A00E975F1 /* TypeSelectionViewController.swift */,
 				B7D6523A202514C700E975F1 /* CreateNewPlaceTableViewController.swift */,
 				B7C10CCC2020EFB000818430 /* TripTableViewCell.swift */,
@@ -264,6 +267,7 @@
 				B7C10CDE20214F9A00818430 /* Place + Convenience.swift in Sources */,
 				B7D652412026DF0E00E975F1 /* PlaceDetailTableViewController.swift in Sources */,
 				B7C10CB72020D19500818430 /* CreateAccountViewController.swift in Sources */,
+				B7BDA845202A29F50080B81B /* EditPlaceTableViewController.swift in Sources */,
 				B7C10CE02021539700818430 /* CreateTripViewController.swift in Sources */,
 				B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */,
 				B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */,

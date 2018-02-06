@@ -11,6 +11,7 @@ import UIKit
 class PlaceDetailTableViewController: UITableViewController {
 
     // MARK: Properties
+    var trip: Trip?
     var place: Place? {
         didSet {
             guard let place = place else { return }
@@ -86,8 +87,22 @@ class PlaceDetailTableViewController: UITableViewController {
         }
         
     }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "toEditPlaceTableViewControllerSegue" {
+            guard let destinationVC = segue.destination as? EditPlaceTableViewController,
+            let place = place
+                else { return }
+            destinationVC.trip = trip
+            destinationVC.place = place
+        }
+    }
 
 }
+
+
 
 extension PlaceDetailTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     

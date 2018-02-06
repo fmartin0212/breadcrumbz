@@ -20,10 +20,10 @@ class TripController {
         
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
     }()
+    
     var trip: Trip?
     
     // MARK: - CRUD Functions
-    
     // Create
     func createTripWith(location: String, startDate: Date, endDate: Date) {
         let trip = Trip(location: location, startDate: startDate, endDate: endDate)

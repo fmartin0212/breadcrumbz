@@ -12,12 +12,7 @@ import CoreData
 class TripDetailViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
-    var trip: Trip? {
-        didSet {
-         
-            
-        }
-    }
+    var trip: Trip?
     var array: Array<Any>?
     
     // MARK: - IBOutlets
@@ -201,6 +196,7 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
         guard let placeArray = array as? [[Place]] else { return UITableViewCell() }
         let place = placeArray[indexPath.section][indexPath.row]
         
+//        cell.trip = trip
         cell.place = place
         
         return cell
