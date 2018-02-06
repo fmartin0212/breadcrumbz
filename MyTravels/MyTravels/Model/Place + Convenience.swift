@@ -11,7 +11,7 @@ import CoreData
 
 extension Place {
     
-    convenience init(name: String, type: String, address: String, comments: String, rating: Int16, photo: Data, trip: Trip, context: NSManagedObjectContext = CoreDataStack.context) {
+    convenience init(name: String, type: String, address: String, comments: String, rating: Int16, trip: Trip, context: NSManagedObjectContext = CoreDataStack.context) {
         
         self.init(context: context)
         self.name = name
@@ -19,8 +19,6 @@ extension Place {
         self.address = address
         self.comments = comments
         self.rating = rating
-        // FIXME: - Should be multiple photos - need to learn how to save array of photos to CD
-        self.photo = photo
         self.trip = trip
         
     }

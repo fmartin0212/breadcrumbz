@@ -11,12 +11,14 @@ import CoreData
 
 class TripController {
     
+    var trip: Trip?
+    
     // MARK: - Properties
     static var shared = TripController()
     var frc: NSFetchedResultsController<Trip> = {
         let fetchRequest: NSFetchRequest<Trip> = Trip.fetchRequest()
         
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "location", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startDate", ascending: false)]
         
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
     }()
@@ -24,8 +26,9 @@ class TripController {
     // MARK: - CRUD Functions
     
     // Create
-    func create(trip: Trip) {
-        
+    func createTripWith(location: String, startDate: Date, endDate: Date) {
+        let trip = Trip(location: location, startDate: startDate, endDate: endDate)
+        self.trip = trip
         saveToPersistentStore()
         
     }
@@ -34,6 +37,7 @@ class TripController {
         trip.managedObjectContext?.delete(trip)
         saveToPersistentStore()
     }
+    
 //
 //    func deleteAll() {
 //        let moc = CoreDataStack.context
@@ -45,12 +49,13 @@ class TripController {
 //        saveToPersistentStore()
 //
 //    }
+    
     // Save to Core Data
     func saveToPersistentStore() {
         do {
             try CoreDataStack.context.save()
         } catch let error {
-            print("Error saving Managed Object Context (Trip): \(error)")
+            print("Error saving Managed Object Context (Place): \(error)")
         }
     }
     

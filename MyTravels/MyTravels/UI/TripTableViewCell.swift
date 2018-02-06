@@ -32,13 +32,13 @@ class TripTableViewCell: UITableViewCell {
         tripImageView.clipsToBounds = true
         
         guard let trip = trip,
-            let photoAsData = trip.photo,
             let startDate = trip.startDate,
-            let endDate = trip.endDate
+            let endDate = trip.endDate,
+            let photo = trip.photo?.photo
             else { return }
         
-        let photo = UIImage(data: photoAsData)
-        tripImageView.image = photo
+        let image = UIImage(data: photo)
+        tripImageView.image = image
         tripNameLabel.text = trip.location
         
         tripStartDateLabel.text = "\(shortDateString(date: startDate)) -"

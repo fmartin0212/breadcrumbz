@@ -38,10 +38,9 @@ class PlaceDetailTableViewController: UITableViewController {
     
     // MARK: - Functions
     func updateViews() {
-        guard let place = place,
-        let photo = place.photo
+        guard let place = place
         else { return }
-        placeMainPhotoImageView.image = UIImage(data: photo)
+//        placeMainPhotoImageView.image = UIImage(data: photo)
         placeNameLabel.text = place.name
         placeAddressLabel.text = place.address
         updateStarsImageViews(place: place)

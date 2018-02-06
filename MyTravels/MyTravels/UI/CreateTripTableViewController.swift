@@ -47,8 +47,11 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
             let photo = photo
             else { return }
         
-        let newTrip = Trip(location: location, startDate: startDate, endDate: endDate, photo: photo)
-        TripController.shared.create(trip: newTrip)
+        TripController.shared.createTripWith(location: location, startDate: startDate, endDate: endDate)
+        
+        // Get newly created trip and add the photo to it
+        guard let trip = TripController.shared.trip else { return }
+        PhotoController.shared.add(photo: photo, trip: trip)
         
         dismiss(animated: true, completion: nil)
         
@@ -65,6 +68,7 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
         guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage,
             let photoAsData = UIImagePNGRepresentation(photo)
             else { return }
+        
         self.photo = photoAsData
         
         photoImageView.image = photo

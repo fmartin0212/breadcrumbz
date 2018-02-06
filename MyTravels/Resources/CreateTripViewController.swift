@@ -60,8 +60,8 @@ class CreateTripViewController: UIViewController, UIImagePickerControllerDelegat
             let endDate = endDate,
             let photo = self.photoAsData
             else { return }
-        let newTrip = Trip(location: location, startDate: startDate, endDate: startDate, photo: photo)
-        TripController.shared.create(trip: newTrip)
+        
+        TripController.shared.createTripWith(location: location, startDate: startDate, endDate: endDate)
         
         dismiss(animated: true, completion: nil)
     }

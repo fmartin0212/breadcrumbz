@@ -24,7 +24,7 @@ class PlaceController {
     
     // Create
     func create(name: String, type: String, address: String, comments: String, rating: Int16, photo: Data, trip: Trip) {
-        let newPlace = Place(name: name, type: type, address: address, comments: comments, rating: rating, photo: photo, trip: trip)
+        let newPlace = Place(name: name, type: type, address: address, comments: comments, rating: rating, trip: trip)
         saveToPersistentStore()
         
     }

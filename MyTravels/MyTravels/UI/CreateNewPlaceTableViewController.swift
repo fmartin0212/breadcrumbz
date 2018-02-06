@@ -206,20 +206,19 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     
     // MARK : - Functions
     func calculateStars() {
+        // FIX ME: THIS.
+    }
+    
+    // MARK: - Image picker controller delegate methods
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        imagePickerController.allowsEditing = true
         
     }
     
-    // MARK: - Table view data source
-/*
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-  
-        if section == 1 {
-      return sectionHeaderLabelWith(text: "Add a new place")
-        }
-        return UILabel()
-    }
- 
- */
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
@@ -274,6 +273,12 @@ extension CreateNewPlaceTableViewController: UICollectionViewDelegate, UICollect
             return cell
         }
         return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            present(imagePickerController, animated: true, completion: nil)
+        }
     }
     
 }

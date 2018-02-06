@@ -983,6 +983,7 @@
                 <tapGestureRecognizer id="akQ-AE-H4F">
                     <connections>
                         <action selector="typeTapGestureRecognized:" destination="MZZ-JI-H9h" id="mYy-Z4-heX"/>
+                        <segue destination="IkI-ZG-NxV" kind="presentation" identifier="toTypeSelectionViewController" id="MyI-RZ-qMJ"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="AZ4-FR-8QW">
@@ -1630,6 +1631,7 @@
         <image name="thumb-down" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="MyI-RZ-qMJ"/>
         <segue reference="uQy-QT-Egi"/>
     </inferredMetricsTieBreakers>
 </document>

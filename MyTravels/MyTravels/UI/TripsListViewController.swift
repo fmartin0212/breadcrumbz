@@ -11,6 +11,9 @@ import CoreData
 
 class TripsListViewController: UIViewController {
 
+    // MARK: - Properties
+    var trips: [Trip]?
+    
     // MARK - IBOutlets
     @IBOutlet weak var tableView: UITableView!
     
@@ -35,10 +38,11 @@ class TripsListViewController: UIViewController {
             NSLog("Error starting fetched results controller")
         }
         
+        guard let trips = TripController.shared.frc.fetchedObjects else { return }
+        self.trips = trips
     }
-
+    
     // MARK: - Functions
-   
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
@@ -72,6 +76,9 @@ extension TripsListViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let trips = TripController.shared.frc.fetchedObjects else { return UITableViewCell() }
         let trip = trips[indexPath.row]
+        print(trips[indexPath.row].location)
+        let photo = trip.photo
+        print(trip.photo)
         cell.trip = trip
         
         return cell
