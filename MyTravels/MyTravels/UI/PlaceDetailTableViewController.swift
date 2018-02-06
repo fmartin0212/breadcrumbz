@@ -17,6 +17,8 @@ class PlaceDetailTableViewController: UITableViewController {
         }
     }
     
+    var photos: [Photo] = []
+    
     // MARK: - IBOutlets
     @IBOutlet weak var placeMainPhotoImageView: UIImageView!
     @IBOutlet weak var placeNameLabel: UILabel!
@@ -26,21 +28,36 @@ class PlaceDetailTableViewController: UITableViewController {
     @IBOutlet weak var starThree: UIImageView!
     @IBOutlet weak var starFour: UIImageView!
     @IBOutlet weak var starFive: UIImageView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Delegates
+        collectionView.delegate = self
+        collectionView.dataSource = self
 //        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
 //         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         self.title = place?.name
+        
+        guard let photos = place?.photos?.allObjects as? [Photo]
+            else { return }
+        self.photos = photos
             
         updateViews()
     }
     
     // MARK: - Functions
     func updateViews() {
-        guard let place = place
-        else { return }
-//        placeMainPhotoImageView.image = UIImage(data: photo)
+        guard let place = place,
+            let photos = place.photos?.allObjects as? [Photo],
+            let photo = photos[0].photo
+            else { return }
+        
+        if photos.count > 0 {
+        placeMainPhotoImageView.image = UIImage(data: photo)
+        }
+        
         placeNameLabel.text = place.name
         placeAddressLabel.text = place.address
         updateStarsImageViews(place: place)
@@ -70,19 +87,24 @@ class PlaceDetailTableViewController: UITableViewController {
         
     }
 
-    // MARK: - Table view data source
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//
-//        guard let place = place,
-//        let photo = place.photo
-//            else { return UIView() }
-//        if section == 0 {
-//            let image = UIImage(data: photo)
-//            let imageView = UIImageView(image: image)
-//
-//            return imageView
-//        }
-//        return UIView()
-//    }
+}
 
+extension PlaceDetailTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photos.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
+        
+        guard let photo = photos[indexPath.row].photo else { return UICollectionViewCell() }
+
+        cell.photo = photo
+        
+        return cell
+        
+    }
+    
 }

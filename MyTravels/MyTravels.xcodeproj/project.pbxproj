@@ -105,7 +105,7 @@
 				B7C10CD420214D4200818430 /* MyTravels.entitlements */,
 				B7C10CDB20214F6900818430 /* Model */,
 				B7C10CDA20214F5400818430 /* UI */,
-				B7C10CDC20214F7200818430 /* Controller */,
+				B7C10CDC20214F7200818430 /* Model Controllers */,
 			);
 			path = MyTravels;
 			sourceTree = "<group>";
@@ -163,14 +163,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		B7C10CDC20214F7200818430 /* Controller */ = {
+		B7C10CDC20214F7200818430 /* Model Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				B7C10CCE2020FD4B00818430 /* TripController.swift */,
 				B7C10CD02020FD5500818430 /* PlaceController.swift */,
 				B7F92BCE20291DEE0021A8CA /* PhotoController.swift */,
 			);
-			path = Controller;
+			path = "Model Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -420,7 +420,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.frankmartin.MyTravels;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -436,7 +436,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.frankmartin.MyTravels;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -50,6 +50,10 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         collectionView.dataSource = self
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "AvenirNext", size: 20)!]
+        
+        // Set textview placeholder text
+        commentTextView.text = "Comments"
+        commentTextView.textColor = #colorLiteral(red: 0.8037719131, green: 0.8036019206, blue: 0.8242246509, alpha: 1)
 
     }
     
@@ -279,6 +283,28 @@ extension CreateNewPlaceTableViewController: UICollectionViewDelegate, UICollect
         if indexPath.row == 0 {
             present(imagePickerController, animated: true, completion: nil)
         }
+    }
+    
+}
+
+extension CreateNewPlaceViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        
+        if commentsTextView.textColor == UIColor.lightGray {
+            commentsTextView.text = nil
+            commentsTextView.textColor = UIColor.black
+        }
+        
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+       
+        if commentsTextView.text.isEmpty {
+            commentsTextView.text = "Comments"
+            commentsTextView.textColor = UIColor.lightGray
+        }
+        
     }
     
 }

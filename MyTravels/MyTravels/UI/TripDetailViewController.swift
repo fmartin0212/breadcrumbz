@@ -14,14 +14,17 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
     // MARK: - Properties
     var trip: Trip? {
         didSet {
-            print("Trip name: \(trip?.location)")
+         
+            
         }
     }
     var array: Array<Any>?
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
- 
+    @IBOutlet weak var tripPhotoImageView: UIImageView!
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -29,6 +32,12 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         // Set navigation bar title/properties
         guard let trip = trip else { return }
         self.title = trip.location
+        
+        // Set trip photo
+        guard let tripPhoto = trip.photo?.photo,
+            let image = UIImage(data: tripPhoto)
+            else { return }
+        tripPhotoImageView.image = image
         
         // Delegates
         tableView.delegate = self

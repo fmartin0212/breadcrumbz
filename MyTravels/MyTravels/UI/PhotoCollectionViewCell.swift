@@ -13,8 +13,10 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     var photo: Data? {
         didSet {
+            
             guard let photoAsData = photo else { return }
             let photoImage = UIImage(data: photoAsData)
+            
             photoImageView.image = photoImage
             photoImageView.layer.cornerRadius = 8
             photoImageView.clipsToBounds = true
@@ -23,6 +25,6 @@ class PhotoCollectionViewCell: UICollectionViewCell {
 
     
     // MARK: - IBOutlets
+    // Create new place
     @IBOutlet weak var photoImageView: UIImageView!
-    
 }
