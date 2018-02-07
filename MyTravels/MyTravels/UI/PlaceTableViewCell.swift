@@ -36,14 +36,20 @@ class PlaceTableViewCell: UITableViewCell {
         
         guard let place = place,
         let photosAsSet = place.photos,
-        let photosArray = photosAsSet.allObjects as? [Photo],
-        let photo = photosArray[0].photo
+        let photosArray = photosAsSet.allObjects as? [Photo]
+        
             else { return }
-        guard let image = UIImage(data: photo) else { return }
-        placeImageView.image = image
-        placeNameLabel.text = place.name
-        placeAddressLabel.text = place.address
-        updateStarsImageViews(place: place)
+        if photosArray.count > 0 {
+            guard let photo = photosArray[0].photo,
+                let image = UIImage(data: photo) else { return }
+            placeImageView.image = image
+            placeNameLabel.text = place.name
+            placeAddressLabel.text = place.address
+            updateStarsImageViews(place: place)
+        } else {
+            placeNameLabel.text = place.name
+            placeAddressLabel.text = place.address
+            updateStarsImageViews(place: place)}
         
     }
     

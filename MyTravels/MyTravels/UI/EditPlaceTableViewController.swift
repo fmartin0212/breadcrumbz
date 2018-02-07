@@ -8,12 +8,14 @@
 
 import UIKit
 
-class EditPlaceTableViewController: UITableViewController {
+class EditPlaceTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // MARK: - Properties
     var trip: Trip?
     var place: Place?
     var rating: Int16 = 0
+    var photos: [Data] = []
+    var imagePickerController = UIImagePickerController()
     
     // MARK: - IBOutlets
     @IBOutlet weak var starOne: UIImageView!
@@ -31,10 +33,31 @@ class EditPlaceTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let place = place else { return }
+        // Delegates
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        imagePickerController.delegate = self
+        
+        guard let place = place,
+            let photosArray = place.photos?.allObjects as? [Photo]
+            else { return }
+        
+        var photosAsData: [Data] = []
+        for photo in photosArray {
+            guard let photoAsData = photo.photo else { return }
+            photosAsData.append(photoAsData)
+        }
+        
+        self.photos = photosAsData
         rating = place.rating
-        updateViews(place: place)
+        
+        // Append Add photo image to photos array
+        guard let addPhotoImage = UIImage(named: "AddTripPhoto256"),
+            let addPhotoImageAsData = UIImagePNGRepresentation(addPhotoImage) else { return }
+        self.photos.insert(addPhotoImageAsData, at: 0)
 
+        updateViews(place: place)
+        
     }
     
     // MARK: - Functions
@@ -55,15 +78,16 @@ class EditPlaceTableViewController: UITableViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-//        guard let trip = self.trip,
-//            let name = nameTextField.text,
-//            let type = typeTextField.text,
-//            let address = addressTextField.text,
-//            let comments = commentTextView.text
-//            else { return }
-////
-//        self.photos.remove(at: 0)
-//
+        guard let trip = self.trip,
+            let place = self.place,
+            let name = placeNameTextField.text,
+            let type = placeTypeTextField.text,
+            let address = placeAddressTextField.text,
+            let comments = placeCommentsTextView.text
+            else { return }
+        
+        self.photos.remove(at: 0)
+
 //        if imageWasUploaded == false {
 //            guard let photo = UIImage(named: "London") else { return }
 //            guard let photoAsData = UIImageJPEGRepresentation(photo, 11.0) else { return }
@@ -71,11 +95,11 @@ class EditPlaceTableViewController: UITableViewController {
 //
 //            dismiss(animated: true, completion: nil)
 //        }
-//
-//        PlaceController.shared.create(name: name, type: type, address: address, comments: comments, rating: rating, trip: trip)
-//        guard let place = PlaceController.shared.place else { return }
-//        PhotoController.shared.add(photos: self.photos, place: place)
-//        dismiss(animated: true, completion: nil)
+
+        PlaceController.shared.update(place: place, name: name, type: type, address: address, comments: comments, rating: rating, trip: trip)
+        guard let currentPlace = PlaceController.shared.place else { return }
+        PhotoController.shared.update(photos: photos, forPlace: currentPlace)
+        dismiss(animated: true, completion: nil)
         
     }
     
@@ -237,17 +261,44 @@ class EditPlaceTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: - Image picker controller delegate methods
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        imagePickerController.allowsEditing = true
+        guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage,
+            let photoAsData = UIImagePNGRepresentation(photo)
+            else { return }
+        
+        self.photos.append(photoAsData)
+        
+        dismiss(animated: true, completion: collectionView.reloadData)
+        
+    }
 
 }
 
 extension EditPlaceTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
+        
+        cell.photo = photos[indexPath.row]
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            present(imagePickerController, animated: true, completion: nil)
+            
+        }
     }
 }

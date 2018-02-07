@@ -33,7 +33,6 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
             let image = UIImage(data: tripPhoto)
             else { return }
         tripPhotoImageView.image = image
-        
         // Delegates
         tableView.delegate = self
         tableView.dataSource = self
@@ -121,10 +120,11 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        guard let trip = trip else { return }
+        
         if segue.identifier == "toCreateNewPlaceTableViewControllerSegue" {
             
-            guard let destinationVC = segue.destination as? CreateNewPlaceTableViewController,
-                let trip = self.trip
+            guard let destinationVC = segue.destination as? CreateNewPlaceTableViewController
                 else { return }
             
             destinationVC.trip = trip
@@ -139,6 +139,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
                 else { return }
             
             let place = placeArray[indexPath.section][indexPath.row]
+            destinationVC.trip = trip
             destinationVC.place = place
 
         }
@@ -196,7 +197,6 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
         guard let placeArray = array as? [[Place]] else { return UITableViewCell() }
         let place = placeArray[indexPath.section][indexPath.row]
         
-//        cell.trip = trip
         cell.place = place
         
         return cell

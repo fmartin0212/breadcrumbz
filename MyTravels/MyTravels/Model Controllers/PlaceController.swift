@@ -42,6 +42,8 @@ class PlaceController {
         place.rating = rating
         place.trip = trip
         
+        self.place = place
+        
         saveToPersistentStore()
         
     }

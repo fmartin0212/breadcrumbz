@@ -48,20 +48,30 @@ class PlaceDetailTableViewController: UITableViewController {
         updateViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        updateViews()
+//        collectionView.reloadData()
+    }
+    
     // MARK: - Functions
     func updateViews() {
         guard let place = place,
-            let photos = place.photos?.allObjects as? [Photo],
-            let photo = photos[0].photo
+            let photos = place.photos?.allObjects as? [Photo]
             else { return }
         
         if photos.count > 0 {
-        placeMainPhotoImageView.image = UIImage(data: photo)
+            guard let photo = photos[0].photo,
+                let image = UIImage(data: photo) else { return }
+            placeMainPhotoImageView.image = image
+            placeNameLabel.text = place.name
+            placeAddressLabel.text = place.address
+            updateStarsImageViews(place: place)
+        } else {
+            
+            placeNameLabel.text = place.name
+            placeAddressLabel.text = place.address
+            updateStarsImageViews(place: place)
         }
-        
-        placeNameLabel.text = place.name
-        placeAddressLabel.text = place.address
-        updateStarsImageViews(place: place)
     }
     
     func updateStarsImageViews(place: Place) {
@@ -102,8 +112,6 @@ class PlaceDetailTableViewController: UITableViewController {
 
 }
 
-
-
 extension PlaceDetailTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -113,7 +121,7 @@ extension PlaceDetailTableViewController: UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
-        
+        print (photos.count)
         guard let photo = photos[indexPath.row].photo else { return UICollectionViewCell() }
 
         cell.photo = photo
