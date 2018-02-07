@@ -40,17 +40,14 @@ class PlaceDetailTableViewController: UITableViewController {
 //        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
 //         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         self.title = place?.name
-        
-        guard let photos = place?.photos?.allObjects as? [Photo]
-            else { return }
-        self.photos = photos
-            
+     
         updateViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         updateViews()
-//        collectionView.reloadData()
+        collectionView.reloadData()
     }
     
     // MARK: - Functions
@@ -58,6 +55,8 @@ class PlaceDetailTableViewController: UITableViewController {
         guard let place = place,
             let photos = place.photos?.allObjects as? [Photo]
             else { return }
+        
+        self.photos = photos
         
         if photos.count > 0 {
             guard let photo = photos[0].photo,
@@ -122,7 +121,8 @@ extension PlaceDetailTableViewController: UICollectionViewDelegate, UICollection
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
         print (photos.count)
-        guard let photo = photos[indexPath.row].photo else { return UICollectionViewCell() }
+        guard let photo = photos[indexPath.row].photo
+            else { return UICollectionViewCell() }
 
         cell.photo = photo
         
