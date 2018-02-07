@@ -72,6 +72,8 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
         self.photo = photoAsData
         
         photoImageView.image = photo
+        photoImageView.contentMode = .scaleAspectFit
+        
         dismiss(animated: true, completion: nil)
         
     }
@@ -79,7 +81,6 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

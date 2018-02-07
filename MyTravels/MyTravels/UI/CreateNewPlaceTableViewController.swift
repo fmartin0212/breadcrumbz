@@ -49,7 +49,7 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "AvenirNext", size: 20)!]
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "AvenirNext", size: 20)!]
         
         // Set textview placeholder text
         commentTextView.text = "Comments"
@@ -151,7 +151,7 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
             
         }
         
-        if rating <= 2 || rating > 4 {
+        if rating <= 2 || rating >= 4 {
             starOne.image = UIImage(named: "star-black-24")
             starTwo.image = UIImage(named: "star-black-24")
             starThree.image = UIImage(named: "star-black-24")

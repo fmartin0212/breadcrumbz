@@ -169,15 +169,15 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
         else { return UIView() }
         
         if firstItemInArrayType == "Lodging" {
-            let text = "   Lodging"
+            let text = "  Lodging"
             return sectionHeaderLabelWith(text: text)
             
         } else if firstItemInArrayType == "Restaurant" {
-            let text = "   Restaurants"
+            let text = "  Restaurants"
             return sectionHeaderLabelWith(text: text)
             
         } else if firstItemInArrayType == "Activity" {
-            let text = "   Activities"
+            let text = "  Activities"
             return sectionHeaderLabelWith(text: text)
         }
         return UIView()
