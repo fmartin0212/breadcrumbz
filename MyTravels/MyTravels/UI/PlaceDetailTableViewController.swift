@@ -41,7 +41,10 @@ class PlaceDetailTableViewController: UITableViewController {
 //         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         self.title = place?.name
      
+        
+        tableView.contentOffset = CGPoint(x: 30, y: 30)
         updateViews()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
