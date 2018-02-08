@@ -877,7 +877,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OsD-sv-giU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="akQ-AE-H4F">
                     <connections>
-                        <action selector="typeTapGestureRecognized:" destination="MZZ-JI-H9h" id="mYy-Z4-heX"/>
+                        <action selector="typeTapGestureRecognizerTapped:" destination="MZZ-JI-H9h" id="mYy-Z4-heX"/>
                         <segue destination="IkI-ZG-NxV" kind="presentation" identifier="toTypeSelectionViewController" id="MyI-RZ-qMJ"/>
                     </connections>
                 </tapGestureRecognizer>
@@ -1140,19 +1140,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n54-F7-f16">
-                                <rect key="frame" x="75" y="200.5" width="225" height="286.5"/>
+                                <rect key="frame" x="75" y="212" width="225" height="264"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="cDM-Gu-dZH">
-                                        <rect key="frame" x="5.5" y="0.0" width="214.5" height="286.5"/>
+                                        <rect key="frame" x="5" y="0.0" width="215" height="264"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZB-gc-ceR">
-                                                <rect key="frame" x="0.0" y="0.0" width="214.5" height="40.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="215" height="36"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVT-tY-rh8">
-                                                <rect key="frame" x="0.0" y="61.5" width="214.5" height="40.5"/>
+                                                <rect key="frame" x="0.0" y="57" width="215" height="36"/>
                                                 <color key="backgroundColor" red="1" green="0.77235045229999999" blue="0.61537169839999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                 <state key="normal" title="Lodging">
@@ -1163,7 +1163,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0p3-jw-Nbk">
-                                                <rect key="frame" x="0.0" y="123" width="214.5" height="40.5"/>
+                                                <rect key="frame" x="0.0" y="114" width="215" height="36"/>
                                                 <color key="backgroundColor" red="1" green="0.77235045229999999" blue="0.61537169839999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                 <state key="normal" title="Restaurant">
@@ -1174,7 +1174,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfT-DO-Q3Y">
-                                                <rect key="frame" x="0.0" y="184.5" width="214.5" height="40.5"/>
+                                                <rect key="frame" x="0.0" y="171" width="215" height="36"/>
                                                 <color key="backgroundColor" red="1" green="0.77235045229999999" blue="0.61537169839999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                 <state key="normal" title="Activity">
@@ -1185,7 +1185,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCY-Qe-H4V">
-                                                <rect key="frame" x="0.0" y="246" width="214.5" height="40.5"/>
+                                                <rect key="frame" x="0.0" y="228" width="215" height="36"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="10"/>
                                                 <state key="normal" title="Cancel">
                                                     <color key="titleColor" red="0.957106173" green="0.51020485159999995" blue="0.54696655270000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1211,10 +1211,12 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="n54-F7-f16" firstAttribute="height" secondItem="jjX-ya-SKj" secondAttribute="height" multiplier="0.43" id="CUh-B1-s8b"/>
+                            <constraint firstItem="eqr-0S-jEK" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="n54-F7-f16" secondAttribute="trailing" constant="75" id="28r-uH-T3X"/>
+                            <constraint firstItem="eqr-0S-jEK" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="n54-F7-f16" secondAttribute="bottom" constant="191" id="OwY-Fq-i3n"/>
+                            <constraint firstItem="n54-F7-f16" firstAttribute="leading" relation="lessThanOrEqual" secondItem="eqr-0S-jEK" secondAttribute="leading" constant="75" id="Wug-G6-Dcl"/>
                             <constraint firstItem="n54-F7-f16" firstAttribute="centerY" secondItem="eqr-0S-jEK" secondAttribute="centerY" id="fhg-YF-jkL"/>
                             <constraint firstItem="n54-F7-f16" firstAttribute="centerX" secondItem="eqr-0S-jEK" secondAttribute="centerX" id="frD-OW-PnJ"/>
-                            <constraint firstItem="n54-F7-f16" firstAttribute="width" secondItem="jjX-ya-SKj" secondAttribute="width" multiplier="0.6" id="fta-fb-NKn"/>
+                            <constraint firstItem="n54-F7-f16" firstAttribute="top" relation="lessThanOrEqual" secondItem="eqr-0S-jEK" secondAttribute="top" constant="192" id="yVW-1I-zmD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eqr-0S-jEK"/>
                     </view>
@@ -1243,11 +1245,13 @@
                             <items>
                                 <navigationItem title="Edit place" id="nkM-d4-euH">
                                     <barButtonItem key="leftBarButtonItem" title="Cancel" id="hNb-Za-Am0">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="cancelButtonTapped:" destination="6qM-vT-uP8" id="mm5-KM-QVM"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem key="rightBarButtonItem" title="Save" id="4Ap-Os-KQA">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="saveButtonTapped:" destination="6qM-vT-uP8" id="occ-qd-j3p"/>
                                         </connections>
@@ -1482,7 +1486,12 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyt-CM-tbJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="c4t-F8-cy4"/>
+                <tapGestureRecognizer id="c4t-F8-cy4">
+                    <connections>
+                        <action selector="typeTextFieldTapGestureRecognizerTapped:" destination="6qM-vT-uP8" id="uTl-85-Q4e"/>
+                        <segue destination="IkI-ZG-NxV" kind="presentation" identifier="toTypeSelectionViewController" id="J3z-ZV-F6J"/>
+                    </connections>
+                </tapGestureRecognizer>
                 <tapGestureRecognizer id="umH-U4-kdD">
                     <connections>
                         <action selector="starOneGestureRecognizerTapped:" destination="6qM-vT-uP8" id="NHt-Tu-9Wg"/>
@@ -1509,7 +1518,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4225" y="1640"/>
+            <point key="canvasLocation" x="4646" y="1640"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iEc-nF-mdU">
@@ -1536,6 +1545,7 @@
         <image name="star-clear-24" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="J3z-ZV-F6J"/>
         <segue reference="uQy-QT-Egi"/>
     </inferredMetricsTieBreakers>
 </document>

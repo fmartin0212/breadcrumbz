@@ -226,6 +226,12 @@ class EditPlaceTableViewController: UITableViewController, UIImagePickerControll
         }
     }
     
+    // MARK: - Tap gesture recognizers
+    @IBAction func typeTextFieldTapGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
+        performSegue(withIdentifier: "toTypeSelectionViewController", sender: self)
+    }
+    
+    
     func updateStarsImageViews(place: Place) {
         
         let starImageViewsArray = [starOne, starTwo, starThree, starFour, starFive]
@@ -252,15 +258,17 @@ class EditPlaceTableViewController: UITableViewController, UIImagePickerControll
 
     // MARK: - Table view data source
     
-    /*
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "toTypeSelectionViewController" {
+            guard let destinationVC = segue.destination as? TypeSelectionViewController else { return }
+            destinationVC.delegate = self
+        }
+        
     }
-    */
     
     // MARK: - Image picker controller delegate methods
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -301,4 +309,11 @@ extension EditPlaceTableViewController: UICollectionViewDelegate, UICollectionVi
             
         }
     }
+}
+
+extension EditPlaceTableViewController: TypeSelectionViewControllerDelegate {
+    func set(type: String) {
+        placeTypeTextField.text = type
+    }
+    
 }

@@ -87,7 +87,12 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         
     }
     
-    // Star rating actions
+    @IBAction func addPhotoButtonTapped(_ sender: UIButton) {
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    // MARK: - Tap gesture recognizers
+    // Star rating
 
     @IBAction func starOneGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
         print("star one tapped")
@@ -135,6 +140,7 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
             starFive.image = UIImage(named: "star-clear-24")
             rating = 2
         }
+        
     }
     
     @IBAction func starThreeGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
@@ -159,6 +165,7 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
             starFive.image = UIImage(named: "star-clear-24")
             rating = 3
         }
+        
     }
     
     @IBAction func starFourGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
@@ -208,13 +215,10 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
             starFive.image = UIImage(named: "star-black-24")
             rating = 5
         }
+        
     }
     
-    @IBAction func addPhotoButtonTapped(_ sender: UIButton) {
-        present(imagePickerController, animated: true, completion: nil)
-    }
-    
-    @IBAction func typeTapGestureRecognized(_ sender: Any) {
+    @IBAction func typeTapGestureRecognizerTapped(_ sender: Any) {
         performSegue(withIdentifier: "toTypeSelectionViewController", sender: self)
         
     }
