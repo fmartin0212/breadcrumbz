@@ -47,6 +47,12 @@ class PlaceTableViewCell: UITableViewCell {
             placeAddressLabel.text = place.address
             updateStarsImageViews(place: place)
         } else {
+            let placeholderImage = UIImage()
+            if place.type == "Activity" {
+                guard let activityPlaceholderImage = UIImage(named: "activity") else { return }
+                placeholderImage = 
+            }
+            placeImageView.image = placeholderImage
             placeNameLabel.text = place.name
             placeAddressLabel.text = place.address
             updateStarsImageViews(place: place)}

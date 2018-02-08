@@ -80,6 +80,8 @@ class EditPlaceTableViewController: UITableViewController, UIImagePickerControll
     }
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+       
+        // Check to see if any required fields are empty, if so, present alertcontroller and jump out of function
         guard let placeNameTF = placeNameTextField,
             let placeTypeTF = placeTypeTextField,
             let placeAddressTF = placeAddressTextField
@@ -87,7 +89,14 @@ class EditPlaceTableViewController: UITableViewController, UIImagePickerControll
         
         let textFields = [placeNameTF, placeTypeTF, placeAddressTF]
         
-        missingFieldAlert(textFields: textFields)
+        
+        if placeNameTextField.text?.isEmpty == true ||
+            placeTypeTextField.text == "Choose a type" ||
+            placeAddressTextField.text?.isEmpty == true  {
+            missingFieldAlert(textFields: textFields)
+            return
+        }
+            
         
         guard let trip = self.trip,
             let place = self.place,

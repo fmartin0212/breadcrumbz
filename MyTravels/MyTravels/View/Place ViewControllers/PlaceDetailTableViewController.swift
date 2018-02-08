@@ -71,7 +71,8 @@ class PlaceDetailTableViewController: UITableViewController {
             placeAddressLabel.text = place.address
             updateStarsImageViews(place: place)
         } else {
-            
+            guard let placeholderImage = UIImage(named: "activity") else { return }
+            placeMainPhotoImageView.image = placeholderImage
             placeNameLabel.text = place.name
             placeAddressLabel.text = place.address
             updateStarsImageViews(place: place)

@@ -33,12 +33,18 @@ class TripTableViewCell: UITableViewCell {
         
         guard let trip = trip,
             let startDate = trip.startDate,
-            let endDate = trip.endDate,
-            let photo = trip.photo?.photo
+            let endDate = trip.endDate
             else { return }
         
-        let image = UIImage(data: photo)
-        tripImageView.image = image
+        var tripPhoto = UIImage()
+        guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
+        tripPhoto = tripPhotoPlaceholderImage
+        if let photo = trip.photo?.photo {
+            guard let image = UIImage(data: photo) else { return }
+            tripPhoto = image
+        }
+        
+        tripImageView.image = tripPhoto
         tripNameLabel.text = trip.location
         
         tripStartDateLabel.text = "\(shortDateString(date: startDate)) -"

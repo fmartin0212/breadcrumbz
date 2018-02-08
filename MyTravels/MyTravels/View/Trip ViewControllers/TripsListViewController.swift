@@ -76,9 +76,7 @@ extension TripsListViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let trips = TripController.shared.frc.fetchedObjects else { return UITableViewCell() }
         let trip = trips[indexPath.row]
-        print(trips[indexPath.row].location)
         let photo = trip.photo
-        print(trip.photo)
         cell.trip = trip
         
         return cell

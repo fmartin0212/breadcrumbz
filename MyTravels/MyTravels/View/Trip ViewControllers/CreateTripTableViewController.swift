@@ -18,10 +18,10 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
     let imagePickerController = UIImagePickerController()
     
     // MARK: - IBOutlets
-    @IBOutlet weak var locationTextField: UITextField!
-    @IBOutlet weak var startDateTextField: UITextField!
-    @IBOutlet weak var endDateTextField: UITextField!
-    @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var tripLocationTextField: UITextField!
+    @IBOutlet weak var tripStartDateTextField: UITextField!
+    @IBOutlet weak var tripEndDateTextField: UITextField!
+    @IBOutlet weak var tripPhotoImageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
         imagePickerController.delegate = self
         
         // Photo properties
-        photoImageView.layer.cornerRadius = 4
+        tripPhotoImageView.layer.cornerRadius = 4
         
     }
     
@@ -40,24 +40,33 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
     }
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        guard let locationTF = locationTextField,
-            let startDateTF = startDateTextField,
-            let endDateTF = endDateTextField
+        
+        // Check to see if any required fields are empty, if so, present alertcontroller and jump out of function
+        guard let tripLocationTF = tripLocationTextField,
+            let tripStartDateTF = tripStartDateTextField,
+            let tripEndDateTF = tripEndDateTextField
             else { return }
         
-        let textFields = [locationTF, startDateTF, endDateTF]
-        missingFieldAlert(textFields: textFields)
+        let textFields = [tripLocationTF, tripStartDateTF, tripEndDateTF]
         
-        guard let location = locationTextField.text,
+        if tripLocationTextField.text?.isEmpty == true ||
+            tripStartDateTextField.text == "Choose a start date" ||
+            tripStartDateTextField.text == "Choose an end date"  {
+            missingFieldAlert(textFields: textFields)
+            return
+            
+        }
+        
+        guard let location = tripLocationTextField.text,
             let startDate = startDate,
-            let endDate = endDate,
-            let photo = photo
+            let endDate = endDate
             else { return }
         
         TripController.shared.createTripWith(location: location, startDate: startDate, endDate: endDate)
         
         // Get newly created trip and add the photo to it
-        guard let trip = TripController.shared.trip else { return }
+        guard let trip = TripController.shared.trip,
+            let photo = photo else { dismiss(animated: true, completion: nil) ; return }
         PhotoController.shared.add(photo: photo, trip: trip)
         
         dismiss(animated: true, completion: nil)
@@ -78,8 +87,8 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
         
         self.photo = photoAsData
         
-        photoImageView.image = photo
-        photoImageView.contentMode = .scaleAspectFit
+        tripPhotoImageView.image = photo
+        tripPhotoImageView.contentMode = .scaleAspectFit
         
         dismiss(animated: true, completion: nil)
         
@@ -122,11 +131,11 @@ extension CreateTripTableViewController: ChooseDateViewControllerDelegate {
         let dateAsString = dateFormatter.string(from: date)
         
         if isEndDate == false {
-            startDateTextField.text = dateAsString
+            tripStartDateTextField.text = dateAsString
             startDate = date
             
         } else {
-            endDateTextField.text = dateAsString
+            tripEndDateTextField.text = dateAsString
             endDate = date
         }
         

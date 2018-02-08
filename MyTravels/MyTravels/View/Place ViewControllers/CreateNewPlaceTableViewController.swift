@@ -9,7 +9,7 @@
 import UIKit
 
 class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     // MARK: - Properties
     var trip: Trip? {
         didSet {
@@ -18,7 +18,6 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     }
     let imagePickerController = UIImagePickerController()
     var photo: Data?
-    var imageWasUploaded = false
     var rating: Int16 = 0
     var mockPhotoData: [Data]?
     var photos: [Data] = []
@@ -39,30 +38,32 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         guard let addPhotoImage = UIImage(named: "AddTripPhoto256"),
             let addPhotoImageAsData = UIImagePNGRepresentation(addPhotoImage) else { return }
         self.photos.insert(addPhotoImageAsData, at: 0)
-
+        
         // Delegates
         imagePickerController.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
         
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "AvenirNext", size: 20)!]
+        //        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "AvenirNext", size: 20)!]
         
         // Set textview placeholder text
         placeCommentsTextView.text = "Comments"
         placeCommentsTextView.textColor = #colorLiteral(red: 0.8037719131, green: 0.8036019206, blue: 0.8242246509, alpha: 1)
-
+        
     }
     
     // MARK: - IBActions
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
-           dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        
+        // Check to see if any required fields are empty, if so, present alertcontroller and jump out of function
         guard let placeNameTF = placeNameTextField,
             let placeTypeTF = placeTypeTextField,
             let placeAddressTF = placeAddressTextField
@@ -70,13 +71,11 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         
         let textFields = [placeNameTF, placeTypeTF, placeAddressTF]
         
-        
         if placeNameTextField.text?.isEmpty == true ||
             placeTypeTextField.text == "Choose a type" ||
             placeAddressTextField.text?.isEmpty == true  {
             missingFieldAlert(textFields: textFields)
             return
-            
         }
         
         guard let trip = self.trip,
@@ -88,26 +87,24 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         
         self.photos.remove(at: 0)
         
-        if imageWasUploaded == false {
-            guard let photo = UIImage(named: "London") else { return }
-            guard let photoAsData = UIImageJPEGRepresentation(photo, 11.0) else { return }
-            PlaceController.shared.create(name: name, type: type, address: address, comments: comments, rating: rating, trip: trip)
+        PlaceController.shared.create(name: name, type: type, address: address, comments: comments, rating: rating, trip: trip)
+        guard let place = PlaceController.shared.place else { return }
         
+        if self.photos.count > 0 {
+            PhotoController.shared.add(photos: self.photos, place: place)
             dismiss(animated: true, completion: nil)
         }
         
-        PlaceController.shared.create(name: name, type: type, address: address, comments: comments, rating: rating, trip: trip)
-        guard let place = PlaceController.shared.place else { return }
-        PhotoController.shared.add(photos: self.photos, place: place)
         dismiss(animated: true, completion: nil)
         
     }
     
+    
     @IBAction func addPhotoButtonTapped(_ sender: UIButton) {
         present(imagePickerController, animated: true, completion: nil)
     }
-    
-    // MARK: - Tap gesture recognizers
+
+// MARK: - Tap gesture recognizers
     // Star rating
 
     @IBAction func starOneGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
@@ -257,11 +254,7 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
             else { return }
         
         self.photos.append(photoAsData)
-       
-        if self.photos.count > 1 {
-            imageWasUploaded = true
-        }
-        
+   
         dismiss(animated: true, completion: collectionView.reloadData)
         
     }

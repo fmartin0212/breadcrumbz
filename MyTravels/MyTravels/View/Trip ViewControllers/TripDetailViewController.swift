@@ -29,10 +29,16 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         self.title = trip.location
         
         // Set trip photo
-        guard let tripPhoto = trip.photo?.photo,
-            let image = UIImage(data: tripPhoto)
-            else { return }
-        tripPhotoImageView.image = image
+        var tripPhoto = UIImage()
+        guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
+        tripPhoto = tripPhotoPlaceholderImage
+        if let photo = trip.photo?.photo {
+            guard let image = UIImage(data: photo) else { return }
+            tripPhoto = image
+        }
+    
+        tripPhotoImageView.image = tripPhoto
+        
         // Delegates
         tableView.delegate = self
         tableView.dataSource = self

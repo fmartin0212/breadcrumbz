@@ -353,10 +353,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="endDateTextField" destination="bZx-5s-UHt" id="K0h-uL-cFI"/>
-                        <outlet property="locationTextField" destination="pRN-Qt-82u" id="ZZq-Ue-hA1"/>
-                        <outlet property="photoImageView" destination="hym-Te-anF" id="9ci-FA-reS"/>
-                        <outlet property="startDateTextField" destination="EXx-05-RLS" id="m7c-Tl-2G5"/>
+                        <outlet property="tripEndDateTextField" destination="bZx-5s-UHt" id="K0h-uL-cFI"/>
+                        <outlet property="tripLocationTextField" destination="pRN-Qt-82u" id="ZZq-Ue-hA1"/>
+                        <outlet property="tripPhotoImageView" destination="hym-Te-anF" id="9ci-FA-reS"/>
+                        <outlet property="tripStartDateTextField" destination="EXx-05-RLS" id="m7c-Tl-2G5"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZJ-NL-OqF" userLabel="First Responder" sceneMemberID="firstResponder"/>
