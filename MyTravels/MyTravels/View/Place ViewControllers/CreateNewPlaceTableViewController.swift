@@ -30,10 +30,10 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     @IBOutlet weak var starFour: UIImageView!
     @IBOutlet weak var starFive: UIImageView!
     
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var typeTextField: UITextField!
-    @IBOutlet weak var addressTextField: UITextField!
-    @IBOutlet weak var commentTextView: UITextView!
+    @IBOutlet weak var placeNameTextField: UITextField!
+    @IBOutlet weak var placeTypeTextField: UITextField!
+    @IBOutlet weak var placeAddressTextField: UITextField!
+    @IBOutlet weak var placeCommentsTextView: UITextView!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -52,8 +52,8 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
 //        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "AvenirNext", size: 20)!]
         
         // Set textview placeholder text
-        commentTextView.text = "Comments"
-        commentTextView.textColor = #colorLiteral(red: 0.8037719131, green: 0.8036019206, blue: 0.8242246509, alpha: 1)
+        placeCommentsTextView.text = "Comments"
+        placeCommentsTextView.textColor = #colorLiteral(red: 0.8037719131, green: 0.8036019206, blue: 0.8242246509, alpha: 1)
 
     }
     
@@ -63,11 +63,27 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     }
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        guard let placeNameTF = placeNameTextField,
+            let placeTypeTF = placeTypeTextField,
+            let placeAddressTF = placeAddressTextField
+            else { return }
+        
+        let textFields = [placeNameTF, placeTypeTF, placeAddressTF]
+        
+        
+        if placeNameTextField.text?.isEmpty == true ||
+            placeTypeTextField.text == "Choose a type" ||
+            placeAddressTextField.text?.isEmpty == true  {
+            missingFieldAlert(textFields: textFields)
+            return
+            
+        }
+        
         guard let trip = self.trip,
-            let name = nameTextField.text,
-            let type = typeTextField.text,
-            let address = addressTextField.text,
-            let comments = commentTextView.text
+            let name = placeNameTextField.text,
+            let type = placeTypeTextField.text,
+            let address = placeAddressTextField.text,
+            let comments = placeCommentsTextView.text
             else { return }
         
         self.photos.remove(at: 0)
@@ -264,7 +280,7 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
 
 extension CreateNewPlaceTableViewController: TypeSelectionViewControllerDelegate {
     func set(type: String) {
-        typeTextField.text = type
+        placeTypeTextField.text = type
     }
 }
 
@@ -291,22 +307,22 @@ extension CreateNewPlaceTableViewController: UICollectionViewDelegate, UICollect
     
 }
 
-extension CreateNewPlaceViewController: UITextViewDelegate {
+extension CreateNewPlaceTableViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         
-        if commentsTextView.textColor == UIColor.lightGray {
-            commentsTextView.text = nil
-            commentsTextView.textColor = UIColor.black
+        if self.placeCommentsTextView.textColor == UIColor.lightGray {
+            self.placeCommentsTextView.text = nil
+            self.placeCommentsTextView.textColor = UIColor.black
         }
         
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
        
-        if commentsTextView.text.isEmpty {
-            commentsTextView.text = "Comments"
-            commentsTextView.textColor = UIColor.lightGray
+        if self.placeCommentsTextView.text.isEmpty {
+            self.placeCommentsTextView.text = "Comments"
+            self.placeCommentsTextView.textColor = UIColor.lightGray
         }
         
     }

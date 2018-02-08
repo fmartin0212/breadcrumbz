@@ -24,11 +24,13 @@ class PlaceDetailTableViewController: UITableViewController {
     @IBOutlet weak var placeMainPhotoImageView: UIImageView!
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var placeAddressLabel: UILabel!
+    
     @IBOutlet weak var starOne: UIImageView!
     @IBOutlet weak var starTwo: UIImageView!
     @IBOutlet weak var starThree: UIImageView!
     @IBOutlet weak var starFour: UIImageView!
     @IBOutlet weak var starFive: UIImageView!
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {

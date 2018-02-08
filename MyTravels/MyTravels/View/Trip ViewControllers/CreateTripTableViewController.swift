@@ -22,7 +22,7 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
     @IBOutlet weak var startDateTextField: UITextField!
     @IBOutlet weak var endDateTextField: UITextField!
     @IBOutlet weak var photoImageView: UIImageView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,6 +40,13 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
     }
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        guard let locationTF = locationTextField,
+            let startDateTF = startDateTextField,
+            let endDateTF = endDateTextField
+            else { return }
+        
+        let textFields = [locationTF, startDateTF, endDateTF]
+        missingFieldAlert(textFields: textFields)
         
         guard let location = locationTextField.text,
             let startDate = startDate,

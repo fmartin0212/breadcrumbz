@@ -22,9 +22,7 @@
 		B7C10CD720214D4700818430 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C10CD620214D4700818430 /* CloudKit.framework */; };
 		B7C10CD920214F3C00818430 /* Trip + Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CD820214F3C00818430 /* Trip + Convenience.swift */; };
 		B7C10CDE20214F9A00818430 /* Place + Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CDD20214F9A00818430 /* Place + Convenience.swift */; };
-		B7C10CE02021539700818430 /* CreateTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CDF2021539700818430 /* CreateTripViewController.swift */; };
 		B7C10CE2202226ED00818430 /* TripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CE1202226ED00818430 /* TripDetailViewController.swift */; };
-		B7C10CE420222E1800818430 /* CreateNewPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CE320222E1800818430 /* CreateNewPlaceViewController.swift */; };
 		B7D652392024E24A00E975F1 /* TypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D652382024E24A00E975F1 /* TypeSelectionViewController.swift */; };
 		B7D6523B202514C700E975F1 /* CreateNewPlaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6523A202514C700E975F1 /* CreateNewPlaceTableViewController.swift */; };
 		B7D6523D202620E700E975F1 /* PlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6523C202620E700E975F1 /* PlaceTableViewCell.swift */; };
@@ -56,9 +54,7 @@
 		B7C10CD620214D4700818430 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		B7C10CD820214F3C00818430 /* Trip + Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip + Convenience.swift"; sourceTree = "<group>"; };
 		B7C10CDD20214F9A00818430 /* Place + Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Place + Convenience.swift"; sourceTree = "<group>"; };
-		B7C10CDF2021539700818430 /* CreateTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripViewController.swift; sourceTree = "<group>"; };
 		B7C10CE1202226ED00818430 /* TripDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailViewController.swift; sourceTree = "<group>"; };
-		B7C10CE320222E1800818430 /* CreateNewPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewPlaceViewController.swift; sourceTree = "<group>"; };
 		B7D652382024E24A00E975F1 /* TypeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeSelectionViewController.swift; sourceTree = "<group>"; };
 		B7D6523A202514C700E975F1 /* CreateNewPlaceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewPlaceTableViewController.swift; sourceTree = "<group>"; };
 		B7D6523C202620E700E975F1 /* PlaceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTableViewCell.swift; sourceTree = "<group>"; };
@@ -154,8 +150,6 @@
 		B7C10CC92020D24300818430 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B7C10CDF2021539700818430 /* CreateTripViewController.swift */,
-				B7C10CE320222E1800818430 /* CreateNewPlaceViewController.swift */,
 				B7C10CB42020D19500818430 /* AppDelegate.swift */,
 				B7D6523E2026526700E975F1 /* ViewControllerExtensions.swift */,
 				B7C10CBE2020D19500818430 /* Assets.xcassets */,
@@ -300,7 +294,6 @@
 				B7D652412026DF0E00E975F1 /* PlaceDetailTableViewController.swift in Sources */,
 				B7C10CB72020D19500818430 /* CreateAccountViewController.swift in Sources */,
 				B7BDA845202A29F50080B81B /* EditPlaceTableViewController.swift in Sources */,
-				B7C10CE02021539700818430 /* CreateTripViewController.swift in Sources */,
 				B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */,
 				B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */,
 				B7C10CD920214F3C00818430 /* Trip + Convenience.swift in Sources */,
@@ -308,7 +301,6 @@
 				B7D6523B202514C700E975F1 /* CreateNewPlaceTableViewController.swift in Sources */,
 				B7C10CCD2020EFB000818430 /* TripTableViewCell.swift in Sources */,
 				B7D652452027FB4B00E975F1 /* ChooseDateViewController.swift in Sources */,
-				B7C10CE420222E1800818430 /* CreateNewPlaceViewController.swift in Sources */,
 				B7D6523D202620E700E975F1 /* PlaceTableViewCell.swift in Sources */,
 				B7D6523F2026526700E975F1 /* ViewControllerExtensions.swift in Sources */,
 				B7C10CD3202111A300818430 /* CoreDataStack.swift in Sources */,

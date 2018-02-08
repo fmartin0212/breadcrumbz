@@ -240,18 +240,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pRN-Qt-82u">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pRN-Qt-82u">
+                                                    <rect key="frame" x="13" y="0.0" width="362" height="50.5"/>
                                                     <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="pRN-Qt-82u" firstAttribute="centerX" secondItem="JFH-Tq-2t5" secondAttribute="centerX" id="2wE-63-Jr9"/>
-                                                <constraint firstItem="pRN-Qt-82u" firstAttribute="height" secondItem="JFH-Tq-2t5" secondAttribute="height" id="4Rj-Hm-zto"/>
-                                                <constraint firstItem="pRN-Qt-82u" firstAttribute="centerY" secondItem="JFH-Tq-2t5" secondAttribute="centerY" id="9Dm-Cx-zkr"/>
-                                                <constraint firstItem="pRN-Qt-82u" firstAttribute="width" secondItem="JFH-Tq-2t5" secondAttribute="width" id="lwl-1o-ysy"/>
+                                                <constraint firstAttribute="trailing" secondItem="pRN-Qt-82u" secondAttribute="trailing" id="53p-LG-qgP"/>
+                                                <constraint firstItem="pRN-Qt-82u" firstAttribute="leading" secondItem="JFH-Tq-2t5" secondAttribute="leading" constant="13" id="HqJ-tC-nJC"/>
+                                                <constraint firstAttribute="bottom" secondItem="pRN-Qt-82u" secondAttribute="bottom" id="Q0r-T0-9IO"/>
+                                                <constraint firstItem="pRN-Qt-82u" firstAttribute="top" secondItem="JFH-Tq-2t5" secondAttribute="top" id="l06-yn-UXU"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -262,11 +262,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose a start date" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EXx-05-RLS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose a start date" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EXx-05-RLS">
+                                                    <rect key="frame" x="13" y="0.0" width="362" height="50.5"/>
                                                     <gestureRecognizers/>
                                                     <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <outletCollection property="gestureRecognizers" destination="3a2-rw-y9s" appends="YES" id="vSW-hG-pfg"/>
@@ -274,10 +274,10 @@
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="EXx-05-RLS" firstAttribute="width" secondItem="xxd-Sb-PFu" secondAttribute="width" id="40A-oU-n5N"/>
-                                                <constraint firstItem="EXx-05-RLS" firstAttribute="centerX" secondItem="xxd-Sb-PFu" secondAttribute="centerX" id="4NX-Pz-5uL"/>
-                                                <constraint firstItem="EXx-05-RLS" firstAttribute="height" secondItem="xxd-Sb-PFu" secondAttribute="height" id="Ufr-4p-33v"/>
-                                                <constraint firstItem="EXx-05-RLS" firstAttribute="centerY" secondItem="xxd-Sb-PFu" secondAttribute="centerY" id="qyx-Ei-gEq"/>
+                                                <constraint firstAttribute="trailing" secondItem="EXx-05-RLS" secondAttribute="trailing" id="76Z-4I-mS6"/>
+                                                <constraint firstAttribute="bottom" secondItem="EXx-05-RLS" secondAttribute="bottom" id="ERu-Wq-Xbv"/>
+                                                <constraint firstItem="EXx-05-RLS" firstAttribute="leading" secondItem="xxd-Sb-PFu" secondAttribute="leading" constant="13" id="NMz-iT-gJM"/>
+                                                <constraint firstItem="EXx-05-RLS" firstAttribute="top" secondItem="xxd-Sb-PFu" secondAttribute="top" id="lnn-zT-Lb3"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -288,11 +288,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose an end date" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bZx-5s-UHt">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose an end date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bZx-5s-UHt">
+                                                    <rect key="frame" x="13" y="0.0" width="362" height="50.5"/>
                                                     <gestureRecognizers/>
                                                     <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <outletCollection property="gestureRecognizers" destination="ozX-0W-sDI" appends="YES" id="g5X-5t-8gX"/>
@@ -300,10 +300,10 @@
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="bZx-5s-UHt" firstAttribute="height" secondItem="hQc-d9-0NR" secondAttribute="height" id="PxU-kp-geM"/>
-                                                <constraint firstItem="bZx-5s-UHt" firstAttribute="width" secondItem="hQc-d9-0NR" secondAttribute="width" id="ZPI-IY-3of"/>
-                                                <constraint firstItem="bZx-5s-UHt" firstAttribute="centerY" secondItem="hQc-d9-0NR" secondAttribute="centerY" id="cff-35-fZJ"/>
-                                                <constraint firstItem="bZx-5s-UHt" firstAttribute="centerX" secondItem="hQc-d9-0NR" secondAttribute="centerX" id="yca-Dl-7gh"/>
+                                                <constraint firstItem="bZx-5s-UHt" firstAttribute="top" secondItem="hQc-d9-0NR" secondAttribute="top" id="1QT-sH-YRB"/>
+                                                <constraint firstAttribute="trailing" secondItem="bZx-5s-UHt" secondAttribute="trailing" id="ggZ-VI-qy9"/>
+                                                <constraint firstItem="bZx-5s-UHt" firstAttribute="leading" secondItem="hQc-d9-0NR" secondAttribute="leading" constant="13" id="jkv-dQ-Sj9"/>
+                                                <constraint firstAttribute="bottom" secondItem="bZx-5s-UHt" secondAttribute="bottom" id="wrL-2p-SNd"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -457,19 +457,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xmC-fB-Zcf">
-                                <rect key="frame" x="0.0" y="64" width="375" height="425"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="333.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="0fS-JP-7Ot">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="425"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pTr-Pb-Eq1">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="283.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="pTr-Pb-Eq1" secondAttribute="height" multiplier="1:1" id="9jB-fs-8ik"/>
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="h9H-Xh-wpj">
-                                                <rect key="frame" x="0.0" y="375" width="375" height="50"/>
+                                                <rect key="frame" x="0.0" y="283.5" width="375" height="50"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="4IK-Uf-0Ki"/>
@@ -487,7 +487,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Emi-uB-9XE">
-                                <rect key="frame" x="0.0" y="489" width="375" height="361"/>
+                                <rect key="frame" x="0.0" y="397.5" width="375" height="269.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -716,7 +716,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="fh1-TT-zMs" secondAttribute="trailing" id="NbT-gN-CYC"/>
                                                 <constraint firstItem="fh1-TT-zMs" firstAttribute="leading" secondItem="B99-Aq-unW" secondAttribute="leading" constant="13" id="O7j-4n-yKK"/>
-                                                <constraint firstAttribute="bottom" secondItem="fh1-TT-zMs" secondAttribute="bottom" constant="0.5" id="XyV-B5-30M"/>
+                                                <constraint firstAttribute="bottom" secondItem="fh1-TT-zMs" secondAttribute="bottom" id="XyV-B5-30M"/>
                                                 <constraint firstItem="fh1-TT-zMs" firstAttribute="top" secondItem="B99-Aq-unW" secondAttribute="top" id="ZkH-qY-MjN"/>
                                                 <constraint firstItem="fh1-TT-zMs" firstAttribute="height" secondItem="B99-Aq-unW" secondAttribute="height" id="bcx-HY-yHn"/>
                                             </constraints>
@@ -862,16 +862,16 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addressTextField" destination="ocb-hV-SV1" id="FV0-gV-ZyG"/>
                         <outlet property="collectionView" destination="vzn-w3-iyS" id="kCj-Pa-zXl"/>
-                        <outlet property="commentTextView" destination="5tx-h8-RC7" id="jJI-ba-1C4"/>
-                        <outlet property="nameTextField" destination="fh1-TT-zMs" id="6U1-Wj-Sxg"/>
+                        <outlet property="placeAddressTextField" destination="ocb-hV-SV1" id="FV0-gV-ZyG"/>
+                        <outlet property="placeCommentsTextView" destination="5tx-h8-RC7" id="jJI-ba-1C4"/>
+                        <outlet property="placeNameTextField" destination="fh1-TT-zMs" id="6U1-Wj-Sxg"/>
+                        <outlet property="placeTypeTextField" destination="8cT-Wc-esB" id="7Hj-MX-HLP"/>
                         <outlet property="starFive" destination="llZ-uD-xqC" id="4dA-Gh-fyd"/>
                         <outlet property="starFour" destination="HJD-rm-lal" id="DVI-cI-P7h"/>
                         <outlet property="starOne" destination="1Jj-RT-Gst" id="c5d-My-SHu"/>
                         <outlet property="starThree" destination="e0e-lE-Xk1" id="jLd-aN-rp1"/>
                         <outlet property="starTwo" destination="IwJ-9M-SIv" id="dav-w5-i8P"/>
-                        <outlet property="typeTextField" destination="8cT-Wc-esB" id="7Hj-MX-HLP"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OsD-sv-giU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1545,7 +1545,7 @@
         <image name="star-clear-24" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="J3z-ZV-F6J"/>
+        <segue reference="MyI-RZ-qMJ"/>
         <segue reference="uQy-QT-Egi"/>
     </inferredMetricsTieBreakers>
 </document>

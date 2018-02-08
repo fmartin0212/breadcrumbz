@@ -23,10 +23,12 @@ class EditPlaceTableViewController: UITableViewController, UIImagePickerControll
     @IBOutlet weak var starThree: UIImageView!
     @IBOutlet weak var starFour: UIImageView!
     @IBOutlet weak var starFive: UIImageView!
+    
     @IBOutlet weak var placeNameTextField: UITextField!
     @IBOutlet weak var placeTypeTextField: UITextField!
     @IBOutlet weak var placeAddressTextField: UITextField!
     @IBOutlet weak var placeCommentsTextView: UITextView!
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     
@@ -78,6 +80,15 @@ class EditPlaceTableViewController: UITableViewController, UIImagePickerControll
     }
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        guard let placeNameTF = placeNameTextField,
+            let placeTypeTF = placeTypeTextField,
+            let placeAddressTF = placeAddressTextField
+            else { return }
+        
+        let textFields = [placeNameTF, placeTypeTF, placeAddressTF]
+        
+        missingFieldAlert(textFields: textFields)
+        
         guard let trip = self.trip,
             let place = self.place,
             let name = placeNameTextField.text,
