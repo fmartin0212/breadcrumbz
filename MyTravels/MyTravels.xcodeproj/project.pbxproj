@@ -83,6 +83,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B71E0C70202CC13600125396 /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B7C10CCC2020EFB000818430 /* TripTableViewCell.swift */,
+				B7D6523C202620E700E975F1 /* PlaceTableViewCell.swift */,
+				B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */,
+			);
+			path = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		B71E0C71202CC1A100125396 /* Popup ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B7D652442027FB4B00E975F1 /* ChooseDateViewController.swift */,
+				B7D652382024E24A00E975F1 /* TypeSelectionViewController.swift */,
+			);
+			path = "Popup ViewControllers";
+			sourceTree = "<group>";
+		};
+		B71E0C72202CC20100125396 /* Trip ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B7D652422027F5C300E975F1 /* CreateTripTableViewController.swift */,
+				B7C10CCA2020EDB400818430 /* TripsListViewController.swift */,
+				B7C10CE1202226ED00818430 /* TripDetailViewController.swift */,
+			);
+			path = "Trip ViewControllers";
+			sourceTree = "<group>";
+		};
+		B71E0C73202CC20D00125396 /* Place ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B7D6523A202514C700E975F1 /* CreateNewPlaceTableViewController.swift */,
+				B7D652402026DF0E00E975F1 /* PlaceDetailTableViewController.swift */,
+				B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */,
+			);
+			path = "Place ViewControllers";
+			sourceTree = "<group>";
+		};
 		B7C10CA82020D19500818430 = {
 			isa = PBXGroup;
 			children = (
@@ -106,7 +145,7 @@
 			children = (
 				B7C10CD420214D4200818430 /* MyTravels.entitlements */,
 				B7C10CDB20214F6900818430 /* Model */,
-				B7C10CDA20214F5400818430 /* UI */,
+				B7C10CDA20214F5400818430 /* View */,
 				B7C10CDC20214F7200818430 /* Model Controllers */,
 			);
 			path = MyTravels;
@@ -134,24 +173,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B7C10CDA20214F5400818430 /* UI */ = {
+		B7C10CDA20214F5400818430 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				B7C10CB62020D19500818430 /* CreateAccountViewController.swift */,
-				B7D652422027F5C300E975F1 /* CreateTripTableViewController.swift */,
-				B7D652442027FB4B00E975F1 /* ChooseDateViewController.swift */,
-				B7C10CCA2020EDB400818430 /* TripsListViewController.swift */,
-				B7C10CE1202226ED00818430 /* TripDetailViewController.swift */,
-				B7D6523A202514C700E975F1 /* CreateNewPlaceTableViewController.swift */,
-				B7D652402026DF0E00E975F1 /* PlaceDetailTableViewController.swift */,
-				B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */,
-				B7D652382024E24A00E975F1 /* TypeSelectionViewController.swift */,
-				B7C10CCC2020EFB000818430 /* TripTableViewCell.swift */,
-				B7D6523C202620E700E975F1 /* PlaceTableViewCell.swift */,
-				B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */,
+				B71E0C72202CC20100125396 /* Trip ViewControllers */,
+				B71E0C73202CC20D00125396 /* Place ViewControllers */,
+				B71E0C71202CC1A100125396 /* Popup ViewControllers */,
+				B71E0C70202CC13600125396 /* Custom Cells */,
 				B7C10CB82020D19500818430 /* Main.storyboard */,
 			);
-			path = UI;
+			path = View;
 			sourceTree = "<group>";
 		};
 		B7C10CDB20214F6900818430 /* Model */ = {
