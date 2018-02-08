@@ -387,24 +387,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hxa-tl-O5W">
-                                <rect key="frame" x="30" y="180" width="315" height="327"/>
+                                <rect key="frame" x="30" y="164" width="315" height="359.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cfP-MW-PpG">
-                                        <rect key="frame" x="10" y="279.5" width="295.5" height="42.5"/>
+                                        <rect key="frame" x="10" y="307.5" width="295.5" height="47"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <state key="normal" title="Save"/>
                                         <connections>
                                             <action selector="saveButtonTapped:" destination="TWR-fC-f4X" eventType="touchUpInside" id="IOg-J9-8kS"/>
                                         </connections>
                                     </button>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="f4F-y7-UD3">
-                                        <rect key="frame" x="0.5" y="65" width="315" height="196.5"/>
+                                    <datePicker contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="f4F-y7-UD3">
+                                        <rect key="frame" x="0.5" y="71.5" width="315" height="216"/>
                                         <date key="date" timeIntervalSinceReferenceDate="539490530.63873005">
                                             <!--2018-02-05 02:28:50 +0000-->
                                         </date>
                                     </datePicker>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a start date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gu-bj-XEd">
-                                        <rect key="frame" x="0.5" y="10" width="315" height="33"/>
+                                        <rect key="frame" x="0.5" y="10" width="315" height="36"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -428,9 +428,9 @@
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="kZ2-zf-DLe" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Hxa-tl-O5W" secondAttribute="bottom" constant="160" id="F5y-9J-72Y"/>
+                            <constraint firstItem="kZ2-zf-DLe" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="Hxa-tl-O5W" secondAttribute="bottom" constant="160" id="F5y-9J-72Y"/>
                             <constraint firstItem="kZ2-zf-DLe" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Hxa-tl-O5W" secondAttribute="trailing" constant="30" id="OMz-TO-fmC"/>
-                            <constraint firstItem="Hxa-tl-O5W" firstAttribute="top" relation="greaterThanOrEqual" secondItem="kZ2-zf-DLe" secondAttribute="top" constant="160" id="fxp-Cc-YjV"/>
+                            <constraint firstItem="Hxa-tl-O5W" firstAttribute="top" relation="lessThanOrEqual" secondItem="kZ2-zf-DLe" secondAttribute="top" constant="160" id="fxp-Cc-YjV"/>
                             <constraint firstItem="Hxa-tl-O5W" firstAttribute="centerY" secondItem="kZ2-zf-DLe" secondAttribute="centerY" id="nYi-GC-HWq"/>
                             <constraint firstItem="Hxa-tl-O5W" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kZ2-zf-DLe" secondAttribute="leading" constant="30" id="pFW-nT-bWU"/>
                             <constraint firstItem="Hxa-tl-O5W" firstAttribute="centerX" secondItem="kZ2-zf-DLe" secondAttribute="centerX" id="rMQ-Qx-aHB"/>
