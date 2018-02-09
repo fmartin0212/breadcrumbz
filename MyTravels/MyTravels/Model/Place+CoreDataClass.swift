@@ -1,16 +1,18 @@
 //
-//  Place + Convenience.swift
+//  Place+CoreDataClass.swift
 //  MyTravels
 //
-//  Created by Frank Martin Jr on 1/30/18.
+//  Created by Frank Martin Jr on 2/9/18.
 //  Copyright © 2018 Frank Martin Jr. All rights reserved.
+//
 //
 
 import Foundation
 import CoreData
 
-extension Place {
-    
+@objc(Place)
+public class Place: NSManagedObject {
+
     convenience init(name: String, type: String, address: String, comments: String, rating: Int16, trip: Trip, context: NSManagedObjectContext = CoreDataStack.context) {
         
         self.init(context: context)
@@ -22,8 +24,4 @@ extension Place {
         self.trip = trip
         
     }
-
-
-// FIXME: - CloudKit convenience initializer
-
 }

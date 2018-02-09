@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C205" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Photo" representedClassName="Photo" syncable="YES" codeGenerationType="class">
+    <entity name="Photo" representedClassName="Photo" syncable="YES">
         <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
         <relationship name="place" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Place" inverseName="photos" inverseEntity="Place" syncable="YES"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="photo" inverseEntity="Trip" syncable="YES"/>
     </entity>
-    <entity name="Place" representedClassName="Place" syncable="YES" codeGenerationType="class">
+    <entity name="Place" representedClassName="Place" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comments" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -14,7 +14,8 @@
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="place" inverseEntity="Photo" syncable="YES"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="places" inverseEntity="Trip" syncable="YES"/>
     </entity>
-    <entity name="Trip" representedClassName="Trip" syncable="YES" codeGenerationType="class">
+    <entity name="Trip" representedClassName="Trip" syncable="YES">
+        <attribute name="cloudKitRecordIDString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -22,8 +23,8 @@
         <relationship name="places" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Place" inverseName="trip" inverseEntity="Place" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Place" positionX="-99" positionY="117" width="128" height="148"/>
-        <element name="Trip" positionX="-452" positionY="117" width="128" height="118"/>
-        <element name="Photo" positionX="-270" positionY="36" width="128" height="88"/>
+        <element name="Photo" positionX="-270" positionY="36" width="128" height="90"/>
+        <element name="Place" positionX="-99" positionY="117" width="128" height="150"/>
+        <element name="Trip" positionX="-452" positionY="117" width="128" height="135"/>
     </elements>
 </model>

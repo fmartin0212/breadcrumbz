@@ -20,8 +20,6 @@
 		B7C10CD12020FD5500818430 /* PlaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CD02020FD5500818430 /* PlaceController.swift */; };
 		B7C10CD3202111A300818430 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CD2202111A300818430 /* CoreDataStack.swift */; };
 		B7C10CD720214D4700818430 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C10CD620214D4700818430 /* CloudKit.framework */; };
-		B7C10CD920214F3C00818430 /* Trip + Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CD820214F3C00818430 /* Trip + Convenience.swift */; };
-		B7C10CDE20214F9A00818430 /* Place + Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CDD20214F9A00818430 /* Place + Convenience.swift */; };
 		B7C10CE2202226ED00818430 /* TripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CE1202226ED00818430 /* TripDetailViewController.swift */; };
 		B7D652392024E24A00E975F1 /* TypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D652382024E24A00E975F1 /* TypeSelectionViewController.swift */; };
 		B7D6523B202514C700E975F1 /* CreateNewPlaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D6523A202514C700E975F1 /* CreateNewPlaceTableViewController.swift */; };
@@ -30,7 +28,14 @@
 		B7D652412026DF0E00E975F1 /* PlaceDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D652402026DF0E00E975F1 /* PlaceDetailTableViewController.swift */; };
 		B7D652432027F5C300E975F1 /* CreateTripTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D652422027F5C300E975F1 /* CreateTripTableViewController.swift */; };
 		B7D652452027FB4B00E975F1 /* ChooseDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D652442027FB4B00E975F1 /* ChooseDateViewController.swift */; };
-		B7F92BCD20291D310021A8CA /* Photo + Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F92BCC20291D310021A8CA /* Photo + Convenience.swift */; };
+		B7DA1B6F202E140C0007497A /* Trip+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B69202E140C0007497A /* Trip+CoreDataClass.swift */; };
+		B7DA1B70202E140C0007497A /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B6A202E140C0007497A /* Trip+CoreDataProperties.swift */; };
+		B7DA1B71202E140C0007497A /* Place+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B6B202E140C0007497A /* Place+CoreDataClass.swift */; };
+		B7DA1B72202E140C0007497A /* Place+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B6C202E140C0007497A /* Place+CoreDataProperties.swift */; };
+		B7DA1B73202E140C0007497A /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B6D202E140C0007497A /* Photo+CoreDataClass.swift */; };
+		B7DA1B74202E140C0007497A /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B6E202E140C0007497A /* Photo+CoreDataProperties.swift */; };
+		B7DA1B76202E164C0007497A /* CloudKitSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B75202E164C0007497A /* CloudKitSyncable.swift */; };
+		B7DA1B78202E1AE20007497A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B77202E1AE20007497A /* User.swift */; };
 		B7F92BCF20291DEE0021A8CA /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F92BCE20291DEE0021A8CA /* PhotoController.swift */; };
 		B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -52,8 +57,6 @@
 		B7C10CD2202111A300818430 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		B7C10CD420214D4200818430 /* MyTravels.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyTravels.entitlements; sourceTree = "<group>"; };
 		B7C10CD620214D4700818430 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		B7C10CD820214F3C00818430 /* Trip + Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip + Convenience.swift"; sourceTree = "<group>"; };
-		B7C10CDD20214F9A00818430 /* Place + Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Place + Convenience.swift"; sourceTree = "<group>"; };
 		B7C10CE1202226ED00818430 /* TripDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailViewController.swift; sourceTree = "<group>"; };
 		B7D652382024E24A00E975F1 /* TypeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeSelectionViewController.swift; sourceTree = "<group>"; };
 		B7D6523A202514C700E975F1 /* CreateNewPlaceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewPlaceTableViewController.swift; sourceTree = "<group>"; };
@@ -62,7 +65,14 @@
 		B7D652402026DF0E00E975F1 /* PlaceDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailTableViewController.swift; sourceTree = "<group>"; };
 		B7D652422027F5C300E975F1 /* CreateTripTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripTableViewController.swift; sourceTree = "<group>"; };
 		B7D652442027FB4B00E975F1 /* ChooseDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDateViewController.swift; sourceTree = "<group>"; };
-		B7F92BCC20291D310021A8CA /* Photo + Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo + Convenience.swift"; sourceTree = "<group>"; };
+		B7DA1B69202E140C0007497A /* Trip+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B7DA1B6A202E140C0007497A /* Trip+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B7DA1B6B202E140C0007497A /* Place+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Place+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B7DA1B6C202E140C0007497A /* Place+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Place+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B7DA1B6D202E140C0007497A /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B7DA1B6E202E140C0007497A /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B7DA1B75202E164C0007497A /* CloudKitSyncable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitSyncable.swift; sourceTree = "<group>"; };
+		B7DA1B77202E1AE20007497A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B7F92BCE20291DEE0021A8CA /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
 		B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,6 +160,7 @@
 		B7C10CC92020D24300818430 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B7DA1B75202E164C0007497A /* CloudKitSyncable.swift */,
 				B7C10CB42020D19500818430 /* AppDelegate.swift */,
 				B7D6523E2026526700E975F1 /* ViewControllerExtensions.swift */,
 				B7C10CBE2020D19500818430 /* Assets.xcassets */,
@@ -183,11 +194,15 @@
 		B7C10CDB20214F6900818430 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B7DA1B77202E1AE20007497A /* User.swift */,
+				B7DA1B69202E140C0007497A /* Trip+CoreDataClass.swift */,
+				B7DA1B6A202E140C0007497A /* Trip+CoreDataProperties.swift */,
+				B7DA1B6B202E140C0007497A /* Place+CoreDataClass.swift */,
+				B7DA1B6C202E140C0007497A /* Place+CoreDataProperties.swift */,
+				B7DA1B6D202E140C0007497A /* Photo+CoreDataClass.swift */,
+				B7DA1B6E202E140C0007497A /* Photo+CoreDataProperties.swift */,
 				B7C10CBB2020D19500818430 /* MyTravels.xcdatamodeld */,
 				B7C10CD2202111A300818430 /* CoreDataStack.swift */,
-				B7C10CD820214F3C00818430 /* Trip + Convenience.swift */,
-				B7C10CDD20214F9A00818430 /* Place + Convenience.swift */,
-				B7F92BCC20291D310021A8CA /* Photo + Convenience.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -282,24 +297,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7F92BCD20291D310021A8CA /* Photo + Convenience.swift in Sources */,
+				B7DA1B6F202E140C0007497A /* Trip+CoreDataClass.swift in Sources */,
 				B7F92BCF20291DEE0021A8CA /* PhotoController.swift in Sources */,
 				B7D652432027F5C300E975F1 /* CreateTripTableViewController.swift in Sources */,
 				B7C10CCF2020FD4B00818430 /* TripController.swift in Sources */,
 				B7D652392024E24A00E975F1 /* TypeSelectionViewController.swift in Sources */,
+				B7DA1B78202E1AE20007497A /* User.swift in Sources */,
+				B7DA1B73202E140C0007497A /* Photo+CoreDataClass.swift in Sources */,
 				B7C10CBD2020D19500818430 /* MyTravels.xcdatamodeld in Sources */,
 				B7C10CCB2020EDB400818430 /* TripsListViewController.swift in Sources */,
 				B7C10CE2202226ED00818430 /* TripDetailViewController.swift in Sources */,
-				B7C10CDE20214F9A00818430 /* Place + Convenience.swift in Sources */,
 				B7D652412026DF0E00E975F1 /* PlaceDetailTableViewController.swift in Sources */,
 				B7C10CB72020D19500818430 /* CreateAccountViewController.swift in Sources */,
 				B7BDA845202A29F50080B81B /* EditPlaceTableViewController.swift in Sources */,
+				B7DA1B74202E140C0007497A /* Photo+CoreDataProperties.swift in Sources */,
 				B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */,
 				B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */,
-				B7C10CD920214F3C00818430 /* Trip + Convenience.swift in Sources */,
 				B7C10CD12020FD5500818430 /* PlaceController.swift in Sources */,
 				B7D6523B202514C700E975F1 /* CreateNewPlaceTableViewController.swift in Sources */,
+				B7DA1B76202E164C0007497A /* CloudKitSyncable.swift in Sources */,
+				B7DA1B70202E140C0007497A /* Trip+CoreDataProperties.swift in Sources */,
 				B7C10CCD2020EFB000818430 /* TripTableViewCell.swift in Sources */,
+				B7DA1B71202E140C0007497A /* Place+CoreDataClass.swift in Sources */,
+				B7DA1B72202E140C0007497A /* Place+CoreDataProperties.swift in Sources */,
 				B7D652452027FB4B00E975F1 /* ChooseDateViewController.swift in Sources */,
 				B7D6523D202620E700E975F1 /* PlaceTableViewCell.swift in Sources */,
 				B7D6523F2026526700E975F1 /* ViewControllerExtensions.swift in Sources */,
