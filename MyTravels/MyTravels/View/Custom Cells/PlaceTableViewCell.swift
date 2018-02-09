@@ -47,17 +47,24 @@ class PlaceTableViewCell: UITableViewCell {
             placeAddressLabel.text = place.address
             updateStarsImageViews(place: place)
         } else {
-            let placeholderImage = UIImage()
-            if place.type == "Activity" {
-                guard let activityPlaceholderImage = UIImage(named: "activity") else { return }
-                placeholderImage = 
+            var placeholderImage = UIImage()
+            if place.type == "Lodging" {
+                guard let lodgingPlaceholderImage = UIImage(named: "Lodging") else { return }
+                placeholderImage = lodgingPlaceholderImage
+            } else if place.type == "Restaurant" {
+                guard let restaurantPlaceholderImage = UIImage(named: "Restaurant") else { return }
+                placeholderImage = restaurantPlaceholderImage
+            } else if place.type == "Activity" {
+                guard let activityPlaceholderImage = UIImage(named: "Activity") else { return }
+                placeholderImage = activityPlaceholderImage
             }
-            placeImageView.image = placeholderImage
-            placeNameLabel.text = place.name
-            placeAddressLabel.text = place.address
-            updateStarsImageViews(place: place)}
-        
-    }
+                
+                placeImageView.image = placeholderImage
+                placeNameLabel.text = place.name
+                placeAddressLabel.text = place.address
+                updateStarsImageViews(place: place)}
+            
+        }
     
     func updateStarsImageViews(place: Place) {
         
