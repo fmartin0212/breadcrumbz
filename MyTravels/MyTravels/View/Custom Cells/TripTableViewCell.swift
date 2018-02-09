@@ -39,7 +39,7 @@ class TripTableViewCell: UITableViewCell {
         var tripPhoto = UIImage()
         guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
         tripPhoto = tripPhotoPlaceholderImage
-        if let photo = trip.photo?.photo {
+        if let photo = trip.photo?.photo as Data? {
             guard let image = UIImage(data: photo) else { return }
             tripPhoto = image
         }
@@ -47,8 +47,8 @@ class TripTableViewCell: UITableViewCell {
         tripImageView.image = tripPhoto
         tripNameLabel.text = trip.location
         
-        tripStartDateLabel.text = "\(shortDateString(date: startDate)) -"
-        tripEndDateLabel.text = shortDateString(date: endDate)
+        tripStartDateLabel.text = "\(shortDateString(date: startDate as Date)) -"
+        tripEndDateLabel.text = shortDateString(date: endDate as Date)
     
     }
     

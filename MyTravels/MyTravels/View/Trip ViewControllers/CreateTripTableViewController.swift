@@ -78,7 +78,9 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
     }
     
     // MARK: - Image picker controller delegate methods
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        picker.sourceType = .photoLibrary
         
         picker.allowsEditing = true
         guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage,

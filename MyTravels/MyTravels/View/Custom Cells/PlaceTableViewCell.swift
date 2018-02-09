@@ -40,7 +40,7 @@ class PlaceTableViewCell: UITableViewCell {
         
             else { return }
         if photosArray.count > 0 {
-            guard let photo = photosArray[0].photo,
+            guard let photo = photosArray[0].photo as Data?,
                 let image = UIImage(data: photo) else { return }
             placeImageView.image = image
             placeNameLabel.text = place.name

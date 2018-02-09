@@ -64,7 +64,7 @@ class PlaceDetailTableViewController: UITableViewController {
         self.photos = photos
         
         if photos.count > 0 {
-            guard let photo = photos[0].photo,
+            guard let photo = photos[0].photo as Data?,
                 let image = UIImage(data: photo) else { return }
             placeMainPhotoImageView.image = image
             placeNameLabel.text = place.name
@@ -140,7 +140,7 @@ extension PlaceDetailTableViewController: UICollectionViewDelegate, UICollection
         guard let photo = photos[indexPath.row].photo
             else { return UICollectionViewCell() }
 
-        cell.photo = photo
+        cell.photo = photo as? Data
         
         return cell
         

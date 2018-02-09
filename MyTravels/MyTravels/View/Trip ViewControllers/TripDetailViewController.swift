@@ -32,7 +32,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         var tripPhoto = UIImage()
         guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
         tripPhoto = tripPhotoPlaceholderImage
-        if let photo = trip.photo?.photo {
+        if let photo = trip.photo?.photo as Data? {
             guard let image = UIImage(data: photo) else { return }
             tripPhoto = image
         }

@@ -46,7 +46,7 @@ class EditPlaceTableViewController: UITableViewController, UIImagePickerControll
         
         var photosAsData: [Data] = []
         for photo in photosArray {
-            guard let photoAsData = photo.photo else { return }
+            guard let photoAsData = photo.photo as Data? else { return }
             photosAsData.append(photoAsData)
         }
         
