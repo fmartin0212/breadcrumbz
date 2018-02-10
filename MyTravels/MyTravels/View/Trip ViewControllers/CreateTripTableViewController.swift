@@ -21,16 +21,21 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
     @IBOutlet weak var tripLocationTextField: UITextField!
     @IBOutlet weak var tripStartDateTextField: UITextField!
     @IBOutlet weak var tripEndDateTextField: UITextField!
-    @IBOutlet weak var tripPhotoImageView: UIImageView!
-
+    @IBOutlet weak var tripPhotoImageView: UIImageView!  {
+        didSet {
+            
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         // Delegates
         imagePickerController.delegate = self
         
         // Photo properties
         tripPhotoImageView.layer.cornerRadius = 4
+        
+        imagePickerController.allowsEditing = true
         
     }
     
@@ -80,19 +85,20 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
     // MARK: - Image picker controller delegate methods
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+
         picker.sourceType = .photoLibrary
-        
-        picker.allowsEditing = true
-        guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage,
-            let photoAsData = UIImagePNGRepresentation(photo)
-            else { return }
-        
+
+        guard let availableMediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary) else { return }
+        picker.mediaTypes = availableMediaTypes
+        guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage
+            else { print("photo nil") ; return }
+        guard let photoAsData = UIImagePNGRepresentation(photo) else { return }
         self.photo = photoAsData
         
-        tripPhotoImageView.image = photo
-        tripPhotoImageView.contentMode = .scaleAspectFit
+        self.tripPhotoImageView.image = photo
+        self.tripPhotoImageView.contentMode = .scaleAspectFit
         
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
         
     }
     

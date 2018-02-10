@@ -43,6 +43,8 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
             let addPhotoImageAsData = UIImagePNGRepresentation(addPhotoImage) else { return }
         self.photos.insert(addPhotoImageAsData, at: 0)
         
+        imagePickerController.allowsEditing = true
+        
         // Delegates
         imagePickerController.delegate = self
         collectionView.delegate = self
@@ -248,7 +250,6 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
       
-        imagePickerController.allowsEditing = true
         guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage,
             let photoAsData = UIImagePNGRepresentation(photo)
             else { return }

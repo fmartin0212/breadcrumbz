@@ -40,6 +40,8 @@ class EditPlaceTableViewController: UITableViewController, UIImagePickerControll
         collectionView.dataSource = self
         imagePickerController.delegate = self
         
+        imagePickerController.allowsEditing = true
+        
         guard let place = place,
             let photosArray = place.photos?.allObjects as? [Photo]
             else { return }
@@ -297,7 +299,6 @@ class EditPlaceTableViewController: UITableViewController, UIImagePickerControll
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        imagePickerController.allowsEditing = true
         guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage,
             let photoAsData = UIImagePNGRepresentation(photo)
             else { return }
