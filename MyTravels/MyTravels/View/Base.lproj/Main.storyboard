@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0zI-oT-TDR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="c7d-w5-Oj0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,7 +23,7 @@
         <!--Create Account View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="CreateAccountViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateAccountViewController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="overCurrentContext" id="BYZ-38-t0r" customClass="CreateAccountViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,19 +31,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xcJ-Q3-FGZ">
                                 <rect key="frame" x="37.5" y="99.5" width="300" height="467"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qjz-Q4-ZZJ">
-                                        <rect key="frame" x="8" y="158" width="284" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TaW-ug-xh5">
                                         <rect key="frame" x="8" y="27" width="284" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="33" id="oMm-FY-45W"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="23"/>
-                                        <color key="textColor" red="0.46484267709999999" green="0.3633223176" blue="0.41235083340000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="23"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KsQ-Um-bZm">
@@ -70,71 +65,62 @@
                                             <color key="titleColor" red="0.957106173" green="0.51020485159999995" blue="0.54696655270000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v0I-nj-qJO">
-                                        <rect key="frame" x="9" y="196" width="284" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q4s-HE-Nyd">
-                                        <rect key="frame" x="7" y="259" width="286" height="36"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                        <state key="normal" title="Create account">
-                                            <color key="titleColor" red="0.957106173" green="0.51020485159999995" blue="0.54696655270000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="createAccountButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g4b-Dt-BDY"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="KsQ-Um-bZm" secondAttribute="trailing" constant="8" id="0qp-Mi-7vT"/>
                                     <constraint firstItem="tvw-hO-vOv" firstAttribute="leading" secondItem="xcJ-Q3-FGZ" secondAttribute="leading" constant="8" id="4nN-7X-Xgp"/>
-                                    <constraint firstItem="q4s-HE-Nyd" firstAttribute="leading" secondItem="xcJ-Q3-FGZ" secondAttribute="leading" constant="7" id="9RT-1p-YgS"/>
-                                    <constraint firstItem="qjz-Q4-ZZJ" firstAttribute="leading" secondItem="KsQ-Um-bZm" secondAttribute="leading" id="BYb-up-SGR"/>
                                     <constraint firstItem="HhT-pr-S8H" firstAttribute="trailing" secondItem="tvw-hO-vOv" secondAttribute="trailing" id="Bpk-tr-NP0"/>
                                     <constraint firstItem="TaW-ug-xh5" firstAttribute="top" secondItem="xcJ-Q3-FGZ" secondAttribute="top" constant="27" id="BvJ-rU-OwC"/>
                                     <constraint firstItem="KsQ-Um-bZm" firstAttribute="leading" secondItem="xcJ-Q3-FGZ" secondAttribute="leading" constant="8" id="H3w-hy-qoy"/>
-                                    <constraint firstItem="qjz-Q4-ZZJ" firstAttribute="top" secondItem="KsQ-Um-bZm" secondAttribute="bottom" constant="32" id="H9x-X8-Xm8"/>
                                     <constraint firstAttribute="trailing" secondItem="tvw-hO-vOv" secondAttribute="trailing" constant="8" id="Id3-Hd-3D8"/>
                                     <constraint firstItem="TaW-ug-xh5" firstAttribute="leading" secondItem="xcJ-Q3-FGZ" secondAttribute="leading" constant="8" id="M1z-I6-qs1"/>
                                     <constraint firstAttribute="bottom" secondItem="tvw-hO-vOv" secondAttribute="bottom" constant="75" id="WZf-Wr-RuT"/>
                                     <constraint firstItem="HhT-pr-S8H" firstAttribute="leading" secondItem="tvw-hO-vOv" secondAttribute="leading" id="XYk-ZV-dkd"/>
                                     <constraint firstItem="HhT-pr-S8H" firstAttribute="top" secondItem="tvw-hO-vOv" secondAttribute="bottom" id="av6-Nh-YB9"/>
                                     <constraint firstAttribute="trailing" secondItem="TaW-ug-xh5" secondAttribute="trailing" constant="8" id="hHx-jl-CS6"/>
-                                    <constraint firstAttribute="trailing" secondItem="q4s-HE-Nyd" secondAttribute="trailing" constant="7" id="kIj-tk-XgE"/>
-                                    <constraint firstItem="qjz-Q4-ZZJ" firstAttribute="trailing" secondItem="KsQ-Um-bZm" secondAttribute="trailing" id="kx4-Io-mKC"/>
-                                    <constraint firstItem="q4s-HE-Nyd" firstAttribute="top" secondItem="qjz-Q4-ZZJ" secondAttribute="bottom" constant="34" id="rdU-gN-ZKc"/>
                                     <constraint firstItem="KsQ-Um-bZm" firstAttribute="top" secondItem="TaW-ug-xh5" secondAttribute="bottom" constant="36" id="zH1-x4-dSH"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q4s-HE-Nyd">
+                                <rect key="frame" x="37.5" y="273" width="300" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="HKw-bW-GZa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Create account">
+                                    <color key="titleColor" red="0.957106173" green="0.51020485159999995" blue="0.54696655270000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="createAccountButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g4b-Dt-BDY"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.55572652816772461" green="0.72726690769195557" blue="0.65769922733306885" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="xcJ-Q3-FGZ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.7" id="1xk-Cd-LBu"/>
                             <constraint firstItem="xcJ-Q3-FGZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AY3-vP-Tth"/>
                             <constraint firstItem="xcJ-Q3-FGZ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="YfC-Yj-9M5"/>
                             <constraint firstItem="xcJ-Q3-FGZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="dDP-r6-5fe"/>
+                            <constraint firstItem="q4s-HE-Nyd" firstAttribute="leading" secondItem="xcJ-Q3-FGZ" secondAttribute="leading" id="geV-BL-1hm"/>
+                            <constraint firstItem="q4s-HE-Nyd" firstAttribute="top" secondItem="KsQ-Um-bZm" secondAttribute="bottom" constant="47.5" id="qJi-Ql-yO5"/>
+                            <constraint firstItem="q4s-HE-Nyd" firstAttribute="trailing" secondItem="xcJ-Q3-FGZ" secondAttribute="trailing" id="qUg-sk-fGK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="createAccountButton" destination="q4s-HE-Nyd" id="7v3-1E-Unw"/>
                         <outlet property="overlayView" destination="xcJ-Q3-FGZ" id="wuE-Pp-fje"/>
-                        <outlet property="passwordTextField" destination="qjz-Q4-ZZJ" id="4AD-yI-LpZ"/>
                         <outlet property="usernameTextField" destination="KsQ-Um-bZm" id="sdy-CQ-bhB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+            <point key="canvasLocation" x="897" y="-696"/>
         </scene>
         <!--My Trips-->
         <scene sceneID="bh2-QR-Xx6">
             <objects>
-                <viewController id="KSc-Yg-SqR" customClass="TripsListViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" id="KSc-Yg-SqR" customClass="TripsListViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bym-UD-DyX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -211,9 +197,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="My Trips" id="HTa-L6-FdL">
                         <barButtonItem key="backBarButtonItem" title=" " id="Wcc-qA-M4H"/>
-                        <barButtonItem key="leftBarButtonItem" id="qPx-EC-HeT">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem id="qPx-EC-HeT">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="userImage32" id="2uo-Zj-EZS">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Xfr-BE-SpC">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -227,7 +218,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="opj-gv-CMe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1744.8" y="133.5832083958021"/>
+            <point key="canvasLocation" x="897" y="64"/>
         </scene>
         <!--Add a new trip-->
         <scene sceneID="dU5-i9-rsU">
@@ -617,7 +608,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p1c-eZ-JcY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2621.5999999999999" y="768.66566716641682"/>
+            <point key="canvasLocation" x="1764" y="798"/>
         </scene>
         <!--Add a place-->
         <scene sceneID="Dfv-Dp-NUR">
@@ -1119,10 +1110,39 @@
             </objects>
             <point key="canvasLocation" x="3422" y="1641"/>
         </scene>
+        <!--Fetch View Controller-->
+        <scene sceneID="eBJ-cy-VN9">
+            <objects>
+                <viewController id="c7d-w5-Oj0" customClass="FetchViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yUo-8V-E7y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second load screen" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zlh-6I-HRT">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mRm-UJ-Lve" firstAttribute="bottom" secondItem="Zlh-6I-HRT" secondAttribute="bottom" id="9yf-Fu-HoN"/>
+                            <constraint firstItem="mRm-UJ-Lve" firstAttribute="trailing" secondItem="Zlh-6I-HRT" secondAttribute="trailing" id="UXv-At-amf"/>
+                            <constraint firstItem="Zlh-6I-HRT" firstAttribute="leading" secondItem="mRm-UJ-Lve" secondAttribute="leading" id="gv3-Qt-Wct"/>
+                            <constraint firstItem="Zlh-6I-HRT" firstAttribute="top" secondItem="mRm-UJ-Lve" secondAttribute="top" id="hQS-GE-jBN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="mRm-UJ-Lve"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eyr-ao-JyV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1028" y="63.418290854572717"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Rwp-mg-H5f">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0zI-oT-TDR" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TripListNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="0zI-oT-TDR" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ISJ-Lb-aoG">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -1136,7 +1156,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dIa-e0-PBp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1004" y="134"/>
+            <point key="canvasLocation" x="42" y="86"/>
         </scene>
         <!--Type Selection View Controller-->
         <scene sceneID="bRI-h6-lyB">
@@ -1550,6 +1570,7 @@
         <image name="CreateTripButtonImage256" width="256" height="256"/>
         <image name="star-black-16" width="16" height="16"/>
         <image name="star-clear-24" width="24" height="24"/>
+        <image name="userImage32" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="MyI-RZ-qMJ"/>

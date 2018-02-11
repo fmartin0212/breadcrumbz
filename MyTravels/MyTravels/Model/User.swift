@@ -12,11 +12,12 @@ import CloudKit
 class User {
     
     let username: String
-    let password: String
+    let password: String?
     let firstName: String?
     let lastName: String?
     let profilePicture: Data?
     var ckRecordID: CKRecordID?
+    let appleUserRef: CKReference
     
     fileprivate var temporaryPhotoURL: URL {
         
@@ -24,19 +25,20 @@ class User {
         
         let temporaryDirectory = NSTemporaryDirectory()
         let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
-        let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("jpg")
+        let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
         
         try? profilePicture?.write(to: fileURL, options: [.atomic])
         
         return fileURL
     }
     
-    init(username: String, password: String, firstName: String?, lastName: String?, profilePicture: Data?) {
+    init(username: String, password: String?, firstName: String?, lastName: String?, profilePicture: Data?, appleUserRef: CKReference) {
         self.username = username
         self.firstName = firstName
         self.lastName = lastName
         self.password = password
         self.profilePicture = profilePicture
+        self.appleUserRef = appleUserRef
     }
     
     // Turn record into User
@@ -45,7 +47,8 @@ class User {
             let password = ckRecord["password"] as? String,
             let firstName = ckRecord["firstName"] as? String,
             let lastName = ckRecord["lastName"] as? String,
-            let profilePicture = ckRecord["profilePicture"] as? CKAsset
+            let profilePicture = ckRecord["profilePictureAsset"] as? CKAsset,
+            let appleUserRef = ckRecord["appleUserRef"] as? CKReference
             else { return nil }
         
         let photoData = try? Data(contentsOf: profilePicture.fileURL)
@@ -55,6 +58,7 @@ class User {
         self.firstName = firstName
         self.lastName = lastName
         self.profilePicture = photoData
+        self.appleUserRef = appleUserRef
         
     }
 }
@@ -74,6 +78,7 @@ extension CKRecord {
         self.setValue(user.firstName, forKey: "firstName")
         self.setValue(user.lastName, forKey: "lastName")
         self.setValue(profilePictureAsset, forKey: "profilePictureAsset")
+        self.setValue(user.appleUserRef, forKey: "appleUserRef")
         
     }
     

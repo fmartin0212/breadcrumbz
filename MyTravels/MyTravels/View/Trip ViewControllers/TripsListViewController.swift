@@ -20,6 +20,14 @@ class TripsListViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        if UserController.shared.loggedInUser == nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let createAccountViewController = storyboard.instantiateViewController(withIdentifier: "CreateAccountViewController")
+            
+            UIView.animate(withDuration: 0.75, animations: {
+                self.present(createAccountViewController, animated: true, completion: nil)
+            })
+        }
         
         // Set navigation bar properties
         self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedStringKey.font: UIFont(name: "Avenir Next", size: 20)!]

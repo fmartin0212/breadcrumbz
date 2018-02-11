@@ -15,14 +15,57 @@ class UserController {
     
     var loggedInUser: User?
     
-    func createNewUserWith(_ username: String, password: String, firstName: String?, lastName: String?, profilePicture: Data?, completion: @escaping (Bool) -> Void) {
+    func createNewUserWith(_ username: String, password: String?, firstName: String?, lastName: String?, profilePicture: Data?, completion: @escaping (Bool) -> Void) {
         
-        let newUser = User(username: username, password: password, firstName: firstName, lastName: lastName, profilePicture: profilePicture)
+        CKContainer.default().fetchUserRecordID { (recordID, error) in
+            if let error = error {
+                print("There was an error fetching the user's record ID. Error: \(error)")
+                completion(false)
+                return
+            }
+            guard let recordID = recordID else { completion(false) ; return }
+            
+            let appleUserRef = CKReference(recordID: recordID, action: .none)
+            
+            let newUser = User(username: username, password: "password", firstName: "Frank", lastName: "lastName", profilePicture: profilePicture, appleUserRef: appleUserRef)
+            
+            guard let ckRecord = CKRecord(user: newUser) else { completion(false) ; return }
+            
+            CloudKitManager.shared.saveToCloudKit(ckRecord: ckRecord) { (success) in
+                completion(true)
+                self.loggedInUser = newUser
+            }
+        }
         
-        guard let ckRecord = CKRecord(user: newUser) else { completion(false) ; return }
+    }
+    
+    func fetchCurrentUser(completion: @escaping (Bool) -> Void) {
         
-        CloudKitManager.shared.saveToCloudKit(ckRecord: ckRecord) { (success) in
-            completion(true)
+        CKContainer.default().fetchUserRecordID { (appleUserID, error) in
+            if let error = error {
+                print("No record ID found. \(error)")
+                completion(false)
+                return
+            }
+            
+            guard let appleUserID = appleUserID else { completion(false) ; return }
+            let predicate = NSPredicate(format: "appleUserRef == %@", appleUserID)
+            let query = CKQuery(recordType: "User", predicate: predicate)
+            CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
+                if let error = error {
+                    print("No records return. Error: \(error)")
+                    self.loggedInUser = nil
+                    completion(false)
+                    return
+                }
+                guard let records = records,
+                    let loggedInUserRecord = records.first,
+                    let loggedInUser = User(ckRecord: loggedInUserRecord)
+                    else { completion(false) ; return }
+                
+                self.loggedInUser = loggedInUser
+                completion(true)
+            })
         }
     }
 }

@@ -24,6 +24,7 @@ class CloudKitManager {
             }
 
             else {
+                print("Save successful!")
                 completion(true)
             }
         }

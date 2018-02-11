@@ -13,7 +13,6 @@ class CreateAccountViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var overlayView: UIView!
     @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var createAccountButton: UIButton!
     
     
@@ -32,6 +31,9 @@ class CreateAccountViewController: UIViewController {
         createAccountButton.layer.borderWidth = 1
         createAccountButton.layer.borderColor = #colorLiteral(red: 0.5557265282, green: 0.7272669077, blue: 0.6576992273, alpha: 1)
         
+        // Format overlayview
+        setPropertiesFor(overlayView: overlayView)
+        
         // Overlay fade in animation
         fadeInOverlayView()
         
@@ -39,7 +41,7 @@ class CreateAccountViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func createAccountButtonTapped(_ sender: UIButton) {
-        
+       
         // Create bubbly effect upon tap
         UIView.animate(withDuration: 0.15, animations: {
             self.createAccountButton.transform = CGAffineTransform(scaleX: 0.90, y: 0.90)
@@ -48,9 +50,21 @@ class CreateAccountViewController: UIViewController {
                 self.createAccountButton.transform = CGAffineTransform.identity
             })
         }
+
+        guard let username = usernameTextField.text,
+            let placeholderProfilePicture = UIImage(named: "userImage256")
+            
+        else { return }
+        let placeholderProfilePictureAsData = UIImagePNGRepresentation(placeholderProfilePicture)
+        
+        UserController.shared.createNewUserWith(username, password: "password", firstName: "Frank", lastName: "Martin", profilePicture: placeholderProfilePictureAsData) { (success) in
+            DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
         
     }
-    
+        
     // MARK: - Functions
     func fadeInOverlayView() {
         
@@ -58,7 +72,7 @@ class CreateAccountViewController: UIViewController {
         overlayView.layer.transform = transform
         overlayView.alpha = 0
         
-        UIView.animate(withDuration: 1.0) {
+        UIView.animate(withDuration: 0.75) {
             self.overlayView.alpha = 1.0
             self.overlayView.layer.transform = CATransform3DIdentity
         }
