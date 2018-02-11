@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="c7d-w5-Oj0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M3q-OV-UnA">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1176,10 +1177,14 @@
                         </searchBar>
                     </tableView>
                     <navigationItem key="navigationItem" id="ARt-fP-IB2"/>
+                    <connections>
+                        <outlet property="searchBar" destination="aWk-1u-Bqu" id="bar-EQ-OWV"/>
+                        <outlet property="tableView" destination="YMi-at-SYy" id="xQU-U3-B6p"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LDL-Iy-xd2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4916" y="189.3553223388306"/>
+            <point key="canvasLocation" x="5246" y="196"/>
         </scene>
         <!--Type Selection View Controller-->
         <scene sceneID="bRI-h6-lyB">
@@ -1617,12 +1622,94 @@
             </objects>
             <point key="canvasLocation" x="897" y="824"/>
         </scene>
+        <!--Search View Controller-->
+        <scene sceneID="zrI-9I-bcL">
+            <objects>
+                <viewController id="M3q-OV-UnA" customClass="SearchViewController" customModule="Root" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dOS-qD-gTO"/>
+                        <viewControllerLayoutGuide type="bottom" id="gSp-RB-2Bm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xSa-t7-tyV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Enter Location Name..." translatesAutoresizingMaskIntoConstraints="NO" id="bBC-rG-bAR">
+                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                                <color key="barTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="M3q-OV-UnA" id="P0R-CL-tUz"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="96L-ub-FkB">
+                                <rect key="frame" x="0.0" y="76" width="375" height="539"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" name="Tint"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="M3q-OV-UnA" id="joi-tZ-kkZ"/>
+                                    <outlet property="delegate" destination="M3q-OV-UnA" id="de7-Bg-tZ8"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HpR-SR-cps" customClass="UIButtonX" customModule="Root" customModuleProvider="target">
+                                <rect key="frame" x="160" y="623" width="54" height="36"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Cancel"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="animate" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="animateDelay">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="animateFrom">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="Tint"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="HpR-SR-cps" firstAttribute="top" secondItem="96L-ub-FkB" secondAttribute="bottom" constant="8" id="3XH-ha-EYW"/>
+                            <constraint firstItem="96L-ub-FkB" firstAttribute="leading" secondItem="xSa-t7-tyV" secondAttribute="leading" id="4Uy-DO-Na1"/>
+                            <constraint firstAttribute="trailing" secondItem="bBC-rG-bAR" secondAttribute="trailing" id="80U-sC-13d"/>
+                            <constraint firstItem="bBC-rG-bAR" firstAttribute="top" secondItem="dOS-qD-gTO" secondAttribute="bottom" id="D0E-BX-rqp"/>
+                            <constraint firstItem="bBC-rG-bAR" firstAttribute="leading" secondItem="xSa-t7-tyV" secondAttribute="leading" id="Ond-Dy-sPs"/>
+                            <constraint firstItem="QsO-TP-Dtj" firstAttribute="trailing" secondItem="HpR-SR-cps" secondAttribute="trailing" constant="161" id="eBM-fe-rAl"/>
+                            <constraint firstItem="96L-ub-FkB" firstAttribute="top" secondItem="bBC-rG-bAR" secondAttribute="bottom" id="nFa-BU-o2q"/>
+                            <constraint firstItem="gSp-RB-2Bm" firstAttribute="top" secondItem="HpR-SR-cps" secondAttribute="bottom" constant="8" id="pHs-pI-Cag"/>
+                            <constraint firstAttribute="trailing" secondItem="96L-ub-FkB" secondAttribute="trailing" id="sJt-Z4-fDw"/>
+                            <constraint firstItem="96L-ub-FkB" firstAttribute="top" secondItem="bBC-rG-bAR" secondAttribute="bottom" id="t5j-GA-Bcv"/>
+                            <constraint firstItem="HpR-SR-cps" firstAttribute="leading" secondItem="QsO-TP-Dtj" secondAttribute="leading" constant="160" id="u2D-cK-z0a"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QsO-TP-Dtj"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Neb-d1-4cs" appends="YES" id="rzD-9F-Dax"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="bBC-rG-bAR" id="rz0-TS-92g"/>
+                        <outlet property="tableView" destination="96L-ub-FkB" id="fEZ-3Z-hlW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cxP-ce-lMv" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="Neb-d1-4cs">
+                    <rectEdge key="edges" left="YES"/>
+                </screenEdgePanGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="5951" y="196"/>
+        </scene>
     </scenes>
     <resources>
         <image name="CreateTripButtonImage256" width="256" height="256"/>
         <image name="star-black-16" width="16" height="16"/>
         <image name="star-clear-24" width="24" height="24"/>
         <image name="userImage32" width="32" height="32"/>
+        <namedColor name="Tint">
+            <color red="0.1439999938" green="0.61400002239999996" blue="0.55000001190000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="J3z-ZV-F6J"/>
