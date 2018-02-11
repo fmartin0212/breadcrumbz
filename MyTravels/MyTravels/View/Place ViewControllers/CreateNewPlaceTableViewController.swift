@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MapKit
 
-class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
     
     // MARK: - Properties
     var trip: Trip? {
@@ -19,8 +20,9 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     let imagePickerController = UIImagePickerController()
     var photo: Data?
     var rating: Int16 = 0
-    var mockPhotoData: [Data]?
     var photos: [Data] = []
+    let locationManager = CLLocationManager()
+    var usersLocation = CLLocationCoordinate2D()
     
     // MARK: - IBOutlets
     @IBOutlet weak var starOne: UIImageView!
@@ -49,6 +51,9 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         imagePickerController.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
         
         //        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "AvenirNext", size: 20)!]
         
@@ -239,6 +244,13 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     }
     
     // MARK : - Functions
+    func getLocation() {
+        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            guard let coordinate = locations.last?.coordinate else { return }
+            usersLocation = coordinate
+        }
+    }
+
     func calculateStars() {
         // FIX ME: THIS.
     }

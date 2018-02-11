@@ -13,7 +13,7 @@ extension UIViewController {
     func sectionHeaderLabelWith(text: String) -> UILabel {
      
         let headerLabel = UILabel()
-        headerLabel.font = UIFont(name: "AvenirNext-Bold", size: 25)
+        headerLabel.font = UIFont(name: "AvenirNext-Medium", size: 25)
         headerLabel.text = text
         
         return headerLabel

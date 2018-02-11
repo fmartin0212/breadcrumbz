@@ -9,6 +9,7 @@
 
 import Foundation
 import CoreData
+import CloudKit
 
 @objc(Place)
 public class Place: NSManagedObject {

@@ -50,6 +50,12 @@ class TripsListViewController: UIViewController {
         self.trips = trips
     }
     
+    // MARK: - IBActions
+    @IBAction func profileButtonTapped(_ sender: UIBarButtonItem) {
+        
+    }
+    
+    
     // MARK: - Functions
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)

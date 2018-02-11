@@ -27,9 +27,7 @@ class CreateAccountViewController: UIViewController {
         overlayView.layer.cornerRadius = 8
         
         // Set button border properties
-        createAccountButton.layer.cornerRadius = 8
-        createAccountButton.layer.borderWidth = 1
-        createAccountButton.layer.borderColor = #colorLiteral(red: 0.5557265282, green: 0.7272669077, blue: 0.6576992273, alpha: 1)
+        setPropertiesFor(button: createAccountButton)
         
         // Format overlayview
         setPropertiesFor(overlayView: overlayView)
@@ -43,10 +41,10 @@ class CreateAccountViewController: UIViewController {
     @IBAction func createAccountButtonTapped(_ sender: UIButton) {
        
         // Create bubbly effect upon tap
-        UIView.animate(withDuration: 0.15, animations: {
+        UIView.animate(withDuration: 0.10, animations: {
             self.createAccountButton.transform = CGAffineTransform(scaleX: 0.90, y: 0.90)
         }) { (_) in
-            UIView.animate(withDuration: 0.15, animations: {
+            UIView.animate(withDuration: 0.10, animations: {
                 self.createAccountButton.transform = CGAffineTransform.identity
             })
         }

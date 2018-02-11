@@ -9,6 +9,7 @@
 
 import Foundation
 import CoreData
+import CloudKit
 
 @objc(Photo)
 public class Photo: NSManagedObject {
