@@ -8,12 +8,16 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class SearchViewController: UIViewController {
 
     // MARK: - Constants & Variables
+    // MapKit
     var searchCompleter = MKLocalSearchCompleter()
     var searchResults = [MKLocalSearchCompletion]()
+    // CoreLocation
+    var locationManager = CLLocationManager()
     
     // MARK: - IBOutlets
     @IBOutlet var tableView: UITableView!
@@ -22,9 +26,15 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        // Delegates
         searchCompleter.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
+        locationManager.delegate = self
+        
+        locationManager.requestWhenInUseAuthorization()
+        
     }
 
 }
@@ -37,13 +47,40 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 
+extension SearchViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        // Need to eventually protect against potential changes, see Apple docs
+        if status == .authorizedWhenInUse {
+            locationManager.requestLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else { return }
+        print(location)
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            if let error = error {
+                print("Could not reverse geocode location. Error: \(error)")
+            }
+            guard let placemarks = placemarks else { return }
+            let placemark = placemarks.first
+        }
+    }
+    
+}
+
 
 extension SearchViewController: MKLocalSearchCompleterDelegate {
     
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         searchResults = completer.results
         tableView.reloadData()
-}
+    }
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
         // handle error
     }
@@ -72,11 +109,19 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let searchResult = searchResults[indexPath.row]
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-        cell.textLabel?.attributedText = highlightedText(searchResult.title, inRanges: searchResult.titleHighlightRanges, size: 17.0)
-        cell.detailTextLabel?.attributedText = highlightedText(searchResult.subtitle, inRanges: searchResult.subtitleHighlightRanges, size: 12.0)
-        return cell
+        if indexPath.row == 0 {
+            let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+            cell.textLabel?.text = "My Location"
+            return cell
+        }
+            
+        else {
+            let searchResult = searchResults[indexPath.row]
+            let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+            cell.textLabel?.attributedText = highlightedText(searchResult.title, inRanges: searchResult.titleHighlightRanges, size: 17.0)
+            cell.detailTextLabel?.attributedText = highlightedText(searchResult.subtitle, inRanges: searchResult.subtitleHighlightRanges, size: 12.0)
+            return cell
+        }
     }
 }
 
@@ -92,13 +137,13 @@ extension SearchViewController: UITableViewDelegate {
         search.start { (response, error) in
             
             guard let response = response else { return }
-            
+            print("adsf")
             let coordinate = response.mapItems[0].placemark.coordinate
             let longitude = coordinate.longitude
             let latitude = coordinate.latitude
             
             print(String(describing: coordinate))
-//            self.delegate?.updateLongLat(long: longitude, lat: latitude)
+            //            self.delegate?.updateLongLat(long: longitude, lat: latitude)
         }
         
         dismiss(animated: true, completion: nil)

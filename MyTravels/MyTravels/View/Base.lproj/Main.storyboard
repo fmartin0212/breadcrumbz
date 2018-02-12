@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M3q-OV-UnA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="c7d-w5-Oj0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -758,11 +758,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ocb-hV-SV1">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose an address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ocb-hV-SV1">
                                                     <rect key="frame" x="13" y="0.0" width="362" height="59.5"/>
+                                                    <gestureRecognizers/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="8TR-HY-SgO" appends="YES" id="sMy-bT-2lt"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -906,6 +910,12 @@
                 <tapGestureRecognizer id="aXQ-3U-eov">
                     <connections>
                         <action selector="starFiveGestureRecognizerTapped:" destination="MZZ-JI-H9h" id="igO-my-HIl"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="8TR-HY-SgO">
+                    <connections>
+                        <action selector="addresTapGestureRecognizerTapped:" destination="MZZ-JI-H9h" id="AYd-Ie-yZE"/>
+                        <segue destination="M3q-OV-UnA" kind="presentation" id="N4A-SW-sw2"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -1161,30 +1171,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dIa-e0-PBp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="42" y="86"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="QjV-Rf-KVO">
-            <objects>
-                <viewController id="6qh-UI-dJf" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="YMi-at-SYy">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <searchBar key="tableFooterView" contentMode="redraw" placeholder="Enter a location" id="aWk-1u-Bqu">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </searchBar>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="ARt-fP-IB2"/>
-                    <connections>
-                        <outlet property="searchBar" destination="aWk-1u-Bqu" id="bar-EQ-OWV"/>
-                        <outlet property="tableView" destination="YMi-at-SYy" id="xQU-U3-B6p"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LDL-Iy-xd2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5246" y="196"/>
         </scene>
         <!--Type Selection View Controller-->
         <scene sceneID="bRI-h6-lyB">
@@ -1642,7 +1628,7 @@
                                     <outlet property="delegate" destination="M3q-OV-UnA" id="P0R-CL-tUz"/>
                                 </connections>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="96L-ub-FkB">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="96L-ub-FkB">
                                 <rect key="frame" x="0.0" y="76" width="375" height="539"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" name="Tint"/>
@@ -1678,10 +1664,8 @@
                             <constraint firstItem="bBC-rG-bAR" firstAttribute="top" secondItem="dOS-qD-gTO" secondAttribute="bottom" id="D0E-BX-rqp"/>
                             <constraint firstItem="bBC-rG-bAR" firstAttribute="leading" secondItem="xSa-t7-tyV" secondAttribute="leading" id="Ond-Dy-sPs"/>
                             <constraint firstItem="QsO-TP-Dtj" firstAttribute="trailing" secondItem="HpR-SR-cps" secondAttribute="trailing" constant="161" id="eBM-fe-rAl"/>
-                            <constraint firstItem="96L-ub-FkB" firstAttribute="top" secondItem="bBC-rG-bAR" secondAttribute="bottom" id="nFa-BU-o2q"/>
                             <constraint firstItem="gSp-RB-2Bm" firstAttribute="top" secondItem="HpR-SR-cps" secondAttribute="bottom" constant="8" id="pHs-pI-Cag"/>
                             <constraint firstAttribute="trailing" secondItem="96L-ub-FkB" secondAttribute="trailing" id="sJt-Z4-fDw"/>
-                            <constraint firstItem="96L-ub-FkB" firstAttribute="top" secondItem="bBC-rG-bAR" secondAttribute="bottom" id="t5j-GA-Bcv"/>
                             <constraint firstItem="HpR-SR-cps" firstAttribute="leading" secondItem="QsO-TP-Dtj" secondAttribute="leading" constant="160" id="u2D-cK-z0a"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QsO-TP-Dtj"/>
@@ -1699,7 +1683,7 @@
                     <rectEdge key="edges" left="YES"/>
                 </screenEdgePanGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="5951" y="196"/>
+            <point key="canvasLocation" x="5152.8000000000002" y="195.6521739130435"/>
         </scene>
     </scenes>
     <resources>
@@ -1712,7 +1696,7 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="J3z-ZV-F6J"/>
+        <segue reference="MyI-RZ-qMJ"/>
         <segue reference="uQy-QT-Egi"/>
     </inferredMetricsTieBreakers>
 </document>

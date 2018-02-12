@@ -243,6 +243,12 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         
     }
     
+    @IBAction func addresTapGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
+        locationManager.requestWhenInUseAuthorization()
+        
+        
+    }
+    
     // MARK : - Functions
     func getLocation() {
         func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -250,6 +256,8 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
             usersLocation = coordinate
         }
     }
+    
+    
 
     func calculateStars() {
         // FIX ME: THIS.
