@@ -250,9 +250,8 @@ class EditPlaceTableViewController: UITableViewController, UIImagePickerControll
     
     // MARK: - Tap gesture recognizers
     @IBAction func typeTextFieldTapGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
-        performSegue(withIdentifier: "toTypeSelectionViewController", sender: self)
+        performSegue(withIdentifier: "ToTypeSelectionViewController", sender: self)
     }
-    
     
     func updateStarsImageViews(place: Place) {
         
@@ -285,8 +284,13 @@ class EditPlaceTableViewController: UITableViewController, UIImagePickerControll
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "toTypeSelectionViewController" {
+        if segue.identifier == "ToTypeSelectionViewControllerSegue" {
             guard let destinationVC = segue.destination as? TypeSelectionViewController else { return }
+            destinationVC.delegate = self
+        }
+        
+        if segue.identifier == "ToSearchViewControllerSegue" {
+            guard let destinationVC = segue.destination as? SearchViewController else { return }
             destinationVC.delegate = self
         }
         
@@ -337,4 +341,10 @@ extension EditPlaceTableViewController: TypeSelectionViewControllerDelegate {
         placeTypeTextField.text = type
     }
     
+}
+
+extension EditPlaceTableViewController: SearchViewControllerDelegate {
+    func set(address: String) {
+        placeAddressTextField.text = address
+    }
 }

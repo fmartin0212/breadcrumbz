@@ -12,7 +12,7 @@ import CoreData
 import CloudKit
 
 @objc(Trip)
-public class Trip: NSManagedObject {
+public class Trip: NSManagedObject, CloudKitSyncable {
     
     // CloudKit - Turn a record into a trip
 //    required init?(record: CKRecord, context: NSManagedObjectContext) {

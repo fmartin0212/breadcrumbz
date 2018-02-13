@@ -10,6 +10,10 @@ import UIKit
 import MapKit
 import CoreLocation
 
+protocol SearchViewControllerDelegate: class {
+    func set(address: String)
+}
+
 class SearchViewController: UIViewController {
 
     // MARK: - Constants & Variables
@@ -18,10 +22,14 @@ class SearchViewController: UIViewController {
     var searchResults = [MKLocalSearchCompletion]()
     // CoreLocation
     var locationManager = CLLocationManager()
+    var usersCurrentLocationAsAddressString: String = ""
+    
+    weak var delegate: SearchViewControllerDelegate?
     
     // MARK: - IBOutlets
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var indicatorVisualEffectView: UIVisualEffectView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,11 +41,18 @@ class SearchViewController: UIViewController {
         tableView.dataSource = self
         locationManager.delegate = self
         
-        locationManager.requestWhenInUseAuthorization()
         
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
 
+    // MARK: - IBActions
+    @IBAction func cancelButtonTapped(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
+
 
 extension SearchViewController: UISearchBarDelegate {
     
@@ -48,6 +63,7 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 extension SearchViewController: CLLocationManagerDelegate {
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         // Need to eventually protect against potential changes, see Apple docs
         if status == .authorizedWhenInUse {
@@ -60,6 +76,8 @@ extension SearchViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        view.isUserInteractionEnabled = false
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         guard let location = locations.first else { return }
         print(location)
         let geocoder = CLGeocoder()
@@ -67,8 +85,22 @@ extension SearchViewController: CLLocationManagerDelegate {
             if let error = error {
                 print("Could not reverse geocode location. Error: \(error)")
             }
-            guard let placemarks = placemarks else { return }
-            let placemark = placemarks.first
+            guard let placemarks = placemarks,
+                let placemark = placemarks.first
+                else { return }
+            guard let name = placemark.name,
+                let postalCode = placemark.postalCode,
+                let locality = placemark.locality,
+                let administrativeArea = placemark.administrativeArea,
+                let country = placemark.country
+                else { return }
+            //                    self.geoCodeAlert()
+            self.usersCurrentLocationAsAddressString = "\(name), \(locality), \(administrativeArea) \(postalCode), \(country)"
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            self.view.isUserInteractionEnabled = true
+            UIView.animate(withDuration: 0.2, animations: {
+                self.indicatorVisualEffectView.alpha = 0
+            })
         }
     }
     
@@ -105,7 +137,7 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults.count
+        return searchResults.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -116,7 +148,7 @@ extension SearchViewController: UITableViewDataSource {
         }
             
         else {
-            let searchResult = searchResults[indexPath.row]
+            let searchResult = searchResults[indexPath.row - 1]
             let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
             cell.textLabel?.attributedText = highlightedText(searchResult.title, inRanges: searchResult.titleHighlightRanges, size: 17.0)
             cell.detailTextLabel?.attributedText = highlightedText(searchResult.subtitle, inRanges: searchResult.subtitleHighlightRanges, size: 12.0)
@@ -130,22 +162,47 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let completion = searchResults[indexPath.row]
-        
-        let searchRequest = MKLocalSearchRequest(completion: completion)
-        let search = MKLocalSearch(request: searchRequest)
-        search.start { (response, error) in
-            
-            guard let response = response else { return }
-            print("adsf")
-            let coordinate = response.mapItems[0].placemark.coordinate
-            let longitude = coordinate.longitude
-            let latitude = coordinate.latitude
-            
-            print(String(describing: coordinate))
-            //            self.delegate?.updateLongLat(long: longitude, lat: latitude)
+        if indexPath.row == 0 {
+            delegate?.set(address: self.usersCurrentLocationAsAddressString)
+            dismiss(animated: true, completion: nil)
         }
-        
-        dismiss(animated: true, completion: nil)
+            
+        else {
+            let completion = searchResults[indexPath.row - 1]
+            
+            let searchRequest = MKLocalSearchRequest(completion: completion)
+            let search = MKLocalSearch(request: searchRequest)
+            search.start { (response, error) in
+                
+                guard let response = response else { return }
+                print("adsf")
+                let coordinate = response.mapItems[0].placemark.coordinate
+                let latitude = coordinate.latitude
+                let longitude = coordinate.longitude
+                let location = CLLocation(latitude: latitude, longitude: longitude)
+                
+                let geocoder = CLGeocoder()
+                geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+                    if let error = error {
+                        print("Could not reverse geocode location. Error: \(error)")
+                    }
+                    guard let placemarks = placemarks,
+                        let placemark = placemarks.first
+                        else { return }
+                    guard let name = placemark.name,
+                        let postalCode = placemark.postalCode,
+                        let locality = placemark.locality,
+                        let administrativeArea = placemark.administrativeArea,
+                        let country = placemark.country
+                        else { return }
+                    //                    self.geoCodeAlert()
+                    let selectedAddress = "\(name), \(locality), \(administrativeArea) \(postalCode), \(country)"
+                    self.delegate?.set(address: selectedAddress)
+                    //            self.delegate?.updateLongLat(long: longitude, lat: latitude)
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
     }
 }
+

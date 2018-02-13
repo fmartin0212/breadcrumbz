@@ -52,8 +52,8 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         collectionView.delegate = self
         collectionView.dataSource = self
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
+        placeCommentsTextView.delegate = self
+      
         
         //        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "AvenirNext", size: 20)!]
         
@@ -283,8 +283,13 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
-        if segue.identifier == "toTypeSelectionViewController" {
+        if segue.identifier == "ToTypeSelectionViewControllerSegue" {
             guard let destinationVC = segue.destination as? TypeSelectionViewController else { return }
+            destinationVC.delegate = self
+        }
+        
+        if segue.identifier == "ToSearchViewControllerSegue" {
+            guard let destinationVC = segue.destination as? SearchViewController else { return }
             destinationVC.delegate = self
         }
         
@@ -325,8 +330,8 @@ extension CreateNewPlaceTableViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         
-        if self.placeCommentsTextView.textColor == UIColor.lightGray {
-            self.placeCommentsTextView.text = nil
+        if self.placeCommentsTextView.text == "Comments" {
+            self.placeCommentsTextView.text = ""
             self.placeCommentsTextView.textColor = UIColor.black
         }
         
@@ -341,4 +346,10 @@ extension CreateNewPlaceTableViewController: UITextViewDelegate {
         
     }
     
+}
+
+extension CreateNewPlaceTableViewController: SearchViewControllerDelegate {
+    func set(address: String) {
+        placeAddressTextField.text = address
+    }
 }
