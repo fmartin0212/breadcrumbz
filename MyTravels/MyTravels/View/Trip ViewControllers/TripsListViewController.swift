@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CloudKit
 
 class TripsListViewController: UIViewController {
 
@@ -48,6 +49,14 @@ class TripsListViewController: UIViewController {
         
         guard let trips = TripController.shared.frc.fetchedObjects else { return }
         self.trips = trips
+        TripController.shared.trips = trips
+        
+        var placesArray: [[Place]] = [[]]
+        for trip in trips {
+            guard let places = trip.places?.allObjects as? [Place] else { return }
+            placesArray.append(places)
+        }
+    
     }
     
     // MARK: - IBActions

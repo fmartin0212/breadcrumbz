@@ -12,7 +12,32 @@ import CoreData
 import CloudKit
 
 @objc(Place)
-public class Place: NSManagedObject {
+public class Place: NSManagedObject, CloudKitSyncable {
+    
+    var recordType: String {
+        return "Place"
+    }
+    
+    var cloudKitRecordID: CKRecordID? {
+        guard let recordIDString = cloudKitRecordIDString else { return nil}
+        return CKRecordID(recordName: recordIDString)
+    }
+    
+//    fileprivate var temporaryPhotoURLs: [URL] {
+//
+//        // Must write to temporary directory to be able to pass image file path url to CKAsset
+//        var photoURLs: [URL] = []
+//        guard let photos = self.photos?.allObjects as? [Photo] else { return [URL]() }
+//        for photo in photos {
+//            let temporaryDirectory = NSTemporaryDirectory()
+//            let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
+//            let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
+//            try? photo.photo?.write(to: fileURL, options: [.atomic])
+//            photoURLs.append(fileURL)
+//        }
+//
+//        return photoURLs
+//    }
 
     convenience init(name: String, type: String, address: String, comments: String, rating: Int16, trip: Trip, context: NSManagedObjectContext = CoreDataStack.context) {
         
@@ -24,5 +49,47 @@ public class Place: NSManagedObject {
         self.rating = rating
         self.trip = trip
         
+    }
+    
+    // CloudKit - Turn a record into a Place
+    required convenience public init?(record: CKRecord, context: NSManagedObjectContext) {
+        self.init(context: context)
+        guard let name = record["name"] as? String,
+            let address = record["address"] as? String,
+            let type = record["type"] as? String,
+            let comments = record["comments"] as? String
+            else { return }
+        
+        self.name = name
+        self.address = address
+        self.type = type
+        self.comments = comments
+    }
+    
+}
+
+    // CloudKit - Turn a Place into a record
+extension CKRecord {
+    convenience init(place: Place, trip: Trip) {
+        
+        let ckRecordID = place.cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
+        
+//        var photoAssets: [CKAsset] = []
+//        for photoURL in place.temporaryPhotoURLs {
+//            let photoAsset = CKAsset(fileURL: photoURL)
+//            photoAssets.append(photoAsset)
+//        }
+        
+        self.init(recordType: "Place", recordID: ckRecordID)
+        
+        guard let tripCKRecordID = trip.cloudKitRecordID else { return }
+        let tripReference = CKReference(recordID: tripCKRecordID, action: .none)
+        
+        self.setValue(place.name, forKey: "name")
+        self.setValue(place.address, forKey: "address")
+        self.setValue(place.type, forKey: "type")
+        self.setValue(place.comments, forKey: "comments")
+//        self.setValue(photoAssets, forKey: "photos")
+        self.setValue(tripReference, forKey: "tripReference")
     }
 }

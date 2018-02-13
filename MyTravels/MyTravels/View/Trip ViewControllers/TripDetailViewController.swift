@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CloudKit
 
 class TripDetailViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
@@ -48,7 +49,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         tableView.separatorStyle = .none
         
         setUpArrays()
-        
+      
         
     }
     

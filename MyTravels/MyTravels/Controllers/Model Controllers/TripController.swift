@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import CloudKit
 
 class TripController {
     
@@ -22,13 +23,23 @@ class TripController {
     }()
     
     var trip: Trip?
+    var trips: [Trip] = []
     
     // MARK: - CRUD Functions
     // Create
     func createTripWith(location: String, startDate: Date, endDate: Date) {
-        let trip = Trip(location: location, startDate: startDate, endDate: endDate)
+        let ckRecordIDString = ""
+        let trip = Trip(location: location, startDate: startDate, endDate: endDate, cloudKitRecordIDString: ckRecordIDString)
         self.trip = trip
         saveToPersistentStore()
+        
+    }
+    
+    func saveTripToCloud(trip: Trip) {
+        guard let record = CKRecord(trip: trip) else { return }
+        CloudKitManager.shared.saveToCloudKit(ckRecord: record) { (success) in
+            
+        }
         
     }
     
@@ -58,5 +69,6 @@ class TripController {
         }
     }
     
+
 }
 

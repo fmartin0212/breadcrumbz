@@ -2,7 +2,7 @@
 //  Photo+CoreDataProperties.swift
 //  MyTravels
 //
-//  Created by Frank Martin Jr on 2/9/18.
+//  Created by Frank Martin Jr on 2/12/18.
 //  Copyright © 2018 Frank Martin Jr. All rights reserved.
 //
 //
@@ -18,6 +18,7 @@ extension Photo {
     }
 
     @NSManaged public var photo: NSData?
+    @NSManaged public var cloudKitRecordIDString: String?
     @NSManaged public var place: Place?
     @NSManaged public var trip: Trip?
 
