@@ -65,8 +65,8 @@ extension CKRecord {
         self.init(recordType: "Photo", recordID: recordID)
         
         let photoAsset = CKAsset(fileURL: photo.temporaryPhotoURL)
-        guard let tripRecordID = trip.cloudKitRecordID else { return }
-        let tripReference = CKReference(recordID: tripRecordID, action: .none)
+//        guard let tripRecordID = trip.cloudKitRecordID else { return }
+        let tripReference = trip.cloudKitReference
         
         self.setValue(photoAsset, forKey: "photo")
         self.setValue(tripReference, forKey: "tripReference")
@@ -80,8 +80,8 @@ extension CKRecord {
         self.init(recordType: "Photo", recordID: recordID)
         
         let photoAsset = CKAsset(fileURL: photo.temporaryPhotoURL)
-        guard let placeRecordID = place.cloudKitRecordID else { return }
-        let placeReference = CKReference(recordID: placeRecordID, action: .none)
+//        guard let placeRecordID = place.cloudKitRecordID else { return }
+        let placeReference = place.cloudKitReference
         
         self.setValue(photoAsset, forKey: "photo")
         self.setValue(placeReference, forKey: "placeReference")

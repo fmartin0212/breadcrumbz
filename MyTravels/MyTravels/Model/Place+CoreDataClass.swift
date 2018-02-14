@@ -82,8 +82,7 @@ extension CKRecord {
         
         self.init(recordType: "Place", recordID: ckRecordID)
         
-        guard let tripCKRecordID = trip.cloudKitRecordID else { return }
-        let tripReference = CKReference(recordID: tripCKRecordID, action: .none)
+        let tripReference = trip.cloudKitReference
         
         self.setValue(place.name, forKey: "name")
         self.setValue(place.address, forKey: "address")

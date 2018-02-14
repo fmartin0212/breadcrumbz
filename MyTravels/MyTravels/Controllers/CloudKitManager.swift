@@ -43,36 +43,64 @@ class CloudKitManager {
         
         let unsyncedTripRecords = unsyncedRecordsOf(type: "Trip") as? [Trip] ?? []
         if unsyncedTripRecords.count > 0 {
+            var allRecordsToSave = [[CKRecord]]()
             var tripRecordsToSave = [CKRecord]()
             var placeRecordsToSave = [CKRecord]()
+            var tripPhotoArray = [CKRecord]()
+            var placePhotos = [CKRecord]()
+            
             for unsyncedTripRecord in unsyncedTripRecords {
                 
-                guard let record = CKRecord(trip: unsyncedTripRecord) else { completion(false) ; return }
-                unsyncedTripRecord.cloudKitRecordIDString = record.recordID.recordName
+                guard let newTripRecord = CKRecord(trip: unsyncedTripRecord) else { completion(false) ; return }
+                tripRecordsToSave.append(newTripRecord)
+                unsyncedTripRecord.cloudKitRecordIDString = newTripRecord.recordID.recordName
                 TripController.shared.saveToPersistentStore()
-                tripRecordsToSave.append(record)
                 
                 guard let places = unsyncedTripRecord.places?.allObjects as? [Place] else { continue }
                 for place in places {
-                    let record = CKRecord(place: place, trip: unsyncedTripRecord)
-                    placeRecordsToSave.append(record)
+                    let newPlaceRecord = CKRecord(place: place, trip: unsyncedTripRecord)
+                    placeRecordsToSave.append(newPlaceRecord)
+                    place.cloudKitRecordIDString = newPlaceRecord.recordID.recordName
+                    PlaceController.shared.saveToPersistentStore()
+                    
+                    guard let photos = place.photos?.allObjects as? [Photo] else { continue }
+                    for photo in photos {
+                        let newPlacePhotoRecord = CKRecord(photo: photo, place: place)
+                        placePhotos.append(newPlacePhotoRecord)
+                        photo.cloudKitRecordIDString = newPlacePhotoRecord.recordID.recordName
+                    }
+                }
+                
+                guard let tripPhoto = unsyncedTripRecord.photo else { continue }
+                let newTripPhotoRecord = CKRecord(photo: tripPhoto, trip: unsyncedTripRecord)
+                tripPhotoArray.append(newTripPhotoRecord)
+                tripPhoto.cloudKitRecordIDString = newTripPhotoRecord.recordID.recordName
+            }
+            
+            allRecordsToSave.append(tripRecordsToSave)
+            allRecordsToSave.append(placeRecordsToSave)
+            allRecordsToSave.append(tripPhotoArray)
+            allRecordsToSave.append(placePhotos)
+            
+            for recordArray in allRecordsToSave {
+                if recordArray.count > 0 {
+                    saveOperation(records: recordArray) { (success) in
+                        print("save operation success")
+                        completion(true)
+                    }
                 }
             }
             
-            saveOperation(records: tripRecordsToSave) { (success) in
-                print("save operation success")
-                completion(true)
-            }
         }
         
     }
-//
-//    func fetchNewRecordsOf(type: String, completion: @escaping (Bool) -> Void) {
-//
-//
-//
-//    }
-    func performCoreDataFetches(completion: @escaping (Bool) -> Void) {
+    //
+    //    func fetchNewRecordsOf(type: String, completion: @escaping (Bool) -> Void) {
+    //
+    //
+    //
+    //    }
+    func performCoreDataFetches() {
         do {
             try TripController.shared.frc.performFetch()
         } catch {
@@ -83,31 +111,29 @@ class CloudKitManager {
         } catch {
             NSLog("Error starting fetched results controller")
         }
-        do {
-            try PhotoController.shared.frc.performFetch()
-        } catch {
-            NSLog("Error starting fetched results controller")
-        }
-        completion(true)
+//        do {
+//            try PhotoController.shared.frc.performFetch()
+//        } catch {
+//            NSLog("Error starting fetched results controller")
+//        }
     }
     
     // MARK: - Helper Fetches
     
     private func recordsOf(type: String) -> [CloudKitSyncable] {
-        performCoreDataFetches { (success) in
-            switch type {
-            case "Trip":
-                guard let trips = TripController.shared.frc.fetchedObjects else { return [] }
-                return trips.flatMap { $0 as CloudKitSyncable }
-            case "Place":
-                guard let places = PlaceController.shared.frc.fetchedObjects else { return [] }
-                return places.flatMap { $0 as CloudKitSyncable }
-            case "Photo":
-                guard let places = PlaceController.shared.frc.fetchedObjects else { return [] }
-                
-            default:
-                return []
-            }
+        performCoreDataFetches()
+        switch type {
+        case "Trip":
+            guard let trips = TripController.shared.frc.fetchedObjects else { return [] }
+            return trips.flatMap { $0 as CloudKitSyncable }
+        case "Place":
+            guard let places = PlaceController.shared.frc.fetchedObjects else { return [] }
+            return places.flatMap { $0 as CloudKitSyncable }
+        case "Photo":
+            guard let photos = PlaceController.shared.frc.fetchedObjects else { return [] }
+            return photos.flatMap { $0 as CloudKitSyncable }
+        default:
+            return []
         }
     }
     
