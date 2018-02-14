@@ -56,6 +56,10 @@ class TripsListViewController: UIViewController {
             guard let places = trip.places?.allObjects as? [Place] else { return }
             placesArray.append(places)
         }
+        
+        CloudKitManager.shared.pushToCloudKit(type: "") { (success) in
+            print("SavED!!!")
+        }
     
     }
     

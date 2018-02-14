@@ -19,7 +19,8 @@ public class Trip: NSManagedObject, CloudKitSyncable {
     }
     
     var cloudKitRecordID: CKRecordID? {
-        guard let recordIDString = cloudKitRecordIDString else { return nil}
+        guard let recordIDString = cloudKitRecordIDString
+            else { return nil}
         return CKRecordID(recordName: recordIDString)
     }
     
@@ -38,13 +39,13 @@ public class Trip: NSManagedObject, CloudKitSyncable {
 //        return fileURL
 //    }
     
-    convenience init(location: String, startDate: Date?, endDate: Date?, cloudKitRecordIDString: String, context: NSManagedObjectContext = CoreDataStack.context) {
+    convenience init(location: String, startDate: Date?, endDate: Date?, context: NSManagedObjectContext = CoreDataStack.context) {
         
         self.init(context: context)
         self.location = location
         self.startDate = startDate as NSDate?
         self.endDate = endDate as NSDate?
-        self.cloudKitRecordIDString = cloudKitRecordIDString
+//        self.cloudKitRecordIDString = cloudKitRecordIDString
         
     }
     
@@ -68,10 +69,13 @@ extension CKRecord {
 //        let photoAsset = CKAsset(fileURL: trip.temporaryPhotoURL)
         
         self.init(recordType: "Trip", recordID: recordID)
+        guard let loggedInUser = UserController.shared.loggedInUser else { return nil }
+        let creatorReference = CKReference(recordID: loggedInUser.appleUserRef.recordID, action: .none)
         
         self.setValue(trip.location, forKey: "location")
         self.setValue(trip.startDate, forKey: "startDate")
         self.setValue(trip.endDate, forKey: "endDate")
+        self.setValue(creatorReference, forKey: "creatorReference")
 //        self.setValue(photoAsset, forKey: "photo")
         
     }

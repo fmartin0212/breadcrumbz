@@ -23,7 +23,7 @@ class CloudKitManager {
             if let error = error {
                 print("There was an error saving to the database: \(error)")
             }
-
+                
             else {
                 print("Save successful!")
                 completion(true)
@@ -33,14 +33,81 @@ class CloudKitManager {
         
     }
     
+    func performFullSync() {
+        
+        
+        
+    }
+    
+    func pushToCloudKit(type: String, completion: @escaping (Bool) -> Void) {
+        
+        let unsyncedTripRecords = unsyncedRecordsOf(type: "Trip") as? [Trip] ?? []
+        if unsyncedTripRecords.count > 0 {
+            var tripRecordsToSave = [CKRecord]()
+            var placeRecordsToSave = [CKRecord]()
+            for unsyncedTripRecord in unsyncedTripRecords {
+                
+                guard let record = CKRecord(trip: unsyncedTripRecord) else { completion(false) ; return }
+                unsyncedTripRecord.cloudKitRecordIDString = record.recordID.recordName
+                TripController.shared.saveToPersistentStore()
+                tripRecordsToSave.append(record)
+                
+                guard let places = unsyncedTripRecord.places?.allObjects as? [Place] else { continue }
+                for place in places {
+                    let record = CKRecord(place: place, trip: unsyncedTripRecord)
+                    placeRecordsToSave.append(record)
+                }
+            }
+            
+            saveOperation(records: tripRecordsToSave) { (success) in
+                print("save operation success")
+                completion(true)
+            }
+        }
+        
+    }
+//
+//    func fetchNewRecordsOf(type: String, completion: @escaping (Bool) -> Void) {
+//
+//
+//
+//    }
+    func performCoreDataFetches(completion: @escaping (Bool) -> Void) {
+        do {
+            try TripController.shared.frc.performFetch()
+        } catch {
+            NSLog("Error starting fetched results controller")
+        }
+        do {
+            try PlaceController.shared.frc.performFetch()
+        } catch {
+            NSLog("Error starting fetched results controller")
+        }
+        do {
+            try PhotoController.shared.frc.performFetch()
+        } catch {
+            NSLog("Error starting fetched results controller")
+        }
+        completion(true)
+    }
+    
     // MARK: - Helper Fetches
     
     private func recordsOf(type: String) -> [CloudKitSyncable] {
-        switch type {
-        case "Trip":
-            return TripController.shared.trips.flatMap { $0 as CloudKitSyncable }
-        default:
-            return []
+        performCoreDataFetches { (success) in
+            switch type {
+            case "Trip":
+                guard let trips = TripController.shared.frc.fetchedObjects else { return [] }
+                return trips.flatMap { $0 as CloudKitSyncable }
+            case "Place":
+                guard let places = PlaceController.shared.frc.fetchedObjects else { return [] }
+                return places.flatMap { $0 as CloudKitSyncable }
+            case "Photo":
+                guard let places = PlaceController.shared.frc.fetchedObjects else { return [] }
+                
+            default:
+                return []
+            }
         }
     }
     
@@ -51,6 +118,15 @@ class CloudKitManager {
     func unsyncedRecordsOf(type: String) -> [CloudKitSyncable] {
         return recordsOf(type: type).filter { !$0.isSynced }
     }
-
+    
+    func saveOperation(records: [CKRecord], completion: @escaping (Bool) -> Void) {
+    let modifyOperation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
+        modifyOperation.perRecordCompletionBlock = nil
+        modifyOperation.savePolicy = .allKeys
+        modifyOperation.queuePriority = .high
+        modifyOperation.qualityOfService = .userInteractive
+        publicDB.add(modifyOperation)
+        completion(true)
+    }
     
 }

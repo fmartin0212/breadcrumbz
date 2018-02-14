@@ -22,6 +22,7 @@ class PlaceController {
     }()
     
     var place: Place?
+    var places: [Place] = []
     
     // CRUD Functions
     // Create

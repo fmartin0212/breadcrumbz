@@ -24,6 +24,8 @@ class PhotoController {
         
     }()
     
+    var photos: [Photo] = []
+    
     // CRUD Functions
     // Add photo to place
     func add(photos: [Data], place: Place) {

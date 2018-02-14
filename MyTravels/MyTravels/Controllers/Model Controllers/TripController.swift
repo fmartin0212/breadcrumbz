@@ -28,8 +28,8 @@ class TripController {
     // MARK: - CRUD Functions
     // Create
     func createTripWith(location: String, startDate: Date, endDate: Date) {
-        let ckRecordIDString = ""
-        let trip = Trip(location: location, startDate: startDate, endDate: endDate, cloudKitRecordIDString: ckRecordIDString)
+//        let ckRecordIDString = nil
+        let trip = Trip(location: location, startDate: startDate, endDate: endDate)
         self.trip = trip
         saveToPersistentStore()
         
