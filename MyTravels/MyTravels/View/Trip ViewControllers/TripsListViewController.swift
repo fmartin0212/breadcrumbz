@@ -57,8 +57,11 @@ class TripsListViewController: UIViewController {
             placesArray.append(places)
         }
         
-        CloudKitManager.shared.pushToCloudKit(type: "") { (success) in
+        CloudKitManager.shared.pushTripsToCloudKit(type: "") { (success) in
             print("SavED!!!")
+        }
+        CloudKitManager.shared.pushPlacesToCloudKit { (success) in
+            print("Saved")
         }
     
     }
