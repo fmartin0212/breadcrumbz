@@ -21,14 +21,14 @@ class TripsListViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        if UserController.shared.loggedInUser == nil {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let createAccountViewController = storyboard.instantiateViewController(withIdentifier: "CreateAccountViewController")
-            
-            UIView.animate(withDuration: 0.75, animations: {
-                self.present(createAccountViewController, animated: true, completion: nil)
-            })
-        }
+//        if UserController.shared.loggedInUser == nil {
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let createAccountViewController = storyboard.instantiateViewController(withIdentifier: "CreateAccountViewController")
+//
+//            UIView.animate(withDuration: 0.75, animations: {
+//                self.present(createAccountViewController, animated: true, completion: nil)
+//            })
+//        }
         
         // Set navigation bar properties
         self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedStringKey.font: UIFont(name: "Avenir Next", size: 20)!]
@@ -57,21 +57,15 @@ class TripsListViewController: UIViewController {
             placesArray.append(places)
         }
         
-        CloudKitManager.shared.pushTripsToCloudKit(type: "") { (success) in
-            print("SavED!!!")
-        }
-        CloudKitManager.shared.pushPlacesToCloudKit { (success) in
-            print("Saved")
-        }
-    
+//        CloudKitManager.shared.pushTripsToCloudKit(type: "") { (success) in
+//            print("Saved trips in CD that were not in CK")
+//        }
+//        CloudKitManager.shared.pushPlacesToCloudKit { (success) in
+//            print("Saved any new places added to existing trips")
+//        }
+//
     }
-    
-    // MARK: - IBActions
-    @IBAction func profileButtonTapped(_ sender: UIBarButtonItem) {
-        
-    }
-    
-    
+
     // MARK: - Functions
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="c7d-w5-Oj0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0zI-oT-TDR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,7 +9,6 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -198,17 +197,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="My Trips" id="HTa-L6-FdL">
                         <barButtonItem key="backBarButtonItem" title=" " id="Wcc-qA-M4H"/>
-                        <leftBarButtonItems>
-                            <barButtonItem id="qPx-EC-HeT">
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </barButtonItem>
-                            <barButtonItem title="Item" image="userImage32" id="2uo-Zj-EZS">
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <action selector="profileButtonTapped:" destination="KSc-Yg-SqR" id="TgE-Z2-bwf"/>
-                                </connections>
-                            </barButtonItem>
-                        </leftBarButtonItems>
+                        <barButtonItem key="leftBarButtonItem" id="qPx-EC-HeT">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Xfr-BE-SpC">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -824,7 +815,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="123" height="126"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bZo-tL-CBg">
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bZo-tL-CBg">
                                                                         <rect key="frame" x="0.0" y="0.0" width="123" height="126"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     </imageView>
@@ -1072,7 +1063,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="123" height="126"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y7t-3H-FT0">
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y7t-3H-FT0">
                                                                         <rect key="frame" x="0.0" y="0.0" width="123" height="126"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     </imageView>
@@ -1151,7 +1142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eyr-ao-JyV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1678" y="49"/>
+            <point key="canvasLocation" x="-1526" y="86"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Rwp-mg-H5f">
@@ -1729,14 +1720,13 @@
         <image name="CreateTripButtonImage256" width="256" height="256"/>
         <image name="star-black-16" width="16" height="16"/>
         <image name="star-clear-24" width="24" height="24"/>
-        <image name="userImage32" width="32" height="32"/>
         <namedColor name="Tint">
             <color red="0.1439999938" green="0.61400002239999996" blue="0.55000001190000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eto-6O-p5W"/>
-        <segue reference="J3z-ZV-F6J"/>
+        <segue reference="N4A-SW-sw2"/>
+        <segue reference="MyI-RZ-qMJ"/>
         <segue reference="uQy-QT-Egi"/>
     </inferredMetricsTieBreakers>
 </document>

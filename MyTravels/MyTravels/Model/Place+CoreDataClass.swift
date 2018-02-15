@@ -35,7 +35,7 @@ public class Place: NSManagedObject, CloudKitSyncable {
 //            try? photo.photo?.write(to: fileURL, options: [.atomic])
 //            photoURLs.append(fileURL)
 //        }
-//
+//skdnaskdnak
 //        return photoURLs
 //    }
 
