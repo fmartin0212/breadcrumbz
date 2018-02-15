@@ -16,7 +16,7 @@ class FetchViewController: UIViewController {
 
         UserController.shared.fetchCurrentUser { (_) in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let tripListNavigationController = storyboard.instantiateViewController(withIdentifier: "TripListNavigationController")
+            let tripListNavigationController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
             DispatchQueue.main.async {
                 self.present(tripListNavigationController, animated: true, completion: nil)
             }
