@@ -118,7 +118,7 @@
             </objects>
             <point key="canvasLocation" x="897" y="-661"/>
         </scene>
-        <!--My Trips-->
+        <!--Trips List View Controller-->
         <scene sceneID="bh2-QR-Xx6">
             <objects>
                 <viewController modalTransitionStyle="crossDissolve" id="KSc-Yg-SqR" customClass="TripsListViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
@@ -127,7 +127,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HlD-A1-XiZ">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="94" width="375" height="524"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripCell" rowHeight="320" id="7Se-qn-EpS" customClass="TripTableViewCell" customModule="MyTravels" customModuleProvider="target">
@@ -186,22 +186,36 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Tk5-Ve-Mhf">
+                                <rect key="frame" x="30" y="64" width="315" height="29"/>
+                                <segments>
+                                    <segment title="My Trips"/>
+                                    <segment title="Shared with me"/>
+                                </segments>
+                                <color key="tintColor" red="0.957106173" green="0.51020485159999995" blue="0.54696655270000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="segementedControllerTapped:" destination="KSc-Yg-SqR" eventType="valueChanged" id="9nu-fl-tur"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="HlD-A1-XiZ" firstAttribute="top" secondItem="Tk5-Ve-Mhf" secondAttribute="bottom" constant="2" id="D4f-Sf-XXV"/>
+                            <constraint firstItem="TTm-2m-a0j" firstAttribute="trailing" secondItem="Tk5-Ve-Mhf" secondAttribute="trailing" constant="30" id="MCW-XK-dbK"/>
+                            <constraint firstItem="Tk5-Ve-Mhf" firstAttribute="leading" secondItem="TTm-2m-a0j" secondAttribute="leading" constant="30" id="PmX-Iq-uVq"/>
+                            <constraint firstItem="Tk5-Ve-Mhf" firstAttribute="top" secondItem="TTm-2m-a0j" secondAttribute="top" id="a6U-Mp-OGb"/>
                             <constraint firstItem="HlD-A1-XiZ" firstAttribute="trailing" secondItem="TTm-2m-a0j" secondAttribute="trailing" id="oph-mm-xru"/>
-                            <constraint firstItem="HlD-A1-XiZ" firstAttribute="top" secondItem="TTm-2m-a0j" secondAttribute="top" id="vbN-nm-iCz"/>
                             <constraint firstItem="HlD-A1-XiZ" firstAttribute="bottom" secondItem="TTm-2m-a0j" secondAttribute="bottom" id="xMP-0C-14C"/>
                             <constraint firstItem="HlD-A1-XiZ" firstAttribute="leading" secondItem="TTm-2m-a0j" secondAttribute="leading" id="zfw-rZ-sBR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TTm-2m-a0j"/>
                     </view>
-                    <navigationItem key="navigationItem" title="My Trips" id="HTa-L6-FdL">
+                    <navigationItem key="navigationItem" id="HTa-L6-FdL">
                         <barButtonItem key="backBarButtonItem" title=" " id="Wcc-qA-M4H"/>
                         <barButtonItem key="leftBarButtonItem" id="qPx-EC-HeT">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Xfr-BE-SpC">
+                        <barButtonItem key="rightBarButtonItem" title="Add trip" id="Xfr-BE-SpC">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="6cL-fW-Y2U" kind="presentation" id="7TT-N8-fxt"/>
@@ -209,6 +223,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="segementedController" destination="Tk5-Ve-Mhf" id="rJj-PD-bni"/>
                         <outlet property="tableView" destination="HlD-A1-XiZ" id="SPg-it-kX6"/>
                     </connections>
                 </viewController>
@@ -1746,7 +1761,7 @@
         <scene sceneID="lQg-cj-Two">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pqx-Pi-stU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="avatar" id="CRd-Hm-54N"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="avatar" selectedImage="avatar" id="CRd-Hm-54N"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jfz-9u-sLW">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

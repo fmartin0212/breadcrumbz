@@ -64,6 +64,7 @@ class User {
         self.profilePicture = photoData
         self.appleUserRef = appleUserRef
         self.sharedWithUserTripsRefs = sharedWithUserTripsRefs
+        self.ckRecordID = ckRecord.recordID
         
     }
 }

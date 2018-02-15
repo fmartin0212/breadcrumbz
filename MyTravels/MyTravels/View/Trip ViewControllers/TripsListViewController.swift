@@ -14,8 +14,18 @@ class TripsListViewController: UIViewController {
 
     // MARK: - Properties
     var trips: [Trip]?
+    var myTripsSelected: Bool {
+        if segementedController.selectedSegmentIndex == 0 {
+            return true
+        }
+        else if segementedController.selectedSegmentIndex == 1 {
+            return false
+        }
+        return true
+    }
     
     // MARK - IBOutlets
+    @IBOutlet weak var segementedController: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -57,16 +67,24 @@ class TripsListViewController: UIViewController {
             placesArray.append(places)
         }
         
-        CloudKitManager.shared.pushTripsToCloudKit(type: "") { (success) in
-            print("Saved trips in CD that were not in CK")
-        }
-        CloudKitManager.shared.pushPlacesToCloudKit { (success) in
-            print("Saved any new places added to existing trips")
-        }
-        CloudKitManager.shared.fetchAllUsers { (usernames) in
-            print(usernames)
+//        CloudKitManager.shared.pushTripsToCloudKit(type: "") { (success) in
+//            print("Saved trips in CD that were not in CK")
+//        }
+//        CloudKitManager.shared.pushPlacesToCloudKit { (success) in
+//            print("Saved any new places added to existing trips")
+//        }
+//        CloudKitManager.shared.fetchAllUsers { (usernames) in
+//            print(usernames)
+//        }
+    }
+    
+    // MARK: - IBActions
+    @IBAction func segementedControllerTapped(_ sender: UISegmentedControl) {
+        if segementedController.selectedSegmentIndex == 1 {
+            
         }
     }
+    
 
     // MARK: - Functions
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
