@@ -223,6 +223,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addTripBarButtonItem" destination="Xfr-BE-SpC" id="xgZ-9t-Fuo"/>
                         <outlet property="segementedController" destination="Tk5-Ve-Mhf" id="rJj-PD-bni"/>
                         <outlet property="tableView" destination="HlD-A1-XiZ" id="SPg-it-kX6"/>
                     </connections>

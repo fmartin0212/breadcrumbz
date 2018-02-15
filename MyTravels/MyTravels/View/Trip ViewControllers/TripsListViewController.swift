@@ -25,6 +25,7 @@ class TripsListViewController: UIViewController {
     }
     
     // MARK - IBOutlets
+    @IBOutlet var addTripBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var segementedController: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
@@ -56,7 +57,9 @@ class TripsListViewController: UIViewController {
         } catch {
             NSLog("Error starting fetched results controller")
         }
+        CloudKitManager.shared.fetchTripsSharedWithUser { (trips) in
         
+        }
         guard let trips = TripController.shared.frc.fetchedObjects else { return }
         self.trips = trips
         TripController.shared.trips = trips
@@ -80,9 +83,16 @@ class TripsListViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func segementedControllerTapped(_ sender: UISegmentedControl) {
+        if segementedController.selectedSegmentIndex == 0 {
+            self.navigationItem.rightBarButtonItem = addTripBarButtonItem
+            tableView.reloadData()
+        }
         if segementedController.selectedSegmentIndex == 1 {
+            self.navigationItem.rightBarButtonItem = nil
+            tableView.reloadData()
             
         }
+        
     }
     
 
@@ -110,8 +120,11 @@ class TripsListViewController: UIViewController {
 extension TripsListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if myTripsSelected == true {
         guard let trips = TripController.shared.frc.fetchedObjects else { return 0 }
         return trips.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

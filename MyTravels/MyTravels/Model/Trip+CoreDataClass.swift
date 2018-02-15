@@ -24,21 +24,6 @@ public class Trip: NSManagedObject, CloudKitSyncable {
         return CKRecordID(recordName: recordIDString)
     }
     
-//    fileprivate var temporaryPhotoURL: URL {
-//        
-//        // Must write to temporary directory to be able to pass image file path url to CKAsset
-//        
-//        let temporaryDirectory = NSTemporaryDirectory()
-//        let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
-//        let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
-//        
-//        guard let photo = self.photo?.photo else { return fileURL }
-//        
-//        try? photo.write(to: fileURL, options: [.atomic])
-//        
-//        return fileURL
-//    }
-    
     convenience init(location: String, startDate: Date?, endDate: Date?, context: NSManagedObjectContext = CoreDataStack.context) {
         
         self.init(context: context)
@@ -70,6 +55,7 @@ extension CKRecord {
         
         self.init(recordType: "Trip", recordID: recordID)
         guard let loggedInUser = UserController.shared.loggedInUser else { return nil }
+        
         let creatorReference = CKReference(recordID: loggedInUser.appleUserRef.recordID, action: .none)
         
         self.setValue(trip.location, forKey: "location")
@@ -80,6 +66,21 @@ extension CKRecord {
         
     }
 }
+
+//    fileprivate var temporaryPhotoURL: URL {
+//
+//        // Must write to temporary directory to be able to pass image file path url to CKAsset
+//
+//        let temporaryDirectory = NSTemporaryDirectory()
+//        let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
+//        let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
+//
+//        guard let photo = self.photo?.photo else { return fileURL }
+//
+//        try? photo.write(to: fileURL, options: [.atomic])
+//
+//        return fileURL
+//    }
 
 
 

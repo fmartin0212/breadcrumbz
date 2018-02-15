@@ -224,6 +224,8 @@ class CloudKitManager {
     }
     
     func shareTripWith(user: User, trip: Trip, completion: @escaping (Bool) -> Void) {
+        
+        
         guard let tripReference = trip.cloudKitReference else { completion(false) ; return }
         user.sharedWithUserTripsRefs?.append(tripReference)
         guard let updatedUserRecord = CKRecord(user: user) else { completion(false) ; return }
@@ -232,5 +234,25 @@ class CloudKitManager {
             print("user successfully updated")
             completion(true)
         }
+    }
+    
+    func fetchTripsSharedWithUser(completion: @escaping ([Trip]) -> Void) {
+        guard let loggedInUser = UserController.shared.loggedInUser else { completion([]) ; return }
+        var trips = [Trip]()
+        let predicate = NSPredicate(format: "sharedWithUserTripsRefs == %@", argumentArray: loggedInUser.sharedWithUserTripsRefs)
+        let query = CKQuery(recordType: "User", predicate: predicate)
+        publicDB.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error {
+                ("Error fetching trips shared with user. Error: \(error)")
+            }
+            
+            guard let records = records else { completion([]) ; return }
+            for record in records {
+                guard let trip = Trip(record: record, context: CoreDataStack.context) else { completion([]) ; return }
+                print(trip.location)
+                trips.append(trip)
+            }
+        }
+        completion(trips)
     }
 }
