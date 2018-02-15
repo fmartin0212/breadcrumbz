@@ -217,8 +217,20 @@ class CloudKitManager {
                 let userRecord = records.first,
                 let user = User(ckRecord: userRecord)
                 else { completion(nil) ; return }
+            print("adsf")
             completion(user)
             
+        }
+    }
+    
+    func shareTripWith(user: User, trip: Trip, completion: @escaping (Bool) -> Void) {
+        guard let tripReference = trip.cloudKitReference else { completion(false) ; return }
+        user.sharedWithUserTripsRefs?.append(tripReference)
+        guard let updatedUserRecord = CKRecord(user: user) else { completion(false) ; return }
+        let recordToBeSaved = [updatedUserRecord]
+        updateOperation(records: recordToBeSaved) { (success) in
+            print("user successfully updated")
+            completion(true)
         }
     }
 }

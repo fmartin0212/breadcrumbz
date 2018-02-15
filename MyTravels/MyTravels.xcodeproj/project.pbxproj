@@ -223,10 +223,10 @@
 		B7C10CDC20214F7200818430 /* Model Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B7DA1B7C202E2B900007497A /* UserController.swift */,
 				B7C10CCE2020FD4B00818430 /* TripController.swift */,
 				B7C10CD02020FD5500818430 /* PlaceController.swift */,
 				B7F92BCE20291DEE0021A8CA /* PhotoController.swift */,
-				B7DA1B7C202E2B900007497A /* UserController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";

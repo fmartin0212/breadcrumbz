@@ -21,7 +21,7 @@ class UsernameSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.isUserInteractionEnabled = false
+        
         // Delegates
         searchBar.delegate = self
         tableView.delegate = self
@@ -74,9 +74,22 @@ extension UsernameSearchViewController: UITableViewDataSource, UITableViewDelega
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let trip = trip else { return }
         loadingVisualEffectView.alpha = 1
         let username = usernames[indexPath.row]
-        
+        CloudKitManager.shared.fetchTripShareReceiverWith(username: username) { (user) in
+            guard let user = user else { return }
+            CloudKitManager.shared.shareTripWith(user: user, trip: trip, completion: { (success) in
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.loadingVisualEffectView.alpha = 0
+                    }, completion: { (success) in
+                        self.dismiss(animated: true, completion: nil)
+                    })
+                }
+            })
+            
+        }
         
     }
 }

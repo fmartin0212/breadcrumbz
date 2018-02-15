@@ -18,6 +18,7 @@ class User {
     let profilePicture: Data?
     var ckRecordID: CKRecordID?
     let appleUserRef: CKReference
+    var sharedWithUserTripsRefs: [CKReference]?
     
     fileprivate var temporaryPhotoURL: URL {
         
@@ -32,13 +33,14 @@ class User {
         return fileURL
     }
     
-    init(username: String, password: String?, firstName: String?, lastName: String?, profilePicture: Data?, appleUserRef: CKReference) {
+    init(username: String, password: String?, firstName: String?, lastName: String?, profilePicture: Data?, appleUserRef: CKReference, sharedWithUserTripsRefs: [CKReference]?) {
         self.username = username
         self.firstName = firstName
         self.lastName = lastName
         self.password = password
         self.profilePicture = profilePicture
         self.appleUserRef = appleUserRef
+        self.sharedWithUserTripsRefs = sharedWithUserTripsRefs
     }
     
     // Turn record into User
@@ -48,7 +50,9 @@ class User {
             let firstName = ckRecord["firstName"] as? String,
             let lastName = ckRecord["lastName"] as? String,
             let profilePicture = ckRecord["profilePictureAsset"] as? CKAsset,
-            let appleUserRef = ckRecord["appleUserRef"] as? CKReference
+            let appleUserRef = ckRecord["appleUserRef"] as? CKReference,
+            var sharedWithUserTripsRefs = ckRecord["sharedWithUserTripsRefs"] as? [CKReference]
+        
             else { return nil }
         
         let photoData = try? Data(contentsOf: profilePicture.fileURL)
@@ -59,6 +63,7 @@ class User {
         self.lastName = lastName
         self.profilePicture = photoData
         self.appleUserRef = appleUserRef
+        self.sharedWithUserTripsRefs = sharedWithUserTripsRefs
         
     }
 }
@@ -79,6 +84,7 @@ extension CKRecord {
         self.setValue(user.lastName, forKey: "lastName")
         self.setValue(profilePictureAsset, forKey: "profilePictureAsset")
         self.setValue(user.appleUserRef, forKey: "appleUserRef")
+        self.setValue(user.sharedWithUserTripsRefs, forKey: "sharedWithUserTripsRefs")
         
     }
     
