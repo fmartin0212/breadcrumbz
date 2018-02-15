@@ -63,7 +63,9 @@ class TripsListViewController: UIViewController {
         CloudKitManager.shared.pushPlacesToCloudKit { (success) in
             print("Saved any new places added to existing trips")
         }
-//
+        CloudKitManager.shared.fetchAllUsers { (usernames) in
+            print(usernames)
+        }
     }
 
     // MARK: - Functions

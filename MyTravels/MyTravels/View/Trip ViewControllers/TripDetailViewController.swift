@@ -58,6 +58,30 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         setUpArrays()
     }
     
+    // MARK: - IBActions
+    @IBAction func actionButtonTapped(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let shareTripAction = UIAlertAction(title: "Share trip", style: .default) { (action) in
+            guard let trip = self.trip else { return }
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let usernameSearchViewController = storyboard.instantiateViewController(withIdentifier: "UsernameSearchViewController") as? UsernameSearchViewController else { return }
+            usernameSearchViewController.trip = trip
+            self.present(usernameSearchViewController, animated: true, completion: {
+                
+            })
+        
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        alertController.addAction(shareTripAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true) {
+            
+        }
+    }
+    
+    
     // MARK: - Functions
     func setUpArrays() {
         

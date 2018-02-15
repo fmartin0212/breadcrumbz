@@ -33,11 +33,33 @@ class CloudKitManager {
         
     }
     
-    func performFullSync() {
+    func performFullSync(completion: @escaping (Bool) -> Void) {
         
-        
-        
+        pushTripsToCloudKit(type: "Trip") { (success) in
+            
+        }
+        pushPlacesToCloudKit { (success) in
+            
+        }
+        completion(true)
     }
+    
+    func fetchAllUsers(completion: @escaping ([String]) -> Void) {
+        
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: "User", predicate: predicate)
+        
+        CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil) { (records, error) in
+            var usernames = [String]()
+            guard let records = records else { completion([]) ; return }
+            for record in records {
+                guard let user = User(ckRecord: record) else { completion([]) ; return }
+                usernames.append(user.username)
+            }
+           completion(usernames)
+        }
+    }
+    
     
     func pushTripsToCloudKit(type: String, completion: @escaping (Bool) -> Void) {
         
@@ -170,4 +192,33 @@ class CloudKitManager {
         completion(true)
     }
     
+    func updateOperation(records: [CKRecord], completion: @escaping (Bool) -> Void) {
+        let modifyOperation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
+        modifyOperation.perRecordCompletionBlock = nil
+        modifyOperation.savePolicy = .changedKeys
+        modifyOperation.queuePriority = .high
+        modifyOperation.qualityOfService = .userInteractive
+        publicDB.add(modifyOperation)
+        completion(true)
+    }
+    
+    
+    // Sharing
+    func fetchTripShareReceiverWith(username: String, completion: @escaping (User?) -> Void) {
+        let predicate = NSPredicate(format: "username == %@", username)
+        let query = CKQuery(recordType: "User", predicate: predicate)
+        publicDB.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error {
+                print("Error fetching 'Share Receiver' User. Error: \(error)")
+                completion(nil)
+                return
+            }
+            guard let records = records,
+                let userRecord = records.first,
+                let user = User(ckRecord: userRecord)
+                else { completion(nil) ; return }
+            completion(user)
+            
+        }
+    }
 }
