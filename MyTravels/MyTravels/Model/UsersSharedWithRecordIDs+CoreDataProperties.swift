@@ -21,3 +21,20 @@ extension UsersSharedWithRecordIDs {
     @NSManaged public var trip: Trip?
 
 }
+
+// MARK: Generated accessors for places
+extension UsersSharedWithRecordIDs {
+    
+    @objc(addPlacesObject:)
+    @NSManaged public func addToTrip(_ value: Trip)
+    
+    @objc(removePlacesObject:)
+    @NSManaged public func removeFromTrips(_ value: Trip)
+    
+    @objc(addPlaces:)
+    @NSManaged public func addToTrips(_ values: NSSet)
+    
+    @objc(removePlaces:)
+    @NSManaged public func removeFromTrip(_ values: NSSet)
+    
+}
