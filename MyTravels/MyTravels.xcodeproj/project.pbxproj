@@ -10,7 +10,6 @@
 		B73926112035255A0050B580 /* UsernameSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73926102035255A0050B580 /* UsernameSearchViewController.swift */; };
 		B739261320362E5F0050B580 /* SharedTripsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B739261220362E5F0050B580 /* SharedTripsController.swift */; };
 		B7392616203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7392614203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift */; };
-		B7392617203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7392615203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataProperties.swift */; };
 		B7BDA845202A29F50080B81B /* EditPlaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */; };
 		B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CB42020D19500818430 /* AppDelegate.swift */; };
 		B7C10CB72020D19500818430 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CB62020D19500818430 /* CreateAccountViewController.swift */; };
@@ -33,7 +32,6 @@
 		B7D652432027F5C300E975F1 /* CreateTripTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D652422027F5C300E975F1 /* CreateTripTableViewController.swift */; };
 		B7D652452027FB4B00E975F1 /* ChooseDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D652442027FB4B00E975F1 /* ChooseDateViewController.swift */; };
 		B7DA1B6F202E140C0007497A /* Trip+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B69202E140C0007497A /* Trip+CoreDataClass.swift */; };
-		B7DA1B70202E140C0007497A /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B6A202E140C0007497A /* Trip+CoreDataProperties.swift */; };
 		B7DA1B71202E140C0007497A /* Place+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B6B202E140C0007497A /* Place+CoreDataClass.swift */; };
 		B7DA1B72202E140C0007497A /* Place+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B6C202E140C0007497A /* Place+CoreDataProperties.swift */; };
 		B7DA1B73202E140C0007497A /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B6D202E140C0007497A /* Photo+CoreDataClass.swift */; };
@@ -52,7 +50,6 @@
 		B73926102035255A0050B580 /* UsernameSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameSearchViewController.swift; sourceTree = "<group>"; };
 		B739261220362E5F0050B580 /* SharedTripsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripsController.swift; sourceTree = "<group>"; };
 		B7392614203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UsersSharedWithRecordIDs+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B7392615203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UsersSharedWithRecordIDs+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlaceTableViewController.swift; sourceTree = "<group>"; };
 		B7C10CB12020D19500818430 /* MyTravels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTravels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7C10CB42020D19500818430 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,7 +75,6 @@
 		B7D652422027F5C300E975F1 /* CreateTripTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripTableViewController.swift; sourceTree = "<group>"; };
 		B7D652442027FB4B00E975F1 /* ChooseDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDateViewController.swift; sourceTree = "<group>"; };
 		B7DA1B69202E140C0007497A /* Trip+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B7DA1B6A202E140C0007497A /* Trip+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B7DA1B6B202E140C0007497A /* Place+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Place+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B7DA1B6C202E140C0007497A /* Place+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Place+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B7DA1B6D202E140C0007497A /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -215,13 +211,11 @@
 			children = (
 				B7DA1B77202E1AE20007497A /* User.swift */,
 				B7DA1B69202E140C0007497A /* Trip+CoreDataClass.swift */,
-				B7DA1B6A202E140C0007497A /* Trip+CoreDataProperties.swift */,
 				B7DA1B6B202E140C0007497A /* Place+CoreDataClass.swift */,
 				B7DA1B6C202E140C0007497A /* Place+CoreDataProperties.swift */,
 				B7DA1B6D202E140C0007497A /* Photo+CoreDataClass.swift */,
 				B7DA1B6E202E140C0007497A /* Photo+CoreDataProperties.swift */,
 				B7392614203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift */,
-				B7392615203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataProperties.swift */,
 				B7C10CBB2020D19500818430 /* MyTravels.xcdatamodeld */,
 				B7C10CD2202111A300818430 /* CoreDataStack.swift */,
 			);
@@ -337,7 +331,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7392617203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataProperties.swift in Sources */,
 				B7DA1B6F202E140C0007497A /* Trip+CoreDataClass.swift in Sources */,
 				B7F92BCF20291DEE0021A8CA /* PhotoController.swift in Sources */,
 				B739261320362E5F0050B580 /* SharedTripsController.swift in Sources */,
@@ -362,7 +355,6 @@
 				B7D6523B202514C700E975F1 /* CreateNewPlaceTableViewController.swift in Sources */,
 				B7DA1B7B202E2A170007497A /* CloudKitManager.swift in Sources */,
 				B7DA1B76202E164C0007497A /* CloudKitSyncable.swift in Sources */,
-				B7DA1B70202E140C0007497A /* Trip+CoreDataProperties.swift in Sources */,
 				B7C10CCD2020EFB000818430 /* TripTableViewCell.swift in Sources */,
 				B7DA1B71202E140C0007497A /* Place+CoreDataClass.swift in Sources */,
 				B7DA1B72202E140C0007497A /* Place+CoreDataProperties.swift in Sources */,

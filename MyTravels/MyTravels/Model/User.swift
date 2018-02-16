@@ -33,14 +33,14 @@ class User {
         return fileURL
     }
     
-    init(username: String, password: String?, firstName: String?, lastName: String?, profilePicture: Data?, appleUserRef: CKReference, sharedWithUserTripsRefs: [CKReference]?) {
+    init(username: String, password: String?, firstName: String?, lastName: String?, profilePicture: Data?, appleUserRef: CKReference) {
         self.username = username
         self.firstName = firstName
         self.lastName = lastName
         self.password = password
         self.profilePicture = profilePicture
         self.appleUserRef = appleUserRef
-        self.sharedWithUserTripsRefs = sharedWithUserTripsRefs
+//        self.sharedWithUserTripsRefs = sharedWithUserTripsRefs
     }
     
     // Turn record into User
@@ -50,8 +50,8 @@ class User {
             let firstName = ckRecord["firstName"] as? String,
             let lastName = ckRecord["lastName"] as? String,
             let profilePicture = ckRecord["profilePictureAsset"] as? CKAsset,
-            let appleUserRef = ckRecord["appleUserRef"] as? CKReference,
-            var sharedWithUserTripsRefs = ckRecord["sharedWithUserTripsRefs"] as? [CKReference]
+            let appleUserRef = ckRecord["appleUserRef"] as? CKReference
+//            var sharedWithUserTripsRefs = ckRecord["sharedWithUserTripsRefs"] as? [CKReference]
         
             else { return nil }
         
@@ -63,7 +63,7 @@ class User {
         self.lastName = lastName
         self.profilePicture = photoData
         self.appleUserRef = appleUserRef
-        self.sharedWithUserTripsRefs = sharedWithUserTripsRefs
+//        self.sharedWithUserTripsRefs = sharedWithUserTripsRefs
         self.ckRecordID = ckRecord.recordID
         
     }
@@ -85,7 +85,7 @@ extension CKRecord {
         self.setValue(user.lastName, forKey: "lastName")
         self.setValue(profilePictureAsset, forKey: "profilePictureAsset")
         self.setValue(user.appleUserRef, forKey: "appleUserRef")
-        self.setValue(user.sharedWithUserTripsRefs, forKey: "sharedWithUserTripsRefs")
+//        self.setValue(user.sharedWithUserTripsRefs, forKey: "sharedWithUserTripsRefs")
         
     }
     

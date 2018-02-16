@@ -28,8 +28,8 @@ public class Trip: NSManagedObject, CloudKitSyncable {
         
         self.init(context: context)
         self.location = location
-        self.startDate = startDate as NSDate?
-        self.endDate = endDate as NSDate?
+        self.startDate = startDate
+        self.endDate = endDate
 //        self.cloudKitRecordIDString = cloudKitRecordIDString
         
     }
@@ -38,8 +38,8 @@ public class Trip: NSManagedObject, CloudKitSyncable {
     required convenience public init?(record: CKRecord, context: NSManagedObjectContext) {
         self.init(context: context)
         self.location = record["location"] as? String
-        self.startDate = record["startDate"] as? NSDate
-        self.endDate = record["endDate"] as? NSDate
+        self.startDate = record["startDate"] as? Date
+        self.endDate = record["endDate"] as? Date
         self.cloudKitRecordIDString = record["recordName"] as? String
         
     }
@@ -55,15 +55,28 @@ extension CKRecord {
         
         self.init(recordType: "Trip", recordID: recordID)
         guard let loggedInUser = UserController.shared.loggedInUser else { return nil }
-        
         let creatorReference = CKReference(recordID: loggedInUser.appleUserRef.recordID, action: .none)
         
-        self.setValue(trip.location, forKey: "location")
-        self.setValue(trip.startDate, forKey: "startDate")
-        self.setValue(trip.endDate, forKey: "endDate")
-        self.setValue(creatorReference, forKey: "creatorReference")
-//        self.setValue(photoAsset, forKey: "photo")
-        
+        var sharedIDsArray = [String]()
+        if let sharedIDObjects = trip.usersSharedWithRecordIDs?.allObjects as? [UsersSharedWithRecordIDs] {
+            for sharedIDObject in sharedIDObjects {
+                guard let sharedID = sharedIDObject.recordID else { return nil }
+                sharedIDsArray.append(sharedID)
+            }
+            self.setValue(sharedIDsArray, forKey: "userIDsTripSharedWith")
+            self.setValue(trip.location, forKey: "location")
+            self.setValue(trip.startDate, forKey: "startDate")
+            self.setValue(trip.endDate, forKey: "endDate")
+            self.setValue(creatorReference, forKey: "creatorReference")
+        }
+            
+        else {
+            self.setValue(trip.location, forKey: "location")
+            self.setValue(trip.startDate, forKey: "startDate")
+            self.setValue(trip.endDate, forKey: "endDate")
+            self.setValue(creatorReference, forKey: "creatorReference")
+            //        self.setValue(photoAsset, forKey: "photo")
+        }
     }
 }
 

@@ -16,7 +16,7 @@
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="place" inverseEntity="Photo" syncable="YES"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="places" inverseEntity="Trip" syncable="YES"/>
     </entity>
-    <entity name="Trip" representedClassName="Trip" syncable="YES">
+    <entity name="Trip" representedClassName="Trip" syncable="YES" codeGenerationType="category">
         <attribute name="cloudKitRecordIDString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
@@ -25,7 +25,7 @@
         <relationship name="places" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Place" inverseName="trip" inverseEntity="Place" syncable="YES"/>
         <relationship name="usersSharedWithRecordIDs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UsersSharedWithRecordIDs" inverseName="trip" inverseEntity="UsersSharedWithRecordIDs" syncable="YES"/>
     </entity>
-    <entity name="UsersSharedWithRecordIDs" representedClassName="UsersSharedWithRecordIDs" syncable="YES">
+    <entity name="UsersSharedWithRecordIDs" representedClassName="UsersSharedWithRecordIDs" syncable="YES" codeGenerationType="category">
         <attribute name="recordID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="usersSharedWithRecordIDs" inverseEntity="Trip" syncable="YES"/>
     </entity>

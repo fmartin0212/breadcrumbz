@@ -26,10 +26,8 @@ class UserController {
             guard let recordID = recordID else { completion(false) ; return }
             
             let appleUserRef = CKReference(recordID: recordID, action: .none)
-            // To make CK happy, must have at something in this array
-            let sharedWithUserTripsRefs = [appleUserRef]
             
-            let newUser = User(username: username, password: "password", firstName: "Frank", lastName: "lastName", profilePicture: profilePicture, appleUserRef: appleUserRef, sharedWithUserTripsRefs: sharedWithUserTripsRefs)
+            let newUser = User(username: username, password: "password", firstName: "Frank", lastName: "lastName", profilePicture: profilePicture, appleUserRef: appleUserRef)
             
             guard let ckRecord = CKRecord(user: newUser) else { completion(false) ; return }
             
