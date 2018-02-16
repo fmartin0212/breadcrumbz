@@ -13,9 +13,10 @@ import CoreData
 @objc(UsersSharedWithRecordIDs)
 public class UsersSharedWithRecordIDs: NSManagedObject {
 
-    convenience init(recordID: String, trip: Trip, context: NSManagedObjectContext = CoreDataStack.context) {
+    convenience init(recordID: String, isSynced: Bool, trip: Trip, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
         self.recordID = recordID
+        self.isSynced = isSynced
         self.trip = trip
     }
     

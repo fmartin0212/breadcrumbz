@@ -237,10 +237,13 @@ class CloudKitManager {
     }
     
     func fetchTripsSharedWithUser(completion: @escaping ([Trip]) -> Void) {
-        guard let loggedInUser = UserController.shared.loggedInUser else { completion([]) ; return }
+        guard let loggedInUser = UserController.shared.loggedInUser,
+        let loggedInUserCKRecord = loggedInUser.ckRecordID?.recordName
+        else { completion([]) ; return }
         var trips = [Trip]()
-        let predicate = NSPredicate(format: "sharedWithUserTripsRefs == %@", argumentArray: loggedInUser.sharedWithUserTripsRefs)
-        let query = CKQuery(recordType: "User", predicate: predicate)
+        
+        let predicate = NSPredicate(format: "userIDsTripSharedWith == %@", loggedInUserCKRecord)
+        let query = CKQuery(recordType: "Trip", predicate: predicate)
         publicDB.perform(query, inZoneWith: nil) { (records, error) in
             if let error = error {
                 ("Error fetching trips shared with user. Error: \(error)")

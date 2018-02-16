@@ -18,7 +18,7 @@ class SharedTripsController {
     
     func addSharedIDTo(trip: Trip, forUser: User) {
         guard let userRecordID = forUser.ckRecordID else { return }
-        let recordID = UsersSharedWithRecordIDs(recordID: userRecordID.recordName, trip: trip)
+        let recordID = UsersSharedWithRecordIDs(recordID: userRecordID.recordName, isSynced: false, trip: trip)
         saveToPersistentStore()
         guard let updatedTripRecord = CKRecord(trip: trip) else { return }
         CloudKitManager.shared.updateOperation(records: [updatedTripRecord]) { (success) in

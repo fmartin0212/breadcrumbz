@@ -26,6 +26,7 @@
         <relationship name="usersSharedWithRecordIDs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UsersSharedWithRecordIDs" inverseName="trip" inverseEntity="UsersSharedWithRecordIDs" syncable="YES"/>
     </entity>
     <entity name="UsersSharedWithRecordIDs" representedClassName="UsersSharedWithRecordIDs" syncable="YES" codeGenerationType="category">
+        <attribute name="isSynced" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="recordID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="usersSharedWithRecordIDs" inverseEntity="Trip" syncable="YES"/>
     </entity>
@@ -33,6 +34,6 @@
         <element name="Photo" positionX="-270" positionY="36" width="128" height="105"/>
         <element name="Place" positionX="-99" positionY="117" width="128" height="165"/>
         <element name="Trip" positionX="-452" positionY="117" width="128" height="148"/>
-        <element name="UsersSharedWithRecordIDs" positionX="-279" positionY="467" width="128" height="73"/>
+        <element name="UsersSharedWithRecordIDs" positionX="-279" positionY="467" width="128" height="88"/>
     </elements>
 </model>

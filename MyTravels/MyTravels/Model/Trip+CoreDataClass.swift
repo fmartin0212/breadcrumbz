@@ -60,8 +60,12 @@ extension CKRecord {
         var sharedIDsArray = [String]()
         if let sharedIDObjects = trip.usersSharedWithRecordIDs?.allObjects as? [UsersSharedWithRecordIDs] {
             for sharedIDObject in sharedIDObjects {
-                guard let sharedID = sharedIDObject.recordID else { return nil }
-                sharedIDsArray.append(sharedID)
+                if sharedIDObject.isSynced == false {
+                    guard let sharedID = sharedIDObject.recordID else { return nil }
+                    sharedIDsArray.append(sharedID)
+                    sharedIDObject.isSynced = true
+                    SharedTripsController.shared.saveToPersistentStore()
+                }
             }
             self.setValue(sharedIDsArray, forKey: "userIDsTripSharedWith")
             self.setValue(trip.location, forKey: "location")

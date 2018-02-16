@@ -70,15 +70,10 @@ class TripsListViewController: UIViewController {
             placesArray.append(places)
         }
         
-//        CloudKitManager.shared.pushTripsToCloudKit(type: "") { (success) in
-//            print("Saved trips in CD that were not in CK")
-//        }
-//        CloudKitManager.shared.pushPlacesToCloudKit { (success) in
-//            print("Saved any new places added to existing trips")
-//        }
-//        CloudKitManager.shared.fetchAllUsers { (usernames) in
-//            print(usernames)
-//        }
+        CloudKitManager.shared.fetchTripsSharedWithUser { (trips) in
+            print(trips.count)
+        }
+        
     }
     
     // MARK: - IBActions
