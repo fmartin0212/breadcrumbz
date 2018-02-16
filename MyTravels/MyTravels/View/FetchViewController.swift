@@ -13,14 +13,15 @@ class FetchViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+//
+//        UserController.shared.fetchCurrentUser { (_) in
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let tripListNavigationController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
+//            DispatchQueue.main.async {
+//                self.present(tripListNavigationController, animated: true, completion: nil)
+//            }
+//        }
+//    }
 
-        UserController.shared.fetchCurrentUser { (_) in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let tripListNavigationController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
-            DispatchQueue.main.async {
-                self.present(tripListNavigationController, animated: true, completion: nil)
-            }
-        }
-    }
-
+}
 }

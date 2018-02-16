@@ -32,14 +32,14 @@ class TripsListViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        if UserController.shared.loggedInUser == nil {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let createAccountViewController = storyboard.instantiateViewController(withIdentifier: "CreateAccountViewController")
-
-            UIView.animate(withDuration: 0.75, animations: {
-                self.present(createAccountViewController, animated: true, completion: nil)
-            })
-        }
+//        if UserController.shared.loggedInUser == nil {
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let createAccountViewController = storyboard.instantiateViewController(withIdentifier: "CreateAccountViewController")
+//
+//            UIView.animate(withDuration: 0.75, animations: {
+//                self.present(createAccountViewController, animated: true, completion: nil)
+//            })
+//        }
         
         // Set navigation bar properties
         self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedStringKey.font: UIFont(name: "Avenir Next", size: 20)!]
@@ -57,9 +57,9 @@ class TripsListViewController: UIViewController {
         } catch {
             NSLog("Error starting fetched results controller")
         }
-        CloudKitManager.shared.fetchTripsSharedWithUser { (trips) in
-        
-        }
+//        CloudKitManager.shared.fetchTripsSharedWithUser { (trips) in
+//
+//        }
         guard let trips = TripController.shared.frc.fetchedObjects else { return }
         self.trips = trips
         TripController.shared.trips = trips
