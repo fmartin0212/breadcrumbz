@@ -201,11 +201,30 @@
                                     <segment title="My Trips"/>
                                     <segment title="Shared with me"/>
                                 </segments>
-                                <color key="tintColor" red="0.957106173" green="0.51020485159999995" blue="0.54696655270000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.69325101379999998" green="0.83318144080000001" blue="0.97062581780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="segementedControllerTapped:" destination="KSc-Yg-SqR" eventType="valueChanged" id="9nu-fl-tur"/>
                                 </connections>
                             </segmentedControl>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qLw-gn-48s">
+                                <rect key="frame" x="150" y="300" width="75" height="82"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ecq-WE-4t2">
+                                    <rect key="frame" x="0.0" y="0.0" width="75" height="82"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ELb-7x-PgZ">
+                                            <rect key="frame" x="0.0" y="-0.5" width="75" height="67"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                </view>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="Of7-Nc-QJM"/>
+                                    <constraint firstAttribute="height" constant="82" id="seI-yL-L13"/>
+                                </constraints>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -213,7 +232,9 @@
                             <constraint firstItem="TTm-2m-a0j" firstAttribute="trailing" secondItem="Tk5-Ve-Mhf" secondAttribute="trailing" constant="30" id="MCW-XK-dbK"/>
                             <constraint firstItem="Tk5-Ve-Mhf" firstAttribute="leading" secondItem="TTm-2m-a0j" secondAttribute="leading" constant="30" id="PmX-Iq-uVq"/>
                             <constraint firstItem="Tk5-Ve-Mhf" firstAttribute="top" secondItem="TTm-2m-a0j" secondAttribute="top" id="a6U-Mp-OGb"/>
+                            <constraint firstItem="qLw-gn-48s" firstAttribute="centerY" secondItem="TTm-2m-a0j" secondAttribute="centerY" id="l8v-na-hCo"/>
                             <constraint firstItem="HlD-A1-XiZ" firstAttribute="trailing" secondItem="TTm-2m-a0j" secondAttribute="trailing" id="oph-mm-xru"/>
+                            <constraint firstItem="qLw-gn-48s" firstAttribute="centerX" secondItem="TTm-2m-a0j" secondAttribute="centerX" id="sRm-bn-SrW"/>
                             <constraint firstItem="HlD-A1-XiZ" firstAttribute="bottom" secondItem="TTm-2m-a0j" secondAttribute="bottom" id="xMP-0C-14C"/>
                             <constraint firstItem="HlD-A1-XiZ" firstAttribute="leading" secondItem="TTm-2m-a0j" secondAttribute="leading" id="zfw-rZ-sBR"/>
                         </constraints>
@@ -235,6 +256,7 @@
                         <outlet property="addTripBarButtonItem" destination="Xfr-BE-SpC" id="xgZ-9t-Fuo"/>
                         <outlet property="segementedController" destination="Tk5-Ve-Mhf" id="rJj-PD-bni"/>
                         <outlet property="tableView" destination="HlD-A1-XiZ" id="SPg-it-kX6"/>
+                        <outlet property="visualEffectView" destination="qLw-gn-48s" id="Whw-WJ-uZy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="opj-gv-CMe" userLabel="First Responder" sceneMemberID="firstResponder"/>

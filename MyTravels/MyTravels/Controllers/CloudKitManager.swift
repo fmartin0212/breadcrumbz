@@ -8,6 +8,7 @@
 
 import Foundation
 import CloudKit
+import CoreData
 
 class CloudKitManager {
     
@@ -217,45 +218,24 @@ class CloudKitManager {
                 let userRecord = records.first,
                 let user = User(ckRecord: userRecord)
                 else { completion(nil) ; return }
-            print("adsf")
+    
             completion(user)
             
         }
     }
     
-    func shareTripWith(user: User, trip: Trip, completion: @escaping (Bool) -> Void) {
-        
-        
-        guard let tripReference = trip.cloudKitReference else { completion(false) ; return }
-        user.sharedWithUserTripsRefs?.append(tripReference)
-        guard let updatedUserRecord = CKRecord(user: user) else { completion(false) ; return }
-        let recordToBeSaved = [updatedUserRecord]
-        updateOperation(records: recordToBeSaved) { (success) in
-            print("user successfully updated")
-            completion(true)
-        }
-    }
+//    func shareTripWith(user: User, trip: Trip, completion: @escaping (Bool) -> Void) {
+//
+//
+//        guard let tripReference = trip.cloudKitReference else { completion(false) ; return }
+//        user.sharedWithUserTripsRefs?.append(tripReference)
+//        guard let updatedUserRecord = CKRecord(user: user) else { completion(false) ; return }
+//        let recordToBeSaved = [updatedUserRecord]
+//        updateOperation(records: recordToBeSaved) { (success) in
+//            print("user successfully updated")
+//            completion(true)
+//        }
+//    }
     
-    func fetchTripsSharedWithUser(completion: @escaping ([Trip]) -> Void) {
-        guard let loggedInUser = UserController.shared.loggedInUser,
-        let loggedInUserCKRecord = loggedInUser.ckRecordID?.recordName
-        else { completion([]) ; return }
-        var trips = [Trip]()
-        
-        let predicate = NSPredicate(format: "userIDsTripSharedWith == %@", loggedInUserCKRecord)
-        let query = CKQuery(recordType: "Trip", predicate: predicate)
-        publicDB.perform(query, inZoneWith: nil) { (records, error) in
-            if let error = error {
-                ("Error fetching trips shared with user. Error: \(error)")
-            }
-            
-            guard let records = records else { completion([]) ; return }
-            for record in records {
-                guard let trip = Trip(record: record, context: CoreDataStack.context) else { completion([]) ; return }
-                print(trip.location)
-                trips.append(trip)
-            }
-        }
-        completion(trips)
-    }
+
 }

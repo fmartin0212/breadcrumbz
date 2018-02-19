@@ -14,6 +14,8 @@ class TripsListViewController: UIViewController {
 
     // MARK: - Properties
     var trips: [Trip]?
+    var tripsSharedWithUser = [LocalTrip]()
+    var firstSharedTripsLoad = true
     var myTripsSelected: Bool {
         if segementedController.selectedSegmentIndex == 0 {
             return true
@@ -28,10 +30,12 @@ class TripsListViewController: UIViewController {
     @IBOutlet var addTripBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var segementedController: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var visualEffectView: UIVisualEffectView!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        visualEffectView.alpha = 0
         if UserController.shared.loggedInUser == nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let createAccountViewController = storyboard.instantiateViewController(withIdentifier: "CreateAccountViewController")
@@ -57,9 +61,7 @@ class TripsListViewController: UIViewController {
         } catch {
             NSLog("Error starting fetched results controller")
         }
-        CloudKitManager.shared.fetchTripsSharedWithUser { (trips) in
-        
-        }
+
         guard let trips = TripController.shared.frc.fetchedObjects else { return }
         self.trips = trips
         TripController.shared.trips = trips
@@ -70,22 +72,32 @@ class TripsListViewController: UIViewController {
             placesArray.append(places)
         }
         
-        CloudKitManager.shared.fetchTripsSharedWithUser { (trips) in
-            print(trips.count)
-        }
-        
     }
     
     // MARK: - IBActions
     @IBAction func segementedControllerTapped(_ sender: UISegmentedControl) {
-        if segementedController.selectedSegmentIndex == 0 {
+        if myTripsSelected == true {
             self.navigationItem.rightBarButtonItem = addTripBarButtonItem
             tableView.reloadData()
         }
-        if segementedController.selectedSegmentIndex == 1 {
+        if myTripsSelected == false {
+            self.visualEffectView.alpha = 1
             self.navigationItem.rightBarButtonItem = nil
-            tableView.reloadData()
             
+            if firstSharedTripsLoad == true {
+                SharedTripsController.shared.fetchTripsSharedWithUser(completion: { (tripsSharedWithUser) in
+                    self.tripsSharedWithUser = tripsSharedWithUser
+                    print("shared trips count: \(SharedTripsController.shared.sharedTrips.count)")
+                    print("shared photos count: \(PhotoController.shared.photos.count)")
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        UIView.animate(withDuration: 0.2, animations: {
+                            self.visualEffectView.alpha = 0
+                            
+                        })
+                    }
+                })
+            }
         }
         
     }
@@ -119,17 +131,31 @@ extension TripsListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let trips = TripController.shared.frc.fetchedObjects else { return 0 }
         return trips.count
         }
+        if myTripsSelected == false {
+            return tripsSharedWithUser.count
+        }
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "TripCell", for: indexPath) as! TripTableViewCell
         cell.selectionStyle = .none
         
+        if myTripsSelected == true {
         guard let trips = TripController.shared.frc.fetchedObjects else { return UITableViewCell() }
         let trip = trips[indexPath.row]
         let photo = trip.photo
         cell.trip = trip
+        } else if myTripsSelected == false {
+            let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
+           cell.localTrip = sharedTrip
+            
+            
+        }
+            
+        
         
         return cell
     }
@@ -151,7 +177,7 @@ extension TripsListViewController: UITableViewDelegate, UITableViewDataSource {
 extension TripsListViewController: NSFetchedResultsControllerDelegate {
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        
+
         switch type {
         case .delete:
             guard let indexPath = indexPath else { return }
@@ -159,7 +185,7 @@ extension TripsListViewController: NSFetchedResultsControllerDelegate {
         case .insert:
             guard let newIndexPath = newIndexPath else { return }
             tableView.insertRows(at: [newIndexPath], with: .automatic)
-            
+
         case .move:
             guard let indexPath = indexPath,
                 let newIndexPath = newIndexPath else { return }
@@ -169,5 +195,4 @@ extension TripsListViewController: NSFetchedResultsControllerDelegate {
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }
     }
-    
 }

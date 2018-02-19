@@ -22,22 +22,22 @@ public class Place: NSManagedObject, CloudKitSyncable {
         guard let recordIDString = cloudKitRecordIDString else { return nil}
         return CKRecordID(recordName: recordIDString)
     }
-    
-//    fileprivate var temporaryPhotoURLs: [URL] {
-//
-//        // Must write to temporary directory to be able to pass image file path url to CKAsset
-//        var photoURLs: [URL] = []
-//        guard let photos = self.photos?.allObjects as? [Photo] else { return [URL]() }
-//        for photo in photos {
-//            let temporaryDirectory = NSTemporaryDirectory()
-//            let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
-//            let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
-//            try? photo.photo?.write(to: fileURL, options: [.atomic])
-//            photoURLs.append(fileURL)
-//        }
-//skdnaskdnak
-//        return photoURLs
-//    }
+
+    fileprivate var temporaryPhotoURLs: [URL] {
+
+        // Must write to temporary directory to be able to pass image file path url to CKAsset
+        var photoURLs: [URL] = []
+        guard let photos = self.photos?.allObjects as? [Photo] else { return [URL]() }
+        for photo in photos {
+            let temporaryDirectory = NSTemporaryDirectory()
+            let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
+            let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
+            try? photo.photo?.write(to: fileURL, options: [.atomic])
+            photoURLs.append(fileURL)
+        }
+
+        return photoURLs
+    }
 
     convenience init(name: String, type: String, address: String, comments: String, rating: Int16, trip: Trip, context: NSManagedObjectContext = CoreDataStack.context) {
         
@@ -58,27 +58,29 @@ public class Place: NSManagedObject, CloudKitSyncable {
             let address = record["address"] as? String,
             let type = record["type"] as? String,
             let comments = record["comments"] as? String
+//            let photos = record["photos"] as? NSSet
             else { return }
         
         self.name = name
         self.address = address
         self.type = type
         self.comments = comments
+//        self.photos = photos
     }
     
 }
 
-    // CloudKit - Turn a Place into a record
+// CloudKit - Turn a Place into a record
 extension CKRecord {
     convenience init(place: Place, trip: Trip) {
         
         let ckRecordID = place.cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
         
-//        var photoAssets: [CKAsset] = []
-//        for photoURL in place.temporaryPhotoURLs {
-//            let photoAsset = CKAsset(fileURL: photoURL)
-//            photoAssets.append(photoAsset)
-//        }
+        var photoAssets: [CKAsset] = []
+        for photoURL in place.temporaryPhotoURLs {
+            let photoAsset = CKAsset(fileURL: photoURL)
+            photoAssets.append(photoAsset)
+        }
         
         self.init(recordType: "Place", recordID: ckRecordID)
         
@@ -88,7 +90,7 @@ extension CKRecord {
         self.setValue(place.address, forKey: "address")
         self.setValue(place.type, forKey: "type")
         self.setValue(place.comments, forKey: "comments")
-//        self.setValue(photoAssets, forKey: "photos")
+        self.setValue(photoAssets, forKey: "photos")
         self.setValue(tripReference, forKey: "tripReference")
     }
 }

@@ -8,12 +8,13 @@
 
 import Foundation
 import CoreData
+import CloudKit
 
 class PhotoController {
     
     // MARK: - Properties
     static var shared = PhotoController()
-    
+    var tripPhoto: Photo?
     var frc: NSFetchedResultsController<Photo> = {
         
         let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
@@ -62,6 +63,12 @@ class PhotoController {
         
     }
     
+    // Delete a photo
+    func delete(photo: Photo) {
+        photo.managedObjectContext?.delete(photo)
+        saveToPersistentStore()
+    }
+    
     
     // Save to Core Data
     func saveToPersistentStore() {
@@ -73,5 +80,25 @@ class PhotoController {
         }
         
     }
+    
+    // CloudKit
+    func fetchPhotoFor(trip: LocalTrip, completion: @escaping (Bool) -> (Void)) {
+        guard let tripCloudKitRecordID = trip.cloudKitRecordID
+            else { completion(false) ; return }
+        let predicate = NSPredicate(format: "tripReference == %@", tripCloudKitRecordID)
+        let query = CKQuery(recordType: "Photo", predicate: predicate)
+        CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error {
+                print("Error retrieving photo for trip. Error: \(error)")
+            }
+            guard let tripPhotoRecord = records?.first,
+                let tripPhoto = Photo(record: tripPhotoRecord, context: CoreDataStack.context)
+                else { completion(false) ; return }
+                self.tripPhoto = tripPhoto
+                PhotoController.shared.delete(photo: tripPhoto)
+        }
+        completion(true)
+    }
+    
     
 }

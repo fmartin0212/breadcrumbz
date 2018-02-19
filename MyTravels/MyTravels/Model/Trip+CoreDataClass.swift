@@ -20,9 +20,25 @@ public class Trip: NSManagedObject, CloudKitSyncable {
     
     var cloudKitRecordID: CKRecordID? {
         guard let recordIDString = cloudKitRecordIDString
-            else { return nil}
+            else { return nil }
         return CKRecordID(recordName: recordIDString)
     }
+    
+    fileprivate var temporaryPhotoURL: URL {
+
+        // Must write to temporary directory to be able to pass image file path url to CKAsset
+
+        let temporaryDirectory = NSTemporaryDirectory()
+        let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
+        let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
+
+        guard let photo = self.photo?.photo else { return fileURL }
+
+        try? photo.write(to: fileURL, options: [.atomic])
+
+        return fileURL
+    }
+
     
     convenience init(location: String, startDate: Date?, endDate: Date?, context: NSManagedObjectContext = CoreDataStack.context) {
         
@@ -35,14 +51,29 @@ public class Trip: NSManagedObject, CloudKitSyncable {
     }
     
     // CloudKit - Turn a record into a Trip
-    required convenience public init?(record: CKRecord, context: NSManagedObjectContext) {
+    convenience public required init?(record: CKRecord, context: NSManagedObjectContext) {
+       guard let location = record["location"] as? String,
+        let startDate = record["startDate"] as? Date,
+        let endDate = record["endDate"] as? Date
+       
+        else { return nil }
+        
         self.init(context: context)
-        self.location = record["location"] as? String
-        self.startDate = record["startDate"] as? Date
-        self.endDate = record["endDate"] as? Date
-        self.cloudKitRecordIDString = record["recordName"] as? String
+        self.cloudKitRecordIDString = record.recordID.recordName
+        self.location = location
+        self.startDate = startDate
+        self.endDate = endDate
+//        self.cloudKitRecordIDString = cloudKitRecordIDString
+        
+        //        self.location = record["location"] as? String
+//        self.startDate = record["startDate"] as? Date
+//        self.endDate = record["endDate"] as? Date
+//        self.cloudKitRecordIDString = record["recordName"] as? String
+
+        //        self.photo = record["photo"] as? Photo
         
     }
+
 }
 
     // CloudKit - Turn a Trip into a record
@@ -51,7 +82,7 @@ extension CKRecord {
     convenience init?(trip: Trip) {
         
         let recordID = trip.cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
-//        let photoAsset = CKAsset(fileURL: trip.temporaryPhotoURL)
+        let photoAsset = CKAsset(fileURL: trip.temporaryPhotoURL)
         
         self.init(recordType: "Trip", recordID: recordID)
         guard let loggedInUser = UserController.shared.loggedInUser else { return nil }
@@ -72,6 +103,7 @@ extension CKRecord {
             self.setValue(trip.startDate, forKey: "startDate")
             self.setValue(trip.endDate, forKey: "endDate")
             self.setValue(creatorReference, forKey: "creatorReference")
+            self.setValue(photoAsset, forKey: "photo")
         }
             
         else {
@@ -79,25 +111,11 @@ extension CKRecord {
             self.setValue(trip.startDate, forKey: "startDate")
             self.setValue(trip.endDate, forKey: "endDate")
             self.setValue(creatorReference, forKey: "creatorReference")
-            //        self.setValue(photoAsset, forKey: "photo")
+            self.setValue(photoAsset, forKey: "photo")
         }
     }
 }
 
-//    fileprivate var temporaryPhotoURL: URL {
-//
-//        // Must write to temporary directory to be able to pass image file path url to CKAsset
-//
-//        let temporaryDirectory = NSTemporaryDirectory()
-//        let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
-//        let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
-//
-//        guard let photo = self.photo?.photo else { return fileURL }
-//
-//        try? photo.write(to: fileURL, options: [.atomic])
-//
-//        return fileURL
-//    }
 
 
 

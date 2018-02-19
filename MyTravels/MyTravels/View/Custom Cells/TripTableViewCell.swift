@@ -17,6 +17,12 @@ class TripTableViewCell: UITableViewCell {
         }
     }
     
+    var localTrip: LocalTrip? {
+        didSet {
+            updateViewsLocalTrip()
+        }
+    }
+    
     // MARK: - IBOutlets
     // Trip
     @IBOutlet weak var tripImageView: UIImageView!
@@ -44,12 +50,40 @@ class TripTableViewCell: UITableViewCell {
             tripPhoto = image
         }
         
+        
         tripImageView.image = tripPhoto
         tripNameLabel.text = trip.location
         
         tripStartDateLabel.text = "\(shortDateString(date: startDate as Date)) -"
         tripEndDateLabel.text = shortDateString(date: endDate as Date)
     
+    }
+    
+    func updateViewsLocalTrip() {
+        
+        tripImageView.layer.cornerRadius = 4
+        tripImageView.clipsToBounds = true
+        
+        guard let localTrip = localTrip
+//            let startDate = localTrip.startDate,
+//            let endDate = localTrip.endDate
+            else { return }
+        
+        var tripPhoto = UIImage()
+        guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
+        tripPhoto = tripPhotoPlaceholderImage
+        
+        if let photoData = localTrip.photoData {
+            guard let photo = UIImage(data: photoData) else { return }
+            tripPhoto = photo
+        }
+        
+        
+        tripImageView.image = tripPhoto
+        tripNameLabel.text = localTrip.location
+        
+        tripStartDateLabel.text = "\(shortDateString(date: localTrip.startDate as Date)) -"
+        tripEndDateLabel.text = shortDateString(date: localTrip.endDate as Date)
     }
     
     func shortDateString(date: Date) -> String {
