@@ -13,7 +13,7 @@ import CloudKit
 class TripDetailViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
-    var sharedTripsView = true
+    var sharedTripsView: Bool?
     var trip: Trip? {
         didSet {
          sharedTripsView = false
@@ -194,7 +194,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
             print("Array count: \(array.count)")
             print("Full array: \(array)")
             self.sharedPlacesArray = array
-            print("adsF")
+            
         }
         
         tableView.reloadData()
@@ -240,12 +240,12 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if sharedTripsView == true {
-        guard let array = array else { return 0 }
-        
-        return array.count
+            guard let sharedPlacesArray = sharedPlacesArray else { return 0 }
+            print("dasf")
+            return sharedPlacesArray.count
         }
-        
-        return 1
+        guard let array = array else { return 0 }
+        return array.count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -280,7 +280,7 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
         return placeArray[section].count
         }
         guard let sharedPlaces = sharedPlacesArray else { return 0 }
-        return sharedPlaces.count
+        return sharedPlaces[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
