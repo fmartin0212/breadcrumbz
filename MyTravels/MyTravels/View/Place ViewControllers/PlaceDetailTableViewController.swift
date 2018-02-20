@@ -11,10 +11,19 @@ import UIKit
 class PlaceDetailTableViewController: UITableViewController {
 
     // MARK: Properties
+    var sharedPlaceView: Bool?
     var trip: Trip?
     var place: Place? {
         didSet {
-            guard let place = place else { return }
+            sharedPlaceView = false
+        }
+    }
+    
+    var sharedTrip: LocalTrip? 
+    
+    var sharedPlace: LocalPlace? {
+        didSet {
+            sharedPlaceView = true
         }
     }
     
@@ -39,13 +48,22 @@ class PlaceDetailTableViewController: UITableViewController {
         // Delegates
         collectionView.delegate = self
         collectionView.dataSource = self
-//        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
-//         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        self.title = place?.name
-     
+        
+        // Set the title to the user-owned place's name
+        if let place = place {
+            self.title = place.name
+            updateViews()
+        }
+        
+        if let sharedPlace = sharedPlace {
+            self.title = sharedPlace.name
+            updateViewsForSharedPlace()
+            
+        }
+        
         
         tableView.contentOffset = CGPoint(x: 30, y: 30)
-        updateViews()
+        
         
     }
     
@@ -89,6 +107,37 @@ class PlaceDetailTableViewController: UITableViewController {
         }
     }
     
+    func updateViewsForSharedPlace() {
+        guard let sharedPlace = sharedPlace,
+            let photos = sharedPlace.photos
+            else { return }
+            
+            if photos.count > 0 {
+                guard let photo = photos.first,
+                    let image = UIImage(data: photo) else { return }
+                placeMainPhotoImageView.image = image
+                placeNameLabel.text = sharedPlace.name
+                placeAddressLabel.text = sharedPlace.address
+//                updateStarsImageViews(place: place)
+            } else {
+                var placeholderImage = UIImage()
+                if sharedPlace.type == "Lodging" {
+                    guard let lodgingPlaceholderImage = UIImage(named: "Lodging") else { return }
+                    placeholderImage = lodgingPlaceholderImage
+                } else if sharedPlace.type == "Restaurant" {
+                    guard let restaurantPlaceholderImage = UIImage(named: "Restaurant") else { return }
+                    placeholderImage = restaurantPlaceholderImage
+                } else if sharedPlace.type == "Activity" {
+                    guard let activityPlaceholderImage = UIImage(named: "Activity") else { return }
+                    placeholderImage = activityPlaceholderImage
+                }
+                placeMainPhotoImageView.image = placeholderImage
+                placeNameLabel.text = sharedPlace.name
+                placeAddressLabel.text = sharedPlace.address
+//                updateStarsImageViews(place: place)
+            }
+    }
+    
     func updateStarsImageViews(place: Place) {
         
         let starImageViewsArray = [starOne, starTwo, starThree, starFour, starFive]
@@ -101,6 +150,30 @@ class PlaceDetailTableViewController: UITableViewController {
             var i = 0
             
             while i < Int(place.rating) {
+                starImageViewsArray[i]?.image = UIImage(named: "star-black-16")
+                i += 1
+            }
+            
+            while i <= starImageViewsArray.count - 1 {
+                starImageViewsArray[i]?.image = UIImage(named: "star-clear-16")
+                i += 1
+            }
+        }
+        
+    }
+    
+    func updateStarsImageViews(sharedPlace: LocalPlace) {
+        guard let sharedPlaceRating = sharedPlace.rating else { return }
+        let starImageViewsArray = [starOne, starTwo, starThree, starFour, starFive]
+        
+        if sharedPlace.rating == 0 {
+            for starImageView in starImageViewsArray {
+                starImageView?.image = UIImage(named: "star-clear-16")
+            }
+        } else if Int(sharedPlaceRating) > 0 {
+            var i = 0
+            
+            while i < Int(sharedPlaceRating) {
                 starImageViewsArray[i]?.image = UIImage(named: "star-black-16")
                 i += 1
             }
@@ -129,21 +202,43 @@ class PlaceDetailTableViewController: UITableViewController {
 
 extension PlaceDetailTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int 
+    {
+        if sharedPlaceView == false {
+            
+            return photos.count
+        }
+        
+        guard let sharedPlace = sharedPlace,
+        let sharedPlacePhotos = sharedPlace.photos
+        else { return 0 }
+        
+        return sharedPlacePhotos.count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        if sharedPlaceView == false {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
+            print (photos.count)
+            guard let photo = photos[indexPath.row].photo
+                else { return UICollectionViewCell() }
+            
+            cell.photo = photo as? Data
+            
+            return cell
+        }
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
-        print (photos.count)
-        guard let photo = photos[indexPath.row].photo
+        
+        guard let sharedPlace = sharedPlace,
+            let sharedPlacePhotos = sharedPlace.photos
             else { return UICollectionViewCell() }
-
-        cell.photo = photo as? Data
+        
+            cell.sharedPlacePhoto = sharedPlacePhotos[indexPath.row]
         
         return cell
-        
     }
     
 }

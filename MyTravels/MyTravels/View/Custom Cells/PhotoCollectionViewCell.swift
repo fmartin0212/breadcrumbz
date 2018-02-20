@@ -22,6 +22,18 @@ class PhotoCollectionViewCell: UICollectionViewCell {
             photoImageView.clipsToBounds = true
         }
     }
+    
+    var sharedPlacePhoto: Data? {
+        didSet {
+            
+            guard let photoAsData = sharedPlacePhoto else { return }
+            let photoImage = UIImage(data: photoAsData)
+            
+            photoImageView.image = photoImage
+            photoImageView.layer.cornerRadius = 8
+            photoImageView.clipsToBounds = true
+        }
+    }
 
     
     // MARK: - IBOutlets

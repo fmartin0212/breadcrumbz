@@ -1147,13 +1147,7 @@
                             <outlet property="delegate" destination="JfA-zy-tb2" id="WS6-BW-Vvd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="(Place name)" id="LIF-uE-g2w">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="Eom-41-hEe">
-                            <connections>
-                                <segue destination="6qM-vT-uP8" kind="presentation" identifier="toEditPlaceTableViewControllerSegue" id="nkv-is-YB2"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="(Place name)" id="LIF-uE-g2w"/>
                     <connections>
                         <outlet property="collectionView" destination="4Bd-rO-oCP" id="AeK-gw-sxa"/>
                         <outlet property="placeAddressLabel" destination="Sye-Ez-sLS" id="o5x-hQ-kMn"/>
