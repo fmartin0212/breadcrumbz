@@ -16,6 +16,11 @@ class PlaceTableViewCell: UITableViewCell {
             updateViews()
         }
     }
+    var sharedPlace: LocalPlace? {
+        didSet {
+          updateViewsForSharedPlace()
+        }
+    }
     
     // MARK: - IBOutlets
     @IBOutlet weak var placeImageView: UIImageView!
@@ -58,13 +63,15 @@ class PlaceTableViewCell: UITableViewCell {
                 guard let activityPlaceholderImage = UIImage(named: "Activity") else { return }
                 placeholderImage = activityPlaceholderImage
             }
-                
-                placeImageView.image = placeholderImage
-                placeNameLabel.text = place.name
-                placeAddressLabel.text = place.address
-                updateStarsImageViews(place: place)}
+            
+            placeImageView.image = placeholderImage
+            placeNameLabel.text = place.name
+            placeAddressLabel.text = place.address
+            updateStarsImageViews(place: place)
             
         }
+        
+    }
     
     func updateStarsImageViews(place: Place) {
         
@@ -89,4 +96,68 @@ class PlaceTableViewCell: UITableViewCell {
         }
     }
     
-}
+    func updateViewsForSharedPlace() {
+        
+        // Round edges on imageviews
+        placeImageView.layer.cornerRadius = 5
+        placeImageView.clipsToBounds = true
+        
+        guard let sharedPlace = sharedPlace,
+            let sharedPlacePhotos = sharedPlace.photos
+            else { return }
+        
+        if sharedPlacePhotos.count > 0 {
+            let mainPhoto = sharedPlacePhotos[0]
+               guard let image = UIImage(data: mainPhoto) else { return }
+            placeImageView.image = image
+            placeNameLabel.text = sharedPlace.name
+            placeAddressLabel.text = sharedPlace.address
+           updateStarsImageViews(sharedPlace: sharedPlace)
+            
+        } else {
+            var placeholderImage = UIImage()
+            if sharedPlace.type == "Lodging" {
+                guard let lodgingPlaceholderImage = UIImage(named: "Lodging") else { return }
+                placeholderImage = lodgingPlaceholderImage
+            } else if sharedPlace.type == "Restaurant" {
+                guard let restaurantPlaceholderImage = UIImage(named: "Restaurant") else { return }
+                placeholderImage = restaurantPlaceholderImage
+            } else if sharedPlace.type == "Activity" {
+                guard let activityPlaceholderImage = UIImage(named: "Activity") else { return }
+                placeholderImage = activityPlaceholderImage
+            }
+            
+            placeImageView.image = placeholderImage
+            placeNameLabel.text = sharedPlace.name
+            placeAddressLabel.text = sharedPlace.address
+            updateStarsImageViews(sharedPlace: sharedPlace)
+        }
+        
+    }
+        
+        func updateStarsImageViews(sharedPlace: LocalPlace) {
+            
+            let starImageViewsArray = [starOne, starTwo, starThree, starFour, starFive]
+            guard let sharedPlaceRating = sharedPlace.rating else { return }
+            if sharedPlace.rating == 0 {
+                for starImageView in starImageViewsArray {
+                    starImageView?.image = UIImage(named: "star-clear-16")
+                }
+            } else if sharedPlaceRating > 0 {
+                var i = 0
+                while i < sharedPlaceRating {
+                    starImageViewsArray[i]?.image = UIImage(named: "star-black-16")
+                    i += 1
+                }
+                
+                while i <= starImageViewsArray.count - 1 {
+                    starImageViewsArray[i]?.image = UIImage(named: "star-clear-16")
+                    i += 1
+                }
+                
+            }
+        }
+        
+    }
+    
+

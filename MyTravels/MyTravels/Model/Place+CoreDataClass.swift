@@ -81,7 +81,7 @@ extension CKRecord {
             let photoAsset = CKAsset(fileURL: photoURL)
             photoAssets.append(photoAsset)
         }
-        
+        let ratingAsInt64 = Int(place.rating)
         self.init(recordType: "Place", recordID: ckRecordID)
         
         let tripReference = trip.cloudKitReference
@@ -90,6 +90,7 @@ extension CKRecord {
         self.setValue(place.address, forKey: "address")
         self.setValue(place.type, forKey: "type")
         self.setValue(place.comments, forKey: "comments")
+        self.setValue(ratingAsInt64, forKey: "rating")
         self.setValue(photoAssets, forKey: "photos")
         self.setValue(tripReference, forKey: "tripReference")
     }

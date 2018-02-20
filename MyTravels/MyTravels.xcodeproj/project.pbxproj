@@ -146,6 +146,16 @@
 			path = "Place ViewControllers";
 			sourceTree = "<group>";
 		};
+		B745843F203B7B1A00A686E7 /* Model outside of MOC */ = {
+			isa = PBXGroup;
+			children = (
+				B7DA1B77202E1AE20007497A /* User.swift */,
+				B7B0C36D203724F30031A92A /* LocalTrip.swift */,
+				B7B0C36F2037446E0031A92A /* LocalPlace.swift */,
+			);
+			path = "Model outside of MOC";
+			sourceTree = "<group>";
+		};
 		B7C10CA82020D19500818430 = {
 			isa = PBXGroup;
 			children = (
@@ -213,7 +223,7 @@
 		B7C10CDB20214F6900818430 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B7DA1B77202E1AE20007497A /* User.swift */,
+				B745843F203B7B1A00A686E7 /* Model outside of MOC */,
 				B7DA1B69202E140C0007497A /* Trip+CoreDataClass.swift */,
 				B7DA1B6B202E140C0007497A /* Place+CoreDataClass.swift */,
 				B7DA1B6C202E140C0007497A /* Place+CoreDataProperties.swift */,
@@ -222,8 +232,6 @@
 				B7392614203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift */,
 				B7C10CBB2020D19500818430 /* MyTravels.xcdatamodeld */,
 				B7C10CD2202111A300818430 /* CoreDataStack.swift */,
-				B7B0C36D203724F30031A92A /* LocalTrip.swift */,
-				B7B0C36F2037446E0031A92A /* LocalPlace.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

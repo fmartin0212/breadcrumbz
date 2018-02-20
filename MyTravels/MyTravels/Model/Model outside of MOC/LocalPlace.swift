@@ -17,8 +17,7 @@ class LocalPlace {
     var rating: Int16?
     var type: String?
     var photos: [Data]?
-    //    var trip: Trip?
-    
+    var reference: CKReference?
     
     fileprivate var temporaryPhotoURLs: [URL] {
         
@@ -36,17 +35,17 @@ class LocalPlace {
         return photoURLs
     }
     
-    init(name: String, type: String, address: String, comments: String, rating: Int16, photos: [Data]?) {
-        
-        self.name = name
-        self.type = type
-        self.address = address
-        self.comments = comments
-        self.rating = rating
-        self.photos = photos
+//    init(name: String, type: String, address: String, comments: String, rating: Int16, photos: [Data]?, trip: LocalTrip) {
+//
+//        self.name = name
+//        self.type = type
+//        self.address = address
+//        self.comments = comments
+//        self.rating = rating
+//        self.photos = photos
 //        self.trip = trip
-        
-    }
+//
+//    }
     
     
     // CloudKit - Turn a record into a Place
@@ -57,7 +56,8 @@ class LocalPlace {
             let rating = record["rating"] as? Int16,
             let type = record["type"] as? String,
             let comments = record["comments"] as? String,
-            let photos = record["photos"] as? [CKAsset]
+            let photos = record["photos"] as? [CKAsset],
+            let reference = record["tripReference"] as? CKReference
             else { return nil }
         
         var photosAsData = [Data]()
@@ -76,6 +76,8 @@ class LocalPlace {
         self.type = type
         self.comments = comments
         self.photos = photosAsData
+        self.reference = reference
+        
     }
     
 }

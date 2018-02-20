@@ -13,9 +13,21 @@ import CloudKit
 class TripDetailViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
-    var trip: Trip?
+    var sharedTripsView = true
+    var trip: Trip? {
+        didSet {
+         sharedTripsView = false
+        }
+    }
+    var sharedTrip: LocalTrip? {
+        didSet {
+            sharedTripsView = true
+        }
+    }
     var array: Array<Any>?
-    
+  
+    var sharedPlacesArray: [[LocalPlace]]?
+
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tripPhotoImageView: UIImageView!
@@ -26,7 +38,8 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         super.viewDidLoad()
         
         // Set navigation bar title/properties
-        guard let trip = trip else { return }
+        if let trip = trip {
+            
         self.title = trip.location
         
         // Set trip photo
@@ -40,10 +53,27 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
     
         tripPhotoImageView.image = tripPhoto
         
+        }
+        
+        if let sharedTrip = sharedTrip {
+    
+            self.title = sharedTrip.location
+        // Set shared trip photo
+            var tripPhoto = UIImage()
+            guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
+            tripPhoto = tripPhotoPlaceholderImage
+            if let photo = sharedTrip.photoData {
+                guard let image = UIImage(data: photo) else { return }
+                tripPhoto = image
+            }
+            
+            tripPhotoImageView.image = tripPhoto
+            
+        }
+        
         // Delegates
         tableView.delegate = self
         tableView.dataSource = self
-        PlaceController.shared.frc.delegate = self
         
         // Table view properties
         tableView.separatorStyle = .none
@@ -85,46 +115,93 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
     // MARK: - Functions
     func setUpArrays() {
         
-        guard let trip = trip,
-            let places = trip.places,
-            let placesArray = places.allObjects as? [Place] else { return }
-        
-        var array: [[Place]] = []
-        var lodgingArray: [Place] = []
-        var restaurantsArray: [Place] = []
-        var activitiesArray: [Place] = []
-        
-        for place in placesArray {
+        if let trip = trip {
+            guard let places = trip.places,
+                let placesArray = places.allObjects as? [Place] else { return }
             
-            if place.type == "Lodging" {
-                lodgingArray.append(place)
+            var array: [[Place]] = []
+            var lodgingArray: [Place] = []
+            var restaurantsArray: [Place] = []
+            var activitiesArray: [Place] = []
+            
+            for place in placesArray {
                 
-            } else if place.type == "Restaurant" {
-                restaurantsArray.append(place)
+                if place.type == "Lodging" {
+                    lodgingArray.append(place)
+                    
+                } else if place.type == "Restaurant" {
+                    restaurantsArray.append(place)
+                    
+                } else if place.type == "Activity" {
+                    activitiesArray.append(place)
+                }
                 
-            } else if place.type == "Activity" {
-                activitiesArray.append(place)
             }
             
+            if lodgingArray.count > 0 {
+                array.append(lodgingArray)
+            }
+            
+            if restaurantsArray.count > 0 {
+                array.append(restaurantsArray)
+            }
+            
+            if activitiesArray.count > 0 {
+                array.append(activitiesArray)
+            }
+            
+            print("Array count: \(array.count)")
+            print("Full array: \(array)")
+            self.array = array
+        
         }
         
-        if lodgingArray.count > 0 {
-            array.append(lodgingArray)
+        if let sharedTrip = sharedTrip  {
+            
+            let places = sharedTrip.places
+            
+            var array: [[LocalPlace]] = []
+            var lodgingArray: [LocalPlace] = []
+            var restaurantsArray: [LocalPlace] = []
+            var activitiesArray: [LocalPlace] = []
+            
+            for place in places {
+                
+                if place.type == "Lodging" {
+                    lodgingArray.append(place)
+                    
+                } else if place.type == "Restaurant" {
+                    restaurantsArray.append(place)
+                    
+                } else if place.type == "Activity" {
+                    activitiesArray.append(place)
+                }
+                
+            }
+            
+            if lodgingArray.count > 0 {
+                array.append(lodgingArray)
+            }
+            
+            if restaurantsArray.count > 0 {
+                array.append(restaurantsArray)
+            }
+            
+            if activitiesArray.count > 0 {
+                array.append(activitiesArray)
+            }
+            
+            print("Array count: \(array.count)")
+            print("Full array: \(array)")
+            self.sharedPlacesArray = array
+            print("adsF")
         }
-        
-        if restaurantsArray.count > 0 {
-            array.append(restaurantsArray)
-        }
-        
-        if activitiesArray.count > 0 {
-            array.append(activitiesArray)
-        }
-        
-        print("Array count: \(array.count)")
-        print("Full array: \(array)")
-        self.array = array
         
         tableView.reloadData()
+        
+    }
+    
+    func updateViewsForTrip() {
         
     }
     
@@ -162,10 +239,13 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
 extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-      
+        if sharedTripsView == true {
         guard let array = array else { return 0 }
         
         return array.count
+        }
+        
+        return 1
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -195,12 +275,28 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        if sharedTripsView == false {
         guard let placeArray = array as? [[Place]] else { return 0 }
         return placeArray[section].count
+        }
+        guard let sharedPlaces = sharedPlacesArray else { return 0 }
+        return sharedPlaces.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if sharedTripsView == true {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath) as! PlaceTableViewCell
+            cell.selectionStyle = .none
+            
+            guard let sharedPlacesArray = sharedPlacesArray else { return UITableViewCell() }
+            let sharedPlace = sharedPlacesArray[indexPath.section][indexPath.row]
+            
+            cell.sharedPlace = sharedPlace
+            
+            return cell
+        }
+        
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath) as! PlaceTableViewCell
         cell.selectionStyle = .none

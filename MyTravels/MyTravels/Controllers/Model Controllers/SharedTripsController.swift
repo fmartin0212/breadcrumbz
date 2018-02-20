@@ -42,15 +42,11 @@ class SharedTripsController {
             
             guard let records = records else { completion([]) ; return }
             for record in records {
-//                guard let trip = Trip(record: record, context: CoreDataStack.context) else { completion([]) ; return }
                 guard let trip = LocalTrip(record: record) else { completion([]) ; return }
                 sharedTrips.append(trip)
-//                TripController.shared.delete(trip: trip)
             }
             self.sharedTrips = sharedTrips
-            self.fetchPhotosForSharedTrips(completion: { (success) in
-                
-            })
+            
             completion(sharedTrips)
         }
         
@@ -63,10 +59,25 @@ class SharedTripsController {
         }
     }
     
-    func fetchPlacesForTrip(completion: @escaping (Bool) -> (Void)) {
+    func fetchPlacesForTrips(sharedTrips: [LocalTrip], completion: @escaping (Bool) -> (Void)) {
         for sharedTrip in sharedTrips {
+            guard let tripCKRecordID = sharedTrip.cloudKitRecordID else { completion(false) ; return }
+            let predicate = NSPredicate(format: "tripReference == %@", tripCKRecordID)
+            let query = CKQuery(recordType: "Place", predicate: predicate)
+            CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
+                if let error = error {
+                    print ("There was an error fetching the trip's places. Error: \(error)")
+                }
+                
+                guard let records = records else { completion(false) ; return }
+                for record in records {
+                    guard let place = LocalPlace(record: record) else { completion(false) ; return }
+                    sharedTrip.places.append(place)
+                }
+            })
             
         }
+        completion(true)
     }
     
     func saveToPersistentStore() {

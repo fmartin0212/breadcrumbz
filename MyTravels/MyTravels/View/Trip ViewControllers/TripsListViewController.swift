@@ -87,15 +87,16 @@ class TripsListViewController: UIViewController {
             if firstSharedTripsLoad == true {
                 SharedTripsController.shared.fetchTripsSharedWithUser(completion: { (tripsSharedWithUser) in
                     self.tripsSharedWithUser = tripsSharedWithUser
-                    print("shared trips count: \(SharedTripsController.shared.sharedTrips.count)")
-                    print("shared photos count: \(PhotoController.shared.photos.count)")
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                        UIView.animate(withDuration: 0.2, animations: {
-                            self.visualEffectView.alpha = 0
-                            
-                        })
-                    }
+                    SharedTripsController.shared.fetchPlacesForTrips(sharedTrips: tripsSharedWithUser, completion: { (success) -> (Void) in
+                        print("shared trips count: \(SharedTripsController.shared.sharedTrips.count)")
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                            UIView.animate(withDuration: 0.2, animations: {
+                                self.visualEffectView.alpha = 0
+                                
+                            })
+                        }
+                    })
                 })
             }
         }
@@ -111,14 +112,30 @@ class TripsListViewController: UIViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "toTripDetailViewSegue" {
-            guard let destinationVC = segue.destination as? TripDetailViewController,
-                let trips = TripController.shared.frc.fetchedObjects,
-                let indexPath = tableView.indexPathForSelectedRow
-                else { return }
-            let trip = trips[indexPath.row]
-            destinationVC.trip = trip
+        if myTripsSelected == true {
             
+            if segue.identifier == "toTripDetailViewSegue" {
+                guard let destinationVC = segue.destination as? TripDetailViewController,
+                    let trips = TripController.shared.frc.fetchedObjects,
+                    let indexPath = tableView.indexPathForSelectedRow
+                    else { return }
+                let trip = trips[indexPath.row]
+                destinationVC.trip = trip
+                
+            }
+        }
+            
+        else {
+            
+            if segue.identifier == "toTripDetailViewSegue" {
+                guard let destinationVC = segue.destination as? TripDetailViewController,
+                    let indexPath = tableView.indexPathForSelectedRow
+                    else { return }
+                
+                let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
+                destinationVC.sharedTrip = sharedTrip
+            
+            }
         }
     }
 
