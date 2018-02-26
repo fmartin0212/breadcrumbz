@@ -37,6 +37,10 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
         // Set navigation bar title/properties
         if let trip = trip {
             
@@ -267,41 +271,41 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        // Use shared places array as datasource
+//         Use shared places array as datasource
         if sharedTripsView == false {
             guard let placeArray = array as? [[Place]],
                 let firstItemInArray = placeArray[section].first,
                 let firstItemInArrayType = firstItemInArray.type
                 else { return UIView() }
-            
+
             if firstItemInArrayType == "Lodging" {
                 let text = "  Lodging"
                 return sectionHeaderLabelWith(text: text)
-                
+
             } else if firstItemInArrayType == "Restaurant" {
                 let text = "  Restaurants"
                 return sectionHeaderLabelWith(text: text)
-                
+
             } else if firstItemInArrayType == "Activity" {
                 let text = "  Activities"
                 return sectionHeaderLabelWith(text: text)
             }
         }
-        
+
          // Use shared places array as datasource
         guard let sharedPlacesArray = sharedPlaces,
             let firstItemInArray = sharedPlacesArray[section].first,
             let firstItemInArrayType = firstItemInArray.type
             else { return UIView() }
-        
+
         if firstItemInArrayType == "Lodging" {
             let text = "  Lodging"
             return sectionHeaderLabelWith(text: text)
-            
+
         } else if firstItemInArrayType == "Restaurant" {
             let text = "  Restaurants"
             return sectionHeaderLabelWith(text: text)
-            
+
         } else if firstItemInArrayType == "Activity" {
             let text = "  Activities"
             return sectionHeaderLabelWith(text: text)
@@ -323,6 +327,10 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
         guard let sharedPlaces = sharedPlaces else { return 0 }
         return sharedPlaces[section].count
         
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

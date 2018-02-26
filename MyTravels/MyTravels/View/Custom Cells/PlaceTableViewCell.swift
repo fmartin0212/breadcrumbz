@@ -9,7 +9,7 @@
 import UIKit
 
 class PlaceTableViewCell: UITableViewCell {
-    
+
     // MARK: - Properties
     var place: Place? {
         didSet {

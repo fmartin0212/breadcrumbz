@@ -117,22 +117,22 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     @IBAction func starOneGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
         print("star one tapped")
         if rating == 1 {
-            starOne.image = UIImage(named: "star-clear-24")
-            starTwo.image = UIImage(named: "star-clear-24")
-            starThree.image = UIImage(named: "star-clear-24")
-            starFour.image = UIImage(named: "star-clear-24")
-            starFive.image = UIImage(named: "star-clear-24")
+            starOne.image = UIImage(named: "star-clear-16")
+            starTwo.image = UIImage(named: "star-clear-16")
+            starThree.image = UIImage(named: "star-clear-16")
+            starFour.image = UIImage(named: "star-clear-16")
+            starFive.image = UIImage(named: "star-clear-16")
             rating = 0
             return
         
         }
         
         if rating == 0 || rating > 1 {
-            starOne.image = UIImage(named: "star-black-24")
-            starTwo.image = UIImage(named: "star-clear-24")
-            starThree.image = UIImage(named: "star-clear-24")
-            starFour.image = UIImage(named: "star-clear-24")
-            starFive.image = UIImage(named: "star-clear-24")
+            starOne.image = UIImage(named: "star-black-16")
+            starTwo.image = UIImage(named: "star-clear-16")
+            starThree.image = UIImage(named: "star-clear-16")
+            starFour.image = UIImage(named: "star-clear-16")
+            starFive.image = UIImage(named: "star-clear-16")
             rating = 1
         }
         
@@ -142,22 +142,22 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         print("star two tapped")
         
         if rating == 2 {
-            starOne.image = UIImage(named: "star-clear-24")
-            starTwo.image = UIImage(named: "star-clear-24")
-            starThree.image = UIImage(named: "star-clear-24")
-            starFour.image = UIImage(named: "star-clear-24")
-            starFive.image = UIImage(named: "star-clear-24")
+            starOne.image = UIImage(named: "star-clear-16")
+            starTwo.image = UIImage(named: "star-clear-16")
+            starThree.image = UIImage(named: "star-clear-16")
+            starFour.image = UIImage(named: "star-clear-16")
+            starFive.image = UIImage(named: "star-clear-16")
             rating = 0
             return
             
         }
         
         if rating <= 1 || rating > 2 {
-            starOne.image = UIImage(named: "star-black-24")
-            starTwo.image = UIImage(named: "star-black-24")
-            starThree.image = UIImage(named: "star-clear-24")
-            starFour.image = UIImage(named: "star-clear-24")
-            starFive.image = UIImage(named: "star-clear-24")
+            starOne.image = UIImage(named: "star-black-16")
+            starTwo.image = UIImage(named: "star-black-16")
+            starThree.image = UIImage(named: "star-clear-16")
+            starFour.image = UIImage(named: "star-clear-16")
+            starFive.image = UIImage(named: "star-clear-16")
             rating = 2
         }
         
@@ -167,22 +167,22 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         print("star three tapped")
         
         if rating == 3 {
-            starOne.image = UIImage(named: "star-clear-24")
-            starTwo.image = UIImage(named: "star-clear-24")
-            starThree.image = UIImage(named: "star-clear-24")
-            starFour.image = UIImage(named: "star-clear-24")
-            starFive.image = UIImage(named: "star-clear-24")
+            starOne.image = UIImage(named: "star-clear-16")
+            starTwo.image = UIImage(named: "star-clear-16")
+            starThree.image = UIImage(named: "star-clear-16")
+            starFour.image = UIImage(named: "star-clear-16")
+            starFive.image = UIImage(named: "star-clear-16")
             rating = 0
             return
             
         }
         
         if rating <= 2 || rating >= 4 {
-            starOne.image = UIImage(named: "star-black-24")
-            starTwo.image = UIImage(named: "star-black-24")
-            starThree.image = UIImage(named: "star-black-24")
-            starFour.image = UIImage(named: "star-clear-24")
-            starFive.image = UIImage(named: "star-clear-24")
+            starOne.image = UIImage(named: "star-black-16")
+            starTwo.image = UIImage(named: "star-black-16")
+            starThree.image = UIImage(named: "star-black-16")
+            starFour.image = UIImage(named: "star-clear-16")
+            starFive.image = UIImage(named: "star-clear-16")
             rating = 3
         }
         
@@ -192,22 +192,22 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         print("star four tapped")
         
         if rating == 4 {
-            starOne.image = UIImage(named: "star-clear-24")
-            starTwo.image = UIImage(named: "star-clear-24")
-            starThree.image = UIImage(named: "star-clear-24")
-            starFour.image = UIImage(named: "star-clear-24")
-            starFive.image = UIImage(named: "star-clear-24")
+            starOne.image = UIImage(named: "star-clear-16")
+            starTwo.image = UIImage(named: "star-clear-16")
+            starThree.image = UIImage(named: "star-clear-16")
+            starFour.image = UIImage(named: "star-clear-16")
+            starFive.image = UIImage(named: "star-clear-16")
             rating = 0
             return
             
         }
         
         if rating <= 3 || rating == 5 {
-            starOne.image = UIImage(named: "star-black-24")
-            starTwo.image = UIImage(named: "star-black-24")
-            starThree.image = UIImage(named: "star-black-24")
-            starFour.image = UIImage(named: "star-black-24")
-            starFive.image = UIImage(named: "star-clear-24")
+            starOne.image = UIImage(named: "star-black-16")
+            starTwo.image = UIImage(named: "star-black-16")
+            starThree.image = UIImage(named: "star-black-16")
+            starFour.image = UIImage(named: "star-black-16")
+            starFive.image = UIImage(named: "star-clear-16")
             rating = 4
         }
     
@@ -217,22 +217,22 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         print("star five tapped")
         
         if rating == 5 {
-            starOne.image = UIImage(named: "star-clear-24")
-            starTwo.image = UIImage(named: "star-clear-24")
-            starThree.image = UIImage(named: "star-clear-24")
-            starFour.image = UIImage(named: "star-clear-24")
-            starFive.image = UIImage(named: "star-clear-24")
+            starOne.image = UIImage(named: "star-clear-16")
+            starTwo.image = UIImage(named: "star-clear-16")
+            starThree.image = UIImage(named: "star-clear-16")
+            starFour.image = UIImage(named: "star-clear-16")
+            starFive.image = UIImage(named: "star-clear-16")
             rating = 0
             return
             
         }
         
         if rating < 5 {
-            starOne.image = UIImage(named: "star-black-24")
-            starTwo.image = UIImage(named: "star-black-24")
-            starThree.image = UIImage(named: "star-black-24")
-            starFour.image = UIImage(named: "star-black-24")
-            starFive.image = UIImage(named: "star-black-24")
+            starOne.image = UIImage(named: "star-black-16")
+            starTwo.image = UIImage(named: "star-black-16")
+            starThree.image = UIImage(named: "star-black-16")
+            starFour.image = UIImage(named: "star-black-16")
+            starFive.image = UIImage(named: "star-black-16")
             rating = 5
         }
         

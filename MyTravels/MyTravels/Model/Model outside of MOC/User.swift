@@ -8,6 +8,7 @@
 
 import Foundation
 import CloudKit
+import Contacts
 
 class User {
     
@@ -18,12 +19,10 @@ class User {
     let profilePicture: Data?
     var ckRecordID: CKRecordID?
     let appleUserRef: CKReference
-    var sharedWithUserTripsRefs: [CKReference]?
     
     fileprivate var temporaryPhotoURL: URL {
         
         // Must write to temporary directory to be able to pass image file path url to CKAsset
-        
         let temporaryDirectory = NSTemporaryDirectory()
         let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
         let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
@@ -40,19 +39,17 @@ class User {
         self.password = password
         self.profilePicture = profilePicture
         self.appleUserRef = appleUserRef
-//        self.sharedWithUserTripsRefs = sharedWithUserTripsRefs
     }
     
     // Turn record into User
     init?(ckRecord: CKRecord) {
+        
         guard let username = ckRecord["username"] as? String,
             let password = ckRecord["password"] as? String,
             let firstName = ckRecord["firstName"] as? String,
             let lastName = ckRecord["lastName"] as? String,
             let profilePicture = ckRecord["profilePictureAsset"] as? CKAsset,
             let appleUserRef = ckRecord["appleUserRef"] as? CKReference
-//            var sharedWithUserTripsRefs = ckRecord["sharedWithUserTripsRefs"] as? [CKReference]
-        
             else { return nil }
         
         let photoData = try? Data(contentsOf: profilePicture.fileURL)
@@ -63,7 +60,6 @@ class User {
         self.lastName = lastName
         self.profilePicture = photoData
         self.appleUserRef = appleUserRef
-//        self.sharedWithUserTripsRefs = sharedWithUserTripsRefs
         self.ckRecordID = ckRecord.recordID
         
     }
@@ -85,7 +81,6 @@ extension CKRecord {
         self.setValue(user.lastName, forKey: "lastName")
         self.setValue(profilePictureAsset, forKey: "profilePictureAsset")
         self.setValue(user.appleUserRef, forKey: "appleUserRef")
-//        self.setValue(user.sharedWithUserTripsRefs, forKey: "sharedWithUserTripsRefs")
         
     }
     
