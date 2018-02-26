@@ -9,7 +9,7 @@
 import Foundation
 import CloudKit
 
-class LocalPlace {
+class SharedPlace {
    
     var address: String?
     var comments: String?

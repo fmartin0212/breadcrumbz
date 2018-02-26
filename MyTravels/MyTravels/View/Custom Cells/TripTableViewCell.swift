@@ -17,7 +17,7 @@ class TripTableViewCell: UITableViewCell {
         }
     }
     
-    var localTrip: LocalTrip? {
+    var localTrip: SharedTrip? {
         didSet {
             updateViewsLocalTrip()
         }

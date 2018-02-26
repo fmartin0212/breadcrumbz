@@ -19,9 +19,9 @@ class PlaceDetailTableViewController: UITableViewController {
         }
     }
     
-    var sharedTrip: LocalTrip? 
+    var sharedTrip: SharedTrip? 
     
-    var sharedPlace: LocalPlace? {
+    var sharedPlace: SharedPlace? {
         didSet {
             sharedPlaceView = true
         }
@@ -162,7 +162,7 @@ class PlaceDetailTableViewController: UITableViewController {
         
     }
     
-    func updateStarsImageViews(sharedPlace: LocalPlace) {
+    func updateStarsImageViews(sharedPlace: SharedPlace) {
         guard let sharedPlaceRating = sharedPlace.rating else { return }
         let starImageViewsArray = [starOne, starTwo, starThree, starFour, starFive]
         

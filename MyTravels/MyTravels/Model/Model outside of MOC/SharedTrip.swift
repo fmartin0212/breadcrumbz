@@ -9,12 +9,12 @@
 import Foundation
 import CloudKit
 
-class LocalTrip {
+class SharedTrip {
     var location: String
     var startDate: Date
     var endDate: Date
     var photoData: Data?
-    var places: [LocalPlace] = []
+    var places: [SharedPlace] = []
     var reference: CKReference {
         if let recordID = cloudKitRecordID {
             let reference = CKReference(recordID: recordID, action: .none)

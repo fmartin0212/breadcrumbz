@@ -82,7 +82,7 @@ class PhotoController {
     }
     
     // CloudKit
-    func fetchPhotoFor(trip: LocalTrip, completion: @escaping (Bool) -> (Void)) {
+    func fetchPhotoFor(trip: SharedTrip, completion: @escaping (Bool) -> (Void)) {
         guard let tripCloudKitRecordID = trip.cloudKitRecordID
             else { completion(false) ; return }
         let predicate = NSPredicate(format: "tripReference == %@", tripCloudKitRecordID)

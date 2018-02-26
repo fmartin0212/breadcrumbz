@@ -9,18 +9,28 @@
 import UIKit
 
 class FetchViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
+        
         UserController.shared.fetchCurrentUser { (_) in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let tripListNavigationController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
-            DispatchQueue.main.async {
-                self.present(tripListNavigationController, animated: true, completion: nil)
+            
+            SharedTripsController.shared.fetchTripsSharedWithUser { (sharedTrips) in
+                SharedTripsController.shared.fetchPlacesForTrips(sharedTrips: sharedTrips, completion: { (success) -> (Void) in
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let tripListNavigationController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
+                    DispatchQueue.main.async {
+                        self.present(tripListNavigationController, animated: true, completion: nil)
+                        
+                    }
+                })
+                
             }
+            
         }
     }
-
+    
 }
+
+

@@ -19,14 +19,14 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
          sharedTripsView = false
         }
     }
-    var sharedTrip: LocalTrip? {
+    var sharedTrip: SharedTrip? {
         didSet {
             sharedTripsView = true
         }
     }
     var array: Array<Any>?
   
-    var sharedPlaces: [[LocalPlace]]?
+    var sharedPlaces: [[SharedPlace]]?
 
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -164,10 +164,10 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
             
             let places = sharedTrip.places
             
-            var array: [[LocalPlace]] = []
-            var lodgingArray: [LocalPlace] = []
-            var restaurantsArray: [LocalPlace] = []
-            var activitiesArray: [LocalPlace] = []
+            var array: [[SharedPlace]] = []
+            var lodgingArray: [SharedPlace] = []
+            var restaurantsArray: [SharedPlace] = []
+            var activitiesArray: [SharedPlace] = []
             
             for place in places {
                 

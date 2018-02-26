@@ -13,7 +13,7 @@ import CloudKit
 class SharedTripsController {
     
     static var shared = SharedTripsController()
-    var sharedTrips = [LocalTrip]()
+    var sharedTrips = [SharedTrip]()
     
     var sharedIDs = [String]()
     
@@ -27,11 +27,12 @@ class SharedTripsController {
         }
     }
     
-    func fetchTripsSharedWithUser(completion: @escaping ([LocalTrip]) -> Void) {
+    func fetchTripsSharedWithUser(completion: @escaping ([SharedTrip]) -> Void) {
+       
         guard let loggedInUser = UserController.shared.loggedInUser,
             let loggedInUserCKRecord = loggedInUser.ckRecordID?.recordName
             else { completion([]) ; return }
-        var sharedTrips = [LocalTrip]()
+        var sharedTrips = [SharedTrip]()
         
         let predicate = NSPredicate(format: "userIDsTripSharedWith CONTAINS %@", loggedInUserCKRecord)
         let query = CKQuery(recordType: "Trip", predicate: predicate)
@@ -42,7 +43,7 @@ class SharedTripsController {
             
             guard let records = records else { completion([]) ; return }
             for record in records {
-                guard let trip = LocalTrip(record: record) else { completion([]) ; return }
+                guard let trip = SharedTrip(record: record) else { completion([]) ; return }
                 sharedTrips.append(trip)
             }
             self.sharedTrips = sharedTrips
@@ -55,11 +56,12 @@ class SharedTripsController {
     func fetchPhotosForSharedTrips(completion: @escaping (Bool) -> Void) {
         
         for sharedTrip in sharedTrips {
-//            PhotoController.sh
+
         }
     }
     
-    func fetchPlacesForTrips(sharedTrips: [LocalTrip], completion: @escaping (Bool) -> (Void)) {
+    func fetchPlacesForTrips(sharedTrips: [SharedTrip], completion: @escaping (Bool) -> (Void)) {
+       
         for sharedTrip in sharedTrips {
             guard let tripCKRecordID = sharedTrip.cloudKitRecordID else { completion(false) ; return }
             let predicate = NSPredicate(format: "tripReference == %@", tripCKRecordID)
@@ -71,7 +73,7 @@ class SharedTripsController {
                 
                 guard let records = records else { completion(false) ; return }
                 for record in records {
-                    guard let place = LocalPlace(record: record) else { completion(false) ; return }
+                    guard let place = SharedPlace(record: record) else { completion(false) ; return }
                     sharedTrip.places.append(place)
                 }
             })

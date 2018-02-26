@@ -16,7 +16,7 @@ class PlaceTableViewCell: UITableViewCell {
             updateViews()
         }
     }
-    var sharedPlace: LocalPlace? {
+    var sharedPlace: SharedPlace? {
         didSet {
           updateViewsForSharedPlace()
         }
@@ -135,7 +135,7 @@ class PlaceTableViewCell: UITableViewCell {
         
     }
         
-        func updateStarsImageViews(sharedPlace: LocalPlace) {
+        func updateStarsImageViews(sharedPlace: SharedPlace) {
             
             let starImageViewsArray = [starOne, starTwo, starThree, starFour, starFive]
             guard let sharedPlaceRating = sharedPlace.rating else { return }
