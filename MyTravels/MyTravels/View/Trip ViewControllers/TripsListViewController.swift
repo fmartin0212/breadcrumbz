@@ -16,7 +16,6 @@ class TripsListViewController: UIViewController {
     // MARK: - Properties
     var trips: [Trip]?
     var tripsSharedWithUser = [SharedTrip]()
-    var firstSharedTripsLoad = true
     var myTripsSelected: Bool {
         if segementedController.selectedSegmentIndex == 0 {
             return true
@@ -27,17 +26,27 @@ class TripsListViewController: UIViewController {
         return true
     }
     
-    // MARK - IBOutlets
+    // MARK: - IBOutlets
     @IBOutlet var addTripBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var segementedController: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
+    // FIXME: - Is this needed?
     @IBOutlet var visualEffectView: UIVisualEffectView!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        // FIXME: - Is this needed?
         visualEffectView.alpha = 0
+        
+        // Set tableview properties
+        tableView.separatorStyle = .none
+        
+        // Set delegates
+        tableView.dataSource = self
+        tableView.delegate = self
+        TripController.shared.frc.delegate = self
         
         // Check to see if there is a current user logged in, if not, present sign-up view
         if UserController.shared.loggedInUser == nil {
@@ -52,14 +61,7 @@ class TripsListViewController: UIViewController {
         // Set navigation bar properties
         self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedStringKey.font: UIFont(name: "Avenir Next", size: 20)!]
         
-        // Set delegates
-        tableView.dataSource = self
-        tableView.delegate = self
-        TripController.shared.frc.delegate = self
-        
-        // Set tableview properties
-        tableView.separatorStyle = .none
-        
+        // Fetch all of the trips/places from Core Data and set them to local variables
         do {
             try TripController.shared.frc.performFetch()
         } catch {
@@ -76,6 +78,32 @@ class TripsListViewController: UIViewController {
             placesArray.append(places)
         }
         
+        // FIXME: - Remove once in correct place
+        let contactStore = CNContactStore()
+        let fetchRequest = CNContactFetchRequest(keysToFetch: [CNContactGivenNameKey as CNKeyDescriptor, CNContactFamilyNameKey as CNKeyDescriptor, CNContactPhoneNumbersKey as CNKeyDescriptor])
+        try? contactStore.enumerateContacts(with: fetchRequest) { (contact, _) in
+            DispatchQueue.main.async {
+            let firstName = contact.givenName
+            let lastName = contact.familyName
+            guard let phoneNumber = contact.phoneNumbers.first?.value.stringValue else { return }
+//            print("CONTACT INFORMATION: \(firstName) \(lastName),\(phoneNumber)")
+                var phoneNumberArray = [String]()
+                for character in phoneNumber.unicodeScalars {
+                    let characterAsString = String(character)
+                    if character.value >= 48 && character.value < 58 {
+                        phoneNumberArray.append(characterAsString)
+                        
+                    }
+                
+                }
+                if Int(phoneNumberArray.first!) == 1 {
+                    phoneNumberArray.remove(at: 0)
+                }
+                print("\(firstName), \(lastName), \(phoneNumberArray)")
+            }
+        }
+        
+        
     }
     
     // MARK: - IBActions
@@ -87,24 +115,13 @@ class TripsListViewController: UIViewController {
         }
         
         if myTripsSelected == false {
-            self.visualEffectView.alpha = 1
             self.navigationItem.rightBarButtonItem = nil
-            
-            if firstSharedTripsLoad == true {
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    UIView.animate(withDuration: 0.2, animations: {
-                        self.visualEffectView.alpha = 0
-                    })
-                }
-            }
+            tableView.reloadData()
         }
     }
     
-
-
-// MARK: - Functions
-override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    // MARK: - Functions
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
@@ -120,11 +137,8 @@ override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                     else { return }
                 let trip = trips[indexPath.row]
                 destinationVC.trip = trip
-                
             }
-        }
-            
-        else {
+        } else {
             
             if segue.identifier == "toTripDetailViewSegue" {
                 guard let destinationVC = segue.destination as? TripDetailViewController,
@@ -133,7 +147,6 @@ override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 
                 let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
                 destinationVC.sharedTrip = sharedTrip
-                
             }
         }
     }
@@ -143,6 +156,7 @@ override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 extension TripsListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       
         if myTripsSelected == true {
             guard let trips = TripController.shared.frc.fetchedObjects else { return 0 }
             return trips.count
@@ -152,6 +166,7 @@ extension TripsListViewController: UITableViewDelegate, UITableViewDataSource {
             return SharedTripsController.shared.sharedTrips.count
         }
         return 0
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -168,10 +183,9 @@ extension TripsListViewController: UITableViewDelegate, UITableViewDataSource {
         } else if myTripsSelected == false {
             let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
             cell.localTrip = sharedTrip
-        
         }
-
         return cell
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -209,4 +223,5 @@ extension TripsListViewController: NSFetchedResultsControllerDelegate {
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }
     }
+    
 }

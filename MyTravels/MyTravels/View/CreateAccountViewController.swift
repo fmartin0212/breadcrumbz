@@ -15,6 +15,9 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var overlayView: UIView!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var createAccountButton: UIButton!
+    @IBOutlet var firstNameTextField: UITextField!
+    @IBOutlet var lastNameTextField: UITextField!
+    @IBOutlet var phoneNumberTextField: UITextField!
     
     
     var centerX: NSLayoutConstraint?
@@ -40,7 +43,7 @@ class CreateAccountViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func createAccountButtonTapped(_ sender: UIButton) {
-       
+        
         // Create bubbly effect upon tap
         UIView.animate(withDuration: 0.10, animations: {
             self.createAccountButton.transform = CGAffineTransform(scaleX: 0.90, y: 0.90)
@@ -49,21 +52,29 @@ class CreateAccountViewController: UIViewController {
                 self.createAccountButton.transform = CGAffineTransform.identity
             })
         }
-
+        
         guard let username = usernameTextField.text,
+            let firstName = firstNameTextField.text,
+            let lastName = lastNameTextField.text,
+            let phoneNumber = phoneNumberTextField.text,
             let placeholderProfilePicture = UIImage(named: "userImage256")
             
-        else { return }
-        let placeholderProfilePictureAsData = UIImagePNGRepresentation(placeholderProfilePicture)
+            else { return }
         
-        UserController.shared.createNewUserWith(username, password: "password", firstName: "Frank", lastName: "Martin", profilePicture: placeholderProfilePictureAsData) { (success) in
+        let placeholderProfilePictureAsData = UIImagePNGRepresentation(placeholderProfilePicture)
+        var phoneNumberAsArray = [String]()
+        for number in phoneNumber {
+            let numberAsString = String(number)
+            phoneNumberAsArray.append(numberAsString)
+        }
+        UserController.shared.createNewUserWith(username: username, firstName: firstName, lastName: lastName, phoneNumber: phoneNumberAsArray, profilePicture: placeholderProfilePictureAsData) { (success) in
             DispatchQueue.main.async {
                 self.dismiss(animated: true, completion: nil)
             }
         }
         
     }
-        
+    
     // MARK: - Functions
     func fadeInOverlayView() {
         

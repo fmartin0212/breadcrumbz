@@ -13,9 +13,9 @@ import Contacts
 class User {
     
     let username: String
-    let password: String?
     let firstName: String?
     let lastName: String?
+    let phoneNumber: [String]?
     let profilePicture: Data?
     var ckRecordID: CKRecordID?
     let appleUserRef: CKReference
@@ -32,11 +32,11 @@ class User {
         return fileURL
     }
     
-    init(username: String, password: String?, firstName: String?, lastName: String?, profilePicture: Data?, appleUserRef: CKReference) {
+    init(username: String, firstName: String?, lastName: String?, phoneNumber: [String]?, profilePicture: Data?, appleUserRef: CKReference) {
         self.username = username
         self.firstName = firstName
         self.lastName = lastName
-        self.password = password
+        self.phoneNumber = phoneNumber
         self.profilePicture = profilePicture
         self.appleUserRef = appleUserRef
     }
@@ -45,7 +45,7 @@ class User {
     init?(ckRecord: CKRecord) {
         
         guard let username = ckRecord["username"] as? String,
-            let password = ckRecord["password"] as? String,
+            let phoneNumber = ckRecord["phoneNumber"] as? [String],
             let firstName = ckRecord["firstName"] as? String,
             let lastName = ckRecord["lastName"] as? String,
             let profilePicture = ckRecord["profilePictureAsset"] as? CKAsset,
@@ -55,9 +55,9 @@ class User {
         let photoData = try? Data(contentsOf: profilePicture.fileURL)
         
         self.username = username
-        self.password = password
         self.firstName = firstName
         self.lastName = lastName
+        self.phoneNumber = phoneNumber
         self.profilePicture = photoData
         self.appleUserRef = appleUserRef
         self.ckRecordID = ckRecord.recordID
@@ -76,9 +76,9 @@ extension CKRecord {
         self.init(recordType: "User", recordID: recordID)
         
         self.setValue(user.username, forKey: "username")
-        self.setValue(user.password, forKey: "password")
         self.setValue(user.firstName, forKey: "firstName")
         self.setValue(user.lastName, forKey: "lastName")
+        self.setValue(user.phoneNumber, forKey: "phoneNumber")
         self.setValue(profilePictureAsset, forKey: "profilePictureAsset")
         self.setValue(user.appleUserRef, forKey: "appleUserRef")
         

@@ -10,6 +10,7 @@ import Foundation
 import CloudKit
 
 class SharedTrip {
+    
     var location: String
     var startDate: Date
     var endDate: Date
@@ -40,13 +41,6 @@ class SharedTrip {
     
             return fileURL
         }
-    
-//    init(location: String, startDate: Date, endDate: Date, photoData: Data?) {
-//        self.location = location
-//        self.startDate = startDate
-//        self.endDate = endDate
-//        self.photoData = photoData
-//    }
     
     // CloudKit - Turn a record into a Trip
     init?(record: CKRecord) {
