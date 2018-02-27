@@ -77,10 +77,12 @@ extension CKRecord {
         let ckRecordID = place.cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
         
         var photoAssets: [CKAsset] = []
+        
         for photoURL in place.temporaryPhotoURLs {
             let photoAsset = CKAsset(fileURL: photoURL)
             photoAssets.append(photoAsset)
         }
+        
         let ratingAsInt64 = Int(place.rating)
         self.init(recordType: "Place", recordID: ckRecordID)
         

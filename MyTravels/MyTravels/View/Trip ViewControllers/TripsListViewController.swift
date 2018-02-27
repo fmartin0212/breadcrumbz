@@ -78,30 +78,30 @@ class TripsListViewController: UIViewController {
             placesArray.append(places)
         }
         
-        // FIXME: - Remove once in correct place
-        let contactStore = CNContactStore()
-        let fetchRequest = CNContactFetchRequest(keysToFetch: [CNContactGivenNameKey as CNKeyDescriptor, CNContactFamilyNameKey as CNKeyDescriptor, CNContactPhoneNumbersKey as CNKeyDescriptor])
-        try? contactStore.enumerateContacts(with: fetchRequest) { (contact, _) in
-            DispatchQueue.main.async {
-            let firstName = contact.givenName
-            let lastName = contact.familyName
-            guard let phoneNumber = contact.phoneNumbers.first?.value.stringValue else { return }
-//            print("CONTACT INFORMATION: \(firstName) \(lastName),\(phoneNumber)")
-                var phoneNumberArray = [String]()
-                for character in phoneNumber.unicodeScalars {
-                    let characterAsString = String(character)
-                    if character.value >= 48 && character.value < 58 {
-                        phoneNumberArray.append(characterAsString)
-                        
-                    }
-                
-                }
-                if Int(phoneNumberArray.first!) == 1 {
-                    phoneNumberArray.remove(at: 0)
-                }
-                print("\(firstName), \(lastName), \(phoneNumberArray)")
-            }
-        }
+        // FIXME: - Remove once in correct places
+//        let contactStore = CNContactStore()
+//        let fetchRequest = CNContactFetchRequest(keysToFetch: [CNContactGivenNameKey as CNKeyDescriptor, CNContactFamilyNameKey as CNKeyDescriptor, CNContactPhoneNumbersKey as CNKeyDescriptor])
+//        try? contactStore.enumerateContacts(with: fetchRequest) { (contact, _) in
+//            DispatchQueue.main.async {
+//            let firstName = contact.givenName
+//            let lastName = contact.familyName
+//            guard let phoneNumber = contact.phoneNumbers.first?.value.stringValue else { return }
+////            print("CONTACT INFORMATION: \(firstName) \(lastName),\(phoneNumber)")
+//                var phoneNumberArray = [String]()
+//                for character in phoneNumber.unicodeScalars {
+//                    let characterAsString = String(character)
+//                    if character.value >= 48 && character.value < 58 {
+//                        phoneNumberArray.append(characterAsString)
+//
+//                    }
+//
+//                }
+//                if Int(phoneNumberArray.first!) == 1 {
+//                    phoneNumberArray.remove(at: 0)
+//                }
+//                print("\(firstName), \(lastName), \(phoneNumberArray)")
+//            }
+//        }
         
         
     }

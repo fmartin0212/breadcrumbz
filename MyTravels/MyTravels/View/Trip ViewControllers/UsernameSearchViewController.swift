@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Contacts
 
 class UsernameSearchViewController: UIViewController {
 
     // MARK: - Properties
     var trip: Trip?
     var usernames = [String]()
+    var arrayOfPhoneNumbers = [[String]]()
     
     // MARK: - IBOutlets
     @IBOutlet weak var searchBar: UISearchBar!
@@ -26,6 +28,38 @@ class UsernameSearchViewController: UIViewController {
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
+        
+        let contactStore = CNContactStore()
+        let fetchRequest = CNContactFetchRequest(keysToFetch: [CNContactGivenNameKey as CNKeyDescriptor, CNContactFamilyNameKey as CNKeyDescriptor, CNContactPhoneNumbersKey as CNKeyDescriptor])
+        try? contactStore.enumerateContacts(with: fetchRequest) { (contact, _) in
+            DispatchQueue.main.async {
+                let firstName = contact.givenName
+                let lastName = contact.familyName
+                guard let phoneNumber = contact.phoneNumbers.first?.value.stringValue else { return }
+                //            print("CONTACT INFORMATION: \(firstName) \(lastName),\(phoneNumber)")
+                var phoneNumberArray = [String]()
+                for character in phoneNumber.unicodeScalars {
+                    let characterAsString = String(character)
+                    if character.value >= 48 && character.value < 58 {
+                        phoneNumberArray.append(characterAsString)
+                        
+                    }
+                    
+                }
+                if Int(phoneNumberArray.first!) == 1 {
+                    phoneNumberArray.remove(at: 0)
+                }
+                //                print("\(firstName), \(lastName), \(phoneNumberArray)")
+                self.arrayOfPhoneNumbers.append(phoneNumberArray)
+                print("adsf")
+            }
+            
+        }
+        
+        for phoneNumberArray in self.arrayOfPhoneNumbers {
+            print("PHONE NUMBER ARRAYS: \(phoneNumberArray)")
+        }
+        print(self.arrayOfPhoneNumbers.count)
         
         view.isUserInteractionEnabled = false
         CloudKitManager.shared.performFullSync { (success) in
@@ -44,6 +78,7 @@ class UsernameSearchViewController: UIViewController {
         }
         
     }
+    
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
