@@ -103,7 +103,6 @@ class TripsListViewController: UIViewController {
 //            }
 //        }
         
-        
     }
     
     // MARK: - IBActions

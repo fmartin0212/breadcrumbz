@@ -58,16 +58,11 @@ class CreateAccountViewController: UIViewController {
             let lastName = lastNameTextField.text,
             let phoneNumber = phoneNumberTextField.text,
             let placeholderProfilePicture = UIImage(named: "userImage256")
-            
             else { return }
         
         let placeholderProfilePictureAsData = UIImagePNGRepresentation(placeholderProfilePicture)
-        var phoneNumberAsArray = [String]()
-        for number in phoneNumber {
-            let numberAsString = String(number)
-            phoneNumberAsArray.append(numberAsString)
-        }
-        UserController.shared.createNewUserWith(username: username, firstName: firstName, lastName: lastName, phoneNumber: phoneNumberAsArray, profilePicture: placeholderProfilePictureAsData) { (success) in
+        
+        UserController.shared.createNewUserWith(username: username, firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, profilePicture: placeholderProfilePictureAsData) { (success) in
             DispatchQueue.main.async {
                 self.dismiss(animated: true, completion: nil)
             }

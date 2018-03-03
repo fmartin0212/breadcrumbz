@@ -15,7 +15,7 @@ class UserController {
     
     var loggedInUser: User?
     
-    func createNewUserWith(username: String, firstName: String?, lastName: String?, phoneNumber: [String]?, profilePicture: Data?, completion: @escaping (Bool) -> Void) {
+    func createNewUserWith(username: String, firstName: String?, lastName: String?, phoneNumber: String?, profilePicture: Data?, completion: @escaping (Bool) -> Void) {
         
         CKContainer.default().fetchUserRecordID { (recordID, error) in
             if let error = error {

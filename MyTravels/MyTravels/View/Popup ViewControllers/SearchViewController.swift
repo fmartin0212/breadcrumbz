@@ -76,10 +76,13 @@ extension SearchViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
         view.isUserInteractionEnabled = false
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
         guard let location = locations.first else { return }
         print(location)
+        
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
             if let error = error {
@@ -118,6 +121,7 @@ extension SearchViewController: MKLocalSearchCompleterDelegate {
     }
     
     func highlightedText(_ text: String, inRanges ranges: [NSValue], size: CGFloat) -> NSAttributedString {
+        
         let attributedText = NSMutableAttributedString(string: text)
         let regular = UIFont.systemFont(ofSize: size)
         attributedText.addAttribute(NSAttributedStringKey.font, value:regular, range:NSMakeRange(0, text.count))

@@ -15,7 +15,7 @@ class User {
     let username: String
     let firstName: String?
     let lastName: String?
-    let phoneNumber: [String]?
+    let phoneNumber: String?
     let profilePicture: Data?
     var ckRecordID: CKRecordID?
     let appleUserRef: CKReference
@@ -32,7 +32,7 @@ class User {
         return fileURL
     }
     
-    init(username: String, firstName: String?, lastName: String?, phoneNumber: [String]?, profilePicture: Data?, appleUserRef: CKReference) {
+    init(username: String, firstName: String?, lastName: String?, phoneNumber: String?, profilePicture: Data?, appleUserRef: CKReference) {
         self.username = username
         self.firstName = firstName
         self.lastName = lastName
@@ -45,7 +45,7 @@ class User {
     init?(ckRecord: CKRecord) {
         
         guard let username = ckRecord["username"] as? String,
-            let phoneNumber = ckRecord["phoneNumber"] as? [String],
+            let phoneNumber = ckRecord["phoneNumber"] as? String,
             let firstName = ckRecord["firstName"] as? String,
             let lastName = ckRecord["lastName"] as? String,
             let profilePicture = ckRecord["profilePictureAsset"] as? CKAsset,
