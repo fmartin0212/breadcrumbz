@@ -10,6 +10,7 @@
 import Foundation
 import CoreData
 import CloudKit
+import MapKit
 
 @objc(Trip)
 public class Trip: NSManagedObject, CloudKitSyncable {

@@ -118,7 +118,7 @@ class PlaceDetailTableViewController: UITableViewController {
                 placeMainPhotoImageView.image = image
                 placeNameLabel.text = sharedPlace.name
                 placeAddressLabel.text = sharedPlace.address
-//                updateStarsImageViews(place: place)
+                updateStarsImageViews(sharedPlace: sharedPlace)
             } else {
                 var placeholderImage = UIImage()
                 if sharedPlace.type == "Lodging" {
@@ -134,7 +134,7 @@ class PlaceDetailTableViewController: UITableViewController {
                 placeMainPhotoImageView.image = placeholderImage
                 placeNameLabel.text = sharedPlace.name
                 placeAddressLabel.text = sharedPlace.address
-//                updateStarsImageViews(place: place)
+                updateStarsImageViews(sharedPlace: sharedPlace)
             }
     }
     
@@ -225,7 +225,7 @@ extension PlaceDetailTableViewController: UICollectionViewDelegate, UICollection
             guard let photo = photos[indexPath.row].photo
                 else { return UICollectionViewCell() }
             
-            cell.photo = photo as? Data
+            cell.photo = photo as Data
             
             return cell
         }

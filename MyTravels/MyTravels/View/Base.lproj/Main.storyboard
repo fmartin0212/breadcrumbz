@@ -521,7 +521,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="pTr-Pb-Eq1">
+                                <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="pTr-Pb-Eq1">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="374"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
@@ -1718,6 +1718,30 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4212" y="1493.7031484257873"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="eIA-2r-OFK">
+            <objects>
+                <viewController id="5Jv-OB-qqU" customClass="MapViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="L5J-He-IYf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eyx-Lf-fMi">
+                                <rect key="frame" x="16" y="76" width="343" height="514"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="fDh-wv-R1f"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="eyx-Lf-fMi" id="wPZ-3q-4IG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RGY-Gn-dYS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5588" y="1875.1124437781111"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iEc-nF-mdU">

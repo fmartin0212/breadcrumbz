@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import CloudKit
 import Contacts
+import MapKit
 
 class TripsListViewController: UIViewController {
     

@@ -38,7 +38,6 @@ class UsernameSearchViewController: UIViewController {
 
                 self.fetchContacts { (success) in
                     
-                    
                 }
                 
                 var allUsers = [User]()

@@ -11,6 +11,7 @@
 		B73926112035255A0050B580 /* UsernameSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73926102035255A0050B580 /* UsernameSearchViewController.swift */; };
 		B739261320362E5F0050B580 /* SharedTripsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B739261220362E5F0050B580 /* SharedTripsController.swift */; };
 		B7392616203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7392614203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift */; };
+		B796DD3A204B5F9500CAF093 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B796DD39204B5F9500CAF093 /* MapViewController.swift */; };
 		B7B0C36E203724F30031A92A /* SharedTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B0C36D203724F30031A92A /* SharedTrip.swift */; };
 		B7B0C3702037446E0031A92A /* SharedPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B0C36F2037446E0031A92A /* SharedPlace.swift */; };
 		B7BDA845202A29F50080B81B /* EditPlaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */; };
@@ -55,6 +56,7 @@
 		B73926102035255A0050B580 /* UsernameSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameSearchViewController.swift; sourceTree = "<group>"; };
 		B739261220362E5F0050B580 /* SharedTripsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripsController.swift; sourceTree = "<group>"; };
 		B7392614203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UsersSharedWithRecordIDs+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B796DD39204B5F9500CAF093 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B7B0C36D203724F30031A92A /* SharedTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTrip.swift; sourceTree = "<group>"; };
 		B7B0C36F2037446E0031A92A /* SharedPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPlace.swift; sourceTree = "<group>"; };
 		B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlaceTableViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			children = (
 				B7D652422027F5C300E975F1 /* CreateTripTableViewController.swift */,
 				B7C10CCA2020EDB400818430 /* TripsListViewController.swift */,
+				B796DD39204B5F9500CAF093 /* MapViewController.swift */,
 				B7C10CE1202226ED00818430 /* TripDetailViewController.swift */,
 				B73926102035255A0050B580 /* UsernameSearchViewController.swift */,
 			);
@@ -457,6 +460,7 @@
 				B7DA1B72202E140C0007497A /* Place+CoreDataProperties.swift in Sources */,
 				B73926112035255A0050B580 /* UsernameSearchViewController.swift in Sources */,
 				B7D652452027FB4B00E975F1 /* ChooseDateViewController.swift in Sources */,
+				B796DD3A204B5F9500CAF093 /* MapViewController.swift in Sources */,
 				B7D6523D202620E700E975F1 /* PlaceTableViewCell.swift in Sources */,
 				B7D6523F2026526700E975F1 /* ViewControllerExtensions.swift in Sources */,
 				B7C10CD3202111A300818430 /* CoreDataStack.swift in Sources */,
