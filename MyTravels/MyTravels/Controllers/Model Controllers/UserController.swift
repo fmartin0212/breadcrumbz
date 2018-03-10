@@ -49,6 +49,7 @@ class UserController {
             }
             
             guard let appleUserID = appleUserID else { completion(false) ; return }
+            print(appleUserID)
             let predicate = NSPredicate(format: "appleUserRef == %@", appleUserID)
             let query = CKQuery(recordType: "User", predicate: predicate)
             CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil, completionHandler: { (records, error) in

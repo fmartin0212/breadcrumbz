@@ -18,6 +18,7 @@ class UsernameSearchViewController: UIViewController {
     var users = [User]()
     var arrayOfPhoneNumbers = [String]()
     var loggedInUsersFriends = [User]()
+    
     // MARK: - IBOutlets
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -35,53 +36,51 @@ class UsernameSearchViewController: UIViewController {
         
         // Sync all user's trips/places
         CloudKitManager.shared.performFullSync { (success) in
-
-                self.fetchContacts { (success) in
-                    
+            
+            self.fetchContacts { (success) in
+                
+            }
+            
+            var allUsers = [User]()
+            var loggedInUsersFriends = [User]()
+            print("full array of phone numbers: \(self.arrayOfPhoneNumbers)")
+            print("count of number of phone numbers: \(self.arrayOfPhoneNumbers.count)")
+            
+            let predicate = NSPredicate(value: true)
+            let query = CKQuery(recordType: "User", predicate: predicate)
+            CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
+                if let error = error {
+                    print("error retrieving all users. \(error)")
+                }
+                guard let records = records else { return }
+                print("number of records: \(records.count)")
+                for record in records {
+                    guard let user = User(ckRecord: record) else { return }
+                    allUsers.append(user)
                 }
                 
-                var allUsers = [User]()
-                var loggedInUsersFriends = [User]()
-                print(self.arrayOfPhoneNumbers)
-                print(self.arrayOfPhoneNumbers.count)
-                
-                let predicate = NSPredicate(value: true)
-                let query = CKQuery(recordType: "User", predicate: predicate)
-                CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
-                    if let error = error {
-                        print("error retrieving all users. \(error)")
+                for user in allUsers {
+                    guard let userPhoneNumber = user.phoneNumber else { continue }
+                    if self.arrayOfPhoneNumbers.contains(userPhoneNumber) {
+                        loggedInUsersFriends.append(user)
                     }
-                    guard let records = records else { return }
-                    print("number of records: \(records.count)")
-                    for record in records {
-                        guard let user = User(ckRecord: record) else { return }
-                        allUsers.append(user)
-                    }
-                    
-                    for user in allUsers {
-                        guard let userPhoneNumber = user.phoneNumber else { continue }
-                        if self.arrayOfPhoneNumbers.contains(userPhoneNumber) {
-                            loggedInUsersFriends.append(user)
-                        }
-                        self.loggedInUsersFriends = loggedInUsersFriends
-                        print("break")
-                        DispatchQueue.main.async {
-                            
-                            
-                            UIView.animate(withDuration: 0.2) {
-                                self.loadingVisualEffectView.alpha = 0
-                                
-                            }
-                            self.tableView.reloadData()
-                            
-                            self.view.isUserInteractionEnabled = true
+                    self.loggedInUsersFriends = loggedInUsersFriends
+                    print("break")
+                    DispatchQueue.main.async {
+                        
+                        UIView.animate(withDuration: 0.2) {
+                            self.loadingVisualEffectView.alpha = 0
                             
                         }
+                        self.tableView.reloadData()
+                        
+                        self.view.isUserInteractionEnabled = true
                         
                     }
-                })
+                    
+                }
+            })
             
-       
         }
         
     }

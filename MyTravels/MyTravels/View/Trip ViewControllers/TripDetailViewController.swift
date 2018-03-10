@@ -256,12 +256,12 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
         // Use user's saved places as data source
         if sharedTripsView == false {
             guard let array = array else { return 0 }
-            return array.count
+            return array.count + 1
         }
         
         // Use shared places array as datasource
         guard let sharedPlacesArray = sharedPlaces else { return 0 }
-        return sharedPlacesArray.count
+        return sharedPlacesArray.count + 1
         
     }
     
@@ -271,10 +271,11 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
+        if section > 0 {
 //         Use shared places array as datasource
         if sharedTripsView == false {
             guard let placeArray = array as? [[Place]],
-                let firstItemInArray = placeArray[section].first,
+                let firstItemInArray = placeArray[section - 1].first,
                 let firstItemInArrayType = firstItemInArray.type
                 else { return UIView() }
 
@@ -309,24 +310,34 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
         } else if firstItemInArrayType == "Activity" {
             let text = "  Activities"
             return sectionHeaderLabelWith(text: text)
+            }
+            return UIView()
         }
         return UIView()
-    
-}
+        
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        // Use user's saved places as data source
-        if sharedTripsView == false {
-            guard let placeArray = array as? [[Place]] else { return 0 }
-            return placeArray[section].count
-        
+        if section  == 0 {
+            return 1
         }
         
-        // Use shared places array as datasource
-        guard let sharedPlaces = sharedPlaces else { return 0 }
-        return sharedPlaces[section].count
+        if section > 0 {
+            
+            // Use user's saved places as data source
+            if sharedTripsView == false {
+                guard let placeArray = array as? [[Place]] else { return 0 }
+                return placeArray[section - 1].count
+                
+            }
+            
+            // Use shared places array as datasource
+            guard let sharedPlaces = sharedPlaces else { return 0 }
+            return sharedPlaces[section - 1].count
+        }
         
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -334,14 +345,18 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+       
+        if indexPath.row == 0 && indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TripDetailCell") as! TripDetailTableViewCell
+            return cell
+        }
         // Use user's saved places as data source
         if sharedTripsView == false {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath) as! PlaceTableViewCell
             cell.selectionStyle = .none
             
             guard let placeArray = array as? [[Place]] else { return UITableViewCell() }
-            let place = placeArray[indexPath.section][indexPath.row]
+            let place = placeArray[indexPath.section - 1][indexPath.row]
             
             cell.place = place
             
@@ -354,11 +369,12 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         
         guard let sharedPlacesArray = sharedPlaces else { return UITableViewCell() }
-        let sharedPlace = sharedPlacesArray[indexPath.section][indexPath.row]
+        let sharedPlace = sharedPlacesArray[indexPath.section - 1][indexPath.row]
         
         cell.sharedPlace = sharedPlace
         
         return cell
+        
         
     }
     
@@ -367,7 +383,7 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
         if sharedTripsView == false {
             if editingStyle == .delete {
                 guard let placeArray = array as? [[Place]] else { return }
-                let place = placeArray[indexPath.section][indexPath.row]
+                let place = placeArray[indexPath.section - 1][indexPath.row]
                 PlaceController.shared.delete(place: place)
                 setUpArrays()
             }

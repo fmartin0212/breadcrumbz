@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		640D44D39C850C2A96963BFD /* Pods_MyTravels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C480CB24B3A0B628223A89 /* Pods_MyTravels.framework */; };
+		B711157920549859000868BD /* TripDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B711157820549859000868BD /* TripDetailTableViewCell.swift */; };
 		B73926112035255A0050B580 /* UsernameSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73926102035255A0050B580 /* UsernameSearchViewController.swift */; };
 		B739261320362E5F0050B580 /* SharedTripsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B739261220362E5F0050B580 /* SharedTripsController.swift */; };
 		B7392616203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7392614203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift */; };
@@ -53,6 +54,7 @@
 /* Begin PBXFileReference section */
 		66C480CB24B3A0B628223A89 /* Pods_MyTravels.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTravels.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A42438B3869DF1A1F6B9E358 /* Pods-MyTravels.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTravels.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels.debug.xcconfig"; sourceTree = "<group>"; };
+		B711157820549859000868BD /* TripDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailTableViewCell.swift; sourceTree = "<group>"; };
 		B73926102035255A0050B580 /* UsernameSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameSearchViewController.swift; sourceTree = "<group>"; };
 		B739261220362E5F0050B580 /* SharedTripsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripsController.swift; sourceTree = "<group>"; };
 		B7392614203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UsersSharedWithRecordIDs+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				B7C10CCC2020EFB000818430 /* TripTableViewCell.swift */,
+				B711157820549859000868BD /* TripDetailTableViewCell.swift */,
 				B7D6523C202620E700E975F1 /* PlaceTableViewCell.swift */,
 				B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */,
 			);
@@ -440,6 +443,7 @@
 				B7DA1B78202E1AE20007497A /* User.swift in Sources */,
 				B7B0C36E203724F30031A92A /* SharedTrip.swift in Sources */,
 				B7DA1B73202E140C0007497A /* Photo+CoreDataClass.swift in Sources */,
+				B711157920549859000868BD /* TripDetailTableViewCell.swift in Sources */,
 				B7DA1B822030E70C0007497A /* SearchViewController.swift in Sources */,
 				B7DA1B7D202E2B900007497A /* UserController.swift in Sources */,
 				B7C10CBD2020D19500818430 /* MyTravels.xcdatamodeld in Sources */,
@@ -606,6 +610,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W53Z73CT67;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.frankmartin.MyTravels;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -623,6 +628,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W53Z73CT67;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.frankmartin.MyTravels;
 				PRODUCT_NAME = "$(TARGET_NAME)";
