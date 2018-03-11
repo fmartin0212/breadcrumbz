@@ -50,7 +50,6 @@ class TripTableViewCell: UITableViewCell {
             tripPhoto = image
         }
         
-        
         tripImageView.image = tripPhoto
         tripNameLabel.text = trip.location
         
@@ -64,10 +63,7 @@ class TripTableViewCell: UITableViewCell {
         tripImageView.layer.cornerRadius = 4
         tripImageView.clipsToBounds = true
         
-        guard let localTrip = localTrip
-//            let startDate = localTrip.startDate,
-//            let endDate = localTrip.endDate
-            else { return }
+        guard let localTrip = localTrip else { return }
         
         var tripPhoto = UIImage()
         guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
@@ -77,7 +73,6 @@ class TripTableViewCell: UITableViewCell {
             guard let photo = UIImage(data: photoData) else { return }
             tripPhoto = photo
         }
-        
         
         tripImageView.image = tripPhoto
         tripNameLabel.text = localTrip.location

@@ -57,12 +57,14 @@ class UsernameSearchViewController: UIViewController {
                 for record in records {
                     guard let user = User(ckRecord: record) else { return }
                     allUsers.append(user)
+                    print("dauhfuef")
                 }
                 
                 for user in allUsers {
                     guard let userPhoneNumber = user.phoneNumber else { continue }
                     if self.arrayOfPhoneNumbers.contains(userPhoneNumber) {
                         loggedInUsersFriends.append(user)
+                        print("adsf")
                     }
                     self.loggedInUsersFriends = loggedInUsersFriends
                     print("break")
@@ -72,6 +74,7 @@ class UsernameSearchViewController: UIViewController {
                             self.loadingVisualEffectView.alpha = 0
                             
                         }
+                        
                         self.tableView.reloadData()
                         
                         self.view.isUserInteractionEnabled = true

@@ -162,7 +162,6 @@ extension TripsListViewController: UITableViewDelegate, UITableViewDataSource {
             return trips.count
         }
         if myTripsSelected == false {
-            print("adsf")
             return SharedTripsController.shared.sharedTrips.count
         }
         return 0

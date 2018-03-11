@@ -9,8 +9,49 @@
 import UIKit
 
 class TripDetailTableViewCell: UITableViewCell {
+    
+    // MARK: - Properties
+    var trip: Trip? {
+        didSet {
+            updateTripDetail()
+        }
+    }
+    var sharedTrip: SharedTrip? {
+        didSet {
+            updateSharedTripDetail()
+        }
+    }
+    
+    // MARK: - IBOutlets
     @IBOutlet var tripLocationLabel: UILabel!
-    @IBOutlet var tripDateLabel: UILabel!
+    @IBOutlet var tripStartDateLabel: UILabel!
+    @IBOutlet var tripEndDateLabel: UILabel!
     
+    // MARK: - Other Functions
+    func updateTripDetail() {
+        guard let trip = trip,
+            let startDate = trip.startDate,
+            let endDate = trip.endDate
+            else { return }
+        tripLocationLabel.text = trip.location
+        tripStartDateLabel.text = "\(shortDateString(date: startDate as Date)) -"
+        tripEndDateLabel.text = shortDateString(date: endDate as Date)
+        
+    }
     
+    func updateSharedTripDetail() {
+        guard let sharedTrip = sharedTrip else { return }
+        tripLocationLabel.text = sharedTrip.location
+        
+    }
+    
+    func shortDateString(date: Date) -> String {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        let date = dateFormatter.string(from: date)
+        
+        return date
+        
+    }
 }

@@ -348,10 +348,18 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
        
         if indexPath.row == 0 && indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TripDetailCell") as! TripDetailTableViewCell
+            if let trip = trip {
+                cell.trip = trip
+            }
+            else if let sharedTrip = sharedTrip {
+                cell.sharedTrip = sharedTrip
+            }
             return cell
         }
+        
         // Use user's saved places as data source
         if sharedTripsView == false {
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath) as! PlaceTableViewCell
             cell.selectionStyle = .none
             
@@ -362,6 +370,12 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
             
+        }
+        
+        if indexPath.row == 0 && indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TripDetailCell") as! TripDetailTableViewCell
+            
+            return cell
         }
         
         // Use shared places array as datasource
@@ -392,7 +406,12 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 106
+    
+        if indexPath.section > 0 {
+            return 106
+        }
+        
+        return 94
     }
     
 }
