@@ -47,6 +47,8 @@
 		B7DA1B7D202E2B900007497A /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B7C202E2B900007497A /* UserController.swift */; };
 		B7DA1B7F202F9FBC0007497A /* FetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */; };
 		B7DA1B822030E70C0007497A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B812030E70C0007497A /* SearchViewController.swift */; };
+		B7F75C0220577BB200C876A0 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F75C0120577BB200C876A0 /* Onboarding.storyboard */; };
+		B7F75C0420577C2000C876A0 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C0320577C2000C876A0 /* OnboardingViewController.swift */; };
 		B7F92BCF20291DEE0021A8CA /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F92BCE20291DEE0021A8CA /* PhotoController.swift */; };
 		B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -96,6 +98,8 @@
 		B7DA1B7C202E2B900007497A /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchViewController.swift; sourceTree = "<group>"; };
 		B7DA1B812030E70C0007497A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		B7F75C0120577BB200C876A0 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		B7F75C0320577C2000C876A0 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		B7F92BCE20291DEE0021A8CA /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
 		B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		D8CD1BB41D947506D15EDEB5 /* Pods-MyTravels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTravels.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels.release.xcconfig"; sourceTree = "<group>"; };
@@ -231,12 +235,14 @@
 		B7C10CDA20214F5400818430 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B7F75C0520577C2900C876A0 /* Onboarding */,
 				B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */,
 				B7C10CB62020D19500818430 /* CreateAccountViewController.swift */,
 				B71E0C72202CC20100125396 /* Trip ViewControllers */,
 				B71E0C73202CC20D00125396 /* Place ViewControllers */,
 				B71E0C71202CC1A100125396 /* Popup ViewControllers */,
 				B71E0C70202CC13600125396 /* Custom Cells */,
+				B7F75C0120577BB200C876A0 /* Onboarding.storyboard */,
 				B7C10CB82020D19500818430 /* Main.storyboard */,
 			);
 			path = View;
@@ -285,6 +291,14 @@
 				B7DA1B75202E164C0007497A /* CloudKitSyncable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		B7F75C0520577C2900C876A0 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				B7F75C0320577C2000C876A0 /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,6 +374,7 @@
 				B7C10CC22020D19500818430 /* LaunchScreen.storyboard in Resources */,
 				B7C10CBF2020D19500818430 /* Assets.xcassets in Resources */,
 				B7C10CBA2020D19500818430 /* Main.storyboard in Resources */,
+				B7F75C0220577BB200C876A0 /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +470,7 @@
 				B7DA1B74202E140C0007497A /* Photo+CoreDataProperties.swift in Sources */,
 				B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */,
 				B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */,
+				B7F75C0420577C2000C876A0 /* OnboardingViewController.swift in Sources */,
 				B7C10CD12020FD5500818430 /* PlaceController.swift in Sources */,
 				B7D6523B202514C700E975F1 /* CreateNewPlaceTableViewController.swift in Sources */,
 				B7DA1B7B202E2A170007497A /* CloudKitManager.swift in Sources */,

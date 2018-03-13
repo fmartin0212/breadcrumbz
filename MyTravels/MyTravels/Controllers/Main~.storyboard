@@ -21,6 +21,14 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Page View Controller-->
+        <scene sceneID="6wT-G2-xVo">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="Poi-6h-zyi" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ddh-ba-AWI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-233" y="-1752"/>
+        </scene>
         <!--Table View Controller-->
         <scene sceneID="zaP-tg-MR4">
             <objects>
