@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7kg-fl-qzV">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Page View Controller-->
+        <!--Onboarding Page View Controller-->
         <scene sceneID="vl7-pM-on1">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="7kg-fl-qzV" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" modalTransitionStyle="crossDissolve" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="min" doubleSided="YES" id="7kg-fl-qzV" customClass="OnboardingPageViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n5P-8A-HlR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-260" y="-1479"/>
@@ -20,11 +20,11 @@
         <!--View Controller-->
         <scene sceneID="O4n-cy-Ztb">
             <objects>
-                <viewController id="fEg-ce-nRm" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExplanationViewController" id="fEg-ce-nRm" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0M4-1x-kkF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.1486544602" green="0.99963706730000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="mVt-zd-b4x"/>
                     </view>
                 </viewController>
@@ -35,11 +35,11 @@
         <!--View Controller-->
         <scene sceneID="f3P-lN-HZk">
             <objects>
-                <viewController id="xmk-1n-76C" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FeaturesViewController" id="xmk-1n-76C" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aj0-Mw-iZV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.97647058819999999" green="0.37104773520000001" blue="0.3826945424" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="mzv-uh-CB9"/>
                     </view>
                 </viewController>
@@ -50,11 +50,11 @@
         <!--View Controller-->
         <scene sceneID="PaN-lM-GFR">
             <objects>
-                <viewController id="1k4-XJ-IPR" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateAccountViewController" id="1k4-XJ-IPR" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0mc-Tj-TnW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.32983107090000002" green="0.73751277579999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="cdH-7x-X1Q"/>
                     </view>
                 </viewController>
