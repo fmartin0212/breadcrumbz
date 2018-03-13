@@ -132,7 +132,7 @@ extension UsernameSearchViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        cell.textLabel?.text = loggedInUsersFriends[indexPath.row].username
+        cell.textLabel?.text = loggedInUsersFriends[indexPath.row].firstName
         return cell
     }
     
@@ -140,9 +140,9 @@ extension UsernameSearchViewController: UITableViewDataSource, UITableViewDelega
         guard let trip = trip else { return }
         loadingVisualEffectView.alpha = 1
         
-        let username = loggedInUsersFriends[indexPath.row].username
+        guard let firstName = loggedInUsersFriends[indexPath.row].firstName else { return }
         
-        CloudKitManager.shared.fetchTripShareReceiverWith(username: username) { (user) in
+        CloudKitManager.shared.fetchTripShareReceiverWith(firstName: firstName) { (user) in
             guard let user = user else { return }
             SharedTripsController.shared.addSharedIDTo(trip: trip, forUser: user)
             DispatchQueue.main.async {

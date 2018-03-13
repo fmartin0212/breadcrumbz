@@ -53,8 +53,7 @@ class CreateAccountViewController: UIViewController {
             })
         }
         
-        guard let username = usernameTextField.text,
-            let firstName = firstNameTextField.text,
+        guard let firstName = firstNameTextField.text,
             let lastName = lastNameTextField.text,
             let phoneNumber = phoneNumberTextField.text,
             let placeholderProfilePicture = UIImage(named: "userImage256")
@@ -62,7 +61,7 @@ class CreateAccountViewController: UIViewController {
         
         let placeholderProfilePictureAsData = UIImagePNGRepresentation(placeholderProfilePicture)
         
-        UserController.shared.createNewUserWith(username: username, firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, profilePicture: placeholderProfilePictureAsData) { (success) in
+        UserController.shared.createNewUserWith(firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, profilePicture: placeholderProfilePictureAsData) { (success) in
             DispatchQueue.main.async {
                 self.dismiss(animated: true, completion: nil)
             }

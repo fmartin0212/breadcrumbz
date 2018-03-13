@@ -12,7 +12,6 @@ import Contacts
 
 class User {
     
-    let username: String
     let firstName: String?
     let lastName: String?
     let phoneNumber: String?
@@ -32,8 +31,7 @@ class User {
         return fileURL
     }
     
-    init(username: String, firstName: String?, lastName: String?, phoneNumber: String?, profilePicture: Data?, appleUserRef: CKReference) {
-        self.username = username
+    init(firstName: String?, lastName: String?, phoneNumber: String?, profilePicture: Data?, appleUserRef: CKReference) {
         self.firstName = firstName
         self.lastName = lastName
         self.phoneNumber = phoneNumber
@@ -44,8 +42,7 @@ class User {
     // Turn record into User
     init?(ckRecord: CKRecord) {
         
-        guard let username = ckRecord["username"] as? String,
-            let phoneNumber = ckRecord["phoneNumber"] as? String,
+        guard let phoneNumber = ckRecord["phoneNumber"] as? String,
             let firstName = ckRecord["firstName"] as? String,
             let lastName = ckRecord["lastName"] as? String,
             let profilePicture = ckRecord["profilePictureAsset"] as? CKAsset,
@@ -54,7 +51,6 @@ class User {
         
         let photoData = try? Data(contentsOf: profilePicture.fileURL)
         
-        self.username = username
         self.firstName = firstName
         self.lastName = lastName
         self.phoneNumber = phoneNumber
@@ -75,7 +71,6 @@ extension CKRecord {
         
         self.init(recordType: "User", recordID: recordID)
         
-        self.setValue(user.username, forKey: "username")
         self.setValue(user.firstName, forKey: "firstName")
         self.setValue(user.lastName, forKey: "lastName")
         self.setValue(user.phoneNumber, forKey: "phoneNumber")

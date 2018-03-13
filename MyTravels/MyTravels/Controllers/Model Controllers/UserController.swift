@@ -15,7 +15,7 @@ class UserController {
     
     var loggedInUser: User?
     
-    func createNewUserWith(username: String, firstName: String?, lastName: String?, phoneNumber: String?, profilePicture: Data?, completion: @escaping (Bool) -> Void) {
+    func createNewUserWith(firstName: String?, lastName: String?, phoneNumber: String?, profilePicture: Data?, completion: @escaping (Bool) -> Void) {
         
         CKContainer.default().fetchUserRecordID { (recordID, error) in
             if let error = error {
@@ -27,7 +27,7 @@ class UserController {
             
             let appleUserRef = CKReference(recordID: recordID, action: .none)
             
-            let newUser = User(username: username, firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, profilePicture: profilePicture, appleUserRef: appleUserRef)
+            let newUser = User(firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, profilePicture: profilePicture, appleUserRef: appleUserRef)
             
             guard let ckRecord = CKRecord(user: newUser) else { completion(false) ; return }
             

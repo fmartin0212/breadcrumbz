@@ -229,7 +229,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
                     let placeArray = array as? [[Place]]
                     else { return }
                 
-                let place = placeArray[indexPath.section][indexPath.row]
+                let place = placeArray[indexPath.section - 1][indexPath.row]
                 destinationVC.trip = trip
                 destinationVC.place = place
             }

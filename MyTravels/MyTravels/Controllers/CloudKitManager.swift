@@ -54,10 +54,12 @@ class CloudKitManager {
             var usernames = [String]()
             guard let records = records else { completion([]) ; return }
             for record in records {
-                guard let user = User(ckRecord: record) else { completion([]) ; return }
-                usernames.append(user.username)
+                guard let user = User(ckRecord: record),
+                    let firstName = user.firstName
+                    else { completion([]) ; return }
+                usernames.append(firstName)
             }
-           completion(usernames)
+            completion(usernames)
         }
     }
     
@@ -205,8 +207,8 @@ class CloudKitManager {
     
     
     // Sharing
-    func fetchTripShareReceiverWith(username: String, completion: @escaping (User?) -> Void) {
-        let predicate = NSPredicate(format: "username == %@", username)
+    func fetchTripShareReceiverWith(firstName: String, completion: @escaping (User?) -> Void) {
+        let predicate = NSPredicate(format: "firstName == %@", firstName)
         let query = CKQuery(recordType: "User", predicate: predicate)
         publicDB.perform(query, inZoneWith: nil) { (records, error) in
             if let error = error {
