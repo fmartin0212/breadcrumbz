@@ -360,14 +360,36 @@
                         <sections>
                             <tableViewSection id="RLf-fq-Yl8">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="51" id="Xui-Mi-zNL">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="51" id="GG3-6i-j4H">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GG3-6i-j4H" id="hWk-yh-fVR">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name of trip (e.g. Backpacking)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7AL-Ol-FsK">
+                                                    <rect key="frame" x="13" y="0.0" width="362" height="50.5"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="7AL-Ol-FsK" secondAttribute="bottom" id="DKu-LH-uHz"/>
+                                                <constraint firstItem="7AL-Ol-FsK" firstAttribute="top" secondItem="hWk-yh-fVR" secondAttribute="top" id="RIx-hU-uxZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="7AL-Ol-FsK" secondAttribute="trailing" id="ahu-dL-ThV"/>
+                                                <constraint firstItem="7AL-Ol-FsK" firstAttribute="leading" secondItem="hWk-yh-fVR" secondAttribute="leading" constant="13" id="z5l-Kd-J5y"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="51" id="Xui-Mi-zNL">
+                                        <rect key="frame" x="0.0" y="51" width="375" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xui-Mi-zNL" id="JFH-Tq-2t5">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name of trip (e.g. Paris)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pRN-Qt-82u">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location of trip (e.g. Europe)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pRN-Qt-82u">
                                                     <rect key="frame" x="13" y="0.0" width="362" height="50.5"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
@@ -382,8 +404,30 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="70" id="C4D-d2-GLN">
+                                        <rect key="frame" x="0.0" y="102" width="375" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="C4D-d2-GLN" id="By9-WI-Gto">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Brief description of you trip (e.g. ??) OPTIONAL" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hYR-K8-KfO">
+                                                    <rect key="frame" x="9" y="0.0" width="366" height="69.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="hYR-K8-KfO" firstAttribute="top" secondItem="By9-WI-Gto" secondAttribute="top" id="EVb-sq-SZh"/>
+                                                <constraint firstAttribute="trailing" secondItem="hYR-K8-KfO" secondAttribute="trailing" id="Lwr-hl-JcA"/>
+                                                <constraint firstAttribute="bottom" secondItem="hYR-K8-KfO" secondAttribute="bottom" id="s0d-Xm-qD3"/>
+                                                <constraint firstItem="hYR-K8-KfO" firstAttribute="leading" secondItem="By9-WI-Gto" secondAttribute="leading" constant="9" id="yV9-RL-MaC"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="51" id="ecZ-Wv-Q5w">
-                                        <rect key="frame" x="0.0" y="51" width="375" height="51"/>
+                                        <rect key="frame" x="0.0" y="172" width="375" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ecZ-Wv-Q5w" id="xxd-Sb-PFu">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
@@ -409,7 +453,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="51" id="2Kj-8x-6Qg">
-                                        <rect key="frame" x="0.0" y="102" width="375" height="51"/>
+                                        <rect key="frame" x="0.0" y="223" width="375" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Kj-8x-6Qg" id="hQc-d9-0NR">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
@@ -435,7 +479,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="148" id="S8r-eB-ePF">
-                                        <rect key="frame" x="0.0" y="153" width="375" height="148"/>
+                                        <rect key="frame" x="0.0" y="274" width="375" height="148"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S8r-eB-ePF" id="nQa-jX-WZ8">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="147.5"/>
@@ -503,7 +547,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2777" y="-965"/>
+            <point key="canvasLocation" x="2776.8000000000002" y="-965.6671664167917"/>
         </scene>
         <!--Choose Date View Controller-->
         <scene sceneID="1SP-vW-oew">

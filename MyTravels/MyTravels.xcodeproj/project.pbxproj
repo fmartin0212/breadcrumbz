@@ -245,9 +245,8 @@
 		B7C10CDA20214F5400818430 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B7F75C0520577C2900C876A0 /* Onboarding */,
 				B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */,
-				B7C10CB62020D19500818430 /* CreateAccountViewController.swift */,
+				B7F75C0520577C2900C876A0 /* Onboarding */,
 				B71E0C72202CC20100125396 /* Tabs */,
 				B71E0C71202CC1A100125396 /* Popup ViewControllers */,
 				B71E0C70202CC13600125396 /* Custom Cells */,
@@ -309,6 +308,7 @@
 				B7F75C06205842E600C876A0 /* OnboardingPageViewController.swift */,
 				B7F75C082058521C00C876A0 /* ExplanationViewController.swift */,
 				B7F75C0A2058523300C876A0 /* FeaturesViewController.swift */,
+				B7C10CB62020D19500818430 /* CreateAccountViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";

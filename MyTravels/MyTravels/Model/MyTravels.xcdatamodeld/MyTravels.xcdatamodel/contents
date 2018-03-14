@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C205" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D102" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Photo" representedClassName="Photo" syncable="YES">
         <attribute name="cloudKitRecordIDString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -18,9 +18,11 @@
     </entity>
     <entity name="Trip" representedClassName="Trip" syncable="YES" codeGenerationType="category">
         <attribute name="cloudKitRecordIDString" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="endDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="location" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="startDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="tripDescription" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="photo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Photo" inverseName="trip" inverseEntity="Photo" syncable="YES"/>
         <relationship name="places" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Place" inverseName="trip" inverseEntity="Place" syncable="YES"/>
         <relationship name="usersSharedWithRecordIDs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UsersSharedWithRecordIDs" inverseName="trip" inverseEntity="UsersSharedWithRecordIDs" syncable="YES"/>
@@ -33,7 +35,7 @@
     <elements>
         <element name="Photo" positionX="-270" positionY="36" width="128" height="105"/>
         <element name="Place" positionX="-99" positionY="117" width="128" height="165"/>
-        <element name="Trip" positionX="-452" positionY="117" width="128" height="148"/>
+        <element name="Trip" positionX="-452" positionY="117" width="128" height="178"/>
         <element name="UsersSharedWithRecordIDs" positionX="-279" positionY="467" width="128" height="88"/>
     </elements>
 </model>
