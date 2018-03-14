@@ -40,11 +40,11 @@ class TripDetailTableViewCell: UITableViewCell {
     }
     
     func updateSharedTripDetail() {
-        guard let sharedTrip = sharedTrip
-        else { return }
+        guard let sharedTrip = sharedTrip else { return }
+        
         tripLocationLabel.text = sharedTrip.location
         tripStartDateLabel.text = "\(shortDateString(date: sharedTrip.startDate as Date)) -"
-        tripStartDateLabel.text = "\(shortDateString(date: sharedTrip.endDate as Date)) -"
+        tripEndDateLabel.text = "\(shortDateString(date: sharedTrip.endDate as Date))"
         
     }
     

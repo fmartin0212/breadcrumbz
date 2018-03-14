@@ -104,23 +104,19 @@ class SharedTripDetailViewController: UIViewController {
         tableView.reloadData()
         
     }
-    
-    func updateViewsForTrip() {
-        
-    }
-    
+
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "toPlaceDetailTableViewController" {
+        if segue.identifier == "toSharedPlaceDetailTableViewController" {
            
             guard let sharedTrip = sharedTrip,
                 let sharedPlaces = sharedPlaces,
-                let destinationVC = segue.destination as? PlaceDetailTableViewController,
+                let destinationVC = segue.destination as? SharedPlaceDetailTableViewController,
                 let indexPath = tableView.indexPathForSelectedRow
                 else { return }
             
-            let sharedPlace = sharedPlaces[indexPath.section][indexPath.row]
+            let sharedPlace = sharedPlaces[indexPath.section - 1][indexPath.row]
             destinationVC.sharedTrip = sharedTrip
             destinationVC.sharedPlace = sharedPlace
             
@@ -215,15 +211,6 @@ extension SharedTripDetailViewController: UITableViewDelegate, UITableViewDataSo
         
         // FIXME: - User should not be able to edit at all. Look into how to disable.
         
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if indexPath.section > 0 {
-            return 106
-        }
-        
-        return 94
     }
     
 }
