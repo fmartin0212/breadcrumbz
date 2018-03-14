@@ -11,22 +11,8 @@ import UIKit
 class PlaceDetailTableViewController: UITableViewController {
 
     // MARK: Properties
-    var sharedPlaceView: Bool?
     var trip: Trip?
-    var place: Place? {
-        didSet {
-            sharedPlaceView = false
-        }
-    }
-    
-    var sharedTrip: SharedTrip? 
-    
-    var sharedPlace: SharedPlace? {
-        didSet {
-            sharedPlaceView = true
-        }
-    }
-    
+    var place: Place?
     var photos: [Photo] = []
     
     // MARK: - IBOutlets
@@ -55,15 +41,7 @@ class PlaceDetailTableViewController: UITableViewController {
             updateViews()
         }
         
-        if let sharedPlace = sharedPlace {
-            self.title = sharedPlace.name
-            updateViewsForSharedPlace()
-            
-        }
-        
-        
         tableView.contentOffset = CGPoint(x: 30, y: 30)
-        
         
     }
     
@@ -107,37 +85,6 @@ class PlaceDetailTableViewController: UITableViewController {
         }
     }
     
-    func updateViewsForSharedPlace() {
-        guard let sharedPlace = sharedPlace,
-            let photos = sharedPlace.photos
-            else { return }
-            
-            if photos.count > 0 {
-                guard let photo = photos.first,
-                    let image = UIImage(data: photo) else { return }
-                placeMainPhotoImageView.image = image
-                placeNameLabel.text = sharedPlace.name
-                placeAddressLabel.text = sharedPlace.address
-                updateStarsImageViews(sharedPlace: sharedPlace)
-            } else {
-                var placeholderImage = UIImage()
-                if sharedPlace.type == "Lodging" {
-                    guard let lodgingPlaceholderImage = UIImage(named: "Lodging") else { return }
-                    placeholderImage = lodgingPlaceholderImage
-                } else if sharedPlace.type == "Restaurant" {
-                    guard let restaurantPlaceholderImage = UIImage(named: "Restaurant") else { return }
-                    placeholderImage = restaurantPlaceholderImage
-                } else if sharedPlace.type == "Activity" {
-                    guard let activityPlaceholderImage = UIImage(named: "Activity") else { return }
-                    placeholderImage = activityPlaceholderImage
-                }
-                placeMainPhotoImageView.image = placeholderImage
-                placeNameLabel.text = sharedPlace.name
-                placeAddressLabel.text = sharedPlace.address
-                updateStarsImageViews(sharedPlace: sharedPlace)
-            }
-    }
-    
     func updateStarsImageViews(place: Place) {
         
         let starImageViewsArray = [starOne, starTwo, starThree, starFour, starFive]
@@ -162,30 +109,6 @@ class PlaceDetailTableViewController: UITableViewController {
         
     }
     
-    func updateStarsImageViews(sharedPlace: SharedPlace) {
-        guard let sharedPlaceRating = sharedPlace.rating else { return }
-        let starImageViewsArray = [starOne, starTwo, starThree, starFour, starFive]
-        
-        if sharedPlace.rating == 0 {
-            for starImageView in starImageViewsArray {
-                starImageView?.image = UIImage(named: "star-clear-16")
-            }
-        } else if Int(sharedPlaceRating) > 0 {
-            var i = 0
-            
-            while i < Int(sharedPlaceRating) {
-                starImageViewsArray[i]?.image = UIImage(named: "star-black-16")
-                i += 1
-            }
-            
-            while i <= starImageViewsArray.count - 1 {
-                starImageViewsArray[i]?.image = UIImage(named: "star-clear-16")
-                i += 1
-            }
-        }
-        
-    }
-    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -197,31 +120,19 @@ class PlaceDetailTableViewController: UITableViewController {
             destinationVC.place = place
         }
     }
-
+    
 }
 
 extension PlaceDetailTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int 
-    {
-        if sharedPlaceView == false {
-            
-            return photos.count
-        }
-        
-        guard let sharedPlace = sharedPlace,
-        let sharedPlacePhotos = sharedPlace.photos
-        else { return 0 }
-        
-        return sharedPlacePhotos.count
-        
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if sharedPlaceView == false {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
-            print (photos.count)
+
             guard let photo = photos[indexPath.row].photo
                 else { return UICollectionViewCell() }
             
@@ -229,16 +140,5 @@ extension PlaceDetailTableViewController: UICollectionViewDelegate, UICollection
             
             return cell
         }
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
-        
-        guard let sharedPlace = sharedPlace,
-            let sharedPlacePhotos = sharedPlace.photos
-            else { return UICollectionViewCell() }
-        
-            cell.sharedPlacePhoto = sharedPlacePhotos[indexPath.row]
-        
-        return cell
-    }
     
 }
