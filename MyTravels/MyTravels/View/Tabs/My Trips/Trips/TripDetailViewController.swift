@@ -37,32 +37,34 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         
         super.viewDidLoad()
         
+        // Set navigation bar title/properties
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .clear
-        // Set navigation bar title/properties
+        navigationController?.navigationBar.prefersLargeTitles = false
+        
         if let trip = trip {
             
-        self.title = trip.location
-        
-        // Set trip photo
-        var tripPhoto = UIImage()
-        guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
-        tripPhoto = tripPhotoPlaceholderImage
-        if let photo = trip.photo?.photo as Data? {
-            guard let image = UIImage(data: photo) else { return }
-            tripPhoto = image
-        }
-    
-        tripPhotoImageView.image = tripPhoto
-        
+//            self.title = trip.location
+            
+            // Set trip photo
+            var tripPhoto = UIImage()
+            guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
+            tripPhoto = tripPhotoPlaceholderImage
+            if let photo = trip.photo?.photo as Data? {
+                guard let image = UIImage(data: photo) else { return }
+                tripPhoto = image
+            }
+            
+            tripPhotoImageView.image = tripPhoto
+            
         }
         
         if let sharedTrip = sharedTrip {
-    
+            
             self.title = sharedTrip.location
-        // Set shared trip photo
+            // Set shared trip photo
             var tripPhoto = UIImage()
             guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
             tripPhoto = tripPhotoPlaceholderImage

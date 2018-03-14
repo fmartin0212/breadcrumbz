@@ -17,9 +17,9 @@ class TripTableViewCell: UITableViewCell {
         }
     }
     
-    var localTrip: SharedTrip? {
+    var sharedTrip: SharedTrip? {
         didSet {
-            updateViewsLocalTrip()
+            updateViewsForSharedTrip()
         }
     }
     
@@ -58,27 +58,27 @@ class TripTableViewCell: UITableViewCell {
     
     }
     
-    func updateViewsLocalTrip() {
+    func updateViewsForSharedTrip() {
         
         tripImageView.layer.cornerRadius = 4
         tripImageView.clipsToBounds = true
         
-        guard let localTrip = localTrip else { return }
+        guard let sharedTrip = sharedTrip else { return }
         
         var tripPhoto = UIImage()
         guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
         tripPhoto = tripPhotoPlaceholderImage
         
-        if let photoData = localTrip.photoData {
+        if let photoData = sharedTrip.photoData {
             guard let photo = UIImage(data: photoData) else { return }
             tripPhoto = photo
         }
         
         tripImageView.image = tripPhoto
-        tripNameLabel.text = localTrip.location
+        tripNameLabel.text = sharedTrip.location
         
-        tripStartDateLabel.text = "\(shortDateString(date: localTrip.startDate as Date)) -"
-        tripEndDateLabel.text = shortDateString(date: localTrip.endDate as Date)
+        tripStartDateLabel.text = "\(shortDateString(date: sharedTrip.startDate as Date)) -"
+        tripEndDateLabel.text = "\(shortDateString(date: sharedTrip.endDate as Date))"
     }
     
     func shortDateString(date: Date) -> String {

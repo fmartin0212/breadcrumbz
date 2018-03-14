@@ -51,6 +51,10 @@
 		B7F75C07205842E600C876A0 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C06205842E600C876A0 /* OnboardingPageViewController.swift */; };
 		B7F75C092058521C00C876A0 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C082058521C00C876A0 /* ExplanationViewController.swift */; };
 		B7F75C0B2058523300C876A0 /* FeaturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C0A2058523300C876A0 /* FeaturesViewController.swift */; };
+		B7F75C0D205871ED00C876A0 /* SharedTripsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C0C205871ED00C876A0 /* SharedTripsListViewController.swift */; };
+		B7F75C112058726900C876A0 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F75C102058726900C876A0 /* Profile.storyboard */; };
+		B7F75C152058769500C876A0 /* SharedTripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C142058769500C876A0 /* SharedTripDetailViewController.swift */; };
+		B7F75C172058771900C876A0 /* SharedPlaceDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C162058771900C876A0 /* SharedPlaceDetailTableViewController.swift */; };
 		B7F92BCF20291DEE0021A8CA /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F92BCE20291DEE0021A8CA /* PhotoController.swift */; };
 		B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -104,6 +108,10 @@
 		B7F75C06205842E600C876A0 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		B7F75C082058521C00C876A0 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewController.swift; sourceTree = "<group>"; };
 		B7F75C0A2058523300C876A0 /* FeaturesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesViewController.swift; sourceTree = "<group>"; };
+		B7F75C0C205871ED00C876A0 /* SharedTripsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripsListViewController.swift; sourceTree = "<group>"; };
+		B7F75C102058726900C876A0 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		B7F75C142058769500C876A0 /* SharedTripDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripDetailViewController.swift; sourceTree = "<group>"; };
+		B7F75C162058771900C876A0 /* SharedPlaceDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPlaceDetailTableViewController.swift; sourceTree = "<group>"; };
 		B7F92BCE20291DEE0021A8CA /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
 		B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		D8CD1BB41D947506D15EDEB5 /* Pods-MyTravels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTravels.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels.release.xcconfig"; sourceTree = "<group>"; };
@@ -152,26 +160,24 @@
 			path = "Popup ViewControllers";
 			sourceTree = "<group>";
 		};
-		B71E0C72202CC20100125396 /* Trip ViewControllers */ = {
+		B71E0C72202CC20100125396 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				B7D652422027F5C300E975F1 /* CreateTripTableViewController.swift */,
-				B7C10CCA2020EDB400818430 /* TripsListViewController.swift */,
+				B7F75C0F2058720F00C876A0 /* My Trips */,
+				B7F75C0E205871FA00C876A0 /* Shared */,
 				B796DD39204B5F9500CAF093 /* MapViewController.swift */,
-				B7C10CE1202226ED00818430 /* TripDetailViewController.swift */,
-				B73926102035255A0050B580 /* UsernameSearchViewController.swift */,
 			);
-			path = "Trip ViewControllers";
+			path = Tabs;
 			sourceTree = "<group>";
 		};
-		B71E0C73202CC20D00125396 /* Place ViewControllers */ = {
+		B71E0C73202CC20D00125396 /* Places */ = {
 			isa = PBXGroup;
 			children = (
 				B7D6523A202514C700E975F1 /* CreateNewPlaceTableViewController.swift */,
 				B7D652402026DF0E00E975F1 /* PlaceDetailTableViewController.swift */,
 				B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */,
 			);
-			path = "Place ViewControllers";
+			path = Places;
 			sourceTree = "<group>";
 		};
 		B745843F203B7B1A00A686E7 /* Model outside of MOC */ = {
@@ -242,12 +248,12 @@
 				B7F75C0520577C2900C876A0 /* Onboarding */,
 				B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */,
 				B7C10CB62020D19500818430 /* CreateAccountViewController.swift */,
-				B71E0C72202CC20100125396 /* Trip ViewControllers */,
-				B71E0C73202CC20D00125396 /* Place ViewControllers */,
+				B71E0C72202CC20100125396 /* Tabs */,
 				B71E0C71202CC1A100125396 /* Popup ViewControllers */,
 				B71E0C70202CC13600125396 /* Custom Cells */,
 				B7F75C0120577BB200C876A0 /* Onboarding.storyboard */,
 				B7C10CB82020D19500818430 /* Main.storyboard */,
+				B7F75C102058726900C876A0 /* Profile.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -305,6 +311,52 @@
 				B7F75C0A2058523300C876A0 /* FeaturesViewController.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		B7F75C0E205871FA00C876A0 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B7F75C132058761E00C876A0 /* Shared Trips */,
+				B7F75C182058771E00C876A0 /* Shared Places */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		B7F75C0F2058720F00C876A0 /* My Trips */ = {
+			isa = PBXGroup;
+			children = (
+				B7F75C12205875FF00C876A0 /* Trips */,
+				B71E0C73202CC20D00125396 /* Places */,
+			);
+			path = "My Trips";
+			sourceTree = "<group>";
+		};
+		B7F75C12205875FF00C876A0 /* Trips */ = {
+			isa = PBXGroup;
+			children = (
+				B7D652422027F5C300E975F1 /* CreateTripTableViewController.swift */,
+				B7C10CCA2020EDB400818430 /* TripsListViewController.swift */,
+				B7C10CE1202226ED00818430 /* TripDetailViewController.swift */,
+				B73926102035255A0050B580 /* UsernameSearchViewController.swift */,
+			);
+			path = Trips;
+			sourceTree = "<group>";
+		};
+		B7F75C132058761E00C876A0 /* Shared Trips */ = {
+			isa = PBXGroup;
+			children = (
+				B7F75C0C205871ED00C876A0 /* SharedTripsListViewController.swift */,
+				B7F75C142058769500C876A0 /* SharedTripDetailViewController.swift */,
+			);
+			path = "Shared Trips";
+			sourceTree = "<group>";
+		};
+		B7F75C182058771E00C876A0 /* Shared Places */ = {
+			isa = PBXGroup;
+			children = (
+				B7F75C162058771900C876A0 /* SharedPlaceDetailTableViewController.swift */,
+			);
+			path = "Shared Places";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,6 +431,7 @@
 			files = (
 				B7C10CC22020D19500818430 /* LaunchScreen.storyboard in Resources */,
 				B7C10CBF2020D19500818430 /* Assets.xcassets in Resources */,
+				B7F75C112058726900C876A0 /* Profile.storyboard in Resources */,
 				B7C10CBA2020D19500818430 /* Main.storyboard in Resources */,
 				B7F75C0220577BB200C876A0 /* Onboarding.storyboard in Resources */,
 			);
@@ -472,6 +525,7 @@
 				B7C10CBD2020D19500818430 /* MyTravels.xcdatamodeld in Sources */,
 				B7C10CCB2020EDB400818430 /* TripsListViewController.swift in Sources */,
 				B7C10CE2202226ED00818430 /* TripDetailViewController.swift in Sources */,
+				B7F75C0D205871ED00C876A0 /* SharedTripsListViewController.swift in Sources */,
 				B7D652412026DF0E00E975F1 /* PlaceDetailTableViewController.swift in Sources */,
 				B7C10CB72020D19500818430 /* CreateAccountViewController.swift in Sources */,
 				B7F75C092058521C00C876A0 /* ExplanationViewController.swift in Sources */,
@@ -481,12 +535,14 @@
 				B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */,
 				B7C10CD12020FD5500818430 /* PlaceController.swift in Sources */,
 				B7D6523B202514C700E975F1 /* CreateNewPlaceTableViewController.swift in Sources */,
+				B7F75C172058771900C876A0 /* SharedPlaceDetailTableViewController.swift in Sources */,
 				B7DA1B7B202E2A170007497A /* CloudKitManager.swift in Sources */,
 				B7DA1B76202E164C0007497A /* CloudKitSyncable.swift in Sources */,
 				B7C10CCD2020EFB000818430 /* TripTableViewCell.swift in Sources */,
 				B7DA1B71202E140C0007497A /* Place+CoreDataClass.swift in Sources */,
 				B7DA1B72202E140C0007497A /* Place+CoreDataProperties.swift in Sources */,
 				B73926112035255A0050B580 /* UsernameSearchViewController.swift in Sources */,
+				B7F75C152058769500C876A0 /* SharedTripDetailViewController.swift in Sources */,
 				B7D652452027FB4B00E975F1 /* ChooseDateViewController.swift in Sources */,
 				B796DD3A204B5F9500CAF093 /* MapViewController.swift in Sources */,
 				B7D6523D202620E700E975F1 /* PlaceTableViewCell.swift in Sources */,

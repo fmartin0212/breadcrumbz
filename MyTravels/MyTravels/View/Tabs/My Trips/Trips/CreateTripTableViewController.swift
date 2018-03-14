@@ -37,6 +37,8 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
         
         imagePickerController.allowsEditing = true
         
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
     }
     
     // MARK: - IBActions

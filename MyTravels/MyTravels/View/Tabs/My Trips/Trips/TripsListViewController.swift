@@ -16,30 +16,13 @@ class TripsListViewController: UIViewController {
     
     // MARK: - Properties
     var trips: [Trip]?
-    var tripsSharedWithUser = [SharedTrip]()
-    var myTripsSelected: Bool {
-        if segementedController.selectedSegmentIndex == 0 {
-            return true
-        }
-        else if segementedController.selectedSegmentIndex == 1 {
-            return false
-        }
-        return true
-    }
     
     // MARK: - IBOutlets
-    @IBOutlet var addTripBarButtonItem: UIBarButtonItem!
-    @IBOutlet weak var segementedController: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-    // FIXME: - Is this needed?
-    @IBOutlet var visualEffectView: UIVisualEffectView!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        // FIXME: - Is this needed?
-        visualEffectView.alpha = 0
         
         // Set tableview properties
         tableView.separatorStyle = .none
@@ -60,7 +43,8 @@ class TripsListViewController: UIViewController {
         }
         
         // Set navigation bar properties
-        self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedStringKey.font: UIFont(name: "Avenir Next", size: 20)!]
+        navigationController?.navigationBar.prefersLargeTitles = true
+//        self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedStringKey.font: UIFont(name: "Avenir Next", size: 20)!]
         
         // Fetch all of the trips/places from Core Data and set them to local variables
         do {
@@ -79,47 +63,10 @@ class TripsListViewController: UIViewController {
             placesArray.append(places)
         }
         
-        // FIXME: - Remove once in correct places
-//        let contactStore = CNContactStore()
-//        let fetchRequest = CNContactFetchRequest(keysToFetch: [CNContactGivenNameKey as CNKeyDescriptor, CNContactFamilyNameKey as CNKeyDescriptor, CNContactPhoneNumbersKey as CNKeyDescriptor])
-//        try? contactStore.enumerateContacts(with: fetchRequest) { (contact, _) in
-//            DispatchQueue.main.async {
-//            let firstName = contact.givenName
-//            let lastName = contact.familyName
-//            guard let phoneNumber = contact.phoneNumbers.first?.value.stringValue else { return }
-////            print("CONTACT INFORMATION: \(firstName) \(lastName),\(phoneNumber)")
-//                var phoneNumberArray = [String]()
-//                for character in phoneNumber.unicodeScalars {
-//                    let characterAsString = String(character)
-//                    if character.value >= 48 && character.value < 58 {
-//                        phoneNumberArray.append(characterAsString)
-//
-//                    }
-//
-//                }
-//                if Int(phoneNumberArray.first!) == 1 {
-//                    phoneNumberArray.remove(at: 0)
-//                }
-//                print("\(firstName), \(lastName), \(phoneNumberArray)")
-//            }
-//        }
-        
     }
-    
-    // MARK: - IBActions
-    @IBAction func segementedControllerTapped(_ sender: UISegmentedControl) {
-        
-        if myTripsSelected == true {
-            self.navigationItem.rightBarButtonItem = addTripBarButtonItem
-            tableView.reloadData()
-        }
-        
-        if myTripsSelected == false {
-            self.navigationItem.rightBarButtonItem = nil
-            tableView.reloadData()
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
-    
     // MARK: - Functions
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
@@ -128,26 +75,13 @@ class TripsListViewController: UIViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if myTripsSelected == true {
-            
-            if segue.identifier == "toTripDetailViewSegue" {
-                guard let destinationVC = segue.destination as? TripDetailViewController,
-                    let trips = TripController.shared.frc.fetchedObjects,
-                    let indexPath = tableView.indexPathForSelectedRow
-                    else { return }
-                let trip = trips[indexPath.row]
-                destinationVC.trip = trip
-            }
-        } else {
-            
-            if segue.identifier == "toTripDetailViewSegue" {
-                guard let destinationVC = segue.destination as? TripDetailViewController,
-                    let indexPath = tableView.indexPathForSelectedRow
-                    else { return }
-                
-                let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
-                destinationVC.sharedTrip = sharedTrip
-            }
+        if segue.identifier == "toTripDetailViewSegue" {
+            guard let destinationVC = segue.destination as? TripDetailViewController,
+                let trips = TripController.shared.frc.fetchedObjects,
+                let indexPath = tableView.indexPathForSelectedRow
+                else { return }
+            let trip = trips[indexPath.row]
+            destinationVC.trip = trip
         }
     }
     
@@ -156,33 +90,19 @@ class TripsListViewController: UIViewController {
 extension TripsListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
-        if myTripsSelected == true {
-            guard let trips = TripController.shared.frc.fetchedObjects else { return 0 }
-            return trips.count
-        }
-        if myTripsSelected == false {
-            return SharedTripsController.shared.sharedTrips.count
-        }
-        return 0
-        
+        guard let trips = TripController.shared.frc.fetchedObjects else { return 0 }
+        return trips.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "TripCell", for: indexPath) as! TripTableViewCell
         cell.selectionStyle = .none
         
-        if myTripsSelected == true {
-            guard let trips = TripController.shared.frc.fetchedObjects else { return UITableViewCell() }
-            let trip = trips[indexPath.row]
-            let photo = trip.photo
-            cell.trip = trip
-        } else if myTripsSelected == false {
-            let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
-            cell.localTrip = sharedTrip
-        }
+        guard let trips = TripController.shared.frc.fetchedObjects else { return UITableViewCell() }
+        let trip = trips[indexPath.row]
+        cell.trip = trip
+        
         return cell
         
     }
