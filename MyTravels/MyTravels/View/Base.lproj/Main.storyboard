@@ -312,7 +312,7 @@
                                             <outlet property="tripDatesLabel" destination="2Sq-P2-Q4o" id="cMZ-d2-Ux0"/>
                                             <outlet property="tripEndDateLabel" destination="NYX-8s-QuH" id="dGb-Da-7tn"/>
                                             <outlet property="tripImageView" destination="90W-Tw-ZA1" id="Blc-IW-Lbb"/>
-                                            <outlet property="tripNameLabel" destination="Sdr-4h-zLU" id="pXI-pW-AE4"/>
+                                            <outlet property="tripLocationLabel" destination="Sdr-4h-zLU" id="pXI-pW-AE4"/>
                                             <outlet property="tripStartDateLabel" destination="2Sq-P2-Q4o" id="hMb-sI-o3V"/>
                                             <segue destination="MYA-cM-QJD" kind="show" identifier="toTripDetailViewSegue" id="n5g-fK-KQq"/>
                                         </connections>
@@ -639,7 +639,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripDetailCell" rowHeight="134" id="Moq-Z9-9uQ" customClass="TripDetailTableViewCell" customModule="MyTravels" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TripDetailCell" rowHeight="134" id="Moq-Z9-9uQ" customClass="TripDetailTableViewCell" customModule="MyTravels" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="429.5" width="375" height="134"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Moq-Z9-9uQ" id="wkz-Wv-5uJ">
@@ -2140,7 +2140,7 @@
                                             <outlet property="tripDatesLabel" destination="m7X-4q-Ns9" id="alM-qn-KQD"/>
                                             <outlet property="tripEndDateLabel" destination="mZC-Ac-bSb" id="Qgg-R6-Jql"/>
                                             <outlet property="tripImageView" destination="ln1-ha-ZS3" id="ZGB-TM-0bh"/>
-                                            <outlet property="tripNameLabel" destination="Mzj-e1-chN" id="rAT-aC-37d"/>
+                                            <outlet property="tripLocationLabel" destination="Mzj-e1-chN" id="rAT-aC-37d"/>
                                             <outlet property="tripStartDateLabel" destination="m7X-4q-Ns9" id="vSm-Vf-LhL"/>
                                             <segue destination="c18-LH-a4l" kind="show" identifier="toSharedTripDetailViewSegue" id="zCC-ep-TBb"/>
                                         </connections>
@@ -2208,7 +2208,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SharedTripDetailCell" rowHeight="127" id="9MZ-BI-QHA" customClass="SharedTripDetailTableViewCell" customModule="MyTravels" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SharedTripDetailCell" rowHeight="127" id="9MZ-BI-QHA" customClass="SharedTripDetailTableViewCell" customModule="MyTravels" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="429.5" width="375" height="127"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9MZ-BI-QHA" id="VRc-Lr-Iat">

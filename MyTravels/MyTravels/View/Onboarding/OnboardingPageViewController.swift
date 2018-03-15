@@ -19,8 +19,6 @@ class OnboardingPageViewController: UIPageViewController {
         dataSource = self
         delegate = self
         
-//        self.view.backgroundColor = UIColor.white
-        
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController],
                                direction: .forward,
@@ -82,7 +80,5 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
     }
 }
 
-extension OnboardingPageViewController: UIPageViewControllerDelegate {
-   
-}
+extension OnboardingPageViewController: UIPageViewControllerDelegate {}
 
