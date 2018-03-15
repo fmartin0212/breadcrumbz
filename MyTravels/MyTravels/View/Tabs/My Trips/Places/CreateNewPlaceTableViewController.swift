@@ -113,7 +113,6 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
 
 // MARK: - Tap gesture recognizers
     // Star rating
-
     @IBAction func starOneGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
         print("star one tapped")
         if rating == 1 {
@@ -245,8 +244,6 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     
     @IBAction func addresTapGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
         locationManager.requestWhenInUseAuthorization()
-        
-        
     }
     
     // MARK : - Functions
@@ -257,8 +254,6 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         }
     }
     
-    
-
     func calculateStars() {
         // FIX ME: THIS.
     }

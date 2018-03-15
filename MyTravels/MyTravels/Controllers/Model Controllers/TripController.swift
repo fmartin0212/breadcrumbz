@@ -27,9 +27,9 @@ class TripController {
     
     // MARK: - CRUD Functions
     // Create
-    func createTripWith(location: String, startDate: Date, endDate: Date) {
+    func createTripWith(name: String, location: String, tripDescription: String?, startDate: Date, endDate: Date) {
 //        let ckRecordIDString = nil
-        let trip = Trip(location: location, startDate: startDate, endDate: endDate)
+        let trip = Trip(name: name, location: location, tripDescription: tripDescription, startDate: startDate, endDate: endDate)
         self.trip = trip
         saveToPersistentStore()
         

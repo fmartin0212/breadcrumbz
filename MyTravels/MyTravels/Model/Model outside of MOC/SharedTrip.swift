@@ -11,7 +11,9 @@ import CloudKit
 
 class SharedTrip {
     
+    var name: String
     var location: String
+    var tripDescription: String?
     var startDate: Date
     var endDate: Date
     var photoData: Data?
@@ -44,7 +46,10 @@ class SharedTrip {
     
     // CloudKit - Turn a record into a Trip
     init?(record: CKRecord) {
-        guard let location = record["location"] as? String,
+        guard
+            let name = record["name"] as? String,
+            let location = record["location"] as? String,
+            let tripDescription = record["tripDescription"] as? String,
             let startDate = record["startDate"] as? Date,
             let endDate = record["endDate"] as? Date,
             let photoData = record["photo"] as? CKAsset,
@@ -53,31 +58,12 @@ class SharedTrip {
         
         let photoAssetAsData = try? Data(contentsOf: photoData.fileURL)
         
+        self.name = name
         self.location = location
+        self.tripDescription = tripDescription
         self.startDate = startDate
         self.endDate = endDate
         self.photoData = photoAssetAsData
         self.cloudKitRecordID = ckRecordID
     }
 }
-
-//// Trip into a record
-//extension CKRecord {
-//
-//    convenience init?(trip: LocalTrip) {
-//
-//        let recordID = trip.cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
-//        let photoAsset = CKAsset(fileURL: trip.temporaryPhotoURL)
-//
-//        self.init(recordType: "Trip", recordID: recordID)
-//        guard let loggedInUser = UserController.shared.loggedInUser else { return nil }
-//        let creatorReference = CKReference(recordID: loggedInUser.appleUserRef.recordID, action: .none)
-//
-//        self.setValue(trip.location, forKey: "location")
-//        self.setValue(trip.startDate, forKey: "startDate")
-//        self.setValue(trip.endDate, forKey: "endDate")
-//        self.setValue(photoAsset, forKey: "photo")
-//        self.setValue(creatorReference, forKey: "creatorReference")
-//    }
-//}
-

@@ -56,7 +56,7 @@ class TripsListViewController: UIViewController {
         guard let trips = TripController.shared.frc.fetchedObjects else { return }
         self.trips = trips
         TripController.shared.trips = trips
-        
+
         var placesArray: [[Place]] = [[]]
         for trip in trips {
             guard let places = trip.places?.allObjects as? [Place] else { return }
@@ -64,9 +64,12 @@ class TripsListViewController: UIViewController {
         }
         
     }
+    
+    // FIXME: - Not needed? Not actually solving my problem.
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
+    
     // MARK: - Functions
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)

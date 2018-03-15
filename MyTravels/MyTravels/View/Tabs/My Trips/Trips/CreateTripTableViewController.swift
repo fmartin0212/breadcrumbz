@@ -18,18 +18,19 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
     let imagePickerController = UIImagePickerController()
     
     // MARK: - IBOutlets
+
+    @IBOutlet weak var tripNameTextField: UITextField!
     @IBOutlet weak var tripLocationTextField: UITextField!
+    @IBOutlet weak var tripDescriptionTextView: UITextView!
     @IBOutlet weak var tripStartDateTextField: UITextField!
     @IBOutlet weak var tripEndDateTextField: UITextField!
-    @IBOutlet weak var tripPhotoImageView: UIImageView!  {
-        didSet {
-            
-        }
-    }
+    @IBOutlet weak var tripPhotoImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
         // Delegates
+        tripDescriptionTextView.delegate = self
         imagePickerController.delegate = self
         
         // Photo properties
@@ -37,7 +38,12 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
         
         imagePickerController.allowsEditing = true
         
+        // Navigation bar properties
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        // Trip description text view initial value
+        tripDescriptionTextView.text = "Brief description (optional)"
+        tripDescriptionTextView.textColor = #colorLiteral(red: 0.8037719131, green: 0.8036019206, blue: 0.8242246509, alpha: 1)
         
     }
     
@@ -48,8 +54,11 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         
+        // FIXME: - Add alert for name text field
         // Check to see if any required fields are empty, if so, present alertcontroller and jump out of function
-        guard let tripLocationTF = tripLocationTextField,
+        guard let tripNameTF = tripNameTextField,
+            let tripLocationTF = tripLocationTextField,
+            let tripDescriptionTV = tripDescriptionTextView,
             let tripStartDateTF = tripStartDateTextField,
             let tripEndDateTF = tripEndDateTextField
             else { return }
@@ -64,12 +73,18 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
             
         }
         
-        guard let location = tripLocationTextField.text,
+        guard let name = tripNameTextField.text,
+            let location = tripLocationTextField.text,
+            var tripDescription = tripDescriptionTextView.text,
             let startDate = startDate,
             let endDate = endDate
             else { return }
         
-        TripController.shared.createTripWith(location: location, startDate: startDate, endDate: endDate)
+        if tripDescription == "Brief description (optional)" {
+            tripDescription = ""
+        }
+        
+        TripController.shared.createTripWith(name: name, location: location, tripDescription: tripDescription, startDate: startDate, endDate: endDate)
         
         // Get newly created trip and add the photo to it
         guard let trip = TripController.shared.trip,
@@ -130,6 +145,10 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
 }
 
 extension CreateTripTableViewController: ChooseDateViewControllerDelegate {
@@ -152,4 +171,27 @@ extension CreateTripTableViewController: ChooseDateViewControllerDelegate {
     }
     
 }
+
+extension CreateTripTableViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        
+        if self.tripDescriptionTextView.text == "Brief description (optional)" {
+            self.tripDescriptionTextView.text = ""
+            self.tripDescriptionTextView.textColor = UIColor.black
+        }
+        
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        
+        if self.tripDescriptionTextView.text.isEmpty {
+            self.tripDescriptionTextView.text = "Brief description (optional)"
+            self.tripDescriptionTextView.textColor = UIColor.lightGray
+        }
+    }
+
+}
+
+
 

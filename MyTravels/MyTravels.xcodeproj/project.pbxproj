@@ -55,6 +55,7 @@
 		B7F75C112058726900C876A0 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F75C102058726900C876A0 /* Profile.storyboard */; };
 		B7F75C152058769500C876A0 /* SharedTripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C142058769500C876A0 /* SharedTripDetailViewController.swift */; };
 		B7F75C172058771900C876A0 /* SharedPlaceDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C162058771900C876A0 /* SharedPlaceDetailTableViewController.swift */; };
+		B7F75C20205A14D800C876A0 /* SharedTripDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C1F205A14D800C876A0 /* SharedTripDetailTableViewCell.swift */; };
 		B7F92BCF20291DEE0021A8CA /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F92BCE20291DEE0021A8CA /* PhotoController.swift */; };
 		B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -112,6 +113,7 @@
 		B7F75C102058726900C876A0 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		B7F75C142058769500C876A0 /* SharedTripDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripDetailViewController.swift; sourceTree = "<group>"; };
 		B7F75C162058771900C876A0 /* SharedPlaceDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPlaceDetailTableViewController.swift; sourceTree = "<group>"; };
+		B7F75C1F205A14D800C876A0 /* SharedTripDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripDetailTableViewCell.swift; sourceTree = "<group>"; };
 		B7F92BCE20291DEE0021A8CA /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
 		B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		D8CD1BB41D947506D15EDEB5 /* Pods-MyTravels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTravels.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels.release.xcconfig"; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			children = (
 				B7C10CCC2020EFB000818430 /* TripTableViewCell.swift */,
 				B711157820549859000868BD /* TripDetailTableViewCell.swift */,
+				B7F75C1F205A14D800C876A0 /* SharedTripDetailTableViewCell.swift */,
 				B7D6523C202620E700E975F1 /* PlaceTableViewCell.swift */,
 				B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */,
 			);
@@ -516,6 +519,7 @@
 				B7C10CCF2020FD4B00818430 /* TripController.swift in Sources */,
 				B7D652392024E24A00E975F1 /* TypeSelectionViewController.swift in Sources */,
 				B7DA1B78202E1AE20007497A /* User.swift in Sources */,
+				B7F75C20205A14D800C876A0 /* SharedTripDetailTableViewCell.swift in Sources */,
 				B7B0C36E203724F30031A92A /* SharedTrip.swift in Sources */,
 				B7DA1B73202E140C0007497A /* Photo+CoreDataClass.swift in Sources */,
 				B711157920549859000868BD /* TripDetailTableViewCell.swift in Sources */,

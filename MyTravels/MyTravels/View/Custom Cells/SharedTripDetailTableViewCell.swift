@@ -1,21 +1,16 @@
 //
-//  TripDetailTableViewCell.swift
+//  SharedTripDetailTableViewCell.swift
 //  MyTravels
 //
-//  Created by Frank Martin Jr on 3/10/18.
+//  Created by Frank Martin Jr on 3/14/18.
 //  Copyright © 2018 Frank Martin Jr. All rights reserved.
 //
 
 import UIKit
 
-class TripDetailTableViewCell: UITableViewCell {
-    
+class SharedTripDetailTableViewCell: UITableViewCell {
+
     // MARK: - Properties
-    var trip: Trip? {
-        didSet {
-            updateTripDetail()
-        }
-    }
     var sharedTrip: SharedTrip? {
         didSet {
             updateSharedTripDetail()
@@ -31,30 +26,14 @@ class TripDetailTableViewCell: UITableViewCell {
     @IBOutlet var tripDescriptionTextView: UITextView!
     
     // MARK: - Other Functions
-    func updateTripDetail() {
-        
-        guard let trip = trip,
-            let tripName = trip.name,
-            let startDate = trip.startDate,
-            let endDate = trip.endDate,
-            let tripDescription = trip.tripDescription
-            else { return }
-        
-        tripNameLabel.text = tripName
-        tripLocationLabel.text = trip.location
-        tripStartDateLabel.text = "\(shortDateString(date: startDate as Date)) -"
-        tripEndDateLabel.text = shortDateString(date: endDate as Date)
-//        tripDescriptionTextView.text = tripDescription
-        tripDescriptionLabel.text = tripDescription
-        
-    }
-    
     func updateSharedTripDetail() {
         guard let sharedTrip = sharedTrip else { return }
         
+        tripNameLabel.text = sharedTrip.name
         tripLocationLabel.text = sharedTrip.location
         tripStartDateLabel.text = "\(shortDateString(date: sharedTrip.startDate as Date)) -"
         tripEndDateLabel.text = "\(shortDateString(date: sharedTrip.endDate as Date))"
+        tripDescriptionLabel.text = sharedTrip.tripDescription
         
     }
     
