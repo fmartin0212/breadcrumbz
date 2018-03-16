@@ -46,8 +46,7 @@ class SharedTrip {
     
     // CloudKit - Turn a record into a Trip
     init?(record: CKRecord) {
-        guard
-            let name = record["name"] as? String,
+        guard let name = record["name"] as? String,
             let location = record["location"] as? String,
             let tripDescription = record["tripDescription"] as? String,
             let startDate = record["startDate"] as? Date,

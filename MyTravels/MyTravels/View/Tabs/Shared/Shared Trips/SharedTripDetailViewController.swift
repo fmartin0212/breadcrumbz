@@ -189,7 +189,7 @@ extension SharedTripDetailViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 && indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SharedTripDetailCell") as! SharedTripDetailTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SharedTripDetailCell") as! TripTableViewCell
             cell.sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
             cell.selectionStyle = .none
             return cell

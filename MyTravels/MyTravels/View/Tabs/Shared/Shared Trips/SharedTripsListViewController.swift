@@ -75,10 +75,6 @@ extension SharedTripsListViewController: UITableViewDelegate, UITableViewDataSou
         
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 320
-    }
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let trips = TripController.shared.frc.fetchedObjects else { return }

@@ -26,6 +26,7 @@ class TripTableViewCell: UITableViewCell {
     // MARK: - IBOutlets
     // Trip
     @IBOutlet weak var tripImageView: UIImageView!
+    @IBOutlet weak var tripNameLabel: UILabel!
     @IBOutlet weak var tripLocationLabel: UILabel!
     @IBOutlet weak var tripDatesLabel: UILabel!
     @IBOutlet weak var tripStartDateLabel: UILabel!
@@ -38,7 +39,6 @@ class TripTableViewCell: UITableViewCell {
         tripImageView.clipsToBounds = true
         
         guard let trip = trip,
-            let name = trip.name,
             let startDate = trip.startDate,
             let endDate = trip.endDate
             else { return }
@@ -51,6 +51,7 @@ class TripTableViewCell: UITableViewCell {
             tripPhoto = image
         }
         
+        tripNameLabel.text = trip.name
         tripImageView.image = tripPhoto
         tripLocationLabel.text = trip.location
         
@@ -75,7 +76,7 @@ class TripTableViewCell: UITableViewCell {
             tripPhoto = photo
         }
         
-        
+        tripNameLabel.text = sharedTrip.name
         tripImageView.image = tripPhoto
         tripLocationLabel.text = sharedTrip.location
         
