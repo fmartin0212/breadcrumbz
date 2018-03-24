@@ -22,15 +22,11 @@ class FetchViewController: UIViewController {
                     let tripListNavigationController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
                     DispatchQueue.main.async {
                         self.present(tripListNavigationController, animated: true, completion: nil)
-                        
                     }
                 })
-                
             }
-            
         }
     }
-    
 }
 
 

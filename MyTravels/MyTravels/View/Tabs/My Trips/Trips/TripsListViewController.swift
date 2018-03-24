@@ -14,7 +14,7 @@ import MapKit
 class TripsListViewController: UIViewController {
     
     // MARK: - Properties
-    var trips: [Trip]?
+//    var trips: [Trip]?
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -44,22 +44,13 @@ class TripsListViewController: UIViewController {
         // Set navigation bar properties
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        // Fetch all of the trips/places from Core Data and set them to local variables
-        do {
-            try TripController.shared.frc.performFetch()
-        } catch {
-            NSLog("Error starting fetched results controller")
-        }
-        
-        guard let trips = TripController.shared.frc.fetchedObjects else { return }
-        self.trips = trips
-        TripController.shared.trips = trips
-
-        var placesArray: [[Place]] = [[]]
-        for trip in trips {
-            guard let places = trip.places?.allObjects as? [Place] else { return }
-            placesArray.append(places)
-        }
+        TripController.shared.fetchAllTrips()
+//
+//        var placesArray: [[Place]] = [[]]
+//        for trip in TripController.shared.trips {
+//            guard let places = trip.places?.allObjects as? [Place] else { return }
+//            placesArray.append(places)
+//        }
         
     }
     

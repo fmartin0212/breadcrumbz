@@ -48,6 +48,18 @@ class TripController {
         saveToPersistentStore()
     }
     
+    func fetchAllTrips() {
+        do {
+            try frc.performFetch()
+        } catch {
+            NSLog("Error starting fetched results controller")
+        }
+        
+        guard let trips = frc.fetchedObjects else { return }
+        self.trips = trips
+        
+    }
+    
 //
 //    func deleteAll() {
 //        let moc = CoreDataStack.context
