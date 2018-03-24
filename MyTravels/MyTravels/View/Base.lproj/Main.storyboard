@@ -2424,16 +2424,11 @@
                         <viewLayoutGuide key="safeArea" id="7rU-9I-kiZ"/>
                     </view>
                     <navigationItem key="navigationItem" id="Wqz-F6-5jJ">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="hkf-KM-HN5">
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </barButtonItem>
-                            <barButtonItem title="..." id="Hes-5y-vxe">
-                                <connections>
-                                    <action selector="actionButtonTapped:" destination="c18-LH-a4l" id="9BB-o0-HeH"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="..." id="Hes-5y-vxe">
+                            <connections>
+                                <action selector="actionButtonTapped:" destination="c18-LH-a4l" id="5J4-ab-96c"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="sharedTripPhotoImageView" destination="cdw-CX-1Sj" id="fa4-Th-4rU"/>

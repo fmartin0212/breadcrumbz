@@ -59,6 +59,11 @@ class SharedTripDetailViewController: UIViewController {
         setUpArrays()
     }
     
+    
+    @IBAction func actionButtonTapped(_ sender: UIBarButtonItem) {
+        
+    }
+    
     // MARK: - Functions
     func setUpArrays() {
         
@@ -189,7 +194,7 @@ extension SharedTripDetailViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 && indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SharedTripDetailCell") as! TripTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SharedTripDetailCell") as! SharedTripDetailTableViewCell
             cell.sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
             cell.selectionStyle = .none
             return cell

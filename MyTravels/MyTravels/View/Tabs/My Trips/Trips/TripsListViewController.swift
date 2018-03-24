@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import CloudKit
-import Contacts
 import MapKit
 
 class TripsListViewController: UIViewController {
@@ -44,7 +43,6 @@ class TripsListViewController: UIViewController {
         
         // Set navigation bar properties
         navigationController?.navigationBar.prefersLargeTitles = true
-//        self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedStringKey.font: UIFont(name: "Avenir Next", size: 20)!]
         
         // Fetch all of the trips/places from Core Data and set them to local variables
         do {
@@ -77,7 +75,6 @@ class TripsListViewController: UIViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier == "toTripDetailViewSegue" {
             guard let destinationVC = segue.destination as? TripDetailViewController,
                 let trips = TripController.shared.frc.fetchedObjects,
@@ -109,10 +106,6 @@ extension TripsListViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
         
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 320
-//    }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
