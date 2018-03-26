@@ -91,6 +91,9 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
             let photo = photo else { dismiss(animated: true, completion: nil) ; return }
         PhotoController.shared.add(photo: photo, trip: trip)
         
+        NotificationCenter.default.post(name: NSNotification.Name("adsf"), object: nil)
+        
+        
         dismiss(animated: true, completion: nil)
         
     }

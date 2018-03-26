@@ -13,11 +13,11 @@ import MapKit
 
 class TripsListViewController: UIViewController {
     
-    // MARK: - Properties
-//    var trips: [Trip]?
-    
     // MARK: - IBOutlets
+    @IBOutlet var noTripsView: UIView!
+    @IBOutlet var addTripBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var addATripButton: UIButton!
     
     override func viewDidLoad() {
         
@@ -45,18 +45,11 @@ class TripsListViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         
         TripController.shared.fetchAllTrips()
-//
-//        var placesArray: [[Place]] = [[]]
-//        for trip in TripController.shared.trips {
-//            guard let places = trip.places?.allObjects as? [Place] else { return }
-//            placesArray.append(places)
-//        }
-        
-    }
-    
-    // FIXME: - Not needed? Not actually solving my problem.
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.prefersLargeTitles = true
+        print("adasf")
+        if TripController.shared.trips.count == 0 {
+            print("adF")
+            self.presentNoTripsView()
+        }
     }
     
     // MARK: - Functions
@@ -116,10 +109,14 @@ extension TripsListViewController: NSFetchedResultsControllerDelegate {
         case .delete:
             guard let indexPath = indexPath else { return }
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            guard let trips = TripController.shared.frc.fetchedObjects else { return }
+            if trips.count == 0 {
+                presentNoTripsView()
+            }
         case .insert:
             guard let newIndexPath = newIndexPath else { return }
             tableView.insertRows(at: [newIndexPath], with: .automatic)
-            
         case .move:
             guard let indexPath = indexPath,
                 let newIndexPath = newIndexPath else { return }
@@ -130,4 +127,26 @@ extension TripsListViewController: NSFetchedResultsControllerDelegate {
         }
     }
     
+}
+
+extension TripsListViewController {
+    
+    private func presentNoTripsView() {
+       
+        view.addSubview(noTripsView)
+        
+        noTripsView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: noTripsView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: noTripsView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: noTripsView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: noTripsView, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
+        
+        addTripBarButtonItem = nil
+        addATripButton.clipsToBounds = true
+        addATripButton.layer.cornerRadius = 25
+        
+    
+    
+    }
 }

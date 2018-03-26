@@ -48,6 +48,7 @@
 		B7DA1B7F202F9FBC0007497A /* FetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */; };
 		B7DA1B822030E70C0007497A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B812030E70C0007497A /* SearchViewController.swift */; };
 		B7EC47C42066E83300905B20 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC47C32066E83300905B20 /* UserDefaults.swift */; };
+		B7EC47C62066EF6800905B20 /* NoTripsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7EC47C52066EF6800905B20 /* NoTripsView.xib */; };
 		B7F75C0220577BB200C876A0 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F75C0120577BB200C876A0 /* Onboarding.storyboard */; };
 		B7F75C07205842E600C876A0 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C06205842E600C876A0 /* OnboardingPageViewController.swift */; };
 		B7F75C092058521C00C876A0 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C082058521C00C876A0 /* ExplanationViewController.swift */; };
@@ -107,6 +108,7 @@
 		B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchViewController.swift; sourceTree = "<group>"; };
 		B7DA1B812030E70C0007497A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		B7EC47C32066E83300905B20 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		B7EC47C52066EF6800905B20 /* NoTripsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoTripsView.xib; sourceTree = "<group>"; };
 		B7F75C0120577BB200C876A0 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		B7F75C06205842E600C876A0 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		B7F75C082058521C00C876A0 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewController.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				B71E0C70202CC13600125396 /* Custom Cells */,
 				B7F75C0120577BB200C876A0 /* Onboarding.storyboard */,
 				B7C10CB82020D19500818430 /* Main.storyboard */,
+				B7EC47C52066EF6800905B20 /* NoTripsView.xib */,
 				B7F75C102058726900C876A0 /* Profile.storyboard */,
 			);
 			path = View;
@@ -437,6 +440,7 @@
 			files = (
 				B7C10CC22020D19500818430 /* LaunchScreen.storyboard in Resources */,
 				B7C10CBF2020D19500818430 /* Assets.xcassets in Resources */,
+				B7EC47C62066EF6800905B20 /* NoTripsView.xib in Resources */,
 				B7F75C112058726900C876A0 /* Profile.storyboard in Resources */,
 				B7C10CBA2020D19500818430 /* Main.storyboard in Resources */,
 				B7F75C0220577BB200C876A0 /* Onboarding.storyboard in Resources */,

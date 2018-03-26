@@ -74,14 +74,5 @@ extension SharedTripsListViewController: UITableViewDelegate, UITableViewDataSou
         return cell
         
     }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            guard let trips = TripController.shared.frc.fetchedObjects else { return }
-            let trip = trips[indexPath.row]
-            TripController.shared.delete(trip: trip)
-        }
-    }
-    
 }
 
