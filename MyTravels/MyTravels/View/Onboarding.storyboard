@@ -24,13 +24,37 @@
                     <view key="view" contentMode="scaleToFill" id="0M4-1x-kkF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.1486544602" green="0.99963706730000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="AJN-MN-wXU">
+                                <rect key="frame" x="91" y="217" width="193" height="253.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding-1" translatesAutoresizingMaskIntoConstraints="NO" id="qfF-PZ-Mwb">
+                                        <rect key="frame" x="0.0" y="0.0" width="193" height="193"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="193" id="14I-dz-nnm"/>
+                                            <constraint firstAttribute="height" constant="193" id="VRW-4D-Dhz"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="blerb about app" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aob-xf-PD4">
+                                        <rect key="frame" x="36" y="233" width="121.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96862745098039216" green="0.95686274509803915" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="AJN-MN-wXU" firstAttribute="centerY" secondItem="mVt-zd-b4x" secondAttribute="centerY" id="OhR-An-aVq"/>
+                            <constraint firstItem="AJN-MN-wXU" firstAttribute="centerX" secondItem="mVt-zd-b4x" secondAttribute="centerX" id="w8J-gZ-F9j"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="mVt-zd-b4x"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RvW-11-RKJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-935" y="-781"/>
+            <point key="canvasLocation" x="-935.20000000000005" y="-781.25937031484261"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="f3P-lN-HZk">
@@ -39,7 +63,27 @@
                     <view key="view" contentMode="scaleToFill" id="aj0-Mw-iZV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.97647058819999999" green="0.37104773520000001" blue="0.3826945424" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-Mc-5gA">
+                                <rect key="frame" x="89.5" y="221.5" width="196" height="244.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding-2" translatesAutoresizingMaskIntoConstraints="NO" id="qJu-Ja-ZO0">
+                                        <rect key="frame" x="0.0" y="0.0" width="196" height="184"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="blerb about app" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evx-4U-fo8">
+                                        <rect key="frame" x="37.5" y="224" width="121.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96862745100000003" green="0.95686274510000002" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Prf-Mc-5gA" firstAttribute="centerX" secondItem="mzv-uh-CB9" secondAttribute="centerX" id="iCU-uA-57h"/>
+                            <constraint firstItem="Prf-Mc-5gA" firstAttribute="centerY" secondItem="mzv-uh-CB9" secondAttribute="centerY" id="rcu-MG-bJm"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="mzv-uh-CB9"/>
                     </view>
                 </viewController>
@@ -54,7 +98,31 @@
                     <view key="view" contentMode="scaleToFill" id="0mc-Tj-TnW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.32983107090000002" green="0.73751277579999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="x45-Tx-KWR">
+                                <rect key="frame" x="106" y="193.5" width="163" height="300.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding-3" translatesAutoresizingMaskIntoConstraints="NO" id="16k-0b-FhM">
+                                        <rect key="frame" x="0.0" y="0.0" width="163" height="170"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="blerb about app" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKu-Y1-oC3">
+                                        <rect key="frame" x="21" y="210" width="121.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1N-ni-jj8">
+                                        <rect key="frame" x="42.5" y="270.5" width="78" height="30"/>
+                                        <state key="normal" title="Get started"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96862745100000003" green="0.95686274510000002" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="x45-Tx-KWR" firstAttribute="centerY" secondItem="cdH-7x-X1Q" secondAttribute="centerY" id="AaY-To-t5k"/>
+                            <constraint firstItem="x45-Tx-KWR" firstAttribute="centerX" secondItem="cdH-7x-X1Q" secondAttribute="centerX" id="eYp-WX-4uq"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="cdH-7x-X1Q"/>
                     </view>
                 </viewController>
@@ -63,4 +131,9 @@
             <point key="canvasLocation" x="522" y="-781"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Onboarding-1" width="164" height="172"/>
+        <image name="Onboarding-2" width="196" height="184"/>
+        <image name="Onboarding-3" width="163" height="170"/>
+    </resources>
 </document>
