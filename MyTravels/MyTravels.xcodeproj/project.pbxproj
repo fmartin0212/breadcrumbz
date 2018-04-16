@@ -12,6 +12,7 @@
 		B73926112035255A0050B580 /* UsernameSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73926102035255A0050B580 /* UsernameSearchViewController.swift */; };
 		B739261320362E5F0050B580 /* SharedTripsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B739261220362E5F0050B580 /* SharedTripsController.swift */; };
 		B7392616203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7392614203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift */; };
+		B78FB5982070317700EE40C2 /* Gilroy-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B78FB5972070317000EE40C2 /* Gilroy-ExtraBold.otf */; };
 		B796DD3A204B5F9500CAF093 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B796DD39204B5F9500CAF093 /* MapViewController.swift */; };
 		B7B0C36E203724F30031A92A /* SharedTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B0C36D203724F30031A92A /* SharedTrip.swift */; };
 		B7B0C3702037446E0031A92A /* SharedPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B0C36F2037446E0031A92A /* SharedPlace.swift */; };
@@ -69,6 +70,7 @@
 		B73926102035255A0050B580 /* UsernameSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameSearchViewController.swift; sourceTree = "<group>"; };
 		B739261220362E5F0050B580 /* SharedTripsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripsController.swift; sourceTree = "<group>"; };
 		B7392614203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UsersSharedWithRecordIDs+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B78FB5972070317000EE40C2 /* Gilroy-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-ExtraBold.otf"; sourceTree = "<group>"; };
 		B796DD39204B5F9500CAF093 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B7B0C36D203724F30031A92A /* SharedTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTrip.swift; sourceTree = "<group>"; };
 		B7B0C36F2037446E0031A92A /* SharedPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPlace.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				B71E0C70202CC13600125396 /* Custom Cells */,
 				B7F75C0120577BB200C876A0 /* Onboarding.storyboard */,
 				B7C10CB82020D19500818430 /* Main.storyboard */,
+				B78FB5972070317000EE40C2 /* Gilroy-ExtraBold.otf */,
 				B7EC47C52066EF6800905B20 /* NoTripsView.xib */,
 				B7F75C102058726900C876A0 /* Profile.storyboard */,
 			);
@@ -439,6 +442,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7C10CC22020D19500818430 /* LaunchScreen.storyboard in Resources */,
+				B78FB5982070317700EE40C2 /* Gilroy-ExtraBold.otf in Resources */,
 				B7C10CBF2020D19500818430 /* Assets.xcassets in Resources */,
 				B7EC47C62066EF6800905B20 /* NoTripsView.xib in Resources */,
 				B7F75C112058726900C876A0 /* Profile.storyboard in Resources */,

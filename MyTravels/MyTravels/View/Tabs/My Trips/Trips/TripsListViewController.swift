@@ -43,11 +43,13 @@ class TripsListViewController: UIViewController {
         
         // Set navigation bar properties
         navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.font : UIFont(name: "AvenirNext", size: 20)]
         
         TripController.shared.fetchAllTrips()
         print("adasf")
         if TripController.shared.trips.count == 0 {
             print("adF")
+            
             self.presentNoTripsView()
         }
     }
