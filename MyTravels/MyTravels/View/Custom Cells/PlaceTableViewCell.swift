@@ -9,7 +9,7 @@
 import UIKit
 
 class PlaceTableViewCell: UITableViewCell {
-
+    
     // MARK: - Properties
     var place: Place? {
         didSet {
@@ -18,7 +18,7 @@ class PlaceTableViewCell: UITableViewCell {
     }
     var sharedPlace: SharedPlace? {
         didSet {
-          updateViewsForSharedPlace()
+            updateViewsForSharedPlace()
         }
     }
     
@@ -40,9 +40,9 @@ class PlaceTableViewCell: UITableViewCell {
         placeImageView.clipsToBounds = true
         
         guard let place = place,
-        let photosAsSet = place.photos,
-        let photosArray = photosAsSet.allObjects as? [Photo]
-        
+            let photosAsSet = place.photos,
+            let photosArray = photosAsSet.allObjects as? [Photo]
+            
             else { return }
         if photosArray.count > 0 {
             guard let photo = photosArray[0].photo as Data?,
@@ -67,6 +67,7 @@ class PlaceTableViewCell: UITableViewCell {
             placeImageView.image = placeholderImage
             placeNameLabel.text = place.name
             placeAddressLabel.text = place.address
+            placeAddressLabel.adjustsFontSizeToFitWidth = true
             updateStarsImageViews(place: place)
             
         }
@@ -87,7 +88,7 @@ class PlaceTableViewCell: UITableViewCell {
                 starImageViewsArray[i]?.image = UIImage(named: "star-black-16")
                 i += 1
             }
-        
+            
             while i <= starImageViewsArray.count - 1 {
                 starImageViewsArray[i]?.image = UIImage(named: "star-clear-16")
                 i += 1
@@ -108,11 +109,11 @@ class PlaceTableViewCell: UITableViewCell {
         
         if sharedPlacePhotos.count > 0 {
             let mainPhoto = sharedPlacePhotos[0]
-               guard let image = UIImage(data: mainPhoto) else { return }
+            guard let image = UIImage(data: mainPhoto) else { return }
             placeImageView.image = image
             placeNameLabel.text = sharedPlace.name
             placeAddressLabel.text = sharedPlace.address
-           updateStarsImageViews(sharedPlace: sharedPlace)
+            updateStarsImageViews(sharedPlace: sharedPlace)
             
         } else {
             var placeholderImage = UIImage()
@@ -134,30 +135,28 @@ class PlaceTableViewCell: UITableViewCell {
         }
         
     }
+    
+    func updateStarsImageViews(sharedPlace: SharedPlace) {
         
-        func updateStarsImageViews(sharedPlace: SharedPlace) {
+        let starImageViewsArray = [starOne, starTwo, starThree, starFour, starFive]
+        guard let sharedPlaceRating = sharedPlace.rating else { return }
+        if sharedPlace.rating == 0 {
+            for starImageView in starImageViewsArray {
+                starImageView?.image = UIImage(named: "star-clear-16")
+            }
+        } else if sharedPlaceRating > 0 {
+            var i = 0
+            while i < sharedPlaceRating {
+                starImageViewsArray[i]?.image = UIImage(named: "star-black-16")
+                i += 1
+            }
             
-            let starImageViewsArray = [starOne, starTwo, starThree, starFour, starFive]
-            guard let sharedPlaceRating = sharedPlace.rating else { return }
-            if sharedPlace.rating == 0 {
-                for starImageView in starImageViewsArray {
-                    starImageView?.image = UIImage(named: "star-clear-16")
-                }
-            } else if sharedPlaceRating > 0 {
-                var i = 0
-                while i < sharedPlaceRating {
-                    starImageViewsArray[i]?.image = UIImage(named: "star-black-16")
-                    i += 1
-                }
-                
-                while i <= starImageViewsArray.count - 1 {
-                    starImageViewsArray[i]?.image = UIImage(named: "star-clear-16")
-                    i += 1
-                }
-                
+            while i <= starImageViewsArray.count - 1 {
+                starImageViewsArray[i]?.image = UIImage(named: "star-clear-16")
+                i += 1
             }
         }
-        
     }
-    
+}
+
 

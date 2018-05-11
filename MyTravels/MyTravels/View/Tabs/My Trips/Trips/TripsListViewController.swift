@@ -46,11 +46,17 @@ class TripsListViewController: UIViewController {
 //        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.font : UIFont(name: "AvenirNext", size: 20)]
         
         TripController.shared.fetchAllTrips()
-        print("adasf")
+     
         if TripController.shared.trips.count == 0 {
-            print("adF")
-            
             self.presentNoTripsView()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        if TripController.shared.trips.count > 0 {
+                noTripsView.removeFromSuperview()
         }
     }
     
@@ -70,7 +76,6 @@ class TripsListViewController: UIViewController {
             destinationVC.trip = trip
         }
     }
-    
 }
 
 extension TripsListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -90,7 +95,6 @@ extension TripsListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.trip = trip
         
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -100,7 +104,6 @@ extension TripsListViewController: UITableViewDelegate, UITableViewDataSource {
             TripController.shared.delete(trip: trip)
         }
     }
-    
 }
 
 extension TripsListViewController: NSFetchedResultsControllerDelegate {
@@ -136,7 +139,7 @@ extension TripsListViewController {
     private func presentNoTripsView() {
        
         view.addSubview(noTripsView)
-        
+        noTripsView.isHidden = false
         noTripsView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint(item: noTripsView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0).isActive = true
@@ -147,8 +150,5 @@ extension TripsListViewController {
         addTripBarButtonItem = nil
         addATripButton.clipsToBounds = true
         addATripButton.layer.cornerRadius = 25
-        
-    
-    
     }
 }

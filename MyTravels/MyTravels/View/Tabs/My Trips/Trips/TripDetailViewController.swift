@@ -55,7 +55,6 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         
         setUpArrays()
       
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

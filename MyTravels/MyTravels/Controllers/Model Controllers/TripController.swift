@@ -60,18 +60,6 @@ class TripController {
         
     }
     
-//
-//    func deleteAll() {
-//        let moc = CoreDataStack.context
-//
-//        for place in TripController.shared.frc.fetchedObjects! {
-//            moc.delete(place)
-//        }
-//
-//        saveToPersistentStore()
-//
-//    }
-    
     // Save to Core Data
     func saveToPersistentStore() {
         do {
