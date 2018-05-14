@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		640D44D39C850C2A96963BFD /* Pods_MyTravels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C480CB24B3A0B628223A89 /* Pods_MyTravels.framework */; };
 		B711157920549859000868BD /* TripDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B711157820549859000868BD /* TripDetailTableViewCell.swift */; };
+		B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */; };
 		B73926112035255A0050B580 /* UsernameSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73926102035255A0050B580 /* UsernameSearchViewController.swift */; };
 		B739261320362E5F0050B580 /* SharedTripsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B739261220362E5F0050B580 /* SharedTripsController.swift */; };
 		B7392616203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7392614203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift */; };
@@ -67,6 +68,7 @@
 		66C480CB24B3A0B628223A89 /* Pods_MyTravels.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTravels.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A42438B3869DF1A1F6B9E358 /* Pods-MyTravels.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTravels.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels.debug.xcconfig"; sourceTree = "<group>"; };
 		B711157820549859000868BD /* TripDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailTableViewCell.swift; sourceTree = "<group>"; };
+		B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B73926102035255A0050B580 /* UsernameSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameSearchViewController.swift; sourceTree = "<group>"; };
 		B739261220362E5F0050B580 /* SharedTripsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripsController.swift; sourceTree = "<group>"; };
 		B7392614203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UsersSharedWithRecordIDs+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -224,8 +226,8 @@
 			children = (
 				B7C10CD420214D4200818430 /* MyTravels.entitlements */,
 				B7C10CDB20214F6900818430 /* Model */,
-				B7C10CDA20214F5400818430 /* View */,
 				B7DA1B79202E2A020007497A /* Controllers */,
+				B7C10CDA20214F5400818430 /* View */,
 			);
 			path = MyTravels;
 			sourceTree = "<group>";
@@ -301,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				B7DA1B7A202E2A170007497A /* CloudKitManager.swift */,
+				B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */,
 				B7C10CDC20214F7200818430 /* Model Controllers */,
 			);
 			path = Controllers;
@@ -528,6 +531,7 @@
 				B7F75C0B2058523300C876A0 /* FeaturesViewController.swift in Sources */,
 				B7D652432027F5C300E975F1 /* CreateTripTableViewController.swift in Sources */,
 				B7C10CCF2020FD4B00818430 /* TripController.swift in Sources */,
+				B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */,
 				B7D652392024E24A00E975F1 /* TypeSelectionViewController.swift in Sources */,
 				B7DA1B78202E1AE20007497A /* User.swift in Sources */,
 				B7F75C20205A14D800C876A0 /* SharedTripDetailTableViewCell.swift in Sources */,

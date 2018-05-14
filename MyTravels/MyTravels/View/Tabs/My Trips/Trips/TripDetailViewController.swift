@@ -43,7 +43,6 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
             }
             
             tripPhotoImageView.image = tripPhoto
-            
         }
         
         // Delegates
@@ -54,7 +53,6 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         tableView.separatorStyle = .none
         
         setUpArrays()
-      
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -173,7 +171,6 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         if section > 0 {
             guard let placeArray = array as? [[Place]],
                 let firstItemInArray = placeArray[section - 1].first,
@@ -199,7 +196,6 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if section  == 0 {
             return 1
         }
@@ -217,7 +213,6 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if indexPath.row == 0 && indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TripDetailCell") as! TripDetailTableViewCell
             if let trip = trip {

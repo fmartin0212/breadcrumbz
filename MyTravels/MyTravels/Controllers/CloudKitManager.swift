@@ -115,9 +115,7 @@ class CloudKitManager {
                     }
                 }
             }
-            
         }
-        
     }
     
     func pushPlacesToCloudKit(completion: @escaping (Bool) -> Void) {
@@ -165,13 +163,13 @@ class CloudKitManager {
         switch type {
         case "Trip":
             guard let trips = TripController.shared.frc.fetchedObjects else { return [] }
-            return trips.flatMap { $0 as CloudKitSyncable }
+            return trips.compactMap { $0 as CloudKitSyncable }
         case "Place":
             guard let places = TripController.shared.frc.fetchedObjects else { return [] }
-            return places.flatMap { $0 as CloudKitSyncable }
+            return places.compactMap { $0 as CloudKitSyncable }
         case "Photo":
             guard let photos = PlaceController.shared.frc.fetchedObjects else { return [] }
-            return photos.flatMap { $0 as CloudKitSyncable }
+            return photos.compactMap { $0 as CloudKitSyncable }
         default:
             return []
         }

@@ -53,13 +53,6 @@ class SharedTripsController {
         
     }
     
-    func fetchPhotosForSharedTrips(completion: @escaping (Bool) -> Void) {
-        
-        for sharedTrip in sharedTrips {
-
-        }
-    }
-    
     func fetchPlacesForTrips(sharedTrips: [SharedTrip], completion: @escaping (Bool) -> (Void)) {
        
         for sharedTrip in sharedTrips {

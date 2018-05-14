@@ -15,8 +15,9 @@ protocol SearchViewControllerDelegate: class {
 }
 
 class SearchViewController: UIViewController {
-
+    
     // MARK: - Constants & Variables
+    
     // MapKit
     var searchCompleter = MKLocalSearchCompleter()
     var searchResults = [MKLocalSearchCompletion]()
@@ -45,7 +46,7 @@ class SearchViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
-
+    
     // MARK: - IBActions
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -106,9 +107,7 @@ extension SearchViewController: CLLocationManagerDelegate {
             })
         }
     }
-    
 }
-
 
 extension SearchViewController: MKLocalSearchCompleterDelegate {
     
@@ -179,7 +178,7 @@ extension SearchViewController: UITableViewDelegate {
             search.start { (response, error) in
                 
                 guard let response = response else { return }
-                print("adsf")
+                
                 let coordinate = response.mapItems[0].placemark.coordinate
                 let latitude = coordinate.latitude
                 let longitude = coordinate.longitude
@@ -191,9 +190,8 @@ extension SearchViewController: UITableViewDelegate {
                         print("Could not reverse geocode location. Error: \(error)")
                     }
                     guard let placemarks = placemarks,
-                        let placemark = placemarks.first
-                        else { return }
-                    guard let name = placemark.name,
+                        let placemark = placemarks.first,
+                        let name = placemark.name,
                         let postalCode = placemark.postalCode,
                         let locality = placemark.locality,
                         let administrativeArea = placemark.administrativeArea,

@@ -34,20 +34,7 @@ class SharedPlace {
         
         return photoURLs
     }
-    
-//    init(name: String, type: String, address: String, comments: String, rating: Int16, photos: [Data]?, trip: LocalTrip) {
-//
-//        self.name = name
-//        self.type = type
-//        self.address = address
-//        self.comments = comments
-//        self.rating = rating
-//        self.photos = photos
-//        self.trip = trip
-//
-//    }
-    
-    
+
     // CloudKit - Turn a record into a Place
     init?(record: CKRecord) {
         

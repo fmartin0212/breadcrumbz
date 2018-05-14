@@ -106,7 +106,6 @@ class PlaceDetailTableViewController: UITableViewController {
                 i += 1
             }
         }
-        
     }
     
     // MARK: - Navigation
@@ -120,7 +119,6 @@ class PlaceDetailTableViewController: UITableViewController {
             destinationVC.place = place
         }
     }
-    
 }
 
 extension PlaceDetailTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -140,5 +138,4 @@ extension PlaceDetailTableViewController: UICollectionViewDelegate, UICollection
             
             return cell
         }
-    
 }

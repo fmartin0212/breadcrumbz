@@ -28,7 +28,6 @@ class TripController {
     // MARK: - CRUD Functions
     // Create
     func createTripWith(name: String, location: String, tripDescription: String?, startDate: Date, endDate: Date) {
-//        let ckRecordIDString = nil
         let trip = Trip(name: name, location: location, tripDescription: tripDescription, startDate: startDate, endDate: endDate)
         self.trip = trip
         saveToPersistentStore()
@@ -38,9 +37,7 @@ class TripController {
     func saveTripToCloud(trip: Trip) {
         guard let record = CKRecord(trip: trip) else { return }
         CloudKitManager.shared.saveToCloudKit(ckRecord: record) { (success) in
-            
         }
-        
     }
     
     func delete(trip: Trip) {
@@ -68,7 +65,5 @@ class TripController {
             print("Error saving Managed Object Context (Place): \(error)")
         }
     }
-    
-
 }
 
