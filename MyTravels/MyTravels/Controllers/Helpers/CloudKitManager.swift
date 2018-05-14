@@ -23,15 +23,11 @@ class CloudKitManager {
         publicDB.save(ckRecord) { (record, error) in
             if let error = error {
                 print("There was an error saving to the database: \(error)")
-            }
-                
-            else {
+            } else {
                 print("Save successful!")
                 completion(true)
-                
             }
         }
-        
     }
     
     func performFullSync(completion: @escaping (Bool) -> Void) {
@@ -63,7 +59,6 @@ class CloudKitManager {
         }
     }
     
-    
     func pushTripsToCloudKit(type: String, completion: @escaping (Bool) -> Void) {
         
         let unsyncedTripRecords = unsyncedRecordsOf(type: "Trip") as? [Trip] ?? []
@@ -86,7 +81,7 @@ class CloudKitManager {
                     let newPlaceRecord = CKRecord(place: place, trip: unsyncedTripRecord)
                     placeRecordsToSave.append(newPlaceRecord)
                     place.cloudKitRecordIDString = newPlaceRecord.recordID.recordName
-                    PlaceController.shared.saveToPersistentStore()
+                    CoreDataManager.save()
                     
                     guard let photos = place.photos?.allObjects as? [Photo] else { continue }
                     for photo in photos {
@@ -130,7 +125,7 @@ class CloudKitManager {
                     let newPlaceRecord = CKRecord(place: place, trip: trip)
                     newPlacesToSave.append(newPlaceRecord)
                     place.cloudKitRecordIDString = newPlaceRecord.recordID.recordName
-                    PlaceController.shared.saveToPersistentStore()
+                    CoreDataManager.save()
                     
                     guard let photos = place.photos?.allObjects as? [Photo] else { continue }
                     for photo in photos {
@@ -149,14 +144,7 @@ class CloudKitManager {
         }
         completion(true)
     }
-    
-    //
-    //    func fetchNewRecordsOf(type: String, completion: @escaping (Bool) -> Void) {
-    //
-    //
-    //
-    //    }
-    
+
     // MARK: - Helper Fetches
     
     private func recordsOf(type: String) -> [CloudKitSyncable] {
@@ -184,7 +172,7 @@ class CloudKitManager {
     }
     
     func saveOperation(records: [CKRecord], completion: @escaping (Bool) -> Void) {
-    let modifyOperation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
+        let modifyOperation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
         modifyOperation.perRecordCompletionBlock = nil
         modifyOperation.savePolicy = .allKeys
         modifyOperation.queuePriority = .high
@@ -218,24 +206,9 @@ class CloudKitManager {
                 let userRecord = records.first,
                 let user = User(ckRecord: userRecord)
                 else { completion(nil) ; return }
-    
+            
             completion(user)
             
         }
     }
-    
-//    func shareTripWith(user: User, trip: Trip, completion: @escaping (Bool) -> Void) {
-//
-//
-//        guard let tripReference = trip.cloudKitReference else { completion(false) ; return }
-//        user.sharedWithUserTripsRefs?.append(tripReference)
-//        guard let updatedUserRecord = CKRecord(user: user) else { completion(false) ; return }
-//        let recordToBeSaved = [updatedUserRecord]
-//        updateOperation(records: recordToBeSaved) { (success) in
-//            print("user successfully updated")
-//            completion(true)
-//        }
-//    }
-    
-
 }

@@ -149,6 +149,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B719FFA120AA3FF20072CF75 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B7DA1B7A202E2A170007497A /* CloudKitManager.swift */,
+				B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		B71E0C70202CC13600125396 /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,8 +311,7 @@
 		B7DA1B79202E2A020007497A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B7DA1B7A202E2A170007497A /* CloudKitManager.swift */,
-				B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */,
+				B719FFA120AA3FF20072CF75 /* Helpers */,
 				B7C10CDC20214F7200818430 /* Model Controllers */,
 			);
 			path = Controllers;

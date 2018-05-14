@@ -29,7 +29,7 @@ class PlaceController {
     func create(name: String, type: String, address: String, comments: String, rating: Int16, trip: Trip) {
         let newPlace = Place(name: name, type: type, address: address, comments: comments, rating: rating, trip: trip)
         self.place = newPlace
-        saveToPersistentStore()
+        CoreDataManager.save()
         
     }
     
@@ -45,22 +45,11 @@ class PlaceController {
         
         self.place = place
         
-        saveToPersistentStore()
-        
+        CoreDataManager.save()
     }
     
     // Delete
     func delete(place: Place) {
-        place.managedObjectContext?.delete(place)
-        saveToPersistentStore()
-    }
-    
-    func saveToPersistentStore() {
-        do {
-            try CoreDataStack.context.save()
-        } catch let error {
-            print("Error saving Managed Object Context (Place): \(error)")
-            
-        }
+        CoreDataManager.delete(object: place)
     }
 }
