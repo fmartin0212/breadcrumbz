@@ -79,7 +79,7 @@ class CloudKitManager {
                 guard let newTripRecord = CKRecord(trip: unsyncedTripRecord) else { completion(false) ; return }
                 tripRecordsToSave.append(newTripRecord)
                 unsyncedTripRecord.cloudKitRecordIDString = newTripRecord.recordID.recordName
-                TripController.shared.saveToPersistentStore()
+                CoreDataManager.save()
                 
                 guard let places = unsyncedTripRecord.places?.allObjects as? [Place] else { continue }
                 for place in places {

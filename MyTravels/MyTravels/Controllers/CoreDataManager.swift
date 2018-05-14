@@ -22,7 +22,7 @@ final class CoreDataManager {
     
     static func delete<T: NSManagedObject>(object: T) {
             object.managedObjectContext?.delete(object)
-        }
+            save()
     }
 }
 

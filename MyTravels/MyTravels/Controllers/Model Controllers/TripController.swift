@@ -30,8 +30,7 @@ class TripController {
     func createTripWith(name: String, location: String, tripDescription: String?, startDate: Date, endDate: Date) {
         let trip = Trip(name: name, location: location, tripDescription: tripDescription, startDate: startDate, endDate: endDate)
         self.trip = trip
-        saveToPersistentStore()
-        
+        CoreDataManager.save()
     }
     
     func saveTripToCloud(trip: Trip) {
@@ -41,8 +40,7 @@ class TripController {
     }
     
     func delete(trip: Trip) {
-        trip.managedObjectContext?.delete(trip)
-        saveToPersistentStore()
+        CoreDataManager.delete(object: trip)
     }
     
     func fetchAllTrips() {
@@ -54,16 +52,6 @@ class TripController {
         
         guard let trips = frc.fetchedObjects else { return }
         self.trips = trips
-        
-    }
-    
-    // Save to Core Data
-    func saveToPersistentStore() {
-        do {
-            try CoreDataStack.context.save()
-        } catch let error {
-            print("Error saving Managed Object Context (Place): \(error)")
-        }
     }
 }
 
