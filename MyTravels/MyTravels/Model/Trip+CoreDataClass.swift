@@ -43,14 +43,11 @@ public class Trip: NSManagedObject, CloudKitSyncable {
     convenience init(name: String, location: String, tripDescription: String?, startDate: Date?, endDate: Date?, context: NSManagedObjectContext = CoreDataStack.context) {
         
         self.init(context: context)
-        
         self.name = name
         self.location = location
         self.tripDescription = tripDescription
         self.startDate = startDate
         self.endDate = endDate
-        //        self.cloudKitRecordIDString = cloudKitRecordIDString
-        
     }
     
     // CloudKit - Turn a record into a Trip
@@ -61,14 +58,11 @@ public class Trip: NSManagedObject, CloudKitSyncable {
             else { return nil }
         
         self.init(context: context)
-        self.cloudKitRecordIDString = record.recordID.recordName
         self.location = location
         self.startDate = startDate
         self.endDate = endDate
-        //        self.cloudKitRecordIDString = cloudKitRecordIDString
-        
+        self.cloudKitRecordIDString = record.recordID.recordName
     }
-    
 }
 
 // CloudKit - Turn a Trip into a record
@@ -90,9 +84,9 @@ extension CKRecord {
                     guard let sharedID = sharedIDObject.recordID else { return nil }
                     sharedIDsArray.append(sharedID)
                     sharedIDObject.isSynced = true
-                    CoreDataManager.save()
                 }
             }
+            CoreDataManager.save()
             self.setValue(sharedIDsArray, forKey: "userIDsTripSharedWith")
         }
         self.setValue(trip.name, forKey: "name")
