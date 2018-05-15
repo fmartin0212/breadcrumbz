@@ -41,24 +41,6 @@ class CloudKitManager {
         completion(true)
     }
     
-    func fetchAllUsers(completion: @escaping ([String]) -> Void) {
-        
-        let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: "User", predicate: predicate)
-        
-        CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil) { (records, error) in
-            var usernames = [String]()
-            guard let records = records else { completion([]) ; return }
-            for record in records {
-                guard let user = User(ckRecord: record),
-                    let firstName = user.firstName
-                    else { completion([]) ; return }
-                usernames.append(firstName)
-            }
-            completion(usernames)
-        }
-    }
-    
     func pushTripsToCloudKit(type: String, completion: @escaping (Bool) -> Void) {
         
         let unsyncedTripRecords = unsyncedRecordsOf(type: "Trip") as? [Trip] ?? []
@@ -144,9 +126,8 @@ class CloudKitManager {
         }
         completion(true)
     }
-
-    // MARK: - Helper Fetches
     
+    // MARK: - Helper Fetches
     private func recordsOf(type: String) -> [CloudKitSyncable] {
         switch type {
         case "Trip":

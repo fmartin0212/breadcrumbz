@@ -22,9 +22,9 @@ public class Place: NSManagedObject, CloudKitSyncable {
         guard let recordIDString = cloudKitRecordIDString else { return nil}
         return CKRecordID(recordName: recordIDString)
     }
-
+    
     fileprivate var temporaryPhotoURLs: [URL] {
-
+        
         // Must write to temporary directory to be able to pass image file path url to CKAsset
         var photoURLs: [URL] = []
         guard let photos = self.photos?.allObjects as? [Photo] else { return [URL]() }
@@ -35,7 +35,7 @@ public class Place: NSManagedObject, CloudKitSyncable {
             try? photo.photo?.write(to: fileURL, options: [.atomic])
             photoURLs.append(fileURL)
         }
-
+        
         return photoURLs
     }
 
@@ -94,6 +94,6 @@ extension CKRecord {
         self.setValue(place.comments, forKey: "comments")
         self.setValue(ratingAsInt64, forKey: "rating")
         self.setValue(photoAssets, forKey: "photos")
-        self.setValue(tripReference, forKey: "tripReference")
+        self.setValue(tripReference, forKey: "tripReference")        
     }
 }

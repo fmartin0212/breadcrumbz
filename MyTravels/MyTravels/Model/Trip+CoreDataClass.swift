@@ -28,7 +28,6 @@ public class Trip: NSManagedObject, CloudKitSyncable {
     fileprivate var temporaryPhotoURL: URL {
         
         // Must write to temporary directory to be able to pass image file path url to CKAsset
-        
         let temporaryDirectory = NSTemporaryDirectory()
         let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
         let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
@@ -72,7 +71,7 @@ public class Trip: NSManagedObject, CloudKitSyncable {
     
 }
 
-    // CloudKit - Turn a Trip into a record
+// CloudKit - Turn a Trip into a record
 extension CKRecord {
     
     convenience init?(trip: Trip) {
@@ -95,27 +94,14 @@ extension CKRecord {
                 }
             }
             self.setValue(sharedIDsArray, forKey: "userIDsTripSharedWith")
-            self.setValue(trip.name, forKey: "name")
-            self.setValue(trip.location, forKey: "location")
-            self.setValue(trip.tripDescription, forKey: "tripDescription")
-            self.setValue(trip.startDate, forKey: "startDate")
-            self.setValue(trip.endDate, forKey: "endDate")
-            self.setValue(creatorReference, forKey: "creatorReference")
-            self.setValue(photoAsset, forKey: "photo")
         }
-            
-        else {
-            self.setValue(trip.name, forKey: "name")
-            self.setValue(trip.location, forKey: "location")
-            self.setValue(trip.tripDescription, forKey: "tripDescription")  
-            self.setValue(trip.startDate, forKey: "startDate")
-            self.setValue(trip.endDate, forKey: "endDate")
-            self.setValue(creatorReference, forKey: "creatorReference")
-            self.setValue(photoAsset, forKey: "photo")
-        }
+        self.setValue(trip.name, forKey: "name")
+        self.setValue(trip.location, forKey: "location")
+        self.setValue(trip.tripDescription, forKey: "tripDescription")
+        self.setValue(trip.startDate, forKey: "startDate")
+        self.setValue(trip.endDate, forKey: "endDate")
+        self.setValue(creatorReference, forKey: "creatorReference")
+        self.setValue(photoAsset, forKey: "photo")
+        trip.cloudKitRecordIDString = recordID.recordName
     }
 }
-
-
-
-

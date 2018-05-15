@@ -83,7 +83,7 @@ class UsernameSearchViewController: UIViewController {
                     
                 }
             })
-            
+        
         }
         
     }

@@ -51,7 +51,6 @@ class SearchViewController: UIViewController {
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-    
 }
 
 
@@ -134,10 +133,6 @@ extension SearchViewController: MKLocalSearchCompleterDelegate {
 }
 
 extension SearchViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResults.count + 1
