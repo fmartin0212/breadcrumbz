@@ -185,7 +185,6 @@ class CloudKitManager {
                 else { completion(nil) ; return }
             
             completion(user)
-            
         }
     }
 }

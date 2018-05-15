@@ -32,7 +32,6 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         navigationController?.navigationBar.prefersLargeTitles = false
         
         if let trip = trip {
-            
             // Set trip photo
             var tripPhoto = UIImage()
             guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
@@ -41,7 +40,6 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
                 guard let image = UIImage(data: photo) else { return }
                 tripPhoto = image
             }
-            
             tripPhotoImageView.image = tripPhoto
         }
         
@@ -56,7 +54,6 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         setUpArrays()
     }
     
@@ -71,7 +68,6 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
             self.present(usernameSearchViewController, animated: true, completion: {
                 
             })
-        
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
             alertController.dismiss(animated: true, completion: nil)

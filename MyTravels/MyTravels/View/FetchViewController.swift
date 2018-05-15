@@ -11,7 +11,6 @@ import UIKit
 class FetchViewController: UIViewController {
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         UserController.shared.fetchCurrentUser { (_) in

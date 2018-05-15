@@ -37,9 +37,7 @@ class UsernameSearchViewController: UIViewController {
         // Sync all user's trips/places
         CloudKitManager.shared.performFullSync { (success) in
             
-            self.fetchContacts { (success) in
-                
-            }
+            self.fetchContacts { (_) in }
             
             var allUsers = [User]()
             var loggedInUsersFriends = [User]()
@@ -78,18 +76,13 @@ class UsernameSearchViewController: UIViewController {
                         self.tableView.reloadData()
                         
                         self.view.isUserInteractionEnabled = true
-                        
                     }
-                    
                 }
             })
-        
         }
-        
     }
     
     func fetchContacts(completion: @escaping (Bool) -> Void) {
-        
         let contactStore = CNContactStore()
         let fetchRequest = CNContactFetchRequest(keysToFetch: [CNContactGivenNameKey as CNKeyDescriptor, CNContactFamilyNameKey as CNKeyDescriptor, CNContactPhoneNumbersKey as CNKeyDescriptor])
         try? contactStore.enumerateContacts(with: fetchRequest) { (contact, _) in
@@ -118,11 +111,6 @@ class UsernameSearchViewController: UIViewController {
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-}
-
-extension UsernameSearchViewController: UISearchBarDelegate {
-    
 }
 
 extension UsernameSearchViewController: UITableViewDataSource, UITableViewDelegate {
