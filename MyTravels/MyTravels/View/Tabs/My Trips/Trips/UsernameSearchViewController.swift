@@ -41,7 +41,7 @@ class UsernameSearchViewController: UIViewController {
             var loggedInUsersFriends = [User]()
             print("full array of phone numbers: \(self.arrayOfPhoneNumbers)")
             print("count of number of phone numbers: \(self.arrayOfPhoneNumbers.count)")
-
+            
             let predicate = NSPredicate(value: true)
             let query = CKQuery(recordType: "User", predicate: predicate)
             CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
@@ -63,7 +63,7 @@ class UsernameSearchViewController: UIViewController {
                         print("adsf")
                     }
                     self.loggedInUsersFriends = loggedInUsersFriends
-                    print("break")
+                    
                     DispatchQueue.main.async {
                         UIView.animate(withDuration: 0.2) {
                             self.loadingVisualEffectView.alpha = 0
@@ -121,22 +121,21 @@ extension UsernameSearchViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let trip = trip else { return }
         loadingVisualEffectView.alpha = 1
         
-        guard let firstName = loggedInUsersFriends[indexPath.row].firstName else { return }
+        guard let trip = trip else { return }
         
-        CloudKitManager.shared.fetchTripShareReceiverWith(firstName: firstName) { (user) in
-            guard let user = user else { return }
-            SharedTripsController.shared.addSharedIDTo(trip: trip, forUser: user)
-            DispatchQueue.main.async {
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.loadingVisualEffectView.alpha = 0
-                }, completion: { (success) in
-                    self.dismiss(animated: true, completion: nil)
-                })
-            }
-        }
+        
+//        let user = loggedInUsersFriends[indexPath.row]
+//        SharedTripsController.shared.addSharedIDTo(trip: trip, forUser: user)
+//        DispatchQueue.main.async {
+//            UIView.animate(withDuration: 0.2, animations: {
+//                self.loadingVisualEffectView.alpha = 0
+//            }, completion: { (success) in
+//                self.dismiss(animated: true, completion: nil)
+//            })
+//        }
     }
 }
+
 

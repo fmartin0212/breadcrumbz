@@ -18,6 +18,8 @@ class User {
     let profilePicture: Data?
     var ckRecordID: CKRecordID?
     let appleUserRef: CKReference
+    var acceptedSharedTrips: [CKReference]?
+    var pendingSharedTrips: [CKReference]?
     
     fileprivate var temporaryPhotoURL: URL {
         

@@ -26,7 +26,12 @@ class PhotoController {
     var photos: [Photo] = []
     
     // CRUD Functions
-    // Add photo to place
+ 
+    func add(photo: Data, trip: Trip) {
+        let _ = Photo(photo: photo, place: nil, trip: trip)
+        CoreDataManager.save()
+    }
+
     func add(photos: [Data], place: Place) {
         for photo in photos {
             let _ = Photo(photo: photo, place: place, trip: nil)
@@ -46,13 +51,6 @@ class PhotoController {
         CoreDataManager.save()
     }
     
-    // Add photo to trip
-    func add(photo: Data, trip: Trip) {
-        let newPhoto = Photo(photo: photo, place: nil, trip: trip)
-        CoreDataManager.save()
-    }
-    
-    // Delete a photo
     func delete(photo: Photo) {
         CoreDataManager.delete(object: photo)
     }

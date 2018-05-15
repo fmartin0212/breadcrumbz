@@ -29,12 +29,10 @@ class PlaceController {
         let newPlace = Place(name: name, type: type, address: address, comments: comments, rating: rating, trip: trip)
         self.place = newPlace
         CoreDataManager.save()
-        
     }
     
     // Update
     func update(place: Place, name: String, type: String, address: String, comments: String, rating: Int16, trip: Trip) {
-       
         place.name = name
         place.type = type
         place.address = address
