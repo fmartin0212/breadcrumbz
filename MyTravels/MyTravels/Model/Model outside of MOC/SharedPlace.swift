@@ -10,7 +10,7 @@ import Foundation
 import CloudKit
 
 class SharedPlace {
-   
+    
     var address: String?
     var comments: String?
     var name: String?
@@ -34,7 +34,7 @@ class SharedPlace {
         
         return photoURLs
     }
-
+    
     // CloudKit - Turn a record into a Place
     init?(record: CKRecord) {
         
@@ -49,14 +49,11 @@ class SharedPlace {
         
         var photosAsData = [Data]()
         if photos.count > 0 {
-            
             for photo in photos {
                 guard let photoAssetAsData = try? Data(contentsOf: photo.fileURL) else { return }
                 photosAsData.append(photoAssetAsData)
             }
-            
         }
-        
         self.name = name
         self.address = address
         self.rating = rating

@@ -74,12 +74,10 @@ extension CKRecord {
     convenience init(photo: Photo, place: Place) {
         
         let recordID = photo.cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
-        
-        self.init(recordType: "Photo", recordID: recordID)
-        
         let photoAsset = CKAsset(fileURL: photo.temporaryPhotoURL)
         let placeReference = place.cloudKitReference
         
+        self.init(recordType: "Photo", recordID: recordID)
         self.setValue(photoAsset, forKey: "photo")
         self.setValue(placeReference, forKey: "placeReference")
         photo.cloudKitRecordIDString = recordID.recordName

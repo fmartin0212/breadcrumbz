@@ -29,20 +29,20 @@ class SharedTrip {
     
     var cloudKitRecordID: CKRecordID?
     
-        fileprivate var temporaryPhotoURL: URL {
-    
-            // Must write to temporary directory to be able to pass image file path url to CKAsset
-    
-            let temporaryDirectory = NSTemporaryDirectory()
-            let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
-            let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
-    
-            guard let photoData = photoData else { return fileURL }
-    
-            try? photoData.write(to: fileURL, options: [.atomic])
-    
-            return fileURL
-        }
+    fileprivate var temporaryPhotoURL: URL {
+        
+        // Must write to temporary directory to be able to pass image file path url to CKAsset
+        
+        let temporaryDirectory = NSTemporaryDirectory()
+        let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
+        let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
+        
+        guard let photoData = photoData else { return fileURL }
+        
+        try? photoData.write(to: fileURL, options: [.atomic])
+        
+        return fileURL
+    }
     
     // CloudKit - Turn a record into a Trip
     init?(record: CKRecord) {
