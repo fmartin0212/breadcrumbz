@@ -20,10 +20,10 @@ class SharedTripsController {
     func addSharedIDTo(trip: Trip, forUser: User) {
         guard let userRecordID = forUser.ckRecordID else { return }
         let recordID = UsersSharedWithRecordIDs(recordID: userRecordID.recordName, isSynced: false, trip: trip)
-        saveToPersistentStore()
+        CoreDataManager.save()
+        
         guard let updatedTripRecord = CKRecord(trip: trip) else { return }
         CloudKitManager.shared.updateOperation(records: [updatedTripRecord]) { (success) in
-            
         }
     }
     
@@ -73,13 +73,5 @@ class SharedTripsController {
             
         }
         completion(true)
-    }
-    
-    func saveToPersistentStore() {
-        do {
-            try CoreDataStack.context.save()
-        } catch let error {
-            print("Error saving Managed Object Context (sharedIDs): \(error)")
-        }
     }
 }

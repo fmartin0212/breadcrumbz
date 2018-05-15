@@ -91,7 +91,7 @@ extension CKRecord {
                     guard let sharedID = sharedIDObject.recordID else { return nil }
                     sharedIDsArray.append(sharedID)
                     sharedIDObject.isSynced = true
-                    SharedTripsController.shared.saveToPersistentStore()
+                    CoreDataManager.save()
                 }
             }
             self.setValue(sharedIDsArray, forKey: "userIDsTripSharedWith")
