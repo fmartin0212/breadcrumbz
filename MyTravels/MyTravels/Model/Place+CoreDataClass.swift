@@ -35,7 +35,6 @@ public class Place: NSManagedObject, CloudKitSyncable {
             try? photo.photo?.write(to: fileURL, options: [.atomic])
             photoURLs.append(fileURL)
         }
-        
         return photoURLs
     }
 
@@ -48,7 +47,6 @@ public class Place: NSManagedObject, CloudKitSyncable {
         self.comments = comments
         self.rating = rating
         self.trip = trip
-        
     }
     
     // CloudKit - Turn a record into a Place
@@ -67,7 +65,6 @@ public class Place: NSManagedObject, CloudKitSyncable {
         self.comments = comments
 //        self.photos = photos
     }
-    
 }
 
 // CloudKit - Turn a Place into a record
@@ -77,18 +74,17 @@ extension CKRecord {
         let ckRecordID = place.cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
 
         let photoAssets = place.temporaryPhotoURLs.map { CKAsset(fileURL: $0) }
-        
         let ratingAsInt64 = Int(place.rating)
-        self.init(recordType: "Place", recordID: ckRecordID)
-        
         let tripReference = trip.cloudKitReference
         
+        self.init(recordType: "Place", recordID: ckRecordID)
         self.setValue(place.name, forKey: "name")
         self.setValue(place.address, forKey: "address")
         self.setValue(place.type, forKey: "type")
         self.setValue(place.comments, forKey: "comments")
         self.setValue(ratingAsInt64, forKey: "rating")
         self.setValue(photoAssets, forKey: "photos")
-        self.setValue(tripReference, forKey: "tripReference")        
+        self.setValue(tripReference, forKey: "tripReference")
+        place.cloudKitRecordIDString = recordID.recordName
     }
 }

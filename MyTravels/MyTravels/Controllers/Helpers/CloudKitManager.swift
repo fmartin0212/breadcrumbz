@@ -55,29 +55,25 @@ class CloudKitManager {
                 
                 guard let newTripRecord = CKRecord(trip: unsyncedTripRecord) else { completion(false) ; return }
                 tripRecordsToSave.append(newTripRecord)
-                unsyncedTripRecord.cloudKitRecordIDString = newTripRecord.recordID.recordName
-                CoreDataManager.save()
                 
                 guard let places = unsyncedTripRecord.places?.allObjects as? [Place] else { continue }
                 for place in places {
                     let newPlaceRecord = CKRecord(place: place, trip: unsyncedTripRecord)
                     placeRecordsToSave.append(newPlaceRecord)
                     place.cloudKitRecordIDString = newPlaceRecord.recordID.recordName
-                    CoreDataManager.save()
                     
                     guard let photos = place.photos?.allObjects as? [Photo] else { continue }
                     for photo in photos {
                         let newPlacePhotoRecord = CKRecord(photo: photo, place: place)
                         placePhotos.append(newPlacePhotoRecord)
-                        photo.cloudKitRecordIDString = newPlacePhotoRecord.recordID.recordName
                     }
                 }
-                
                 guard let tripPhoto = unsyncedTripRecord.photo else { continue }
                 let newTripPhotoRecord = CKRecord(photo: tripPhoto, trip: unsyncedTripRecord)
                 tripPhotoArray.append(newTripPhotoRecord)
-                tripPhoto.cloudKitRecordIDString = newTripPhotoRecord.recordID.recordName
             }
+            
+            CoreDataManager.save()
             
             allRecordsToSave.append(tripRecordsToSave)
             allRecordsToSave.append(placeRecordsToSave)
