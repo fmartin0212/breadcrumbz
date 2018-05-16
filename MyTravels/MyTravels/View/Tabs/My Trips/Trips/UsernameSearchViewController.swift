@@ -130,14 +130,22 @@ extension UsernameSearchViewController: UITableViewDataSource, UITableViewDelega
         guard let tripReference = trip.reference else { return }
         
         // If anything is in the user's pending refs list, append the new tripReference; otherwise, set the refs list to a new array with the trip reference.
-        if let _ = user.pendingSharedTripsRefs {
+        if let userPendingSharedTripsRefs = user.pendingSharedTripsRefs {
+            if userPendingSharedTripsRefs.contains(tripReference) {
+                self.loadingVisualEffectView.alpha = 0
+                let alert = UIAlertController(title: "Oops!", message: "You have already shared this trip with this user. Please choose someone else.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
             user.pendingSharedTripsRefs?.append(tripReference)
         } else {
             user.pendingSharedTripsRefs = [tripReference]
         }
 
-        let record = CKRecord(user: user)
-        CloudKitManager.shared.updateOperation(records: [record!]) { (_) in
+        guard let record = CKRecord(user: user) else { return }
+        CloudKitManager.shared.updateOperation(records: [record]) { (_) in
             DispatchQueue.main.async {
                 self.loadingVisualEffectView.alpha = 0
                 self.dismiss(animated: true, completion: nil)

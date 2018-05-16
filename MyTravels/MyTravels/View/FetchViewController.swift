@@ -14,9 +14,8 @@ class FetchViewController: UIViewController {
         super.viewDidLoad()
         
         UserController.shared.fetchCurrentUser { (_) in
-            
             SharedTripsController.shared.fetchTripsSharedWithUser { (sharedTrips) in
-                SharedTripsController.shared.fetchPlacesForTrips(sharedTrips: sharedTrips, completion: { (success) -> (Void) in
+                SharedTripsController.shared.fetchPlacesForSharedTrips(sharedTrips: sharedTrips, completion: { (success) -> (Void) in
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let tripListNavigationController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
                     DispatchQueue.main.async {

@@ -30,11 +30,11 @@ class SharedTripsController {
     func fetchTripsSharedWithUser(completion: @escaping ([SharedTrip]) -> Void) {
        
         guard let loggedInUser = UserController.shared.loggedInUser,
-            let loggedInUserCKRecord = loggedInUser.ckRecordID?.recordName
+            let loggedInUserCKRecordID = loggedInUser.ckRecordID?.recordName
             else { completion([]) ; return }
         var sharedTrips = [SharedTrip]()
-        
-        let predicate = NSPredicate(format: "userIDsTripSharedWith CONTAINS %@", loggedInUserCKRecord)
+        guard let pendingSharedTripRefs = loggedInUser.pendingSharedTripsRefs else { completion([]) ; return }
+        let predicate = NSPredicate(format: "recordID IN %@", pendingSharedTripRefs)
         let query = CKQuery(recordType: "Trip", predicate: predicate)
         CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil) { (records, error) in
             if let error = error {
@@ -50,11 +50,9 @@ class SharedTripsController {
             
             completion(sharedTrips)
         }
-        
     }
     
-    func fetchPlacesForTrips(sharedTrips: [SharedTrip], completion: @escaping (Bool) -> (Void)) {
-       
+    func fetchPlacesForSharedTrips(sharedTrips: [SharedTrip], completion: @escaping (Bool) -> (Void)) {
         for sharedTrip in sharedTrips {
             guard let tripCKRecordID = sharedTrip.cloudKitRecordID else { completion(false) ; return }
             let predicate = NSPredicate(format: "tripReference == %@", tripCKRecordID)
