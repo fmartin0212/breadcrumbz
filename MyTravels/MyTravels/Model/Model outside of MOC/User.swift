@@ -18,8 +18,8 @@ class User {
     let profilePicture: Data?
     var ckRecordID: CKRecordID?
     let appleUserRef: CKReference
-    var acceptedSharedTrips: [CKReference]?
-    var pendingSharedTrips: [CKReference]?
+    var pendingSharedTripsRefs: [CKReference]?
+    var acceptedSharedTripsRefs: [CKReference]?
     
     fileprivate var temporaryPhotoURL: URL {
         
@@ -59,13 +59,14 @@ class User {
         self.profilePicture = photoData
         self.appleUserRef = appleUserRef
         self.ckRecordID = ckRecord.recordID
-        
+        self.pendingSharedTripsRefs = ckRecord["pendingSharedTrips"] as? [CKReference]
+        self.acceptedSharedTripsRefs = ckRecord["acceptedSharedTrips"] as? [CKReference]
+        }
     }
-}
 
 // Turn User into a CKRecord
 extension CKRecord {
- 
+    
     convenience init?(user: User) {
         
         let recordID = user.ckRecordID ?? CKRecordID(recordName: UUID().uuidString)
@@ -78,7 +79,7 @@ extension CKRecord {
         self.setValue(user.phoneNumber, forKey: "phoneNumber")
         self.setValue(profilePictureAsset, forKey: "profilePictureAsset")
         self.setValue(user.appleUserRef, forKey: "appleUserRef")
-        
+        self.setValue(user.pendingSharedTripsRefs, forKey: "pendingSharedTrips")
+        self.setValue(user.acceptedSharedTripsRefs, forKey: "acceptedSharedTrips")
     }
-    
 }

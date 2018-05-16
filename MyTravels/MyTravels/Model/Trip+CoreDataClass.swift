@@ -25,6 +25,11 @@ public class Trip: NSManagedObject, CloudKitSyncable {
         return CKRecordID(recordName: recordIDString)
     }
     
+    var reference: CKReference? {
+        guard let cloudKitRecordID = cloudKitRecordID else { return nil }
+        return CKReference(recordID: cloudKitRecordID, action: .deleteSelf)
+    }
+    
     fileprivate var temporaryPhotoURL: URL {
         
         // Must write to temporary directory to be able to pass image file path url to CKAsset

@@ -125,17 +125,24 @@ extension UsernameSearchViewController: UITableViewDataSource, UITableViewDelega
         
         guard let trip = trip else { return }
         
+        let user = loggedInUsersFriends[indexPath.row]
         
-//        let user = loggedInUsersFriends[indexPath.row]
-//        SharedTripsController.shared.addSharedIDTo(trip: trip, forUser: user)
-//        DispatchQueue.main.async {
-//            UIView.animate(withDuration: 0.2, animations: {
-//                self.loadingVisualEffectView.alpha = 0
-//            }, completion: { (success) in
-//                self.dismiss(animated: true, completion: nil)
-//            })
-//        }
+        guard let tripReference = trip.reference else { return }
+        
+        // If anything is in the user's pending refs list, append the new tripReference; otherwise, set the refs list to a new array with the trip reference.
+        if let _ = user.pendingSharedTripsRefs {
+            user.pendingSharedTripsRefs?.append(tripReference)
+        } else {
+            user.pendingSharedTripsRefs = [tripReference]
+        }
+
+        let record = CKRecord(user: user)
+        CloudKitManager.shared.updateOperation(records: [record!]) { (_) in
+            DispatchQueue.main.async {
+                self.loadingVisualEffectView.alpha = 0
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
 }
-
 

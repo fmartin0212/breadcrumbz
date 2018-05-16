@@ -20,8 +20,8 @@ protocol CloudKitSyncable {
     // These are going to be outside the data model file
     var recordType: String { get }
     var cloudKitRecordID: CKRecordID? { get }
+    var reference: CKReference? { get }
 }
-
 extension CloudKitSyncable {
     var isSynced: Bool {
         return cloudKitRecordID != nil

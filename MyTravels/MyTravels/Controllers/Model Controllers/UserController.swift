@@ -36,7 +36,6 @@ class UserController {
                 self.loggedInUser = newUser
             }
         }
-        
     }
     
     func fetchCurrentUser(completion: @escaping (Bool) -> Void) {
