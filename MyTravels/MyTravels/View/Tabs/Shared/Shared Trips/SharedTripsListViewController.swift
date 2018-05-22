@@ -51,7 +51,7 @@ class SharedTripsListViewController: UIViewController {
                 let indexPath = tableView.indexPathForSelectedRow
                 else { return }
             let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
-            destinationVC.sharedTrip = sharedTrip
+//            destinationVC.sharedTrip = sharedTrip
         }
     }
 }
@@ -72,6 +72,12 @@ extension SharedTripsListViewController: UITableViewDelegate, UITableViewDataSou
         
         return cell
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if SharedTripsController.shared.sharedTrips[indexPath.row].name == "adsf" {
+            
+        }
     }
 }
 

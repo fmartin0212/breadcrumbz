@@ -68,7 +68,7 @@ class User {
 extension CKRecord {
     
     convenience init?(user: User) {
-        
+
         let recordID = user.ckRecordID ?? CKRecordID(recordName: UUID().uuidString)
         let profilePictureAsset = CKAsset(fileURL: user.temporaryPhotoURL)
         
