@@ -26,8 +26,8 @@ class SharedTrip {
         let failedRecordID = CKRecordID(recordName: "FAIL")
         return CKReference(recordID: failedRecordID, action: .none)
     }
-    
     var cloudKitRecordID: CKRecordID?
+    var isAcceptedTrip: Bool = true
     
     fileprivate var temporaryPhotoURL: URL {
         

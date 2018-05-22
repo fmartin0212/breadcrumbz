@@ -13,17 +13,19 @@ class FetchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UserController.shared.fetchCurrentUser { (_) in
-            SharedTripsController.shared.fetchTripsSharedWithUser { (sharedTrips) in
-                SharedTripsController.shared.fetchPlacesForSharedTrips(sharedTrips: sharedTrips, completion: { (success) -> (Void) in
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let tripListNavigationController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
-                    DispatchQueue.main.async {
-                        self.present(tripListNavigationController, animated: true, completion: nil)
-                    }
+        UserController.shared.fetchCurrentUser(completion: { (_) in
+            SharedTripsController.shared.fetchUsersPendingSharedTrips(completion: { (_) in
+                SharedTripsController.shared.fetchAcceptedSharedTrips(completion: { (_) in
+                    SharedTripsController.shared.fetchPlacesForSharedTrips(completion: { (_) in
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let tripListNavigationController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
+                        DispatchQueue.main.async {
+                            self.present(tripListNavigationController, animated: true, completion: nil)
+                        }
+                    })
                 })
-            }
-        }
+            })
+        })
     }
 }
 

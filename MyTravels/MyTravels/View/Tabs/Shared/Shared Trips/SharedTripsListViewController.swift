@@ -50,8 +50,8 @@ class SharedTripsListViewController: UIViewController {
             guard let destinationVC = segue.destination as? SharedTripDetailViewController,
                 let indexPath = tableView.indexPathForSelectedRow
                 else { return }
-            let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
-//            destinationVC.sharedTrip = sharedTrip
+            let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.section][indexPath.row]
+            destinationVC.sharedTrip = sharedTrip
         }
     }
 }
@@ -59,7 +59,7 @@ class SharedTripsListViewController: UIViewController {
 extension SharedTripsListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return SharedTripsController.shared.sharedTrips.count
+            return SharedTripsController.shared.sharedTrips[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -67,17 +67,10 @@ extension SharedTripsListViewController: UITableViewDelegate, UITableViewDataSou
         let cell = tableView.dequeueReusableCell(withIdentifier: "TripCell", for: indexPath) as! TripTableViewCell
         cell.selectionStyle = .none
         
-        let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
+        let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.section][indexPath.row]
         cell.sharedTrip = sharedTrip
         
         return cell
         
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if SharedTripsController.shared.sharedTrips[indexPath.row].name == "adsf" {
-            
         }
     }
-}
-
