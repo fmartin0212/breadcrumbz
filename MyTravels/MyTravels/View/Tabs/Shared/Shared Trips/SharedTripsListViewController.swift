@@ -52,6 +52,7 @@ class SharedTripsListViewController: UIViewController {
                 else { return }
             let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.section][indexPath.row]
             destinationVC.sharedTrip = sharedTrip
+
         }
     }
 }
