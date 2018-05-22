@@ -13,7 +13,7 @@ import CloudKit
 class SharedTripsController {
     
     static var shared = SharedTripsController()
-    var sharedTrips = [[SharedTrip]]()
+    var sharedTrips: [[SharedTrip]] = []
     var pendingSharedTrips = [SharedTrip]()
     var acceptedSharedTrips = [SharedTrip]()
     
