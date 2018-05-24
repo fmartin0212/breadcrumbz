@@ -21,7 +21,7 @@ class SharedTripsListViewController: UIViewController {
         
         // Set delegates
         tableView.dataSource = self
-        tableView.delegate = self
+        
         
         // FIXME: - This should tell the user that they do not have an account or are not logged into their iCloud account. Prompt for account creation?
         // Check to see if there is a current user logged in, if not, present sign-up view
@@ -57,10 +57,26 @@ class SharedTripsListViewController: UIViewController {
     }
 }
 
-extension SharedTripsListViewController: UITableViewDelegate, UITableViewDataSource {
+extension SharedTripsListViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return SharedTripsController.shared.sharedTrips.count > 0 ?  SharedTripsController.shared.sharedTrips.count : 0
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if SharedTripsController.shared.sharedTrips.count > 0 {
+            if SharedTripsController.shared.sharedTrips[section].first?.isAcceptedTrip == false {
+                return "Pending"
+            }
+        }
+        return ""
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if SharedTripsController.shared.sharedTrips.count > 0 {
             return SharedTripsController.shared.sharedTrips[section].count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -69,9 +85,27 @@ extension SharedTripsListViewController: UITableViewDelegate, UITableViewDataSou
         cell.selectionStyle = .none
         
         let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.section][indexPath.row]
+        
         cell.sharedTrip = sharedTrip
+        cell.delegate = self
+        
+        SharedTripsController.shared.fetchCreator(for: sharedTrip) { (user) in
+            guard let user = user else { return }
+            cell.user = user
+        }
         
         return cell
         
         }
     }
+
+extension SharedTripsListViewController: TripTableViewCellDelegate {
+    func accepted(sharedTrip: SharedTrip, by user: User) {
+        SharedTripsController.shared.accept(sharedTrip: sharedTrip, for: user)
+        print("asdf")
+        tableView.reloadData()
+    }
+    func denied(sharedTrip: SharedTrip, by user: User) {
+//        SharedTripsController.shared.
+    }
+}

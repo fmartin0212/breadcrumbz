@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol TripTableViewCellDelegate: class {
+    func accepted(sharedTrip: SharedTrip, by user: User)
+    func denied(sharedTrip: SharedTrip, by user: User)
+}
+
 class TripTableViewCell: UITableViewCell {
     
     // MARK: - Properties
@@ -23,6 +28,14 @@ class TripTableViewCell: UITableViewCell {
         }
     }
     
+    var user: User? {
+        didSet {
+            updateViewsForUser()
+        }
+    }
+    
+    weak var delegate: TripTableViewCellDelegate?
+    
     // MARK: - IBOutlets
     // Trip
     @IBOutlet weak var tripImageView: UIImageView!
@@ -31,6 +44,9 @@ class TripTableViewCell: UITableViewCell {
     @IBOutlet weak var tripDatesLabel: UILabel!
     @IBOutlet weak var tripStartDateLabel: UILabel!
     @IBOutlet weak var tripEndDateLabel: UILabel!
+    @IBOutlet weak var tripCreatorLabel: UILabel!
+    @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var denyButton: UIButton!
     
     // MARK: - Functions
     func updateViews() {
@@ -82,6 +98,22 @@ class TripTableViewCell: UITableViewCell {
         
         tripStartDateLabel.text = "\(shortDateString(date: sharedTrip.startDate as Date)) -"
         tripEndDateLabel.text = "\(shortDateString(date: sharedTrip.endDate as Date))"
+        
+        if sharedTrip.isAcceptedTrip == true {
+            acceptButton.isHidden = true
+            denyButton.isHidden = true
+        } else {
+            acceptButton.isHidden = false
+            denyButton.isHidden = false
+        }
+    }
+    
+    func updateViewsForUser() {
+        guard let user = user else { return }
+        DispatchQueue.main.async {
+            self.tripCreatorLabel.alpha = 1
+            self.tripCreatorLabel.text = user.firstName
+        }
     }
     
     func shortDateString(date: Date) -> String {
@@ -94,4 +126,19 @@ class TripTableViewCell: UITableViewCell {
         
     }
 
+    @IBAction func acceptButtonTapped(_ sender: Any) {
+        guard let sharedTrip = sharedTrip,
+            let user = user
+            else { return }
+        
+        delegate?.accepted(sharedTrip: sharedTrip, by: user)
+    }
+    
+    @IBAction func denyButtonTapped(_ sender: Any) {
+        guard let sharedTrip = sharedTrip,
+            let user = user
+            else { return }
+        
+        delegate?.denied(sharedTrip: sharedTrip, by: user)
+    }
 }

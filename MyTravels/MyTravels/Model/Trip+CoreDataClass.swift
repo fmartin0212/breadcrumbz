@@ -79,8 +79,8 @@ extension CKRecord {
         let photoAsset = CKAsset(fileURL: trip.temporaryPhotoURL)
         
         self.init(recordType: "Trip", recordID: recordID)
-        guard let loggedInUser = UserController.shared.loggedInUser else { return nil }
-        let creatorReference = CKReference(recordID: loggedInUser.appleUserRef.recordID, action: .none)
+        guard let loggedInUser = UserController.shared.loggedInUser, let loggedInUserCKRecordID = loggedInUser.ckRecordID  else { return nil }
+        let creatorReference = CKReference(recordID: loggedInUserCKRecordID, action: .none)
         
         var sharedIDsArray = [String]()
         if let sharedIDObjects = trip.usersSharedWithRecordIDs?.allObjects as? [UsersSharedWithRecordIDs] {

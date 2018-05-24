@@ -18,8 +18,8 @@ class User {
     let profilePicture: Data?
     var ckRecordID: CKRecordID?
     let appleUserRef: CKReference
-    var pendingSharedTripsRefs: [CKReference]?
-    var acceptedSharedTripsRefs: [CKReference]?
+    var pendingSharedTripsRefs: [CKReference] = []
+    var acceptedSharedTripsRefs: [CKReference] = []
     
     fileprivate var temporaryPhotoURL: URL {
         
@@ -51,6 +51,13 @@ class User {
             let appleUserRef = ckRecord["appleUserRef"] as? CKReference
             else { return nil }
         
+        if let pendingSharedTripsRefs = ckRecord["pendingSharedTrips"] as? [CKReference] {
+            self.pendingSharedTripsRefs = pendingSharedTripsRefs
+        }
+        if let acceptedSharedTripsRefs = ckRecord["acceptedSharedTrips"] as? [CKReference] {
+            self.acceptedSharedTripsRefs = acceptedSharedTripsRefs
+        }
+        
         let photoData = try? Data(contentsOf: profilePicture.fileURL)
         
         self.firstName = firstName
@@ -59,8 +66,6 @@ class User {
         self.profilePicture = photoData
         self.appleUserRef = appleUserRef
         self.ckRecordID = ckRecord.recordID
-        self.pendingSharedTripsRefs = ckRecord["pendingSharedTrips"] as? [CKReference]
-        self.acceptedSharedTripsRefs = ckRecord["acceptedSharedTrips"] as? [CKReference]
         }
     }
 

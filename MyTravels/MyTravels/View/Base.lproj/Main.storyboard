@@ -2164,7 +2164,7 @@
                                                             <rect key="frame" x="0.0" y="276.5" width="326" height="60"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="vq9-yN-Wt6">
-                                                                    <rect key="frame" x="0.0" y="1" width="172" height="59"/>
+                                                                    <rect key="frame" x="0.0" y="1" width="176" height="59"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Trip name)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppx-P9-tUU">
                                                                             <rect key="frame" x="0.0" y="0.0" width="88" height="22"/>
@@ -2198,10 +2198,10 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="xfb-TC-cCC">
-                                                                    <rect key="frame" x="172" y="0.0" width="154" height="60"/>
+                                                                    <rect key="frame" x="176" y="0.0" width="150" height="60"/>
                                                                     <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="9CM-Oa-fBw">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="154" height="30"/>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="9CM-Oa-fBw">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Shared from" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6j-yf-e5B">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
@@ -2209,8 +2209,8 @@
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HEA-IE-HJC">
-                                                                                    <rect key="frame" x="86" y="0.0" width="68" height="30"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HEA-IE-HJC">
+                                                                                    <rect key="frame" x="82" y="0.0" width="68" height="30"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
@@ -2218,15 +2218,21 @@
                                                                             </subviews>
                                                                         </stackView>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IxR-wz-lun">
-                                                                            <rect key="frame" x="0.0" y="30" width="154" height="30"/>
+                                                                            <rect key="frame" x="0.0" y="30" width="150" height="30"/>
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRx-LT-X8J">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="30"/>
                                                                                     <state key="normal" title="Accept"/>
+                                                                                    <connections>
+                                                                                        <action selector="acceptButtonTapped:" destination="pbV-cm-PzN" eventType="touchUpInside" id="nOh-Xk-MU5"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0qS-oO-UVq">
-                                                                                    <rect key="frame" x="82" y="0.0" width="72" height="30"/>
+                                                                                    <rect key="frame" x="80" y="0.0" width="70" height="30"/>
                                                                                     <state key="normal" title="Deny"/>
+                                                                                    <connections>
+                                                                                        <action selector="denyButtonTapped:" destination="pbV-cm-PzN" eventType="touchUpInside" id="N2H-Gi-c01"/>
+                                                                                    </connections>
                                                                                 </button>
                                                                             </subviews>
                                                                         </stackView>
@@ -2245,6 +2251,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="acceptButton" destination="kRx-LT-X8J" id="Dwc-Sb-uYG"/>
+                                            <outlet property="denyButton" destination="0qS-oO-UVq" id="jib-35-BTY"/>
+                                            <outlet property="tripCreatorLabel" destination="HEA-IE-HJC" id="Aqj-he-o0Y"/>
                                             <outlet property="tripDatesLabel" destination="m7X-4q-Ns9" id="alM-qn-KQD"/>
                                             <outlet property="tripEndDateLabel" destination="mZC-Ac-bSb" id="Qgg-R6-Jql"/>
                                             <outlet property="tripImageView" destination="ln1-ha-ZS3" id="ZGB-TM-0bh"/>

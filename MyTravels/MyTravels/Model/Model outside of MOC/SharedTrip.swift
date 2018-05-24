@@ -11,11 +11,11 @@ import CloudKit
 
 class SharedTrip {
     
-    var name: String
-    var location: String
-    var tripDescription: String?
-    var startDate: Date
-    var endDate: Date
+    let name: String
+    let location: String
+    let tripDescription: String?
+    let startDate: Date
+    let endDate: Date
     var photoData: Data?
     var places: [SharedPlace] = []
     var reference: CKReference {
@@ -26,8 +26,10 @@ class SharedTrip {
         let failedRecordID = CKRecordID(recordName: "FAIL")
         return CKReference(recordID: failedRecordID, action: .none)
     }
-    var cloudKitRecordID: CKRecordID?
+    let cloudKitRecordID: CKRecordID?
+    let creatorRef: CKReference
     var isAcceptedTrip: Bool = true
+    
     
     fileprivate var temporaryPhotoURL: URL {
         
@@ -52,7 +54,8 @@ class SharedTrip {
             let startDate = record["startDate"] as? Date,
             let endDate = record["endDate"] as? Date,
             let photoData = record["photo"] as? CKAsset,
-            let ckRecordID = record["recordID"] as? CKRecordID
+            let ckRecordID = record["recordID"] as? CKRecordID,
+            let creatorRef = record["creatorReference"] as? CKReference
             else { return nil }
         
         let photoAssetAsData = try? Data(contentsOf: photoData.fileURL)
@@ -64,5 +67,12 @@ class SharedTrip {
         self.endDate = endDate
         self.photoData = photoAssetAsData
         self.cloudKitRecordID = ckRecordID
+        self.creatorRef = creatorRef
+    }
+}
+
+extension SharedTrip: Equatable {
+    static func == (lhs: SharedTrip, rhs: SharedTrip) -> Bool {
+        return lhs.cloudKitRecordID == rhs.cloudKitRecordID
     }
 }
