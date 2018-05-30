@@ -68,6 +68,9 @@ extension SharedTripsListViewController: UITableViewDataSource {
             if SharedTripsController.shared.sharedTrips[section].first?.isAcceptedTrip == false {
                 return "Pending"
             }
+            else if SharedTripsController.shared.sharedTrips[section].first?.isAcceptedTrip == true {
+                return "Following"
+            }
         }
         return ""
     }
@@ -87,12 +90,14 @@ extension SharedTripsListViewController: UITableViewDataSource {
         let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.section][indexPath.row]
         
         cell.sharedTrip = sharedTrip
-        cell.delegate = self
+        cell.indexPath = indexPath
         
         SharedTripsController.shared.fetchCreator(for: sharedTrip) { (user) in
             guard let user = user else { return }
             cell.user = user
         }
+        
+        cell.delegate = self
         
         return cell
         
@@ -100,12 +105,18 @@ extension SharedTripsListViewController: UITableViewDataSource {
     }
 
 extension SharedTripsListViewController: TripTableViewCellDelegate {
-    func accepted(sharedTrip: SharedTrip, by user: User) {
-        SharedTripsController.shared.accept(sharedTrip: sharedTrip, for: user)
-        print("asdf")
-        tableView.reloadData()
+    
+    func accepted(sharedTrip: SharedTrip, indexPath: IndexPath, user: User) {
+        SharedTripsController.shared.accept(sharedTrip: sharedTrip, at: indexPath, for: user) { (success) in
+            if success {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
-    func denied(sharedTrip: SharedTrip, by user: User) {
+    
+    func denied(sharedTrip: SharedTrip, indexPath: IndexPath, user: User) {
 //        SharedTripsController.shared.
     }
 }

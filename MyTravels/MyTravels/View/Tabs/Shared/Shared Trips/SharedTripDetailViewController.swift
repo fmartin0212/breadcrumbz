@@ -206,12 +206,5 @@ extension SharedTripDetailViewController: UITableViewDelegate, UITableViewDataSo
         return cell
         
     }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
-        // FIXME: - User should not be able to edit at all. Look into how to disable.
-        
-    }
-    
 }
 

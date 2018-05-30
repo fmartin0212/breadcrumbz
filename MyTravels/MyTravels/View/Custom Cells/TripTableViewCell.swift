@@ -9,8 +9,8 @@
 import UIKit
 
 protocol TripTableViewCellDelegate: class {
-    func accepted(sharedTrip: SharedTrip, by user: User)
-    func denied(sharedTrip: SharedTrip, by user: User)
+    func accepted(sharedTrip: SharedTrip, indexPath: IndexPath, user: User)
+    func denied(sharedTrip: SharedTrip, indexPath: IndexPath, user: User)
 }
 
 class TripTableViewCell: UITableViewCell {
@@ -33,6 +33,8 @@ class TripTableViewCell: UITableViewCell {
             updateViewsForUser()
         }
     }
+    
+    var indexPath: IndexPath?
     
     weak var delegate: TripTableViewCellDelegate?
     
@@ -128,17 +130,19 @@ class TripTableViewCell: UITableViewCell {
 
     @IBAction func acceptButtonTapped(_ sender: Any) {
         guard let sharedTrip = sharedTrip,
-            let user = user
+            let user = user,
+            let indexPath = indexPath
             else { return }
         
-        delegate?.accepted(sharedTrip: sharedTrip, by: user)
+        delegate?.accepted(sharedTrip: sharedTrip, indexPath: indexPath, user: user)
     }
     
     @IBAction func denyButtonTapped(_ sender: Any) {
         guard let sharedTrip = sharedTrip,
-            let user = user
+            let user = user,
+            let indexPath = indexPath
             else { return }
         
-        delegate?.denied(sharedTrip: sharedTrip, by: user)
+        delegate?.denied(sharedTrip: sharedTrip, indexPath: indexPath, user: user)
     }
 }
