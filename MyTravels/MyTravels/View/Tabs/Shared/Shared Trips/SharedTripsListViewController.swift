@@ -116,7 +116,7 @@ extension SharedTripsListViewController: TripTableViewCellDelegate {
         }
     }
     
-    func denied(sharedTrip: SharedTrip, indexPath: IndexPath, user: User) {
+    func denied(sharedTrip: SharedTrip, indexPath: IndexPath) {
         SharedTripsController.shared.deny(sharedTrip: sharedTrip, at: indexPath) { (success) in
             if success {
                 DispatchQueue.main.async {

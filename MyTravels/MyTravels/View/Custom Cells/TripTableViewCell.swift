@@ -9,8 +9,8 @@
 import UIKit
 
 protocol TripTableViewCellDelegate: class {
-    func accepted(sharedTrip: SharedTrip, indexPath)
-    func denied(sharedTrip: SharedTrip, indexPath)
+    func accepted(sharedTrip: SharedTrip, indexPath: IndexPath)
+    func denied(sharedTrip: SharedTrip, indexPath: IndexPath)
 }
 
 class TripTableViewCell: UITableViewCell {
