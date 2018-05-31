@@ -160,22 +160,23 @@ class SharedTripsController {
         }
     }
     
-    func accept(sharedTrip: SharedTrip, at indexPath: IndexPath, for user: User, completion: @escaping (Bool) -> Void) {
+    func accept(sharedTrip: SharedTrip, at indexPath: IndexPath, completion: @escaping (Bool) -> Void) {
         sharedTrip.isAcceptedTrip = true
-        guard let indexToRemove = pendingSharedTrips.index(of: sharedTrip) else { completion(false) ; return }
+        guard let loggedInUser = UserController.shared.loggedInUser,
+           let indexToRemove = pendingSharedTrips.index(of: sharedTrip) else { completion(false) ; return }
+    
+        loggedInUser.pendingSharedTripsRefs.remove(at: indexToRemove)
+        loggedInUser.pendingSharedTripsRefs.forEach { print($0.recordID.recordName) }
+        let acceptedSharedRef = CKReference(recordID: sharedTrip.cloudKitRecordID!, action: .deleteSelf)
+        loggedInUser.acceptedSharedTripsRefs.append(acceptedSharedRef)
         
-        user.pendingSharedTripsRefs.remove(at: indexToRemove)
-        user.pendingSharedTripsRefs.forEach { print($0.recordID.recordName) }
-        
-        guard let record = CKRecord(user: user) else { completion(false) ; return }
+        guard let record = CKRecord(user: loggedInUser) else { completion(false) ; return }
         CloudKitManager.shared.updateOperation(records: [record]) { (success) in
             if success {
-                let acceptedSharedRef = CKReference(recordID: sharedTrip.cloudKitRecordID!, action: .deleteSelf)
-                user.acceptedSharedTripsRefs.append(acceptedSharedRef)
                 
                 self.pendingSharedTrips.remove(at: indexToRemove)
-                
                 self.acceptedSharedTrips.append(sharedTrip)
+                
                 self.sharedTrips.removeAll()
                 self.sharedTrips.append(self.pendingSharedTrips)
                 self.sharedTrips.append(self.acceptedSharedTrips)
@@ -185,13 +186,21 @@ class SharedTripsController {
         }
     }
     
-    func deny(sharedTrip: SharedTrip, at indexPath: IndexPath, for: User, completion: @escaping (Bool) -> Void) {
-        
+    func deny(sharedTrip: SharedTrip, at indexPath: IndexPath, completion: @escaping (Bool) -> Void) {
         guard let loggedInUser = UserController.shared.loggedInUser,
-            let loggedInUserindexToRemove = pendingSharedTrips.index(of: sharedTrip) else { completion(false) ; return }
-//        loggedInUser.pendingSharedTripsRefs.remove(at: <#T##Int#>)
+            let indexToRemove = pendingSharedTrips.index(of: sharedTrip) else { completion(false) ; return }
         
-//        self.pendingSharedTrips.remove(at: indexToRemove)
+        loggedInUser.pendingSharedTripsRefs.remove(at: indexToRemove)
         
+        guard let record = CKRecord(user: loggedInUser) else { completion(false) ; return }
+        CloudKitManager.shared.updateOperation(records: [record]) { (success) in
+            self.pendingSharedTrips.remove(at: indexToRemove)
+            
+            self.sharedTrips.removeAll()
+            self.sharedTrips.append(self.pendingSharedTrips)
+            self.sharedTrips.append(self.acceptedSharedTrips)
+            
+            completion(true)
+        }
     }
 }
