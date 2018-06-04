@@ -43,7 +43,8 @@ class TripsListViewController: UIViewController {
         
         // Set navigation bar properties
         navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.font : UIFont(name: "AvenirNext", size: 20)]
+        addTripBarButtonItem.setTitleTextAttributes([NSAttributedStringKey.font : UIFont(name: "AvenirNext-Regular", size: 15) as Any], for: .normal)
+//        navigationController?.navigationItem.rightBarButtonItem?.style = .
         
         TripController.shared.fetchAllTrips()
      

@@ -29,7 +29,6 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .clear
-        navigationController?.navigationBar.prefersLargeTitles = false
         
         if let trip = trip {
             // Set trip photo
