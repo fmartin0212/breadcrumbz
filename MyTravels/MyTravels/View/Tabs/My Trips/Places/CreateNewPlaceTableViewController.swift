@@ -53,15 +53,10 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         collectionView.dataSource = self
         locationManager.delegate = self
         placeCommentsTextView.delegate = self
-      
-        
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Gilroy", size: 20)!]
-        self.navigationController?.navigationItem.title = "Add a crumb"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+
         // Set textview placeholder text
         placeCommentsTextView.text = "Comments"
         placeCommentsTextView.textColor = #colorLiteral(red: 0.8037719131, green: 0.8036019206, blue: 0.8242246509, alpha: 1)
-        
     }
     
     // MARK: - IBActions

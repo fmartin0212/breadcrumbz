@@ -43,11 +43,9 @@ class TripsListViewController: UIViewController {
         
         // Set navigation bar properties
         navigationController?.navigationBar.prefersLargeTitles = true
-        addTripBarButtonItem.setTitleTextAttributes([NSAttributedStringKey.font : UIFont(name: "AvenirNext-Regular", size: 15) as Any], for: .normal)
-//        navigationController?.navigationItem.rightBarButtonItem?.style = .
+        addTripBarButtonItem.format()
         
         TripController.shared.fetchAllTrips()
-     
         if TripController.shared.trips.count == 0 {
             self.presentNoTripsView()
         }

@@ -19,6 +19,8 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
     
     // MARK: - IBOutlets
 
+    @IBOutlet weak var cancelBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var saveBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var tripNameTextField: UITextField!
     @IBOutlet weak var tripLocationTextField: UITextField!
     @IBOutlet weak var tripDescriptionTextView: UITextView!
@@ -38,13 +40,12 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
         
         imagePickerController.allowsEditing = true
         
-        // Navigation bar properties
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
         // Trip description text view initial value
         tripDescriptionTextView.text = "Brief description (optional)"
         tripDescriptionTextView.textColor = #colorLiteral(red: 0.8037719131, green: 0.8036019206, blue: 0.8242246509, alpha: 1)
         
+        cancelBarButtonItem.format()
+        saveBarButtonItem.format()
     }
     
     // MARK: - IBActions
