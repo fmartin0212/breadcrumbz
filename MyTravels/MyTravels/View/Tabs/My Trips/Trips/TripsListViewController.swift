@@ -18,6 +18,7 @@ class TripsListViewController: UIViewController {
     @IBOutlet var addTripBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addATripButton: UIButton!
+    @IBOutlet weak var profileBarButtonItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         

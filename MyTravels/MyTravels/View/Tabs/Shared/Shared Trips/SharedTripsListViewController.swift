@@ -33,9 +33,6 @@ class SharedTripsListViewController: UIViewController {
                 self.present(createAccountViewController, animated: true, completion: nil)
             })
         }
-        
-        // Set navigation bar properties
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     // MARK: - Functions
