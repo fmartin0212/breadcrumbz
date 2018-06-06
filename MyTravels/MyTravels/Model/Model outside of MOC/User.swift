@@ -14,7 +14,7 @@ class User {
     
     let firstName: String?
     let lastName: String?
-    let phoneNumber: String?
+    let username: String?
     let profilePicture: Data?
     var ckRecordID: CKRecordID?
     let appleUserRef: CKReference
@@ -33,10 +33,10 @@ class User {
         return fileURL
     }
     
-    init(firstName: String?, lastName: String?, phoneNumber: String?, profilePicture: Data?, appleUserRef: CKReference) {
+    init(firstName: String?, lastName: String?, username: String?, profilePicture: Data?, appleUserRef: CKReference) {
         self.firstName = firstName
         self.lastName = lastName
-        self.phoneNumber = phoneNumber
+        self.username = username
         self.profilePicture = profilePicture
         self.appleUserRef = appleUserRef
     }
@@ -44,9 +44,9 @@ class User {
     // Turn record into User
     init?(ckRecord: CKRecord) {
         
-        guard let phoneNumber = ckRecord["phoneNumber"] as? String,
-            let firstName = ckRecord["firstName"] as? String,
+        guard let firstName = ckRecord["firstName"] as? String,
             let lastName = ckRecord["lastName"] as? String,
+            let username = ckRecord["username"] as? String,
             let profilePicture = ckRecord["profilePictureAsset"] as? CKAsset,
             let appleUserRef = ckRecord["appleUserRef"] as? CKReference
             else { return nil }
@@ -62,7 +62,7 @@ class User {
         
         self.firstName = firstName
         self.lastName = lastName
-        self.phoneNumber = phoneNumber
+        self.username = username
         self.profilePicture = photoData
         self.appleUserRef = appleUserRef
         self.ckRecordID = ckRecord.recordID
@@ -81,7 +81,7 @@ extension CKRecord {
         
         self.setValue(user.firstName, forKey: "firstName")
         self.setValue(user.lastName, forKey: "lastName")
-        self.setValue(user.phoneNumber, forKey: "phoneNumber")
+        self.setValue(user.username, forKey: "username")
         self.setValue(profilePictureAsset, forKey: "profilePictureAsset")
         self.setValue(user.appleUserRef, forKey: "appleUserRef")
         self.setValue(user.pendingSharedTripsRefs, forKey: "pendingSharedTrips")

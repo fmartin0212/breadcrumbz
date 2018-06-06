@@ -17,6 +17,7 @@ class SharedTripDetailViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet var sharedTripPhotoImageView: UIImageView!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var actionButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         
@@ -28,6 +29,8 @@ class SharedTripDetailViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .clear
         navigationController?.navigationBar.prefersLargeTitles = false
+        
+        actionButton.format()
         
         guard let sharedTrip = sharedTrip else { return }
     
@@ -122,6 +125,9 @@ class SharedTripDetailViewController: UIViewController {
             
         }
         
+    }
+    
+    @IBAction func actionButtonTapped(_ sender: Any) {
     }
     
 }

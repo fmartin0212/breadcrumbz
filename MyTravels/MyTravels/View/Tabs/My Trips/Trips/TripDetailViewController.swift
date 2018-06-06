@@ -60,13 +60,18 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
     @IBAction func actionButtonTapped(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let shareTripAction = UIAlertAction(title: "Share trip", style: .default) { (action) in
-            guard let trip = self.trip else { return }
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let usernameSearchViewController = storyboard.instantiateViewController(withIdentifier: "UsernameSearchViewController") as? UsernameSearchViewController else { return }
-            usernameSearchViewController.trip = trip
-            self.present(usernameSearchViewController, animated: true, completion: {
-                
+            CloudKitManager.shared.performFullSync(completion: { (success) in
+                DispatchQueue.main.async {
+                    self.presentShareAlertController()
+                }
             })
+//
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            guard let usernameSearchViewController = storyboard.instantiateViewController(withIdentifier: "UsernameSearchViewController") as? UsernameSearchViewController else { return }
+//            usernameSearchViewController.trip = trip
+//            self.present(usernameSearchViewController, animated: true, completion: {
+//
+//            })
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
             alertController.dismiss(animated: true, completion: nil)
@@ -124,6 +129,51 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         
         tableView.reloadData()
         
+    }
+    
+    func presentShareAlertController() {
+        let alertController = UIAlertController(title: "Share trip", message: "Enter a username below to share your trip", preferredStyle: .alert)
+        alertController.addTextField(configurationHandler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let shareAction = UIAlertAction(title: "Share", style: .default) { (action) in
+            guard let trip = self.trip,
+                let username = alertController.textFields?.first!.text else { return }
+            
+            let predicate = NSPredicate(format: "username == %@", username)
+            let query = CKQuery(recordType: "User", predicate: predicate)
+            CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
+                guard let userRecord = records?.first,
+                    let user = User(ckRecord: userRecord),
+                    let tripReference = trip.reference
+                    else { return }
+                
+                // If anything is in the user's pending refs list, append the new tripReference; otherwise, set the refs list to a new array with the trip reference.
+                //        if let userPendingSharedTripsRefs = user.pendingSharedTripsRefs {
+                if user.pendingSharedTripsRefs.contains(tripReference) {
+                    
+                    let alert = UIAlertController(title: "Oops!", message: "You have already shared this trip with this user. Please choose someone else.", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alert.addAction(okAction)
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                } else {
+                    user.pendingSharedTripsRefs.append(tripReference)
+                    //        } else {
+                    //            user.pendingSharedTripsRefs = [tripReference]
+                }
+                
+                guard let record = CKRecord(user: user) else { return }
+                CloudKitManager.shared.updateOperation(records: [record]) { (_) in
+                    DispatchQueue.main.async {
+                        print("break")
+                    }
+                }
+            })
+        }
+        alertController.addAction(shareAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
 
     // MARK: - Navigation

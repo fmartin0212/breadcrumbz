@@ -2550,11 +2550,12 @@
                     <navigationItem key="navigationItem" id="Wqz-F6-5jJ">
                         <barButtonItem key="rightBarButtonItem" title="..." id="Hes-5y-vxe">
                             <connections>
-                                <action selector="actionButtonTapped:" destination="c18-LH-a4l" id="5J4-ab-96c"/>
+                                <action selector="actionButtonTapped:" destination="c18-LH-a4l" id="1bY-JZ-yQd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="actionButton" destination="Hes-5y-vxe" id="g1m-6h-gnn"/>
                         <outlet property="sharedTripPhotoImageView" destination="cdw-CX-1Sj" id="fa4-Th-4rU"/>
                         <outlet property="tableView" destination="pQ7-OR-bS9" id="lYQ-Vr-vCd"/>
                     </connections>
