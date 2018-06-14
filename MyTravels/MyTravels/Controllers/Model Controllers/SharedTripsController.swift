@@ -178,8 +178,13 @@ class SharedTripsController {
                 self.acceptedSharedTrips.append(sharedTrip)
                 
                 self.sharedTrips.removeAll()
+                
+                if self.pendingSharedTrips.count > 0 {
                 self.sharedTrips.append(self.pendingSharedTrips)
-                self.sharedTrips.append(self.acceptedSharedTrips)
+                }
+                if self.acceptedSharedTrips.count > 0 {
+                    self.sharedTrips.append(self.acceptedSharedTrips)
+                }
                 
                 completion(true)
             }
@@ -197,8 +202,13 @@ class SharedTripsController {
             self.pendingSharedTrips.remove(at: indexToRemove)
             
             self.sharedTrips.removeAll()
-            self.sharedTrips.append(self.pendingSharedTrips)
-            self.sharedTrips.append(self.acceptedSharedTrips)
+            
+            if self.pendingSharedTrips.count > 0 {
+                self.sharedTrips.append(self.pendingSharedTrips)
+            }
+            if self.acceptedSharedTrips.count > 0 {
+                self.sharedTrips.append(self.acceptedSharedTrips)
+            }
             
             completion(true)
         }

@@ -20,10 +20,14 @@ class TripsListViewController: UIViewController {
     @IBOutlet weak var addATripButton: UIButton!
     @IBOutlet weak var profileBarButtonItem: UIBarButtonItem!
     
+    private let duration: TimeInterval = 0.5
+    var operation: UINavigationControllerOperation = .push
+    var thumbnailFrame = CGRect.zero
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+    
         // Set tableview properties
         tableView.separatorStyle = .none
         

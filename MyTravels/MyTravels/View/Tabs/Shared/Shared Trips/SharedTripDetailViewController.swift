@@ -28,7 +28,6 @@ class SharedTripDetailViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .clear
-        navigationController?.navigationBar.prefersLargeTitles = false
         
         actionButton.format()
         

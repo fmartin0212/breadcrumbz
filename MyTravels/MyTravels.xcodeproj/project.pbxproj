@@ -13,6 +13,8 @@
 		B73926112035255A0050B580 /* UsernameSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73926102035255A0050B580 /* UsernameSearchViewController.swift */; };
 		B739261320362E5F0050B580 /* SharedTripsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B739261220362E5F0050B580 /* SharedTripsController.swift */; };
 		B7392616203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7392614203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift */; };
+		B75E335C20D3150500839678 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E335B20D3150500839678 /* SignUpViewController.swift */; };
+		B75E335E20D316DD00839678 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E335D20D316DD00839678 /* TextFieldTableViewCell.swift */; };
 		B77E4F7120C6D482007EB266 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E4F7020C6D481007EB266 /* Extensions.swift */; };
 		B77E4F7320C835EF007EB266 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B77E4F7220C835EE007EB266 /* Assets.xcassets */; };
 		B78FB5982070317700EE40C2 /* Gilroy-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B78FB5972070317000EE40C2 /* Gilroy-ExtraBold.otf */; };
@@ -73,6 +75,8 @@
 		B73926102035255A0050B580 /* UsernameSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameSearchViewController.swift; sourceTree = "<group>"; };
 		B739261220362E5F0050B580 /* SharedTripsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripsController.swift; sourceTree = "<group>"; };
 		B7392614203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UsersSharedWithRecordIDs+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B75E335B20D3150500839678 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		B75E335D20D316DD00839678 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		B76D944720C0C5BB003E8BBE /* Gilroy-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Light.otf"; sourceTree = "<group>"; };
 		B77E4F7020C6D481007EB266 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B77E4F7220C835EE007EB266 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 		B71E0C70202CC13600125396 /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
+				B75E335D20D316DD00839678 /* TextFieldTableViewCell.swift */,
 				B7C10CCC2020EFB000818430 /* TripTableViewCell.swift */,
 				B711157820549859000868BD /* TripDetailTableViewCell.swift */,
 				B7F75C1F205A14D800C876A0 /* SharedTripDetailTableViewCell.swift */,
@@ -337,6 +342,7 @@
 				B7F75C082058521C00C876A0 /* ExplanationViewController.swift */,
 				B7F75C0A2058523300C876A0 /* FeaturesViewController.swift */,
 				B7C10CB62020D19500818430 /* CreateAccountViewController.swift */,
+				B75E335B20D3150500839678 /* SignUpViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -578,7 +584,9 @@
 				B7D652452027FB4B00E975F1 /* ChooseDateViewController.swift in Sources */,
 				B796DD3A204B5F9500CAF093 /* MapViewController.swift in Sources */,
 				B7D6523D202620E700E975F1 /* PlaceTableViewCell.swift in Sources */,
+				B75E335C20D3150500839678 /* SignUpViewController.swift in Sources */,
 				B7EC47C42066E83300905B20 /* UserDefaults.swift in Sources */,
+				B75E335E20D316DD00839678 /* TextFieldTableViewCell.swift in Sources */,
 				B77E4F7120C6D482007EB266 /* Extensions.swift in Sources */,
 				B7D6523F2026526700E975F1 /* ViewControllerExtensions.swift in Sources */,
 				B7C10CD3202111A300818430 /* CoreDataStack.swift in Sources */,

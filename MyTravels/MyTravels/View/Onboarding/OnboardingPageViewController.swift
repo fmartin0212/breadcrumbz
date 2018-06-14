@@ -11,7 +11,7 @@ import UIKit
 class OnboardingPageViewController: UIPageViewController {
     
     lazy var orderedViewControllers: [UIViewController] = {
-        return [viewController(identifier: "ExplanationViewController"), viewController(identifier: "FeaturesViewController"), viewController(identifier: "CreateAccountViewController")]
+        return [viewController(identifier: "ExplanationViewController"), viewController(identifier: "FeaturesViewController"), viewController(identifier: "SignUp")]
     }()
     
     override func viewDidLoad() {

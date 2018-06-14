@@ -61,8 +61,10 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let shareTripAction = UIAlertAction(title: "Share trip", style: .default) { (action) in
             CloudKitManager.shared.performFullSync(completion: { (success) in
-                DispatchQueue.main.async {
-                    self.presentShareAlertController()
+                if success {
+                    DispatchQueue.main.async {
+                        self.presentShareAlertController()
+                    }
                 }
             })
 //
