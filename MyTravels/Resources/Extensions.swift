@@ -20,3 +20,9 @@ extension UIBarButtonItem {
         self.setTitleTextAttributes(attributes, for: .selected)
     }
 }
+
+extension UIButton {
+    func formatBlue() {
+         self.layer.cornerRadius = 8
+    }
+}

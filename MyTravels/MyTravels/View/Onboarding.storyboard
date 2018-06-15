@@ -126,22 +126,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iXf-l7-Ol4">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iXf-l7-Ol4">
                                 <rect key="frame" x="0.0" y="201" width="375" height="162"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="162" id="Me8-zU-c00"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="x5J-Gu-RvB">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="entryCell" id="x5J-Gu-RvB" customClass="TextFieldTableViewCell" customModule="MyTravels" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x5J-Gu-RvB" id="ZKK-mE-SP0">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kRW-EY-r1X">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kRW-EY-r1X">
+                                                    <rect key="frame" x="10" y="0.0" width="355" height="44"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -149,11 +149,14 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="kRW-EY-r1X" secondAttribute="trailing" id="QqG-b8-ipc"/>
+                                            <constraint firstAttribute="trailing" secondItem="kRW-EY-r1X" secondAttribute="trailing" constant="10" id="QqG-b8-ipc"/>
                                             <constraint firstItem="kRW-EY-r1X" firstAttribute="top" secondItem="x5J-Gu-RvB" secondAttribute="top" id="R75-ZE-9QS"/>
                                             <constraint firstAttribute="bottom" secondItem="kRW-EY-r1X" secondAttribute="bottom" id="tGD-sQ-c0L"/>
-                                            <constraint firstItem="kRW-EY-r1X" firstAttribute="leading" secondItem="x5J-Gu-RvB" secondAttribute="leading" id="z9M-Ke-exC"/>
+                                            <constraint firstItem="kRW-EY-r1X" firstAttribute="leading" secondItem="x5J-Gu-RvB" secondAttribute="leading" constant="10" id="z9M-Ke-exC"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="entryTextField" destination="kRW-EY-r1X" id="xpr-zI-Oti"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
@@ -170,6 +173,15 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Skip"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJy-Sz-BPc">
+                                <rect key="frame" x="130" y="430" width="95" height="38"/>
+                                <color key="backgroundColor" red="0.1696610677" green="0.32706386389999997" blue="0.72726690770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
+                                <state key="normal" title="Sign up">
+                                    <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -177,11 +189,14 @@
                             <constraint firstItem="iXf-l7-Ol4" firstAttribute="top" secondItem="ukb-a5-RJS" secondAttribute="bottom" constant="32" id="7mi-2a-KAe"/>
                             <constraint firstItem="iXf-l7-Ol4" firstAttribute="leading" secondItem="jx5-Qf-78x" secondAttribute="leading" id="AgC-Dq-sct"/>
                             <constraint firstItem="jx5-Qf-78x" firstAttribute="trailing" secondItem="iXf-l7-Ol4" secondAttribute="trailing" id="CMW-4l-Rcy"/>
+                            <constraint firstItem="EJy-Sz-BPc" firstAttribute="top" secondItem="iXf-l7-Ol4" secondAttribute="bottom" constant="67" id="htb-Ge-vIa"/>
                             <constraint firstItem="ukb-a5-RJS" firstAttribute="centerX" secondItem="jx5-Qf-78x" secondAttribute="centerX" id="mS4-wE-Gx8"/>
+                            <constraint firstItem="EJy-Sz-BPc" firstAttribute="centerX" secondItem="iXf-l7-Ol4" secondAttribute="centerX" id="v3v-BR-LsP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jx5-Qf-78x"/>
                     </view>
                     <connections>
+                        <outlet property="signUpButton" destination="EJy-Sz-BPc" id="Ere-4P-VqM"/>
                         <outlet property="skipButtonTapped" destination="ZoF-35-6hK" id="U4N-hN-kfD"/>
                         <outlet property="tableView" destination="iXf-l7-Ol4" id="lYU-cO-Xgt"/>
                     </connections>
