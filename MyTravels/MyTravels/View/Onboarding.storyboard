@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7kg-fl-qzV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7kg-fl-qzV">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,15 +12,15 @@
         <!--Onboarding Page View Controller-->
         <scene sceneID="vl7-pM-on1">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" modalTransitionStyle="crossDissolve" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="max" doubleSided="YES" id="7kg-fl-qzV" customClass="OnboardingPageViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="OnboardingPageVC" autoresizesArchivedViewToFullSize="NO" modalTransitionStyle="crossDissolve" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="max" doubleSided="YES" id="7kg-fl-qzV" customClass="OnboardingPageViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n5P-8A-HlR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-260" y="-1479"/>
         </scene>
-        <!--View Controller-->
+        <!--Explanation View Controller-->
         <scene sceneID="O4n-cy-Ztb">
             <objects>
-                <viewController storyboardIdentifier="ExplanationViewController" id="fEg-ce-nRm" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExplanationViewController" id="fEg-ce-nRm" customClass="ExplanationViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0M4-1x-kkF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,10 +45,12 @@
                                     </textView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ez-yY-4lQ">
-                                <rect key="frame" x="321" y="20" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ez-yY-4lQ">
+                                <rect key="frame" x="321" y="30" width="30" height="30"/>
                                 <state key="normal" title="Skip"/>
+                                <connections>
+                                    <action selector="skipButtonTapped:" destination="fEg-ce-nRm" eventType="touchUpInside" id="uXX-SO-3uj"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745098039216" green="0.95686274509803915" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -56,6 +58,8 @@
                             <constraint firstItem="mVt-zd-b4x" firstAttribute="leading" secondItem="AJN-MN-wXU" secondAttribute="leading" id="HHB-44-BKp"/>
                             <constraint firstItem="AJN-MN-wXU" firstAttribute="centerY" secondItem="mVt-zd-b4x" secondAttribute="centerY" id="OhR-An-aVq"/>
                             <constraint firstItem="AJN-MN-wXU" firstAttribute="trailing" secondItem="mVt-zd-b4x" secondAttribute="trailing" id="T15-51-TCr"/>
+                            <constraint firstItem="1Ez-yY-4lQ" firstAttribute="top" secondItem="mVt-zd-b4x" secondAttribute="top" constant="10" id="kdl-Wq-zfk"/>
+                            <constraint firstItem="mVt-zd-b4x" firstAttribute="trailing" secondItem="1Ez-yY-4lQ" secondAttribute="trailing" constant="24" id="sgu-5n-LQu"/>
                             <constraint firstItem="AJN-MN-wXU" firstAttribute="centerX" secondItem="mVt-zd-b4x" secondAttribute="centerX" id="w8J-gZ-F9j"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mVt-zd-b4x"/>
@@ -65,16 +69,16 @@
             </objects>
             <point key="canvasLocation" x="-935.20000000000005" y="-781.25937031484261"/>
         </scene>
-        <!--View Controller-->
+        <!--Features View Controller-->
         <scene sceneID="f3P-lN-HZk">
             <objects>
-                <viewController storyboardIdentifier="FeaturesViewController" id="xmk-1n-76C" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FeaturesViewController" id="xmk-1n-76C" customClass="FeaturesViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aj0-Mw-iZV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-Mc-5gA">
-                                <rect key="frame" x="32.5" y="167.5" width="311.5" height="352"/>
+                                <rect key="frame" x="32.5" y="206.5" width="311.5" height="274"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding-2" translatesAutoresizingMaskIntoConstraints="NO" id="qJu-Ja-ZO0">
                                         <rect key="frame" x="58" y="0.0" width="196" height="184"/>
@@ -87,27 +91,22 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1N-ni-jj8">
-                                        <rect key="frame" x="94" y="314" width="124" height="38"/>
-                                        <color key="backgroundColor" red="0.1696610677" green="0.32706386389999997" blue="0.72726690770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
-                                        <state key="normal" title="Get started">
-                                            <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </state>
-                                    </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWW-pY-kaG">
-                                <rect key="frame" x="322" y="27" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWW-pY-kaG">
+                                <rect key="frame" x="321" y="30" width="30" height="30"/>
                                 <state key="normal" title="Skip"/>
+                                <connections>
+                                    <action selector="skipButtonTapped:" destination="xmk-1n-76C" eventType="touchUpInside" id="DnW-zk-xiu"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.95686274510000002" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Prf-Mc-5gA" firstAttribute="leading" secondItem="mzv-uh-CB9" secondAttribute="leading" constant="32.5" id="0I9-0K-AKO"/>
                             <constraint firstItem="mzv-uh-CB9" firstAttribute="trailing" secondItem="Prf-Mc-5gA" secondAttribute="trailing" constant="31" id="7Z2-a7-F7J"/>
+                            <constraint firstItem="mzv-uh-CB9" firstAttribute="trailing" secondItem="bWW-pY-kaG" secondAttribute="trailing" constant="24" id="CC1-Wo-L3g"/>
+                            <constraint firstItem="bWW-pY-kaG" firstAttribute="top" secondItem="mzv-uh-CB9" secondAttribute="top" constant="10" id="WLC-XE-V21"/>
                             <constraint firstItem="Prf-Mc-5gA" firstAttribute="centerX" secondItem="mzv-uh-CB9" secondAttribute="centerX" id="iCU-uA-57h"/>
                             <constraint firstItem="Prf-Mc-5gA" firstAttribute="centerY" secondItem="mzv-uh-CB9" secondAttribute="centerY" id="rcu-MG-bJm"/>
                         </constraints>
@@ -116,7 +115,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VJq-af-rxS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-196" y="-781"/>
+            <point key="canvasLocation" x="-196" y="-781.25937031484261"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="wsc-RW-RQA">
@@ -126,7 +125,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iXf-l7-Ol4">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iXf-l7-Ol4">
                                 <rect key="frame" x="0.0" y="201" width="375" height="162"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -168,19 +167,24 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="51" id="fvf-WH-lgp"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZoF-35-6hK">
-                                <rect key="frame" x="336" y="20" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZoF-35-6hK">
+                                <rect key="frame" x="321" y="30" width="30" height="30"/>
                                 <state key="normal" title="Skip"/>
+                                <connections>
+                                    <action selector="skipButtonTapped:" destination="9ph-Lb-1Q9" eventType="touchUpInside" id="nOv-3f-Tzr"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJy-Sz-BPc">
-                                <rect key="frame" x="130" y="430" width="95" height="38"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJy-Sz-BPc">
+                                <rect key="frame" x="140" y="363" width="95" height="38"/>
                                 <color key="backgroundColor" red="0.1696610677" green="0.32706386389999997" blue="0.72726690770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
                                 <state key="normal" title="Sign up">
                                     <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </state>
+                                <connections>
+                                    <action selector="signUpButtonTapped:" destination="9ph-Lb-1Q9" eventType="touchUpInside" id="Thl-kb-FWD"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -189,7 +193,9 @@
                             <constraint firstItem="iXf-l7-Ol4" firstAttribute="top" secondItem="ukb-a5-RJS" secondAttribute="bottom" constant="32" id="7mi-2a-KAe"/>
                             <constraint firstItem="iXf-l7-Ol4" firstAttribute="leading" secondItem="jx5-Qf-78x" secondAttribute="leading" id="AgC-Dq-sct"/>
                             <constraint firstItem="jx5-Qf-78x" firstAttribute="trailing" secondItem="iXf-l7-Ol4" secondAttribute="trailing" id="CMW-4l-Rcy"/>
-                            <constraint firstItem="EJy-Sz-BPc" firstAttribute="top" secondItem="iXf-l7-Ol4" secondAttribute="bottom" constant="67" id="htb-Ge-vIa"/>
+                            <constraint firstItem="jx5-Qf-78x" firstAttribute="trailing" secondItem="ZoF-35-6hK" secondAttribute="trailing" constant="24" id="QvR-oJ-Bds"/>
+                            <constraint firstItem="ZoF-35-6hK" firstAttribute="top" secondItem="jx5-Qf-78x" secondAttribute="top" constant="10" id="SZ2-bd-ili"/>
+                            <constraint firstItem="EJy-Sz-BPc" firstAttribute="top" secondItem="iXf-l7-Ol4" secondAttribute="bottom" id="htb-Ge-vIa"/>
                             <constraint firstItem="ukb-a5-RJS" firstAttribute="centerX" secondItem="jx5-Qf-78x" secondAttribute="centerX" id="mS4-wE-Gx8"/>
                             <constraint firstItem="EJy-Sz-BPc" firstAttribute="centerX" secondItem="iXf-l7-Ol4" secondAttribute="centerX" id="v3v-BR-LsP"/>
                         </constraints>

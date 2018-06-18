@@ -15,6 +15,10 @@ class ExplanationViewController: UIViewController {
         
     }
 
+    @IBAction func skipButtonTapped(_ sender: Any) {
+        presentTripListVC()
+    }
+    
     /*
     // MARK: - Navigation
 

@@ -59,7 +59,6 @@
 		B7F75C092058521C00C876A0 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C082058521C00C876A0 /* ExplanationViewController.swift */; };
 		B7F75C0B2058523300C876A0 /* FeaturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C0A2058523300C876A0 /* FeaturesViewController.swift */; };
 		B7F75C0D205871ED00C876A0 /* SharedTripsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C0C205871ED00C876A0 /* SharedTripsListViewController.swift */; };
-		B7F75C112058726900C876A0 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F75C102058726900C876A0 /* Profile.storyboard */; };
 		B7F75C152058769500C876A0 /* SharedTripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C142058769500C876A0 /* SharedTripDetailViewController.swift */; };
 		B7F75C172058771900C876A0 /* SharedPlaceDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C162058771900C876A0 /* SharedPlaceDetailTableViewController.swift */; };
 		B7F75C20205A14D800C876A0 /* SharedTripDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C1F205A14D800C876A0 /* SharedTripDetailTableViewCell.swift */; };
@@ -125,7 +124,6 @@
 		B7F75C082058521C00C876A0 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewController.swift; sourceTree = "<group>"; };
 		B7F75C0A2058523300C876A0 /* FeaturesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesViewController.swift; sourceTree = "<group>"; };
 		B7F75C0C205871ED00C876A0 /* SharedTripsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripsListViewController.swift; sourceTree = "<group>"; };
-		B7F75C102058726900C876A0 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		B7F75C142058769500C876A0 /* SharedTripDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripDetailViewController.swift; sourceTree = "<group>"; };
 		B7F75C162058771900C876A0 /* SharedPlaceDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPlaceDetailTableViewController.swift; sourceTree = "<group>"; };
 		B7F75C1F205A14D800C876A0 /* SharedTripDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -284,7 +282,6 @@
 				B78FB5972070317000EE40C2 /* Gilroy-ExtraBold.otf */,
 				B76D944720C0C5BB003E8BBE /* Gilroy-Light.otf */,
 				B7EC47C52066EF6800905B20 /* NoTripsView.xib */,
-				B7F75C102058726900C876A0 /* Profile.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -466,7 +463,6 @@
 				B7C10CC22020D19500818430 /* LaunchScreen.storyboard in Resources */,
 				B78FB5982070317700EE40C2 /* Gilroy-ExtraBold.otf in Resources */,
 				B7EC47C62066EF6800905B20 /* NoTripsView.xib in Resources */,
-				B7F75C112058726900C876A0 /* Profile.storyboard in Resources */,
 				B77E4F7320C835EF007EB266 /* Assets.xcassets in Resources */,
 				B7C10CBA2020D19500818430 /* Main.storyboard in Resources */,
 				B7F75C0220577BB200C876A0 /* Onboarding.storyboard in Resources */,

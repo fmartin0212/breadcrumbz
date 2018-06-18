@@ -26,3 +26,11 @@ extension UIButton {
          self.layer.cornerRadius = 8
     }
 }
+
+extension UIViewController {
+    func presentTripListVC() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let tripListNavigationController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
+        self.present(tripListNavigationController, animated: true, completion: nil)
+    }
+}

@@ -37,14 +37,14 @@ class TripsListViewController: UIViewController {
         TripController.shared.frc.delegate = self
         
         // Check to see if there is a current user logged in, if not, present sign-up view
-        if UserController.shared.loggedInUser == nil {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let createAccountViewController = storyboard.instantiateViewController(withIdentifier: "CreateAccountViewController")
-            
-            UIView.animate(withDuration: 0.75, animations: {
-                self.present(createAccountViewController, animated: true, completion: nil)
-            })
-        }
+//        if UserController.shared.loggedInUser == nil {
+//            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+//            let createAccountViewController = storyboard.instantiateViewController(withIdentifier: "OnboardingPageVC")
+//
+//            UIView.animate(withDuration: 0.75, animations: {
+//                self.present(createAccountViewController, animated: true, completion: nil)
+//            })
+//        }
         
         // Set navigation bar properties
         navigationController?.navigationBar.prefersLargeTitles = true

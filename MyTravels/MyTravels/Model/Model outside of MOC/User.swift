@@ -8,7 +8,6 @@
 
 import Foundation
 import CloudKit
-import Contacts
 
 class User {
     

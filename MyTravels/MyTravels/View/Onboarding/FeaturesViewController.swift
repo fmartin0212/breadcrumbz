@@ -15,4 +15,8 @@ class FeaturesViewController: UIViewController {
 
     }
     
+    @IBAction func skipButtonTapped(_ sender: Any) {
+        presentTripListVC()
+    }
+    
 }
