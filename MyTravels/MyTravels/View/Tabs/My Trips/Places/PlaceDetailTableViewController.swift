@@ -37,12 +37,10 @@ class PlaceDetailTableViewController: UITableViewController {
         
         // Set the title to the user-owned place's name
         if let place = place {
-            self.title = place.name
             updateViews()
         }
         
         tableView.contentOffset = CGPoint(x: 30, y: 30)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

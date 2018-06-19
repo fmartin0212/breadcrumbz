@@ -55,7 +55,9 @@ extension SignUpViewController {
         
         UserController.shared.createNewUserWith(firstName: firstName, lastName: lastName, username: username, profilePicture: placeholderProfilePictureAsData) { (success) in
             if success {
-                self.presentTripListVC()
+                DispatchQueue.main.async {
+                    self.presentTripListVC()
+                }
             }
         }
     }

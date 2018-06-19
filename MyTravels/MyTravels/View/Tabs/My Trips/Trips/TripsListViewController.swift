@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import CloudKit
-import MapKit
 
 class TripsListViewController: UIViewController {
     
@@ -20,12 +19,7 @@ class TripsListViewController: UIViewController {
     @IBOutlet weak var addATripButton: UIButton!
     @IBOutlet weak var profileBarButtonItem: UIBarButtonItem!
     
-    private let duration: TimeInterval = 0.5
-    var operation: UINavigationControllerOperation = .push
-    var thumbnailFrame = CGRect.zero
-    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
     
         // Set tableview properties
@@ -49,8 +43,10 @@ class TripsListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        TripController.shared.fetchAllTrips()
         if TripController.shared.trips.count > 0 {
                 noTripsView.removeFromSuperview()
+                self.navigationItem.rightBarButtonItem = addTripBarButtonItem
         }
     }
     
@@ -59,6 +55,9 @@ class TripsListViewController: UIViewController {
         view.endEditing(true)
     }
     
+    @IBAction func addATripButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "addATripSegue", sender: nil)
+    }
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toTripDetailViewSegue" {
@@ -140,7 +139,7 @@ extension TripsListViewController {
         NSLayoutConstraint(item: noTripsView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 0).isActive = true
         NSLayoutConstraint(item: noTripsView, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
         
-        addTripBarButtonItem = nil
+        self.navigationItem.rightBarButtonItem = nil
         addATripButton.clipsToBounds = true
         addATripButton.layer.cornerRadius = 25
     }
