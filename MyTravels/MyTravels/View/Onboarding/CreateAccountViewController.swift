@@ -12,13 +12,13 @@ import CloudKit
 class CreateAccountViewController: UIViewController {
     
     // MARK: - IBOutlets
+    
     @IBOutlet weak var overlayView: UIView!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var createAccountButton: UIButton!
     @IBOutlet var firstNameTextField: UITextField!
     @IBOutlet var lastNameTextField: UITextField!
     @IBOutlet var phoneNumberTextField: UITextField!
-    
     
     var centerX: NSLayoutConstraint?
     var centerY: NSLayoutConstraint?
@@ -43,10 +43,7 @@ class CreateAccountViewController: UIViewController {
     
     // MARK: - IBActions
     
-    
-    
     @IBAction func createAccountButtonTapped(_ sender: UIButton) {
-        
         // Create bubbly effect upon tap
         UIView.animate(withDuration: 0.10, animations: {
             self.createAccountButton.transform = CGAffineTransform(scaleX: 0.90, y: 0.90)
@@ -69,12 +66,11 @@ class CreateAccountViewController: UIViewController {
                 self.dismiss(animated: true, completion: nil)
             }
         }
-        
     }
     
     // MARK: - Functions
+    
     func fadeInOverlayView() {
-        
         let transform = CATransform3DTranslate(CATransform3DIdentity, 0, 200, 0)
         overlayView.layer.transform = transform
         overlayView.alpha = 0
@@ -89,6 +85,5 @@ class CreateAccountViewController: UIViewController {
         view.endEditing(true)
         overlayView.endEditing(true)
     }
-    
 }
 

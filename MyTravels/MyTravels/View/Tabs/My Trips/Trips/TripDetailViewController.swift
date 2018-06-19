@@ -60,6 +60,11 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
     @IBAction func actionButtonTapped(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let shareTripAction = UIAlertAction(title: "Share trip", style: .default) { (action) in
+            if UserController.shared.loggedInUser == nil {
+                self.presentCreateAccountAlert()
+                return
+            }
+            
             CloudKitManager.shared.performFullSync(completion: { (success) in
                 if success {
                     DispatchQueue.main.async {
@@ -67,13 +72,6 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
                     }
                 }
             })
-//
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            guard let usernameSearchViewController = storyboard.instantiateViewController(withIdentifier: "UsernameSearchViewController") as? UsernameSearchViewController else { return }
-//            usernameSearchViewController.trip = trip
-//            self.present(usernameSearchViewController, animated: true, completion: {
-//
-//            })
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
             alertController.dismiss(animated: true, completion: nil)
@@ -134,6 +132,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
     }
     
     func presentShareAlertController() {
+        
         let alertController = UIAlertController(title: "Share trip", message: "Enter a username below to share your trip", preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -160,8 +159,6 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
                     return
                 } else {
                     user.pendingSharedTripsRefs.append(tripReference)
-                    //        } else {
-                    //            user.pendingSharedTripsRefs = [tripReference]
                 }
                 
                 guard let record = CKRecord(user: user) else { return }
@@ -177,17 +174,32 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         
         present(alertController, animated: true, completion: nil)
     }
-
+    
+    func presentCreateAccountAlert() {
+        let alertController = UIAlertController(title: nil, message: "Please create an account in order to share trips", preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let createAccountAction = UIAlertAction(title: "Create account", style: .default) { (_) in
+            let sb = UIStoryboard(name: "Onboarding", bundle: nil)
+            let createAccountVC = sb.instantiateViewController(withIdentifier: "SignUp")
+//            createAccountVC.sk
+            self.present(createAccountVC, animated: true, completion: nil)
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(createAccountAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "toCreateNewPlaceTableViewControllerSegue" {
-            guard let trip = trip else { return }
-            guard let destinationVC = segue.destination as? CreateNewPlaceTableViewController
+            guard let trip = trip,
+                let destinationVC = segue.destination as? CreateNewPlaceTableViewController
                 else { return }
             
             destinationVC.trip = trip
-            
         }
         
         if segue.identifier == "toPlaceDetailTableViewController" {

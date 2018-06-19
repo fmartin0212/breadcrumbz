@@ -12,21 +12,10 @@ class ExplanationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 
     @IBAction func skipButtonTapped(_ sender: Any) {
+        UserDefaults.standard.setValue(true, forKey: "userSkippedSignUp")
         presentTripListVC()
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

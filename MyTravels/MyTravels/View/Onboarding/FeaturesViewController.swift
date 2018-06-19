@@ -12,10 +12,10 @@ class FeaturesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     @IBAction func skipButtonTapped(_ sender: Any) {
+        UserDefaults.standard.setValue(true, forKey: "userSkippedSignUp")
         presentTripListVC()
     }
     

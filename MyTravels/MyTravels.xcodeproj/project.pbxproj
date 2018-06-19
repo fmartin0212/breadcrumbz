@@ -52,7 +52,6 @@
 		B7DA1B7D202E2B900007497A /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B7C202E2B900007497A /* UserController.swift */; };
 		B7DA1B7F202F9FBC0007497A /* FetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */; };
 		B7DA1B822030E70C0007497A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B812030E70C0007497A /* SearchViewController.swift */; };
-		B7EC47C42066E83300905B20 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC47C32066E83300905B20 /* UserDefaults.swift */; };
 		B7EC47C62066EF6800905B20 /* NoTripsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7EC47C52066EF6800905B20 /* NoTripsView.xib */; };
 		B7F75C0220577BB200C876A0 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F75C0120577BB200C876A0 /* Onboarding.storyboard */; };
 		B7F75C07205842E600C876A0 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C06205842E600C876A0 /* OnboardingPageViewController.swift */; };
@@ -117,7 +116,6 @@
 		B7DA1B7C202E2B900007497A /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchViewController.swift; sourceTree = "<group>"; };
 		B7DA1B812030E70C0007497A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		B7EC47C32066E83300905B20 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		B7EC47C52066EF6800905B20 /* NoTripsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoTripsView.xib; sourceTree = "<group>"; };
 		B7F75C0120577BB200C876A0 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		B7F75C06205842E600C876A0 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
@@ -310,7 +308,6 @@
 				B7C10CD02020FD5500818430 /* PlaceController.swift */,
 				B7F92BCE20291DEE0021A8CA /* PhotoController.swift */,
 				B739261220362E5F0050B580 /* SharedTripsController.swift */,
-				B7EC47C32066E83300905B20 /* UserDefaults.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -581,7 +578,6 @@
 				B796DD3A204B5F9500CAF093 /* MapViewController.swift in Sources */,
 				B7D6523D202620E700E975F1 /* PlaceTableViewCell.swift in Sources */,
 				B75E335C20D3150500839678 /* SignUpViewController.swift in Sources */,
-				B7EC47C42066E83300905B20 /* UserDefaults.swift in Sources */,
 				B75E335E20D316DD00839678 /* TextFieldTableViewCell.swift in Sources */,
 				B77E4F7120C6D482007EB266 /* Extensions.swift in Sources */,
 				B7D6523F2026526700E975F1 /* ViewControllerExtensions.swift in Sources */,

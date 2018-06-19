@@ -29,6 +29,7 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUpButtonTapped(_ sender: Any) {
+        UserDefaults.standard.setValue(true, forKey: "userSkippedSignUp")
         createNewAccount()
     }
 }
@@ -54,11 +55,7 @@ extension SignUpViewController {
         
         UserController.shared.createNewUserWith(firstName: firstName, lastName: lastName, username: username, profilePicture: placeholderProfilePictureAsData) { (success) in
             if success {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let tripListNavigationController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
-                DispatchQueue.main.async {
-                    self.present(tripListNavigationController, animated: true, completion: nil)
-                }
+                self.presentTripListVC()
             }
         }
     }

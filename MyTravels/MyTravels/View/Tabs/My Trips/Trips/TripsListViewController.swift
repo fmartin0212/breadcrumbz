@@ -35,17 +35,7 @@ class TripsListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         TripController.shared.frc.delegate = self
-        
-        // Check to see if there is a current user logged in, if not, present sign-up view
-//        if UserController.shared.loggedInUser == nil {
-//            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-//            let createAccountViewController = storyboard.instantiateViewController(withIdentifier: "OnboardingPageVC")
-//
-//            UIView.animate(withDuration: 0.75, animations: {
-//                self.present(createAccountViewController, animated: true, completion: nil)
-//            })
-//        }
-        
+
         // Set navigation bar properties
         navigationController?.navigationBar.prefersLargeTitles = true
         addTripBarButtonItem.format()
@@ -141,7 +131,6 @@ extension TripsListViewController: NSFetchedResultsControllerDelegate {
 extension TripsListViewController {
     
     private func presentNoTripsView() {
-       
         view.addSubview(noTripsView)
         noTripsView.isHidden = false
         noTripsView.translatesAutoresizingMaskIntoConstraints = false

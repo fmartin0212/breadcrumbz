@@ -19,5 +19,4 @@ public class UsersSharedWithRecordIDs: NSManagedObject {
         self.isSynced = isSynced
         self.trip = trip
     }
-    
 }
