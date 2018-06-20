@@ -277,7 +277,7 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
             if let trip = trip {
                 cell.trip = trip
             }
-            
+            cell.isUserInteractionEnabled = false
             return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath) as! PlaceTableViewCell
@@ -292,8 +292,15 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        if indexPath.row == 0 && indexPath.section == 0 {
+            return UITableViewCellEditingStyle.none
+        }
+        return UITableViewCellEditingStyle.delete
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
+     
         if editingStyle == .delete {
             guard let placeArray = array as? [[Place]] else { return }
             let place = placeArray[indexPath.section - 1][indexPath.row]

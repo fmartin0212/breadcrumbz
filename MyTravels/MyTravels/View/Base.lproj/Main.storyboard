@@ -115,6 +115,9 @@
                             </barButtonItem>
                             <barButtonItem title="Item" image="user" id="arl-NY-cCk">
                                 <color key="tintColor" red="0.1696610677" green="0.32706386389999997" blue="0.72726690770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="profileButtonTapped:" destination="KSc-Yg-SqR" id="G99-2n-KV5"/>
+                                </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" title="Add a trip" id="Xfr-BE-SpC">
@@ -1259,6 +1262,94 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b3i-54-Otm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1118" y="116"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="J6O-8t-z3C">
+            <objects>
+                <viewController storyboardIdentifier="profileVC" modalPresentationStyle="overCurrentContext" id="GlI-HB-7cO" customClass="ProfileViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MGo-GB-64l">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gjg-YE-yHF">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="zcR-S6-EyV" appends="YES" id="uCT-2N-aqX"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mIx-ap-912">
+                                <rect key="frame" x="47" y="143.5" width="281.5" height="400"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RA5-cx-POg">
+                                        <rect key="frame" x="78" y="51" width="124" height="124"/>
+                                        <color key="backgroundColor" red="1" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <inset key="contentEdgeInsets" minX="50" minY="50" maxX="50" maxY="50"/>
+                                        <state key="normal" image="user"/>
+                                    </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IMP-qy-VbO">
+                                        <rect key="frame" x="0.0" y="217" width="281.5" height="183"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="profileDetailCell" textLabel="Bna-aI-5xx" style="IBUITableViewCellStyleDefault" id="R09-hz-ov2">
+                                                <rect key="frame" x="0.0" y="28" width="281.5" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="R09-hz-ov2" id="ZNJ-Sa-UDh">
+                                                    <rect key="frame" x="0.0" y="0.0" width="281.5" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bna-aI-5xx">
+                                                            <rect key="frame" x="15" y="0.0" width="251.5" height="44"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="RA5-cx-POg" firstAttribute="top" secondItem="mIx-ap-912" secondAttribute="top" constant="51" id="KuF-Sd-KD2"/>
+                                    <constraint firstAttribute="trailing" secondItem="IMP-qy-VbO" secondAttribute="trailing" id="Sj9-JD-vq6"/>
+                                    <constraint firstAttribute="bottom" secondItem="IMP-qy-VbO" secondAttribute="bottom" id="SjK-bW-KJg"/>
+                                    <constraint firstItem="IMP-qy-VbO" firstAttribute="top" secondItem="mIx-ap-912" secondAttribute="top" constant="217" id="W8B-yY-8Q5"/>
+                                    <constraint firstItem="IMP-qy-VbO" firstAttribute="leading" secondItem="mIx-ap-912" secondAttribute="leading" id="WRx-co-YRe"/>
+                                    <constraint firstItem="RA5-cx-POg" firstAttribute="centerX" secondItem="mIx-ap-912" secondAttribute="centerX" id="Y4P-Gi-0vB"/>
+                                    <constraint firstItem="IMP-qy-VbO" firstAttribute="top" secondItem="RA5-cx-POg" secondAttribute="bottom" constant="42" id="vrr-ep-r5f"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="mIx-ap-912" firstAttribute="width" secondItem="MGo-GB-64l" secondAttribute="width" multiplier="0.75" id="9jX-RH-FQO"/>
+                            <constraint firstItem="mIx-ap-912" firstAttribute="centerX" secondItem="23P-jN-kS5" secondAttribute="centerX" id="CtJ-ha-3eG"/>
+                            <constraint firstItem="mIx-ap-912" firstAttribute="height" secondItem="MGo-GB-64l" secondAttribute="height" multiplier="0.6" id="Fqb-iE-gvO"/>
+                            <constraint firstItem="23P-jN-kS5" firstAttribute="trailing" secondItem="gjg-YE-yHF" secondAttribute="trailing" id="GGY-15-DQK"/>
+                            <constraint firstItem="gjg-YE-yHF" firstAttribute="leading" secondItem="23P-jN-kS5" secondAttribute="leading" id="RKE-op-syf"/>
+                            <constraint firstItem="gjg-YE-yHF" firstAttribute="top" secondItem="23P-jN-kS5" secondAttribute="top" id="TTU-nS-gol"/>
+                            <constraint firstItem="23P-jN-kS5" firstAttribute="bottom" secondItem="gjg-YE-yHF" secondAttribute="bottom" id="eHv-h3-lMa"/>
+                            <constraint firstItem="mIx-ap-912" firstAttribute="centerY" secondItem="23P-jN-kS5" secondAttribute="centerY" id="kAu-D4-ayJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="23P-jN-kS5"/>
+                    </view>
+                    <connections>
+                        <outlet property="overlayView" destination="mIx-ap-912" id="hnw-Xp-WRh"/>
+                        <outlet property="profilePictureButton" destination="RA5-cx-POg" id="ZSO-g6-Z7H"/>
+                        <outlet property="tableView" destination="IMP-qy-VbO" id="5K3-hY-DG9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="png-wc-tpk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="zcR-S6-EyV">
+                    <connections>
+                        <action selector="tapGestureRecognized:" destination="GlI-HB-7cO" id="Kek-k9-dnO"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="168.80000000000001" y="-154.27286356821591"/>
         </scene>
         <!--My Trips-->
         <scene sceneID="Rwp-mg-H5f">

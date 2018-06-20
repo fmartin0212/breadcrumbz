@@ -21,18 +21,6 @@ class SharedTripsListViewController: UIViewController {
         
         // Set delegates
         tableView.dataSource = self
-        
-        
-        // FIXME: - This should tell the user that they do not have an account or are not logged into their iCloud account. Prompt for account creation?
-        // Check to see if there is a current user logged in, if not, present sign-up view
-        if UserController.shared.loggedInUser == nil {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let createAccountViewController = storyboard.instantiateViewController(withIdentifier: "CreateAccountViewController")
-            
-            UIView.animate(withDuration: 0.75, animations: {
-                self.present(createAccountViewController, animated: true, completion: nil)
-            })
-        }
     }
     
     // MARK: - Functions

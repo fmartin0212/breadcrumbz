@@ -54,6 +54,13 @@ class TripsListViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+    @IBAction func profileButtonTapped(_ sender: Any) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let profileVC = sb.instantiateViewController(withIdentifier: "profileVC")
+        UIView.animate(withDuration: 2) {
+            self.present(profileVC, animated: true, completion: nil)
+        }
+    }
     
     @IBAction func addATripButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "addATripSegue", sender: nil)
