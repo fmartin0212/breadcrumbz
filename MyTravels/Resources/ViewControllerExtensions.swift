@@ -32,7 +32,7 @@ extension UIViewController {
     
     func setPropertiesFor(button: UIButton) {
        
-        button.backgroundColor = UIColor(red: 255, green: 77, blue: 77, alpha: 1.0)
+        button.backgroundColor = UIColor(red: 255.0, green: 77.0, blue: 77.0, alpha: 1.0)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.cornerRadius = 8
         

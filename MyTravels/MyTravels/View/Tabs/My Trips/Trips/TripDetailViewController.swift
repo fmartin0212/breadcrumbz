@@ -222,7 +222,6 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let array = array else { return 0 }
         return array.count + 1
-        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -249,21 +248,20 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
                 return sectionHeaderLabelWith(text: text)
             }
         }
-        
         return UIView()
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section  == 0 {
+
+        guard let placeArray = array as? [[Place]] else { return 0 }
+
+        if section == 0 {
             return 1
         }
         
         if section > 0 {
-            guard let placeArray = array as? [[Place]] else { return 0 }
             return placeArray[section - 1].count
         }
-        
         return 0
     }
     
@@ -307,7 +305,5 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
             PlaceController.shared.delete(place: place)
             setUpArrays()
         }
-        
     }
-    
 }
