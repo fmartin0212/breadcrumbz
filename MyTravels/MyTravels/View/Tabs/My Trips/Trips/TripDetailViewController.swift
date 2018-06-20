@@ -210,28 +210,85 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
                 let placeArray = array as? [[Place]]
                 else { return }
             
-            let place = placeArray[indexPath.section - 1][indexPath.row]
+            let place = placeArray[indexPath.section - 2][indexPath.row]
             destinationVC.trip = trip
             destinationVC.place = place
             
         }
     }
 }
-extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
+extension TripDetailViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let array = array else { return 0 }
-        return array.count + 1
+        return array.count + 2
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+        guard let placeArray = array as? [[Place]] else { return 0 }
+
+        if section == 0 {
+            return 1
+        }
+        
+        if section == 1 {
+            return 1
+        }
+        
+        if section > 1 {
+            return placeArray[section - 2].count
+        }
+        return 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0  && indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TripDetailCell") as! TripDetailTableViewCell
+            if let trip = trip {
+                cell.trip = trip
+            }
+            cell.isUserInteractionEnabled = false
+            return cell
+        }
+        
+        if indexPath.section == 1  && indexPath.row == 0 {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AddACrumbCell", for: indexPath) as! AddACrumbTableViewCell
+            if let placeArray = array as? [[Place]] {
+                if placeArray.count > 0 {
+                    cell.tripHasCrumbs = true
+                } else {
+                    cell.tripHasCrumbs = false
+                }
+            }
+            return cell
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath) as! PlaceTableViewCell
+        cell.selectionStyle = .none
+        
+        guard let placeArray = array as? [[Place]] else { return UITableViewCell() }
+        let place = placeArray[indexPath.section - 2][indexPath.row]
+        
+        cell.place = place
+        
+        return cell
+    }
+}
+
+extension TripDetailViewController: UITableViewDelegate {
+  
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 1 {
+            return 0
+        }
         return 30
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section > 0 {
+        if section > 1 {
             guard let placeArray = array as? [[Place]],
-                let firstItemInArray = placeArray[section - 1].first,
+                let firstItemInArray = placeArray[section - 2].first,
                 let firstItemInArrayType = firstItemInArray.type
                 else { return UIView() }
             
@@ -251,59 +308,37 @@ extension TripDetailViewController: UITableViewDelegate, UITableViewDataSource {
         return UIView()
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        guard let placeArray = array as? [[Place]] else { return 0 }
-
-        if section == 0 {
-            return 1
-        }
-        
-        if section > 0 {
-            return placeArray[section - 1].count
-        }
-        return 0
-    }
-    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.0001
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 && indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TripDetailCell") as! TripDetailTableViewCell
-            if let trip = trip {
-                cell.trip = trip
-            }
-            cell.isUserInteractionEnabled = false
-            return cell
-        }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath) as! PlaceTableViewCell
-        cell.selectionStyle = .none
-        
-        guard let placeArray = array as? [[Place]] else { return UITableViewCell() }
-        let place = placeArray[indexPath.section - 1][indexPath.row]
-        
-        cell.place = place
-        
-        return cell
-        
+        return 0.00001
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        if indexPath.row == 0 && indexPath.section == 0 {
+        if indexPath.row == 0 && indexPath.section == 0 || indexPath.row == 0 && indexPath.section == 1  {
             return UITableViewCellEditingStyle.none
         }
         return UITableViewCellEditingStyle.delete
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     
+        
         if editingStyle == .delete {
             guard let placeArray = array as? [[Place]] else { return }
-            let place = placeArray[indexPath.section - 1][indexPath.row]
+            let place = placeArray[indexPath.section - 2][indexPath.row]
             PlaceController.shared.delete(place: place)
             setUpArrays()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 && indexPath.row == 0 {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            guard let addPlaceVC = sb.instantiateViewController(withIdentifier: "addAPlace") as? CreateNewPlaceTableViewController else { return }
+            
+            guard let trip = trip else { return }
+            
+            addPlaceVC.trip = trip
+            
+            self.present(addPlaceVC, animated: true, completion: nil)
         }
     }
 }

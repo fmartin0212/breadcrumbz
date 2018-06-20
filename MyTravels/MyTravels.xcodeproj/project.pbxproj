@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		640D44D39C850C2A96963BFD /* Pods_MyTravels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C480CB24B3A0B628223A89 /* Pods_MyTravels.framework */; };
+		B7073BE520DAF03D001B1F9F /* AddACrumbTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7073BE420DAF03D001B1F9F /* AddACrumbTableViewCell.swift */; };
 		B711157920549859000868BD /* TripDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B711157820549859000868BD /* TripDetailTableViewCell.swift */; };
 		B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */; };
 		B725034F20D9B64C00744B23 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B725034E20D9B64C00744B23 /* ProfileViewController.swift */; };
@@ -68,6 +69,7 @@
 /* Begin PBXFileReference section */
 		66C480CB24B3A0B628223A89 /* Pods_MyTravels.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTravels.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A42438B3869DF1A1F6B9E358 /* Pods-MyTravels.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTravels.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels.debug.xcconfig"; sourceTree = "<group>"; };
+		B7073BE420DAF03D001B1F9F /* AddACrumbTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddACrumbTableViewCell.swift; sourceTree = "<group>"; };
 		B711157820549859000868BD /* TripDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailTableViewCell.swift; sourceTree = "<group>"; };
 		B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B725034E20D9B64C00744B23 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				B7C10CCC2020EFB000818430 /* TripTableViewCell.swift */,
 				B711157820549859000868BD /* TripDetailTableViewCell.swift */,
 				B7F75C1F205A14D800C876A0 /* SharedTripDetailTableViewCell.swift */,
+				B7073BE420DAF03D001B1F9F /* AddACrumbTableViewCell.swift */,
 				B7D6523C202620E700E975F1 /* PlaceTableViewCell.swift */,
 				B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */,
 			);
@@ -535,6 +538,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7B0C3702037446E0031A92A /* SharedPlace.swift in Sources */,
+				B7073BE520DAF03D001B1F9F /* AddACrumbTableViewCell.swift in Sources */,
 				B7DA1B6F202E140C0007497A /* Trip+CoreDataClass.swift in Sources */,
 				B7F92BCF20291DEE0021A8CA /* PhotoController.swift in Sources */,
 				B739261320362E5F0050B580 /* SharedTripsController.swift in Sources */,
