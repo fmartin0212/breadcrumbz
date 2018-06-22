@@ -73,7 +73,7 @@ extension SharedTripsListViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         
         let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.section][indexPath.row]
-        
+
         cell.sharedTrip = sharedTrip
         cell.indexPath = indexPath
         
@@ -108,6 +108,15 @@ extension SharedTripsListViewController: TripTableViewCellDelegate {
                     self.tableView.reloadData()
                 }
             }
+        }
+    }
+}
+
+extension SharedTripsListViewController : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.section][indexPath.row]
+        if sharedTrip.isAcceptedTrip == false {
+            return
         }
     }
 }

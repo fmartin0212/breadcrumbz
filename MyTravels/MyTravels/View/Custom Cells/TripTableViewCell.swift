@@ -9,6 +9,7 @@
 import UIKit
 
 protocol TripTableViewCellDelegate: class {
+    
     func accepted(sharedTrip: SharedTrip, indexPath: IndexPath)
     func denied(sharedTrip: SharedTrip, indexPath: IndexPath)
 }
@@ -82,6 +83,10 @@ class TripTableViewCell: UITableViewCell {
         
         tripImageView.layer.cornerRadius = 4
         tripImageView.clipsToBounds = true
+        acceptButton.clipsToBounds = true
+        acceptButton.layer.cornerRadius = 4
+        denyButton.clipsToBounds = true
+        denyButton.layer.cornerRadius = 4
         
         guard let sharedTrip = sharedTrip else { return }
         
@@ -140,7 +145,14 @@ class TripTableViewCell: UITableViewCell {
         guard let sharedTrip = sharedTrip,
             let indexPath = indexPath
             else { return }
-        
-        delegate?.denied(sharedTrip: sharedTrip, indexPath: indexPath)
+        UIView.animate(withDuration: 0.10, animations: {
+            self.denyButton.transform = CGAffineTransform(scaleX: 0.90, y: 0.90)
+        }) { (_) in
+            UIView.animate(withDuration: 0.10, animations: {
+                self.denyButton.transform = CGAffineTransform.identity
+            }, completion: { (_) in
+                self.delegate?.denied(sharedTrip: sharedTrip, indexPath: indexPath)
+            })
+        }
     }
 }

@@ -46,6 +46,9 @@ class SharedTripsController {
             }
             
             guard let records = records else { completion(false) ; return }
+            for record in records {
+                guard let sharedTrip = SharedTrip(record: record) else { completion(false) ; return }
+            }
             
             self.pendingSharedTrips = records.compactMap { SharedTrip(record: $0) }
             for pendingSharedTrip in self.pendingSharedTrips {

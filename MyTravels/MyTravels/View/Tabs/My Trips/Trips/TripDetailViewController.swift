@@ -47,7 +47,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         tableView.dataSource = self
         
         // Table view properties
-        tableView.separatorStyle = .none
+        tableView.separatorStyle = .singleLine
         
         setUpArrays()
     }

@@ -50,7 +50,7 @@ class SharedTrip {
     init?(record: CKRecord) {
         guard let name = record["name"] as? String,
             let location = record["location"] as? String,
-            let tripDescription = record["tripDescription"] as? String,
+            let tripDescription = record["tripDescription"] as? String?,
             let startDate = record["startDate"] as? Date,
             let endDate = record["endDate"] as? Date,
             let photoData = record["photo"] as? CKAsset,
