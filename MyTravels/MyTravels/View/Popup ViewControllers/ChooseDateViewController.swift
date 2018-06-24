@@ -28,8 +28,10 @@ class ChooseDateViewController: UIViewController {
         super.viewDidLoad()
         
         setPropertiesFor(overlayView: overlayView)
-        setPropertiesFor(button: saveButton)
         setLabelText()
+        
+        saveButton.clipsToBounds = true
+        saveButton.layer.cornerRadius = 8
     }
 
     // MARK: - IBActions

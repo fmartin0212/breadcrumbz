@@ -42,7 +42,7 @@ class SharedTripDetailViewController: UIViewController {
             guard let image = UIImage(data: photo) else { return }
             tripPhoto = image
         }
-        
+        tableView.setContentOffset(CGPoint(x: 100.0, y: 100.0), animated: true)
         sharedTripPhotoImageView.image = tripPhoto
         
         // Delegates

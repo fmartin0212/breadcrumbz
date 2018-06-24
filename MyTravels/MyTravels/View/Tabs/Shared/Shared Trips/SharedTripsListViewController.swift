@@ -11,6 +11,8 @@ import UIKit
 class SharedTripsListViewController: UIViewController {
     
     // MARK: - IBOutlets
+    
+    @IBOutlet weak var profileBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -21,14 +23,18 @@ class SharedTripsListViewController: UIViewController {
         
         // Set delegates
         tableView.dataSource = self
+        tableView.delegate = self
+        
     }
     
     // MARK: - Functions
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
     // MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "toSharedTripDetailViewSegue" {
@@ -38,6 +44,14 @@ class SharedTripsListViewController: UIViewController {
             let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.section][indexPath.row]
             destinationVC.sharedTrip = sharedTrip
 
+        }
+    }
+    
+    @IBAction func profileBarButtonItemTapped(_ sender: Any) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let profileVC = sb.instantiateViewController(withIdentifier: "profileVC")
+        UIView.animate(withDuration: 2) {
+            self.present(profileVC, animated: true, completion: nil)
         }
     }
 }
@@ -115,8 +129,24 @@ extension SharedTripsListViewController: TripTableViewCellDelegate {
 extension SharedTripsListViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.section][indexPath.row]
+        guard let cell = tableView.cellForRow(at: indexPath) as? TripTableViewCell else { return }
+        
         if sharedTrip.isAcceptedTrip == false {
-            return
+            UIView.animate(withDuration: 0.10, animations: {
+                cell.acceptButton.transform = CGAffineTransform(scaleX: 0.90, y: 0.90)
+            }) { (_) in
+                UIView.animate(withDuration: 0.10, animations: {
+                    cell.acceptButton.transform = CGAffineTransform.identity
+                }, completion: { (_) in
+                   
+                })
+            }
+             return
         }
+        
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        guard let sharedTripDetailVC = sb.instantiateViewController(withIdentifier: "sharedTripDetail") as? SharedTripDetailViewController else { return }
+        sharedTripDetailVC.sharedTrip = sharedTrip
+        self.navigationController?.pushViewController(sharedTripDetailVC, animated: true)
     }
 }

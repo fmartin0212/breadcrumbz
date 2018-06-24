@@ -14,6 +14,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var profilePictureButton: UIButton!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,8 +22,15 @@ class ProfileViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        
         profilePictureButton.clipsToBounds = true
         profilePictureButton.layer.cornerRadius = 61
+        
+    }
+    @IBAction func profileButtonTapped(_ sender: Any) {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        
     }
     
     @IBAction func tapGestureRecognized(_ sender: Any) {
@@ -75,4 +83,8 @@ extension ProfileViewController: UITableViewDelegate {
         }
         return headerLabel
     }
+}
+
+extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
 }
