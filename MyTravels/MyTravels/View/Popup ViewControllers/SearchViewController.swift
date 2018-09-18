@@ -35,13 +35,11 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         // Delegates
         searchCompleter.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         locationManager.delegate = self
-        
         
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()

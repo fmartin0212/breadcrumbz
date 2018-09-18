@@ -24,6 +24,8 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     let locationManager = CLLocationManager()
     var usersLocation = CLLocationCoordinate2D()
     
+    var stars: [UIImageView] = []
+    
     // MARK: - IBOutlets
     @IBOutlet weak var starOne: UIImageView!
     @IBOutlet weak var starTwo: UIImageView!
@@ -33,13 +35,16 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     
     @IBOutlet weak var placeNameTextField: UITextField!
     @IBOutlet weak var placeTypeTextField: UITextField!
-    @IBOutlet weak var placeAddressTextField: UITextField!
+    @IBOutlet weak var placeAddressTextView: UITextView!
     @IBOutlet weak var placeCommentsTextView: UITextView!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let stars: [UIImageView] = [starOne, starTwo, starThree, starFour, starFive]
+        self.stars = stars
         
         guard let addPhotoImage = UIImage(named: "AddTripPhoto256"),
             let addPhotoImageAsData = UIImagePNGRepresentation(addPhotoImage) else { return }
@@ -53,7 +58,7 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         collectionView.dataSource = self
         locationManager.delegate = self
         placeCommentsTextView.delegate = self
-
+        
         // Set textview placeholder text
         placeCommentsTextView.text = "Comments"
         placeCommentsTextView.textColor = #colorLiteral(red: 0.8037719131, green: 0.8036019206, blue: 0.8242246509, alpha: 1)
@@ -69,22 +74,22 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         // Check to see if any required fields are empty, if so, present alertcontroller and jump out of function
         guard let placeNameTF = placeNameTextField,
             let placeTypeTF = placeTypeTextField,
-            let placeAddressTF = placeAddressTextField
+            let placeAddressTV = placeAddressTextView
             else { return }
         
-        let textFields = [placeNameTF, placeTypeTF, placeAddressTF]
+        let textFields = [placeNameTF, placeTypeTF, placeAddressTV]
         
         if placeNameTextField.text?.isEmpty == true ||
             placeTypeTextField.text == "Choose a type" ||
-            placeAddressTextField.text?.isEmpty == true  {
-            missingFieldAlert(textFields: textFields)
+            placeAddressTextView.text?.isEmpty == true  {
+            //            missingFieldAlert(textFields: textFields)
             return
         }
         
         guard let trip = self.trip,
             let name = placeNameTextField.text,
             let type = placeTypeTextField.text,
-            let address = placeAddressTextField.text,
+            let address = placeAddressTV.text,
             let comments = placeCommentsTextView.text
             else { return }
         
@@ -102,135 +107,31 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         
     }
     
-    
     @IBAction func addPhotoButtonTapped(_ sender: UIButton) {
         present(imagePickerController, animated: true, completion: nil)
+        
     }
-
-// MARK: - Tap gesture recognizers
+    
+    // MARK: - Tap gesture recognizers
     // Star rating
     @IBAction func starOneGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
-        print("star one tapped")
-        if rating == 1 {
-            starOne.image = UIImage(named: "star-clear-16")
-            starTwo.image = UIImage(named: "star-clear-16")
-            starThree.image = UIImage(named: "star-clear-16")
-            starFour.image = UIImage(named: "star-clear-16")
-            starFive.image = UIImage(named: "star-clear-16")
-            rating = 0
-            return
-        
-        }
-        
-        if rating == 0 || rating > 1 {
-            starOne.image = UIImage(named: "star-black-16")
-            starTwo.image = UIImage(named: "star-clear-16")
-            starThree.image = UIImage(named: "star-clear-16")
-            starFour.image = UIImage(named: "star-clear-16")
-            starFive.image = UIImage(named: "star-clear-16")
-            rating = 1
-        }
-        
+        calculateStars(starTapped: 0)
     }
     
     @IBAction func starTwoGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
-        print("star two tapped")
-        
-        if rating == 2 {
-            starOne.image = UIImage(named: "star-clear-16")
-            starTwo.image = UIImage(named: "star-clear-16")
-            starThree.image = UIImage(named: "star-clear-16")
-            starFour.image = UIImage(named: "star-clear-16")
-            starFive.image = UIImage(named: "star-clear-16")
-            rating = 0
-            return
-            
-        }
-        
-        if rating <= 1 || rating > 2 {
-            starOne.image = UIImage(named: "star-black-16")
-            starTwo.image = UIImage(named: "star-black-16")
-            starThree.image = UIImage(named: "star-clear-16")
-            starFour.image = UIImage(named: "star-clear-16")
-            starFive.image = UIImage(named: "star-clear-16")
-            rating = 2
-        }
-        
+        calculateStars(starTapped: 1)
     }
     
     @IBAction func starThreeGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
-        print("star three tapped")
-        
-        if rating == 3 {
-            starOne.image = UIImage(named: "star-clear-16")
-            starTwo.image = UIImage(named: "star-clear-16")
-            starThree.image = UIImage(named: "star-clear-16")
-            starFour.image = UIImage(named: "star-clear-16")
-            starFive.image = UIImage(named: "star-clear-16")
-            rating = 0
-            return
-            
-        }
-        
-        if rating <= 2 || rating >= 4 {
-            starOne.image = UIImage(named: "star-black-16")
-            starTwo.image = UIImage(named: "star-black-16")
-            starThree.image = UIImage(named: "star-black-16")
-            starFour.image = UIImage(named: "star-clear-16")
-            starFive.image = UIImage(named: "star-clear-16")
-            rating = 3
-        }
-        
+        calculateStars(starTapped: 2)
     }
     
     @IBAction func starFourGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
-        print("star four tapped")
-        
-        if rating == 4 {
-            starOne.image = UIImage(named: "star-clear-16")
-            starTwo.image = UIImage(named: "star-clear-16")
-            starThree.image = UIImage(named: "star-clear-16")
-            starFour.image = UIImage(named: "star-clear-16")
-            starFive.image = UIImage(named: "star-clear-16")
-            rating = 0
-            return
-            
-        }
-        
-        if rating <= 3 || rating == 5 {
-            starOne.image = UIImage(named: "star-black-16")
-            starTwo.image = UIImage(named: "star-black-16")
-            starThree.image = UIImage(named: "star-black-16")
-            starFour.image = UIImage(named: "star-black-16")
-            starFive.image = UIImage(named: "star-clear-16")
-            rating = 4
-        }
-    
+        calculateStars(starTapped: 3)
     }
     
     @IBAction func starFiveGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
-        print("star five tapped")
-        
-        if rating == 5 {
-            starOne.image = UIImage(named: "star-clear-16")
-            starTwo.image = UIImage(named: "star-clear-16")
-            starThree.image = UIImage(named: "star-clear-16")
-            starFour.image = UIImage(named: "star-clear-16")
-            starFive.image = UIImage(named: "star-clear-16")
-            rating = 0
-            return
-            
-        }
-        
-        if rating < 5 {
-            starOne.image = UIImage(named: "star-black-16")
-            starTwo.image = UIImage(named: "star-black-16")
-            starThree.image = UIImage(named: "star-black-16")
-            starFour.image = UIImage(named: "star-black-16")
-            starFive.image = UIImage(named: "star-black-16")
-            rating = 5
-        }
-        
+        calculateStars(starTapped: 4)
     }
     
     @IBAction func typeTapGestureRecognizerTapped(_ sender: Any) {
@@ -238,11 +139,16 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         
     }
     
-    @IBAction func addresTapGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
+    @IBAction func addressTapGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
         locationManager.requestWhenInUseAuthorization()
+        guard let searchVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "searchVC") as? SearchViewController else { return }
+        searchVC.delegate = self
+        
+        present(searchVC, animated: true, completion: nil)
     }
-    
-    // MARK : - Functions
+}
+
+extension CreateNewPlaceTableViewController {
     func getLocation() {
         func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
             guard let coordinate = locations.last?.coordinate else { return }
@@ -250,30 +156,28 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
         }
     }
     
-    func calculateStars() {
-        // FIX ME: THIS.
-    }
-    
-    // MARK: - Image picker controller delegate methods
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-       
-        guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage,
-            let photoAsData = UIImagePNGRepresentation(photo)
-            else { return }
+    func calculateStars(starTapped: Int) {
+        if starTapped == 4 {
+            for star in 0...4 {
+                self.stars[star].image = UIImage(named: "star-black-16")
+            }
+            rating = Int16(starTapped)
+            return
+        }
         
-        self.photos.append(photoAsData)
-   
-        dismiss(animated: true, completion: collectionView.reloadData)
+        for star in 0...starTapped {
+            self.stars[star].image = UIImage(named: "star-black-16")
+        }
         
+        for star in (starTapped + 1)...4 {
+            self.stars[star].image = UIImage(named: "star-clear-16")
+        }
+        
+        rating = Int16(starTapped)
     }
     
-    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
+        
         if segue.identifier == "ToTypeSelectionViewControllerSegue" {
             guard let destinationVC = segue.destination as? TypeSelectionViewController else { return }
             destinationVC.delegate = self
@@ -283,64 +187,96 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
             guard let destinationVC = segue.destination as? SearchViewController else { return }
             destinationVC.delegate = self
         }
-        
-    }
-
-}
-
-extension CreateNewPlaceTableViewController: TypeSelectionViewControllerDelegate {
-    func set(type: String) {
-        placeTypeTextField.text = type
     }
 }
-
-extension CreateNewPlaceTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    // MARK: - Image picker controller delegate methods
+    
+    extension CreateNewPlaceTableViewController {
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            dismiss(animated: true, completion: nil)
+        }
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+            
+            guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage,
+                let photoAsData = UIImagePNGRepresentation(photo)
+                else { return }
+            
+            self.photos.append(photoAsData)
+            
+            dismiss(animated: true, completion: collectionView.reloadData)
+        }
+    }
+    
+    extension CreateNewPlaceTableViewController: TypeSelectionViewControllerDelegate {
+        func set(type: String) {
+            placeTypeTextField.text = type
+        }
+    }
+    
+    extension CreateNewPlaceTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+        
+        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            return photos.count
+        }
+        
+        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
             cell.photo = photos[indexPath.row]
             return cell
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      
-        if indexPath.row == 0 {
-            present(imagePickerController, animated: true, completion: nil)
+            
         }
-    }
-    
-}
-
-extension CreateNewPlaceTableViewController: UITextViewDelegate {
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
         
-        if self.placeCommentsTextView.text == "Comments" {
-            self.placeCommentsTextView.text = ""
-            self.placeCommentsTextView.textColor = UIColor.black
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            
+            if indexPath.row == 0 {
+                present(imagePickerController, animated: true, completion: nil)
+            }
         }
         
     }
     
-    func textViewDidEndEditing(_ textView: UITextView) {
-       
-        if self.placeCommentsTextView.text.isEmpty {
-            self.placeCommentsTextView.text = "Comments"
-            self.placeCommentsTextView.textColor = UIColor.lightGray
+    extension CreateNewPlaceTableViewController: UITextViewDelegate {
+        
+        func textViewDidBeginEditing(_ textView: UITextView) {
+            
+            if self.placeCommentsTextView.text == "Comments" {
+                self.placeCommentsTextView.text = ""
+                self.placeCommentsTextView.textColor = UIColor.black
+            }
         }
         
+        func textViewDidEndEditing(_ textView: UITextView) {
+            
+            if self.placeCommentsTextView.text.isEmpty {
+                self.placeCommentsTextView.text = "Comments"
+                self.placeCommentsTextView.textColor = UIColor.lightGray
+            }
+        }
     }
     
-}
-
-extension CreateNewPlaceTableViewController: SearchViewControllerDelegate {
-    func set(address: String) {
-        placeAddressTextField.text = address
+    extension CreateNewPlaceTableViewController: SearchViewControllerDelegate {
+        func set(address: String) {
+            placeAddressTextView.text = address
+        }
     }
+    
+    // MARK: - UITableViewDataSource
+    
+    extension CreateNewPlaceTableViewController {
+        
+        override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            switch indexPath.row {
+            case 2:
+                return UITableViewAutomaticDimension
+            case 4:
+                return UITableViewAutomaticDimension
+            case 5:
+                return 150
+            default:
+                return 60
+            }
+        }
 }
