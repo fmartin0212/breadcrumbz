@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import CloudKit
 
 class ProfileViewController: UIViewController {
+    
+    let profilePictureSetNotification = Notification.Name("profilePictureSet")
 
     @IBOutlet weak var overlayView: UIView!
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var profilePictureButton: UIButton!
     
@@ -26,11 +30,37 @@ class ProfileViewController: UIViewController {
         profilePictureButton.clipsToBounds = true
         profilePictureButton.layer.cornerRadius = 61
         
+        guard let loggedInUser = UserController.shared.loggedInUser,
+            let profilePictureAsData = loggedInUser.profilePicture,
+            let profilePicture = UIImage(data: profilePictureAsData)
+            else { return }
+        
+        profilePictureButton.setImage(nil, for: .normal)
+        profilePictureButton.setBackgroundImage(profilePicture, for: .normal)
     }
+    
     @IBAction func profileButtonTapped(_ sender: Any) {
         let imagePickerController = UIImagePickerController()
+        imagePickerController.allowsEditing = true
         imagePickerController.delegate = self
+        present(imagePickerController, animated: true, completion: nil)
         
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        guard let loggedInUser = UserController.shared.loggedInUser,
+            let updatedProfileImage = profilePictureButton.backgroundImage(for: .normal)
+            else { return }
+        
+        loggedInUser.profilePicture = UIImagePNGRepresentation(updatedProfileImage)
+        guard let record = CKRecord(user: loggedInUser) else { return }
+        
+        CloudKitManager.shared.updateOperation(records: [record]) { (success) in
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: TripsListViewController.profilePictureUpdatedNotification, object: self)
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
     
     @IBAction func tapGestureRecognized(_ sender: Any) {
@@ -39,6 +69,7 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -66,6 +97,7 @@ extension ProfileViewController: UITableViewDataSource {
 }
 
 extension ProfileViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerLabel = UILabel()
         headerLabel.font = UIFont(name: "AvenirNext", size: 18)
@@ -87,4 +119,17 @@ extension ProfileViewController: UITableViewDelegate {
 
 extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    
+        let profilePicture = info[UIImagePickerControllerEditedImage] as? UIImage
+        profilePictureButton.setBackgroundImage(profilePicture, for: .normal)
+        profilePictureButton.setImage(nil, for: .normal)
+        profilePictureButton.backgroundColor = UIColor.clear
+        picker.dismiss(animated: true) {
+            self.saveButton.isHidden = false
+        }
+        
+//        NotificationCenter.default.post()
+    }
+
 }

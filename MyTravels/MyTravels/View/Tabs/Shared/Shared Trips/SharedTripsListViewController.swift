@@ -24,7 +24,6 @@ class SharedTripsListViewController: UIViewController {
         // Set delegates
         tableView.dataSource = self
         tableView.delegate = self
-        
     }
     
     // MARK: - Functions

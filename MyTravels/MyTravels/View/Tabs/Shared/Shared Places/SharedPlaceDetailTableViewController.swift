@@ -37,7 +37,7 @@ class SharedPlaceDetailTableViewController: UITableViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        tableView.contentOffset = CGPoint(x: 30, y: 30)
+//        tableView.contentOffset = CGPoint(x: 30, y: 30)
         
         guard let sharedPlace = sharedPlace
             else { return }

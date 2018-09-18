@@ -56,7 +56,7 @@ class CreateAccountViewController: UIViewController {
         guard let firstName = firstNameTextField.text,
             let lastName = lastNameTextField.text,
             let username = phoneNumberTextField.text,
-            let placeholderProfilePicture = UIImage(named: "calendar")
+            let placeholderProfilePicture = UIImage(named: "user")
             else { return }
         
         let placeholderProfilePictureAsData = UIImagePNGRepresentation(placeholderProfilePicture)

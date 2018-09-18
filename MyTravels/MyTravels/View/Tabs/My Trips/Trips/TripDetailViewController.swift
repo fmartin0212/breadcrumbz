@@ -42,6 +42,8 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
             tripPhotoImageView.image = tripPhoto
         }
         
+        tableView.setContentOffset(CGPoint(x: (navigationController?.navigationBar.frame.origin.x)!, y: (navigationController?.navigationBar.frame.origin.y)!), animated: true)
+        
         // Delegates
         tableView.delegate = self
         tableView.dataSource = self

@@ -14,7 +14,7 @@ class User {
     let firstName: String?
     let lastName: String?
     let username: String?
-    let profilePicture: Data?
+    var profilePicture: Data?
     var ckRecordID: CKRecordID?
     let appleUserRef: CKReference
     var pendingSharedTripsRefs: [CKReference] = []
@@ -65,8 +65,8 @@ class User {
         self.profilePicture = photoData
         self.appleUserRef = appleUserRef
         self.ckRecordID = ckRecord.recordID
-        }
     }
+}
 
 // Turn User into a CKRecord
 extension CKRecord {

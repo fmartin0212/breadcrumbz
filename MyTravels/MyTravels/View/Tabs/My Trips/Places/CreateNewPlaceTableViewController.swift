@@ -260,7 +260,7 @@ class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerCon
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-      
+       
         guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage,
             let photoAsData = UIImagePNGRepresentation(photo)
             else { return }

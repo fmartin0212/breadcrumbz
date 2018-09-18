@@ -117,7 +117,7 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
         self.photo = photoAsData
         
         self.tripPhotoImageView.image = photo
-        self.tripPhotoImageView.contentMode = .scaleAspectFit
+        self.tripPhotoImageView.contentMode = .scaleAspectFill
         
         dismiss(animated: true)
         
