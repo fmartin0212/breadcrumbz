@@ -33,7 +33,7 @@ class TripController {
         CoreDataManager.save()
     }
     
-    func saveTripToCloud(trip: Trip) {
+    func save(trip: Trip) {
         guard let record = CKRecord(trip: trip) else { return }
         CloudKitManager.shared.saveToCloudKit(ckRecord: record) { (success) in
         }

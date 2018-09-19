@@ -22,16 +22,10 @@ class TripsListViewController: UIViewController {
     // MARK: - Constants & Variables
     // FIXME - Put this in a 'Constants' file
     static let profilePictureUpdatedNotification = Notification.Name("profilePictureUpdatedNotification")
-//    lazy var leftBarButton: UIButton {
-//        let rect = CGRect(x: navigationItem.leftBarButtonItem?.customView, y: <#T##Int#>, width: <#T##Int#>, height: <#T##Int#>)
-//    }
-//    lazy var profilePictureButtonImage: UIImage {
-//        let image = UIImage(
-//    }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-    
+        super.viewDidLoad() 
+        
         // Set tableview properties
         tableView.separatorStyle = .none
         
@@ -50,7 +44,7 @@ class TripsListViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateProfilePicture), name: TripsListViewController.profilePictureUpdatedNotification, object: nil)
         
-        updateProfilePicture()
+//        updateProfilePicture()
     }
     
     @objc func updateProfilePicture() {
@@ -59,7 +53,7 @@ class TripsListViewController: UIViewController {
             let profilePictureAsData = loggedInUser.profilePicture,
             let profilePicture = UIImage(data: profilePictureAsData)
             else { return }
-        let resizedProfilepicture = profilePicture.resizeImage(CGFloat(40), opaque: false)
+        let resizedProfilepicture = profilePicture.resizeImage(CGFloat(20), opaque: false)
         profileBarButtonItem.image = nil
         profileBarButtonItem.setBackgroundImage(resizedProfilepicture, for: .normal, barMetrics: .default)
     
@@ -83,6 +77,7 @@ class TripsListViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+    
     @IBAction func profileButtonTapped(_ sender: Any) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let profileVC = sb.instantiateViewController(withIdentifier: "profileVC")
@@ -94,7 +89,9 @@ class TripsListViewController: UIViewController {
     @IBAction func addATripButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "addATripSegue", sender: nil)
     }
+    
     // MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toTripDetailViewSegue" {
             guard let destinationVC = segue.destination as? TripDetailViewController,

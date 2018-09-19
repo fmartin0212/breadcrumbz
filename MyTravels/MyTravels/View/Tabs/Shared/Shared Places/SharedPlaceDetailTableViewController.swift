@@ -37,11 +37,6 @@ class SharedPlaceDetailTableViewController: UITableViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-//        tableView.contentOffset = CGPoint(x: 30, y: 30)
-        
-        guard let sharedPlace = sharedPlace
-            else { return }
-        self.title = sharedPlace.name
         updateViewsForSharedPlace()
         
     }
@@ -79,6 +74,12 @@ class SharedPlaceDetailTableViewController: UITableViewController {
                 guard let activityPlaceholderImage = UIImage(named: "Activity") else { return }
                 placeholderImage = activityPlaceholderImage
             }
+            
+            if sharedPlace.comments == "Comments" {
+                sharedPlaceCommentsTextView = nil
+            } else {
+                sharedPlaceCommentsTextView.text = sharedPlace.comments
+            }
             sharedPlaceMainPhotoImageView.image = placeholderImage
             sharedPlaceNameLabel.text = sharedPlace.name
             sharedPlaceAddressLabel.text = sharedPlace.address
@@ -87,25 +88,24 @@ class SharedPlaceDetailTableViewController: UITableViewController {
     }
     
     func updateStarsImageViews(sharedPlace: SharedPlace) {
-        guard let sharedPlaceRating = sharedPlace.rating else { return }
-        let starImageViewsArray = [starOne, starTwo, starThree, starFour, starFive]
+        guard let ratingAsInt16 = sharedPlace.rating else { return }
+        let ratingAsFloat = Float(ratingAsInt16)
+        let rating = Int(ratingAsFloat)
+        let stars: [UIImageView] = [starOne, starTwo, starThree, starFour, starFive]
         
-        if sharedPlace.rating == 0 {
-            for starImageView in starImageViewsArray {
-                starImageView?.image = UIImage(named: "star-clear-16")
+        if rating == 5 {
+            for star in stars {
+                star.image = UIImage(named: "star-black-16")
             }
-        } else if Int(sharedPlaceRating) > 0 {
-            var i = 0
-            
-            while i < Int(sharedPlaceRating) {
-                starImageViewsArray[i]?.image = UIImage(named: "star-black-16")
-                i += 1
-            }
-            
-            while i <= starImageViewsArray.count - 1 {
-                starImageViewsArray[i]?.image = UIImage(named: "star-clear-16")
-                i += 1
-            }
+            return
+        }
+        
+        for star in 0...(rating - 1) {
+            stars[star].image = UIImage(named: "star-black-16")
+        }
+        
+        for star in rating...4 {
+            stars[star].image = UIImage(named: "star-clear-16")
         }
     }
 }

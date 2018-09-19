@@ -30,7 +30,6 @@ class SharedTrip {
     let creatorRef: CKReference
     var isAcceptedTrip: Bool = true
     
-    
     fileprivate var temporaryPhotoURL: URL {
         
         // Must write to temporary directory to be able to pass image file path url to CKAsset

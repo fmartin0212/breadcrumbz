@@ -126,6 +126,7 @@ extension SharedTripsListViewController: TripTableViewCellDelegate {
 }
 
 extension SharedTripsListViewController : UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.section][indexPath.row]
         guard let cell = tableView.cellForRow(at: indexPath) as? TripTableViewCell else { return }

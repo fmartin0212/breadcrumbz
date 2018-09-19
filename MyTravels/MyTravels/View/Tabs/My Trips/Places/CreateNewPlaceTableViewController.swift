@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class CreateNewPlaceTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
+class CreateNewPlaceTableViewController: UITableViewController, CLLocationManagerDelegate {
     
     // MARK: - Properties
     var trip: Trip? {
@@ -161,7 +161,7 @@ extension CreateNewPlaceTableViewController {
             for star in 0...4 {
                 self.stars[star].image = UIImage(named: "star-black-16")
             }
-            rating = Int16(starTapped)
+            rating = Int16(starTapped + 1)
             return
         }
         
@@ -173,7 +173,7 @@ extension CreateNewPlaceTableViewController {
             self.stars[star].image = UIImage(named: "star-clear-16")
         }
         
-        rating = Int16(starTapped)
+        rating = Int16(starTapped + 1)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -189,94 +189,101 @@ extension CreateNewPlaceTableViewController {
         }
     }
 }
-    
-    // MARK: - Image picker controller delegate methods
-    
-    extension CreateNewPlaceTableViewController {
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            dismiss(animated: true, completion: nil)
-        }
-        
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-            
-            guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage,
-                let photoAsData = UIImagePNGRepresentation(photo)
-                else { return }
-            
-            self.photos.append(photoAsData)
-            
-            dismiss(animated: true, completion: collectionView.reloadData)
-        }
+
+// MARK: - UIImagePickerControllerDelegate
+
+extension CreateNewPlaceTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
     
-    extension CreateNewPlaceTableViewController: TypeSelectionViewControllerDelegate {
-        func set(type: String) {
-            placeTypeTextField.text = type
-        }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage,
+            let photoAsData = UIImagePNGRepresentation(photo)
+            else { return }
+        
+        self.photos.append(photoAsData)
+        
+        dismiss(animated: true, completion: collectionView.reloadData)
+    }
+}
+
+extension CreateNewPlaceTableViewController: TypeSelectionViewControllerDelegate {
+    func set(type: String) {
+        placeTypeTextField.text = type
+    }
+}
+
+extension CreateNewPlaceTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photos.count
     }
     
-    extension CreateNewPlaceTableViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return photos.count
-        }
-        
-        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
-            cell.photo = photos[indexPath.row]
-            return cell
-            
-        }
-        
-        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            
-            if indexPath.row == 0 {
-                present(imagePickerController, animated: true, completion: nil)
-            }
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
+        cell.photo = photos[indexPath.row]
+        return cell
         
     }
     
-    extension CreateNewPlaceTableViewController: UITextViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        func textViewDidBeginEditing(_ textView: UITextView) {
-            
-            if self.placeCommentsTextView.text == "Comments" {
-                self.placeCommentsTextView.text = ""
-                self.placeCommentsTextView.textColor = UIColor.black
-            }
-        }
-        
-        func textViewDidEndEditing(_ textView: UITextView) {
-            
-            if self.placeCommentsTextView.text.isEmpty {
-                self.placeCommentsTextView.text = "Comments"
-                self.placeCommentsTextView.textColor = UIColor.lightGray
-            }
+        if indexPath.row == 0 {
+            present(imagePickerController, animated: true, completion: nil)
         }
     }
     
-    extension CreateNewPlaceTableViewController: SearchViewControllerDelegate {
-        func set(address: String) {
-            placeAddressTextView.text = address
+}
+
+extension CreateNewPlaceTableViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        
+        if self.placeCommentsTextView.text == "Comments" {
+            self.placeCommentsTextView.text = ""
+            self.placeCommentsTextView.textColor = UIColor.black
         }
     }
     
-    // MARK: - UITableViewDataSource
-    
-    extension CreateNewPlaceTableViewController {
+    func textViewDidEndEditing(_ textView: UITextView) {
         
-        override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            switch indexPath.row {
-            case 2:
-                return UITableViewAutomaticDimension
-            case 4:
-                return UITableViewAutomaticDimension
-            case 5:
-                return 150
-            default:
-                return 60
-            }
+        if self.placeCommentsTextView.text.isEmpty {
+            self.placeCommentsTextView.text = "Comments"
+            self.placeCommentsTextView.textColor = UIColor.lightGray
         }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.frame.height > ((tableView.cellForRow(at: IndexPath(row: 3, section: 0)))?.frame.height)! {
+            print("adsf")
+        }
+    }
+}
+
+extension CreateNewPlaceTableViewController: SearchViewControllerDelegate {
+    func set(address: String) {
+        placeAddressTextView.text = address
+        tableView.reloadData()
+    }
+}
+
+// MARK: - UITableViewDataSource
+
+extension CreateNewPlaceTableViewController {
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 2:
+            return UITableViewAutomaticDimension
+        case 4:
+            return UITableViewAutomaticDimension
+        case 5:
+            return 150
+        default:
+            return 60
+        }
+    }
 }

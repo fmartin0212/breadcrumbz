@@ -23,14 +23,6 @@ class SharedTripDetailViewController: UIViewController {
         
         super.viewDidLoad()
         
-        // Set navigation bar title/properties
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-//        self.navigationController?.navigationBar.isTranslucent = true
-//        self.navigationController?.view.backgroundColor = .clear
-        
-//        actionButton.format()
-        
         guard let sharedTrip = sharedTrip else { return }
     
         // Set shared trip photo
@@ -43,9 +35,7 @@ class SharedTripDetailViewController: UIViewController {
             tripPhoto = image
         }
         navigationController?.navigationItem.rightBarButtonItem = nil
-//        tableView.setContentOffset(CGPoint(x: 100.0, y: 100.0), animated: true)
-        
-//        tableView.setContentOffset(CGPoint(x: (navigationController?.navigationBar.frame.origin.x)!, y: (navigationController?.navigationBar.frame.origin.y)!), animated: true)
+
         sharedTripPhotoImageView.image = tripPhoto
         
         // Delegates

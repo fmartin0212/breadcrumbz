@@ -84,11 +84,11 @@ extension ProfileViewController: UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            cell.textLabel?.text = loggedInUser.firstName
-        case 1:
-            cell.textLabel?.text = loggedInUser.lastName
-        case 2:
             cell.textLabel?.text = loggedInUser.username
+        case 1:
+            cell.textLabel?.text = loggedInUser.firstName
+        case 2:
+            cell.textLabel?.text = loggedInUser.lastName
         default:
             break
         }
@@ -99,8 +99,10 @@ extension ProfileViewController: UITableViewDataSource {
 extension ProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
         let headerLabel = UILabel()
-        headerLabel.font = UIFont(name: "AvenirNext", size: 18)
+        headerLabel.backgroundColor = UIColor.white
+        headerLabel.font = UIFont(name: "AvenirNext", size: 15)
         headerLabel.textColor = UIColor.gray
         
         switch section {
@@ -113,6 +115,7 @@ extension ProfileViewController: UITableViewDelegate {
         default:
             break
         }
+        
         return headerLabel
     }
 }
