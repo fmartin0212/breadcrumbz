@@ -35,8 +35,8 @@
                                             <constraint firstAttribute="height" constant="193" id="VRW-4D-Dhz"/>
                                         </constraints>
                                     </imageView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Ensure that you rememebr all of the places that you loved by logging your trip experience." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="L27-FZ-w81">
-                                        <rect key="frame" x="9" y="233" width="357.5" height="128"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Ensure that you rememeber all of the places that you loved by logging your trip experience." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="L27-FZ-w81">
+                                        <rect key="frame" x="4.5" y="233" width="366" height="128"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="nm2-45-dkN"/>
                                         </constraints>
@@ -83,8 +83,8 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding-2" translatesAutoresizingMaskIntoConstraints="NO" id="qJu-Ja-ZO0">
                                         <rect key="frame" x="58" y="0.0" width="196" height="184"/>
                                     </imageView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Share your experiences with friends and family" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="opA-ow-JMB">
-                                        <rect key="frame" x="0.0" y="224" width="311.5" height="50"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Share your experiences with friends and family." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="opA-ow-JMB">
+                                        <rect key="frame" x="19.5" y="224" width="273" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="y1a-ln-mk6"/>
                                         </constraints>

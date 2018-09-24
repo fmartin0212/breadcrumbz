@@ -1241,6 +1241,7 @@
                     <connections>
                         <outlet property="collectionView" destination="4Bd-rO-oCP" id="AeK-gw-sxa"/>
                         <outlet property="placeAddressLabel" destination="Sye-Ez-sLS" id="o5x-hQ-kMn"/>
+                        <outlet property="placeCommentsTextView" destination="7d8-Sa-9oH" id="6NC-eT-ztd"/>
                         <outlet property="placeMainPhotoImageView" destination="zM3-RV-UnZ" id="83W-gp-gRF"/>
                         <outlet property="placeNameLabel" destination="RAG-Qq-WdD" id="V8O-No-prt"/>
                         <outlet property="starFive" destination="0n3-yM-ybw" id="FbA-xv-1PS"/>

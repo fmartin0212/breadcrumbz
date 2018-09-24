@@ -170,9 +170,9 @@ extension CreateTripTableViewController: ChooseDateViewControllerDelegate {
             tripEndDateTextField.text = dateAsString
             endDate = date
         }
-        
+     
+        resignFirstResponder()
     }
-    
 }
 
 extension CreateTripTableViewController: UITextViewDelegate {

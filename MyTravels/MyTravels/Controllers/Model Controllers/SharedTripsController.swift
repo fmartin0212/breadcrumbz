@@ -37,7 +37,7 @@ class SharedTripsController {
             completion(false)
             return
         }
-//        guard let pendingSharedTripsRefs = loggedInUser.pendingSharedTripsRefs else { completion(false) ; return }
+
         let pendingPredicate = NSPredicate(format: "recordID IN %@", loggedInUser.pendingSharedTripsRefs)
         let query = CKQuery(recordType: "Trip", predicate: pendingPredicate)
         CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil) { (records, error) in
@@ -55,6 +55,10 @@ class SharedTripsController {
                 pendingSharedTrip.isAcceptedTrip = false
             }
             
+            if self.sharedTrips.contains(self.pendingSharedTrips) {
+                completion(true)
+                return
+            }
             self.sharedTrips.append(self.pendingSharedTrips)
             completion(true)
         }
@@ -67,7 +71,7 @@ class SharedTripsController {
             completion(false)
             return
         }
-//        guard let acceptedSharedTripsRefs = loggedInUser.acceptedSharedTripsRefs else { completion(false) ; return }
+        
         let acceptedPredicate = NSPredicate(format: "recordID IN %@", loggedInUser.acceptedSharedTripsRefs)
         let query = CKQuery(recordType: "Trip", predicate: acceptedPredicate)
         CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil) { (records, error) in
@@ -77,52 +81,16 @@ class SharedTripsController {
             
             guard let records = records else { completion(false) ; return }
             
+            if self.sharedTrips.contains(self.acceptedSharedTrips) {
+                completion(true)
+                return
+            }
+            
             self.acceptedSharedTrips = records.compactMap { SharedTrip(record: $0) }
             self.sharedTrips.append(self.acceptedSharedTrips)
             completion(true)
         }
     }
-//
-//    func fetchTripsSharedWithUser(completion: @escaping ([SharedTrip]) -> Void) {
-//
-//        guard let loggedInUser = UserController.shared.loggedInUser
-//            else { completion([]) ; return }
-//        var sharedTrips = [SharedTrip]()
-//
-//        // If the user has pending shared trips, fetch them.
-//
-//            let pendingPredicate = NSPredicate(format: "recordID IN %@", loggedInUser.pendingSharedTripsRefs)
-//            let query = CKQuery(recordType: "Trip", predicate: NSPredicate(value: true))
-//            CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil) { (records, error) in
-//                if let error = error {
-//                    print("There was an error fetching the pending shared trips in \(#function): \(error)")
-//                }
-//
-//                if let records = records {
-//                    //                    let pendingSharedTrips = records.compac
-//                }
-//
-//                //                let acceptedPredicate = NSPredicate(format: "recordID IN %@", acceptedSharedTripsRefs)
-//            }
-//
-//
-//        let query = CKQuery(recordType: "Trip", predicate: NSPredicate(value: true))
-//        CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil) { (records, error) in
-//            if let error = error {
-//                ("Error fetching trips shared with user. Error: \(error)")
-//            }
-//
-//            guard let records = records else { completion([]) ; return }
-//
-//            for record in records {
-//                guard let sharedTrip = SharedTrip(record: record) else { completion([]) ; return }
-//                sharedTrips.append(sharedTrip)
-//            }
-//            //            self.sharedTrips = sharedTrips
-//
-//            completion(sharedTrips)
-//        }
-//    }
     
     func fetchPlacesForSharedTrips(completion: @escaping (Bool) -> Void) {
         for array in sharedTrips {

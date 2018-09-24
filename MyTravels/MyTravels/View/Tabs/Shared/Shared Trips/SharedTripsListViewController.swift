@@ -14,9 +14,11 @@ class SharedTripsListViewController: UIViewController {
     
     @IBOutlet weak var profileBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
-    
+    private let refreshControl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
         // Set tableview properties
         tableView.separatorStyle = .none
@@ -24,6 +26,8 @@ class SharedTripsListViewController: UIViewController {
         // Set delegates
         tableView.dataSource = self
         tableView.delegate = self
+        
+        tableView.refreshControl = refreshControl
     }
     
     // MARK: - Functions
@@ -31,6 +35,20 @@ class SharedTripsListViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+    
+    @objc func refresh() {
+        SharedTripsController.shared.fetchUsersPendingSharedTrips(completion: { (_) in
+            SharedTripsController.shared.fetchAcceptedSharedTrips(completion: { (_) in
+                SharedTripsController.shared.fetchPlacesForSharedTrips(completion: { (_) in
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        self.refreshControl.endRefreshing()
+                    }
+                })
+            })
+        })
+    }
+    
     
     // MARK: - Navigation
     
@@ -42,7 +60,7 @@ class SharedTripsListViewController: UIViewController {
                 else { return }
             let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.section][indexPath.row]
             destinationVC.sharedTrip = sharedTrip
-
+            
         }
     }
     

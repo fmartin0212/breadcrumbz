@@ -75,15 +75,16 @@ class SharedPlaceDetailTableViewController: UITableViewController {
                 placeholderImage = activityPlaceholderImage
             }
             
-            if sharedPlace.comments == "Comments" {
-                sharedPlaceCommentsTextView = nil
-            } else {
-                sharedPlaceCommentsTextView.text = sharedPlace.comments
-            }
             sharedPlaceMainPhotoImageView.image = placeholderImage
             sharedPlaceNameLabel.text = sharedPlace.name
             sharedPlaceAddressLabel.text = sharedPlace.address
             updateStarsImageViews(sharedPlace: sharedPlace)
+        }
+        
+        if sharedPlace.comments == "Comments" {
+            sharedPlaceCommentsTextView.text = ""
+        } else {
+            sharedPlaceCommentsTextView.text = sharedPlace.comments
         }
     }
     
@@ -134,6 +135,12 @@ extension SharedPlaceDetailTableViewController: UICollectionViewDelegate, UIColl
         
         return cell
     }
+}
+
+extension SharedPlaceDetailTableViewController {
     
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
+    }
 }
 

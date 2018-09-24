@@ -19,6 +19,7 @@ class PlaceDetailTableViewController: UITableViewController {
     @IBOutlet weak var placeMainPhotoImageView: UIImageView!
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var placeAddressLabel: UILabel!
+    @IBOutlet weak var placeCommentsTextView: UITextView!
     
     @IBOutlet weak var starOne: UIImageView!
     @IBOutlet weak var starTwo: UIImageView!
@@ -36,16 +37,14 @@ class PlaceDetailTableViewController: UITableViewController {
         collectionView.dataSource = self
         
         // Set the title to the user-owned place's name
-        if let place = place {
+        if let _ = place {
             updateViews()
         }
-        
-        tableView.contentOffset = CGPoint(x: 30, y: 30)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateViews()
+//        updateViews()
         collectionView.reloadData()
     }
     
@@ -80,6 +79,12 @@ class PlaceDetailTableViewController: UITableViewController {
             placeNameLabel.text = place.name
             placeAddressLabel.text = place.address
             updateStarsImageViews(place: place)
+        }
+        
+        if place.comments == "Comments" {
+            placeCommentsTextView.text = ""
+        } else {
+            placeCommentsTextView.text = place.comments
         }
     }
     
@@ -136,4 +141,11 @@ extension PlaceDetailTableViewController: UICollectionViewDelegate, UICollection
             
             return cell
         }
+}
+
+extension PlaceDetailTableViewController {
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
+    }
 }

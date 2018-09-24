@@ -151,7 +151,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
                     else { return }
                 
                 // If anything is in the user's pending refs list, append the new tripReference; otherwise, set the refs list to a new array with the trip reference.
-                //        if let userPendingSharedTripsRefs = user.pendingSharedTripsRefs {
+
                 if user.pendingSharedTripsRefs.contains(tripReference) {
                     
                     let alert = UIAlertController(title: "Oops!", message: "You have already shared this trip with this user. Please choose someone else.", preferredStyle: .alert)

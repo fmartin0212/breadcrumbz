@@ -6,8 +6,5 @@ target 'MyTravels' do
   use_frameworks!
 
   # Pods for MyTravels
-pod 'FacebookCore'
-pod 'FacebookLogin'
-
 
 end

@@ -45,7 +45,7 @@ class CloudKitManager {
         
         let unsyncedTripRecords = unsyncedRecordsOf(type: "Trip") as? [Trip] ?? []
         if unsyncedTripRecords.count > 0 {
-            var allRecordsToSave = [[CKRecord]]()
+            var allRecordsToSave = [[CKRecord]]() 
             var tripRecordsToSave = [CKRecord]()
             var placeRecordsToSave = [CKRecord]()
             var tripPhotoArray = [CKRecord]()
@@ -80,13 +80,19 @@ class CloudKitManager {
             allRecordsToSave.append(tripPhotoArray)
             allRecordsToSave.append(placePhotos)
             
+            let dispatchGroup = DispatchGroup()
+            
             for recordArray in allRecordsToSave {
+                dispatchGroup.enter()
                 if recordArray.count > 0 {
                     saveOperation(records: recordArray) { (success) in
                         print("save operation success")
-                        completion(true)
+                        dispatchGroup.leave()
                     }
                 }
+            }
+            dispatchGroup.notify(queue: .main) {
+                completion(true)
             }
         }
     }
