@@ -45,7 +45,7 @@ class CloudKitManager {
         
         let unsyncedTripRecords = unsyncedRecordsOf(type: "Trip") as? [Trip] ?? []
         if unsyncedTripRecords.count > 0 {
-            var allRecordsToSave = [[CKRecord]]() 
+            var allRecordsToSave = [[CKRecord]]()
             var tripRecordsToSave = [CKRecord]()
             var placeRecordsToSave = [CKRecord]()
             var tripPhotoArray = [CKRecord]()
