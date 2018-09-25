@@ -13,8 +13,9 @@ import CloudKit
 import MapKit
 
 @objc(Trip)
-public class Trip: NSManagedObject, CloudKitSyncable {
+public class Trip: NSManagedObject, CloudKitSyncable, FirebaseSyncable {
     
+    // MARK: - CloudKitSyncable
     var recordType: String {
         return "Trip"
     }
@@ -29,6 +30,9 @@ public class Trip: NSManagedObject, CloudKitSyncable {
         guard let cloudKitRecordID = cloudKitRecordID else { return nil }
         return CKReference(recordID: cloudKitRecordID, action: .deleteSelf)
     }
+    
+    // MARK: - FirebaseSyncable
+    var id: UUID?
     
     fileprivate var temporaryPhotoURL: URL {
         

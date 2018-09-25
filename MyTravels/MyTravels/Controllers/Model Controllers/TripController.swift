@@ -53,5 +53,18 @@ class TripController {
         guard let trips = frc.fetchedObjects else { return }
         self.trips = trips
     }
+    
+    func createTrip(with name: String, location: String, tripDescription: String?, startDate: String, endDate: String) {
+        
+        var tripDict = [String : Any]()
+        
+        tripDict["name"] = name
+        tripDict["location"] = location
+        tripDict["description"] = tripDescription
+        tripDict["startDate"] = startDate
+        tripDict["endDate"] = endDate
+        
+        FirebaseManager.save(object: tripDict, to: "asdaf")
+    }
 }
 

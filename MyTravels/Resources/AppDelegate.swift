@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
+        TripController.shared.createTrip(with: "test", location: "test", tripDescription: "test", startDate: "test", endDate: "test")
+        
         return true
     }
 }
