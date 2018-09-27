@@ -34,9 +34,7 @@ class TripController {
     }
     
     func save(trip: Trip) {
-        guard let record = CKRecord(trip: trip) else { return }
-        CloudKitManager.shared.saveToCloudKit(ckRecord: record) { (success) in
-        }
+      
     }
     
     func delete(trip: Trip) {
@@ -54,17 +52,21 @@ class TripController {
         self.trips = trips
     }
     
-    func createTrip(with name: String, location: String, tripDescription: String?, startDate: String, endDate: String) {
+    func upload(trip: Trip) {
         
         var tripDict = [String : Any]()
         
-        tripDict["name"] = name
-        tripDict["location"] = location
-        tripDict["description"] = tripDescription
-        tripDict["startDate"] = startDate
-        tripDict["endDate"] = endDate
+        tripDict["name"] = trip.name
+        tripDict["location"] = trip.location
+        tripDict["description"] = trip.tripDescription
+        tripDict["startDate"] = trip.startDate?.timeIntervalSince1970
+        tripDict["endDate"] = trip.endDate?.timeIntervalSince1970
         
-        FirebaseManager.save(object: tripDict, to: "asdaf")
+        let ref = FirebaseManager.ref.child("123456").childByAutoId()
+        trip.id = ref.key
+        CoreDataManager.save()
+        
+        FirebaseManager.save(object: tripDict, to: ref)
     }
 }
 

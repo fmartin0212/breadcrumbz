@@ -15,7 +15,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
     // MARK: - Properties
     var trip: Trip?
     var array: Array<Any>?
-
+    
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tripPhotoImageView: UIImageView!
@@ -126,7 +126,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
             print("Array count: \(array.count)")
             print("Full array: \(array)")
             self.array = array
-        
+            
         }
         
         tableView.reloadData()
@@ -142,40 +142,14 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
             guard let trip = self.trip,
                 let username = alertController.textFields?.first!.text else { return }
             
-            let predicate = NSPredicate(format: "username == %@", username)
-            let query = CKQuery(recordType: "User", predicate: predicate)
-            CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
-                guard let userRecord = records?.first,
-                    let user = User(ckRecord: userRecord),
-                    let tripReference = trip.reference
-                    else { return }
-                
-                // If anything is in the user's pending refs list, append the new tripReference; otherwise, set the refs list to a new array with the trip reference.
-
-                if user.pendingSharedTripsRefs.contains(tripReference) {
-                    
-                    let alert = UIAlertController(title: "Oops!", message: "You have already shared this trip with this user. Please choose someone else.", preferredStyle: .alert)
-                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    alert.addAction(okAction)
-                    self.present(alert, animated: true, completion: nil)
-                    return
-                } else {
-                    user.pendingSharedTripsRefs.append(tripReference)
-                }
-                
-                guard let record = CKRecord(user: user) else { return }
-                CloudKitManager.shared.updateOperation(records: [record]) { (_) in
-                    DispatchQueue.main.async {
-                        print("break")
-                    }
-                }
-            })
+            
         }
         alertController.addAction(shareAction)
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true, completion: nil)
     }
+    
     
     func presentCreateAccountAlert() {
         let alertController = UIAlertController(title: nil, message: "Please create an account in order to share trips", preferredStyle: .alert)
@@ -184,7 +158,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         let createAccountAction = UIAlertAction(title: "Create account", style: .default) { (_) in
             let sb = UIStoryboard(name: "Onboarding", bundle: nil)
             let createAccountVC = sb.instantiateViewController(withIdentifier: "SignUp")
-//            createAccountVC.sk
+            //            createAccountVC.sk
             self.present(createAccountVC, animated: true, completion: nil)
         }
         
@@ -219,6 +193,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         }
     }
 }
+
 extension TripDetailViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -227,9 +202,9 @@ extension TripDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        
         guard let placeArray = array as? [[Place]] else { return 0 }
-
+        
         if section == 0 {
             return 1
         }
@@ -243,7 +218,7 @@ extension TripDetailViewController: UITableViewDataSource {
         }
         return 0
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0  && indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TripDetailCell") as! TripDetailTableViewCell
@@ -255,7 +230,7 @@ extension TripDetailViewController: UITableViewDataSource {
         }
         
         if indexPath.section == 1  && indexPath.row == 0 {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AddACrumbCell", for: indexPath) as! AddACrumbTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AddACrumbCell", for: indexPath) as! AddACrumbTableViewCell
             if let placeArray = array as? [[Place]] {
                 if placeArray.count > 0 {
                     cell.tripHasCrumbs = true
@@ -279,7 +254,7 @@ extension TripDetailViewController: UITableViewDataSource {
 }
 
 extension TripDetailViewController: UITableViewDelegate {
-  
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 1 {
             return 0

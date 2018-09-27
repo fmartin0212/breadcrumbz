@@ -53,14 +53,14 @@ class ProfileViewController: UIViewController {
             else { return }
         
         loggedInUser.profilePicture = UIImagePNGRepresentation(updatedProfileImage)
-        guard let record = CKRecord(user: loggedInUser) else { return }
-        
-        CloudKitManager.shared.updateOperation(records: [record]) { (success) in
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: TripsListViewController.profilePictureUpdatedNotification, object: self)
-                self.dismiss(animated: true, completion: nil)
-            }
-        }
+//        guard let record = CKRecord(user: loggedInUser) else { return }
+//
+//        CloudKitManager.shared.updateOperation(records: [record]) { (success) in
+//            DispatchQueue.main.async {
+//                NotificationCenter.default.post(name: TripsListViewController.profilePictureUpdatedNotification, object: self)
+//                self.dismiss(animated: true, completion: nil)
+//            }
+//        }
     }
     
     @IBAction func tapGestureRecognized(_ sender: Any) {

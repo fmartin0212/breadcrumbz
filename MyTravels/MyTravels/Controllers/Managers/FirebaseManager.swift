@@ -10,21 +10,30 @@ import Foundation
 import FirebaseDatabase
 import FirebaseStorage
 import FirebaseStorageUI
+import FirebaseAuth
 
 protocol FirebaseSyncable {
-    var id: UUID? { get set }
+    var id: String? { get set }
 }
 
 class FirebaseManager {
     
-    static var ref: DatabaseReference!
+    static var ref: DatabaseReference! = Database.database().reference()
     
-    init() {
-        print("asf")
+    static func save(object: [String : Any], to databaseReference: DatabaseReference) {
+      
+        databaseReference.setValue(object)
     }
     
-    static func save(object: [String : Any], to path: String) {
-       ref = Database.database().reference()
-        ref.setValue(object)
+    static func addUser(with email: String, password: String, completion: @escaping (Bool) -> Void) {
+        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+            if let error = error {
+                print("There was an error creating a new user: \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            guard let _ = user else { completion(false) ; return }
+            completion(true)
+        }
     }
 }
