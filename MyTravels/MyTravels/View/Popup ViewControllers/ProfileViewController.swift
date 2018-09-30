@@ -30,13 +30,11 @@ class ProfileViewController: UIViewController {
         profilePictureButton.clipsToBounds = true
         profilePictureButton.layer.cornerRadius = 61
         
-        guard let loggedInUser = UserController.shared.loggedInUser,
-            let profilePictureAsData = loggedInUser.profilePicture,
-            let profilePicture = UIImage(data: profilePictureAsData)
+        guard let loggedInUser = UserController.shared.loggedInUser
             else { return }
         
         profilePictureButton.setImage(nil, for: .normal)
-        profilePictureButton.setBackgroundImage(profilePicture, for: .normal)
+    
     }
     
     @IBAction func profileButtonTapped(_ sender: Any) {
@@ -52,7 +50,6 @@ class ProfileViewController: UIViewController {
             let updatedProfileImage = profilePictureButton.backgroundImage(for: .normal)
             else { return }
         
-        loggedInUser.profilePicture = UIImagePNGRepresentation(updatedProfileImage)
 //        guard let record = CKRecord(user: loggedInUser) else { return }
 //
 //        CloudKitManager.shared.updateOperation(records: [record]) { (success) in
@@ -84,7 +81,7 @@ extension ProfileViewController: UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            cell.textLabel?.text = loggedInUser.username
+            cell.textLabel?.text = loggedInUser.email
         case 1:
             cell.textLabel?.text = loggedInUser.firstName
         case 2:

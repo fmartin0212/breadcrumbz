@@ -25,15 +25,16 @@ class FirebaseManager {
         databaseReference.setValue(object)
     }
     
-    static func addUser(with email: String, password: String, completion: @escaping (Bool) -> Void) {
+    static func addUser(with email: String, password: String, completion: @escaping (User?, Error?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             if let error = error {
+                
                 print("There was an error creating a new user: \(error.localizedDescription)")
-                completion(false)
+                completion(nil, error)
                 return
             }
-            guard let _ = user else { completion(false) ; return }
-            completion(true)
+            guard let user = user else { completion(nil, error) ; return }
+            completion(user, nil)
         }
     }
 }

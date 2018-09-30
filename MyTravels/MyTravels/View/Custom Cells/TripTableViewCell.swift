@@ -29,7 +29,7 @@ class TripTableViewCell: UITableViewCell {
         }
     }
     
-    var user: User? {
+    var user: InternalUser? {
         didSet {
             updateViewsForUser()
         }

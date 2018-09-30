@@ -20,8 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
 //        TripController.shared.upload(with: "test", location: "test", tripDescription: "test", startDate: "test", endDate: "test")
-        let trip = Trip(name: "asdsF", location: "afsafas", tripDescription: "adsdsa", startDate: Date(), endDate: Date())
-        TripController.shared.upload(trip: trip)
         
         return true
     }

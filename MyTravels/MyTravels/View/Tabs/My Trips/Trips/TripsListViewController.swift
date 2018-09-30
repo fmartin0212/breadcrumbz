@@ -49,14 +49,9 @@ class TripsListViewController: UIViewController {
     
     @objc func updateProfilePicture() {
         
-        guard let loggedInUser = UserController.shared.loggedInUser,
-            let profilePictureAsData = loggedInUser.profilePicture,
-            let profilePicture = UIImage(data: profilePictureAsData)
+        guard let loggedInUser = UserController.shared.loggedInUser 
             else { return }
-        let resizedProfilepicture = profilePicture.resizeImage(CGFloat(20), opaque: false)
-        profileBarButtonItem.image = nil
-        profileBarButtonItem.setBackgroundImage(resizedProfilepicture, for: .normal, barMetrics: .default)
-    
+       
     }
     
     @objc func doSomething() {

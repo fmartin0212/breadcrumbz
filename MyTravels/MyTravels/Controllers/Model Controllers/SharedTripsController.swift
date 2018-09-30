@@ -19,11 +19,6 @@ class SharedTripsController {
     
     var sharedIDs = [String]()
     
-    
-    func addSharedIDTo(trip: Trip, forUser: User) {
-      
-    }
-    
     func fetchUsersPendingSharedTrips(completion: @escaping (Bool) -> Void) {
     
         }
@@ -34,10 +29,6 @@ class SharedTripsController {
     
     func fetchPlacesForSharedTrips(completion: @escaping (Bool) -> Void) {
       
-    }
-    
-    func fetchCreator(for sharedTrip: SharedTrip, completion: @escaping (User?) -> Void) {
-       
     }
     
     func accept(sharedTrip: SharedTrip, at indexPath: IndexPath, completion: @escaping (Bool) -> Void) {

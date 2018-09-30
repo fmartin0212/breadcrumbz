@@ -60,7 +60,7 @@ class CloudKitManager {
     
     
     // Sharing
-    func fetchTripShareReceiverWith(firstName: String, completion: @escaping (User?) -> Void) {
-      
-    }
+//    func fetchTripShareReceiverWith(firstName: String, completion: @escaping (User?) -> Void) {
+//      
+//    }
 }

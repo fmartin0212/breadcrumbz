@@ -51,7 +51,7 @@
 		B7DA1B73202E140C0007497A /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B6D202E140C0007497A /* Photo+CoreDataClass.swift */; };
 		B7DA1B74202E140C0007497A /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B6E202E140C0007497A /* Photo+CoreDataProperties.swift */; };
 		B7DA1B76202E164C0007497A /* CloudKitSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B75202E164C0007497A /* CloudKitSyncable.swift */; };
-		B7DA1B78202E1AE20007497A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B77202E1AE20007497A /* User.swift */; };
+		B7DA1B78202E1AE20007497A /* InternalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B77202E1AE20007497A /* InternalUser.swift */; };
 		B7DA1B7B202E2A170007497A /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B7A202E2A170007497A /* CloudKitManager.swift */; };
 		B7DA1B7D202E2B900007497A /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B7C202E2B900007497A /* UserController.swift */; };
 		B7DA1B7F202F9FBC0007497A /* FetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */; };
@@ -118,7 +118,7 @@
 		B7DA1B6D202E140C0007497A /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B7DA1B6E202E140C0007497A /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B7DA1B75202E164C0007497A /* CloudKitSyncable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitSyncable.swift; sourceTree = "<group>"; };
-		B7DA1B77202E1AE20007497A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B7DA1B77202E1AE20007497A /* InternalUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUser.swift; sourceTree = "<group>"; };
 		B7DA1B7A202E2A170007497A /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		B7DA1B7C202E2B900007497A /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchViewController.swift; sourceTree = "<group>"; };
@@ -216,7 +216,7 @@
 		B745843F203B7B1A00A686E7 /* Model outside of MOC */ = {
 			isa = PBXGroup;
 			children = (
-				B7DA1B77202E1AE20007497A /* User.swift */,
+				B7DA1B77202E1AE20007497A /* InternalUser.swift */,
 				B7B0C36D203724F30031A92A /* SharedTrip.swift */,
 				B7B0C36F2037446E0031A92A /* SharedPlace.swift */,
 			);
@@ -539,7 +539,7 @@
 				B7C10CCF2020FD4B00818430 /* TripController.swift in Sources */,
 				B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */,
 				B7D652392024E24A00E975F1 /* TypeSelectionViewController.swift in Sources */,
-				B7DA1B78202E1AE20007497A /* User.swift in Sources */,
+				B7DA1B78202E1AE20007497A /* InternalUser.swift in Sources */,
 				B7F75C20205A14D800C876A0 /* SharedTripDetailTableViewCell.swift in Sources */,
 				B7B0C36E203724F30031A92A /* SharedTrip.swift in Sources */,
 				B7DA1B73202E140C0007497A /* Photo+CoreDataClass.swift in Sources */,

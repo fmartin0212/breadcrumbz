@@ -16,10 +16,16 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
-        
+        self.tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         signUpButton.formatBlue()
     }
-    
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        var frame = self.tableView.frame
+        frame.size = self.tableView.contentSize
+        self.tableView.frame = frame
+    }
+
     // MARK: - Outlets
     @IBOutlet weak var skipButtonTapped: UIButton!
 
@@ -53,13 +59,13 @@ extension SignUpViewController {
         guard let placeholderProfilePicture = UIImage(named: "user") else { return }
         let placeholderProfilePictureAsData = UIImagePNGRepresentation(placeholderProfilePicture)
         
-        UserController.shared.createNewUserWith(firstName: firstName, lastName: lastName, username: username, profilePicture: placeholderProfilePictureAsData) { (success) in
-            if success {
-                DispatchQueue.main.async {
-                    self.presentTripListVC()
-                }
-            }
-        }
+//        UserController.shared.createNewUserWith(firstName: firstName, lastName: lastName, username: username, profilePicture: placeholderProfilePictureAsData) { (success) in
+//            if success {
+//                DispatchQueue.main.async {
+//                    self.presentTripListVC()
+//                }
+//            }
+//        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -70,21 +76,27 @@ extension SignUpViewController {
 extension SignUpViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "entryCell", for: indexPath) as? TextFieldTableViewCell else { return UITableViewCell() }
+        cell.entryTextField.returnKeyType = .next
+        
         switch indexPath.row {
         case 0:
             cell.entryTextField.placeholder = "First name"
-            cell.entryTextField.returnKeyType = .next
         case 1:
             cell.entryTextField.placeholder = "Last name"
-            cell.entryTextField.returnKeyType = .next
         case 2:
-            cell.entryTextField.placeholder = "Username"
+            cell.entryTextField.placeholder = "Email"
+        case 3:
+            cell.entryTextField.placeholder = "Password"
+        case 4:
+            cell.entryTextField.placeholder = "Confirm Password"
             cell.entryTextField.returnKeyType = .done
+        case 5:
+            cell.entryTextField.isHidden = true
         default:
             break
         }
@@ -103,11 +115,17 @@ extension SignUpViewController: UITableViewDelegate {
     }
 }
 
+
 extension SignUpViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.tag == 2 {
-            createNewAccount()
+        guard let passwordTextField = tableView.viewWithTag(3) as? UITextField else { return false }
+        if textField.tag == 4 {
+            if passwordTextField.text == textField.text {
+                createNewAccount()
+            } else {
+                // FIXME: - PRESENT ALERT CONTROLLER
+            }
             return false
         }
         

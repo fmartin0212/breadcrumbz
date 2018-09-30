@@ -9,36 +9,34 @@
 import Foundation
 import FirebaseDatabase
 
-class User {
+class InternalUser {
     
-    let firstName: String?
+    let firstName: String
     let lastName: String?
-    let username: String?
-    var profilePicture: Data?
+    let email: String
     var uid: String?
     
-    init(firstName: String?, lastName: String?, username: String?, profilePicture: Data?) {
+    init(firstName: String, lastName: String?, email: String) {
         self.firstName = firstName
         self.lastName = lastName
-        self.username = username
-        self.profilePicture = profilePicture
+        self.email = email
     }
     
-    // Turn record into User
+    // Turn snapshot into User
     init?(snapshot: DataSnapshot) {
         
         guard let tripDict = snapshot.value as? [String : Any],
             let firstName = tripDict["firstName"] as? String,
-            let lastName = tripDict["lastName"] as? String,
-            let username = tripDict["username"] as? String
+            let lastName = tripDict["lastName"] as? String?,
+            let username = tripDict["email"] as? String
             //FIXME profle pic
             else { return nil }
         
         self.firstName = firstName
         self.lastName = lastName
-        self.username = username
+        self.email = username
         // FIX ME
         //        self.profilePicture = photoData
-        // FIX ME - Set UID
+        // FIX ME - Set UID - Am I going to need this? May be set when user signs in/registers.
     }
 }

@@ -61,11 +61,7 @@ class CreateAccountViewController: UIViewController {
         
         let placeholderProfilePictureAsData = UIImagePNGRepresentation(placeholderProfilePicture)
         
-        UserController.shared.createNewUserWith(firstName: firstName, lastName: lastName, username: username, profilePicture: placeholderProfilePictureAsData) { (success) in
-            DispatchQueue.main.async {
-                self.dismiss(animated: true, completion: nil)
-            }
-        }
+      
     }
     
     // MARK: - Functions

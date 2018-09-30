@@ -108,11 +108,6 @@ extension SharedTripsListViewController: UITableViewDataSource {
         cell.sharedTrip = sharedTrip
         cell.indexPath = indexPath
         
-        SharedTripsController.shared.fetchCreator(for: sharedTrip) { (user) in
-            guard let user = user else { return }
-            cell.user = user
-        }
-        
         cell.delegate = self
         
         return cell
