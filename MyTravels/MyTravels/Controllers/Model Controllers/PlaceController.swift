@@ -49,4 +49,35 @@ class PlaceController {
     func delete(place: Place) {
         CoreDataManager.delete(object: place)
     }
+    
+    func uploadPlaces(for trip: Trip, completion: @escaping (Bool) -> Void) {
+        guard let tripUID = trip.uid, let places = trip.places?.allObjects as? [Place] else { return }
+        
+        let dispatchGroup = DispatchGroup()
+        for place in places {
+            dispatchGroup.enter()
+            let ref = FirebaseManager.ref.child(tripUID).childByAutoId()
+            
+            let placeDict: [String : Any] = ["name" : place.name ?? "",
+                                             "type" : place.type ?? "",
+                                             "address" : place.address ?? "",
+                                             "rating" : place.rating,
+                                             "comments" : place.comments ?? ""
+            ]
+            FirebaseManager.save(object: placeDict, to: ref) { (error) in
+                if let error = error {
+                    print("Error saving data in uploadPlaces: \(error)"
+                    completion(false)
+                    return
+                }
+            }
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            completion(true)
+        }
+    }
+    
+    
 }

@@ -13,6 +13,8 @@ import CloudKit
 
 @objc(Place)
 public class Place: NSManagedObject, CloudKitSyncable {
+
+    var uid: String?
     
     var recordType: String {
         return "Place"

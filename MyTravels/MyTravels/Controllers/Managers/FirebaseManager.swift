@@ -20,9 +20,15 @@ class FirebaseManager {
     
     static var ref: DatabaseReference! = Database.database().reference()
     
-    static func save(object: [String : Any], to databaseReference: DatabaseReference) {
-      
-        databaseReference.setValue(object)
+    static func save(object: [String : Any], to databaseReference: DatabaseReference, completion: @escaping (Error?) -> Void) {
+        databaseReference.setValue(object) { (error, _) in
+            if let error = error {
+                print("There was an error saving an object to the database")
+                completion(error)
+                return
+            }
+            completion(nil)
+        }
     }
     
     static func addUser(with email: String, password: String, completion: @escaping (User?, Error?) -> Void) {

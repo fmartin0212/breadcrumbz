@@ -35,9 +35,13 @@ class InternalUserController {
                             ]
             
             let ref = FirebaseManager.ref.child(newUser.uid ?? "")
-            FirebaseManager.save(object: userDict, to: ref)
-            
-            completion(true)
+            FirebaseManager.save(object: userDict, to: ref, completion: { (error) in
+                if let error = error {
+                    // Present alert controller?
+                } else {
+                    completion(true)
+                }
+            })
         }
     }
     
