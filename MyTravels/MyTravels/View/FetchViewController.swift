@@ -17,7 +17,7 @@ class FetchViewController: UIViewController {
             UserDefaults.standard.setValue(false, forKey: "userSkippedSignUp")
         }
         
-        UserController.shared.fetchCurrentUser(completion: { (success) in
+        InternalUserController.shared.fetchCurrentUser(completion: { (success) in
             if success {
                 SharedTripsController.shared.fetchUsersPendingSharedTrips(completion: { (_) in
                     SharedTripsController.shared.fetchAcceptedSharedTrips(completion: { (_) in

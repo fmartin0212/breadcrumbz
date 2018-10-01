@@ -62,7 +62,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
     @IBAction func actionButtonTapped(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let shareTripAction = UIAlertAction(title: "Share trip", style: .default) { (action) in
-            if UserController.shared.loggedInUser == nil {
+            if InternalUserController.shared.loggedInUser == nil {
                 self.presentCreateAccountAlert()
                 return
             }

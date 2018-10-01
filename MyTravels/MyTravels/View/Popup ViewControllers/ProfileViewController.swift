@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController {
         profilePictureButton.clipsToBounds = true
         profilePictureButton.layer.cornerRadius = 61
         
-        guard let loggedInUser = UserController.shared.loggedInUser
+        guard let loggedInUser = InternalUserController.shared.loggedInUser
             else { return }
         
         profilePictureButton.setImage(nil, for: .normal)
@@ -46,7 +46,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        guard let loggedInUser = UserController.shared.loggedInUser,
+        guard let loggedInUser = InternalUserController.shared.loggedInUser,
             let updatedProfileImage = profilePictureButton.backgroundImage(for: .normal)
             else { return }
         
@@ -77,7 +77,7 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "profileDetailCell", for: indexPath)
         
-        guard let loggedInUser = UserController.shared.loggedInUser else { return UITableViewCell() }
+        guard let loggedInUser = InternalUserController.shared.loggedInUser else { return UITableViewCell() }
         
         switch indexPath.section {
         case 0:

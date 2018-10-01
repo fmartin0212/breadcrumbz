@@ -9,9 +9,9 @@
 import Foundation
 import CloudKit
 
-class UserController {
+class InternalUserController {
     
-    static var shared = UserController()
+    static var shared = InternalUserController()
     
     var loggedInUser: InternalUser?
     
@@ -31,7 +31,7 @@ class UserController {
             
             let userDict: [String : Any] = ["email" : newUser.email,
                             "firstName" : newUser.firstName,
-                            "lastName" : newUser.lastName
+                            "lastName" : newUser.lastName ?? ""
                             ]
             
             let ref = FirebaseManager.ref.child(newUser.uid ?? "")
@@ -42,6 +42,6 @@ class UserController {
     }
     
     func fetchCurrentUser(completion: @escaping (Bool) -> Void) {
-       
+        
     }
 }

@@ -49,7 +49,7 @@ class TripsListViewController: UIViewController {
     
     @objc func updateProfilePicture() {
         
-        guard let loggedInUser = UserController.shared.loggedInUser 
+        guard let loggedInUser = InternalUserController.shared.loggedInUser 
             else { return }
        
     }

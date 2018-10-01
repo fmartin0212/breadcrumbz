@@ -54,6 +54,10 @@ class TripController {
     
     func upload(trip: Trip) {
         
+        guard let loggedInUserUID = InternalUserController.shared.loggedInUser?.uid else { return }
+            // PRESENT ALERT CONTROLLER OR CREATE ACCOUNT
+        
+        
         var tripDict = [String : Any]()
         
         tripDict["name"] = trip.name
@@ -62,7 +66,7 @@ class TripController {
         tripDict["startDate"] = trip.startDate?.timeIntervalSince1970
         tripDict["endDate"] = trip.endDate?.timeIntervalSince1970
         
-        let ref = FirebaseManager.ref.child("123456").childByAutoId()
+        let ref = FirebaseManager.ref.child(loggedInUserUID).childByAutoId()
         trip.id = ref.key
         CoreDataManager.save()
         
