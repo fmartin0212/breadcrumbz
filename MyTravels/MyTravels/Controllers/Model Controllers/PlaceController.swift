@@ -66,7 +66,7 @@ class PlaceController {
             ]
             FirebaseManager.save(object: placeDict, to: ref) { (error) in
                 if let error = error {
-                    print("Error saving data in uploadPlaces: \(error)"
+                    print("Error saving data in uploadPlaces: \(error)")
                     completion(false)
                     return
                 }

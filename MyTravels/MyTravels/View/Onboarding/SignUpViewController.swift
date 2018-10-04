@@ -48,24 +48,45 @@ extension SignUpViewController {
         let firstNameCell = (tableView.cellForRow(at: firstNameCellIndexPath)) as! TextFieldTableViewCell
         guard let firstName = firstNameCell.entryTextField.text, !firstName.isEmpty else { return }
         
+        
+        // Last name is optional
         let lastNameCellIndexPath = IndexPath(row: 1, section: 0)
         let lastNameCell = (tableView.cellForRow(at: lastNameCellIndexPath)) as! TextFieldTableViewCell
-        guard let lastName = lastNameCell.entryTextField.text, !lastName.isEmpty else { return }
+        let lastName = lastNameCell.entryTextField.text
         
-        let usernameCellIndexPath = IndexPath(row: 2, section: 0)
-        let usernameCell = (tableView.cellForRow(at: usernameCellIndexPath)) as! TextFieldTableViewCell
-        guard let username = usernameCell.entryTextField.text, !username.isEmpty else { return }
+        let emailCellIndexPath = IndexPath(row: 2, section: 0)
+        let emailCell = (tableView.cellForRow(at: emailCellIndexPath)) as! TextFieldTableViewCell
+        guard let email = emailCell.entryTextField.text, !email.isEmpty else { return }
         
-        guard let placeholderProfilePicture = UIImage(named: "user") else { return }
-        let placeholderProfilePictureAsData = UIImagePNGRepresentation(placeholderProfilePicture)
+        let passwordCellIndexPath = IndexPath(row: 3, section: 0)
+        let passwordCell = (tableView.cellForRow(at: passwordCellIndexPath) as! TextFieldTableViewCell)
+        guard let password = passwordCell.entryTextField.text else { return }
         
-//        UserController.shared.createNewUserWith(firstName: firstName, lastName: lastName, username: username, profilePicture: placeholderProfilePictureAsData) { (success) in
-//            if success {
-//                DispatchQueue.main.async {
-//                    self.presentTripListVC()
-//                }
-//            }
-//        }
+        let passwordConfCellIndexPath = IndexPath(row: 4, section: 0)
+        let passwordConfCell = (tableView.cellForRow(at: passwordConfCellIndexPath) as! TextFieldTableViewCell)
+        guard let passwordConf = passwordConfCell.entryTextField.text else { return }
+        
+        if password == passwordConf {
+            InternalUserController.shared.createNewUserWith(firstName: firstName, lastName: lastName, email: email, password: password) { (success) in
+                if success {
+                    self.presentTripListVC()
+                } else {
+                    let alertController = UIAlertController(title: "Oops!", message: "Your passwords do not match -- please re-enter your passwords", preferredStyle: .alert)
+                    let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alertController.addAction(OKAction)
+                }
+            }
+        }
+        else {
+            let alertController = UIAlertController(title: "Oops!", message: "Your passwords do not match -- please re-enter your passwords", preferredStyle: .alert)
+            let OKAction = UIAlertAction(title: "OK", style: .default, handler: { (_) in
+                passwordCell.entryTextField.text = ""
+                passwordConfCell.entryTextField.text = ""
+            })
+            alertController.addAction(OKAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

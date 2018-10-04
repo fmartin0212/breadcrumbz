@@ -17,17 +17,9 @@ class FetchViewController: UIViewController {
             UserDefaults.standard.setValue(false, forKey: "userSkippedSignUp")
         }
         
-        InternalUserController.shared.fetchCurrentUser(completion: { (success) in
+        InternalUserController.shared.checkForLoggedInUser { (success) in
             if success {
-                SharedTripsController.shared.fetchUsersPendingSharedTrips(completion: { (_) in
-                    SharedTripsController.shared.fetchAcceptedSharedTrips(completion: { (_) in
-                        SharedTripsController.shared.fetchPlacesForSharedTrips(completion: { (_) in
-                            DispatchQueue.main.async {
-                                self.presentTripListVC()
-                            }
-                        })
-                    })
-                })
+                self.presentTripListVC()
             } else if !success && UserDefaults.standard.value(forKey: "userSkippedSignUp") as! Bool == false {
                 let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
                 let tripListNavigationController = storyboard.instantiateViewController(withIdentifier: "OnboardingPageVC")
@@ -39,7 +31,7 @@ class FetchViewController: UIViewController {
                     self.presentTripListVC()
                 }
             }
-        })
+        }
     }
 }
 

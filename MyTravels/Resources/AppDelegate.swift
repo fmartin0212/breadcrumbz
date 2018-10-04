@@ -19,11 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
-        InternalUserController.shared.createNewUserWith(firstName: "Frank", lastName: "Martin", email: "fmartin0212@gmail.com", password: "password") { (success) in
-        let trip = Trip(name: "Test trip 1", location: "Location test", tripDescription: "Test trip Description", startDate: Date(), endDate: Date())
-        TripController.shared.upload(trip: trip)
-        }
-        
         return true
     }
 }

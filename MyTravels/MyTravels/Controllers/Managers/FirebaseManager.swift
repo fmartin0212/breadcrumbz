@@ -43,4 +43,24 @@ class FirebaseManager {
             completion(user, nil)
         }
     }
+    
+    static func login(with email: String, and password: String, completion: @escaping (User?, Error?) -> Void) {
+        Auth.auth().signIn(withEmail: email, password: password) { (firebaseUser, error) in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            completion(firebaseUser, nil)
+        }
+    }
+    
+    static func checkForLoggedInUser() -> User? {
+         return Auth.auth().currentUser
+    }
+    
+    static func fetch(from ref: DatabaseReference, completion: @escaping (DataSnapshot) -> Void) {
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            completion(snapshot)
+        }
+    }
 }

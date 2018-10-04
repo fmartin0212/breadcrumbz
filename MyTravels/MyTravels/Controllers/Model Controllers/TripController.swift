@@ -52,11 +52,10 @@ class TripController {
         self.trips = trips
     }
     
-    func upload(trip: Trip) {
+    func upload(trip: Trip, completion: @escaping (Bool) -> Void) {
         
-        guard let loggedInUserUID = InternalUserController.shared.loggedInUser?.uid else { return }
+        guard let loggedInUserUID = InternalUserController.shared.loggedInUser?.uid else { return completion(false) }
             // PRESENT ALERT CONTROLLER OR CREATE ACCOUNT
-        
         
         var tripDict = [String : Any]()
         
@@ -70,7 +69,12 @@ class TripController {
         trip.id = ref.key
         CoreDataManager.save()
         
-        FirebaseManager.save(object: tripDict, to: ref)
+        FirebaseManager.save(object: tripDict, to: ref) { (error) in
+            if let _ = error {
+                completion(false)
+            }
+            completion(true)
+        }
     }
 }
 
