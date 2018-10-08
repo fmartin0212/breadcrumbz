@@ -29,13 +29,13 @@ class InternalUserController {
             newUser.uid = firebaseUser.uid
             self.loggedInUser = newUser
             
-            let userDict: [String : Any] = ["email" : newUser.email,
+            let internalUserDict: [String : Any] = ["email" : newUser.email,
                             "firstName" : newUser.firstName,
                             "lastName" : newUser.lastName ?? ""
                             ]
             
             let ref = FirebaseManager.ref.child(newUser.uid ?? "")
-            FirebaseManager.save(object: userDict, to: ref, completion: { (error) in
+            FirebaseManager.save(object: internalUserDict, to: ref, completion: { (error) in
                 if let error = error {
                     // Present alert controller?
                 } else {
@@ -50,10 +50,12 @@ class InternalUserController {
             let ref = FirebaseManager.ref.child(firebaseUser.uid)
             FirebaseManager.fetch(from: ref) { (snapshot) in
                 let loggedInUser = InternalUser(snapshot: snapshot)
+                self.loggedInUser = loggedInUser
                 completion(true)
                 return
             }
+        } else {
+            completion(false)
         }
-        completion(false)
     }
 }

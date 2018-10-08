@@ -71,7 +71,7 @@ extension SignUpViewController {
                 if success {
                     self.presentTripListVC()
                 } else {
-                    let alertController = UIAlertController(title: "Oops!", message: "Your passwords do not match -- please re-enter your passwords", preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Something went wrong.", message: "Please try again.", preferredStyle: .alert)
                     let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                     alertController.addAction(OKAction)
                 }
@@ -140,14 +140,10 @@ extension SignUpViewController: UITableViewDelegate {
 extension SignUpViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let passwordTextField = tableView.viewWithTag(3) as? UITextField else { return false }
+        
         if textField.tag == 4 {
-            if passwordTextField.text == textField.text {
-                createNewAccount()
-            } else {
-                // FIXME: - PRESENT ALERT CONTROLLER
-            }
-            return false
+            createNewAccount()
+            return true
         }
         
         let nextResponderIndexPath = IndexPath(row: textField.tag + 1, section: 0)

@@ -55,6 +55,11 @@ class FirebaseManager {
     }
     
     static func checkForLoggedInUser() -> User? {
+//        do {
+//            try Auth.auth().signOut()
+//        } catch {
+//
+//        }
          return Auth.auth().currentUser
     }
     
