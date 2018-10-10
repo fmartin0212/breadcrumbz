@@ -203,7 +203,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name of trip (e.g. Backpacking)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7AL-Ol-FsK">
                                                     <rect key="frame" x="13" y="0.0" width="362" height="50.5"/>
                                                     <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
@@ -225,7 +225,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location of trip (e.g. Europe)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pRN-Qt-82u">
                                                     <rect key="frame" x="13" y="0.0" width="362" height="50.5"/>
                                                     <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
@@ -247,7 +247,7 @@
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hYR-K8-KfO">
                                                     <rect key="frame" x="9" y="0.0" width="366" height="69.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                             </subviews>
@@ -268,7 +268,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a start date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="McP-eI-EJL">
                                                     <rect key="frame" x="14" y="0.0" width="361" height="50.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -290,7 +290,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose an end date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOr-El-KJJ">
                                                     <rect key="frame" x="13" y="0.0" width="362" height="50.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -791,54 +791,45 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose a type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8cT-Wc-esB">
-                                                    <rect key="frame" x="13" y="0.0" width="362" height="59.5"/>
-                                                    <gestureRecognizers/>
-                                                    <nil key="textColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a type" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3p0-JZ-qJL">
+                                                    <rect key="frame" x="14" y="0.0" width="361" height="59.5"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <outletCollection property="gestureRecognizers" destination="akQ-AE-H4F" appends="YES" id="a04-1R-ofv"/>
-                                                    </connections>
-                                                </textField>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="8cT-Wc-esB" secondAttribute="bottom" id="7Id-el-J2X"/>
-                                                <constraint firstItem="8cT-Wc-esB" firstAttribute="top" secondItem="NDt-bQ-iAN" secondAttribute="top" id="Uz6-o0-1DX"/>
-                                                <constraint firstAttribute="trailing" secondItem="8cT-Wc-esB" secondAttribute="trailing" id="lKd-5R-uHJ"/>
-                                                <constraint firstItem="8cT-Wc-esB" firstAttribute="leading" secondItem="NDt-bQ-iAN" secondAttribute="leading" constant="13" id="oqf-6c-0Nw"/>
-                                                <constraint firstItem="8cT-Wc-esB" firstAttribute="height" secondItem="NDt-bQ-iAN" secondAttribute="height" id="s1W-dU-nHc"/>
+                                                <constraint firstItem="3p0-JZ-qJL" firstAttribute="top" secondItem="NDt-bQ-iAN" secondAttribute="top" id="2eC-HB-SEx"/>
+                                                <constraint firstAttribute="trailing" secondItem="3p0-JZ-qJL" secondAttribute="trailing" id="EdO-vH-G4Y"/>
+                                                <constraint firstItem="3p0-JZ-qJL" firstAttribute="leading" secondItem="NDt-bQ-iAN" secondAttribute="leading" constant="14" id="fpd-XN-WEI"/>
+                                                <constraint firstAttribute="bottom" secondItem="3p0-JZ-qJL" secondAttribute="bottom" id="rT8-dG-78d"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="dJp-87-Gz1">
-                                        <rect key="frame" x="0.0" y="216" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="60" id="dJp-87-Gz1">
+                                        <rect key="frame" x="0.0" y="216" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dJp-87-Gz1" id="Y5x-Bw-yS5">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Choose an address" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0iv-SC-Opt">
-                                                    <rect key="frame" x="9" y="0.0" width="366" height="43.5"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <gestureRecognizers/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose an address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGf-36-See">
+                                                    <rect key="frame" x="14" y="0.0" width="361" height="59.5"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                    <connections>
-                                                        <outletCollection property="gestureRecognizers" destination="bYZ-iG-1wg" appends="YES" id="F3O-z0-g9q"/>
-                                                    </connections>
-                                                </textView>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="0iv-SC-Opt" secondAttribute="trailing" id="GoI-ov-ttd"/>
-                                                <constraint firstAttribute="bottom" secondItem="0iv-SC-Opt" secondAttribute="bottom" id="qX7-EA-VZJ"/>
-                                                <constraint firstItem="0iv-SC-Opt" firstAttribute="leading" secondItem="Y5x-Bw-yS5" secondAttribute="leading" constant="9" id="tWu-UP-LFl"/>
-                                                <constraint firstItem="0iv-SC-Opt" firstAttribute="top" secondItem="Y5x-Bw-yS5" secondAttribute="top" id="wYU-nz-ew0"/>
+                                                <constraint firstAttribute="bottom" secondItem="FGf-36-See" secondAttribute="bottom" id="GRB-kJ-dvv"/>
+                                                <constraint firstAttribute="trailing" secondItem="FGf-36-See" secondAttribute="trailing" id="P0f-UF-aPi"/>
+                                                <constraint firstItem="FGf-36-See" firstAttribute="leading" secondItem="Y5x-Bw-yS5" secondAttribute="leading" constant="14" id="QxY-J3-9dw"/>
+                                                <constraint firstItem="FGf-36-See" firstAttribute="top" secondItem="Y5x-Bw-yS5" secondAttribute="top" id="pKr-Mh-hYt"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="58" id="ZKe-SF-Hd8">
-                                        <rect key="frame" x="0.0" y="260" width="375" height="58"/>
+                                        <rect key="frame" x="0.0" y="276" width="375" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZKe-SF-Hd8" id="SLG-vD-BFC">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="57.5"/>
@@ -894,7 +885,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="123" id="zkg-4A-aLi">
-                                        <rect key="frame" x="0.0" y="318" width="375" height="123"/>
+                                        <rect key="frame" x="0.0" y="334" width="375" height="123"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zkg-4A-aLi" id="b5l-em-9Iz">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="122.5"/>
@@ -916,7 +907,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="149" id="tgl-D4-GXi">
-                                        <rect key="frame" x="0.0" y="441" width="375" height="149"/>
+                                        <rect key="frame" x="0.0" y="457" width="375" height="149"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tgl-D4-GXi" id="mwZ-G5-MVI">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="148.5"/>
@@ -984,23 +975,21 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="vzn-w3-iyS" id="kCj-Pa-zXl"/>
-                        <outlet property="placeAddressTextView" destination="0iv-SC-Opt" id="ztq-DU-5PF"/>
+                        <outlet property="placeAddressLabel" destination="FGf-36-See" id="B3h-kj-MJV"/>
                         <outlet property="placeCommentsTextView" destination="5tx-h8-RC7" id="jJI-ba-1C4"/>
                         <outlet property="placeNameTextField" destination="fh1-TT-zMs" id="6U1-Wj-Sxg"/>
-                        <outlet property="placeTypeTextField" destination="8cT-Wc-esB" id="7Hj-MX-HLP"/>
+                        <outlet property="placeTypeLabel" destination="3p0-JZ-qJL" id="9ND-E8-N52"/>
                         <outlet property="starFive" destination="llZ-uD-xqC" id="4dA-Gh-fyd"/>
                         <outlet property="starFour" destination="HJD-rm-lal" id="DVI-cI-P7h"/>
                         <outlet property="starOne" destination="1Jj-RT-Gst" id="c5d-My-SHu"/>
                         <outlet property="starThree" destination="e0e-lE-Xk1" id="jLd-aN-rp1"/>
                         <outlet property="starTwo" destination="IwJ-9M-SIv" id="dav-w5-i8P"/>
-                        <segue destination="M3q-OV-UnA" kind="show" identifier="toAddressSearchViewController" id="110-fO-PgQ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OsD-sv-giU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="akQ-AE-H4F">
                     <connections>
                         <action selector="typeTapGestureRecognizerTapped:" destination="MZZ-JI-H9h" id="mYy-Z4-heX"/>
-                        <segue destination="IkI-ZG-NxV" kind="presentation" identifier="ToTypeSelectionViewControllerSegue" id="MyI-RZ-qMJ"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="AZ4-FR-8QW">
@@ -1428,7 +1417,7 @@
         <!--Type Selection View Controller-->
         <scene sceneID="bRI-h6-lyB">
             <objects>
-                <viewController storyboardIdentifier="typeSelectionViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="IkI-ZG-NxV" customClass="TypeSelectionViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="typeSelectionVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="IkI-ZG-NxV" customClass="TypeSelectionViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jjX-ya-SKj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2589,8 +2578,4 @@
             <color red="0.1439999938" green="0.61400002239999996" blue="0.55000001190000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="110-fO-PgQ"/>
-        <segue reference="J3z-ZV-F6J"/>
-    </inferredMetricsTieBreakers>
 </document>
