@@ -13,19 +13,18 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
     // MARK: - Properties
     var startDate: Date?
     var endDate: Date?
-    var isEndDate: Bool = false
     var photo: Data?
     let imagePickerController = UIImagePickerController()
     
-    // MARK: - IBOutlets
+    // MARK: - Outlets
 
     @IBOutlet weak var cancelBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var saveBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var tripNameTextField: UITextField!
     @IBOutlet weak var tripLocationTextField: UITextField!
     @IBOutlet weak var tripDescriptionTextView: UITextView!
-    @IBOutlet weak var tripStartDateTextField: UITextField!
-    @IBOutlet weak var tripEndDateTextField: UITextField!
+    @IBOutlet weak var tripStartDateLabel: UILabel!
+    @IBOutlet weak var tripEndDateLabel: UILabel!
     @IBOutlet weak var tripPhotoImageView: UIImageView!
     
     override func viewDidLoad() {
@@ -48,7 +47,7 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
         saveBarButtonItem.format()
     }
     
-    // MARK: - IBActions
+    // MARK: - Actions
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
@@ -60,16 +59,16 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
         guard let tripNameTF = tripNameTextField,
             let tripLocationTF = tripLocationTextField,
             let tripDescriptionTV = tripDescriptionTextView,
-            let tripStartDateTF = tripStartDateTextField,
-            let tripEndDateTF = tripEndDateTextField
+            let tripStartLabel = tripStartDateLabel,
+            let tripEndLabel = tripEndDateLabel
             else { return }
         
-        let textFields = [tripLocationTF, tripStartDateTF, tripEndDateTF]
+//        let textFields = [tripLocationTF, tripStartLabel, tripEndLabel]
         
         if tripLocationTextField.text?.isEmpty == true ||
-            tripStartDateTextField.text == "Choose a start date" ||
-            tripStartDateTextField.text == "Choose an end date"  {
-            missingFieldAlert(textFields: textFields)
+            tripStartLabel.text == "Choose a start date" ||
+            tripEndLabel.text == "Choose an end date"  {
+//            missingFieldAlert(textFields: textFields)
             return
             
         }
@@ -103,7 +102,7 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
         present(imagePickerController, animated: true, completion: nil)
     }
     
-    // MARK: - Image picker controller delegate methods
+    // MARK: - Image Picker Controller Delegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
 
@@ -126,52 +125,62 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "toChooseStartDateViewControllerSegue" {
-            guard let destinationVC = segue.destination as? ChooseDateViewController
-                else { return }
-            
-            isEndDate = false
-            destinationVC.isEndDate = isEndDate
-            destinationVC.delegate = self
-        }
-        
-        if segue.identifier == "toChooseEndDateViewControllerSegue" {
-            guard let destinationVC = segue.destination as? ChooseDateViewController
-                else { return }
-            
-            isEndDate = true
-            destinationVC.isEndDate = isEndDate
-            destinationVC.delegate = self
-        }
-    }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
 }
 
-extension CreateTripTableViewController: ChooseDateViewControllerDelegate {
+// MARK: - Table View Delegate
+
+extension CreateTripTableViewController {
     
-    func set(date: Date) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
+        tripNameTextField.resignFirstResponder()
+        tripLocationTextField.resignFirstResponder()
+        tripDescriptionTextView.resignFirstResponder()
+        
+        // Create a reference to the ChooseDateViewController
+        guard let chooseDateVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseDateViewController") as? ChooseDateViewController else { return }
+        
+        switch indexPath.row {
+            
+        case 3:
+            chooseDateVC.isEndDate = false
+            chooseDateVC.delegate = self
+            present(chooseDateVC, animated: true, completion: nil)
+            return
+            
+        case 4:
+            chooseDateVC.isEndDate = true
+            chooseDateVC.delegate = self
+            present(chooseDateVC, animated: true, completion: nil)
+            return
+            
+        default:
+            return
+            
+        }
+    }
+}
+
+extension CreateTripTableViewController : ChooseDateViewControllerDelegate {
+    
+    func set(date: Date, sender: ChooseDateViewController) {
        
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         let dateAsString = dateFormatter.string(from: date)
         
-        if isEndDate == false {
-            tripStartDateTextField.text = dateAsString
+        if sender.isEndDate == false {
+            tripStartDateLabel.text = dateAsString
             startDate = date
             
         } else {
-            tripEndDateTextField.text = dateAsString
+            tripEndDateLabel.text = dateAsString
             endDate = date
         }
-     
-        resignFirstResponder()
     }
 }
 
@@ -183,7 +192,6 @@ extension CreateTripTableViewController: UITextViewDelegate {
             self.tripDescriptionTextView.text = ""
             self.tripDescriptionTextView.textColor = UIColor.black
         }
-        
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -193,7 +201,6 @@ extension CreateTripTableViewController: UITextViewDelegate {
             self.tripDescriptionTextView.textColor = UIColor.lightGray
         }
     }
-
 }
 
 

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ChooseDateViewControllerDelegate: class {
-    func set(date: Date)
+    func set(date: Date, sender: ChooseDateViewController)
 }
 
 class ChooseDateViewController: UIViewController {
@@ -37,7 +37,7 @@ class ChooseDateViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         
-        delegate?.set(date: datePicker.date)
+        delegate?.set(date: datePicker.date, sender: self)
         dismiss(animated: true, completion: nil)
     }
     

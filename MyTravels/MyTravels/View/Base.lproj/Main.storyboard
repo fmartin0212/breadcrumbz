@@ -266,22 +266,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose a start date" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EXx-05-RLS">
-                                                    <rect key="frame" x="13" y="0.0" width="362" height="50.5"/>
-                                                    <gestureRecognizers/>
-                                                    <nil key="textColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a start date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="McP-eI-EJL">
+                                                    <rect key="frame" x="14" y="0.0" width="361" height="50.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <outletCollection property="gestureRecognizers" destination="3a2-rw-y9s" appends="YES" id="vSW-hG-pfg"/>
-                                                    </connections>
-                                                </textField>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="EXx-05-RLS" secondAttribute="trailing" id="76Z-4I-mS6"/>
-                                                <constraint firstAttribute="bottom" secondItem="EXx-05-RLS" secondAttribute="bottom" id="ERu-Wq-Xbv"/>
-                                                <constraint firstItem="EXx-05-RLS" firstAttribute="leading" secondItem="xxd-Sb-PFu" secondAttribute="leading" constant="13" id="NMz-iT-gJM"/>
-                                                <constraint firstItem="EXx-05-RLS" firstAttribute="top" secondItem="xxd-Sb-PFu" secondAttribute="top" id="lnn-zT-Lb3"/>
+                                                <constraint firstAttribute="trailing" secondItem="McP-eI-EJL" secondAttribute="trailing" id="ELv-jb-nBU"/>
+                                                <constraint firstItem="McP-eI-EJL" firstAttribute="top" secondItem="xxd-Sb-PFu" secondAttribute="top" id="Q0t-xx-q5M"/>
+                                                <constraint firstItem="McP-eI-EJL" firstAttribute="leading" secondItem="xxd-Sb-PFu" secondAttribute="leading" constant="14" id="rXx-TP-5BE"/>
+                                                <constraint firstAttribute="bottom" secondItem="McP-eI-EJL" secondAttribute="bottom" id="szX-ep-DaV"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -292,22 +288,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Choose an end date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bZx-5s-UHt">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose an end date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOr-El-KJJ">
                                                     <rect key="frame" x="13" y="0.0" width="362" height="50.5"/>
-                                                    <gestureRecognizers/>
-                                                    <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <outletCollection property="gestureRecognizers" destination="ozX-0W-sDI" appends="YES" id="g5X-5t-8gX"/>
-                                                    </connections>
-                                                </textField>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="bZx-5s-UHt" firstAttribute="top" secondItem="hQc-d9-0NR" secondAttribute="top" id="1QT-sH-YRB"/>
-                                                <constraint firstAttribute="trailing" secondItem="bZx-5s-UHt" secondAttribute="trailing" id="ggZ-VI-qy9"/>
-                                                <constraint firstItem="bZx-5s-UHt" firstAttribute="leading" secondItem="hQc-d9-0NR" secondAttribute="leading" constant="13" id="jkv-dQ-Sj9"/>
-                                                <constraint firstAttribute="bottom" secondItem="bZx-5s-UHt" secondAttribute="bottom" id="wrL-2p-SNd"/>
+                                                <constraint firstItem="bOr-El-KJJ" firstAttribute="top" secondItem="hQc-d9-0NR" secondAttribute="top" id="Aye-FG-LV3"/>
+                                                <constraint firstItem="bOr-El-KJJ" firstAttribute="leading" secondItem="hQc-d9-0NR" secondAttribute="leading" constant="13" id="MQE-tY-jMM"/>
+                                                <constraint firstAttribute="trailing" secondItem="bOr-El-KJJ" secondAttribute="trailing" id="OEA-kY-Le8"/>
+                                                <constraint firstAttribute="bottom" secondItem="bOr-El-KJJ" secondAttribute="bottom" id="d4Y-Be-JRV"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -360,24 +352,15 @@
                         <outlet property="cancelBarButtonItem" destination="vYa-oJ-dCQ" id="TZZ-eP-O1F"/>
                         <outlet property="saveBarButtonItem" destination="tNq-qa-kW9" id="uuG-nG-dAW"/>
                         <outlet property="tripDescriptionTextView" destination="hYR-K8-KfO" id="mod-b4-QPh"/>
-                        <outlet property="tripEndDateTextField" destination="bZx-5s-UHt" id="K0h-uL-cFI"/>
+                        <outlet property="tripEndDateLabel" destination="bOr-El-KJJ" id="IzK-kK-xEw"/>
                         <outlet property="tripLocationTextField" destination="pRN-Qt-82u" id="ZZq-Ue-hA1"/>
                         <outlet property="tripNameTextField" destination="7AL-Ol-FsK" id="NKl-4e-20B"/>
                         <outlet property="tripPhotoImageView" destination="hym-Te-anF" id="9ci-FA-reS"/>
-                        <outlet property="tripStartDateTextField" destination="EXx-05-RLS" id="m7c-Tl-2G5"/>
+                        <outlet property="tripStartDateLabel" destination="McP-eI-EJL" id="mpM-Lf-HVR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZJ-NL-OqF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="3a2-rw-y9s">
-                    <connections>
-                        <segue destination="TWR-fC-f4X" kind="presentation" identifier="toChooseStartDateViewControllerSegue" id="uQy-QT-Egi"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="ozX-0W-sDI">
-                    <connections>
-                        <segue destination="TWR-fC-f4X" kind="presentation" identifier="toChooseEndDateViewControllerSegue" id="nVn-tc-rMB"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="3a2-rw-y9s"/>
                 <tapGestureRecognizer id="USH-uE-D1t">
                     <connections>
                         <action selector="addPhotoGestureRecognizerTapped:" destination="B3j-8S-Qgh" id="IqY-eQ-cUT"/>
@@ -2608,7 +2591,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="110-fO-PgQ"/>
-        <segue reference="MyI-RZ-qMJ"/>
-        <segue reference="uQy-QT-Egi"/>
+        <segue reference="J3z-ZV-F6J"/>
     </inferredMetricsTieBreakers>
 </document>
