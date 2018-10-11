@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class FetchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
          UserDefaults.standard.setValue(false, forKey: "userSkippedSignUp")
         if UserDefaults.standard.value(forKey: "userSkippedSignUp") == nil {
             UserDefaults.standard.setValue(false, forKey: "userSkippedSignUp")

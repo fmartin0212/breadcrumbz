@@ -54,20 +54,24 @@ extension SignUpViewController {
         let lastNameCell = (tableView.cellForRow(at: lastNameCellIndexPath)) as! TextFieldTableViewCell
         let lastName = lastNameCell.entryTextField.text
         
-        let emailCellIndexPath = IndexPath(row: 2, section: 0)
+        let usernameCellIndexPath = IndexPath(row: 2, section: 0)
+        let usernameCell = (tableView.cellForRow(at: usernameCellIndexPath)) as! TextFieldTableViewCell
+        guard let username = usernameCell.entryTextField.text else { return }
+        
+        let emailCellIndexPath = IndexPath(row: 3, section: 0)
         let emailCell = (tableView.cellForRow(at: emailCellIndexPath)) as! TextFieldTableViewCell
         guard let email = emailCell.entryTextField.text, !email.isEmpty else { return }
         
-        let passwordCellIndexPath = IndexPath(row: 3, section: 0)
+        let passwordCellIndexPath = IndexPath(row: 4, section: 0)
         let passwordCell = (tableView.cellForRow(at: passwordCellIndexPath) as! TextFieldTableViewCell)
         guard let password = passwordCell.entryTextField.text else { return }
         
-        let passwordConfCellIndexPath = IndexPath(row: 4, section: 0)
+        let passwordConfCellIndexPath = IndexPath(row: 5, section: 0)
         let passwordConfCell = (tableView.cellForRow(at: passwordConfCellIndexPath) as! TextFieldTableViewCell)
         guard let passwordConf = passwordConfCell.entryTextField.text else { return }
         
         if password == passwordConf {
-            InternalUserController.shared.createNewUserWith(firstName: firstName, lastName: lastName, email: email, password: password) { (success) in
+            InternalUserController.shared.createNewUserWith(firstName: firstName, lastName: lastName, username: username, email: email, password: password) { (success) in
                 if success {
                     self.presentTripListVC()
                 } else {
@@ -97,7 +101,7 @@ extension SignUpViewController {
 extension SignUpViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -108,16 +112,18 @@ extension SignUpViewController: UITableViewDataSource {
         case 0:
             cell.entryTextField.placeholder = "First name"
         case 1:
-            cell.entryTextField.placeholder = "Last name"
+            cell.entryTextField.placeholder = "Last name (optional)"
         case 2:
-            cell.entryTextField.placeholder = "Email"
+            cell.entryTextField.placeholder = "Username"
         case 3:
-            cell.entryTextField.placeholder = "Password"
+            cell.entryTextField.placeholder = "Email"
         case 4:
+            cell.entryTextField.placeholder = "Password"
+        case 5:
             cell.entryTextField.placeholder = "Confirm Password"
             cell.entryTextField.returnKeyType = .done
-        case 5:
-            cell.entryTextField.isHidden = true
+//        case 5:
+//            cell.entryTextField.isHidden = true
         default:
             break
         }
@@ -141,7 +147,7 @@ extension SignUpViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if textField.tag == 4 {
+        if textField.tag == 5 {
             createNewAccount()
             return true
         }

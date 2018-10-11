@@ -13,12 +13,14 @@ class InternalUser {
     
     let firstName: String
     let lastName: String?
+    let username: String
     let email: String
     var uid: String?
     
-    init(firstName: String, lastName: String?, email: String) {
+    init(firstName: String, lastName: String?, username: String, email: String) {
         self.firstName = firstName
         self.lastName = lastName
+        self.username = username
         self.email = email
     }
     
@@ -28,13 +30,15 @@ class InternalUser {
         guard let tripDict = snapshot.value as? [String : Any],
             let firstName = tripDict["firstName"] as? String,
             let lastName = tripDict["lastName"] as? String?,
-            let username = tripDict["email"] as? String
+            let username = tripDict["username"] as? String,
+            let email = tripDict["email"] as? String
             //FIXME profle pic
             else { return nil }
         
         self.firstName = firstName
         self.lastName = lastName
-        self.email = username
+        self.username = username
+        self.email = email
         // FIX ME
         //        self.profilePicture = photoData
         // FIX ME - Set UID - Am I going to need this? May be set when user signs in/registers.

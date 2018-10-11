@@ -15,8 +15,8 @@ class InternalUserController {
     
     var loggedInUser: InternalUser?
     
-    func createNewUserWith(firstName: String, lastName: String?, email: String, password: String, completion: @escaping (Bool) -> Void) {
-        let newUser = InternalUser(firstName: firstName, lastName: lastName, email: email)
+    func createNewUserWith(firstName: String, lastName: String?, username: String, email: String, password: String, completion: @escaping (Bool) -> Void) {
+        let newUser = InternalUser(firstName: firstName, lastName: lastName, username: username, email: email)
         FirebaseManager.addUser(with: email, password: password) { (firebaseUser, error) in
             if let error = error {
                 // FIXME - Should switch on an enum
@@ -29,12 +29,13 @@ class InternalUserController {
             newUser.uid = firebaseUser.uid
             self.loggedInUser = newUser
             
-            let internalUserDict: [String : Any] = ["email" : newUser.email,
+            let internalUserDict: [String : Any] = [ "username" : newUser.username,
+                            "email" : newUser.email,
                             "firstName" : newUser.firstName,
                             "lastName" : newUser.lastName ?? ""
                             ]
             
-            let ref = FirebaseManager.ref.child(newUser.uid ?? "")
+            let ref = FirebaseManager.ref.child(username)
             FirebaseManager.save(object: internalUserDict, to: ref, completion: { (error) in
                 if let error = error {
                     // Present alert controller?
