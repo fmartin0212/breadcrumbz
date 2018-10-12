@@ -81,11 +81,11 @@ extension ProfileViewController: UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            cell.textLabel?.text = loggedInUser.email
+            cell.textLabel?.text = loggedInUser.username
         case 1:
             cell.textLabel?.text = loggedInUser.firstName
         case 2:
-            cell.textLabel?.text = loggedInUser.lastName
+            cell.textLabel?.text = loggedInUser.lastName ?? ""
         default:
             break
         }

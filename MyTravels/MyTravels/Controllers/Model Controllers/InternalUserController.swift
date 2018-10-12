@@ -17,7 +17,7 @@ class InternalUserController {
     
     func createNewUserWith(firstName: String, lastName: String?, username: String, email: String, password: String, completion: @escaping (Bool) -> Void) {
         let newUser = InternalUser(firstName: firstName, lastName: lastName, username: username, email: email)
-        FirebaseManager.addUser(with: email, password: password) { (firebaseUser, error) in
+        FirebaseManager.addUser(with: email, password: password, username: username) { (firebaseUser, error) in
             if let error = error {
                 // FIXME - Should switch on an enum
                 print("Error saving a new user to the Firebase Database: \(error.localizedDescription)")
@@ -48,7 +48,7 @@ class InternalUserController {
     
     func checkForLoggedInUser(completion: @escaping (Bool) -> Void) {
         if let firebaseUser = FirebaseManager.checkForLoggedInUser() {
-            let ref = FirebaseManager.ref.child(firebaseUser.uid)
+            let ref = FirebaseManager.ref.child(firebaseUser.displayName ?? "")
             FirebaseManager.fetch(from: ref) { (snapshot) in
                 let loggedInUser = InternalUser(snapshot: snapshot)
                 self.loggedInUser = loggedInUser

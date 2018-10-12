@@ -31,7 +31,7 @@ class FirebaseManager {
         }
     }
     
-    static func addUser(with email: String, password: String, completion: @escaping (User?, Error?) -> Void) {
+    static func addUser(with email: String, password: String, username: String, completion: @escaping (User?, Error?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             if let error = error {
                 
@@ -40,7 +40,14 @@ class FirebaseManager {
                 return
             }
             guard let user = user else { completion(nil, error) ; return }
-            completion(user, nil)
+            let changeRequest = user.createProfileChangeRequest()
+            changeRequest.displayName = username
+            changeRequest.commitChanges(completion: { (error) in
+                if let error = error {
+                    print(error as Any)
+                }
+                completion(user, nil)
+            })
         }
     }
     
