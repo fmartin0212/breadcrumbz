@@ -67,13 +67,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
                 return
             }
             
-            CloudKitManager.shared.performFullSync(completion: { (success) in
-                if success {
-                    DispatchQueue.main.async {
-                        self.presentShareAlertController()
-                    }
-                }
-            })
+            self.presentShareAlertController()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
             alertController.dismiss(animated: true, completion: nil)
@@ -139,10 +133,11 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         alertController.addTextField(configurationHandler: nil)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let shareAction = UIAlertAction(title: "Share", style: .default) { (action) in
-            guard let trip = self.trip,
-                let username = alertController.textFields?.first!.text else { return }
             
-            
+            guard let trip = self.trip else { return }
+            TripController.shared.upload(trip: trip, completion: { (success) in
+                if success {}
+            })
         }
         alertController.addAction(shareAction)
         alertController.addAction(cancelAction)

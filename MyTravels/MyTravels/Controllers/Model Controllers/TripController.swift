@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-import CloudKit
+import FirebaseDatabase
 
 class TripController {
     
@@ -54,7 +54,7 @@ class TripController {
     
     func upload(trip: Trip, completion: @escaping (Bool) -> Void) {
         
-        guard let loggedInUserUID = InternalUserController.shared.loggedInUser?.uid else { return completion(false) }
+        guard let username = InternalUserController.shared.loggedInUser?.username else { return completion(false) }
             // PRESENT ALERT CONTROLLER OR CREATE ACCOUNT
         
         var tripDict = [String : Any]()
@@ -65,14 +65,26 @@ class TripController {
         tripDict["startDate"] = trip.startDate?.timeIntervalSince1970
         tripDict["endDate"] = trip.endDate?.timeIntervalSince1970
         
-        let ref = FirebaseManager.ref.child(loggedInUserUID).childByAutoId()
-        trip.id = ref.key
+        let tripRef = FirebaseManager.ref.child("Trip").childByAutoId()
+        trip.id = tripRef.key
         CoreDataManager.save()
         
-        FirebaseManager.save(object: tripDict, to: ref) { (error) in
+        FirebaseManager.save(object: tripDict, to: tripRef) { (error) in
             if let _ = error {
                 completion(false)
             }
+            
+            let userTripRef = FirebaseManager.ref.child("\(username) / + \(trip.id ?? "")")
+            
+            let tripID : [String : Any] = ["tripID" : trip.id]
+            
+            FirebaseManager.save(object: tripID, to: userTripRef, completion: { (error) in
+                if let error = error {
+                    print(error)
+                    completion(false)
+                }
+            })
+            
             completion(true)
         }
     }

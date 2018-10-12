@@ -40,6 +40,8 @@ class FirebaseManager {
                 return
             }
             guard let user = user else { completion(nil, error) ; return }
+           
+            // Update displayName in Authentication storage
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = username
             changeRequest.commitChanges(completion: { (error) in
@@ -61,12 +63,7 @@ class FirebaseManager {
         }
     }
     
-    static func checkForLoggedInUser() -> User? {
-//        do {
-//            try Auth.auth().signOut()
-//        } catch {
-//
-//        }
+    static func getLoggedInUser() -> User? {
          return Auth.auth().currentUser
     }
     

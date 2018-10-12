@@ -47,7 +47,7 @@ class InternalUserController {
     }
     
     func checkForLoggedInUser(completion: @escaping (Bool) -> Void) {
-        if let firebaseUser = FirebaseManager.checkForLoggedInUser() {
+        if let firebaseUser = FirebaseManager.getLoggedInUser() {
             let ref = FirebaseManager.ref.child(firebaseUser.displayName ?? "")
             FirebaseManager.fetch(from: ref) { (snapshot) in
                 let loggedInUser = InternalUser(snapshot: snapshot)
