@@ -134,10 +134,12 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let shareAction = UIAlertAction(title: "Share", style: .default) { (action) in
             
-            guard let trip = self.trip else { return }
-            TripController.shared.upload(trip: trip, completion: { (success) in
+            guard let trip = self.trip,
+                let receiver = alertController.textFields?[0].text
+                else { return }
+            TripController.shared.share(trip: trip, withReceiver: receiver, completion: { (success) in
                 if success {}
-            })
+                })
         }
         alertController.addAction(shareAction)
         alertController.addAction(cancelAction)

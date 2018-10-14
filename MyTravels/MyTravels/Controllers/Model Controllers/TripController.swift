@@ -34,7 +34,7 @@ class TripController {
     }
     
     func save(trip: Trip) {
-      
+        
     }
     
     func delete(trip: Trip) {
@@ -52,41 +52,79 @@ class TripController {
         self.trips = trips
     }
     
-    func upload(trip: Trip, completion: @escaping (Bool) -> Void) {
+    func share(trip: Trip, withReceiver receiver: String, completion: @escaping (Bool) -> Void) {
         
-        guard let username = InternalUserController.shared.loggedInUser?.username else { return completion(false) }
-            // PRESENT ALERT CONTROLLER OR CREATE ACCOUNT
+        guard let loggedInUser = InternalUserController.shared.loggedInUser else { return completion(false) }
+        // PRESENT ALERT CONTROLLER OR CREATE ACCOUNT
         
-        var tripDict = [String : Any]()
+        if let tripID = trip.id {
+            
+            // Trip has already been saved to the database, only a child needs to be saved on the receiver.
+            addTripIDToReceiver(tripID: tripID, receiver: receiver) { (success) in
+                if success {
+                    completion(true)
+                    return
+                } else {
+                    print("Something went wrong with adding a tripID to a user in: ", #function)
+                }
+            }
+            
+        } else {
+            
+            // Trip has not been saved in the database, so we need to save a new Trip child and a child on the receiver.
+            upload(trip: trip, creatorName: loggedInUser.username) { (success) in
+                if success {
+                    guard let tripID = trip.id else { completion ( false) ; return }
+                    self.addTripIDToReceiver(tripID: tripID, receiver: receiver, completion: { (success) in
+                        if success {
+                            completion(true)
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
+    func upload(trip: Trip, creatorName: String, completion: @escaping (Bool) -> Void) {
         
-        tripDict["name"] = trip.name
-        tripDict["location"] = trip.location
-        tripDict["description"] = trip.tripDescription
-        tripDict["startDate"] = trip.startDate?.timeIntervalSince1970
-        tripDict["endDate"] = trip.endDate?.timeIntervalSince1970
+        let tripDict: [String : Any] = [
+            "name" : trip.name,
+            "location" : trip.location,
+            "description" : trip.tripDescription,
+            "startDate" : trip.startDate?.timeIntervalSince1970,
+            "endDate" : trip.endDate?.timeIntervalSince1970,
+            "creatorName" : creatorName
+        ]
         
         let tripRef = FirebaseManager.ref.child("Trip").childByAutoId()
-        trip.id = tripRef.key
-        CoreDataManager.save()
         
         FirebaseManager.save(object: tripDict, to: tripRef) { (error) in
             if let _ = error {
                 completion(false)
+                return
             }
             
-            let userTripRef = FirebaseManager.ref.child("\(username) / + \(trip.id ?? "")")
-            
-            let tripID : [String : Any] = ["tripID" : trip.id]
-            
-            FirebaseManager.save(object: tripID, to: userTripRef, completion: { (error) in
-                if let error = error {
-                    print(error)
-                    completion(false)
-                }
-            })
+            // If save to Firebase is successful, save trip's UID locally and to persistent store.
+            trip.id = tripRef.key
+            CoreDataManager.save()
             
             completion(true)
         }
     }
+    
+    func addTripIDToReceiver(tripID: String, receiver: String, completion: @escaping (Bool) -> Void) {
+        let userTripRef = FirebaseManager.ref.child("User").child(receiver).child("participantTripIDs").child(tripID)
+        
+        let tripID : [String : Any] = ["tripID" : tripID]
+        
+        FirebaseManager.save(object: tripID, to: userTripRef, completion: { (error) in
+            if let error = error {
+                print(error)
+                completion(false)
+            }
+            completion(true)
+        })
+    }
 }
+
 
