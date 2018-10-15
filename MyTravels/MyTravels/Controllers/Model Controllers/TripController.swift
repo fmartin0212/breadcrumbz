@@ -32,11 +32,7 @@ class TripController {
         self.trip = trip
         CoreDataManager.save()
     }
-    
-    func save(trip: Trip) {
-        
-    }
-    
+
     func delete(trip: Trip) {
         CoreDataManager.delete(object: trip)
     }

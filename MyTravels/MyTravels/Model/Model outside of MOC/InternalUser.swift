@@ -15,7 +15,6 @@ class InternalUser {
     let lastName: String?
     let username: String
     let email: String
-    var uid: String?
     
     init(firstName: String, lastName: String?, username: String, email: String) {
         self.firstName = firstName

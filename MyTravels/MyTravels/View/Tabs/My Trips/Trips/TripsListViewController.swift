@@ -25,7 +25,7 @@ class TripsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad() 
-        
+     
         // Set tableview properties
         tableView.separatorStyle = .none
         
