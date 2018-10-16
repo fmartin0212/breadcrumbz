@@ -26,7 +26,7 @@ class InternalUserController {
             }
             
             guard let firebaseUser = firebaseUser else { completion(false) ; return }
-            newUser.uid = firebaseUser.uid
+//            newUser.uid = firebaseUser.uid
             self.loggedInUser = newUser
             
             let internalUserDict: [String : Any] = [ "username" : newUser.username,

@@ -2,7 +2,7 @@
 //  Trip+CoreDataProperties.swift
 //  MyTravels
 //
-//  Created by Frank Martin Jr on 3/14/18.
+//  Created by Frank Martin Jr on 10/15/18.
 //  Copyright © 2018 Frank Martin Jr. All rights reserved.
 //
 //
@@ -17,12 +17,12 @@ extension Trip {
         return NSFetchRequest<Trip>(entityName: "Trip")
     }
 
-    @NSManaged public var cloudKitRecordIDString: String?
-    @NSManaged public var endDate: NSDate?
-    @NSManaged public var location: String?
-    @NSManaged public var startDate: NSDate?
-    @NSManaged public var name: String?
+    @NSManaged public var endDate: NSDate
+    @NSManaged public var location: String
+    @NSManaged public var name: String
+    @NSManaged public var startDate: NSDate
     @NSManaged public var tripDescription: String?
+    @NSManaged public var uid: String?
     @NSManaged public var photo: Photo?
     @NSManaged public var places: NSSet?
     @NSManaged public var usersSharedWithRecordIDs: NSSet?

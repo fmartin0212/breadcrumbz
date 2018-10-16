@@ -262,19 +262,19 @@ extension TripDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section > 1 {
             guard let placeArray = array as? [[Place]],
-                let firstItemInArray = placeArray[section - 2].first,
-                let firstItemInArrayType = firstItemInArray.type
+                let firstItemInArray = placeArray[section - 2].first
+//                let firstItemInArrayType = firstItemInArray.type
                 else { return UIView() }
             
-            if firstItemInArrayType == "Lodging" {
+            if firstItemInArray.type == "Lodging" {
                 let text = "  Lodging"
                 return sectionHeaderLabelWith(text: text)
                 
-            } else if firstItemInArrayType == "Restaurant" {
+            } else if firstItemInArray.type == "Restaurant" {
                 let text = "  Restaurants"
                 return sectionHeaderLabelWith(text: text)
                 
-            } else if firstItemInArrayType == "Activity" {
+            } else if firstItemInArray.type == "Activity" {
                 let text = "  Activities"
                 return sectionHeaderLabelWith(text: text)
             }

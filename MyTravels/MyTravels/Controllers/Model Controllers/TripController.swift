@@ -68,9 +68,11 @@ class TripController {
         } else {
             
             // Trip has not been saved in the database, so we need to save a new Trip child and a child on the receiver.
-            upload(trip: trip, creatorName: loggedInUser.username) { (success) in
+            let creatorName = loggedInUser.firstName + " " + (loggedInUser.lastName ?? "")
+            
+            upload(trip: trip, creatorName: creatorName) { (success) in
                 if success {
-                    guard let tripID = trip.id else { completion ( false) ; return }
+                    guard let tripID = trip.id else { completion(false) ; return }
                     self.addTripIDToReceiver(tripID: tripID, receiver: receiver, completion: { (success) in
                         if success {
                             completion(true)
@@ -83,14 +85,17 @@ class TripController {
     
     func upload(trip: Trip, creatorName: String, completion: @escaping (Bool) -> Void) {
         
-        let tripDict: [String : Any] = [
+        let tripDict: [String : Any?] = [
             "name" : trip.name,
             "location" : trip.location,
             "description" : trip.tripDescription,
-            "startDate" : trip.startDate?.timeIntervalSince1970,
-            "endDate" : trip.endDate?.timeIntervalSince1970,
-            "creatorName" : creatorName
+            "startDate" : trip.startDate.timeIntervalSince1970,
+            "endDate" : trip.endDate.timeIntervalSince1970,
+            "creatorName" : creatorName,
+            "places" : PlaceController.shared.createPlaces(for: trip)
         ]
+        
+        
         
         let tripRef = FirebaseManager.ref.child("Trip").childByAutoId()
         
@@ -104,7 +109,12 @@ class TripController {
             trip.id = tripRef.key
             CoreDataManager.save()
             
-            completion(true)
+            let storeRef = FirebaseManager.storeRef.child("Trip").child(trip.id!).child(trip.id!)
+            FirebaseManager.saveImages(for: trip, to: storeRef, completion: { (success) in
+                if success {
+                    completion(true)
+                }
+            })
         }
     }
     

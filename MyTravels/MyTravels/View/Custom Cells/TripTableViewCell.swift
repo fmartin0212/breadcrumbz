@@ -54,13 +54,12 @@ class TripTableViewCell: UITableViewCell {
     // MARK: - Functions
     func updateViews() {
         
+        guard let trip = trip
+            else { return }
+        
         tripImageView.layer.cornerRadius = 4
         tripImageView.clipsToBounds = true
         
-        guard let trip = trip,
-            let startDate = trip.startDate,
-            let endDate = trip.endDate
-            else { return }
         
         var tripPhoto = UIImage()
         guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
@@ -74,9 +73,9 @@ class TripTableViewCell: UITableViewCell {
         tripImageView.image = tripPhoto
         tripLocationLabel.text = trip.location
         
-        tripStartDateLabel.text = "\(shortDateString(date: startDate as Date)) -"
-        tripEndDateLabel.text = shortDateString(date: endDate as Date)
-    
+        tripStartDateLabel.text = "\(shortDateString(date: trip.startDate as Date)) -"
+        tripEndDateLabel.text = shortDateString(date: trip.endDate as Date)
+        
     }
     
     func updateViewsForSharedTrip() {

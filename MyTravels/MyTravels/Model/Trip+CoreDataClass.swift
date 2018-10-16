@@ -32,15 +32,14 @@ public class Trip: NSManagedObject, FirebaseSyncable {
         return fileURL
     }
     
-    
-    convenience init(name: String, location: String, tripDescription: String?, startDate: Date?, endDate: Date?, context: NSManagedObjectContext = CoreDataStack.context) {
+    convenience init(name: String, location: String, tripDescription: String?, startDate: Date, endDate: Date, context: NSManagedObjectContext = CoreDataStack.context) {
         
         self.init(context: context)
         self.name = name
         self.location = location
         self.tripDescription = tripDescription
-        self.startDate = startDate
-        self.endDate = endDate
+        self.startDate = startDate as NSDate
+        self.endDate = endDate as NSDate
     }
     
     // CloudKit - Turn a record into a Trip
@@ -52,8 +51,8 @@ public class Trip: NSManagedObject, FirebaseSyncable {
         
         self.init(context: context)
         self.location = location
-        self.startDate = startDate
-        self.endDate = endDate
+        self.startDate = NSDate()
+        self.endDate = NSDate()
         
     }
 }
