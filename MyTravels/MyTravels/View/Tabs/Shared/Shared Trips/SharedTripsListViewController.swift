@@ -75,9 +75,9 @@ class SharedTripsListViewController: UIViewController {
 
 extension SharedTripsListViewController: UITableViewDataSource {
 
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return SharedTripsController.shared.sharedTrips.count
-  
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -124,21 +124,7 @@ extension SharedTripsListViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
-        guard let cell = tableView.cellForRow(at: indexPath) as? TripTableViewCell else { return }
-        
-        if sharedTrip.isAcceptedTrip == false {
-            UIView.animate(withDuration: 0.10, animations: {
-                cell.acceptButton.transform = CGAffineTransform(scaleX: 0.90, y: 0.90)
-            }) { (_) in
-                UIView.animate(withDuration: 0.10, animations: {
-                    cell.acceptButton.transform = CGAffineTransform.identity
-                }, completion: { (_) in
-                   
-                })
-            }
-             return
-        }
-        
+
         let sb = UIStoryboard(name: "Main", bundle: nil)
         guard let sharedTripDetailVC = sb.instantiateViewController(withIdentifier: "sharedTripDetail") as? SharedTripDetailViewController else { return }
         sharedTripDetailVC.sharedTrip = sharedTrip

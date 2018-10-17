@@ -103,18 +103,16 @@ class PlaceTableViewCell: UITableViewCell {
         placeImageView.layer.cornerRadius = 5
         placeImageView.clipsToBounds = true
         
-        guard let sharedPlace = sharedPlace,
-            let sharedPlacePhotos = sharedPlace.photos
+        guard let sharedPlace = sharedPlace
             else { return }
         
-        if sharedPlacePhotos.count > 0 {
+        if let sharedPlacePhotos = sharedPlace.photos, sharedPlacePhotos.count > 0 {
             let mainPhoto = sharedPlacePhotos[0]
-            guard let image = UIImage(data: mainPhoto) else { return }
-            placeImageView.image = image
+            placeImageView.image = mainPhoto
             placeNameLabel.text = sharedPlace.name
             placeAddressLabel.text = sharedPlace.address
             updateStarsImageViews(sharedPlace: sharedPlace)
-            
+
         } else {
             var placeholderImage = UIImage()
             if sharedPlace.type == "Lodging" {

@@ -34,8 +34,11 @@ class FetchViewController: UIViewController {
                 SharedTripsController.shared.fetchSharedTrips() { (success) in
                     if !success {
                         print("trips not fetched")
+                        return
                     }
-                    self.presentTripListVC()
+                    DispatchQueue.main.async {
+                        self.presentTripListVC()
+                    }
                 }
             } else if !success && UserDefaults.standard.value(forKey: "userSkippedSignUp") as! Bool == false {
                 let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)

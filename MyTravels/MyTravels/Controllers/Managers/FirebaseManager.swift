@@ -35,7 +35,7 @@ class FirebaseManager {
         }
     }
     
-    static func fetch(from ref: DatabaseReference, completion: @escaping (DataSnapshot) -> Void) {
+    static func fetchObject(from ref: DatabaseReference, completion: @escaping (DataSnapshot) -> Void) {
 
         ref.observeSingleEvent(of: .value) { (snapshot) in
             print("saaf")
@@ -121,6 +121,23 @@ class FirebaseManager {
                 }
             }
         }
+    }
+    
+    static func fetchImage(storeRef: StorageReference, completion: @escaping (UIImage?) -> Void) {
+        storeRef.getData(maxSize: 9999999) { (data, error) in
+            if let error = error {
+                print("There was an error getting the image: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+            guard let data = data else { completion(nil) ; return }
+            let image = UIImage(data: data)
+            completion(image)
+        }
+    }
+    
+    static func fetchImages(storeRef: StorageReference, completion: @escaping ([UIImage]?) -> Void) {
+      
     }
 }
 

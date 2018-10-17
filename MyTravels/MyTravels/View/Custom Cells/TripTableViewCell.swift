@@ -93,8 +93,7 @@ class TripTableViewCell: UITableViewCell {
         guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
         tripPhoto = tripPhotoPlaceholderImage
         
-        if let photoData = sharedTrip.photoData {
-            guard let photo = UIImage(data: photoData) else { return }
+        if let photo = sharedTrip.photo {
             tripPhoto = photo
         }
         
@@ -104,6 +103,7 @@ class TripTableViewCell: UITableViewCell {
         
         tripStartDateLabel.text = "\(shortDateString(date: sharedTrip.startDate as Date)) -"
         tripEndDateLabel.text = "\(shortDateString(date: sharedTrip.endDate as Date))"
+        tripCreatorLabel.text = sharedTrip.creatorName
         
         if sharedTrip.isAcceptedTrip == true {
             acceptButton.isHidden = true

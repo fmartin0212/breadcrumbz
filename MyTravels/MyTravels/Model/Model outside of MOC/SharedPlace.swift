@@ -6,7 +6,7 @@
 //  Copyright © 2018 Frank Martin Jr. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CloudKit
 
 class SharedPlace {
@@ -16,25 +16,8 @@ class SharedPlace {
     var name: String?
     var rating: Int16?
     var type: String?
-    var photos: [Data]?
-    var reference: CKReference?
-    
-    fileprivate var temporaryPhotoURLs: [URL] {
-        
-        // Must write to temporary directory to be able to pass image file path url to CKAsset
-        var photoURLs: [URL] = []
-        guard let photos = photos else { return [URL]() }
-        for photo in photos {
-            let temporaryDirectory = NSTemporaryDirectory()
-            let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
-            let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
-            try? photo.write(to: fileURL, options: [.atomic])
-            photoURLs.append(fileURL)
-        }
-        
-        return photoURLs
-    }
-    
+    var photos: [UIImage]?
+
     // CloudKit - Turn a record into a Place
     init?(dictionary: [String : Any]) {
         
