@@ -31,8 +31,12 @@ class FetchViewController: UIViewController {
         
         InternalUserController.shared.checkForLoggedInUser { (success) in
             if success {
-                self.presentTripListVC()
-           
+                SharedTripsController.shared.fetchSharedTrips() { (success) in
+                    if !success {
+                        print("trips not fetched")
+                    }
+                    self.presentTripListVC()
+                }
             } else if !success && UserDefaults.standard.value(forKey: "userSkippedSignUp") as! Bool == false {
                 let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
                 let tripListNavigationController = storyboard.instantiateViewController(withIdentifier: "OnboardingPageVC")

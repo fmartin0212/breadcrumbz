@@ -36,32 +36,19 @@ class SharedPlace {
     }
     
     // CloudKit - Turn a record into a Place
-    init?(record: CKRecord) {
+    init?(dictionary: [String : Any]) {
         
-        guard let name = record["name"] as? String,
-            let address = record["address"] as? String,
-            let rating = record["rating"] as? Int16,
-            let type = record["type"] as? String,
-            let comments = record["comments"] as? String,
-            let photos = record["photos"] as? [CKAsset],
-            let reference = record["tripReference"] as? CKReference
+        guard let name = dictionary["name"] as? String,
+            let address = dictionary["address"] as? String,
+            let rating = dictionary["rating"] as? Int16,
+            let type = dictionary["type"] as? String,
+            let comments = dictionary["comments"] as? String
             else { return nil }
-        
-        var photosAsData = [Data]()
-        if photos.count > 0 {
-            for photo in photos {
-                guard let photoAssetAsData = try? Data(contentsOf: photo.fileURL) else { return }
-                photosAsData.append(photoAssetAsData)
-            }
-        }
+    
         self.name = name
         self.address = address
         self.rating = rating
         self.type = type
         self.comments = comments
-        self.photos = photosAsData
-        self.reference = reference
-        
     }
-    
 }

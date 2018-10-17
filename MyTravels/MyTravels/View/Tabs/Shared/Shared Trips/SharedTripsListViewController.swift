@@ -58,7 +58,7 @@ class SharedTripsListViewController: UIViewController {
             guard let destinationVC = segue.destination as? SharedTripDetailViewController,
                 let indexPath = tableView.indexPathForSelectedRow
                 else { return }
-            let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.section][indexPath.row]
+            let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
             destinationVC.sharedTrip = sharedTrip
             
         }
@@ -74,28 +74,10 @@ class SharedTripsListViewController: UIViewController {
 }
 
 extension SharedTripsListViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return SharedTripsController.shared.sharedTrips.count > 0 ?  SharedTripsController.shared.sharedTrips.count : 0
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if SharedTripsController.shared.sharedTrips.count > 0 {
-            if SharedTripsController.shared.sharedTrips[section].first?.isAcceptedTrip == false {
-                return "Pending"
-            }
-            else if SharedTripsController.shared.sharedTrips[section].first?.isAcceptedTrip == true {
-                return "Following"
-            }
-        }
-        return ""
-    }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if SharedTripsController.shared.sharedTrips.count > 0 {
-            return SharedTripsController.shared.sharedTrips[section].count
-        }
-        return 0
+            return SharedTripsController.shared.sharedTrips.count
+  
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -103,7 +85,7 @@ extension SharedTripsListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TripCell", for: indexPath) as! TripTableViewCell
         cell.selectionStyle = .none
         
-        let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.section][indexPath.row]
+        let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
 
         cell.sharedTrip = sharedTrip
         cell.indexPath = indexPath
@@ -141,7 +123,7 @@ extension SharedTripsListViewController: TripTableViewCellDelegate {
 extension SharedTripsListViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.section][indexPath.row]
+        let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
         guard let cell = tableView.cellForRow(at: indexPath) as? TripTableViewCell else { return }
         
         if sharedTrip.isAcceptedTrip == false {

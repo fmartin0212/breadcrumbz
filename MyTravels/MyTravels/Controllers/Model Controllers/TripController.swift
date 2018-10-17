@@ -109,7 +109,7 @@ class TripController {
             trip.id = tripRef.key
             CoreDataManager.save()
             
-            let storeRef = FirebaseManager.storeRef.child("Trip").child(trip.id!).child(trip.id!)
+            let storeRef = FirebaseManager.storeRef.child("Trip").child(trip.id!)
             FirebaseManager.saveImages(for: trip, to: storeRef, completion: { (success) in
                 if success {
                     completion(true)

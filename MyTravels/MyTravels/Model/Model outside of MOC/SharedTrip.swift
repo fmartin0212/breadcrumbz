@@ -8,6 +8,7 @@
 
 import Foundation
 import CloudKit
+import FirebaseDatabase
 
 class SharedTrip {
     
@@ -18,17 +19,9 @@ class SharedTrip {
     let endDate: Date
     var photoData: Data?
     var places: [SharedPlace] = []
-    var reference: CKReference {
-        if let recordID = cloudKitRecordID {
-            let reference = CKReference(recordID: recordID, action: .none)
-            return reference
-        }
-        let failedRecordID = CKRecordID(recordName: "FAIL")
-        return CKReference(recordID: failedRecordID, action: .none)
-    }
-    let cloudKitRecordID: CKRecordID?
-    let creatorRef: CKReference
     var isAcceptedTrip: Bool = true
+    
+    var uid: String
     
     fileprivate var temporaryPhotoURL: URL {
         
@@ -45,33 +38,31 @@ class SharedTrip {
         return fileURL
     }
     
-    // CloudKit - Turn a record into a Trip
-    init?(record: CKRecord) {
-        guard let name = record["name"] as? String,
-            let location = record["location"] as? String,
-            let tripDescription = record["tripDescription"] as? String?,
-            let startDate = record["startDate"] as? Date,
-            let endDate = record["endDate"] as? Date,
-            let photoData = record["photo"] as? CKAsset,
-            let ckRecordID = record["recordID"] as? CKRecordID,
-            let creatorRef = record["creatorReference"] as? CKReference
-            else { return nil }
+    init?(snapshot: DataSnapshot) {
+        self.uid = snapshot.key
         
-        let photoAssetAsData = try? Data(contentsOf: photoData.fileURL)
+        guard let tripDictionary = snapshot.value as? [String : Any],
+            let name = tripDictionary["name"] as? String,
+            let location = tripDictionary["location"] as? String,
+            let tripDescription = tripDictionary["tripDescription"] as? String?,
+            let startDate = tripDictionary["startDate"] as? TimeInterval,
+            let endDate = tripDictionary["endDate"] as? TimeInterval
+            else { return nil }
         
         self.name = name
         self.location = location
         self.tripDescription = tripDescription
-        self.startDate = startDate
-        self.endDate = endDate
-        self.photoData = photoAssetAsData
-        self.cloudKitRecordID = ckRecordID
-        self.creatorRef = creatorRef
+        self.startDate = Date(timeIntervalSince1970: startDate)
+        self.endDate = Date(timeIntervalSince1970: endDate)
+        
+        if let places = SharedPlaceController.parsePlacesFrom(tripDictionary: tripDictionary) {
+            self.places = places
+        }
     }
 }
 
 extension SharedTrip: Equatable {
     static func == (lhs: SharedTrip, rhs: SharedTrip) -> Bool {
-        return lhs.cloudKitRecordID == rhs.cloudKitRecordID
+        return lhs.uid == rhs.uid
     }
 }

@@ -36,7 +36,9 @@ class FirebaseManager {
     }
     
     static func fetch(from ref: DatabaseReference, completion: @escaping (DataSnapshot) -> Void) {
+
         ref.observeSingleEvent(of: .value) { (snapshot) in
+            print("saaf")
             completion(snapshot)
         }
     }
@@ -97,9 +99,10 @@ class FirebaseManager {
     }
     
     static func savePlacePhotos(for trip: Trip, to storeRef: StorageReference, completion: @escaping (Bool) -> Void) {
+       
         if let places = trip.places?.allObjects as? [Place] {
             for place in places {
-                let photoRef = storeRef.child("Places").child(UUID().uuidString)
+                let photoRef = storeRef.child("Places").child(place.name).child(UUID().uuidString)
                 if let photos = place.photos?.allObjects as? [Photo] {
                     let dispatchGroup = DispatchGroup()
                     for photo in photos {
@@ -107,12 +110,13 @@ class FirebaseManager {
                         guard let photoData = photo.photo else { completion(false) ; return }
                         let data = Data(referencing: photoData)
                         photoRef.putData(data, metadata: nil) { (_, error) in
-                            
+                            photo.uuid = photoRef.name
+                            CoreDataManager.save()
                         }
                         dispatchGroup.leave()
-                        dispatchGroup.notify(queue: .main) {
-                            completion(true)
-                        }
+                    }
+                    dispatchGroup.notify(queue: .main) {
+                        completion(true)
                     }
                 }
             }

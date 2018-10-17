@@ -55,22 +55,5 @@ class PhotoController {
         CoreDataManager.delete(object: photo)
     }
     
-    // CloudKit
-    func fetchPhotoFor(trip: SharedTrip, completion: @escaping (Bool) -> (Void)) {
-        guard let tripCloudKitRecordID = trip.cloudKitRecordID
-            else { completion(false) ; return }
-        let predicate = NSPredicate(format: "tripReference == %@", tripCloudKitRecordID)
-        let query = CKQuery(recordType: "Photo", predicate: predicate)
-        CloudKitManager.shared.publicDB.perform(query, inZoneWith: nil) { (records, error) in
-            if let error = error {
-                print("Error retrieving photo for trip. Error: \(error)")
-            }
-            guard let tripPhotoRecord = records?.first,
-                let tripPhoto = Photo(record: tripPhotoRecord, context: CoreDataStack.context)
-                else { completion(false) ; return }
-            self.tripPhoto = tripPhoto
-            PhotoController.shared.delete(photo: tripPhoto)
-        }
-        completion(true)
-    }
+
 }
