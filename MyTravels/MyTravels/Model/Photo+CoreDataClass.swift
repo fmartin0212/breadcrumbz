@@ -13,7 +13,7 @@ import CloudKit
 
 @objc(Photo)
 public class Photo: NSManagedObject, CloudKitSyncable {
-
+    
     var recordType: String {
         return "Photo"
     }

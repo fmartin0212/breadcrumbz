@@ -43,7 +43,7 @@ class SharedTrip {
         self.endDate = Date(timeIntervalSince1970: endDate)
         self.creatorName = creator
         
-        if let places = SharedPlaceController.parsePlacesFrom(tripDictionary: tripDictionary) {
+        SharedPlaceController.parsePlacesFrom(tripDictionary: tripDictionary) { (places) in
             self.places = places
         }
     }

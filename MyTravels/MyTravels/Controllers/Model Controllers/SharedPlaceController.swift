@@ -6,26 +6,56 @@
 //  Copyright © 2018 Frank Martin Jr. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import FirebaseDatabase
 
 class SharedPlaceController {
     
-    static func parsePlacesFrom(tripDictionary: [String : Any]) -> [SharedPlace]? {
+    static func parsePlacesFrom(tripDictionary: [String : Any], completion: @escaping ([SharedPlace]) -> Void) {
         guard let placesDictionary = tripDictionary["places"] as? [String : [String : Any]]
-            else { return nil }
-
-        return placesDictionary.compactMap({ (_, value) -> SharedPlace? in
-//            dispatchGroup.enter()
+            else { completion([]) ; return }
+        
+        let dispatchGroup  = DispatchGroup()
+        
+        var places: [SharedPlace] = []
+        
+        for (_, value) in placesDictionary {
             
-            guard let sharedPlace = SharedPlace(dictionary: value) else { return nil }
-//            let storeRef = FirebaseManager.storeRef.child("Trips").child(placesDictionary.keys.first!).child("Places").child(sharedPlace.name!)
-//            FirebaseManager.fetchImage(storeRef: storeRef, completion: { (image) in
-//                if let image = image {
-//                sharedPlace.photos = [image]
-//                }
-//            })
-            return sharedPlace
+            guard let sharedPlace = SharedPlace(dictionary: value) else { completion([]) ; return }
+            
+            var placeImages: [UIImage] = []
+            
+            if let photoURLs = sharedPlace.photoURLs {
+                for urlAsString in photoURLs {
+                    
+                    dispatchGroup.enter()
+                    
+                    guard let url = URL(string: urlAsString) else { completion([]) ; return }
+  
+                    let dataTask = URLSession.shared.dataTask(with: url) { (data, _, error) in
+                        if let error = error {
+                            print(error)
+                            completion([])
+                            dispatchGroup.leave()
+                            return
+                        }
+                        
+                        guard let data = data,
+                            let image = UIImage(data: data)
+                            else { completion([]) ; return }
+                       
+                        placeImages.append(image)
+                     
+                        dispatchGroup.leave()
+                    }
+                    dataTask.resume()
+                }
+            }
+            places.append(sharedPlace)
+        }
+        
+        dispatchGroup.notify(queue: .main, execute: {
+            completion(places)
         })
     }
 }

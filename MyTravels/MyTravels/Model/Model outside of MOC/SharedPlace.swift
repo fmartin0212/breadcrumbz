@@ -17,6 +17,7 @@ class SharedPlace {
     var rating: Int16?
     var type: String?
     var photos: [UIImage]?
+    var photoURLs: [String]?
 
     // CloudKit - Turn a record into a Place
     init?(dictionary: [String : Any]) {
@@ -27,6 +28,10 @@ class SharedPlace {
             let type = dictionary["type"] as? String,
             let comments = dictionary["comments"] as? String
             else { return nil }
+        
+        if let photoURLs = dictionary["photoURLs"] as? [String] {
+            self.photoURLs = photoURLs
+        }
     
         self.name = name
         self.address = address

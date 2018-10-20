@@ -101,20 +101,42 @@ class FirebaseManager {
     static func savePlacePhotos(for trip: Trip, to storeRef: StorageReference, completion: @escaping (Bool) -> Void) {
        
         if let places = trip.places?.allObjects as? [Place] {
+           
             for place in places {
-                let photoRef = storeRef.child("Places").child(place.name).child(UUID().uuidString)
+                
                 if let photos = place.photos?.allObjects as? [Photo] {
+                   
                     let dispatchGroup = DispatchGroup()
+                  
                     for photo in photos {
-                        dispatchGroup.enter()
-                        guard let photoData = photo.photo else { completion(false) ; return }
+                      
+                    let photoDBRef = FirebaseManager.ref.child("Trip").child(trip.id!).child("places").child(place.name).child("photoURLs").childByAutoId()
+                    let photoRef = storeRef.child("Places").child(place.name).child(photoDBRef.key)
+                        
+                        guard let photoData = photo.photo
+                            else { completion(false) ; return }
+                        
                         let data = Data(referencing: photoData)
-                        photoRef.putData(data, metadata: nil) { (_, error) in
-                            photo.uuid = photoRef.name
+                        
+                        dispatchGroup.enter()
+                        photoRef.putData(data, metadata: nil) { (metadata, error) in
+                            photo.uid = photoRef.name
                             CoreDataManager.save()
+
+                            let photoDictionary: [String : Any] = [photo.uid! : metadata?.downloadURL()?.absoluteString as Any]
+                            
+                            dispatchGroup.enter()
+                            FirebaseManager.save(object: photoDictionary, to: photoDBRef, completion: { (error) in
+                                if let error = error {
+                                    print(error)
+                                    
+                                }
+                                dispatchGroup.leave()
+                            })
+                            dispatchGroup.leave()
                         }
-                        dispatchGroup.leave()
                     }
+                    
                     dispatchGroup.notify(queue: .main) {
                         completion(true)
                     }
@@ -130,6 +152,7 @@ class FirebaseManager {
                 completion(nil)
                 return
             }
+
             guard let data = data else { completion(nil) ; return }
             let image = UIImage(data: data)
             completion(image)

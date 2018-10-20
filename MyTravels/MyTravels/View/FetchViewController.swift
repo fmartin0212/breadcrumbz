@@ -13,6 +13,7 @@ class FetchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+ 
 //        Auth.auth().signIn(withEmail: "fmartjn0212@gmail.com", password: "Spaceship11!") { (user, error) in
 //            print(user?.displayName)
 //        }
@@ -34,6 +35,7 @@ class FetchViewController: UIViewController {
                 SharedTripsController.shared.fetchSharedTrips() { (success) in
                     if !success {
                         print("trips not fetched")
+                        self.presentTripListVC()
                         return
                     }
                     DispatchQueue.main.async {
