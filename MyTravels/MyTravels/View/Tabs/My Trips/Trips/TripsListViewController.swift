@@ -24,7 +24,10 @@ class TripsListViewController: UIViewController {
     static let profilePictureUpdatedNotification = Notification.Name("profilePictureUpdatedNotification")
     
     override func viewDidLoad() {
-        super.viewDidLoad() 
+        super.viewDidLoad()
+        
+        let nib = UINib(nibName: "TripCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "TripCell")
      
         // Set tableview properties
         tableView.separatorStyle = .none
