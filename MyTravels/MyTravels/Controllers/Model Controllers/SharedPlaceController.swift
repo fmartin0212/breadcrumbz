@@ -15,47 +15,55 @@ class SharedPlaceController {
         guard let placesDictionary = tripDictionary["places"] as? [String : [String : Any]]
             else { completion([]) ; return }
         
-        let dispatchGroup  = DispatchGroup()
         
-        var places: [SharedPlace] = []
+        var sharedPlaces: [SharedPlace] = []
         
         for (_, value) in placesDictionary {
-            
             guard let sharedPlace = SharedPlace(dictionary: value) else { completion([]) ; return }
-            
+            sharedPlaces.append(sharedPlace)
+        }
+        
+        self.fetchSharedPlacesPhotos(sharedPlaces: sharedPlaces) { (success) in
+            if success {
+                completion(sharedPlaces)
+            }
+        }
+    }
+    
+    static func fetchSharedPlacesPhotos(sharedPlaces: [SharedPlace], completion: @escaping (Bool) -> Void) {
+        
+        let dispatchGroup  = DispatchGroup()
+        for sharedPlace in sharedPlaces {
             var placeImages: [UIImage] = []
-            
+            sharedPlace.photos = placeImages
+           
             if let photoURLs = sharedPlace.photoURLs {
                 for urlAsString in photoURLs {
+                    guard let url = URL(string: urlAsString) else { completion(false) ; return }
                     
                     dispatchGroup.enter()
-                    
-                    guard let url = URL(string: urlAsString) else { completion([]) ; return }
-  
                     let dataTask = URLSession.shared.dataTask(with: url) { (data, _, error) in
                         if let error = error {
                             print(error)
-                            completion([])
+                            completion(false)
                             dispatchGroup.leave()
                             return
                         }
                         
                         guard let data = data,
                             let image = UIImage(data: data)
-                            else { completion([]) ; return }
-                       
-                        placeImages.append(image)
-                     
+                            else { completion(false) ; return }
+                        
+                        sharedPlace.photos?.append(image)
+                        
                         dispatchGroup.leave()
                     }
                     dataTask.resume()
                 }
             }
-            places.append(sharedPlace)
         }
-        
-        dispatchGroup.notify(queue: .main, execute: {
-            completion(places)
-        })
+        dispatchGroup.notify(queue: .main) {
+            completion(true)
+        }
     }
 }

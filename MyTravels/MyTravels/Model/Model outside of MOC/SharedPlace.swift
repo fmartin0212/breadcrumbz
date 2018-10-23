@@ -25,12 +25,18 @@ class SharedPlace {
         guard let name = dictionary["name"] as? String,
             let address = dictionary["address"] as? String,
             let rating = dictionary["rating"] as? Int16,
-            let type = dictionary["type"] as? String,
+            let type = dictionary["type"] as? String, 
             let comments = dictionary["comments"] as? String
             else { return nil }
         
-        if let photoURLs = dictionary["photoURLs"] as? [String] {
-            self.photoURLs = photoURLs
+        if let photoURLs = dictionary["photoURLs"] as? [String: [String : Any]] {
+            self.photoURLs = photoURLs.compactMap({ (key, value) -> String? in
+                let photoDict = value as! [String: String]
+                for (_, value) in photoDict {
+                    return value
+                }
+                return ""
+            })
         }
     
         self.name = name

@@ -13,6 +13,10 @@ class FetchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        for trip in TripController.shared.trips {
+         trip.id = nil
+        }
  
 //        Auth.auth().signIn(withEmail: "fmartjn0212@gmail.com", password: "Spaceship11!") { (user, error) in
 //            print(user?.displayName)
