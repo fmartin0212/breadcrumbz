@@ -90,35 +90,10 @@ extension SharedTripsListViewController: UITableViewDataSource {
         cell.sharedTrip = sharedTrip
         cell.indexPath = indexPath
         
-        cell.delegate = self
-        
         return cell
         
         }
     }
-
-extension SharedTripsListViewController: TripTableViewCellDelegate {
-    
-    func accepted(sharedTrip: SharedTrip, indexPath: IndexPath) {
-        SharedTripsController.shared.accept(sharedTrip: sharedTrip, at: indexPath) { (success) in
-            if success {
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-        }
-    }
-    
-    func denied(sharedTrip: SharedTrip, indexPath: IndexPath) {
-        SharedTripsController.shared.deny(sharedTrip: sharedTrip, at: indexPath) { (success) in
-            if success {
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-        }
-    }
-}
 
 extension SharedTripsListViewController : UITableViewDelegate {
     
