@@ -30,13 +30,11 @@ class ProfileViewController: UIViewController {
         profilePictureButton.clipsToBounds = true
         profilePictureButton.layer.cornerRadius = 61
         
-        guard let loggedInUser = UserController.shared.loggedInUser,
-            let profilePictureAsData = loggedInUser.profilePicture,
-            let profilePicture = UIImage(data: profilePictureAsData)
+        guard let loggedInUser = InternalUserController.shared.loggedInUser
             else { return }
         
         profilePictureButton.setImage(nil, for: .normal)
-        profilePictureButton.setBackgroundImage(profilePicture, for: .normal)
+    
     }
     
     @IBAction func profileButtonTapped(_ sender: Any) {
@@ -48,19 +46,18 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        guard let loggedInUser = UserController.shared.loggedInUser,
+        guard let loggedInUser = InternalUserController.shared.loggedInUser,
             let updatedProfileImage = profilePictureButton.backgroundImage(for: .normal)
             else { return }
         
-        loggedInUser.profilePicture = UIImagePNGRepresentation(updatedProfileImage)
-        guard let record = CKRecord(user: loggedInUser) else { return }
-        
-        CloudKitManager.shared.updateOperation(records: [record]) { (success) in
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: TripsListViewController.profilePictureUpdatedNotification, object: self)
-                self.dismiss(animated: true, completion: nil)
-            }
-        }
+//        guard let record = CKRecord(user: loggedInUser) else { return }
+//
+//        CloudKitManager.shared.updateOperation(records: [record]) { (success) in
+//            DispatchQueue.main.async {
+//                NotificationCenter.default.post(name: TripsListViewController.profilePictureUpdatedNotification, object: self)
+//                self.dismiss(animated: true, completion: nil)
+//            }
+//        }
     }
     
     @IBAction func tapGestureRecognized(_ sender: Any) {
@@ -80,7 +77,7 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "profileDetailCell", for: indexPath)
         
-        guard let loggedInUser = UserController.shared.loggedInUser else { return UITableViewCell() }
+        guard let loggedInUser = InternalUserController.shared.loggedInUser else { return UITableViewCell() }
         
         switch indexPath.section {
         case 0:
@@ -88,7 +85,7 @@ extension ProfileViewController: UITableViewDataSource {
         case 1:
             cell.textLabel?.text = loggedInUser.firstName
         case 2:
-            cell.textLabel?.text = loggedInUser.lastName
+            cell.textLabel?.text = loggedInUser.lastName ?? ""
         default:
             break
         }

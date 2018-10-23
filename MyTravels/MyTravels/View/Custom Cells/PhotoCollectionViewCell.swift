@@ -23,13 +23,12 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    var sharedPlacePhoto: Data? {
+    var sharedPlacePhoto: UIImage? {
         didSet {
             
-            guard let photoAsData = sharedPlacePhoto else { return }
-            let photoImage = UIImage(data: photoAsData)
+            guard let photo = sharedPlacePhoto else { return }
             
-            photoImageView.image = photoImage
+            photoImageView.image = photo
             photoImageView.layer.cornerRadius = 8
             photoImageView.clipsToBounds = true
         }

@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-import CloudKit
+import FirebaseDatabase
 
 class TripController {
     
@@ -32,13 +32,7 @@ class TripController {
         self.trip = trip
         CoreDataManager.save()
     }
-    
-    func save(trip: Trip) {
-        guard let record = CKRecord(trip: trip) else { return }
-        CloudKitManager.shared.saveToCloudKit(ckRecord: record) { (success) in
-        }
-    }
-    
+
     func delete(trip: Trip) {
         CoreDataManager.delete(object: trip)
     }
@@ -53,5 +47,90 @@ class TripController {
         guard let trips = frc.fetchedObjects else { return }
         self.trips = trips
     }
+    
+    func share(trip: Trip, withReceiver receiver: String, completion: @escaping (Bool) -> Void) {
+        
+        guard let loggedInUser = InternalUserController.shared.loggedInUser else { return completion(false) }
+        // PRESENT ALERT CONTROLLER OR CREATE ACCOUNT
+        
+        if let tripID = trip.id {
+            
+            // Trip has already been saved to the database, only a child needs to be saved on the receiver.
+            addTripIDToReceiver(tripID: tripID, receiver: receiver) { (success) in
+                if success {
+                    completion(true)
+                    return
+                } else {
+                    print("Something went wrong with adding a tripID to a user in: ", #function)
+                }
+            }
+            
+        } else {
+            
+            // Trip has not been saved in the database, so we need to save a new Trip child and a child on the receiver.
+            let creatorName = loggedInUser.firstName + " " + (loggedInUser.lastName ?? "")
+            
+            upload(trip: trip, creatorName: creatorName) { (success) in
+                if success {
+                    guard let tripID = trip.id else { completion(false) ; return }
+                    self.addTripIDToReceiver(tripID: tripID, receiver: receiver, completion: { (success) in
+                        if success {
+                            completion(true)
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
+    func upload(trip: Trip, creatorName: String, completion: @escaping (Bool) -> Void) {
+        
+        let tripDict: [String : Any?] = [
+            "name" : trip.name,
+            "location" : trip.location,
+            "description" : trip.tripDescription,
+            "startDate" : trip.startDate.timeIntervalSince1970,
+            "endDate" : trip.endDate.timeIntervalSince1970,
+            "creatorName" : creatorName,
+            "places" : PlaceController.shared.createPlaces(for: trip)
+        ]
+        
+        
+        
+        let tripRef = FirebaseManager.ref.child("Trip").childByAutoId()
+        
+        FirebaseManager.save(object: tripDict, to: tripRef) { (error) in
+            if let _ = error {
+                completion(false)
+                return
+            }
+            
+            // If save to Firebase is successful, save trip's UID locally and to persistent store.
+            trip.id = tripRef.key
+            CoreDataManager.save()
+            
+            let storeRef = FirebaseManager.storeRef.child("Trip").child(trip.id!)
+            FirebaseManager.saveImages(for: trip, to: storeRef, completion: { (success) in
+                if success {
+                    completion(true)
+                }
+            })
+        }
+    }
+    
+    func addTripIDToReceiver(tripID: String, receiver: String, completion: @escaping (Bool) -> Void) {
+        let userTripRef = FirebaseManager.ref.child("User").child(receiver).child("participantTripIDs").child(tripID)
+        
+        let tripID : [String : Any] = ["tripID" : tripID]
+        
+        FirebaseManager.save(object: tripID, to: userTripRef, completion: { (error) in
+            if let error = error {
+                print(error)
+                completion(false)
+            }
+            completion(true)
+        })
+    }
 }
+
 

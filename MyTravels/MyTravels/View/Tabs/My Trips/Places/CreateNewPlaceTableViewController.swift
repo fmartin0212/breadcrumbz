@@ -34,8 +34,8 @@ class CreateNewPlaceTableViewController: UITableViewController, CLLocationManage
     @IBOutlet weak var starFive: UIImageView!
     
     @IBOutlet weak var placeNameTextField: UITextField!
-    @IBOutlet weak var placeTypeTextField: UITextField!
-    @IBOutlet weak var placeAddressTextView: UITextView!
+    @IBOutlet weak var placeTypeLabel: UILabel!
+    @IBOutlet weak var placeAddressLabel: UILabel!
     @IBOutlet weak var placeCommentsTextView: UITextView!
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -73,23 +73,23 @@ class CreateNewPlaceTableViewController: UITableViewController, CLLocationManage
         
         // Check to see if any required fields are empty, if so, present alertcontroller and jump out of function
         guard let placeNameTF = placeNameTextField,
-            let placeTypeTF = placeTypeTextField,
-            let placeAddressTV = placeAddressTextView
+            let placeTypeLabel = placeTypeLabel,
+            let placeAddressLabel = placeAddressLabel
             else { return }
         
-        let textFields = [placeNameTF, placeTypeTF, placeAddressTV]
+//        let textFields = [placeNameTF, placeTypeTF, placeAddressTV]
         
         if placeNameTextField.text?.isEmpty == true ||
-            placeTypeTextField.text == "Choose a type" ||
-            placeAddressTextView.text?.isEmpty == true  {
+            placeTypeLabel.text == "Choose a type" ||
+            placeAddressLabel.text?.isEmpty == true  {
             //            missingFieldAlert(textFields: textFields)
             return
         }
         
         guard let trip = self.trip,
             let name = placeNameTextField.text,
-            let type = placeTypeTextField.text,
-            let address = placeAddressTV.text,
+            let type = placeTypeLabel.text,
+            let address = placeAddressLabel.text,
             let comments = placeCommentsTextView.text
             else { return }
         
@@ -149,6 +149,7 @@ class CreateNewPlaceTableViewController: UITableViewController, CLLocationManage
 }
 
 extension CreateNewPlaceTableViewController {
+   
     func getLocation() {
         func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
             guard let coordinate = locations.last?.coordinate else { return }
@@ -175,17 +176,28 @@ extension CreateNewPlaceTableViewController {
         
         rating = Int16(starTapped + 1)
     }
+}
+
+// MARK: - Table View Delegate
+extension CreateNewPlaceTableViewController {
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if segue.identifier == "ToTypeSelectionViewControllerSegue" {
-            guard let destinationVC = segue.destination as? TypeSelectionViewController else { return }
-            destinationVC.delegate = self
-        }
-        
-        if segue.identifier == "ToSearchViewControllerSegue" {
-            guard let destinationVC = segue.destination as? SearchViewController else { return }
-            destinationVC.delegate = self
+        switch indexPath.row {
+            
+        case 1:
+            guard let typeSelectionVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "typeSelectionVC") as? TypeSelectionViewController else { return }
+            typeSelectionVC.delegate = self
+            present(typeSelectionVC, animated: true, completion: nil)
+            
+        case 2:
+            guard let searchVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "searchVC") as? SearchViewController else { return }
+            searchVC.delegate = self
+            present(searchVC, animated: true, completion: nil)
+       
+        default:
+            return
+            
         }
     }
 }
@@ -193,6 +205,7 @@ extension CreateNewPlaceTableViewController {
 // MARK: - UIImagePickerControllerDelegate
 
 extension CreateNewPlaceTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
@@ -210,8 +223,10 @@ extension CreateNewPlaceTableViewController: UIImagePickerControllerDelegate, UI
 }
 
 extension CreateNewPlaceTableViewController: TypeSelectionViewControllerDelegate {
+    
     func set(type: String) {
-        placeTypeTextField.text = type
+        placeTypeLabel.text = type
+        tableView.reloadData()
     }
 }
 
@@ -235,7 +250,6 @@ extension CreateNewPlaceTableViewController: UICollectionViewDelegate, UICollect
             present(imagePickerController, animated: true, completion: nil)
         }
     }
-    
 }
 
 extension CreateNewPlaceTableViewController: UITextViewDelegate {
@@ -264,8 +278,9 @@ extension CreateNewPlaceTableViewController: UITextViewDelegate {
 }
 
 extension CreateNewPlaceTableViewController: SearchViewControllerDelegate {
+   
     func set(address: String) {
-        placeAddressTextView.text = address
+        placeAddressLabel.text = address
         tableView.reloadData()
     }
 }
@@ -275,13 +290,18 @@ extension CreateNewPlaceTableViewController: SearchViewControllerDelegate {
 extension CreateNewPlaceTableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         switch indexPath.row {
+       
         case 2:
-            return UITableViewAutomaticDimension
+            return 60
+        
         case 4:
-            return UITableViewAutomaticDimension
+            return 60
+       
         case 5:
             return 150
+       
         default:
             return 60
         }

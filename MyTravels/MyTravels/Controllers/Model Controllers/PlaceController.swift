@@ -49,4 +49,27 @@ class PlaceController {
     func delete(place: Place) {
         CoreDataManager.delete(object: place)
     }
+    
+    func createPlaces(for trip: Trip) -> [String : [String : Any]]? {
+        
+        guard let places = trip.places?.allObjects as? [Place], places.count > 0 else { return nil }
+        
+        var placesDict = [String : [String : Any]]()
+        
+        for place in places {
+            
+            let placeDict: [String : Any] = ["name" : place.name,
+                                         "type" : place.type,
+                                         "address" : place.address,
+                                         "rating" : place.rating,
+                                         "comments" : place.comments ?? ""
+            ]
+            
+        placesDict[place.name] = placeDict
+            
+        }
+        return placesDict
+    }
 }
+
+

@@ -30,9 +30,8 @@ class SharedTripDetailViewController: UIViewController {
         guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
         tripPhoto = tripPhotoPlaceholderImage
         
-        if let photo = sharedTrip.photoData {
-            guard let image = UIImage(data: photo) else { return }
-            tripPhoto = image
+        if let photo = sharedTrip.photo {
+            tripPhoto = photo
         }
         navigationController?.navigationItem.rightBarButtonItem = nil
 
@@ -116,12 +115,7 @@ class SharedTripDetailViewController: UIViewController {
             destinationVC.sharedPlace = sharedPlace
             
         }
-        
     }
-    
-    @IBAction func actionButtonTapped(_ sender: Any) {
-    }
-    
 }
 
 extension SharedTripDetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -188,7 +182,7 @@ extension SharedTripDetailViewController: UITableViewDelegate, UITableViewDataSo
 
         if indexPath.row == 0 && indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SharedTripDetailCell") as! SharedTripDetailTableViewCell
-            cell.sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.section][indexPath.row]
+            cell.sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
             cell.selectionStyle = .none
             return cell
         }

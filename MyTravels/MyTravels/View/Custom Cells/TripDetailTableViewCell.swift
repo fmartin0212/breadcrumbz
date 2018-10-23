@@ -33,19 +33,14 @@ class TripDetailTableViewCell: UITableViewCell {
     // MARK: - Other Functions
     func updateTripDetail() {
         
-        guard let trip = trip,
-            let tripName = trip.name,
-            let startDate = trip.startDate,
-            let endDate = trip.endDate,
-            let tripDescription = trip.tripDescription
+        guard let trip = trip
             else { return }
         
-        tripNameLabel.text = tripName
+        tripNameLabel.text = trip.name
         tripLocationLabel.text = trip.location
-        tripStartDateLabel.text = "\(shortDateString(date: startDate as Date)) -"
-        tripEndDateLabel.text = shortDateString(date: endDate as Date)
-//        tripDescriptionTextView.text = tripDescription
-        tripDescriptionLabel.text = tripDescription
+        tripStartDateLabel.text = "\(shortDateString(date: trip.startDate as Date)) -"
+        tripEndDateLabel.text = shortDateString(date: trip.endDate as Date)
+        tripDescriptionLabel.text = trip.description
         
     }
     

@@ -50,14 +50,12 @@ class SharedPlaceDetailTableViewController: UITableViewController {
     // MARK: - Functions
     
     func updateViewsForSharedPlace() {
-        guard let sharedPlace = sharedPlace,
-            let photos = sharedPlace.photos
+        guard let sharedPlace = sharedPlace
             else { return }
         
-        if photos.count > 0 {
-            guard let photo = photos.first,
-                let image = UIImage(data: photo) else { return }
-            sharedPlaceMainPhotoImageView.image = image
+        if let photos = sharedPlace.photos, photos.count > 0 {
+            guard let photo = photos.first else { return }
+            sharedPlaceMainPhotoImageView.image = photo
             sharedPlaceNameLabel.text = sharedPlace.name
             sharedPlaceAddressLabel.text = sharedPlace.address
             updateStarsImageViews(sharedPlace: sharedPlace)

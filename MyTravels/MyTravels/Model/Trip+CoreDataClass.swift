@@ -13,25 +13,13 @@ import CloudKit
 import MapKit
 
 @objc(Trip)
-public class Trip: NSManagedObject, CloudKitSyncable {
+public class Trip: NSManagedObject, FirebaseSyncable {
     
-    var recordType: String {
-        return "Trip"
-    }
-    
-    var cloudKitRecordID: CKRecordID? {
-        guard let recordIDString = cloudKitRecordIDString
-            else { return nil }
-        return CKRecordID(recordName: recordIDString)
-    }
-    
-    var reference: CKReference? {
-        guard let cloudKitRecordID = cloudKitRecordID else { return nil }
-        return CKReference(recordID: cloudKitRecordID, action: .deleteSelf)
-    }
+    // MARK: - FirebaseSyncable
+    var id: String?
     
     fileprivate var temporaryPhotoURL: URL {
-        
+
         // Must write to temporary directory to be able to pass image file path url to CKAsset
         let temporaryDirectory = NSTemporaryDirectory()
         let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
@@ -44,15 +32,14 @@ public class Trip: NSManagedObject, CloudKitSyncable {
         return fileURL
     }
     
-    
-    convenience init(name: String, location: String, tripDescription: String?, startDate: Date?, endDate: Date?, context: NSManagedObjectContext = CoreDataStack.context) {
+    convenience init(name: String, location: String, tripDescription: String?, startDate: Date, endDate: Date, context: NSManagedObjectContext = CoreDataStack.context) {
         
         self.init(context: context)
         self.name = name
         self.location = location
         self.tripDescription = tripDescription
-        self.startDate = startDate
-        self.endDate = endDate
+        self.startDate = startDate as NSDate
+        self.endDate = endDate as NSDate
     }
     
     // CloudKit - Turn a record into a Trip
@@ -64,43 +51,9 @@ public class Trip: NSManagedObject, CloudKitSyncable {
         
         self.init(context: context)
         self.location = location
-        self.startDate = startDate
-        self.endDate = endDate
-        self.cloudKitRecordIDString = record.recordID.recordName
+        self.startDate = NSDate()
+        self.endDate = NSDate()
+        
     }
 }
 
-// CloudKit - Turn a Trip into a record
-extension CKRecord {
-    
-    convenience init?(trip: Trip) {
-        
-        let recordID = trip.cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
-        let photoAsset = CKAsset(fileURL: trip.temporaryPhotoURL)
-        
-        self.init(recordType: "Trip", recordID: recordID)
-        guard let loggedInUser = UserController.shared.loggedInUser, let loggedInUserCKRecordID = loggedInUser.ckRecordID else { return nil }
-        let creatorReference = CKReference(recordID: loggedInUserCKRecordID, action: .none)
-        
-        var sharedIDsArray = [String]()
-        if let sharedIDObjects = trip.usersSharedWithRecordIDs?.allObjects as? [UsersSharedWithRecordIDs] {
-            for sharedIDObject in sharedIDObjects {
-                if sharedIDObject.isSynced == false {
-                    guard let sharedID = sharedIDObject.recordID else { return nil }
-                    sharedIDsArray.append(sharedID)
-                    sharedIDObject.isSynced = true
-                }
-            }
-            CoreDataManager.save()
-            self.setValue(sharedIDsArray, forKey: "userIDsTripSharedWith")
-        }
-        self.setValue(trip.name, forKey: "name")
-        self.setValue(trip.location, forKey: "location")
-        self.setValue(trip.tripDescription, forKey: "tripDescription")
-        self.setValue(trip.startDate, forKey: "startDate")
-        self.setValue(trip.endDate, forKey: "endDate")
-        self.setValue(creatorReference, forKey: "creatorReference")
-        self.setValue(photoAsset, forKey: "photo")
-        trip.cloudKitRecordIDString = recordID.recordName
-    }
-}

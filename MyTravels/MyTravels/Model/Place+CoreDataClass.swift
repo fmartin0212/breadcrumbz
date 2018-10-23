@@ -13,6 +13,8 @@ import CloudKit
 
 @objc(Place)
 public class Place: NSManagedObject, CloudKitSyncable {
+
+    var uid: String?
     
     var recordType: String {
         return "Place"
@@ -72,24 +74,4 @@ public class Place: NSManagedObject, CloudKitSyncable {
     }
 }
 
-// CloudKit - Turn a Place into a record
-extension CKRecord {
-    convenience init(place: Place, trip: Trip) {
-        
-        let ckRecordID = place.cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
 
-        let photoAssets = place.temporaryPhotoURLs.map { CKAsset(fileURL: $0) }
-        let ratingAsInt64 = Int(place.rating)
-        let tripReference = trip.cloudKitReference
-        
-        self.init(recordType: "Place", recordID: ckRecordID)
-        self.setValue(place.name, forKey: "name")
-        self.setValue(place.address, forKey: "address")
-        self.setValue(place.type, forKey: "type")
-        self.setValue(place.comments, forKey: "comments")
-        self.setValue(ratingAsInt64, forKey: "rating")
-        self.setValue(photoAssets, forKey: "photos")
-        self.setValue(tripReference, forKey: "tripReference")
-        place.cloudKitRecordIDString = recordID.recordName
-    }
-}

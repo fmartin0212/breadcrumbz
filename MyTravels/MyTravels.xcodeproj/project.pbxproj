@@ -12,6 +12,7 @@
 		B711157920549859000868BD /* TripDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B711157820549859000868BD /* TripDetailTableViewCell.swift */; };
 		B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */; };
 		B725034F20D9B64C00744B23 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B725034E20D9B64C00744B23 /* ProfileViewController.swift */; };
+		B735428D2174E36300D9A68D /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B735428C2174E36200D9A68D /* Trip+CoreDataProperties.swift */; };
 		B73926112035255A0050B580 /* UsernameSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73926102035255A0050B580 /* UsernameSearchViewController.swift */; };
 		B739261320362E5F0050B580 /* SharedTripsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B739261220362E5F0050B580 /* SharedTripsController.swift */; };
 		B7392616203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7392614203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift */; };
@@ -19,8 +20,11 @@
 		B75E335E20D316DD00839678 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E335D20D316DD00839678 /* TextFieldTableViewCell.swift */; };
 		B77E4F7120C6D482007EB266 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E4F7020C6D481007EB266 /* Extensions.swift */; };
 		B77E4F7320C835EF007EB266 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B77E4F7220C835EE007EB266 /* Assets.xcassets */; };
+		B78BC0742159587100827394 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B78BC0732159587100827394 /* GoogleService-Info.plist */; };
+		B78BC0762159740300827394 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78BC0752159740300827394 /* FirebaseManager.swift */; };
 		B78FB5982070317700EE40C2 /* Gilroy-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B78FB5972070317000EE40C2 /* Gilroy-ExtraBold.otf */; };
 		B796DD3A204B5F9500CAF093 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B796DD39204B5F9500CAF093 /* MapViewController.swift */; };
+		B7A5A708217FD2E70034D52B /* TripCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7A5A707217FD2E70034D52B /* TripCell.xib */; };
 		B7B0C36E203724F30031A92A /* SharedTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B0C36D203724F30031A92A /* SharedTrip.swift */; };
 		B7B0C3702037446E0031A92A /* SharedPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B0C36F2037446E0031A92A /* SharedPlace.swift */; };
 		B7BDA845202A29F50080B81B /* EditPlaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */; };
@@ -49,9 +53,9 @@
 		B7DA1B73202E140C0007497A /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B6D202E140C0007497A /* Photo+CoreDataClass.swift */; };
 		B7DA1B74202E140C0007497A /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B6E202E140C0007497A /* Photo+CoreDataProperties.swift */; };
 		B7DA1B76202E164C0007497A /* CloudKitSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B75202E164C0007497A /* CloudKitSyncable.swift */; };
-		B7DA1B78202E1AE20007497A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B77202E1AE20007497A /* User.swift */; };
+		B7DA1B78202E1AE20007497A /* InternalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B77202E1AE20007497A /* InternalUser.swift */; };
 		B7DA1B7B202E2A170007497A /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B7A202E2A170007497A /* CloudKitManager.swift */; };
-		B7DA1B7D202E2B900007497A /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B7C202E2B900007497A /* UserController.swift */; };
+		B7DA1B7D202E2B900007497A /* InternalUserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B7C202E2B900007497A /* InternalUserController.swift */; };
 		B7DA1B7F202F9FBC0007497A /* FetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */; };
 		B7DA1B822030E70C0007497A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B812030E70C0007497A /* SearchViewController.swift */; };
 		B7F75C0220577BB200C876A0 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F75C0120577BB200C876A0 /* Onboarding.storyboard */; };
@@ -62,6 +66,7 @@
 		B7F75C152058769500C876A0 /* SharedTripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C142058769500C876A0 /* SharedTripDetailViewController.swift */; };
 		B7F75C172058771900C876A0 /* SharedPlaceDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C162058771900C876A0 /* SharedPlaceDetailTableViewController.swift */; };
 		B7F75C20205A14D800C876A0 /* SharedTripDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C1F205A14D800C876A0 /* SharedTripDetailTableViewCell.swift */; };
+		B7F7CF44217685150097198C /* SharedPlaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7CF43217685150097198C /* SharedPlaceController.swift */; };
 		B7F92BCF20291DEE0021A8CA /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F92BCE20291DEE0021A8CA /* PhotoController.swift */; };
 		B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +78,7 @@
 		B711157820549859000868BD /* TripDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailTableViewCell.swift; sourceTree = "<group>"; };
 		B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B725034E20D9B64C00744B23 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		B735428C2174E36200D9A68D /* Trip+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B73926102035255A0050B580 /* UsernameSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameSearchViewController.swift; sourceTree = "<group>"; };
 		B739261220362E5F0050B580 /* SharedTripsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripsController.swift; sourceTree = "<group>"; };
 		B7392614203631E20050B580 /* UsersSharedWithRecordIDs+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UsersSharedWithRecordIDs+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -81,8 +87,11 @@
 		B76D944720C0C5BB003E8BBE /* Gilroy-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Light.otf"; sourceTree = "<group>"; };
 		B77E4F7020C6D481007EB266 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B77E4F7220C835EE007EB266 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B78BC0732159587100827394 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B78BC0752159740300827394 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		B78FB5972070317000EE40C2 /* Gilroy-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-ExtraBold.otf"; sourceTree = "<group>"; };
 		B796DD39204B5F9500CAF093 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		B7A5A707217FD2E70034D52B /* TripCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripCell.xib; sourceTree = "<group>"; };
 		B7B0C36D203724F30031A92A /* SharedTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTrip.swift; sourceTree = "<group>"; };
 		B7B0C36F2037446E0031A92A /* SharedPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPlace.swift; sourceTree = "<group>"; };
 		B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlaceTableViewController.swift; sourceTree = "<group>"; };
@@ -114,9 +123,9 @@
 		B7DA1B6D202E140C0007497A /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B7DA1B6E202E140C0007497A /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B7DA1B75202E164C0007497A /* CloudKitSyncable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitSyncable.swift; sourceTree = "<group>"; };
-		B7DA1B77202E1AE20007497A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B7DA1B77202E1AE20007497A /* InternalUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUser.swift; sourceTree = "<group>"; };
 		B7DA1B7A202E2A170007497A /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
-		B7DA1B7C202E2B900007497A /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		B7DA1B7C202E2B900007497A /* InternalUserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUserController.swift; sourceTree = "<group>"; };
 		B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchViewController.swift; sourceTree = "<group>"; };
 		B7DA1B812030E70C0007497A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		B7F75C0120577BB200C876A0 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
@@ -127,6 +136,7 @@
 		B7F75C142058769500C876A0 /* SharedTripDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripDetailViewController.swift; sourceTree = "<group>"; };
 		B7F75C162058771900C876A0 /* SharedPlaceDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPlaceDetailTableViewController.swift; sourceTree = "<group>"; };
 		B7F75C1F205A14D800C876A0 /* SharedTripDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripDetailTableViewCell.swift; sourceTree = "<group>"; };
+		B7F7CF43217685150097198C /* SharedPlaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SharedPlaceController.swift; path = "MyTravels/Controllers/Model Controllers/SharedPlaceController.swift"; sourceTree = SOURCE_ROOT; };
 		B7F92BCE20291DEE0021A8CA /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
 		B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		D8CD1BB41D947506D15EDEB5 /* Pods-MyTravels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTravels.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels.release.xcconfig"; sourceTree = "<group>"; };
@@ -158,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				B7DA1B7A202E2A170007497A /* CloudKitManager.swift */,
+				B78BC0752159740300827394 /* FirebaseManager.swift */,
 				B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */,
 			);
 			path = Managers;
@@ -211,9 +222,10 @@
 		B745843F203B7B1A00A686E7 /* Model outside of MOC */ = {
 			isa = PBXGroup;
 			children = (
-				B7DA1B77202E1AE20007497A /* User.swift */,
+				B7DA1B77202E1AE20007497A /* InternalUser.swift */,
 				B7B0C36D203724F30031A92A /* SharedTrip.swift */,
 				B7B0C36F2037446E0031A92A /* SharedPlace.swift */,
+				B7A5A707217FD2E70034D52B /* TripCell.xib */,
 			);
 			path = "Model outside of MOC";
 			sourceTree = "<group>";
@@ -258,6 +270,7 @@
 				B7D6523E2026526700E975F1 /* ViewControllerExtensions.swift */,
 				B7C10CC02020D19500818430 /* LaunchScreen.storyboard */,
 				B7C10CC32020D19500818430 /* Info.plist */,
+				B78BC0732159587100827394 /* GoogleService-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -292,6 +305,7 @@
 			children = (
 				B745843F203B7B1A00A686E7 /* Model outside of MOC */,
 				B7DA1B69202E140C0007497A /* Trip+CoreDataClass.swift */,
+				B735428C2174E36200D9A68D /* Trip+CoreDataProperties.swift */,
 				B7DA1B6B202E140C0007497A /* Place+CoreDataClass.swift */,
 				B7DA1B6C202E140C0007497A /* Place+CoreDataProperties.swift */,
 				B7DA1B6D202E140C0007497A /* Photo+CoreDataClass.swift */,
@@ -306,11 +320,12 @@
 		B7C10CDC20214F7200818430 /* Model Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B7DA1B7C202E2B900007497A /* UserController.swift */,
+				B7DA1B7C202E2B900007497A /* InternalUserController.swift */,
 				B7C10CCE2020FD4B00818430 /* TripController.swift */,
 				B7C10CD02020FD5500818430 /* PlaceController.swift */,
 				B7F92BCE20291DEE0021A8CA /* PhotoController.swift */,
 				B739261220362E5F0050B580 /* SharedTripsController.swift */,
+				B7F7CF43217685150097198C /* SharedPlaceController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -401,6 +416,7 @@
 				B7C10CAD2020D19500818430 /* Sources */,
 				B7C10CAE2020D19500818430 /* Frameworks */,
 				B7C10CAF2020D19500818430 /* Resources */,
+				C0B5999E2ED0AD39DCC13FE5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -459,16 +475,44 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7C10CC22020D19500818430 /* LaunchScreen.storyboard in Resources */,
+				B7A5A708217FD2E70034D52B /* TripCell.xib in Resources */,
 				B78FB5982070317700EE40C2 /* Gilroy-ExtraBold.otf in Resources */,
 				B77E4F7320C835EF007EB266 /* Assets.xcassets in Resources */,
 				B7C10CBA2020D19500818430 /* Main.storyboard in Resources */,
 				B7F75C0220577BB200C876A0 /* Onboarding.storyboard in Resources */,
+				B78BC0742159587100827394 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		C0B5999E2ED0AD39DCC13FE5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DFF1DB9B59DB479D49482023 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -505,14 +549,15 @@
 				B7C10CCF2020FD4B00818430 /* TripController.swift in Sources */,
 				B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */,
 				B7D652392024E24A00E975F1 /* TypeSelectionViewController.swift in Sources */,
-				B7DA1B78202E1AE20007497A /* User.swift in Sources */,
+				B7F7CF44217685150097198C /* SharedPlaceController.swift in Sources */,
+				B7DA1B78202E1AE20007497A /* InternalUser.swift in Sources */,
 				B7F75C20205A14D800C876A0 /* SharedTripDetailTableViewCell.swift in Sources */,
 				B7B0C36E203724F30031A92A /* SharedTrip.swift in Sources */,
 				B7DA1B73202E140C0007497A /* Photo+CoreDataClass.swift in Sources */,
 				B711157920549859000868BD /* TripDetailTableViewCell.swift in Sources */,
 				B7DA1B822030E70C0007497A /* SearchViewController.swift in Sources */,
 				B7F75C07205842E600C876A0 /* OnboardingPageViewController.swift in Sources */,
-				B7DA1B7D202E2B900007497A /* UserController.swift in Sources */,
+				B7DA1B7D202E2B900007497A /* InternalUserController.swift in Sources */,
 				B7C10CBD2020D19500818430 /* MyTravels.xcdatamodeld in Sources */,
 				B7C10CCB2020EDB400818430 /* TripsListViewController.swift in Sources */,
 				B7C10CE2202226ED00818430 /* TripDetailViewController.swift in Sources */,
@@ -527,6 +572,8 @@
 				B7C10CD12020FD5500818430 /* PlaceController.swift in Sources */,
 				B7D6523B202514C700E975F1 /* CreateNewPlaceTableViewController.swift in Sources */,
 				B7F75C172058771900C876A0 /* SharedPlaceDetailTableViewController.swift in Sources */,
+				B78BC0762159740300827394 /* FirebaseManager.swift in Sources */,
+				B735428D2174E36300D9A68D /* Trip+CoreDataProperties.swift in Sources */,
 				B725034F20D9B64C00744B23 /* ProfileViewController.swift in Sources */,
 				B7DA1B7B202E2A170007497A /* CloudKitManager.swift in Sources */,
 				B7DA1B76202E164C0007497A /* CloudKitSyncable.swift in Sources */,

@@ -8,12 +8,6 @@
 
 import UIKit
 
-protocol TripTableViewCellDelegate: class {
-    
-    func accepted(sharedTrip: SharedTrip, indexPath: IndexPath)
-    func denied(sharedTrip: SharedTrip, indexPath: IndexPath)
-}
-
 class TripTableViewCell: UITableViewCell {
     
     // MARK: - Properties
@@ -29,15 +23,13 @@ class TripTableViewCell: UITableViewCell {
         }
     }
     
-    var user: User? {
+    var user: InternalUser? {
         didSet {
             updateViewsForUser()
         }
     }
     
     var indexPath: IndexPath?
-    
-    weak var delegate: TripTableViewCellDelegate?
     
     // MARK: - IBOutlets
     // Trip
@@ -48,19 +40,16 @@ class TripTableViewCell: UITableViewCell {
     @IBOutlet weak var tripStartDateLabel: UILabel!
     @IBOutlet weak var tripEndDateLabel: UILabel!
     @IBOutlet weak var tripCreatorLabel: UILabel!
-    @IBOutlet weak var acceptButton: UIButton!
-    @IBOutlet weak var denyButton: UIButton!
     
     // MARK: - Functions
     func updateViews() {
         
+        guard let trip = trip
+            else { return }
+        
         tripImageView.layer.cornerRadius = 4
         tripImageView.clipsToBounds = true
         
-        guard let trip = trip,
-            let startDate = trip.startDate,
-            let endDate = trip.endDate
-            else { return }
         
         var tripPhoto = UIImage()
         guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
@@ -74,19 +63,15 @@ class TripTableViewCell: UITableViewCell {
         tripImageView.image = tripPhoto
         tripLocationLabel.text = trip.location
         
-        tripStartDateLabel.text = "\(shortDateString(date: startDate as Date)) -"
-        tripEndDateLabel.text = shortDateString(date: endDate as Date)
-    
+        tripStartDateLabel.text = "\(shortDateString(date: trip.startDate as Date)) -"
+        tripEndDateLabel.text = shortDateString(date: trip.endDate as Date)
+        
     }
     
     func updateViewsForSharedTrip() {
         
         tripImageView.layer.cornerRadius = 4
         tripImageView.clipsToBounds = true
-        acceptButton.clipsToBounds = true
-        acceptButton.layer.cornerRadius = 4
-        denyButton.clipsToBounds = true
-        denyButton.layer.cornerRadius = 4
         
         guard let sharedTrip = sharedTrip else { return }
         
@@ -94,8 +79,7 @@ class TripTableViewCell: UITableViewCell {
         guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
         tripPhoto = tripPhotoPlaceholderImage
         
-        if let photoData = sharedTrip.photoData {
-            guard let photo = UIImage(data: photoData) else { return }
+        if let photo = sharedTrip.photo {
             tripPhoto = photo
         }
         
@@ -105,14 +89,8 @@ class TripTableViewCell: UITableViewCell {
         
         tripStartDateLabel.text = "\(shortDateString(date: sharedTrip.startDate as Date)) -"
         tripEndDateLabel.text = "\(shortDateString(date: sharedTrip.endDate as Date))"
-        
-        if sharedTrip.isAcceptedTrip == true {
-            acceptButton.isHidden = true
-            denyButton.isHidden = true
-        } else {
-            acceptButton.isHidden = false
-            denyButton.isHidden = false
-        }
+        tripCreatorLabel.text = sharedTrip.creatorName
+
     }
     
     func updateViewsForUser() {
@@ -131,28 +109,5 @@ class TripTableViewCell: UITableViewCell {
         
         return date
         
-    }
-
-    @IBAction func acceptButtonTapped(_ sender: Any) {
-        guard let sharedTrip = sharedTrip,
-            let indexPath = indexPath
-            else { return }
-        
-        delegate?.accepted(sharedTrip: sharedTrip, indexPath: indexPath)
-    }
-    
-    @IBAction func denyButtonTapped(_ sender: Any) {
-        guard let sharedTrip = sharedTrip,
-            let indexPath = indexPath
-            else { return }
-        UIView.animate(withDuration: 0.10, animations: {
-            self.denyButton.transform = CGAffineTransform(scaleX: 0.90, y: 0.90)
-        }) { (_) in
-            UIView.animate(withDuration: 0.10, animations: {
-                self.denyButton.transform = CGAffineTransform.identity
-            }, completion: { (_) in
-                self.delegate?.denied(sharedTrip: sharedTrip, indexPath: indexPath)
-            })
-        }
     }
 }
