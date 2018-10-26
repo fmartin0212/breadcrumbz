@@ -139,7 +139,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
                 else { return }
             TripController.shared.share(trip: trip, withReceiver: receiver, completion: { (success) in
                 if success {}
-                })
+            })
         }
         alertController.addAction(shareAction)
         alertController.addAction(cancelAction)
@@ -263,7 +263,7 @@ extension TripDetailViewController: UITableViewDelegate {
         if section > 1 {
             guard let placeArray = array as? [[Place]],
                 let firstItemInArray = placeArray[section - 2].first
-//                let firstItemInArrayType = firstItemInArray.type
+                //                let firstItemInArrayType = firstItemInArray.type
                 else { return UIView() }
             
             if firstItemInArray.type == "Lodging" {
