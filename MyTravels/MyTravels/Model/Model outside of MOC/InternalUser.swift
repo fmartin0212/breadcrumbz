@@ -6,7 +6,7 @@
 //  Copyright © 2018 Frank Martin Jr. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import FirebaseDatabase
 
 class InternalUser {
@@ -15,6 +15,8 @@ class InternalUser {
     let lastName: String?
     let username: String
     let email: String
+    var photoURL: URL?
+    var photo: UIImage?
     
     init(firstName: String, lastName: String?, username: String, email: String) {
         self.firstName = firstName

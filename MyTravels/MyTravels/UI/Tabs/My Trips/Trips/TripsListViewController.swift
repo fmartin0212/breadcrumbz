@@ -13,6 +13,7 @@ import CloudKit
 class TripsListViewController: UIViewController {
     
     // MARK: - IBOutlets
+    
     @IBOutlet var noTripsView: UIView!
     @IBOutlet var addTripBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
@@ -20,14 +21,34 @@ class TripsListViewController: UIViewController {
     @IBOutlet weak var profileBarButtonItem: UIBarButtonItem!
     
     // MARK: - Constants & Variables
+    var profileButton: UIButton?
+    
     // FIXME - Put this in a 'Constants' file
     static let profilePictureUpdatedNotification = Notification.Name("profilePictureUpdatedNotification")
     
     override func viewDidLoad() {
-        super.viewDidLoad() 
+        super.viewDidLoad()
+        
+        let nib = UINib(nibName: "TripCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "TripCell")
      
         // Set tableview properties
         tableView.separatorStyle = .none
+        
+        let button = UIButton(type: .custom)
+        let image = UIImage(named: "user2")
+        let resizedImage = resizeImage(image: image!, targetSize: CGSize(width: 30, height: 30))
+        button.setImage(resizedImage, for: .normal)
+        button.clipsToBounds = true
+        button.layer.cornerRadius = button.bounds.size.width / 2
+        button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        profileButton = button
+        
+        let barButton = UIBarButtonItem(customView: button)
+        //assign button to navigationbar
+        self.navigationItem.leftBarButtonItem = barButton
+        
         
         // Set delegates
         tableView.dataSource = self
@@ -48,14 +69,15 @@ class TripsListViewController: UIViewController {
     }
     
     @objc func updateProfilePicture() {
-        
-        guard let loggedInUser = InternalUserController.shared.loggedInUser
-            else { return }
-       
-    }
-    
-    @objc func doSomething() {
-        print("adsF")
+        let button = UIButton(type: .custom)
+        let image = UIImage(named: "user2")
+        let resizedImage = resizeImage(image: image!, targetSize: CGSize(width: 30, height: 30))
+        button.setImage(resizedImage, for: .normal)
+        button.clipsToBounds = true
+        button.layer.cornerRadius = button.bounds.size.width / 2
+        button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        profileButton = button
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,11 +91,12 @@ class TripsListViewController: UIViewController {
     }
     
     // MARK: - Functions
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
-    @IBAction func profileButtonTapped(_ sender: Any) {
+    @objc func profileButtonTapped() {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let profileVC = sb.instantiateViewController(withIdentifier: "profileVC")
         UIView.animate(withDuration: 2) {
@@ -99,7 +122,7 @@ class TripsListViewController: UIViewController {
     }
 }
 
-extension TripsListViewController: UITableViewDelegate, UITableViewDataSource {
+extension TripsListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let trips = TripController.shared.frc.fetchedObjects else { return 0 }
@@ -124,6 +147,19 @@ extension TripsListViewController: UITableViewDelegate, UITableViewDataSource {
             let trip = trips[indexPath.row]
             TripController.shared.delete(trip: trip)
         }
+    }
+}
+
+extension TripsListViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let trip = TripController.shared.trips[indexPath.row]
+        
+        guard let tripDetailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tripDetailVC") as? TripDetailViewController else { return }
+        
+        tripDetailVC.trip = trip
+        
+        navigationController?.pushViewController(tripDetailVC, animated: true)
     }
 }
 
@@ -152,7 +188,6 @@ extension TripsListViewController: NSFetchedResultsControllerDelegate {
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }
     }
-    
 }
 
 extension TripsListViewController {
@@ -174,6 +209,7 @@ extension TripsListViewController {
 }
 
 extension UIImage {
+    
     func resizeImage(_ dimension: CGFloat, opaque: Bool, contentMode: UIViewContentMode = .scaleAspectFit) -> UIImage {
         var width: CGFloat
         var height: CGFloat
@@ -212,5 +248,33 @@ extension UIImage {
         }
         
         return newImage
+    }
+}
+
+extension TripsListViewController {
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
     }
 }

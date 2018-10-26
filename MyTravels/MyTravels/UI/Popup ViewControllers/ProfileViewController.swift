@@ -8,6 +8,8 @@
 
 import UIKit
 import CloudKit
+import FirebaseStorage
+import FirebaseDatabase
 
 class ProfileViewController: UIViewController {
     
@@ -30,10 +32,10 @@ class ProfileViewController: UIViewController {
         profilePictureButton.clipsToBounds = true
         profilePictureButton.layer.cornerRadius = 61
         
-        guard let loggedInUser = InternalUserController.shared.loggedInUser
+        guard let loggedInUserPhoto = InternalUserController.shared.loggedInUser?.photo
             else { return }
         
-        profilePictureButton.setImage(nil, for: .normal)
+        profilePictureButton.setImage(loggedInUserPhoto, for: .normal)
     
     }
     
@@ -50,14 +52,12 @@ class ProfileViewController: UIViewController {
             let updatedProfileImage = profilePictureButton.backgroundImage(for: .normal)
             else { return }
         
-//        guard let record = CKRecord(user: loggedInUser) else { return }
-//
-//        CloudKitManager.shared.updateOperation(records: [record]) { (success) in
-//            DispatchQueue.main.async {
-//                NotificationCenter.default.post(name: TripsListViewController.profilePictureUpdatedNotification, object: self)
-//                self.dismiss(animated: true, completion: nil)
-//            }
-//        }
+        let ref = FirebaseManager.ref.child(loggedInUser.username).child("photoURL").childByAutoId()
+        let storeRef = FirebaseManager.storeRef.child("User").child(loggedInUser.username).child("photo").child(ref.key)
+        
+        
+        
+        
     }
     
     @IBAction func tapGestureRecognized(_ sender: Any) {

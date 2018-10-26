@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CloudKit
 
 class SharedPlace {
     
@@ -19,7 +18,6 @@ class SharedPlace {
     var photos: [UIImage]?
     var photoURLs: [String]?
 
-    // CloudKit - Turn a record into a Place
     init?(dictionary: [String : Any]) {
         
         guard let name = dictionary["name"] as? String,

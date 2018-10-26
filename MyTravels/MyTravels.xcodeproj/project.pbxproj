@@ -225,7 +225,6 @@
 				B7DA1B77202E1AE20007497A /* InternalUser.swift */,
 				B7B0C36D203724F30031A92A /* SharedTrip.swift */,
 				B7B0C36F2037446E0031A92A /* SharedPlace.swift */,
-				B7A5A707217FD2E70034D52B /* TripCell.xib */,
 			);
 			path = "Model outside of MOC";
 			sourceTree = "<group>";
@@ -256,7 +255,7 @@
 				B7C10CD420214D4200818430 /* MyTravels.entitlements */,
 				B7C10CDB20214F6900818430 /* Model */,
 				B7DA1B79202E2A020007497A /* Controllers */,
-				B7C10CDA20214F5400818430 /* View */,
+				B7C10CDA20214F5400818430 /* UI */,
 			);
 			path = MyTravels;
 			sourceTree = "<group>";
@@ -284,7 +283,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B7C10CDA20214F5400818430 /* View */ = {
+		B7C10CDA20214F5400818430 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */,
@@ -292,12 +291,13 @@
 				B71E0C72202CC20100125396 /* Tabs */,
 				B71E0C71202CC1A100125396 /* Popup ViewControllers */,
 				B71E0C70202CC13600125396 /* Custom Cells */,
-				B7F75C0120577BB200C876A0 /* Onboarding.storyboard */,
-				B7C10CB82020D19500818430 /* Main.storyboard */,
 				B78FB5972070317000EE40C2 /* Gilroy-ExtraBold.otf */,
 				B76D944720C0C5BB003E8BBE /* Gilroy-Light.otf */,
+				B7F75C0120577BB200C876A0 /* Onboarding.storyboard */,
+				B7C10CB82020D19500818430 /* Main.storyboard */,
+				B7A5A707217FD2E70034D52B /* TripCell.xib */,
 			);
-			path = View;
+			path = UI;
 			sourceTree = "<group>";
 		};
 		B7C10CDB20214F6900818430 /* Model */ = {

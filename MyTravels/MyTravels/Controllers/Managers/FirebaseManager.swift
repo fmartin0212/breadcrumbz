@@ -24,7 +24,19 @@ class FirebaseManager {
     static var ref: DatabaseReference! = Database.database().reference()
     static var storeRef: StorageReference! = Storage.storage().reference()
     
+    static func saveSingleObject(_ object: Any, to databaseReference: DatabaseReference, completion: @escaping (Error?) -> Void) {
+        databaseReference.setValue(object) { (error, _) in
+            if let error = error {
+                print("There was an error saving an object to the database")
+                completion(error)
+                return
+            }
+            completion(nil)
+        }
+    }
+    
     static func save(object: [String : Any?], to databaseReference: DatabaseReference, completion: @escaping (Error?) -> Void) {
+        
         databaseReference.setValue(object) { (error, _) in
             if let error = error {
                 print("There was an error saving an object to the database")
@@ -38,7 +50,6 @@ class FirebaseManager {
     static func fetchObject(from ref: DatabaseReference, completion: @escaping (DataSnapshot) -> Void) {
 
         ref.observeSingleEvent(of: .value) { (snapshot) in
-            print("saaf")
             completion(snapshot)
         }
     }
@@ -99,19 +110,19 @@ class FirebaseManager {
     }
     
     static func savePlacePhotos(for trip: Trip, to storeRef: StorageReference, completion: @escaping (Bool) -> Void) {
-       
+        
         if let places = trip.places?.allObjects as? [Place] {
-           
+            
             for place in places {
                 
                 if let photos = place.photos?.allObjects as? [Photo] {
-                   
+                    
                     let dispatchGroup = DispatchGroup()
-                  
+                    
                     for photo in photos {
-                      
-                    let photoDBRef = FirebaseManager.ref.child("Trip").child(trip.id!).child("places").child(place.name).child("photoURLs").childByAutoId()
-                    let photoRef = storeRef.child("Places").child(place.name).child(photoDBRef.key)
+                        
+                        let photoDBRef = FirebaseManager.ref.child("Trip").child(trip.id!).child("places").child(place.name).child("photoURLs").childByAutoId()
+                        let photoRef = storeRef.child("Places").child(place.name).child(photoDBRef.key)
                         
                         guard let photoData = photo.photo
                             else { completion(false) ; return }
@@ -122,7 +133,7 @@ class FirebaseManager {
                         photoRef.putData(data, metadata: nil) { (metadata, error) in
                             photo.uid = photoRef.name
                             CoreDataManager.save()
-
+                            
                             let photoDictionary: [String : Any] = [photo.uid! : metadata?.downloadURL()?.absoluteString as Any]
                             
                             dispatchGroup.enter()
@@ -157,10 +168,6 @@ class FirebaseManager {
             let image = UIImage(data: data)
             completion(image)
         }
-    }
-    
-    static func fetchImages(storeRef: StorageReference, completion: @escaping ([UIImage]?) -> Void) {
-      
     }
 }
 

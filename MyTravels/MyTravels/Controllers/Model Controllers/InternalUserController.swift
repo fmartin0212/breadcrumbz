@@ -6,7 +6,7 @@
 //  Copyright © 2018 Frank Martin Jr. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CloudKit
 
 class InternalUserController {
@@ -59,4 +59,8 @@ class InternalUserController {
             completion(false)
         }
     }
+    
+    func saveProfilePhoto(photo: UIImage)
+    
+        
 }
