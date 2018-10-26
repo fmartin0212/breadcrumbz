@@ -60,7 +60,7 @@ class InternalUserController {
         }
     }
     
-    func saveProfilePhoto(photo: UIImage)
+//    func saveProfilePhoto(photo: UIImage)
     
         
 }

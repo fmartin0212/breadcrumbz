@@ -94,9 +94,7 @@ class TripController {
             "creatorName" : creatorName,
             "places" : PlaceController.shared.createPlaces(for: trip)
         ]
-        
-        
-        
+    
         let tripRef = FirebaseManager.ref.child("Trip").childByAutoId()
         
         FirebaseManager.save(object: tripDict, to: tripRef) { (error) in
@@ -109,8 +107,7 @@ class TripController {
             trip.id = tripRef.key
             CoreDataManager.save()
             
-            let storeRef = FirebaseManager.storeRef.child("Trip").child(trip.id!)
-            FirebaseManager.saveImages(for: trip, to: storeRef, completion: { (success) in
+            PhotoController.shared.savePhotos(for: trip, completion: { (success) in
                 if success {
                     completion(true)
                 }

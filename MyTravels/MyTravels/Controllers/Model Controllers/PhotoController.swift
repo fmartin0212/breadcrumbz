@@ -6,7 +6,7 @@
 //  Copyright © 2018 Frank Martin Jr. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreData
 import CloudKit
 import FirebaseDatabase
@@ -58,7 +58,73 @@ class PhotoController {
     }
     
     // MARK: - Firebase
-    func save(photo: UIImage, to storeRef: StorageReference, completion
     
+    func savePhotos(for trip: Trip, completion: @escaping (Bool) -> Void) {
+        let storeRef = FirebaseManager.storeRef.child("Trip").child(trip.id!)
+        saveTripPhoto(trip: trip, storeRef: storeRef) { (success) in
+            if success {
+                self.savePlacePhotos(for: trip, to: storeRef, completion: { (success) in
+                    if success {
+                        completion(true)
+                    }
+                })
+            }
+        }
+    }
+    
+    func savePlacePhotos(for trip: Trip, to storeRef: StorageReference, completion: @escaping (Bool) -> Void) {
+        
+        if let places = trip.places?.allObjects as? [Place] {
+            
+            for place in places {
+                
+                if let photos = place.photos?.allObjects as? [Photo] {
+                    
+                    let dispatchGroup = DispatchGroup()
+                    
+                    for photo in photos {
+                        
+                        let photoDBRef = FirebaseManager.ref.child("Trip").child(trip.id!).child("places").child(place.name).child("photoURLs").childByAutoId()
+                        let photoRef = storeRef.child("Places").child(place.name).child(photoDBRef.key)
+                        
+                        guard let photoData = photo.photo
+                            else { completion(false) ; return }
+                        
+                        let data = Data(referencing: photoData)
+                        
+                        dispatchGroup.enter()
+                        FirebaseManager.save(data: data, to: photoRef) { (metadata, error) in
+                            
+                            photo.uid = photoRef.name
+                            CoreDataManager.save()
+                            
+                            let photoDictionary: [String : Any] = [photo.uid! : metadata?.downloadURL()?.absoluteString as Any]
+                            
+                            dispatchGroup.enter()
+                            FirebaseManager.save(object: photoDictionary, to: photoDBRef, completion: { (error) in
+                                if let error = error {
+                                    print(error)
+                                    
+                                }
+                                dispatchGroup.leave()
+                            })
+                            dispatchGroup.leave()
+                        }
+                    }
+                    dispatchGroup.notify(queue: .main) {
+                        completion(true)
+                    }
+                }
+            }
+        }
+    }
 
+    func saveTripPhoto(trip: Trip, storeRef: StorageReference, completion: @escaping (Bool) -> Void) {
+        guard let tripPhoto = trip.photo?.photo else { completion(false) ; return }
+        let data = Data(referencing: tripPhoto)
+        
+        FirebaseManager.save(data: data, to: storeRef) { (_, error) in
+            completion(true)
+        }
+    }
 }
