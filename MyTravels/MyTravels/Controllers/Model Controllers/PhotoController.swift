@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 import CloudKit
+import FirebaseDatabase
+import FirebaseStorage
 
 class PhotoController {
     
@@ -54,6 +56,9 @@ class PhotoController {
     func delete(photo: Photo) {
         CoreDataManager.delete(object: photo)
     }
+    
+    // MARK: - Firebase
+    func save(photo: UIImage, to storeRef: StorageReference, completion
     
 
 }

@@ -15,6 +15,7 @@ class SharedTripsListViewController: UIViewController {
     @IBOutlet weak var profileBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     private let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,16 +38,12 @@ class SharedTripsListViewController: UIViewController {
     }
     
     @objc func refresh() {
-        SharedTripsController.shared.fetchUsersPendingSharedTrips(completion: { (_) in
-            SharedTripsController.shared.fetchAcceptedSharedTrips(completion: { (_) in
-                SharedTripsController.shared.fetchPlacesForSharedTrips(completion: { (_) in
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                        self.refreshControl.endRefreshing()
-                    }
-                })
-            })
-        })
+        SharedTripsController.shared.fetchSharedTrips { (success) in
+            if success {
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        }
     }
     
     
@@ -88,7 +85,6 @@ extension SharedTripsListViewController: UITableViewDataSource {
         let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
 
         cell.sharedTrip = sharedTrip
-        cell.indexPath = indexPath
         
         return cell
         
