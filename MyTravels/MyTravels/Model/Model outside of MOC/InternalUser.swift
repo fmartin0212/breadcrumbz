@@ -36,12 +36,19 @@ class InternalUser {
             //FIXME profle pic
             else { return nil }
         
+        
         self.firstName = firstName
         self.lastName = lastName
         self.username = username
         self.email = email
-        // FIX ME
-        //        self.profilePicture = photoData
-        // FIX ME - Set UID - Am I going to need this? May be set when user signs in/registers.
+
+        if let photoURL = tripDict["photoURL"] as? String {
+            self.photoURL = photoURL
+            InternalUserController.shared.fetchProfilePhoto(from: photoURL) { (photo) in
+                guard let photo = photo else { return }
+                self.photo = photo
+                NotificationCenter.default.post(Notification(name: Notification.Name("profilePictureUpdatedNotification")))
+            }
+        }
     }
 }

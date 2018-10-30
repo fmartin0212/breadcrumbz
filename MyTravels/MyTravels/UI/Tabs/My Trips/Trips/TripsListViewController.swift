@@ -58,8 +58,11 @@ class TripsListViewController: UIViewController {
     @objc func updateProfilePicture() {
         let image = InternalUserController.shared.loggedInUser!.photo
         let resizedImage = image?.resize(to: CGSize(width: 35, height: 35))
-        profileButton?.setImage(resizedImage, for: .normal)
-        profileButton?.clipsToBounds = true
+        
+        DispatchQueue.main.async {
+            self.profileButton?.setImage(resizedImage, for: .normal)
+            self.profileButton?.clipsToBounds = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

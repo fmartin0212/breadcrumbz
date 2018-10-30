@@ -62,8 +62,8 @@ class InternalUserController {
     }
     
     func saveProfilePhoto(photo: UIImage, for user: InternalUser, completion: @escaping (Bool) -> Void) {
-        let ref = FirebaseManager.ref.child("User").child(user.username).child("photoURL").childByAutoId()
-        let storeRef = FirebaseManager.storeRef.child("User").child(user.username).child("photo").child(ref.key)
+        let ref = FirebaseManager.ref.child("User").child(user.username).child("photoURL")
+        let storeRef = FirebaseManager.storeRef.child("User").child(user.username).child("photo")
         
         guard let imageAsData = UIImagePNGRepresentation(photo) else { completion(false) ; return }
         
@@ -87,5 +87,21 @@ class InternalUserController {
                 completion(true)
             })
         }
+    }
+    
+    func fetchProfilePhoto(from urlAsString: String, completion: @escaping (UIImage?) -> Void) {
+            guard let url = URL(string: urlAsString) else { completion(nil) ; return }
+        
+        let dataTask = URLSession.shared.dataTask(with: url) { (data, _, error) in
+            if let error = error {
+                print("There was an error retrieving the profile photo from Firebase: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+            guard let data = data else { completion(nil) ; return }
+            let image = UIImage(data: data)
+            completion(image)
+        }
+        dataTask.resume()
     }
 }

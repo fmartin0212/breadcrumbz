@@ -32,11 +32,10 @@ class ProfileViewController: UIViewController {
         profilePictureButton.clipsToBounds = true
         profilePictureButton.layer.cornerRadius = 61
         
-        guard let loggedInUserPhoto = InternalUserController.shared.loggedInUser?.photo
-            else { return }
-        
-        profilePictureButton.setImage(loggedInUserPhoto, for: .normal)
-    
+        if let loggedInUserPhoto = InternalUserController.shared.loggedInUser?.photo {
+            profilePictureButton.setBackgroundImage(loggedInUserPhoto, for: .normal)
+            profilePictureButton.setImage(nil, for: .normal)
+        }
     }
     
     @IBAction func profileButtonTapped(_ sender: Any) {
@@ -128,8 +127,5 @@ extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationC
         picker.dismiss(animated: true) {
             self.saveButton.isHidden = false
         }
-        
-//        NotificationCenter.default.post()
     }
-
 }
