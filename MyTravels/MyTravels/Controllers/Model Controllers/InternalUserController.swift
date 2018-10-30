@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import CloudKit
+import FirebaseDatabase
+import FirebaseStorage
 
 class InternalUserController {
     
@@ -60,7 +61,31 @@ class InternalUserController {
         }
     }
     
-//    func saveProfilePhoto(photo: UIImage)
-    
+    func saveProfilePhoto(photo: UIImage, for user: InternalUser, completion: @escaping (Bool) -> Void) {
+        let ref = FirebaseManager.ref.child("User").child(user.username).child("photoURL").childByAutoId()
+        let storeRef = FirebaseManager.storeRef.child("User").child(user.username).child("photo").child(ref.key)
         
+        guard let imageAsData = UIImagePNGRepresentation(photo) else { completion(false) ; return }
+        
+        FirebaseManager.save(data: imageAsData, to: storeRef) { (metadata, error) in
+            if let error = error {
+                print("There was an error saving the profile picture to Firebase: \(error.localizedDescription)")
+                 completion(false)
+                return
+            }
+            
+            user.photoURL = metadata?.downloadURL()?.absoluteString
+            user.photo = photo
+            
+            FirebaseManager.saveSingleObject(metadata?.downloadURL()?.absoluteString as Any, to: ref, completion: { (error) in
+                if let error = error {
+                    print("There was an error saving the photo URL to the Firebase DB: \(error.localizedDescription)")
+                    completion(false)
+                    return
+                }
+                
+                completion(true)
+            })
+        }
+    }
 }

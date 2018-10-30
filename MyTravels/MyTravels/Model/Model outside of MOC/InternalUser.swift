@@ -15,7 +15,7 @@ class InternalUser {
     let lastName: String?
     let username: String
     let email: String
-    var photoURL: URL?
+    var photoURL: String?
     var photo: UIImage?
     
     init(firstName: String, lastName: String?, username: String, email: String) {
