@@ -104,4 +104,8 @@ class InternalUserController {
         }
         dataTask.resume()
     }
+    
+    func blockUserWith(username: String, completion: @escaping (Bool) -> Void) {
+        
+    }
 }

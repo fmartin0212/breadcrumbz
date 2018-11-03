@@ -18,11 +18,12 @@ protocol FirebaseSyncable {
 
 class FirebaseManager {
     
-    // MARK: - Firebase Database
     
     // Constants & Variables
     static var ref: DatabaseReference! = Database.database().reference()
     static var storeRef: StorageReference! = Storage.storage().reference()
+    
+    // MARK: - Firebase Database
     
     static func saveSingleObject(_ object: Any, to databaseReference: DatabaseReference, completion: @escaping (Error?) -> Void) {
         databaseReference.setValue(object) { (error, _) in
@@ -45,6 +46,10 @@ class FirebaseManager {
             }
             completion(nil)
         }
+    }
+    
+    static func removeObject(completion: @escaping (Bool) -> Void) {
+        
     }
     
     static func fetchObject(from ref: DatabaseReference, completion: @escaping (DataSnapshot) -> Void) {

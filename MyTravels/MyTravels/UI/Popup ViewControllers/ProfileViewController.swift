@@ -23,7 +23,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setPropertiesFor(overlayView: overlayView)
         
         tableView.dataSource = self

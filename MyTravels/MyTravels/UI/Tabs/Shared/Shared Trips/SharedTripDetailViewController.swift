@@ -200,3 +200,11 @@ extension SharedTripDetailViewController: UITableViewDelegate, UITableViewDataSo
     }
 }
 
+extension SharedTripDetailViewController {
+    
+    func blockUserWith(username: String, completion: @escaping (Bool) -> Void) {
+        guard let sharedTrip = sharedTrip else { completion(false) ; return }
+        
+        
+    }
+}
