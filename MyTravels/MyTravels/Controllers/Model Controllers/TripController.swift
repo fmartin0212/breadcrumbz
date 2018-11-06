@@ -103,6 +103,15 @@ class TripController {
                 return
             }
             
+            let sharedTripIDRef = FirebaseManager.ref.child("User").child(InternalUserController.shared.loggedInUser!.username).child("sharedTripIDs").child(tripRef.key)
+            let sharedTripIDDict = ["sharedID" : tripRef.key]
+            FirebaseManager.save(object: sharedTripIDDict, to: sharedTripIDRef, completion: { (error) in
+                if let error = error {
+                    print("There was an error saving the shared trip ID to the 'sharer': \(error.localizedDescription)")
+                }
+            })
+            
+            
             // If save to Firebase is successful, save trip's UID locally and to persistent store.
             trip.id = tripRef.key
             CoreDataManager.save()

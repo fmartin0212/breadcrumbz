@@ -106,6 +106,9 @@ class InternalUserController {
     }
     
     func blockUserWith(username: String, completion: @escaping (Bool) -> Void) {
-        
+        let ref =  FirebaseManager.ref.child(username).child("sharedTripIDs")
+        FirebaseManager.fetchObject(from: ref) { (snapshot) in
+            let dicts = snapshot.value as? []
+        }
     }
 }

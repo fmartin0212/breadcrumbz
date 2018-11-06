@@ -48,8 +48,10 @@ class FirebaseManager {
         }
     }
     
-    static func removeObject(completion: @escaping (Bool) -> Void) {
-        
+    static func removeObject(ref: DatabaseReference, completion: @escaping (Error?) -> Void) {
+        ref.removeValue { (error, _) in
+            completion(error)
+        }
     }
     
     static func fetchObject(from ref: DatabaseReference, completion: @escaping (DataSnapshot) -> Void) {
