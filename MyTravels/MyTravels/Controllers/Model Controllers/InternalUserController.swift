@@ -106,9 +106,19 @@ class InternalUserController {
     }
     
     func blockUserWith(username: String, completion: @escaping (Bool) -> Void) {
-        let ref =  FirebaseManager.ref.child(username).child("sharedTripIDs")
+        guard let loggedInUserPartcipantIDs = InternalUserController.shared.loggedInUser!.participantTripIDs else { completion(false) ; return }
+        let ref =  FirebaseManager.ref.child("User").child(username).child("sharedTripIDs")
         FirebaseManager.fetchObject(from: ref) { (snapshot) in
-            let dicts = snapshot.value as? []
+            guard let sharedTripIDDictionary = snapshot.value as? [String : Any] else { completion(false) ; return }
+            let sharedTripIDs = sharedTripIDDictionary.compactMap { $0.key }
+            for participantTripID in loggedInUserPartcipantIDs {
+                if sharedTripIDs.contains(participantTripID) {
+                    guard let index = loggedInUserPartcipantIDs.firstIndex(of: participantTripID) else { completion(false) ; return }
+                    InternalUserController.shared.loggedInUser!.participantTripIDs?.remove(at: index)
+                }
+            }
+            
+            print("break")
         }
     }
 }

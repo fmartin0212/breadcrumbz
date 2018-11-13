@@ -17,6 +17,7 @@ class InternalUser {
     let email: String
     var photoURL: String?
     var photo: UIImage?
+    var participantTripIDs: [String]?
     
     init(firstName: String, lastName: String?, username: String, email: String) {
         self.firstName = firstName
@@ -50,5 +51,11 @@ class InternalUser {
                 NotificationCenter.default.post(Notification(name: Notification.Name("profilePictureUpdatedNotification")))
             }
         }
+        
+        if let participantTripIDDictionary = tripDict["participantTripIDs"] as? [String : Any] {
+            self.participantTripIDs = participantTripIDDictionary.compactMap { $0.key }
+            print("break")
+            }
+        }
     }
-}
+
