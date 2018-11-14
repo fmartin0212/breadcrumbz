@@ -53,9 +53,14 @@ class TripsListViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateProfilePicture), name: TripsListViewController.profilePictureUpdatedNotification, object: nil)
         
 //        updateProfilePicture()
-        InternalUserController.shared.blockUserWith(username: "fmartjn0212") { (success) in
+        TripController.shared.share(trip: TripController.shared.trips[0]
+        , withReceiver: "fmartjn0212") { (_) in
             
         }
+        
+//        InternalUserController.shared.blockUserWith(username: "fmartjn0212") { (success) in
+//
+//        }
         
     }
     

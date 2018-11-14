@@ -127,9 +127,7 @@ class TripController {
     func addTripIDToReceiver(tripID: String, receiver: String, completion: @escaping (Bool) -> Void) {
         let userTripRef = FirebaseManager.ref.child("User").child(receiver).child("participantTripIDs").child(tripID)
         
-        let tripID : [String : Any] = ["tripID" : tripID]
-        
-        FirebaseManager.save(object: tripID, to: userTripRef, completion: { (error) in
+        FirebaseManager.saveSingleObject(tripID, to: userTripRef, completion: { (error) in
             if let error = error {
                 print(error)
                 completion(false)

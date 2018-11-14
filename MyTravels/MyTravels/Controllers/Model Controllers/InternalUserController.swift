@@ -106,19 +106,44 @@ class InternalUserController {
     }
     
     func blockUserWith(username: String, completion: @escaping (Bool) -> Void) {
+       // Unwrap logged in user's participant trip IDs
         guard let loggedInUserPartcipantIDs = InternalUserController.shared.loggedInUser!.participantTripIDs else { completion(false) ; return }
+        
+        // Fetch all the sharedTripIDs for the user that is going to be blocked
         let ref =  FirebaseManager.ref.child("User").child(username).child("sharedTripIDs")
         FirebaseManager.fetchObject(from: ref) { (snapshot) in
             guard let sharedTripIDDictionary = snapshot.value as? [String : Any] else { completion(false) ; return }
             let sharedTripIDs = sharedTripIDDictionary.compactMap { $0.key }
+            
+            
+            // Remove the participantTripIDs for the logged in user if it matches a sharedTripID from the blocked user.
             for participantTripID in loggedInUserPartcipantIDs {
                 if sharedTripIDs.contains(participantTripID) {
                     guard let index = loggedInUserPartcipantIDs.firstIndex(of: participantTripID) else { completion(false) ; return }
-                    InternalUserController.shared.loggedInUser!.participantTripIDs?.remove(at: index)
+                    self.loggedInUser!.participantTripIDs?.remove(at: index)
+                    print("break")
                 }
             }
-            
-            print("break")
+           
+            // Update Firebase
+            let dispatchGroup = DispatchGroup()
+            guard let loggedInUserPartcipantIDs = self.loggedInUser!.participantTripIDs else { completion(false) ; return }
+           
+            for participantTripID in loggedInUserPartcipantIDs {
+                 let ref = FirebaseManager.ref.child("User").child(self.loggedInUser!.username).child("participantTripIDs").child(participantTripID)
+                dispatchGroup.enter()
+                FirebaseManager.saveSingleObject(participantTripID, to: ref, completion: { (error) in
+                    if let error = error {
+                        print("error saving tripID : \(error.localizedDescription)")
+                        completion(false)
+                        return
+                    }
+                    dispatchGroup.leave()
+                })
+            }
+            dispatchGroup.notify(queue: .main, execute: {
+                completion(true)
+            })
         }
     }
 }
