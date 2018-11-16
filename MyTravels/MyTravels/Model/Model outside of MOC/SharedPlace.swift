@@ -15,7 +15,7 @@ class SharedPlace {
     var name: String?
     var rating: Int16?
     var type: String?
-    var photos: [UIImage]?
+    var photos: [UIImage] = []
     var photoURLs: [String]?
 
     init?(dictionary: [String : Any]) {

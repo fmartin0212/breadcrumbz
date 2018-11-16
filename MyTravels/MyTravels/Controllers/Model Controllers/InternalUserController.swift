@@ -27,14 +27,14 @@ class InternalUserController {
             }
             
             guard let firebaseUser = firebaseUser else { completion(false) ; return }
-//            newUser.uid = firebaseUser.uid
+            //            newUser.uid = firebaseUser.uid
             self.loggedInUser = newUser
             
             let internalUserDict: [String : Any] = [ "username" : newUser.username,
-                            "email" : newUser.email,
-                            "firstName" : newUser.firstName,
-                            "lastName" : newUser.lastName ?? ""
-                            ]
+                                                     "email" : newUser.email,
+                                                     "firstName" : newUser.firstName,
+                                                     "lastName" : newUser.lastName ?? ""
+            ]
             
             let ref = FirebaseManager.ref.child("User").child(username)
             FirebaseManager.save(object: internalUserDict, to: ref, completion: { (error) in
@@ -70,7 +70,7 @@ class InternalUserController {
         FirebaseManager.save(data: imageAsData, to: storeRef) { (metadata, error) in
             if let error = error {
                 print("There was an error saving the profile picture to Firebase: \(error.localizedDescription)")
-                 completion(false)
+                completion(false)
                 return
             }
             
@@ -90,7 +90,7 @@ class InternalUserController {
     }
     
     func fetchProfilePhoto(from urlAsString: String, completion: @escaping (UIImage?) -> Void) {
-            guard let url = URL(string: urlAsString) else { completion(nil) ; return }
+        guard let url = URL(string: urlAsString) else { completion(nil) ; return }
         
         let dataTask = URLSession.shared.dataTask(with: url) { (data, _, error) in
             if let error = error {
@@ -106,8 +106,8 @@ class InternalUserController {
     }
     
     func blockUserWith(username: String, completion: @escaping (Bool) -> Void) {
-       // Unwrap logged in user's participant trip IDs
-        guard let loggedInUserPartcipantIDs = InternalUserController.shared.loggedInUser!.participantTripIDs else { completion(false) ; return }
+        // Unwrap logged in user's participant trip IDs
+        guard var loggedInUserPartcipantIDs = InternalUserController.shared.loggedInUser!.participantTripIDs else { completion(false) ; return }
         
         // Fetch all the sharedTripIDs for the user that is going to be blocked
         let ref =  FirebaseManager.ref.child("User").child(username).child("sharedTripIDs")
@@ -120,30 +120,43 @@ class InternalUserController {
             for participantTripID in loggedInUserPartcipantIDs {
                 if sharedTripIDs.contains(participantTripID) {
                     guard let index = loggedInUserPartcipantIDs.firstIndex(of: participantTripID) else { completion(false) ; return }
-                    self.loggedInUser!.participantTripIDs?.remove(at: index)
+                    loggedInUserPartcipantIDs.remove(at: index)
                     print("break")
                 }
             }
-           
             // Update Firebase
-            let dispatchGroup = DispatchGroup()
-            guard let loggedInUserPartcipantIDs = self.loggedInUser!.participantTripIDs else { completion(false) ; return }
-           
-            for participantTripID in loggedInUserPartcipantIDs {
-                 let ref = FirebaseManager.ref.child("User").child(self.loggedInUser!.username).child("participantTripIDs").child(participantTripID)
-                dispatchGroup.enter()
-                FirebaseManager.saveSingleObject(participantTripID, to: ref, completion: { (error) in
+            
+            if loggedInUserPartcipantIDs.count == 0 {
+                let ref = FirebaseManager.ref.child("User").child(self.loggedInUser!.username).child("participantTripIDs").child("placeholder")
+                FirebaseManager.saveSingleObject("placeholder", to: ref, completion: { (error) in
                     if let error = error {
                         print("error saving tripID : \(error.localizedDescription)")
                         completion(false)
                         return
                     }
-                    dispatchGroup.leave()
+                    completion(true)
+                    return
+                })
+            } else {
+                
+                let dispatchGroup = DispatchGroup()
+                for participantTripID in loggedInUserPartcipantIDs {
+                    let ref = FirebaseManager.ref.child("User").child(self.loggedInUser!.username).child("participantTripIDs").child(participantTripID)
+                    dispatchGroup.enter()
+                    FirebaseManager.saveSingleObject(participantTripID, to: ref, completion: { (error) in
+                        if let error = error {
+                            print("error saving tripID : \(error.localizedDescription)")
+                            completion(false)
+                            return
+                        }
+                        dispatchGroup.leave()
+                    })
+                }
+                dispatchGroup.notify(queue: .main, execute: {
+                    self.loggedInUser!.participantTripIDs = loggedInUserPartcipantIDs
+                    completion(true)
                 })
             }
-            dispatchGroup.notify(queue: .main, execute: {
-                completion(true)
-            })
         }
     }
 }

@@ -52,7 +52,7 @@ class SharedPlaceController {
                             let image = UIImage(data: data)
                             else { completion(false) ; return }
                         
-                        sharedPlace.photos?.append(image)
+                        sharedPlace.photos.append(image)
                         
                         dispatchGroup.leave()
                     }
