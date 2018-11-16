@@ -13,10 +13,7 @@ import CloudKit
 import MapKit
 
 @objc(Trip)
-public class Trip: NSManagedObject, FirebaseSyncable {
-    
-    // MARK: - FirebaseSyncable
-    var id: String?
+public class Trip: NSManagedObject {
     
     fileprivate var temporaryPhotoURL: URL {
 

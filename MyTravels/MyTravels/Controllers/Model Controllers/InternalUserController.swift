@@ -106,56 +106,66 @@ class InternalUserController {
     }
     
     func blockUserWith(username: String, completion: @escaping (Bool) -> Void) {
-        // Unwrap logged in user's participant trip IDs
-        guard var loggedInUserPartcipantIDs = InternalUserController.shared.loggedInUser!.participantTripIDs else { completion(false) ; return }
-        
-        // Fetch all the sharedTripIDs for the user that is going to be blocked
-        let ref =  FirebaseManager.ref.child("User").child(username).child("sharedTripIDs")
-        FirebaseManager.fetchObject(from: ref) { (snapshot) in
-            guard let sharedTripIDDictionary = snapshot.value as? [String : Any] else { completion(false) ; return }
-            let sharedTripIDs = sharedTripIDDictionary.compactMap { $0.key }
-            
-            
-            // Remove the participantTripIDs for the logged in user if it matches a sharedTripID from the blocked user.
-            for participantTripID in loggedInUserPartcipantIDs {
-                if sharedTripIDs.contains(participantTripID) {
-                    guard let index = loggedInUserPartcipantIDs.firstIndex(of: participantTripID) else { completion(false) ; return }
-                    loggedInUserPartcipantIDs.remove(at: index)
-                    print("break")
-                }
-            }
-            // Update Firebase
-            
-            if loggedInUserPartcipantIDs.count == 0 {
-                let ref = FirebaseManager.ref.child("User").child(self.loggedInUser!.username).child("participantTripIDs").child("placeholder")
-                FirebaseManager.saveSingleObject("placeholder", to: ref, completion: { (error) in
-                    if let error = error {
-                        print("error saving tripID : \(error.localizedDescription)")
-                        completion(false)
-                        return
-                    }
-                    completion(true)
-                    return
-                })
+        // Add user to loggedInUser's blocked list
+        let blockRef = FirebaseManager.ref.child("User").child(loggedInUser!.username).child("blockedUsernames").child(username)
+        FirebaseManager.saveSingleObject(username, to: blockRef) { (error) in
+            if let error = error {
+                print("There was an error saving the username to the loggedInUser's blockedUser list : \(error.localizedDescription)")
+                completion(false)
+                return
             } else {
+                // Unwrap logged in user's participant trip IDs
+                guard var loggedInUserPartcipantIDs = InternalUserController.shared.loggedInUser!.participantTripIDs else { completion(false) ; return }
                 
-                let dispatchGroup = DispatchGroup()
-                for participantTripID in loggedInUserPartcipantIDs {
-                    let ref = FirebaseManager.ref.child("User").child(self.loggedInUser!.username).child("participantTripIDs").child(participantTripID)
-                    dispatchGroup.enter()
-                    FirebaseManager.saveSingleObject(participantTripID, to: ref, completion: { (error) in
-                        if let error = error {
-                            print("error saving tripID : \(error.localizedDescription)")
-                            completion(false)
-                            return
+                // Fetch all the sharedTripIDs for the user that is going to be blocked
+                let ref =  FirebaseManager.ref.child("User").child(username).child("sharedTripIDs")
+                FirebaseManager.fetchObject(from: ref) { (snapshot) in
+                    guard let sharedTripIDDictionary = snapshot.value as? [String : Any] else { completion(false) ; return }
+                    let sharedTripIDs = sharedTripIDDictionary.compactMap { $0.key }
+                    
+                    
+                    // Remove the participantTripIDs for the logged in user if it matches a sharedTripID from the blocked user.
+                    for participantTripID in loggedInUserPartcipantIDs {
+                        if sharedTripIDs.contains(participantTripID) {
+                            guard let index = loggedInUserPartcipantIDs.firstIndex(of: participantTripID) else { completion(false) ; return }
+                            loggedInUserPartcipantIDs.remove(at: index)
+                            print("break")
                         }
-                        dispatchGroup.leave()
-                    })
+                    }
+                    // Update Firebase
+                    
+                    if loggedInUserPartcipantIDs.count == 0 {
+                        let ref = FirebaseManager.ref.child("User").child(self.loggedInUser!.username).child("participantTripIDs")
+                        FirebaseManager.removeObject(ref: ref, completion: { (error) in
+                            if let error = error {
+                                print("error saving tripID : \(error.localizedDescription)")
+                                completion(false)
+                                return
+                            }
+                            completion(true)
+                            return
+                        })
+                    } else {
+                        
+                        let dispatchGroup = DispatchGroup()
+                        for participantTripID in loggedInUserPartcipantIDs {
+                            let ref = FirebaseManager.ref.child("User").child(self.loggedInUser!.username).child("participantTripIDs").child(participantTripID)
+                            dispatchGroup.enter()
+                            FirebaseManager.saveSingleObject(participantTripID, to: ref, completion: { (error) in
+                                if let error = error {
+                                    print("error saving tripID : \(error.localizedDescription)")
+                                    completion(false)
+                                    return
+                                }
+                                dispatchGroup.leave()
+                            })
+                        }
+                        dispatchGroup.notify(queue: .main, execute: {
+                            self.loggedInUser!.participantTripIDs = loggedInUserPartcipantIDs
+                            completion(true)
+                        })
+                    }
                 }
-                dispatchGroup.notify(queue: .main, execute: {
-                    self.loggedInUser!.participantTripIDs = loggedInUserPartcipantIDs
-                    completion(true)
-                })
             }
         }
     }

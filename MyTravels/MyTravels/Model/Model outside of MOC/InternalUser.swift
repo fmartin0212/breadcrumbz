@@ -18,6 +18,7 @@ class InternalUser {
     var photoURL: String?
     var photo: UIImage?
     var participantTripIDs: [String]?
+    var blockedUsernames: [String]?
     
     init(firstName: String, lastName: String?, username: String, email: String) {
         self.firstName = firstName
@@ -42,7 +43,7 @@ class InternalUser {
         self.lastName = lastName
         self.username = username
         self.email = email
-
+        
         if let photoURL = tripDict["photoURL"] as? String {
             self.photoURL = photoURL
             InternalUserController.shared.fetchProfilePhoto(from: photoURL) { (photo) in
@@ -52,10 +53,14 @@ class InternalUser {
             }
         }
         
-        if let participantTripIDDictionary = tripDict["participantTripIDs"] as? [String : Any] {
-            self.participantTripIDs = participantTripIDDictionary.compactMap { $0.key }
-            print("break")
-            }
+        if let participantTripIDs = tripDict["participantTripIDs"] as? [String : Any] {
+            self.participantTripIDs = participantTripIDs.compactMap { $0.key }
         }
+        
+        if let blockedUsernames = tripDict["blockedUsernames"] as? [String : Any] {
+            self.blockedUsernames = blockedUsernames.compactMap { $0.key }
+        }
+        
     }
+}
 

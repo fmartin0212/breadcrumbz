@@ -60,7 +60,7 @@ class PhotoController {
     // MARK: - Firebase
     
     func savePhotos(for trip: Trip, completion: @escaping (Bool) -> Void) {
-        let storeRef = FirebaseManager.storeRef.child("Trip").child(trip.id!)
+        let storeRef = FirebaseManager.storeRef.child("Trip").child(trip.uid!)
         saveTripPhoto(trip: trip, storeRef: storeRef) { (success) in
             if success {
                 self.savePlacePhotos(for: trip, to: storeRef, completion: { (success) in
@@ -84,7 +84,7 @@ class PhotoController {
                     
                     for photo in photos {
                         
-                        let photoDBRef = FirebaseManager.ref.child("Trip").child(trip.id!).child("places").child(place.name).child("photoURLs").childByAutoId()
+                        let photoDBRef = FirebaseManager.ref.child("Trip").child(trip.uid!).child("places").child(place.name).child("photoURLs").childByAutoId()
                         let photoRef = storeRef.child("Places").child(place.name).child(photoDBRef.key)
                         
                         guard let photoData = photo.photo
