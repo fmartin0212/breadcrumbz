@@ -155,7 +155,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         let createAccountAction = UIAlertAction(title: "Create account", style: .default) { (_) in
             let sb = UIStoryboard(name: "Onboarding", bundle: nil)
             let createAccountVC = sb.instantiateViewController(withIdentifier: "SignUp")
-            //            createAccountVC.sk
+
             self.present(createAccountVC, animated: true, completion: nil)
         }
         

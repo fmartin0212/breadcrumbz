@@ -33,7 +33,6 @@ class SharedTripDetailViewController: UIViewController {
         if let photo = sharedTrip.photo {
             tripPhoto = photo
         }
-        navigationController?.navigationItem.rightBarButtonItem = nil
 
         sharedTripPhotoImageView.image = tripPhoto
         
@@ -205,6 +204,12 @@ extension SharedTripDetailViewController {
     func blockUserWith(username: String, completion: @escaping (Bool) -> Void) {
         guard let sharedTrip = sharedTrip else { completion(false) ; return }
         
-        
+        InternalUserController.shared.blockUserWith(username: username) { (success) in
+            if success {
+                completion(true)
+            } else {
+                // Handle error UI
+            }
+        }
     }
 }
