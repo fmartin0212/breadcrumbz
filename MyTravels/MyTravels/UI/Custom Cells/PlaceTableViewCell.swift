@@ -106,8 +106,8 @@ class PlaceTableViewCell: UITableViewCell {
         guard let sharedPlace = sharedPlace
             else { return }
         
-        if let sharedPlacePhotos = sharedPlace.photos, sharedPlacePhotos.count > 0 {
-            let mainPhoto = sharedPlacePhotos[0]
+        if sharedPlace.photos.count > 0 {
+            let mainPhoto = sharedPlace.photos[0]
             placeImageView.image = mainPhoto
             placeNameLabel.text = sharedPlace.name
             placeAddressLabel.text = sharedPlace.address

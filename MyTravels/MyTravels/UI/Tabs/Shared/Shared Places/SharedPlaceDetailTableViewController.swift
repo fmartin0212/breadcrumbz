@@ -53,9 +53,9 @@ class SharedPlaceDetailTableViewController: UITableViewController {
         guard let sharedPlace = sharedPlace
             else { return }
         
-        if let photos = sharedPlace.photos, photos.count > 0 {
-            guard let photo = photos.first else { return }
-            sharedPlaceMainPhotoImageView.image = photo
+        if sharedPlace.photos.count > 0 {
+            guard let mainPhoto = sharedPlace.photos.first else { return }
+            sharedPlaceMainPhotoImageView.image = mainPhoto
             sharedPlaceNameLabel.text = sharedPlace.name
             sharedPlaceAddressLabel.text = sharedPlace.address
             updateStarsImageViews(sharedPlace: sharedPlace)
@@ -113,11 +113,10 @@ extension SharedPlaceDetailTableViewController: UICollectionViewDelegate, UIColl
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        guard let sharedPlace = sharedPlace,
-            let sharedPlacePhotos = sharedPlace.photos
+        guard let sharedPlace = sharedPlace
             else { return 0 }
         
-        return sharedPlacePhotos.count
+        return sharedPlace.photos.count
         
     }
     
@@ -125,11 +124,10 @@ extension SharedPlaceDetailTableViewController: UICollectionViewDelegate, UIColl
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
         
-        guard let sharedPlace = sharedPlace,
-            let sharedPlacePhotos = sharedPlace.photos
+        guard let sharedPlace = sharedPlace
             else { return UICollectionViewCell() }
         
-        cell.sharedPlacePhoto = sharedPlacePhotos[indexPath.row]
+        cell.sharedPlacePhoto = sharedPlace.photos[indexPath.row]
         
         return cell
     }

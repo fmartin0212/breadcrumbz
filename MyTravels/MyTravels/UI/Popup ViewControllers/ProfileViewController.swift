@@ -23,7 +23,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setPropertiesFor(overlayView: overlayView)
         
         tableView.dataSource = self
@@ -32,11 +32,10 @@ class ProfileViewController: UIViewController {
         profilePictureButton.clipsToBounds = true
         profilePictureButton.layer.cornerRadius = 61
         
-        guard let loggedInUserPhoto = InternalUserController.shared.loggedInUser?.photo
-            else { return }
-        
-        profilePictureButton.setImage(loggedInUserPhoto, for: .normal)
-    
+        if let loggedInUserPhoto = InternalUserController.shared.loggedInUser?.photo {
+            profilePictureButton.setBackgroundImage(loggedInUserPhoto, for: .normal)
+            profilePictureButton.setImage(nil, for: .normal)
+        }
     }
     
     @IBAction func profileButtonTapped(_ sender: Any) {
@@ -52,12 +51,12 @@ class ProfileViewController: UIViewController {
             let updatedProfileImage = profilePictureButton.backgroundImage(for: .normal)
             else { return }
         
-        let ref = FirebaseManager.ref.child(loggedInUser.username).child("photoURL").childByAutoId()
-        let storeRef = FirebaseManager.storeRef.child("User").child(loggedInUser.username).child("photo").child(ref.key)
-        
-        
-        
-        
+        InternalUserController.shared.saveProfilePhoto(photo: updatedProfileImage, for: loggedInUser) { (success) in
+            if success {
+                NotificationCenter.default.post(Notification(name: Notification.Name("profilePictureUpdatedNotification")))
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
     
     @IBAction func tapGestureRecognized(_ sender: Any) {
@@ -128,8 +127,5 @@ extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationC
         picker.dismiss(animated: true) {
             self.saveButton.isHidden = false
         }
-        
-//        NotificationCenter.default.post()
     }
-
 }

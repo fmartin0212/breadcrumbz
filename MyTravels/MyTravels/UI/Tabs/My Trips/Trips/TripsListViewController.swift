@@ -32,24 +32,11 @@ class TripsListViewController: UIViewController {
         let nib = UINib(nibName: "TripCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TripCell")
      
+        setupLeftBarButton()
+        
         // Set tableview properties
         tableView.separatorStyle = .none
-        
-        let button = UIButton(type: .custom)
-        let image = UIImage(named: "user2")
-        let resizedImage = resizeImage(image: image!, targetSize: CGSize(width: 30, height: 30))
-        button.setImage(resizedImage, for: .normal)
-        button.clipsToBounds = true
-        button.layer.cornerRadius = button.bounds.size.width / 2
-        button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
-        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        profileButton = button
-        
-        let barButton = UIBarButtonItem(customView: button)
-        //assign button to navigationbar
-        self.navigationItem.leftBarButtonItem = barButton
-        
-        
+       
         // Set delegates
         tableView.dataSource = self
         tableView.delegate = self
@@ -66,18 +53,18 @@ class TripsListViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateProfilePicture), name: TripsListViewController.profilePictureUpdatedNotification, object: nil)
         
 //        updateProfilePicture()
+//
+        
     }
     
     @objc func updateProfilePicture() {
-        let button = UIButton(type: .custom)
-        let image = UIImage(named: "user2")
-        let resizedImage = resizeImage(image: image!, targetSize: CGSize(width: 30, height: 30))
-        button.setImage(resizedImage, for: .normal)
-        button.clipsToBounds = true
-        button.layer.cornerRadius = button.bounds.size.width / 2
-        button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
-        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        profileButton = button
+        let image = InternalUserController.shared.loggedInUser!.photo
+        let resizedImage = image?.resize(to: CGSize(width: 35, height: 35))
+        
+        DispatchQueue.main.async {
+            self.profileButton?.setImage(resizedImage, for: .normal)
+            self.profileButton?.clipsToBounds = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,9 +76,7 @@ class TripsListViewController: UIViewController {
                 self.navigationItem.rightBarButtonItem = addTripBarButtonItem
         }
     }
-    
-    // MARK: - Functions
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
@@ -119,6 +104,40 @@ class TripsListViewController: UIViewController {
             let trip = trips[indexPath.row]
             destinationVC.trip = trip
         }
+    }
+}
+
+extension TripsListViewController {
+    
+    private func presentNoTripsView() {
+        view.addSubview(noTripsView)
+        noTripsView.isHidden = false
+        noTripsView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint(item: noTripsView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: noTripsView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: noTripsView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: noTripsView, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
+        
+        self.navigationItem.rightBarButtonItem = nil
+        addATripButton.clipsToBounds = true
+        addATripButton.layer.cornerRadius = 25
+    }
+    
+    private func setupLeftBarButton() {
+        let button = UIButton(type: .custom)
+        let image = InternalUserController.shared.loggedInUser?.photo != nil ? InternalUserController.shared.loggedInUser?.photo : UIImage(named: "user")
+        let resizedImage = image?.resize(to: CGSize(width: 35, height: 35))
+        button.setImage(resizedImage, for: .normal)
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 17.5
+        button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        profileButton = button
+        
+        let barButton = UIBarButtonItem(customView: button)
+        //assign button to navigationbar
+        self.navigationItem.leftBarButtonItem = barButton
     }
 }
 
@@ -190,91 +209,4 @@ extension TripsListViewController: NSFetchedResultsControllerDelegate {
     }
 }
 
-extension TripsListViewController {
-    
-    private func presentNoTripsView() {
-        view.addSubview(noTripsView)
-        noTripsView.isHidden = false
-        noTripsView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: noTripsView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: noTripsView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: noTripsView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: noTripsView, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-        
-        self.navigationItem.rightBarButtonItem = nil
-        addATripButton.clipsToBounds = true
-        addATripButton.layer.cornerRadius = 25
-    }
-}
 
-extension UIImage {
-    
-    func resizeImage(_ dimension: CGFloat, opaque: Bool, contentMode: UIViewContentMode = .scaleAspectFit) -> UIImage {
-        var width: CGFloat
-        var height: CGFloat
-        var newImage: UIImage
-        
-        let size = self.size
-        let aspectRatio =  size.width/size.height
-        
-        switch contentMode {
-        case .scaleAspectFit:
-            if aspectRatio > 1 {                            // Landscape image
-                width = dimension
-                height = dimension / aspectRatio
-            } else {                                        // Portrait image
-                height = dimension
-                width = dimension * aspectRatio
-            }
-            
-        default:
-            fatalError("UIIMage.resizeToFit(): FATAL: Unimplemented ContentMode")
-        }
-        
-        if #available(iOS 10.0, *) {
-            let renderFormat = UIGraphicsImageRendererFormat.default()
-            renderFormat.opaque = opaque
-            let renderer = UIGraphicsImageRenderer(size: CGSize(width: width, height: height), format: renderFormat)
-            newImage = renderer.image {
-                (context) in
-                self.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
-            }
-        } else {
-            UIGraphicsBeginImageContextWithOptions(CGSize(width: width, height: height), opaque, 0)
-            self.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
-            newImage = UIGraphicsGetImageFromCurrentImageContext()!
-            UIGraphicsEndImageContext()
-        }
-        
-        return newImage
-    }
-}
-
-extension TripsListViewController {
-    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / size.width
-        let heightRatio = targetSize.height / size.height
-        
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
-        }
-        
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage!
-    }
-}

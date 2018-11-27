@@ -139,7 +139,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
                 else { return }
             TripController.shared.share(trip: trip, withReceiver: receiver, completion: { (success) in
                 if success {}
-                })
+            })
         }
         alertController.addAction(shareAction)
         alertController.addAction(cancelAction)
@@ -155,7 +155,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         let createAccountAction = UIAlertAction(title: "Create account", style: .default) { (_) in
             let sb = UIStoryboard(name: "Onboarding", bundle: nil)
             let createAccountVC = sb.instantiateViewController(withIdentifier: "SignUp")
-            //            createAccountVC.sk
+
             self.present(createAccountVC, animated: true, completion: nil)
         }
         
@@ -263,7 +263,7 @@ extension TripDetailViewController: UITableViewDelegate {
         if section > 1 {
             guard let placeArray = array as? [[Place]],
                 let firstItemInArray = placeArray[section - 2].first
-//                let firstItemInArrayType = firstItemInArray.type
+                //                let firstItemInArrayType = firstItemInArray.type
                 else { return UIView() }
             
             if firstItemInArray.type == "Lodging" {

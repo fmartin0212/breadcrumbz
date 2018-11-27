@@ -47,3 +47,12 @@ extension Date {
         return date
     }
 }
+
+extension UIImage {
+    func resize(to newSize: CGSize) -> UIImage? {
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+        return renderer.image { rendererContext in
+            draw(in: CGRect(origin: .zero, size: newSize))
+        }
+    }
+}

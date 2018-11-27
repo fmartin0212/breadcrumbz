@@ -34,8 +34,6 @@ class SharedPlaceController {
         
         let dispatchGroup  = DispatchGroup()
         for sharedPlace in sharedPlaces {
-            var placeImages: [UIImage] = []
-            sharedPlace.photos = placeImages
            
             if let photoURLs = sharedPlace.photoURLs {
                 for urlAsString in photoURLs {
@@ -54,7 +52,7 @@ class SharedPlaceController {
                             let image = UIImage(data: data)
                             else { completion(false) ; return }
                         
-                        sharedPlace.photos?.append(image)
+                        sharedPlace.photos.append(image)
                         
                         dispatchGroup.leave()
                     }
