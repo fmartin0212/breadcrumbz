@@ -28,6 +28,7 @@ class TripsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         let nib = UINib(nibName: "TripCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TripCell")
@@ -46,6 +47,13 @@ class TripsListViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         addTripBarButtonItem.format()
         TripController.shared.fetchAllTrips()
+        
+        
+//        for trip in TripController.shared.trips {
+//            trip.uid = nil
+//            CoreDataManager.save()
+//        }
+        
         if TripController.shared.trips.count == 0 {
             self.presentNoTripsView()
         }

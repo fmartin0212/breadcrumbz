@@ -123,7 +123,6 @@ class InternalUserController {
                     guard let sharedTripIDDictionary = snapshot.value as? [String : Any] else { completion(false) ; return }
                     let sharedTripIDs = sharedTripIDDictionary.compactMap { $0.key }
                     
-                    
                     // Remove the participantTripIDs for the logged in user if it matches a sharedTripID from the blocked user.
                     for participantTripID in loggedInUserPartcipantIDs {
                         if sharedTripIDs.contains(participantTripID) {
@@ -132,16 +131,21 @@ class InternalUserController {
                             print("break")
                         }
                     }
-                    // Update Firebase
                     
+                    // Update Firebase
+                    // If loggedInUserPartcipantIDs.count is 0, then all of the user's shared trips were from the blocked user; therefore, this node can be removed altogether.
                     if loggedInUserPartcipantIDs.count == 0 {
                         let ref = FirebaseManager.ref.child("User").child(self.loggedInUser!.username).child("participantTripIDs")
                         FirebaseManager.removeObject(ref: ref, completion: { (error) in
                             if let error = error {
                                 print("error saving tripID : \(error.localizedDescription)")
-                                completion(false)
+                                complettion(false)
                                 return
                             }
+                            
+                            let sharedTrips = SharedTripsController.shared.sharedTrips.filter { $0.creatorUsername != username }
+                            SharedTripsController.shared.sharedTrips = sharedTrips
+                            
                             completion(true)
                             return
                         })
@@ -160,7 +164,12 @@ class InternalUserController {
                                 dispatchGroup.leave()
                             })
                         }
+                        
+                  
                         dispatchGroup.notify(queue: .main, execute: {
+                            let sharedTrips = SharedTripsController.shared.sharedTrips.filter { $0.creatorUsername != username }
+                            SharedTripsController.shared.sharedTrips = sharedTrips
+                            
                             self.loggedInUser!.participantTripIDs = loggedInUserPartcipantIDs
                             completion(true)
                         })

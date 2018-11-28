@@ -13,6 +13,26 @@ class SharedTripDetailViewController: UIViewController {
     // MARK: - Properties
     var sharedTrip: SharedTrip?
     var sharedPlaces: [[SharedPlace]]?
+    let rightBarButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("...", for: .normal)
+//        let attributedString = NSAttributedString(string: "...", attributes: [NSAttributedStringKey.font : UIFont(name: "AvenirNext", size: 22)])
+//        button.setAttributedTitle(attributedString, for: .normal)
+//        button.setAttributedTitle(attributedString, for: .highlighted)
+        return button
+    }()
+    
+    lazy var loadingView: UIView = {
+        var view = UIView(frame: CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y, width: self.view.frame.width * 0.10, height: self.view.frame.height * 0.10))
+        
+        view.backgroundColor = .black
+        view.layer.opacity = 0.3
+        
+        let loadingLabel = UILabel()
+        loadingLabel.text = "Loading"
+        view.addSubview(loadingLabel)
+        return view
+    }()
     
     // MARK: - IBOutlets
     @IBOutlet var sharedTripPhotoImageView: UIImageView!
@@ -20,9 +40,9 @@ class SharedTripDetailViewController: UIViewController {
     @IBOutlet weak var actionButton: UIBarButtonItem!
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
+        rightBarButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
         guard let sharedTrip = sharedTrip else { return }
     
         // Set shared trip photo
@@ -112,7 +132,6 @@ class SharedTripDetailViewController: UIViewController {
             let sharedPlace = sharedPlaces[indexPath.section - 1][indexPath.row]
             destinationVC.sharedTrip = sharedTrip
             destinationVC.sharedPlace = sharedPlace
-            
         }
     }
 }
@@ -201,7 +220,7 @@ extension SharedTripDetailViewController: UITableViewDelegate, UITableViewDataSo
 
 extension SharedTripDetailViewController {
     
-    func blockUserWith(username: String, completion: @escaping (Bool) -> Void) {
+    private func blockUserWith(username: String, completion: @escaping (Bool) -> Void) {
         guard let sharedTrip = sharedTrip else { completion(false) ; return }
         
         InternalUserController.shared.blockUserWith(username: username) { (success) in
@@ -211,5 +230,39 @@ extension SharedTripDetailViewController {
                 // Handle error UI
             }
         }
+    }
+    
+    @objc func actionButtonTapped() {
+        
+        let actionAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let blockUserAction = UIAlertAction(title: "Block user", style: .default) { (_) in
+            let confirmationAlertController = UIAlertController(title: nil, message: "Are you sure you want to block this user?", preferredStyle: .alert)
+            
+            let blockAction = UIAlertAction(title: "Block", style: .destructive, handler: { (_) in
+                
+                self.view.addSubview(self.loadingView)
+                
+                InternalUserController.shared.blockUserWith(username: self.sharedTrip!.creatorUsername, completion: { (success) in
+                    if success {
+                        DispatchQueue.main.async {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                })
+            })
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+            
+            confirmationAlertController.addAction(blockAction)
+            confirmationAlertController.addAction(cancelAction)
+            
+            self.present(confirmationAlertController, animated: true, completion: nil)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        actionAlertController.addAction(blockUserAction)
+        actionAlertController.addAction(cancelAction)
+        self.present(actionAlertController, animated: true, completion: nil)
+        
     }
 }

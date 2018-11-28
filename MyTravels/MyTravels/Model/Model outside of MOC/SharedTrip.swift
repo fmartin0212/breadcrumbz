@@ -18,6 +18,7 @@ class SharedTrip {
     let startDate: Date
     let endDate: Date
     let creatorName: String
+    let creatorUsername: String
     var photo: UIImage?
     var places: [SharedPlace] = []
     var isAcceptedTrip: Bool = true
@@ -33,7 +34,8 @@ class SharedTrip {
             let tripDescription = tripDictionary["tripDescription"] as? String?,
             let startDate = tripDictionary["startDate"] as? TimeInterval,
             let endDate = tripDictionary["endDate"] as? TimeInterval,
-            let creator = tripDictionary["creatorName"] as? String
+            let creator = tripDictionary["creatorName"] as? String,
+            let creatorUsername = tripDictionary["creatorUsername"] as? String
             else { return nil }
         
         self.name = name
@@ -42,6 +44,7 @@ class SharedTrip {
         self.startDate = Date(timeIntervalSince1970: startDate)
         self.endDate = Date(timeIntervalSince1970: endDate)
         self.creatorName = creator
+        self.creatorUsername = creatorUsername
         
         SharedPlaceController.parsePlacesFrom(tripDictionary: tripDictionary) { (places) in
             self.places = places
