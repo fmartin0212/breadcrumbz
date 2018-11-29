@@ -39,8 +39,8 @@ class TripDetailTableViewCell: UITableViewCell {
         tripNameLabel.text = trip.name
         tripLocationLabel.text = trip.location
         tripStartDateLabel.text = "\((trip.startDate as Date).short()) -"
-        tripEndDateLabel.text =  "\(trip.endDate)"
-        tripDescriptionLabel.text = trip.description
+        tripEndDateLabel.text = (trip.endDate as Date).short()
+        tripDescriptionLabel.text = trip.tripDescription ?? ""
         
     }
     
@@ -49,17 +49,7 @@ class TripDetailTableViewCell: UITableViewCell {
         
         tripLocationLabel.text = sharedTrip.location
         tripStartDateLabel.text = "\((sharedTrip.startDate as Date).short()) -"
-        tripEndDateLabel.text = (sharedTrip.endDate as Date).short()
-        
-    }
-    
-    func shortDateString(date: Date) -> String {
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        let date = dateFormatter.string(from: date)
-        
-        return date
+        tripEndDateLabel.text = "\((sharedTrip.endDate as Date).short())"
         
     }
 }

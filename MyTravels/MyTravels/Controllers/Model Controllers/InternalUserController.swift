@@ -139,7 +139,7 @@ class InternalUserController {
                         FirebaseManager.removeObject(ref: ref, completion: { (error) in
                             if let error = error {
                                 print("error saving tripID : \(error.localizedDescription)")
-                                complettion(false)
+                                completion(false)
                                 return
                             }
                             
