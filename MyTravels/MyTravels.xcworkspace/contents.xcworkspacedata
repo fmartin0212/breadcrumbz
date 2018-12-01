@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:MyTravels/UI/Custom Cells/SignIn.xib">
+   </FileRef>
+   <FileRef
       location = "group:MyTravels.xcodeproj">
    </FileRef>
    <FileRef

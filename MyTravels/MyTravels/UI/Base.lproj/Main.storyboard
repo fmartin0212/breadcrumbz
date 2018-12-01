@@ -1216,19 +1216,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mIx-ap-912">
                                 <rect key="frame" x="47" y="143.5" width="281" height="400"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RA5-cx-POg">
-                                        <rect key="frame" x="78.5" y="51" width="124" height="124"/>
-                                        <color key="backgroundColor" red="1" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="124" id="Hju-yE-87m"/>
-                                            <constraint firstAttribute="width" constant="124" id="cmf-ea-PGO"/>
-                                        </constraints>
-                                        <inset key="contentEdgeInsets" minX="50" minY="50" maxX="50" maxY="50"/>
-                                        <state key="normal" image="user"/>
-                                        <connections>
-                                            <action selector="profileButtonTapped:" destination="GlI-HB-7cO" eventType="touchUpInside" id="09a-H6-mwN"/>
-                                        </connections>
-                                    </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IMP-qy-VbO">
                                         <rect key="frame" x="0.0" y="217" width="281" height="183"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1260,6 +1247,19 @@
                                         </state>
                                         <connections>
                                             <action selector="saveButtonTapped:" destination="GlI-HB-7cO" eventType="touchUpInside" id="y98-yg-CMO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RA5-cx-POg">
+                                        <rect key="frame" x="78.5" y="51" width="124" height="124"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="124" id="Hju-yE-87m"/>
+                                            <constraint firstAttribute="width" constant="124" id="cmf-ea-PGO"/>
+                                        </constraints>
+                                        <inset key="contentEdgeInsets" minX="50" minY="50" maxX="50" maxY="50"/>
+                                        <state key="normal" image="user"/>
+                                        <connections>
+                                            <action selector="profileButtonTapped:" destination="GlI-HB-7cO" eventType="touchUpInside" id="09a-H6-mwN"/>
                                         </connections>
                                     </button>
                                 </subviews>

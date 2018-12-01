@@ -93,6 +93,10 @@ extension SignUpViewController {
         
     }
     
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
@@ -106,24 +110,32 @@ extension SignUpViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "entryCell", for: indexPath) as? TextFieldTableViewCell else { return UITableViewCell() }
+        
         cell.entryTextField.returnKeyType = .next
+        cell.entryTextField.addKeyboardDone(targetVC: self, selector: #selector(dismissKeyboard))
         
         switch indexPath.row {
         case 0:
             cell.entryTextField.placeholder = "First name"
+            cell.entryTextField.textContentType = UITextContentType.givenName
         case 1:
             cell.entryTextField.placeholder = "Last name (optional)"
+              cell.entryTextField.textContentType = UITextContentType.familyName
         case 2:
             cell.entryTextField.placeholder = "Username"
         case 3:
             cell.entryTextField.placeholder = "Email"
+            cell.entryTextField.textContentType = UITextContentType.emailAddress
+            cell.entryTextField.keyboardType = .emailAddress
         case 4:
             cell.entryTextField.placeholder = "Password"
+            cell.entryTextField.textContentType = UITextContentType.password
+            cell.entryTextField.isSecureTextEntry = true
         case 5:
             cell.entryTextField.placeholder = "Confirm Password"
+            cell.entryTextField.textContentType = UITextContentType.password
+            cell.entryTextField.isSecureTextEntry = true
             cell.entryTextField.returnKeyType = .done
-//        case 5:
-//            cell.entryTextField.isHidden = true
         default:
             break
         }
