@@ -29,7 +29,6 @@ class TripsListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         let nib = UINib(nibName: "TripCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TripCell")
      
@@ -90,10 +89,15 @@ class TripsListViewController: UIViewController {
     }
     
     @objc func profileButtonTapped() {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let profileVC = sb.instantiateViewController(withIdentifier: "profileVC")
-        UIView.animate(withDuration: 2) {
-            self.present(profileVC, animated: true, completion: nil)
+        
+        if let _ = InternalUserController.shared.loggedInUser {
+            let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "profileVC")
+            UIView.animate(withDuration: 2) {
+                self.present(profileVC, animated: true, completion: nil)
+            }
+        } else {
+            let signUpVC = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "SignUp")
+            self.present(signUpVC, animated: true, completion: nil)
         }
     }
     

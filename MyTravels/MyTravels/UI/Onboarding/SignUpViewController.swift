@@ -10,8 +10,13 @@ import UIKit
 
 class SignUpViewController: UIViewController {
 
+    // MARK: - Constants & Variables
+    var logIn: Bool = false
+    
+    // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var skipButtonTapped: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +31,6 @@ class SignUpViewController: UIViewController {
         self.tableView.frame = frame
     }
 
-    // MARK: - Outlets
-    @IBOutlet weak var skipButtonTapped: UIButton!
-
     // MARK: - Actions
     @IBAction func skipButtonTapped(_ sender: Any) {
         presentTripListVC()
@@ -37,6 +39,12 @@ class SignUpViewController: UIViewController {
     @IBAction func signUpButtonTapped(_ sender: Any) {
         UserDefaults.standard.setValue(true, forKey: "userSkippedSignUp")
         createNewAccount()
+    }
+    
+    @IBAction func logInButtonTapped(_ sender: Any) {
+        logIn = !logIn
+        
+        self.tableView.reloadData()
     }
 }
 
@@ -105,6 +113,9 @@ extension SignUpViewController {
 extension SignUpViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if logIn == true {
+            return 2
+        }
         return 6
     }
     
