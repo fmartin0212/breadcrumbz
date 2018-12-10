@@ -22,9 +22,13 @@ class TripsListViewController: UIViewController {
     
     // MARK: - Constants & Variables
     var profileButton: UIButton?
-    
-    // FIXME - Put this in a 'Constants' file
-    static let profilePictureUpdatedNotification = Notification.Name("profilePictureUpdatedNotification")
+    var fromSignUpVC = false {
+        didSet {
+            fetchUserInfo { (success) in
+                NotificationCenter.default.post(name: Constants.profilePictureUpdatedNotif, object: nil)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +61,7 @@ class TripsListViewController: UIViewController {
             self.presentNoTripsView()
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateProfilePicture), name: TripsListViewController.profilePictureUpdatedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateProfilePicture), name: Constants.profilePictureUpdatedNotif, object: nil)
         
 //        updateProfilePicture()
 //
@@ -150,6 +154,24 @@ extension TripsListViewController {
         let barButton = UIBarButtonItem(customView: button)
         //assign button to navigationbar
         self.navigationItem.leftBarButtonItem = barButton
+    }
+    
+    private func fetchUserInfo(completion: @escaping (Bool) -> Void) {
+        // FIXME: UI needs to show loading animation/indicator
+        guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(false) ; return }
+        SharedTripsController.shared.fetchSharedTrips { (success) in
+            if success {
+                NotificationCenter.default.post(name: Constants.sharedTripsReceivedNotif, object: nil)
+                if let photoURL = loggedInUser.photoURL {
+                    InternalUserController.shared.fetchProfilePhoto(from: photoURL, completion: { (photo) in
+                        DispatchQueue.main.async {
+                            self.updateProfilePicture()
+                            completion(true)
+                        }
+                    })
+                }
+            } else { completion(false) }
+        }
     }
 }
 

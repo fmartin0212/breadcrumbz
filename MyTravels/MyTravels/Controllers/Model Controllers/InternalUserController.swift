@@ -61,6 +61,25 @@ class InternalUserController {
         }
     }
     
+    func login(withEmail email: String, password: String, completion: @escaping (Error?) -> Void) {
+        FirebaseManager.login(withEmail: email, and: password) { (firebaseUser, error) in
+            if let error = error {
+                // FIXME : Need better error handling
+                print("Error logging in Firebase user : \(error.localizedDescription)")
+                    completion(error)
+                return
+            } else {
+                guard let username = firebaseUser?.displayName else { completion(nil) ; return }
+                let ref = FirebaseManager.ref.child("User").child(username)
+                FirebaseManager.fetchObject(from: ref, completion: { (snapshot) in
+                    guard let loggedInUser = InternalUser(snapshot: snapshot) else { completion(nil) ; return }
+                    self.loggedInUser = loggedInUser
+                    completion(nil)
+                })
+            }
+        }
+    }
+    
     func saveProfilePhoto(photo: UIImage, for user: InternalUser, completion: @escaping (Bool) -> Void) {
         let ref = FirebaseManager.ref.child("User").child(user.username).child("photoURL")
         let storeRef = FirebaseManager.storeRef.child("User").child(user.username).child("photo")

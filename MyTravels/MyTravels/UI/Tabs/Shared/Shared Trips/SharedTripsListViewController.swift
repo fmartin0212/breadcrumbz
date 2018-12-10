@@ -19,8 +19,8 @@ class SharedTripsListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        
+        refreshControl.addTarget(self, action: #selector(fetchSharedTrips), for: .valueChanged)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Constants.sharedTripsReceivedNotif, object: nil)
         // Set tableview properties
         tableView.separatorStyle = .none
         
@@ -42,15 +42,38 @@ class SharedTripsListViewController: UIViewController {
         view.endEditing(true)
     }
     
-    @objc func refresh() {
+    @objc func fetchSharedTrips() {
         SharedTripsController.shared.fetchSharedTrips { (success) in
             if success {
-                self.tableView.reloadData()
-                self.refreshControl.endRefreshing()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.refreshControl.endRefreshing()                    
+                }
             }
         }
     }
     
+    @objc func refreshTableView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func setupLeftBarButton() {
+        let button = UIButton(type: .custom)
+        let image = InternalUserController.shared.loggedInUser?.photo != nil ? InternalUserController.shared.loggedInUser?.photo : UIImage(named: "user")
+        let resizedImage = image?.resize(to: CGSize(width: 35, height: 35))
+        button.setImage(resizedImage, for: .normal)
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 17.5
+        button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        profileButton = button
+        
+        let barButton = UIBarButtonItem(customView: button)
+        //assign button to navigationbar
+        self.navigationItem.leftBarButtonItem = barButton
+    }
     
     // MARK: - Navigation
     
@@ -76,7 +99,6 @@ class SharedTripsListViewController: UIViewController {
 }
 
 extension SharedTripsListViewController: UITableViewDataSource {
-
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return SharedTripsController.shared.sharedTrips.count

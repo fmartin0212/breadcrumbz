@@ -176,7 +176,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csM-4g-pzI">
-                                <rect key="frame" x="140" y="469" width="95" height="38"/>
+                                <rect key="frame" x="100" y="474" width="175" height="38"/>
                                 <color key="backgroundColor" red="0.1696610677" green="0.32706386389999997" blue="0.72726690770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
@@ -188,13 +188,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8MA-F8-cUd">
-                                <rect key="frame" x="179.5" y="515" width="16" height="21"/>
+                                <rect key="frame" x="179.5" y="520" width="16" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="duA-ZN-2de">
-                                <rect key="frame" x="166.5" y="544" width="42" height="30"/>
+                                <rect key="frame" x="166.5" y="549" width="42" height="30"/>
                                 <state key="normal" title="Log in"/>
                                 <connections>
                                     <action selector="logInButtonTapped:" destination="9ph-Lb-1Q9" eventType="touchUpInside" id="P4e-BQ-KgE"/>
@@ -207,19 +207,22 @@
                             <constraint firstItem="iXf-l7-Ol4" firstAttribute="top" secondItem="ukb-a5-RJS" secondAttribute="bottom" constant="18" id="40A-Vk-vzK"/>
                             <constraint firstItem="duA-ZN-2de" firstAttribute="centerX" secondItem="8MA-F8-cUd" secondAttribute="centerX" id="6o2-lB-xQR"/>
                             <constraint firstItem="ukb-a5-RJS" firstAttribute="top" secondItem="jx5-Qf-78x" secondAttribute="top" constant="80" id="6yO-yy-Etq"/>
-                            <constraint firstItem="csM-4g-pzI" firstAttribute="top" secondItem="iXf-l7-Ol4" secondAttribute="bottom" id="Flw-N7-TS5"/>
+                            <constraint firstItem="jx5-Qf-78x" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="csM-4g-pzI" secondAttribute="trailing" constant="100" id="DaJ-3R-BCs"/>
                             <constraint firstItem="duA-ZN-2de" firstAttribute="top" secondItem="8MA-F8-cUd" secondAttribute="bottom" constant="8" id="MaJ-sG-Gda"/>
                             <constraint firstItem="jx5-Qf-78x" firstAttribute="trailing" secondItem="ZoF-35-6hK" secondAttribute="trailing" constant="24" id="QvR-oJ-Bds"/>
                             <constraint firstItem="ZoF-35-6hK" firstAttribute="top" secondItem="jx5-Qf-78x" secondAttribute="top" constant="10" id="SZ2-bd-ili"/>
+                            <constraint firstItem="csM-4g-pzI" firstAttribute="leading" relation="lessThanOrEqual" secondItem="jx5-Qf-78x" secondAttribute="leading" constant="100" id="huk-Ju-8nu"/>
                             <constraint firstItem="ukb-a5-RJS" firstAttribute="centerX" secondItem="jx5-Qf-78x" secondAttribute="centerX" id="mS4-wE-Gx8"/>
                             <constraint firstItem="iXf-l7-Ol4" firstAttribute="leading" secondItem="jx5-Qf-78x" secondAttribute="leading" id="oIe-hC-M7H"/>
                             <constraint firstItem="8MA-F8-cUd" firstAttribute="centerX" secondItem="csM-4g-pzI" secondAttribute="centerX" id="qP8-HG-HGs"/>
                             <constraint firstItem="jx5-Qf-78x" firstAttribute="trailing" secondItem="iXf-l7-Ol4" secondAttribute="trailing" id="rDO-tt-NJW"/>
                             <constraint firstItem="8MA-F8-cUd" firstAttribute="top" secondItem="csM-4g-pzI" secondAttribute="bottom" constant="8" id="tEt-hW-exb"/>
+                            <constraint firstItem="csM-4g-pzI" firstAttribute="top" secondItem="iXf-l7-Ol4" secondAttribute="bottom" constant="5" id="uFN-ZF-IaY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jx5-Qf-78x"/>
                     </view>
                     <connections>
+                        <outlet property="loginButton" destination="duA-ZN-2de" id="DMN-Zv-UbE"/>
                         <outlet property="signUpButton" destination="csM-4g-pzI" id="lqA-8u-Ai0"/>
                         <outlet property="skipButtonTapped" destination="ZoF-35-6hK" id="U4N-hN-kfD"/>
                         <outlet property="tableView" destination="iXf-l7-Ol4" id="lYU-cO-Xgt"/>
