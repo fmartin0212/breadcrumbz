@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CloudKit
 import FirebaseDatabase
 
 class SharedTrip {

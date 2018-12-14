@@ -25,7 +25,6 @@ extension Trip {
     @NSManaged public var uid: String?
     @NSManaged public var photo: Photo?
     @NSManaged public var places: NSSet?
-    @NSManaged public var usersSharedWithRecordIDs: NSSet?
 
 }
 
@@ -43,22 +42,5 @@ extension Trip {
 
     @objc(removePlaces:)
     @NSManaged public func removeFromPlaces(_ values: NSSet)
-
-}
-
-// MARK: Generated accessors for usersSharedWithRecordIDs
-extension Trip {
-
-    @objc(addUsersSharedWithRecordIDsObject:)
-    @NSManaged public func addToUsersSharedWithRecordIDs(_ value: UsersSharedWithRecordIDs)
-
-    @objc(removeUsersSharedWithRecordIDsObject:)
-    @NSManaged public func removeFromUsersSharedWithRecordIDs(_ value: UsersSharedWithRecordIDs)
-
-    @objc(addUsersSharedWithRecordIDs:)
-    @NSManaged public func addToUsersSharedWithRecordIDs(_ values: NSSet)
-
-    @objc(removeUsersSharedWithRecordIDs:)
-    @NSManaged public func removeFromUsersSharedWithRecordIDs(_ values: NSSet)
 
 }
