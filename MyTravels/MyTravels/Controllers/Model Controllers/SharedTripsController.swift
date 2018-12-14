@@ -8,16 +8,16 @@
 
 import Foundation
 import CoreData
-import CloudKit
 
 class SharedTripsController {
     
+    // MARK: - Properties
     static var shared = SharedTripsController()
     var sharedTrips: [SharedTrip] = []
-    var pendingSharedTrips = [SharedTrip]()
-    var acceptedSharedTrips = [SharedTrip]()
-    
     var sharedIDs = [String]()
+}
+
+extension SharedTripsController {
     
     func fetchSharedTrips(completion: @escaping (Bool) -> Void) {
         guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(false) ; return }
@@ -27,7 +27,7 @@ class SharedTripsController {
             guard let participantTripIDDictionaries = snapshot.value as? [String : String] else { completion(false) ; return }
             
             let dispatchGroup = DispatchGroup()
-          
+            
             for (tripID, _) in participantTripIDDictionaries {
                 dispatchGroup.enter()
                 
@@ -52,24 +52,5 @@ class SharedTripsController {
                 completion(true)
             })
         }
-    }
-    
-    func fetchUsersPendingSharedTrips(completion: @escaping (Bool) -> Void) { 
-        
-        }
-
-    func fetchAcceptedSharedTrips(completion: @escaping (Bool) -> Void) {
-     
-    }
-    
-    func fetchPlacesForSharedTrips(completion: @escaping (Bool) -> Void) {
-      
-    }
-    
-    func accept(sharedTrip: SharedTrip, at indexPath: IndexPath, completion: @escaping (Bool) -> Void) {
-      
-    }
-    
-    func deny(sharedTrip: SharedTrip, at indexPath: IndexPath, completion: @escaping (Bool) -> Void) {
     }
 }

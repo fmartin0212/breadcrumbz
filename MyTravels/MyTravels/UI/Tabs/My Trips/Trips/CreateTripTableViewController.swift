@@ -11,6 +11,7 @@ import UIKit
 class CreateTripTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // MARK: - Properties
+    
     var startDate: Date?
     var endDate: Date?
     var photo: Data?
@@ -48,6 +49,7 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
     }
     
     // MARK: - Actions
+    
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }

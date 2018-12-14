@@ -18,5 +18,4 @@ class FeaturesViewController: UIViewController {
         UserDefaults.standard.setValue(true, forKey: "userSkippedSignUp")
         presentTripListVC()
     }
-    
 }

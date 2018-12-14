@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import CloudKit
 import FirebaseDatabase
 import FirebaseStorage
 
