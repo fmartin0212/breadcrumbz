@@ -10,17 +10,19 @@ import UIKit
 
 class SharedTripsListViewController: UIViewController {
     
-    // MARK: - IBOutlets
+    // MARK: - Properties
     
     @IBOutlet weak var profileBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     private let refreshControl = UIRefreshControl()
+    private var profileButton: UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         refreshControl.addTarget(self, action: #selector(fetchSharedTrips), for: .valueChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Constants.sharedTripsReceivedNotif, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateProfilePicture), name: Constants.profilePictureUpdatedNotif, object: nil)
         // Set tableview properties
         tableView.separatorStyle = .none
         
@@ -29,6 +31,7 @@ class SharedTripsListViewController: UIViewController {
         tableView.delegate = self
         
         tableView.refreshControl = refreshControl
+        setupLeftBarButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,7 +75,31 @@ class SharedTripsListViewController: UIViewController {
         
         let barButton = UIBarButtonItem(customView: button)
         //assign button to navigationbar
+        self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.leftBarButtonItem = barButton
+    }
+    
+    @objc func profileButtonTapped() {
+        
+        if let _ = InternalUserController.shared.loggedInUser {
+            let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "profileVC")
+            UIView.animate(withDuration: 2) {
+                self.present(profileVC, animated: true, completion: nil)
+            }
+        } else {
+            let signUpVC = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "SignUp")
+            self.present(signUpVC, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func updateProfilePicture() {
+        let image = InternalUserController.shared.loggedInUser!.photo
+        let resizedImage = image?.resize(to: CGSize(width: 35, height: 35))
+        
+        DispatchQueue.main.async {
+            self.profileButton?.setImage(resizedImage, for: .normal)
+            self.profileButton?.clipsToBounds = true
+        }
     }
     
     // MARK: - Navigation
@@ -99,9 +126,9 @@ class SharedTripsListViewController: UIViewController {
 }
 
 extension SharedTripsListViewController: UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return SharedTripsController.shared.sharedTrips.count
+        return SharedTripsController.shared.sharedTrips.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -110,19 +137,19 @@ extension SharedTripsListViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         
         let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
-
+        
         cell.sharedTrip = sharedTrip
         
         return cell
         
-        }
     }
+}
 
 extension SharedTripsListViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
-
+        
         let sb = UIStoryboard(name: "Main", bundle: nil)
         guard let sharedTripDetailVC = sb.instantiateViewController(withIdentifier: "sharedTripDetail") as? SharedTripDetailViewController else { return }
         sharedTripDetailVC.sharedTrip = sharedTrip

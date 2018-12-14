@@ -18,7 +18,8 @@ class FetchViewController: UIViewController {
 //            print(user?.displayName)
 //        }
 //
-        try? Auth.auth().signOut()
+//        try? Auth.auth().signOut()
+        
 
         UserDefaults.standard.setValue(false, forKey: "userSkippedSignUp")
         
