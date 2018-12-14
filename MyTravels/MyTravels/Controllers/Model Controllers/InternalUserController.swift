@@ -61,6 +61,25 @@ class InternalUserController {
         }
     }
     
+    func login(withEmail email: String, password: String, completion: @escaping (Error?) -> Void) {
+        FirebaseManager.login(withEmail: email, and: password) { (firebaseUser, error) in
+            if let error = error {
+                // FIXME : Need better error handling
+                print("Error logging in Firebase user : \(error.localizedDescription)")
+                    completion(error)
+                return
+            } else {
+                guard let username = firebaseUser?.displayName else { completion(nil) ; return }
+                let ref = FirebaseManager.ref.child("User").child(username)
+                FirebaseManager.fetchObject(from: ref, completion: { (snapshot) in
+                    guard let loggedInUser = InternalUser(snapshot: snapshot) else { completion(nil) ; return }
+                    self.loggedInUser = loggedInUser
+                    completion(nil)
+                })
+            }
+        }
+    }
+    
     func saveProfilePhoto(photo: UIImage, for user: InternalUser, completion: @escaping (Bool) -> Void) {
         let ref = FirebaseManager.ref.child("User").child(user.username).child("photoURL")
         let storeRef = FirebaseManager.storeRef.child("User").child(user.username).child("photo")
@@ -123,7 +142,6 @@ class InternalUserController {
                     guard let sharedTripIDDictionary = snapshot.value as? [String : Any] else { completion(false) ; return }
                     let sharedTripIDs = sharedTripIDDictionary.compactMap { $0.key }
                     
-                    
                     // Remove the participantTripIDs for the logged in user if it matches a sharedTripID from the blocked user.
                     for participantTripID in loggedInUserPartcipantIDs {
                         if sharedTripIDs.contains(participantTripID) {
@@ -132,8 +150,9 @@ class InternalUserController {
                             print("break")
                         }
                     }
-                    // Update Firebase
                     
+                    // Update Firebase
+                    // If loggedInUserPartcipantIDs.count is 0, then all of the user's shared trips were from the blocked user; therefore, this node can be removed altogether.
                     if loggedInUserPartcipantIDs.count == 0 {
                         let ref = FirebaseManager.ref.child("User").child(self.loggedInUser!.username).child("participantTripIDs")
                         FirebaseManager.removeObject(ref: ref, completion: { (error) in
@@ -142,6 +161,10 @@ class InternalUserController {
                                 completion(false)
                                 return
                             }
+                            
+                            let sharedTrips = SharedTripsController.shared.sharedTrips.filter { $0.creatorUsername != username }
+                            SharedTripsController.shared.sharedTrips = sharedTrips
+                            
                             completion(true)
                             return
                         })
@@ -160,7 +183,12 @@ class InternalUserController {
                                 dispatchGroup.leave()
                             })
                         }
+                        
+                  
                         dispatchGroup.notify(queue: .main, execute: {
+                            let sharedTrips = SharedTripsController.shared.sharedTrips.filter { $0.creatorUsername != username }
+                            SharedTripsController.shared.sharedTrips = sharedTrips
+                            
                             self.loggedInUser!.participantTripIDs = loggedInUserPartcipantIDs
                             completion(true)
                         })

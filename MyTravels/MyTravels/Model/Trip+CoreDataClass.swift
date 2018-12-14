@@ -22,7 +22,8 @@ public class Trip: NSManagedObject {
         let temporaryDirectoryURL = URL(fileURLWithPath: temporaryDirectory)
         let fileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
         
-        guard let photo = self.photo?.photo else { return fileURL }
+        guard let photo =
+            self.photo?.photo else { return fileURL }
         
         try? photo.write(to: fileURL, options: [.atomic])
         

@@ -22,13 +22,18 @@ class TripsListViewController: UIViewController {
     
     // MARK: - Constants & Variables
     var profileButton: UIButton?
-    
-    // FIXME - Put this in a 'Constants' file
-    static let profilePictureUpdatedNotification = Notification.Name("profilePictureUpdatedNotification")
+    var fromSignUpVC = false {
+        didSet {
+            fetchUserInfo { (success) in
+                NotificationCenter.default.post(name: Constants.profilePictureUpdatedNotif, object: nil)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
         let nib = UINib(nibName: "TripCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TripCell")
      
@@ -46,15 +51,29 @@ class TripsListViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         addTripBarButtonItem.format()
         TripController.shared.fetchAllTrips()
-        if TripController.shared.trips.count == 0 {
-            self.presentNoTripsView()
-        }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateProfilePicture), name: TripsListViewController.profilePictureUpdatedNotification, object: nil)
+        
+//        for trip in TripController.shared.trips {
+//            trip.uid = nil
+//            CoreDataManager.save()
+//        }
+        
+//        if TripController.shared.trips.count == 0 {
+//            self.presentNoTripsView()
+//        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateProfilePicture), name: Constants.profilePictureUpdatedNotif, object: nil)
         
 //        updateProfilePicture()
-//
-        
+
+        let loadingView = LoadingView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: view.frame.height))
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loadingView)
+        view.bringSubview(toFront: loadingView)
+        NSLayoutConstraint(item: loadingView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: loadingView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: loadingView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: loadingView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
     }
     
     @objc func updateProfilePicture() {
@@ -82,10 +101,15 @@ class TripsListViewController: UIViewController {
     }
     
     @objc func profileButtonTapped() {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let profileVC = sb.instantiateViewController(withIdentifier: "profileVC")
-        UIView.animate(withDuration: 2) {
-            self.present(profileVC, animated: true, completion: nil)
+        
+        if let _ = InternalUserController.shared.loggedInUser {
+            let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "profileVC")
+            UIView.animate(withDuration: 2) {
+                self.present(profileVC, animated: true, completion: nil)
+            }
+        } else {
+            let signUpVC = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "SignUp")
+            self.present(signUpVC, animated: true, completion: nil)
         }
     }
     
@@ -138,6 +162,24 @@ extension TripsListViewController {
         let barButton = UIBarButtonItem(customView: button)
         //assign button to navigationbar
         self.navigationItem.leftBarButtonItem = barButton
+    }
+    
+    private func fetchUserInfo(completion: @escaping (Bool) -> Void) {
+        // FIXME: UI needs to show loading animation/indicator
+        guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(false) ; return }
+        SharedTripsController.shared.fetchSharedTrips { (success) in
+            if success {
+                NotificationCenter.default.post(name: Constants.sharedTripsReceivedNotif, object: nil)
+                if let photoURL = loggedInUser.photoURL {
+                    InternalUserController.shared.fetchProfilePhoto(from: photoURL, completion: { (photo) in
+                        DispatchQueue.main.async {
+                            self.updateProfilePicture()
+                            completion(true)
+                        }
+                    })
+                }
+            } else { completion(false) }
+        }
     }
 }
 

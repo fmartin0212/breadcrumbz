@@ -21,6 +21,7 @@ class SharedTripsController {
     
     func fetchSharedTrips(completion: @escaping (Bool) -> Void) {
         guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(false) ; return }
+        self.sharedTrips = []
         let ref = FirebaseManager.ref.child("User").child(loggedInUser.username).child("participantTripIDs")
         FirebaseManager.fetchObject(from: ref) { (snapshot) in
             guard let participantTripIDDictionaries = snapshot.value as? [String : String] else { completion(false) ; return }

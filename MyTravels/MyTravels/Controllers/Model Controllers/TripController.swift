@@ -98,6 +98,7 @@ class TripController {
                 "startDate" : trip.startDate.timeIntervalSince1970,
                 "endDate" : trip.endDate.timeIntervalSince1970,
                 "creatorName" : creatorName,
+                "creatorUsername" : loggedInUser.username,
                 "places" : PlaceController.shared.createPlaces(for: trip)
             ]
             
@@ -116,7 +117,6 @@ class TripController {
                     }
                 })
                 
-                
                 // If save to Firebase is successful, save trip's UID locally and to persistent store.
                 trip.uid = tripRef.key
                 CoreDataManager.save()
@@ -128,7 +128,6 @@ class TripController {
                 })
             }
         }
-        
     }
     
     func addTripIDToReceiver(tripID: String, receiver: String, completion: @escaping (Bool) -> Void) {

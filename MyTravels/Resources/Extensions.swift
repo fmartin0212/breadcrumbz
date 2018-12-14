@@ -56,3 +56,23 @@ extension UIImage {
         }
     }
 }
+
+extension UITextField {
+    
+    func addKeyboardDone(targetVC: UIViewController, selector: Selector ) {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: targetVC, action: selector)
+        
+        toolbar.setItems([flexibleSpace, doneButton], animated: false)
+        
+        self.inputAccessoryView = toolbar
+        
+    }
+//    Causes invalid instance sent to selector crash
+//    @objc func dismissKeyboard(targetVC: UIViewController) {
+//        targetVC.view.endEditing(true)
+//    }
+}

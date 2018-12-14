@@ -14,21 +14,14 @@ class FetchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        for trip in TripController.shared.trips {
-//         trip.id = nil
-//        }
-//
 //        Auth.auth().signIn(withEmail: "fmartjn0212@gmail.com", password: "Spaceship11!") { (user, error) in
 //            print(user?.displayName)
 //        }
 //
 //        try? Auth.auth().signOut()
-//        let ref = FirebaseManager.ref.child(InternalUserController.shared.loggedInUser!.username).child("participants")
-//        FirebaseManager.fetch(from: <#T##DatabaseReference#>, completion: <#T##(DataSnapshot) -> Void#>)
         
-         UserDefaults.standard.setValue(false, forKey: "userSkippedSignUp")
-        
-        
+
+        UserDefaults.standard.setValue(false, forKey: "userSkippedSignUp")
         
         if UserDefaults.standard.value(forKey: "userSkippedSignUp") == nil {
             UserDefaults.standard.setValue(false, forKey: "userSkippedSignUp")
