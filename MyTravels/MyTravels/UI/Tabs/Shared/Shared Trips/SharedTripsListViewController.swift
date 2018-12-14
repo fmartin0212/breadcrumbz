@@ -32,6 +32,7 @@ class SharedTripsListViewController: UIViewController {
         
         tableView.refreshControl = refreshControl
         setupLeftBarButton()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

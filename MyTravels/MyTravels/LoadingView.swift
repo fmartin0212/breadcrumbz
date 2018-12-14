@@ -11,22 +11,18 @@ class LoadingView: UIView {
 
     // MARK: - Properties
     
-    @IBOutlet weak var blackSquareView: UIView!
+    @IBOutlet weak var blackView: UIView!
     @IBOutlet weak var loadingLabel: UILabel!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-//        blackSquareView.layer.cornerRadius = 7
-//        blackSquareView.layer.opacity =
+        blackView.layer.cornerRadius = 7
+        blackView.layer.opacity = 0.3
         
-//        self.backgroundColor = nil
+        self.backgroundColor = nil
+    }
+    
+    deinit {
+        print("hi")
     }
 }
