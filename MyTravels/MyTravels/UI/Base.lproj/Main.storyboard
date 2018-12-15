@@ -2406,12 +2406,17 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="123" height="126"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TF4-7L-B7a">
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TF4-7L-B7a">
                                                                         <rect key="frame" x="0.0" y="0.0" width="123" height="126"/>
-                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     </imageView>
                                                                 </subviews>
                                                             </view>
+                                                            <constraints>
+                                                                <constraint firstItem="TF4-7L-B7a" firstAttribute="leading" secondItem="fn7-ff-hWx" secondAttribute="leading" id="CwY-ti-SdZ"/>
+                                                                <constraint firstAttribute="trailing" secondItem="TF4-7L-B7a" secondAttribute="trailing" id="YG3-ck-kiH"/>
+                                                                <constraint firstItem="TF4-7L-B7a" firstAttribute="top" secondItem="fn7-ff-hWx" secondAttribute="top" id="vOg-rV-3fd"/>
+                                                                <constraint firstAttribute="bottom" secondItem="TF4-7L-B7a" secondAttribute="bottom" id="vXl-em-loY"/>
+                                                            </constraints>
                                                             <connections>
                                                                 <outlet property="photoImageView" destination="TF4-7L-B7a" id="tgh-VL-lOv"/>
                                                             </connections>

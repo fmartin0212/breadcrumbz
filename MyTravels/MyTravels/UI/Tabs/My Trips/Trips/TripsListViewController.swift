@@ -20,11 +20,14 @@ class TripsListViewController: UIViewController {
     @IBOutlet weak var profileBarButtonItem: UIBarButtonItem!
     
     // MARK: - Constants & Variables
+    
     var profileButton: UIButton?
     var fromSignUpVC = false {
         didSet {
+            let loadingView = enableLoadingState()
             fetchUserInfo { (success) in
                 NotificationCenter.default.post(name: Constants.profilePictureUpdatedNotif, object: nil)
+                self.disableLoadingState(loadingView)
             }
         }
     }
@@ -49,7 +52,6 @@ class TripsListViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         addTripBarButtonItem.format()
         TripController.shared.fetchAllTrips()
-        
         
 //        for trip in TripController.shared.trips {
 //            trip.uid = nil

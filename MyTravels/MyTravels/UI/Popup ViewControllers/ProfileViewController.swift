@@ -47,6 +47,11 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+        
+        // Present the loading view
+        let loadingView = self.presentLoadingView()
+        loadingView.loadingLabel.text = "Saving"
+        
         guard let loggedInUser = InternalUserController.shared.loggedInUser,
             let updatedProfileImage = profilePictureButton.backgroundImage(for: .normal)
             else { return }
@@ -54,6 +59,7 @@ class ProfileViewController: UIViewController {
         InternalUserController.shared.saveProfilePhoto(photo: updatedProfileImage, for: loggedInUser) { (success) in
             if success {
                 NotificationCenter.default.post(Notification(name: Notification.Name("profilePictureUpdatedNotification")))
+                loadingView.removeFromSuperview()
                 self.dismiss(animated: true, completion: nil)
             }
         }

@@ -57,6 +57,9 @@ extension SignUpViewController {
     
     func createNewAccount() {
         
+        let loadingView = self.enableLoadingState()
+        loadingView.loadingLabel.text = "Creating account"
+        
         let firstNameCellIndexPath = IndexPath(row: 0, section: 0)
         let firstNameCell = (tableView.cellForRow(at: firstNameCellIndexPath)) as! TextFieldTableViewCell
         guard let firstName = firstNameCell.entryTextField.text, !firstName.isEmpty else { return }
@@ -85,8 +88,10 @@ extension SignUpViewController {
         if password == passwordConf {
             InternalUserController.shared.createNewUserWith(firstName: firstName, lastName: lastName, username: username, email: email, password: password) { (success) in
                 if success {
+                    self.disableLoadingState(loadingView)
                     self.presentTripListVC()
                 } else {
+                    self.disableLoadingState(loadingView)
                     let alertController = UIAlertController(title: "Something went wrong.", message: "Please try again.", preferredStyle: .alert)
                     let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                     alertController.addAction(OKAction)
@@ -94,6 +99,7 @@ extension SignUpViewController {
             }
         }
         else {
+            self.disableLoadingState(loadingView)
             let alertController = UIAlertController(title: "Oops!", message: "Your passwords do not match -- please re-enter your passwords", preferredStyle: .alert)
             let OKAction = UIAlertAction(title: "OK", style: .default, handler: { (_) in
                 passwordCell.entryTextField.text = ""
@@ -106,6 +112,9 @@ extension SignUpViewController {
     }
     
     func signIn() {
+        
+        let loadingView = enableLoadingState()
+        loadingView.loadingLabel.text = "Logging in"
         
         let emailCellIndexPath = IndexPath(row: 0, section: 0)
         let emailCell = (tableView.cellForRow(at: emailCellIndexPath)) as! TextFieldTableViewCell
@@ -122,6 +131,7 @@ extension SignUpViewController {
                 return
             }
             DispatchQueue.main.async {
+                self.disableLoadingState(loadingView)
                 let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController
                 let tripListVC = ((tabBarController?.customizableViewControllers?.first! as! UINavigationController).viewControllers.first!) as! TripsListViewController
                 tripListVC.fromSignUpVC = true
