@@ -34,12 +34,53 @@ extension UIViewController {
         let tripListNavigationController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
         self.present(tripListNavigationController, animated: true, completion: nil)
     }
+    
+    @discardableResult func presentLoadingView() -> LoadingView {
+        
+        // Initialize the loading view.
+        let loadingView: LoadingView = UIView.fromNib()
+        
+        // Add view and bring it to the front of the superview.
+        view.addSubview(loadingView)
+        view.bringSubview(toFront: loadingView)
+   
+        // Add constraints
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint(item: loadingView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: loadingView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: loadingView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: loadingView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+        
+        return loadingView
+    }
+    
+    func toggleEnabledNavBarItems() {
+        guard let navigationController = navigationController else { return }
+        navigationController.navigationBar.isUserInteractionEnabled = !navigationController.navigationBar.isUserInteractionEnabled
+    }
+    
+    func toggleEnabledTabBarItems() {
+        guard let tabBarController = tabBarController else { return }
+        tabBarController.tabBar.isUserInteractionEnabled = !tabBarController.tabBar.isUserInteractionEnabled
+    }
+    
+    @discardableResult func enableLoadingState() -> LoadingView {
+        let loadingView = presentLoadingView()
+        toggleEnabledNavBarItems()
+        toggleEnabledTabBarItems()
+        return loadingView
+    }
+    
+    func disableLoadingState(_ loadingView: LoadingView) {
+        toggleEnabledNavBarItems()
+        toggleEnabledTabBarItems()
+        loadingView.removeFromSuperview()
+    }
 }
 
 extension Date {
     
     func short() -> String {
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
         let date = dateFormatter.string(from: self)
@@ -49,6 +90,7 @@ extension Date {
 }
 
 extension UIImage {
+    
     func resize(to newSize: CGSize) -> UIImage? {
         let renderer = UIGraphicsImageRenderer(size: newSize)
         return renderer.image { rendererContext in
@@ -69,10 +111,12 @@ extension UITextField {
         toolbar.setItems([flexibleSpace, doneButton], animated: false)
         
         self.inputAccessoryView = toolbar
-        
     }
-//    Causes invalid instance sent to selector crash
-//    @objc func dismissKeyboard(targetVC: UIViewController) {
-//        targetVC.view.endEditing(true)
-//    }
+}
+
+extension UIView {
+    
+    static func fromNib<T: UIView>() -> T {
+        return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)!.first! as! T
+    }
 }

@@ -136,8 +136,12 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
             guard let trip = self.trip,
                 let receiver = alertController.textFields?[0].text
                 else { return }
+            let loadingView = self.enableLoadingState()
+            loadingView.loadingLabel.text = "Sharing"
             TripController.shared.share(trip: trip, withReceiver: receiver, completion: { (success) in
-                if success {}
+                if success {
+                    self.disableLoadingState(loadingView)
+                }
             })
         }
         alertController.addAction(shareAction)

@@ -13,6 +13,7 @@ import FirebaseDatabase
 class TripController {
     
     // MARK: - Properties
+    
     static var shared = TripController()
     var frc: NSFetchedResultsController<Trip> = {
         let fetchRequest: NSFetchRequest<Trip> = Trip.fetchRequest()
@@ -21,23 +22,51 @@ class TripController {
         
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
     }()
-    
     var trip: Trip?
     var trips: [Trip] = []
     
     // MARK: - CRUD Functions
-    // Create
-    func createTripWith(name: String, location: String, tripDescription: String?, startDate: Date, endDate: Date) {
+    
+    /**
+     Initializes a Trip object into the Managed Object Context, and saves it to the persistent store.
+     - parameter name: The name of the trip.
+     - parameter location: The location of the trip.
+     - parameter tripDescription: An optional description of the trip.
+     - parameter startDate: The start date of the trip.
+     - parameter endDate: The end date of the trip.
+    */
+    func createTripWith(name: String,
+                        location: String,
+                        tripDescription: String?,
+                        startDate: Date,
+                        endDate: Date) {
+        
+        // Initialize a trip
         let trip = Trip(name: name, location: location, tripDescription: tripDescription, startDate: startDate, endDate: endDate)
+        
+        // Set the shared instance's global trip reference
         self.trip = trip
+        
+        // Save to Core Data
         CoreDataManager.save()
     }
-
+    
+    /**
+     Deletes a trip from the Core Data persistent store.
+     - parameter trip: The trip to be deleted.
+    */
     func delete(trip: Trip) {
+        
+        // Delete from Core Data
         CoreDataManager.delete(object: trip)
     }
     
+    /**
+     Calls a fetch on the fetched results controller and returns all of the Trips from the persistent store.
+    */
     func fetchAllTrips() {
+        
+        // Perform the fetch
         do {
             try frc.performFetch()
         } catch {
@@ -45,13 +74,23 @@ class TripController {
         }
         
         guard let trips = frc.fetchedObjects else { return }
+        
+        // Set the shared instance's trips array
         self.trips = trips
     }
     
-    func share(trip: Trip, withReceiver receiver: String, completion: @escaping (Bool) -> Void) {
+    /**
+     Shares a trip with another user.
+     - parameter trip: The trip being shared.
+     - parameter withReceiver: The username that is receiving the trip.
+     -
+    */
+    func share(trip: Trip,
+               withReceiver receiver: String,
+               completion: @escaping (Bool) -> Void) {
         
+        // Check for a logged in user
         guard let loggedInUser = InternalUserController.shared.loggedInUser else { return completion(false) }
-        // PRESENT ALERT CONTROLLER OR CREATE ACCOUNT
         
         // Check to see if the receiver has blocked the loggedInUser
         self.checkIfBlocked(receiver) { (isBlocked) in
@@ -59,6 +98,7 @@ class TripController {
                 completion(false)
                 return
             }
+            
             if let tripID = trip.uid {
                 
                 // Trip has already been saved to the database, only a child needs to be saved on the receiver.
@@ -73,7 +113,7 @@ class TripController {
                 
             } else {
                 
-                // Trip has not been saved in the database, so we need to save a new Trip child and a child on the receiver.
+                // Trip has not been saved to the database, so we need to save a new Trip child and a child on the receiver.
                 let creatorName = loggedInUser.firstName + " " + (loggedInUser.lastName ?? "")
                 
                 upload(trip: trip, creatorName: creatorName) { (success) in
@@ -89,8 +129,16 @@ class TripController {
             }
         }
         
-        func upload(trip: Trip, creatorName: String, completion: @escaping (Bool) -> Void) {
+        /**
+         Creates a dictionary from the trip's properties and the trip creator's name. Creates a Firebase reference for a new child node under 'Trip.' Calls on the Firebase Manager to have the trip uploaded.
+         - parameter trip: The trip to be uploaded.
+         - parameter creatorName: The username of the trip creator.
+        */
+        func upload(trip: Trip,
+                    creatorName: String,
+                    completion: @escaping (Bool) -> Void) {
             
+            // Initialize a dictionary based on the trip's properties and the trip creator's name.
             let tripDict: [String : Any?] = [
                 "name" : trip.name,
                 "location" : trip.location,

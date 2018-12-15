@@ -20,11 +20,14 @@ class TripsListViewController: UIViewController {
     @IBOutlet weak var profileBarButtonItem: UIBarButtonItem!
     
     // MARK: - Constants & Variables
+    
     var profileButton: UIButton?
     var fromSignUpVC = false {
         didSet {
+            let loadingView = enableLoadingState()
             fetchUserInfo { (success) in
                 NotificationCenter.default.post(name: Constants.profilePictureUpdatedNotif, object: nil)
+                self.disableLoadingState(loadingView)
             }
         }
     }
@@ -32,7 +35,6 @@ class TripsListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
         let nib = UINib(nibName: "TripCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TripCell")
      
@@ -45,34 +47,25 @@ class TripsListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         TripController.shared.frc.delegate = self
-
+        
         // Set navigation bar properties
         navigationController?.navigationBar.prefersLargeTitles = true
         addTripBarButtonItem.format()
         TripController.shared.fetchAllTrips()
-        
         
 //        for trip in TripController.shared.trips {
 //            trip.uid = nil
 //            CoreDataManager.save()
 //        }
         
-//        if TripController.shared.trips.count == 0 {
-//            self.presentNoTripsView()
-//        }
+        if TripController.shared.trips.count == 0 {
+            self.presentNoTripsView()
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateProfilePicture), name: Constants.profilePictureUpdatedNotif, object: nil)
         
 //        updateProfilePicture()
-
-        let loadingView = LoadingView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: view.frame.height))
-        loadingView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(loadingView)
-        view.bringSubview(toFront: loadingView)
-        NSLayoutConstraint(item: loadingView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
-        NSLayoutConstraint(item: loadingView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
-        NSLayoutConstraint(item: loadingView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
-        NSLayoutConstraint(item: loadingView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+        
     }
     
     @objc func updateProfilePicture() {

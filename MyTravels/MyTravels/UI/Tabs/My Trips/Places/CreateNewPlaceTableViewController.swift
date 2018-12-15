@@ -12,6 +12,7 @@ import MapKit
 class CreateNewPlaceTableViewController: UITableViewController, CLLocationManagerDelegate {
     
     // MARK: - Properties
+    
     var trip: Trip? {
         didSet {
             print("hello")
@@ -27,6 +28,7 @@ class CreateNewPlaceTableViewController: UITableViewController, CLLocationManage
     var stars: [UIImageView] = []
     
     // MARK: - IBOutlets
+    
     @IBOutlet weak var starOne: UIImageView!
     @IBOutlet weak var starTwo: UIImageView!
     @IBOutlet weak var starThree: UIImageView!
@@ -65,6 +67,7 @@ class CreateNewPlaceTableViewController: UITableViewController, CLLocationManage
     }
     
     // MARK: - IBActions
+    
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
@@ -179,6 +182,7 @@ extension CreateNewPlaceTableViewController {
 }
 
 // MARK: - Table View Delegate
+
 extension CreateNewPlaceTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
