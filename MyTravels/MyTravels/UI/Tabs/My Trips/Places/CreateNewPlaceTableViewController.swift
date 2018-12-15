@@ -182,6 +182,7 @@ extension CreateNewPlaceTableViewController {
 }
 
 // MARK: - Table View Delegate
+
 extension CreateNewPlaceTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
