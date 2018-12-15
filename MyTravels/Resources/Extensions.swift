@@ -36,14 +36,21 @@ extension UIViewController {
     }
     
     @discardableResult func presentLoadingView() -> LoadingView {
+        
+        // Initialize the loading view.
         let loadingView: LoadingView = UIView.fromNib()
-        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Add view and bring it to the front of the superview.
         view.addSubview(loadingView)
         view.bringSubview(toFront: loadingView)
+   
+        // Add constraints
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint(item: loadingView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
         NSLayoutConstraint(item: loadingView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
         NSLayoutConstraint(item: loadingView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
         NSLayoutConstraint(item: loadingView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+        
         return loadingView
     }
     

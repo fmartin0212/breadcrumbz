@@ -47,7 +47,7 @@ class TripsListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         TripController.shared.frc.delegate = self
-
+        
         // Set navigation bar properties
         navigationController?.navigationBar.prefersLargeTitles = true
         addTripBarButtonItem.format()

@@ -17,25 +17,27 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wCm-UP-bEx">
-                    <rect key="frame" x="117.33333333333333" y="363.33333333333331" width="179.33333333333337" height="179.33333333333331"/>
+                    <rect key="frame" x="139.66666666666669" y="385.66666666666669" width="134.66666666666669" height="134.66666666666669"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="wCm-UP-bEx" secondAttribute="height" multiplier="1:1" id="Glv-Dq-4hC"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DDv-fb-p21">
-                    <rect key="frame" x="175" y="441" width="64" height="24"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DDv-fb-p21">
+                    <rect key="frame" x="139.66666666666669" y="441.33333333333331" width="134.66666666666669" height="23.333333333333314"/>
                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="1" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="DDv-fb-p21" firstAttribute="leading" secondItem="wCm-UP-bEx" secondAttribute="leading" id="04d-Ih-lJp"/>
                 <constraint firstItem="wCm-UP-bEx" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="2L8-MZ-JwB"/>
                 <constraint firstItem="wCm-UP-bEx" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="2ws-EA-BtQ"/>
                 <constraint firstItem="DDv-fb-p21" firstAttribute="centerX" secondItem="wCm-UP-bEx" secondAttribute="centerX" id="5Xb-jr-qE3"/>
-                <constraint firstItem="wCm-UP-bEx" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.2" id="DWq-Uk-GM1"/>
+                <constraint firstItem="wCm-UP-bEx" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.15" id="DWq-Uk-GM1"/>
+                <constraint firstItem="DDv-fb-p21" firstAttribute="trailing" secondItem="wCm-UP-bEx" secondAttribute="trailing" id="jIP-j7-cnG"/>
                 <constraint firstItem="DDv-fb-p21" firstAttribute="centerY" secondItem="wCm-UP-bEx" secondAttribute="centerY" id="l0i-4B-z5W"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

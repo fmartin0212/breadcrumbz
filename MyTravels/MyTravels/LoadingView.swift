@@ -17,12 +17,12 @@ class LoadingView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         blackView.layer.cornerRadius = 7
-        blackView.layer.opacity = 0.3
+        blackView.layer.opacity = 0.5
         
         self.backgroundColor = nil
     }
     
     deinit {
-        print("hi")
+        print("The loading view was deinitialized.")
     }
 }
