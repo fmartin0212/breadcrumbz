@@ -65,6 +65,7 @@ extension UIViewController {
     }
     
     @discardableResult func enableLoadingState() -> LoadingView {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         let loadingView = presentLoadingView()
         toggleEnabledNavBarItems()
         toggleEnabledTabBarItems()
@@ -72,6 +73,7 @@ extension UIViewController {
     }
     
     func disableLoadingState(_ loadingView: LoadingView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
         toggleEnabledNavBarItems()
         toggleEnabledTabBarItems()
         loadingView.removeFromSuperview()

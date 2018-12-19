@@ -12,8 +12,9 @@ class SignUpViewController: UIViewController {
     
     // MARK: - Constants & Variables
     var logIn: Bool = false
-    
+    var textFields: [UITextField] = []
     // MARK: - Outlets
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var skipButtonTapped: UIButton!
@@ -24,8 +25,26 @@ class SignUpViewController: UIViewController {
         tableView.dataSource = self
         self.tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         signUpButton.formatBlue()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
+    @objc func keyboardDidShow(notification: NSNotification) {
+        
+        var info = notification.userInfo!
+        let keyBoardSize = info[UIKeyboardFrameEndUserInfoKey] as! CGRect
+        scrollView.contentInset.bottom = keyBoardSize.height
+        scrollView.scrollIndicatorInsets.bottom = keyBoardSize.height
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        
+        UIView.animate(withDuration: 0.25) {
+            self.scrollView.contentInset.bottom = 0
+            self.scrollView.scrollIndicatorInsets.bottom = 0
+        }
+    }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         var frame = self.tableView.frame
         frame.size = self.tableView.contentSize
@@ -57,12 +76,10 @@ extension SignUpViewController {
     
     func createNewAccount() {
         
-        let loadingView = self.enableLoadingState()
-        loadingView.loadingLabel.text = "Creating account"
-        
         let firstNameCellIndexPath = IndexPath(row: 0, section: 0)
         let firstNameCell = (tableView.cellForRow(at: firstNameCellIndexPath)) as! TextFieldTableViewCell
         guard let firstName = firstNameCell.entryTextField.text, !firstName.isEmpty else { return }
+        textFields.append(firstNameCell.entryTextField)
         
         // Last name is optional
         let lastNameCellIndexPath = IndexPath(row: 1, section: 0)
@@ -71,21 +88,28 @@ extension SignUpViewController {
         
         let usernameCellIndexPath = IndexPath(row: 2, section: 0)
         let usernameCell = (tableView.cellForRow(at: usernameCellIndexPath)) as! TextFieldTableViewCell
-        guard let username = usernameCell.entryTextField.text else { return }
+        guard let username = usernameCell.entryTextField.text, !username.isEmpty else { return }
+        textFields.append(usernameCell.entryTextField)
         
         let emailCellIndexPath = IndexPath(row: 3, section: 0)
         let emailCell = (tableView.cellForRow(at: emailCellIndexPath)) as! TextFieldTableViewCell
         guard let email = emailCell.entryTextField.text, !email.isEmpty else { return }
+        textFields.append(emailCell.entryTextField)
         
         let passwordCellIndexPath = IndexPath(row: 4, section: 0)
         let passwordCell = (tableView.cellForRow(at: passwordCellIndexPath) as! TextFieldTableViewCell)
-        guard let password = passwordCell.entryTextField.text else { return }
+        guard let password = passwordCell.entryTextField.text, !password.isEmpty else { return }
+        textFields.append(passwordCell.entryTextField)
         
         let passwordConfCellIndexPath = IndexPath(row: 5, section: 0)
         let passwordConfCell = (tableView.cellForRow(at: passwordConfCellIndexPath) as! TextFieldTableViewCell)
-        guard let passwordConf = passwordConfCell.entryTextField.text else { return }
+        guard let passwordConf = passwordConfCell.entryTextField.text, !passwordConf.isEmpty else { return }
+        textFields.append(passwordConfCell.entryTextField)
         
         if password == passwordConf {
+            let loadingView = self.enableLoadingState()
+            loadingView.loadingLabel.text = "Creating account"
+            
             InternalUserController.shared.createNewUserWith(firstName: firstName, lastName: lastName, username: username, email: email, password: password) { (success) in
                 if success {
                     self.disableLoadingState(loadingView)
@@ -99,7 +123,6 @@ extension SignUpViewController {
             }
         }
         else {
-            self.disableLoadingState(loadingView)
             let alertController = UIAlertController(title: "Oops!", message: "Your passwords do not match -- please re-enter your passwords", preferredStyle: .alert)
             let OKAction = UIAlertAction(title: "OK", style: .default, handler: { (_) in
                 passwordCell.entryTextField.text = ""
