@@ -17,7 +17,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var skipButtonTapped: UIButton!
+    @IBOutlet weak var skipButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
@@ -112,32 +112,38 @@ extension SignUpViewController {
             
             InternalUserController.shared.createNewUserWith(firstName: firstName, lastName: lastName, username: username, email: email, password: password) { (success) in
                 if success {
-                    self.disableLoadingState(loadingView)
-                    self.presentTripListVC()
+                    DispatchQueue.main.async {
+                        self.disableLoadingState(loadingView)
+                        if self.skipButton.isHidden {
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                        self.presentTripListVC()
+                    }
                 } else {
-                    self.disableLoadingState(loadingView)
-                    let alertController = UIAlertController(title: "Something went wrong.", message: "Please try again.", preferredStyle: .alert)
-                    let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    alertController.addAction(OKAction)
+                    DispatchQueue.main.async {
+                        self.disableLoadingState(loadingView)
+                        let alertController = UIAlertController(title: "Something went wrong.", message: "Please try again.", preferredStyle: .alert)
+                        let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        alertController.addAction(OKAction)
+                    }
                 }
             }
         }
         else {
+            
             let alertController = UIAlertController(title: "Oops!", message: "Your passwords do not match -- please re-enter your passwords", preferredStyle: .alert)
             let OKAction = UIAlertAction(title: "OK", style: .default, handler: { (_) in
                 passwordCell.entryTextField.text = ""
                 passwordConfCell.entryTextField.text = ""
             })
             alertController.addAction(OKAction)
-            self.present(alertController, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.present(alertController, animated: true, completion: nil)
+            }
         }
-        
     }
     
     func signIn() {
-        
-        let loadingView = enableLoadingState()
-        loadingView.loadingLabel.text = "Logging in"
         
         let emailCellIndexPath = IndexPath(row: 0, section: 0)
         let emailCell = (tableView.cellForRow(at: emailCellIndexPath)) as! TextFieldTableViewCell
@@ -147,9 +153,13 @@ extension SignUpViewController {
         let passwordCell = (tableView.cellForRow(at: passwordCellIndexPath) as! TextFieldTableViewCell)
         guard let password = passwordCell.entryTextField.text else { return }
         
+        let loadingView = enableLoadingState()
+        loadingView.loadingLabel.text = "Logging in"
+        
         InternalUserController.shared.login(withEmail: email, password: password) { (error) in
             if let error = error {
                 // FIXME: Need error handling
+                self.disableLoadingState(loadingView)
                 print("There was an error logging in the user: \(error.localizedDescription)")
                 return
             }

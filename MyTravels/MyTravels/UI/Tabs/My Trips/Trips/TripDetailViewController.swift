@@ -142,6 +142,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
                 if success {
                     self.disableLoadingState(loadingView)
                 }
+                self.disableLoadingState(loadingView)
             })
         }
         alertController.addAction(shareAction)

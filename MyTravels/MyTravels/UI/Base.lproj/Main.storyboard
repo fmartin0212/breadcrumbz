@@ -1240,7 +1240,7 @@
                                         </prototypes>
                                     </tableView>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVC-e4-UwC">
-                                        <rect key="frame" x="238.5" y="5" width="37" height="36"/>
+                                        <rect key="frame" x="239" y="5" width="37" height="36"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                         <state key="normal" title="Save">
                                             <color key="titleColor" red="0.1696610677" green="0.32706386389999997" blue="0.72726690770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1262,17 +1262,27 @@
                                             <action selector="profileButtonTapped:" destination="GlI-HB-7cO" eventType="touchUpInside" id="09a-H6-mwN"/>
                                         </connections>
                                     </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAI-hv-Y6U">
+                                        <rect key="frame" x="5" y="5" width="60" height="36"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                        <state key="normal" title="Log out"/>
+                                        <connections>
+                                            <action selector="logOutButtonTapped:" destination="GlI-HB-7cO" eventType="touchUpInside" id="8ub-Je-OdX"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="PAI-hv-Y6U" firstAttribute="top" secondItem="mIx-ap-912" secondAttribute="top" constant="5" id="7ca-Z6-bhF"/>
                                     <constraint firstItem="RA5-cx-POg" firstAttribute="top" secondItem="mIx-ap-912" secondAttribute="top" constant="51" id="KuF-Sd-KD2"/>
+                                    <constraint firstItem="PAI-hv-Y6U" firstAttribute="leading" secondItem="mIx-ap-912" secondAttribute="leading" constant="5" id="NOZ-Ra-5rS"/>
                                     <constraint firstAttribute="trailing" secondItem="IMP-qy-VbO" secondAttribute="trailing" id="Sj9-JD-vq6"/>
                                     <constraint firstAttribute="bottom" secondItem="IMP-qy-VbO" secondAttribute="bottom" id="SjK-bW-KJg"/>
                                     <constraint firstItem="IMP-qy-VbO" firstAttribute="top" secondItem="mIx-ap-912" secondAttribute="top" constant="217" id="W8B-yY-8Q5"/>
                                     <constraint firstItem="IMP-qy-VbO" firstAttribute="leading" secondItem="mIx-ap-912" secondAttribute="leading" id="WRx-co-YRe"/>
                                     <constraint firstItem="RA5-cx-POg" firstAttribute="centerX" secondItem="mIx-ap-912" secondAttribute="centerX" id="Y4P-Gi-0vB"/>
                                     <constraint firstItem="mVC-e4-UwC" firstAttribute="top" secondItem="mIx-ap-912" secondAttribute="top" constant="5" id="eJo-jU-gZu"/>
-                                    <constraint firstAttribute="trailing" secondItem="mVC-e4-UwC" secondAttribute="trailing" constant="5.5" id="t2B-yF-XyM"/>
+                                    <constraint firstAttribute="trailing" secondItem="mVC-e4-UwC" secondAttribute="trailing" constant="5" id="t2B-yF-XyM"/>
                                     <constraint firstItem="IMP-qy-VbO" firstAttribute="top" secondItem="RA5-cx-POg" secondAttribute="bottom" constant="42" id="vrr-ep-r5f"/>
                                 </constraints>
                             </view>
@@ -1291,6 +1301,7 @@
                         <viewLayoutGuide key="safeArea" id="23P-jN-kS5"/>
                     </view>
                     <connections>
+                        <outlet property="logOutButton" destination="PAI-hv-Y6U" id="97j-8f-GPI"/>
                         <outlet property="overlayView" destination="mIx-ap-912" id="hnw-Xp-WRh"/>
                         <outlet property="profilePictureButton" destination="RA5-cx-POg" id="ZSO-g6-Z7H"/>
                         <outlet property="saveButton" destination="mVC-e4-UwC" id="Zv2-eJ-0tb"/>

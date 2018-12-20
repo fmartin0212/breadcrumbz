@@ -55,7 +55,7 @@ class FirebaseManager {
     }
     
     static func fetchObject(from ref: DatabaseReference, completion: @escaping (DataSnapshot) -> Void) {
-
+        
         ref.observeSingleEvent(of: .value) { (snapshot) in
             completion(snapshot)
         }
@@ -72,7 +72,7 @@ class FirebaseManager {
                 return
             }
             guard let user = user else { completion(nil, error) ; return }
-           
+            
             // Update displayName in Authentication storage
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = username
@@ -96,12 +96,22 @@ class FirebaseManager {
     }
     
     static func getLoggedInUser() -> User? {
-         return Auth.auth().currentUser
+        return Auth.auth().currentUser
+    }
+    
+    static func logOutUser() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print(error)
+        }
     }
     
     // MARK: - Firebase Storage
     
-    static func save(data: Data, to storeRef: StorageReference, completion: @escaping (StorageMetadata?, Error?) -> Void) {
+    static func save(data: Data,
+                     to storeRef: StorageReference,
+                     completion: @escaping (StorageMetadata?, Error?) -> Void) {
         storeRef.putData(data, metadata: nil) { (metadata, error) in
             completion(metadata, error)
         }
@@ -114,7 +124,7 @@ class FirebaseManager {
                 completion(nil)
                 return
             }
-
+            
             guard let data = data else { completion(nil) ; return }
             let image = UIImage(data: data)
             completion(image)

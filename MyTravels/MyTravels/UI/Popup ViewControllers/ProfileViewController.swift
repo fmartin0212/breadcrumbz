@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController {
     let profilePictureSetNotification = Notification.Name("profilePictureSet")
 
     @IBOutlet weak var overlayView: UIView!
+    @IBOutlet weak var logOutButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var profilePictureButton: UIButton!
@@ -36,6 +37,10 @@ class ProfileViewController: UIViewController {
             profilePictureButton.setBackgroundImage(loggedInUserPhoto, for: .normal)
             profilePictureButton.setImage(nil, for: .normal)
         }
+        
+        if let _ = InternalUserController.shared.loggedInUser {
+            logOutButton.isHidden = false
+        }
     }
     
     @IBAction func profileButtonTapped(_ sender: Any) {
@@ -43,7 +48,22 @@ class ProfileViewController: UIViewController {
         imagePickerController.allowsEditing = true
         imagePickerController.delegate = self
         present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    @IBAction func logOutButtonTapped(_ sender: Any) {
+        let confirmationAlertController = UIAlertController(title: "Log out", message: "Are you sure you would like to log out?", preferredStyle: .alert)
         
+        let logOutAction = UIAlertAction(title: "Log out", style: .destructive) { (_) in
+            InternalUserController.shared.logOut()
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        confirmationAlertController.addAction(logOutAction)
+        confirmationAlertController.addAction(cancelAction)
+        
+        self.present(confirmationAlertController, animated: true, completion: nil)
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {

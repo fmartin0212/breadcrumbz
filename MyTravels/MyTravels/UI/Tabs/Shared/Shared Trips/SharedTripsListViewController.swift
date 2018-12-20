@@ -88,13 +88,15 @@ class SharedTripsListViewController: UIViewController {
                 self.present(profileVC, animated: true, completion: nil)
             }
         } else {
-            let signUpVC = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "SignUp")
+            let signUpVC = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "SignUp") as! SignUpViewController
+            signUpVC.loadViewIfNeeded()
+            signUpVC.skipButton.isHidden = true
             self.present(signUpVC, animated: true, completion: nil)
         }
     }
     
     @objc func updateProfilePicture() {
-        let image = InternalUserController.shared.loggedInUser!.photo
+        let image = InternalUserController.shared.loggedInUser != nil ? InternalUserController.shared.loggedInUser!.photo : UIImage(named: "user")
         let resizedImage = image?.resize(to: CGSize(width: 35, height: 35))
         
         DispatchQueue.main.async {

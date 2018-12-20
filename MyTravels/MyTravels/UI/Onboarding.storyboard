@@ -251,7 +251,7 @@
                         <outlet property="loginButton" destination="duA-ZN-2de" id="DMN-Zv-UbE"/>
                         <outlet property="scrollView" destination="L5B-qp-p3z" id="Fwa-eI-jfg"/>
                         <outlet property="signUpButton" destination="csM-4g-pzI" id="lqA-8u-Ai0"/>
-                        <outlet property="skipButtonTapped" destination="ZoF-35-6hK" id="U4N-hN-kfD"/>
+                        <outlet property="skipButton" destination="ZoF-35-6hK" id="U4N-hN-kfD"/>
                         <outlet property="tableView" destination="iXf-l7-Ol4" id="lYU-cO-Xgt"/>
                     </connections>
                 </viewController>
