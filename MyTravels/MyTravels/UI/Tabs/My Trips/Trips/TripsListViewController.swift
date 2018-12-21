@@ -138,6 +138,8 @@ extension TripsListViewController {
         self.navigationItem.rightBarButtonItem = nil
         addATripButton.clipsToBounds = true
         addATripButton.layer.cornerRadius = 25
+        addATripButton.layer.borderColor = UIColor(red: 255, green: 77, blue: 77, alpha: 1).cgColor
+        addATripButton.layer.borderWidth = 2
     }
     
     private func setupLeftBarButton() {
