@@ -53,4 +53,8 @@ extension SharedTripsController {
             })
         }
     }
+    
+    func clearSharedTrips() {
+        sharedTrips = []
+    }
 }

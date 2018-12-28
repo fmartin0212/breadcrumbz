@@ -64,12 +64,10 @@ class TripsListViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateProfilePicture), name: Constants.profilePictureUpdatedNotif, object: nil)
         
-//        updateProfilePicture()
-        
     }
     
     @objc func updateProfilePicture() {
-        let image = InternalUserController.shared.loggedInUser!.photo
+        let image = InternalUserController.shared.loggedInUser != nil ? InternalUserController.shared.loggedInUser!.photo : UIImage(named: "user")
         let resizedImage = image?.resize(to: CGSize(width: 35, height: 35))
         
         DispatchQueue.main.async {
@@ -100,7 +98,9 @@ class TripsListViewController: UIViewController {
                 self.present(profileVC, animated: true, completion: nil)
             }
         } else {
-            let signUpVC = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "SignUp")
+            let signUpVC = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "SignUp") as! SignUpViewController
+            signUpVC.loadViewIfNeeded()
+            signUpVC.skipButton.isHidden = true
             self.present(signUpVC, animated: true, completion: nil)
         }
     }
@@ -138,6 +138,8 @@ extension TripsListViewController {
         self.navigationItem.rightBarButtonItem = nil
         addATripButton.clipsToBounds = true
         addATripButton.layer.cornerRadius = 25
+        addATripButton.layer.borderColor = #colorLiteral(red: 1, green: 0.3019607843, blue: 0.3019607843, alpha: 1)
+        addATripButton.layer.borderWidth = 2
     }
     
     private func setupLeftBarButton() {

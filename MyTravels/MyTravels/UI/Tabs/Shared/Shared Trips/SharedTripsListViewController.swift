@@ -33,11 +33,14 @@ class SharedTripsListViewController: UIViewController {
         tableView.refreshControl = refreshControl
         setupLeftBarButton()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Constants.refreshSharedTripsListNotif, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
+        
+      checkForNoSharedTrips()
     }
     
     // MARK: - Functions
@@ -60,6 +63,7 @@ class SharedTripsListViewController: UIViewController {
     @objc func refreshTableView() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            self.checkForNoSharedTrips()
         }
     }
     
@@ -88,13 +92,15 @@ class SharedTripsListViewController: UIViewController {
                 self.present(profileVC, animated: true, completion: nil)
             }
         } else {
-            let signUpVC = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "SignUp")
+            let signUpVC = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "SignUp") as! SignUpViewController
+            signUpVC.loadViewIfNeeded()
+            signUpVC.skipButton.isHidden = true
             self.present(signUpVC, animated: true, completion: nil)
         }
     }
     
     @objc func updateProfilePicture() {
-        let image = InternalUserController.shared.loggedInUser!.photo
+        let image = InternalUserController.shared.loggedInUser != nil ? InternalUserController.shared.loggedInUser!.photo : UIImage(named: "user")
         let resizedImage = image?.resize(to: CGSize(width: 35, height: 35))
         
         DispatchQueue.main.async {
@@ -155,5 +161,21 @@ extension SharedTripsListViewController : UITableViewDelegate {
         guard let sharedTripDetailVC = sb.instantiateViewController(withIdentifier: "sharedTripDetail") as? SharedTripDetailViewController else { return }
         sharedTripDetailVC.sharedTrip = sharedTrip
         self.navigationController?.pushViewController(sharedTripDetailVC, animated: true)
+    }
+}
+
+extension SharedTripsListViewController {
+    
+    func checkForNoSharedTrips() {
+        if SharedTripsController.shared.sharedTrips.count == 0 {
+            let noSharedTripsView: NoSharedTripsView = UIView.fromNib()
+            view.addSubview(noSharedTripsView)
+            noSharedTripsView.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint(item: noSharedTripsView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+            NSLayoutConstraint(item: noSharedTripsView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
+            NSLayoutConstraint(item: noSharedTripsView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
+            NSLayoutConstraint(item: noSharedTripsView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+        }
     }
 }

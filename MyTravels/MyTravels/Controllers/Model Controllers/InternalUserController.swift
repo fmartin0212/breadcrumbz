@@ -80,11 +80,18 @@ class InternalUserController {
         }
     }
     
+    func logOut() {
+        FirebaseManager.logOutUser()
+        InternalUserController.shared.loggedInUser = nil
+        SharedTripsController.shared.clearSharedTrips()
+        NotificationCenter.default.post(name: Constants.profilePictureUpdatedNotif, object: nil)
+    }
+    
     func saveProfilePhoto(photo: UIImage, for user: InternalUser, completion: @escaping (Bool) -> Void) {
         let ref = FirebaseManager.ref.child("User").child(user.username).child("photoURL")
         let storeRef = FirebaseManager.storeRef.child("User").child(user.username).child("photo")
         
-        guard let imageAsData = UIImagePNGRepresentation(photo) else { completion(false) ; return }
+        guard let imageAsData = UIImageJPEGRepresentation(photo, 0.1) else { completion(false) ; return }
         
         FirebaseManager.save(data: imageAsData, to: storeRef) { (metadata, error) in
             if let error = error {
