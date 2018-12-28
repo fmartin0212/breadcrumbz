@@ -9,7 +9,6 @@
 
 import Foundation
 import CoreData
-import MapKit
 
 @objc(Trip)
 public class Trip: NSManagedObject {

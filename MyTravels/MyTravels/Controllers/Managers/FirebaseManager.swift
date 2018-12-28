@@ -9,14 +9,13 @@
 import Foundation
 import FirebaseDatabase
 import FirebaseStorage
-import FirebaseStorageUI
 import FirebaseAuth
 
 protocol FirebaseSyncable {
     var id: String? { get set }
 }
 
-class FirebaseManager {
+final class FirebaseManager {
     
     
     // Constants & Variables
@@ -112,6 +111,7 @@ class FirebaseManager {
     static func save(data: Data,
                      to storeRef: StorageReference,
                      completion: @escaping (StorageMetadata?, Error?) -> Void) {
+        
         storeRef.putData(data, metadata: nil) { (metadata, error) in
             completion(metadata, error)
         }
