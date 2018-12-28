@@ -114,7 +114,7 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
         picker.mediaTypes = availableMediaTypes
         guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage
             else { print("photo nil") ; return }
-        guard let photoAsData = UIImagePNGRepresentation(photo) else { return }
+        guard let photoAsData = UIImageJPEGRepresentation(photo, 0.1) else { return }
         self.photo = photoAsData
         
         self.tripPhotoImageView.image = photo

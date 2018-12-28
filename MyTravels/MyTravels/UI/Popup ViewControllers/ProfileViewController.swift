@@ -55,7 +55,10 @@ class ProfileViewController: UIViewController {
         
         let logOutAction = UIAlertAction(title: "Log out", style: .destructive) { (_) in
             InternalUserController.shared.logOut()
-            self.dismiss(animated: true, completion: nil)
+            NotificationCenter.default.post(name: Constants.sharedTripsReceivedNotif, object: nil)
+            DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)                
+            }
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

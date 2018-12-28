@@ -91,7 +91,7 @@ class InternalUserController {
         let ref = FirebaseManager.ref.child("User").child(user.username).child("photoURL")
         let storeRef = FirebaseManager.storeRef.child("User").child(user.username).child("photo")
         
-        guard let imageAsData = UIImagePNGRepresentation(photo) else { completion(false) ; return }
+        guard let imageAsData = UIImageJPEGRepresentation(photo, 0.1) else { completion(false) ; return }
         
         FirebaseManager.save(data: imageAsData, to: storeRef) { (metadata, error) in
             if let error = error {

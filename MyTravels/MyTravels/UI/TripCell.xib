@@ -11,15 +11,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripCell" rowHeight="411" id="4eh-VU-CCO" customClass="TripTableViewCell" customModule="MyTravels" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="391" height="411"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripCell" rowHeight="382" id="4eh-VU-CCO" customClass="TripTableViewCell" customModule="MyTravels" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="391" height="382"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4eh-VU-CCO" id="cee-ia-yCY">
-                <rect key="frame" x="0.0" y="0.0" width="391" height="410.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="391" height="381.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Uj1-3N-44u">
-                        <rect key="frame" x="25.5" y="10" width="340" height="400.5"/>
+                        <rect key="frame" x="25.5" y="15" width="340" height="366.5"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7gk-0t-lfb">
                                 <rect key="frame" x="0.0" y="0.0" width="340" height="271.5"/>
@@ -27,11 +27,11 @@
                                     <constraint firstAttribute="height" constant="271.5" id="l9u-7b-jcr"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="cFC-76-wpw">
-                                <rect key="frame" x="0.0" y="271.5" width="340" height="94"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="cFC-76-wpw">
+                                <rect key="frame" x="0.0" y="271.5" width="340" height="95"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxc-mJ-3n3">
-                                        <rect key="frame" x="0.0" y="35" width="340" height="59"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="340" height="59"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="y7f-tT-xeL">
                                                 <rect key="frame" x="0.0" y="0.0" width="169.5" height="59"/>
@@ -82,19 +82,12 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G03-Lh-cuw">
-                                <rect key="frame" x="0.0" y="365.5" width="340" height="35"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="JB6-Vq-A8D"/>
-                                </constraints>
-                            </view>
                         </subviews>
                     </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Uj1-3N-44u" firstAttribute="centerX" secondItem="cee-ia-yCY" secondAttribute="centerX" id="8J4-sn-qDL"/>
-                    <constraint firstItem="Uj1-3N-44u" firstAttribute="top" secondItem="cee-ia-yCY" secondAttribute="top" constant="10" id="Qe9-bu-T8h"/>
+                    <constraint firstItem="Uj1-3N-44u" firstAttribute="top" secondItem="cee-ia-yCY" secondAttribute="top" constant="15" id="Qe9-bu-T8h"/>
                     <constraint firstItem="7gk-0t-lfb" firstAttribute="width" secondItem="cee-ia-yCY" secondAttribute="width" multiplier="0.87" id="y2X-x8-lbX"/>
                     <constraint firstAttribute="bottom" secondItem="Uj1-3N-44u" secondAttribute="bottom" id="ylw-FI-hnU"/>
                 </constraints>
@@ -108,7 +101,7 @@
                 <outlet property="tripNameLabel" destination="MxW-X6-d9f" id="d8h-9k-AhO"/>
                 <outlet property="tripStartDateLabel" destination="8ub-Sg-5Vt" id="cfU-h9-aje"/>
             </connections>
-            <point key="canvasLocation" x="136.80000000000001" y="-581.55922038980509"/>
+            <point key="canvasLocation" x="136.80000000000001" y="-594.60269865067471"/>
         </tableViewCell>
     </objects>
 </document>
