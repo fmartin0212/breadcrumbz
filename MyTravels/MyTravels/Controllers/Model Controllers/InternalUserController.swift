@@ -37,7 +37,7 @@ class InternalUserController {
             ]
             
             let ref = FirebaseManager.ref.child("User").child(username)
-            FirebaseManager.save(object: internalUserDict, to: ref, completion: { (error) in
+            FirebaseManager.save(internalUserDict, to: ref, completion: { (error) in
                 if let error = error {
                     // Present alert controller?
                 } else {
@@ -103,7 +103,7 @@ class InternalUserController {
             user.photoURL = metadata?.downloadURL()?.absoluteString
             user.photo = photo
             
-            FirebaseManager.saveSingleObject(metadata?.downloadURL()?.absoluteString as Any, to: ref, completion: { (error) in
+            FirebaseManager.save(metadata?.downloadURL()?.absoluteString as Any, to: ref, completion: { (error) in
                 if let error = error {
                     print("There was an error saving the photo URL to the Firebase DB: \(error.localizedDescription)")
                     completion(false)
@@ -134,7 +134,7 @@ class InternalUserController {
     func blockUserWith(username: String, completion: @escaping (Bool) -> Void) {
         // Add user to loggedInUser's blocked list
         let blockRef = FirebaseManager.ref.child("User").child(loggedInUser!.username).child("blockedUsernames").child(username)
-        FirebaseManager.saveSingleObject(username, to: blockRef) { (error) in
+        FirebaseManager.save(username, to: blockRef) { (error) in
             if let error = error {
                 print("There was an error saving the username to the loggedInUser's blockedUser list : \(error.localizedDescription)")
                 completion(false)
@@ -181,7 +181,7 @@ class InternalUserController {
                         for participantTripID in loggedInUserPartcipantIDs {
                             let ref = FirebaseManager.ref.child("User").child(self.loggedInUser!.username).child("participantTripIDs").child(participantTripID)
                             dispatchGroup.enter()
-                            FirebaseManager.saveSingleObject(participantTripID, to: ref, completion: { (error) in
+                            FirebaseManager.save(participantTripID, to: ref, completion: { (error) in
                                 if let error = error {
                                     print("error saving tripID : \(error.localizedDescription)")
                                     completion(false)

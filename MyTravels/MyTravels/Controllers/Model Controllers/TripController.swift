@@ -22,7 +22,7 @@ class TripController {
         
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
     }()
-    var trip: Trip?
+    
     var trips: [Trip] = []
     
     // MARK: - CRUD Functions
@@ -39,16 +39,15 @@ class TripController {
                         location: String,
                         tripDescription: String?,
                         startDate: Date,
-                        endDate: Date) {
+                        endDate: Date) -> Trip {
         
         // Initialize a trip
         let trip = Trip(name: name, location: location, tripDescription: tripDescription, startDate: startDate, endDate: endDate)
         
-        // Set the shared instance's global trip reference
-        self.trip = trip
-        
         // Save to Core Data
         CoreDataManager.save()
+        
+        return trip
     }
     
     /**
@@ -62,7 +61,7 @@ class TripController {
     }
     
     /**
-     Calls a fetch on the fetched results controller and returns all of the Trips from the persistent store.
+     Calls a fetch on the fetched results controller and returns all of the trips from the persistent store. Sets the trips property on the shared instance.
     */
     func fetchAllTrips() {
         
@@ -82,8 +81,8 @@ class TripController {
     /**
      Shares a trip with another user.
      - parameter trip: The trip being shared.
-     - parameter withReceiver: The username that is receiving the trip.
-     -
+     - parameter withReceiver: The username of the receiver.
+     - parameter completion: A completion block which passes a boolean to inform the caller of whether the trip was successfully shared.
     */
     func share(trip: Trip,
                withReceiver receiver: String,
@@ -133,6 +132,7 @@ class TripController {
          Creates a dictionary from the trip's properties and the trip creator's name. Creates a Firebase reference for a new child node under 'Trip.' Calls on the Firebase Manager to have the trip uploaded.
          - parameter trip: The trip to be uploaded.
          - parameter creatorName: The username of the trip creator.
+         - parameter completion: A completion block which passes a boolean to indicate whether the trip was successfully saved to the Firebase database.
         */
         func upload(trip: Trip,
                     creatorName: String,
@@ -150,16 +150,19 @@ class TripController {
                 "places" : PlaceController.shared.createPlaces(for: trip)
             ]
             
+            // Create a new Firebase database reference for the trip.
             let tripRef = FirebaseManager.ref.child("Trip").childByAutoId()
             
-            FirebaseManager.save(object: tripDict, to: tripRef) { (error) in
+            // Save the trip to the Firebase database reference.
+            FirebaseManager.save(tripDict, to: tripRef) { (error) in
                 if let _ = error {
                     completion(false)
                     return
                 }
                 
+                // Save the trip ID to the logged in user's Firebase node
                 let sharedTripIDRef = FirebaseManager.ref.child("User").child(InternalUserController.shared.loggedInUser!.username).child("sharedTripIDs").child(tripRef.key)
-                FirebaseManager.saveSingleObject(tripRef.key, to: sharedTripIDRef, completion: { (error) in
+                FirebaseManager.save(tripRef.key, to: sharedTripIDRef, completion: { (error) in
                     if let error = error {
                         print("There was an error saving the shared trip ID to the 'sharer': \(error.localizedDescription)")
                     }
@@ -169,6 +172,7 @@ class TripController {
                 trip.uid = tripRef.key
                 CoreDataManager.save()
                 
+                // Save the trip's photos to Firebase storage.
                 PhotoController.shared.savePhotos(for: trip, completion: { (success) in
                     if success {
                         completion(true)
@@ -178,10 +182,21 @@ class TripController {
         }
     }
     
-    func addTripIDToReceiver(tripID: String, receiver: String, completion: @escaping (Bool) -> Void) {
+    /**
+     Adds a shared trip ID to the receiver in the Firebase database.
+     - parameter tripID: The ID of the trip that has been shared.
+     - parameter receiver: The username of the receiver.
+     - parameter completion: A completion block that passes a boolean to the caller to inform the caller of whether the save was successful.
+     */
+    func addTripIDToReceiver(tripID: String,
+                             receiver: String,
+                             completion: @escaping (Bool) -> Void) {
+        
+        // Get a database reference to the receiver's participant trip ID child node.
         let userTripRef = FirebaseManager.ref.child("User").child(receiver).child("participantTripIDs").child(tripID)
         
-        FirebaseManager.saveSingleObject(tripID, to: userTripRef, completion: { (error) in
+        // Save the trip ID to the database reference.
+        FirebaseManager.save(tripID, to: userTripRef, completion: { (error) in
             if let error = error {
                 print(error)
                 completion(false)
@@ -190,10 +205,22 @@ class TripController {
         })
     }
     
-    func checkIfBlocked(_ receiver: String, completion: @escaping (Bool) -> Void) {
+    /**
+     Checks whether the logged in user is blocked by receiver.
+     - parameter receiver: The username of the receiver.
+     - parameter completion: A completion block which passes a boolean to inform the caller of whether the logged in user is blocked by the receiver.
+    */
+    func checkIfBlocked(_ receiver: String,
+                        completion: @escaping (Bool) -> Void) {
+        
+        // Get a database reference to the receiver's blocked usernames.
         let ref = FirebaseManager.ref.child("User").child(receiver).child("blockedUsernames")
+        
+        // Fetches all of the receiver's blocked usernames from the Firebase database.
         FirebaseManager.fetchObject(from: ref) { (snapshot) in
             guard let blockedUsernames = snapshot.value as? [String : String] else { completion(false) ; return }
+            
+            // Loops through each username dictionary, checking if the logged in user's username is blocked by the receiver.
             for (username, _) in blockedUsernames {
                 if username == InternalUserController.shared.loggedInUser!.username {
                     completion(true)

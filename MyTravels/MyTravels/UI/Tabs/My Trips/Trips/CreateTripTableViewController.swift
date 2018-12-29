@@ -86,16 +86,12 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
             tripDescription = ""
         }
         
-        TripController.shared.createTripWith(name: name, location: location, tripDescription: tripDescription, startDate: startDate, endDate: endDate)
+        let trip = TripController.shared.createTripWith(name: name, location: location, tripDescription: tripDescription, startDate: startDate, endDate: endDate)
         
         // Get newly created trip and add the photo to it
-        guard let trip = TripController.shared.trip,
-            let photo = photo else { dismiss(animated: true, completion: nil) ; return }
+        guard let photo = photo else { dismiss(animated: true, completion: nil) ; return }
         PhotoController.shared.add(photo: photo, trip: trip)
-        
-        NotificationCenter.default.post(name: NSNotification.Name("adsf"), object: nil)
-        
-        
+    
         dismiss(animated: true, completion: nil)
         
     }

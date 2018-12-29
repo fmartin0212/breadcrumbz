@@ -118,9 +118,9 @@ class EditPlaceTableViewController: UITableViewController, UIImagePickerControll
 //            dismiss(animated: true, completion: nil)
 //        }
 
-        PlaceController.shared.update(place: place, name: name, type: type, address: address, comments: comments, rating: rating, trip: trip)
-        guard let currentPlace = PlaceController.shared.place else { return }
-        PhotoController.shared.update(photos: photos, forPlace: currentPlace)
+        PlaceController.shared.update(place: place, name: name, type: type, address: address, comments: comments, rating: rating)
+    
+        PhotoController.shared.update(photos: photos, for: place)
         dismiss(animated: true, completion: nil)
         
     }

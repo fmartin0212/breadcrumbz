@@ -35,7 +35,7 @@ class InternalUser {
             let lastName = tripDict["lastName"] as? String?,
             let username = tripDict["username"] as? String,
             let email = tripDict["email"] as? String
-            //FIXME profle pic
+
             else { return nil }
         
         
