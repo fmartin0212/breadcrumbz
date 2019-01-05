@@ -11,12 +11,14 @@ import UIKit
 class SharedPlaceDetailTableViewController: UITableViewController {
     
     // MARK: Properties
+    
     var sharedTrip: SharedTrip?
     var sharedPlace: SharedPlace?
     
     var photos: [Photo] = []
     
     // MARK: - IBOutlets
+    
     @IBOutlet weak var sharedPlaceMainPhotoImageView: UIImageView!
     @IBOutlet weak var sharedPlaceNameLabel: UILabel!
     @IBOutlet weak var sharedPlaceAddressLabel: UILabel!

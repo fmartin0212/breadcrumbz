@@ -18,9 +18,15 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wCm-UP-bEx">
                     <rect key="frame" x="139.66666666666669" y="385.66666666666669" width="134.66666666666669" height="134.66666666666669"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="620-93-eix">
+                            <rect key="frame" x="57.333333333333343" y="86" width="20" height="20"/>
+                        </activityIndicatorView>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="wCm-UP-bEx" secondAttribute="height" multiplier="1:1" id="Glv-Dq-4hC"/>
+                        <constraint firstItem="620-93-eix" firstAttribute="centerX" secondItem="wCm-UP-bEx" secondAttribute="centerX" id="WkM-rB-ZZj"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DDv-fb-p21">
@@ -37,6 +43,7 @@
                 <constraint firstItem="wCm-UP-bEx" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="2ws-EA-BtQ"/>
                 <constraint firstItem="DDv-fb-p21" firstAttribute="centerX" secondItem="wCm-UP-bEx" secondAttribute="centerX" id="5Xb-jr-qE3"/>
                 <constraint firstItem="wCm-UP-bEx" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.15" id="DWq-Uk-GM1"/>
+                <constraint firstItem="620-93-eix" firstAttribute="top" secondItem="DDv-fb-p21" secondAttribute="bottom" constant="7.0000000000000568" id="YiP-6c-AT1"/>
                 <constraint firstItem="DDv-fb-p21" firstAttribute="trailing" secondItem="wCm-UP-bEx" secondAttribute="trailing" id="jIP-j7-cnG"/>
                 <constraint firstItem="DDv-fb-p21" firstAttribute="centerY" secondItem="wCm-UP-bEx" secondAttribute="centerY" id="l0i-4B-z5W"/>
             </constraints>

@@ -23,7 +23,6 @@ class SharedTripDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var tripStartDateLabel: UILabel!
     @IBOutlet weak var tripEndDateLabel: UILabel!
     @IBOutlet weak var tripDescriptionLabel: UILabel!
-    @IBOutlet var tripDescriptionTextView: UITextView!
     
     // MARK: - Other Functions
     func updateSharedTripDetail() {
@@ -33,7 +32,7 @@ class SharedTripDetailTableViewCell: UITableViewCell {
         tripLocationLabel.text = sharedTrip.location
         tripStartDateLabel.text = "\(shortDateString(date: sharedTrip.startDate as Date)) -"
         tripEndDateLabel.text = "\(shortDateString(date: sharedTrip.endDate as Date))"
-        tripDescriptionLabel.text = sharedTrip.tripDescription
+        tripDescriptionLabel.text = sharedTrip.description
         
     }
     
