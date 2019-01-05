@@ -101,7 +101,7 @@
                 <outlet property="tripNameLabel" destination="MxW-X6-d9f" id="d8h-9k-AhO"/>
                 <outlet property="tripStartDateLabel" destination="8ub-Sg-5Vt" id="cfU-h9-aje"/>
             </connections>
-            <point key="canvasLocation" x="136.80000000000001" y="-594.60269865067471"/>
+            <point key="canvasLocation" x="136" y="-594.60269865067471"/>
         </tableViewCell>
     </objects>
 </document>

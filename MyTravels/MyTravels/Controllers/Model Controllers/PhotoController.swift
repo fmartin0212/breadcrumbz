@@ -11,9 +11,10 @@ import CoreData
 import FirebaseDatabase
 import FirebaseStorage
 
-class PhotoController {
+final class PhotoController {
     
     // MARK: - Properties
+    
     static var shared = PhotoController()
     var tripPhoto: Photo?
     var frc: NSFetchedResultsController<Photo> = {
@@ -27,41 +28,85 @@ class PhotoController {
     var photos: [Photo] = []
     
     // CRUD Functions
- 
+    
+    /**
+     Initializes a new photo and saves the Core Data MOC.
+     - parameter photo: The photo as data to be saved.
+     - parameter trip: The trip that the photo belongs to.
+     */
     func add(photo: Data, trip: Trip) {
+        
+        // Initialize a new Photo.
         let _ = Photo(photo: photo, place: nil, trip: trip)
+        
+        // Save the Core Data MOC.
         CoreDataManager.save()
     }
 
+    /**
+     Loops over the photos parameter and initializes a new photo object. Saves the Core Data MOC.
+     - parameter photos: The array of photos as data to be saved.
+     - parameter place: The place that the photos belong to.
+     */
     func add(photos: [Data], place: Place) {
+        
+        // Loop over the photos and initialize a Photo.
         for photo in photos {
             let _ = Photo(photo: photo, place: place, trip: nil)
         }
+        
+        // Save the Core Data MOC.
         CoreDataManager.save()
     }
     
-    func update(photos: [Data], forPlace: Place) {
-        guard let photoArray = forPlace.photos?.allObjects as? [Photo] else { return }
+    /**
+     Removes all of the photos from the Core Data MOC.
+     - parameter photos: The array of photos as data to be saved.
+     - parameter place: The place that the photos belong to.
+     */
+    func update(photos: [Data], for place: Place) {
+        guard let photoArray = place.photos?.allObjects as? [Photo] else { return }
         
+        // Remove all of the existing photos from the place.
         for photo in photoArray {
             photo.managedObjectContext?.delete(photo)
         }
+        
+        // Initialize a new photo for each photo in the photos array.
         for photo in photos {
-            let _ = Photo(photo: photo, place: forPlace, trip: nil)
+            let _ = Photo(photo: photo, place: place, trip: nil)
         }
+        
+        // Save the Core Data MOC.
         CoreDataManager.save()
     }
     
+    /**
+     Deletes the Photo from the Core Data MOC.
+     - parameter photo: The photo to be deleted.
+     */
     func delete(photo: Photo) {
         CoreDataManager.delete(object: photo)
     }
     
     // MARK: - Firebase
     
-    func savePhotos(for trip: Trip, completion: @escaping (Bool) -> Void) {
+    /**
+     Calls savePhotos and savePlacePhotos to save the trip photo and the place photos to Firebase Storage.
+     - parameter trip: The trip that the photos are being saved for.
+     - parameter completion: A completion block that passes a boolean which informs the caller of whether the photos were successfully saved to Firebase Storage.
+     */
+    func savePhotos(for trip: Trip,
+                    completion: @escaping (Bool) -> Void) {
+        
+        // Create a reference in the Firebase Storage.
         let storeRef = FirebaseManager.storeRef.child("Trip").child(trip.uid!)
+        
+        // Save the trip photo to the database reference.
         saveTripPhoto(trip: trip, storeRef: storeRef) { (success) in
             if success {
+                
+                // Save the trip's places' photos.
                 self.savePlacePhotos(for: trip, to: storeRef, completion: { (success) in
                     if success {
                         completion(true)
@@ -71,7 +116,9 @@ class PhotoController {
         }
     }
     
-    func savePlacePhotos(for trip: Trip, to storeRef: StorageReference, completion: @escaping (Bool) -> Void) {
+    func savePlacePhotos(for trip: Trip,
+                         to storeRef: StorageReference,
+                         completion: @escaping (Bool) -> Void) {
         
         if let places = trip.places?.allObjects as? [Place] {
             
@@ -100,7 +147,7 @@ class PhotoController {
                             let photoDictionary: [String : Any] = [photo.uid! : metadata?.downloadURL()?.absoluteString as Any]
                             
                             dispatchGroup.enter()
-                            FirebaseManager.save(object: photoDictionary, to: photoDBRef, completion: { (error) in
+                            FirebaseManager.save(photoDictionary, to: photoDBRef, completion: { (error) in
                                 if let error = error {
                                     print(error)
                                     
@@ -118,7 +165,10 @@ class PhotoController {
         }
     }
 
-    func saveTripPhoto(trip: Trip, storeRef: StorageReference, completion: @escaping (Bool) -> Void) {
+    func saveTripPhoto(trip: Trip,
+                       storeRef: StorageReference,
+                       completion: @escaping (Bool) -> Void) {
+        
         guard let tripPhoto = trip.photo?.photo else { completion(false) ; return }
         let data = Data(referencing: tripPhoto)
         

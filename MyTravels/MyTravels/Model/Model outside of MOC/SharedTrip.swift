@@ -13,7 +13,7 @@ class SharedTrip {
     
     let name: String
     let location: String
-    let tripDescription: String?
+    let description: String?
     let startDate: Date
     let endDate: Date
     let creatorName: String
@@ -30,7 +30,7 @@ class SharedTrip {
         guard let tripDictionary = snapshot.value as? [String : Any],
             let name = tripDictionary["name"] as? String,
             let location = tripDictionary["location"] as? String,
-            let tripDescription = tripDictionary["tripDescription"] as? String?,
+            let description = tripDictionary["description"] as? String?,
             let startDate = tripDictionary["startDate"] as? TimeInterval,
             let endDate = tripDictionary["endDate"] as? TimeInterval,
             let creator = tripDictionary["creatorName"] as? String,
@@ -39,7 +39,7 @@ class SharedTrip {
         
         self.name = name
         self.location = location
-        self.tripDescription = tripDescription
+        self.description = description
         self.startDate = Date(timeIntervalSince1970: startDate)
         self.endDate = Date(timeIntervalSince1970: endDate)
         self.creatorName = creator
@@ -52,7 +52,11 @@ class SharedTrip {
 }
 
 extension SharedTrip: Equatable {
+    
     static func == (lhs: SharedTrip, rhs: SharedTrip) -> Bool {
         return lhs.uid == rhs.uid
     }
 }
+
+
+

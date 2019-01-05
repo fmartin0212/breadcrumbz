@@ -11,6 +11,7 @@ import UIKit
 class TripDetailTableViewCell: UITableViewCell {
     
     // MARK: - Properties
+    
     var trip: Trip? {
         didSet {
             updateTripDetail()
@@ -23,14 +24,15 @@ class TripDetailTableViewCell: UITableViewCell {
     }
     
     // MARK: - IBOutlets
+    
     @IBOutlet weak var tripNameLabel: UILabel!
     @IBOutlet weak var tripLocationLabel: UILabel!
     @IBOutlet weak var tripStartDateLabel: UILabel!
     @IBOutlet weak var tripEndDateLabel: UILabel!
     @IBOutlet weak var tripDescriptionLabel: UILabel!
-    @IBOutlet var tripDescriptionTextView: UITextView!
     
     // MARK: - Other Functions
+    
     func updateTripDetail() {
         
         guard let trip = trip

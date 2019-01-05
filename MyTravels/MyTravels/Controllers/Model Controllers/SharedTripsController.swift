@@ -12,6 +12,7 @@ import CoreData
 class SharedTripsController {
     
     // MARK: - Properties
+    
     static var shared = SharedTripsController()
     var sharedTrips: [SharedTrip] = []
     var sharedIDs = [String]()

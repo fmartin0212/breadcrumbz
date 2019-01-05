@@ -98,8 +98,7 @@ class CreateNewPlaceTableViewController: UITableViewController, CLLocationManage
         
         self.photos.remove(at: 0)
         
-        PlaceController.shared.create(name: name, type: type, address: address, comments: comments, rating: rating, trip: trip)
-        guard let place = PlaceController.shared.place else { return }
+        let place = PlaceController.shared.createNewPlaceWith(name: name, type: type, address: address, comments: comments, rating: rating, trip: trip)
         
         if self.photos.count > 0 {
             PhotoController.shared.add(photos: self.photos, place: place)

@@ -11,18 +11,14 @@ import FirebaseDatabase
 import FirebaseStorage
 import FirebaseAuth
 
-protocol FirebaseSyncable {
-    var id: String? { get set }
-}
-
 final class FirebaseManager {
     
+    // MARK: - Constants & Variables
     
-    // Constants & Variables
     static var ref: DatabaseReference! = Database.database().reference()
     static var storeRef: StorageReference! = Storage.storage().reference()
     
-    // MARK: - Firebase Database
+    // MARK: - Database
     
     static func saveSingleObject(_ object: Any, to databaseReference: DatabaseReference, completion: @escaping (Error?) -> Void) {
         databaseReference.setValue(object) { (error, _) in
@@ -35,7 +31,7 @@ final class FirebaseManager {
         }
     }
     
-    static func save(object: [String : Any?], to databaseReference: DatabaseReference, completion: @escaping (Error?) -> Void) {
+    static func save(_ object: Any, to databaseReference: DatabaseReference, completion: @escaping (Error?) -> Void) {
         
         databaseReference.setValue(object) { (error, _) in
             if let error = error {
@@ -60,7 +56,7 @@ final class FirebaseManager {
         }
     }
     
-    // MARK: - Firebase Auth
+    // MARK: - Auth
     
     static func addUser(with email: String, password: String, username: String, completion: @escaping (User?, Error?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
@@ -106,7 +102,7 @@ final class FirebaseManager {
         }
     }
     
-    // MARK: - Firebase Storage
+    // MARK: - Storage
     
     static func save(data: Data,
                      to storeRef: StorageReference,
