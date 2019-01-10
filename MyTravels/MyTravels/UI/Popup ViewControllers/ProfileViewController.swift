@@ -29,13 +29,13 @@ class ProfileViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-        
-        profilePictureButton.clipsToBounds = true
-        profilePictureButton.layer.cornerRadius = 61
-        
+   
         if let loggedInUserPhoto = InternalUserController.shared.loggedInUser?.photo {
             profilePictureButton.setBackgroundImage(loggedInUserPhoto, for: .normal)
             profilePictureButton.setImage(nil, for: .normal)
+            
+            profilePictureButton.clipsToBounds = true
+            profilePictureButton.layer.cornerRadius = 61
         }
         
         if let _ = InternalUserController.shared.loggedInUser {
@@ -71,21 +71,6 @@ class ProfileViewController: UIViewController {
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         
-        // Present the loading view
-        let loadingView = self.presentLoadingView()
-        loadingView.loadingLabel.text = "Saving"
-        
-        guard let loggedInUser = InternalUserController.shared.loggedInUser,
-            let updatedProfileImage = profilePictureButton.backgroundImage(for: .normal)
-            else { return }
-        
-        InternalUserController.shared.saveProfilePhoto(photo: updatedProfileImage, for: loggedInUser) { (success) in
-            if success {
-                NotificationCenter.default.post(Notification(name: Notification.Name("profilePictureUpdatedNotification")))
-                loadingView.removeFromSuperview()
-                self.dismiss(animated: true, completion: nil)
-            }
-        }
     }
     
     @IBAction func tapGestureRecognized(_ sender: Any) {
@@ -152,9 +137,26 @@ extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationC
         let profilePicture = info[UIImagePickerControllerEditedImage] as? UIImage
         profilePictureButton.setBackgroundImage(profilePicture, for: .normal)
         profilePictureButton.setImage(nil, for: .normal)
+        profilePictureButton.clipsToBounds = true
+        profilePictureButton.layer.cornerRadius = 61
         profilePictureButton.backgroundColor = UIColor.clear
         picker.dismiss(animated: true) {
-            self.saveButton.isHidden = false
+            // Present the loading view
+            let loadingView = self.presentLoadingView()
+            loadingView.loadingLabel.text = "Saving"
+            
+            guard let loggedInUser = InternalUserController.shared.loggedInUser,
+                let updatedProfileImage = self.profilePictureButton.backgroundImage(for: .normal)
+                else { return }
+            
+            InternalUserController.shared.saveProfilePhoto(photo: updatedProfileImage, for: loggedInUser) { (success) in
+                if success {
+                    NotificationCenter.default.post(Notification(name: Notification.Name("profilePictureUpdatedNotification")))
+                    loadingView.removeFromSuperview()
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+
         }
     }
 }

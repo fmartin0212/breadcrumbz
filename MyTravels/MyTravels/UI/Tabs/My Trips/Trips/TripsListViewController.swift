@@ -63,6 +63,7 @@ class TripsListViewController: UIViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateProfilePicture), name: Constants.profilePictureUpdatedNotif, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(loadUserInfo), name: Constants.userLoggedInNotif, object: nil)
         
     }
     
@@ -99,6 +100,7 @@ class TripsListViewController: UIViewController {
             }
         } else {
             let signUpVC = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "SignUp") as! SignUpViewController
+            signUpVC.isOnboarding = false
             signUpVC.loadViewIfNeeded()
             signUpVC.skipButton.isHidden = true
             self.present(signUpVC, animated: true, completion: nil)
@@ -138,8 +140,7 @@ extension TripsListViewController {
         self.navigationItem.rightBarButtonItem = nil
         addATripButton.clipsToBounds = true
         addATripButton.layer.cornerRadius = 25
-        addATripButton.layer.borderColor = #colorLiteral(red: 1, green: 0.3019607843, blue: 0.3019607843, alpha: 1)
-        addATripButton.layer.borderWidth = 2
+    
     }
     
     private func setupLeftBarButton() {
@@ -159,7 +160,7 @@ extension TripsListViewController {
     }
     
     private func fetchUserInfo(completion: @escaping (Bool) -> Void) {
-        // FIXME: UI needs to show loading animation/indicator
+        
         guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(false) ; return }
         SharedTripsController.shared.fetchSharedTrips { (success) in
             if success {
@@ -173,6 +174,14 @@ extension TripsListViewController {
                     })
                 }
             } else { completion(false) }
+        }
+    }
+    
+    @objc func loadUserInfo() {
+        let loadingView = enableLoadingState()
+        fetchUserInfo { (success) in
+            NotificationCenter.default.post(name: Constants.profilePictureUpdatedNotif, object: nil)
+            self.disableLoadingState(loadingView)
         }
     }
 }

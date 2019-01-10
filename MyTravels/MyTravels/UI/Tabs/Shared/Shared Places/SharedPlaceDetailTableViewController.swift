@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class SharedPlaceDetailTableViewController: UITableViewController {
     
@@ -16,11 +17,12 @@ class SharedPlaceDetailTableViewController: UITableViewController {
     var sharedPlace: SharedPlace?
     
     var photos: [Photo] = []
-    
+    t
     // MARK: - IBOutlets
     
     @IBOutlet weak var sharedPlaceMainPhotoImageView: UIImageView!
     @IBOutlet weak var sharedPlaceNameLabel: UILabel!
+    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var sharedPlaceAddressLabel: UILabel!
     @IBOutlet var sharedPlaceCommentsTextView: UITextView!
     
@@ -35,10 +37,15 @@ class SharedPlaceDetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Delegates
-        collectionView.delegate = self
+        // Set collectionview datasource/delegate
         collectionView.dataSource = self
+        collectionView.delegate = self
         
+        // Set MapView properties
+        mapView.isScrollEnabled = false
+        mapView.isZoomEnabled = false
+        
+        // Update the views for the shared place.
         updateViewsForSharedPlace()
         
     }
@@ -55,10 +62,12 @@ class SharedPlaceDetailTableViewController: UITableViewController {
         guard let sharedPlace = sharedPlace
             else { return }
         
+        addAnnotation(for: sharedPlace)
+        
         if sharedPlace.photos.count > 0 {
             guard let mainPhoto = sharedPlace.photos.first else { return }
             sharedPlaceMainPhotoImageView.image = mainPhoto
-            sharedPlaceNameLabel.text = sharedPlace.name
+            sharedPlaceNameLabel.text = sharedPlace.name.uppercased()
             sharedPlaceAddressLabel.text = sharedPlace.address
             updateStarsImageViews(sharedPlace: sharedPlace)
             
@@ -89,8 +98,8 @@ class SharedPlaceDetailTableViewController: UITableViewController {
     }
     
     func updateStarsImageViews(sharedPlace: SharedPlace) {
-        guard let ratingAsInt16 = sharedPlace.rating else { return }
-        let ratingAsFloat = Float(ratingAsInt16)
+
+        let ratingAsFloat = Float(sharedPlace.rating)
         let rating = Int(ratingAsFloat)
         let stars: [UIImageView] = [starOne, starTwo, starThree, starFour, starFive]
         
@@ -108,6 +117,33 @@ class SharedPlaceDetailTableViewController: UITableViewController {
         for star in rating...4 {
             stars[star].image = UIImage(named: "star-clear-16")
         }
+    }
+    
+    func addAnnotation(for sharedPlace: SharedPlace) {
+        
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(sharedPlace.address) { (placemarks, error) in
+            if let error = error {
+                print("There was an error finding a placemark : \(error.localizedDescription)")
+                return
+            }
+            guard let placemarks = placemarks,
+            let placemark = placemarks.first,
+            let coordinate = placemark.location?.coordinate
+                else { return }
+            
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            
+            let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+            
+            self.mapView.setRegion(region, animated: false)
+            self.mapView.addAnnotation(annotation)
+            
+        }
+        
+        
     }
 }
 

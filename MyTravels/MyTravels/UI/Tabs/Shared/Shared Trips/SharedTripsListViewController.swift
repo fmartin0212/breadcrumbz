@@ -16,10 +16,13 @@ class SharedTripsListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     private let refreshControl = UIRefreshControl()
     private var profileButton: UIButton?
+    lazy var noSharedTripsView: NoSharedTripsView = UIView.fromNib()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        extendedLayoutIncludesOpaqueBars = true
+        tableView.refreshControl = refreshControl
+        tableView.addSubview(refreshControl)
         refreshControl.addTarget(self, action: #selector(fetchSharedTrips), for: .valueChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Constants.sharedTripsReceivedNotif, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateProfilePicture), name: Constants.profilePictureUpdatedNotif, object: nil)
@@ -30,7 +33,6 @@ class SharedTripsListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.refreshControl = refreshControl
         setupLeftBarButton()
         
         NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Constants.refreshSharedTripsListNotif, object: nil)
@@ -40,7 +42,7 @@ class SharedTripsListViewController: UIViewController {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
         
-      checkForNoSharedTrips()
+        checkForNoSharedTrips()
     }
     
     // MARK: - Functions
@@ -53,6 +55,7 @@ class SharedTripsListViewController: UIViewController {
         SharedTripsController.shared.fetchSharedTrips { (success) in
             if success {
                 DispatchQueue.main.async {
+                    self.checkForNoSharedTrips()
                     self.tableView.reloadData()
                     self.refreshControl.endRefreshing()                    
                 }
@@ -168,7 +171,6 @@ extension SharedTripsListViewController {
     
     func checkForNoSharedTrips() {
         if SharedTripsController.shared.sharedTrips.count == 0 {
-            let noSharedTripsView: NoSharedTripsView = UIView.fromNib()
             view.addSubview(noSharedTripsView)
             noSharedTripsView.translatesAutoresizingMaskIntoConstraints = false
             
@@ -176,6 +178,8 @@ extension SharedTripsListViewController {
             NSLayoutConstraint(item: noSharedTripsView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
             NSLayoutConstraint(item: noSharedTripsView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
             NSLayoutConstraint(item: noSharedTripsView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+        } else {
+            noSharedTripsView.removeFromSuperview()
         }
     }
 }

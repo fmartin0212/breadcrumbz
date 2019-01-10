@@ -11,17 +11,26 @@ import UIKit
 class SignUpViewController: UIViewController {
     
     // MARK: - Constants & Variables
+    
     var logIn: Bool = false
+    var isOnboarding = true
     var textFields: [UITextField] = []
+    
     // MARK: - Outlets
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var skipButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if isOnboarding == true {
+            cancelButton.isHidden = true
+        }
+        
         tableView.dataSource = self
         self.tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         signUpButton.formatBlue()
@@ -45,6 +54,7 @@ class SignUpViewController: UIViewController {
             self.scrollView.scrollIndicatorInsets.bottom = 0
         }
     }
+    
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         var frame = self.tableView.frame
         frame.size = self.tableView.contentSize
@@ -52,6 +62,11 @@ class SignUpViewController: UIViewController {
     }
     
     // MARK: - Actions
+    
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func skipButtonTapped(_ sender: Any) {
         presentTripListVC()
     }
@@ -114,8 +129,10 @@ extension SignUpViewController {
                 if success {
                     DispatchQueue.main.async {
                         self.disableLoadingState(loadingView)
-                        if self.skipButton.isHidden {
+                        if self.isOnboarding == false {
+                            NotificationCenter.default.post(name: Constants.userLoggedInNotif, object: nil)
                             self.dismiss(animated: true, completion: nil)
+                            
                         }
                         self.presentTripListVC()
                     }
@@ -165,10 +182,16 @@ extension SignUpViewController {
             }
             DispatchQueue.main.async {
                 self.disableLoadingState(loadingView)
-                let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController
-                let tripListVC = ((tabBarController?.customizableViewControllers?.first! as! UINavigationController).viewControllers.first!) as! TripsListViewController
-                tripListVC.fromSignUpVC = true
-                self.present(tabBarController!, animated: true, completion: nil)
+                if self.isOnboarding == false {
+                    NotificationCenter.default.post(name: Constants.userLoggedInNotif, object: nil)
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    
+                    let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController
+                    let tripListVC = ((tabBarController?.customizableViewControllers?.first! as! UINavigationController).viewControllers.first!) as! TripsListViewController
+                    tripListVC.fromSignUpVC = true
+                    self.present(tabBarController!, animated: true, completion: nil)
+                }
             }
         }
     }
@@ -229,15 +252,19 @@ extension SignUpViewController: UITableViewDataSource {
             case 0:
                 cell.entryTextField.placeholder = "First name"
                 cell.entryTextField.textContentType = UITextContentType.givenName
+                       cell.entryTextField.isSecureTextEntry = false
             case 1:
                 cell.entryTextField.placeholder = "Last name (optional)"
-                cell.entryTextField.textContentType = UITextContentType.familyName
+                cell.entryTextField.textContentType = UITextContentType.givenName
+                cell.entryTextField.isSecureTextEntry = false
             case 2:
                 cell.entryTextField.placeholder = "Username"
+                cell.entryTextField.isSecureTextEntry = false
             case 3:
                 cell.entryTextField.placeholder = "Email"
                 cell.entryTextField.textContentType = UITextContentType.emailAddress
                 cell.entryTextField.keyboardType = .emailAddress
+                cell.entryTextField.isSecureTextEntry = false
             case 4:
                 cell.entryTextField.placeholder = "Password"
                 cell.entryTextField.textContentType = UITextContentType.password

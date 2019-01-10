@@ -137,14 +137,13 @@ class PlaceTableViewCell: UITableViewCell {
     func updateStarsImageViews(sharedPlace: SharedPlace) {
         
         let starImageViewsArray = [starOne, starTwo, starThree, starFour, starFive]
-        guard let sharedPlaceRating = sharedPlace.rating else { return }
         if sharedPlace.rating == 0 {
             for starImageView in starImageViewsArray {
                 starImageView?.image = UIImage(named: "star-clear-16")
             }
-        } else if sharedPlaceRating > 0 {
+        } else if sharedPlace.rating > 0 {
             var i = 0
-            while i < sharedPlaceRating {
+            while i < sharedPlace.rating {
                 starImageViewsArray[i]?.image = UIImage(named: "star-black-16")
                 i += 1
             }

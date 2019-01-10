@@ -15,5 +15,6 @@ class Constants {
     static public let sharedTripsReceivedNotif = Notification.Name("sharedTripsReceived")
     static public let profilePictureUpdatedNotif = Notification.Name("profilePictureUpdatedNotification")
     static public let refreshSharedTripsListNotif = Notification.Name("refreshSharedTripsListNotif")
+    static public let userLoggedInNotif = Notification.Name("userLoggedInNotif")
     
     }

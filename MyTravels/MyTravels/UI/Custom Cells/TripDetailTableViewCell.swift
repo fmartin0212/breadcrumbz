@@ -38,7 +38,7 @@ class TripDetailTableViewCell: UITableViewCell {
         guard let trip = trip
             else { return }
         
-        tripNameLabel.text = trip.name
+        tripNameLabel.text = trip.name.uppercased()
         tripLocationLabel.text = trip.location
         tripStartDateLabel.text = "\((trip.startDate as Date).short()) -"
         tripEndDateLabel.text = (trip.endDate as Date).short()

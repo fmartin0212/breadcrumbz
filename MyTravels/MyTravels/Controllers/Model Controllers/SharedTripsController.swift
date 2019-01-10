@@ -15,7 +15,6 @@ class SharedTripsController {
     
     static var shared = SharedTripsController()
     var sharedTrips: [SharedTrip] = []
-    var sharedIDs = [String]()
 }
 
 extension SharedTripsController {
@@ -23,6 +22,7 @@ extension SharedTripsController {
     func fetchSharedTrips(completion: @escaping (Bool) -> Void) {
         guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(false) ; return }
         self.sharedTrips = []
+//        var sharedTripsPlaceholder: [SharedTrip] = []
         let ref = FirebaseManager.ref.child("User").child(loggedInUser.username).child("participantTripIDs")
         FirebaseManager.fetchObject(from: ref) { (snapshot) in
             guard let participantTripIDDictionaries = snapshot.value as? [String : String] else { completion(false) ; return }
@@ -37,6 +37,8 @@ extension SharedTripsController {
                     if let sharedTrip = SharedTrip(snapshot: snapshot) {
                         
                         self.sharedTrips.append(sharedTrip)
+//                        sharedTripsPlaceholder.append(sharedTrip)
+                        
                         dispatchGroup.enter()
                         let storeRef = FirebaseManager.storeRef.child("Trip").child(sharedTrip.uid)
                         FirebaseManager.fetchImage(storeRef: storeRef, completion: { (image) in
@@ -50,6 +52,7 @@ extension SharedTripsController {
                 })
             }
             dispatchGroup.notify(queue: .main, execute: {
+//                self.sharedTrips = sharedTripsPlaceholder
                 completion(true)
             })
         }

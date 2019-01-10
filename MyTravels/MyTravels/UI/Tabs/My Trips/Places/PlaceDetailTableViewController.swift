@@ -40,6 +40,9 @@ class PlaceDetailTableViewController: UITableViewController {
         if let _ = place {
             updateViews()
         }
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 44  
     }
     
     override func viewWillAppear(_ animated: Bool) {

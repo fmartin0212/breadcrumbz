@@ -155,19 +155,18 @@ extension SharedTripDetailViewController: UITableViewDelegate, UITableViewDataSo
         if section > 0 {
             // Use shared places array as datasource
             guard let sharedPlacesArray = sharedPlaces,
-                let firstItemInArray = sharedPlacesArray[section - 1].first,
-                let firstItemInArrayType = firstItemInArray.type
+                let firstItemInArray = sharedPlacesArray[section - 1].first
                 else { return UIView() }
             
-            if firstItemInArrayType == "Lodging" {
+            if firstItemInArray.type == "Lodging" {
                 let text = "  Lodging"
                 return sectionHeaderLabelWith(text: text)
                 
-            } else if firstItemInArrayType == "Restaurant" {
+            } else if firstItemInArray.type == "Restaurant" {
                 let text = "  Restaurants"
                 return sectionHeaderLabelWith(text: text)
                 
-            } else if firstItemInArrayType == "Activity" {
+            } else if firstItemInArray.type == "Activity" {
                 let text = "  Activities"
                 return sectionHeaderLabelWith(text: text)
             }

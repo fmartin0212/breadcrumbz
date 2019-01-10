@@ -10,11 +10,11 @@ import UIKit
 
 class SharedPlace {
     
-    var address: String?
+    var address: String
     var comments: String?
-    var name: String?
-    var rating: Int16?
-    var type: String?
+    var name: String
+    var rating: Int16
+    var type: String
     var photos: [UIImage] = []
     var photoURLs: [String]?
 

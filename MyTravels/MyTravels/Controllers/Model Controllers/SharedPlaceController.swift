@@ -24,9 +24,10 @@ class SharedPlaceController {
         }
         
         self.fetchSharedPlacesPhotos(sharedPlaces: sharedPlaces) { (success) in
-            if success {
+            // FIXME: - UNCOMMENT THIS - NEED TO HANDLE IF PHOTOS DON'T COME BACK
+//            if success {
                 completion(sharedPlaces)
-            }
+//            }
         }
     }
     

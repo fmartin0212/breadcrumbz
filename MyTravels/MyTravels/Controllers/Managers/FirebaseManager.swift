@@ -126,6 +126,16 @@ final class FirebaseManager {
             completion(image)
         }
     }
+    
+    static func performQuery(completion: @escaping (Bool) -> Void) {
+        let ref = FirebaseManager.ref.child("User").queryEqual(toValue: "frank", childKey: "username")
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            for child in snapshot.children {
+                print(child)
+                print("dsaf")
+            }
+        }
+    }
 }
 
 

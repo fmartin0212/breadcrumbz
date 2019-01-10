@@ -206,6 +206,13 @@
                                                 </prototypes>
                                                 <sections/>
                                             </tableView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bph-PI-Hyv">
+                                                <rect key="frame" x="12" y="8" width="48" height="30"/>
+                                                <state key="normal" title="Cancel"/>
+                                                <connections>
+                                                    <action selector="cancelButtonTapped:" destination="9ph-Lb-1Q9" eventType="touchUpInside" id="HSl-Ra-5Lb"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -241,13 +248,16 @@
                         <constraints>
                             <constraint firstItem="L5B-qp-p3z" firstAttribute="leading" secondItem="jx5-Qf-78x" secondAttribute="leading" id="4On-9s-7PQ"/>
                             <constraint firstItem="jx5-Qf-78x" firstAttribute="top" secondItem="L5B-qp-p3z" secondAttribute="top" id="AIL-1q-jKd"/>
+                            <constraint firstItem="jx5-Qf-78x" firstAttribute="top" secondItem="bph-PI-Hyv" secondAttribute="bottom" constant="-38" id="BBy-ZK-IUB"/>
                             <constraint firstItem="L5B-qp-p3z" firstAttribute="trailing" secondItem="jx5-Qf-78x" secondAttribute="trailing" id="CCz-jx-eWx"/>
+                            <constraint firstItem="jx5-Qf-78x" firstAttribute="leading" secondItem="bph-PI-Hyv" secondAttribute="trailing" constant="-60" id="I6A-eD-2AE"/>
                             <constraint firstItem="jx5-Qf-78x" firstAttribute="bottom" secondItem="L5B-qp-p3z" secondAttribute="bottom" id="QQb-6B-oS3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jx5-Qf-78x"/>
                     </view>
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
+                        <outlet property="cancelButton" destination="bph-PI-Hyv" id="b90-BY-WYY"/>
                         <outlet property="loginButton" destination="duA-ZN-2de" id="DMN-Zv-UbE"/>
                         <outlet property="scrollView" destination="L5B-qp-p3z" id="Fwa-eI-jfg"/>
                         <outlet property="signUpButton" destination="csM-4g-pzI" id="lqA-8u-Ai0"/>

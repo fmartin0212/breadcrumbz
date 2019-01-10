@@ -19,6 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
+//        FirebaseManager.performQuery { (success) in
+//            print("asdSF")
+//        }
+        
         return true
     }
 }
