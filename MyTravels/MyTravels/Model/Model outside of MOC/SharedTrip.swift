@@ -57,6 +57,3 @@ extension SharedTrip: Equatable {
         return lhs.uid == rhs.uid
     }
 }
-
-
-

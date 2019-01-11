@@ -17,7 +17,7 @@ class SharedPlaceDetailTableViewController: UITableViewController {
     var sharedPlace: SharedPlace?
     
     var photos: [Photo] = []
-    t
+    var placemark: CLPlacemark?
     // MARK: - IBOutlets
     
     @IBOutlet weak var sharedPlaceMainPhotoImageView: UIImageView!
@@ -132,6 +132,7 @@ class SharedPlaceDetailTableViewController: UITableViewController {
             let coordinate = placemark.location?.coordinate
                 else { return }
             
+            self.placemark = placemark
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
@@ -140,10 +141,33 @@ class SharedPlaceDetailTableViewController: UITableViewController {
             
             self.mapView.setRegion(region, animated: false)
             self.mapView.addAnnotation(annotation)
+        }
+    }
+}
+
+// MARK: - Table View Delegate
+
+extension SharedPlaceDetailTableViewController {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 2 {
+            
+            guard let placemark = placemark,
+                let location = placemark.location
+            else { return }
+            
+            let region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0))
+            
+            let options = [
+                MKLaunchOptionsCameraKey: NSValue(mkCoordinate: region.center),
+                MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: region.span)
+            ]
+            let mkPlacemark = MKPlacemark(placemark: placemark)
+            let mapItem = MKMapItem(placemark: mkPlacemark)
+            
+            mapItem.openInMaps(launchOptions: options)
             
         }
-        
-        
     }
 }
 

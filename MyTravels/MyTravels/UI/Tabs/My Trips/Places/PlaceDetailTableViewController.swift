@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import MapKit
 
 class PlaceDetailTableViewController: UITableViewController {
 
     // MARK: Properties
+    
     var trip: Trip?
     var place: Place?
     var photos: [Photo] = []
+    var placemark: CLPlacemark?
     
     // MARK: - IBOutlets
+    
     @IBOutlet weak var placeMainPhotoImageView: UIImageView!
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var placeAddressLabel: UILabel!
@@ -26,6 +30,7 @@ class PlaceDetailTableViewController: UITableViewController {
     @IBOutlet weak var starThree: UIImageView!
     @IBOutlet weak var starFour: UIImageView!
     @IBOutlet weak var starFive: UIImageView!
+    @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -111,6 +116,33 @@ class PlaceDetailTableViewController: UITableViewController {
                 starImageViewsArray[i]?.image = UIImage(named: "star-clear-16")
                 i += 1
             }
+        }
+    }
+    
+    
+    func addAnnotation(for place: Place) {
+        
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(place.address) { (placemarks, error) in
+            if let error = error {
+                print("There was an error finding a placemark : \(error.localizedDescription)")
+                return
+            }
+            guard let placemarks = placemarks,
+                let placemark = placemarks.first,
+                let coordinate = placemark.location?.coordinate
+                else { return }
+            
+            self.placemark = placemark
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            
+            let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+            
+            self.mapView.setRegion(region, animated: false)
+            self.mapView.addAnnotation(annotation)
+            
         }
     }
     
