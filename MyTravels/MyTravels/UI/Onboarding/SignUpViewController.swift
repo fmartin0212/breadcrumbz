@@ -125,8 +125,11 @@ extension SignUpViewController {
             let loadingView = self.enableLoadingState()
             loadingView.loadingLabel.text = "Creating account"
             
-            InternalUserController.shared.createNewUserWith(firstName: firstName, lastName: lastName, username: username, email: email, password: password) { (success) in
-                if success {
+            InternalUserController.shared.createNewUserWith(firstName: firstName, lastName: lastName, username: username, email: email, password: password) { (errorMessage) in
+                if let errorMessage = errorMessage {
+                    self.disableLoadingState(loadingView)
+                    self.presentStandardAlertController(withTitle: "Oops!", message: errorMessage)
+                } else {
                     DispatchQueue.main.async {
                         self.disableLoadingState(loadingView)
                         if self.isOnboarding == false {
@@ -135,13 +138,6 @@ extension SignUpViewController {
                             
                         }
                         self.presentTripListVC()
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self.disableLoadingState(loadingView)
-                        let alertController = UIAlertController(title: "Something went wrong.", message: "Please try again.", preferredStyle: .alert)
-                        let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                        alertController.addAction(OKAction)
                     }
                 }
             }
@@ -173,24 +169,27 @@ extension SignUpViewController {
         let loadingView = enableLoadingState()
         loadingView.loadingLabel.text = "Logging in"
         
-        InternalUserController.shared.login(withEmail: email, password: password) { (error) in
-            if let error = error {
-                // FIXME: Need error handling
-                self.disableLoadingState(loadingView)
-                print("There was an error logging in the user: \(error.localizedDescription)")
-                return
-            }
-            DispatchQueue.main.async {
-                self.disableLoadingState(loadingView)
-                if self.isOnboarding == false {
-                    NotificationCenter.default.post(name: Constants.userLoggedInNotif, object: nil)
-                    self.dismiss(animated: true, completion: nil)
-                } else {
-                    
-                    let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController
-                    let tripListVC = ((tabBarController?.customizableViewControllers?.first! as! UINavigationController).viewControllers.first!) as! TripsListViewController
-                    tripListVC.fromSignUpVC = true
-                    self.present(tabBarController!, animated: true, completion: nil)
+        InternalUserController.shared.login(withEmail: email, password: password) { (errorMessage) in
+            if let errorMessage = errorMessage {
+                DispatchQueue.main.async {
+                    self.disableLoadingState(loadingView)
+                    self.presentStandardAlertController(withTitle: "Oops!", message: errorMessage)
+                    print("There was an error logging in the user: \(errorMessage)")
+                    return
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.disableLoadingState(loadingView)
+                    if self.isOnboarding == false {
+                        NotificationCenter.default.post(name: Constants.userLoggedInNotif, object: nil)
+                        self.dismiss(animated: true, completion: nil)
+                    } else {
+                        
+                        let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController
+                        let tripListVC = ((tabBarController?.customizableViewControllers?.first! as! UINavigationController).viewControllers.first!) as! TripsListViewController
+                        tripListVC.fromSignUpVC = true
+                        self.present(tabBarController!, animated: true, completion: nil)
+                    }
                 }
             }
         }
@@ -252,7 +251,7 @@ extension SignUpViewController: UITableViewDataSource {
             case 0:
                 cell.entryTextField.placeholder = "First name"
                 cell.entryTextField.textContentType = UITextContentType.givenName
-                       cell.entryTextField.isSecureTextEntry = false
+                cell.entryTextField.isSecureTextEntry = false
             case 1:
                 cell.entryTextField.placeholder = "Last name (optional)"
                 cell.entryTextField.textContentType = UITextContentType.givenName

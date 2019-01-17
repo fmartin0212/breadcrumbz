@@ -27,6 +27,7 @@ final class FirebaseManager {
                 completion(error)
                 return
             }
+            
             completion(nil)
         }
     }
@@ -50,7 +51,6 @@ final class FirebaseManager {
     }
     
     static func fetchObject(from ref: DatabaseReference, completion: @escaping (DataSnapshot) -> Void) {
-        
         ref.observeSingleEvent(of: .value) { (snapshot) in
             completion(snapshot)
         }
@@ -58,15 +58,26 @@ final class FirebaseManager {
     
     // MARK: - Auth
     
-    static func addUser(with email: String, password: String, username: String, completion: @escaping (User?, Error?) -> Void) {
+    static func addUser(with email: String, password: String, username: String, completion: @escaping (User?, String?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             if let error = error {
-                
-                print("There was an error creating a new user: \(error.localizedDescription)")
-                completion(nil, error)
-                return
+                if let errorCode = AuthErrorCode(rawValue: error._code) {
+                    switch errorCode {
+                    case .emailAlreadyInUse:
+                        completion(nil, Constants.emailInUse)
+                    case .invalidEmail:
+                        completion(nil, Constants.invalidEmail)
+                    case .weakPassword:
+                        completion(nil, Constants.weakPassword)
+                    default:
+                        completion(nil, Constants.somethingWentWrong)
+                    }
+                    print("There was an error creating a new user: \(error.localizedDescription)")
+                    return
+                }
             }
-            guard let user = user else { completion(nil, error) ; return }
+            
+            guard let user = user else { completion(nil, Constants.somethingWentWrong) ; return }
             
             // Update displayName in Authentication storage
             let changeRequest = user.createProfileChangeRequest()
@@ -80,13 +91,25 @@ final class FirebaseManager {
         }
     }
     
-    static func login(withEmail email: String, and password: String, completion: @escaping (User?, Error?) -> Void) {
+    static func login(withEmail email: String, and password: String, completion: @escaping (User?, String?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (firebaseUser, error) in
             if let error = error {
-                completion(nil, error)
-                return
+                if let errorCode = AuthErrorCode(rawValue: error._code) {
+                    switch errorCode  {
+                    case .wrongPassword:
+                        completion(nil, Constants.wrongPassword)
+                    case .invalidCredential:
+                        completion(nil, Constants.noAccount)
+                    case .userNotFound:
+                        completion(nil, Constants.noAccount)
+                    default:
+                        completion(nil, Constants.somethingWentWrong)
+                    }
+                    return
+                }
+            } else {
+                completion(firebaseUser, nil)
             }
-            completion(firebaseUser, nil)
         }
     }
     

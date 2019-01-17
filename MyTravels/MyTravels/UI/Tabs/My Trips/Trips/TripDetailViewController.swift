@@ -90,6 +90,8 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
             var restaurantsArray: [Place] = []
             var activitiesArray: [Place] = []
             
+            
+            
             for place in placesArray {
                 
                 if place.type == "Lodging" {

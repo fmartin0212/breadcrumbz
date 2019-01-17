@@ -16,18 +16,16 @@ class InternalUserController {
     
     var loggedInUser: InternalUser?
     
-    func createNewUserWith(firstName: String, lastName: String?, username: String, email: String, password: String, completion: @escaping (Bool) -> Void) {
+    func createNewUserWith(firstName: String, lastName: String?, username: String, email: String, password: String, completion: @escaping (String?) -> Void) {
         let newUser = InternalUser(firstName: firstName, lastName: lastName, username: username, email: email)
-        FirebaseManager.addUser(with: email, password: password, username: username) { (firebaseUser, error) in
-            if let error = error {
-                // FIXME - Should switch on an enum
-                print("Error saving a new user to the Firebase Database: \(error.localizedDescription)")
-                completion(false)
+        FirebaseManager.addUser(with: email, password: password, username: username) { (firebaseUser, errorMessage) in
+            if let errorMessage = errorMessage {
+                print("Error saving a new user to the Firebase Database: \(errorMessage)")
+                completion(errorMessage)
                 return
             }
             
-            guard let firebaseUser = firebaseUser else { completion(false) ; return }
-            //            newUser.uid = firebaseUser.uid
+            guard let _ = firebaseUser else { completion(Constants.somethingWentWrong) ; return }
             self.loggedInUser = newUser
             
             let internalUserDict: [String : Any] = [ "username" : newUser.username,
@@ -38,12 +36,8 @@ class InternalUserController {
             
             let ref = FirebaseManager.ref.child("User").child(username)
             FirebaseManager.save(internalUserDict, to: ref, completion: { (error) in
-                if let error = error {
-                    // Present alert controller?
-                } else {
-                    completion(true)
-                }
-            })
+                completion(nil)
+                })
         }
     }
     
@@ -61,12 +55,11 @@ class InternalUserController {
         }
     }
     
-    func login(withEmail email: String, password: String, completion: @escaping (Error?) -> Void) {
-        FirebaseManager.login(withEmail: email, and: password) { (firebaseUser, error) in
-            if let error = error {
-                // FIXME : Need better error handling
-                print("Error logging in Firebase user : \(error.localizedDescription)")
-                    completion(error)
+    func login(withEmail email: String, password: String, completion: @escaping (String?) -> Void) {
+        FirebaseManager.login(withEmail: email, and: password) { (firebaseUser, errorMessage) in
+            if let errorMessage = errorMessage {
+                print("Error logging in Firebase user : \(errorMessage)")
+                completion(errorMessage)
                 return
             } else {
                 guard let username = firebaseUser?.displayName else { completion(nil) ; return }
