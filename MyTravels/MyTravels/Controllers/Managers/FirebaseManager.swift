@@ -20,19 +20,90 @@ final class FirebaseManager {
     
     // MARK: - Database
     
-    static func saveSingleObject(_ object: Any, to databaseReference: DatabaseReference, completion: @escaping (Error?) -> Void) {
-        databaseReference.setValue(object) { (error, _) in
-            if let error = error {
+    static func save<T: FirebaseSavable>(_ object: T,
+                                         uuid: String? = nil,
+                                         completion: @escaping (_ errorMessage: String?, _ uuid: String?) -> Void) {
+        
+        var databaseRef = object.databaseRef
+        
+        // Used for Auth
+        if let uuid = uuid {
+            databaseRef = databaseRef.child(uuid)
+        } else {
+            databaseRef = object.databaseRef.childByAutoId()
+        }
+    
+        databaseRef.setValue(object.dictionary) { (error, databaseRef) in
+            if let _ = error {
                 print("There was an error saving an object to the database")
-                completion(error)
+                completion(Constants.somethingWentWrong, nil)
+                return
+            } else {
+                completion(nil, databaseRef.key)
+            }
+        }
+    }
+    
+    static func update<T: FirebaseSavable>(object: T,
+                                           atChildren children: [String]? = nil,
+                                           withValues values: [String : Any],
+                                           completion: @escaping (String?) -> Void) {
+        
+        var databaseRef = object.databaseRef.child(object.uuid!)
+        
+        if let children = children {
+            children.forEach { databaseRef = databaseRef.child($0) }
+        }
+        
+        databaseRef.updateChildValues(values) { (error, _) in
+            if let error = error {
+                print(error)
+                completion(Constants.somethingWentWrong)
                 return
             }
-            
             completion(nil)
         }
     }
     
-    static func save(_ object: Any, to databaseReference: DatabaseReference, completion: @escaping (Error?) -> Void) {
+    static func update(at ref: DatabaseReference, value: [String : Any], completion: @escaping (_ errorMessage: String?) -> Void) {
+        ref.updateChildValues(value) { (error, _) in
+            if let _ = error {
+                completion(Constants.somethingWentWrong)
+                return
+            }
+            completion(nil)
+        }
+    }
+    
+    static func fetch<T: FirebaseRetrievable>(uuid: String? = nil,
+                                              atChildren children: [String]? = nil,
+                                              withQuery query: String? = nil,
+                                              completion: @escaping (T?) -> Void) {
+        var databaseRef = T.databaseRef
+        
+        if let uuid = uuid {
+            databaseRef = databaseRef.child(uuid)
+        }
+        
+        if let query = query {
+            databaseRef.queryEqual(toValue: query)
+        }
+        
+        if let children = children {
+            children.forEach { databaseRef = databaseRef.child($0) }
+        }
+        
+        databaseRef.observeSingleEvent(of: .value) { (snapshot) in
+            guard snapshot.exists(),
+                let dictionary = snapshot.value as? [String : Any]
+                else { completion(nil) ; return }
+            
+            let object = T(dictionary: dictionary, uuid: snapshot.key)
+            completion(object)
+        }
+    }
+    
+    static func save(_ object: Any, to databaseReference: DatabaseReference, atChildren children: [String]? = nil, completion: @escaping (Error?) -> Void) {
         
         databaseReference.setValue(object) { (error, _) in
             if let error = error {

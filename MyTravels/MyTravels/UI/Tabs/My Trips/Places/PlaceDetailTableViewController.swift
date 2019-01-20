@@ -47,7 +47,10 @@ class PlaceDetailTableViewController: UITableViewController {
         }
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 44  
+        tableView.estimatedRowHeight = 44
+        
+        mapView.isScrollEnabled = false
+        mapView.isZoomEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,6 +97,8 @@ class PlaceDetailTableViewController: UITableViewController {
         } else {
             placeCommentsTextView.text = place.comments
         }
+        
+        addAnnotation(for: place)
     }
     
     func updateStarsImageViews(place: Place) {

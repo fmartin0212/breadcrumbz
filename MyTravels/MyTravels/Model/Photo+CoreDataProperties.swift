@@ -1,9 +1,8 @@
 //
 //  Photo+CoreDataProperties.swift
-//  MyTravels
+//  
 //
-//  Created by Frank Martin Jr on 2/12/18.
-//  Copyright © 2018 Frank Martin Jr. All rights reserved.
+//  Created by Frank Martin Jr on 1/19/19.
 //
 //
 
@@ -17,6 +16,7 @@ extension Photo {
         return NSFetchRequest<Photo>(entityName: "Photo")
     }
 
+    @NSManaged public var firebaseURL: String?
     @NSManaged public var photo: NSData?
     @NSManaged public var uid: String?
     @NSManaged public var place: Place?

@@ -52,6 +52,7 @@ final class PhotoController {
         
         // Loop over the photos and initialize a Photo.
         for photo in photos {
+//            let _ = Photo(
             let _ = Photo(photo: photo, place: place, trip: nil)
         }
         

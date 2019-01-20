@@ -133,51 +133,34 @@ class TripController {
          - parameter trip: The trip to be uploaded.
          - parameter creatorName: The username of the trip creator.
          - parameter completion: A completion block which passes a boolean to indicate whether the trip was successfully saved to the Firebase database.
-        */
+         */
         func upload(trip: Trip,
                     creatorName: String,
                     completion: @escaping (Bool) -> Void) {
             
-            // Initialize a dictionary based on the trip's properties and the trip creator's name.
-            let tripDict: [String : Any?] = [
-                "name" : trip.name,
-                "location" : trip.location,
-                "description" : trip.tripDescription,
-                "startDate" : trip.startDate.timeIntervalSince1970,
-                "endDate" : trip.endDate.timeIntervalSince1970,
-                "creatorName" : creatorName,
-                "creatorUsername" : loggedInUser.username,
-                "places" : PlaceController.shared.createPlaces(for: trip)
-            ]
-            
-            // Create a new Firebase database reference for the trip.
-            let tripRef = FirebaseManager.ref.child("Trip").childByAutoId()
-            
-            // Save the trip to the Firebase database reference.
-            FirebaseManager.save(tripDict, to: tripRef) { (error) in
-                if let _ = error {
+            FirebaseManager.save(trip) { (errorMessage, tripUUID) in
+                if let errorMessage = errorMessage {
+                    print(errorMessage)
                     completion(false)
                     return
                 }
-                
-                // Save the trip ID to the logged in user's Firebase node
-                let sharedTripIDRef = FirebaseManager.ref.child("User").child(InternalUserController.shared.loggedInUser!.username).child("sharedTripIDs").child(tripRef.key)
-                FirebaseManager.save(tripRef.key, to: sharedTripIDRef, completion: { (error) in
-                    if let error = error {
-                        print("There was an error saving the shared trip ID to the 'sharer': \(error.localizedDescription)")
-                    }
-                })
-                
-                // If save to Firebase is successful, save trip's UID locally and to persistent store.
-                trip.uid = tripRef.key
+                trip.uuid = tripUUID
+                trip.uid = trip.uuid
                 CoreDataManager.save()
                 
-                // Save the trip's photos to Firebase storage.
-                PhotoController.shared.savePhotos(for: trip, completion: { (success) in
-                    if success {
-                        completion(true)
-                    }
-                })
+                if let tripUUID = tripUUID {
+                    let children = [Constants.sharedTripIDs]
+                    let values = [tripUUID : true]
+                    FirebaseManager.update(object: InternalUserController.shared.loggedInUser!, atChildren: children, withValues: values, completion: { (_) in
+
+                        // Save the trip's photos to Firebase storage.
+                        PhotoController.shared.savePhotos(for: trip, completion: { (success) in
+                            if success {
+                                completion(true)
+                            }
+                        })
+                    })
+                }
             }
         }
     }
@@ -193,16 +176,14 @@ class TripController {
                              completion: @escaping (Bool) -> Void) {
         
         // Get a database reference to the receiver's participant trip ID child node.
-        let userTripRef = FirebaseManager.ref.child("User").child(receiver).child("participantTripIDs").child(tripID)
+        let userTripRef = Constants.databaseRef.child(Constants.user).child(receiver).child(Constants.participantTripIDs)
         
         // Save the trip ID to the database reference.
-        FirebaseManager.save(tripID, to: userTripRef, completion: { (error) in
-            if let error = error {
-                print(error)
-                completion(false)
-            }
+        let value = [tripID : true]
+        FirebaseManager.update(at: userTripRef, value: value) { (_) in
+          print("break")
             completion(true)
-        })
+        }
     }
     
     /**

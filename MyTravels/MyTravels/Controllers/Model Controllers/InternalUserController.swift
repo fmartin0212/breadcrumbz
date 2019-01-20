@@ -17,7 +17,11 @@ class InternalUserController {
     var loggedInUser: InternalUser?
     
     func createNewUserWith(firstName: String, lastName: String?, username: String, email: String, password: String, completion: @escaping (String?) -> Void) {
+        
+        // Initialize a new user
         let newUser = InternalUser(firstName: firstName, lastName: lastName, username: username, email: email)
+
+        // Save the user to Firebase Auth
         FirebaseManager.addUser(with: email, password: password, username: username) { (firebaseUser, errorMessage) in
             if let errorMessage = errorMessage {
                 print("Error saving a new user to the Firebase Database: \(errorMessage)")
@@ -26,31 +30,29 @@ class InternalUserController {
             }
             
             guard let _ = firebaseUser else { completion(Constants.somethingWentWrong) ; return }
-            self.loggedInUser = newUser
             
-            let internalUserDict: [String : Any] = [ "username" : newUser.username,
-                                                     "email" : newUser.email,
-                                                     "firstName" : newUser.firstName,
-                                                     "lastName" : newUser.lastName ?? ""
-            ]
-            
-            let ref = FirebaseManager.ref.child("User").child(username)
-            FirebaseManager.save(internalUserDict, to: ref, completion: { (error) in
-                completion(nil)
-                })
+            // Save the user to the Firebase Database
+            FirebaseManager.save(newUser, uuid: firebaseUser?.uid, completion: { (errorMessage, uuid) in
+                if let errorMessage = errorMessage {
+                    completion(errorMessage)
+                    return
+                } else {
+                    newUser.uuid = uuid
+                    self.loggedInUser = newUser
+                    completion(nil)
+                }
+            })
         }
     }
     
     func checkForLoggedInUser(completion: @escaping (Bool) -> Void) {
         if let firebaseUser = FirebaseManager.getLoggedInUser() {
-            let ref = FirebaseManager.ref.child("User").child(firebaseUser.displayName!)
-            FirebaseManager.fetchObject(from: ref) { (snapshot) in
-                let loggedInUser = InternalUser(snapshot: snapshot)
+            FirebaseManager.fetch(uuid: firebaseUser.uid, completion: { (loggedInUser: InternalUser?) in
+                guard let loggedInUser = loggedInUser else { completion(false) ; return  }
                 self.loggedInUser = loggedInUser
                 completion(true)
-                return
             }
-        } else {
+        )} else {
             completion(false)
         }
     }
@@ -62,10 +64,10 @@ class InternalUserController {
                 completion(errorMessage)
                 return
             } else {
-                guard let username = firebaseUser?.displayName else { completion(nil) ; return }
-                let ref = FirebaseManager.ref.child("User").child(username)
-                FirebaseManager.fetchObject(from: ref, completion: { (snapshot) in
-                    guard let loggedInUser = InternalUser(snapshot: snapshot) else { completion(nil) ; return }
+                guard let uuid = firebaseUser?.uid else { completion(nil) ; return }
+                
+                FirebaseManager.fetch(uuid: uuid, atChildren: nil, completion: { (loggedInUser: InternalUser?) in
+                    guard let loggedInUser = loggedInUser else { completion(Constants.somethingWentWrong) ; return  }
                     self.loggedInUser = loggedInUser
                     completion(nil)
                 })

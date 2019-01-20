@@ -9,10 +9,31 @@
 import Foundation
 import FirebaseDatabase
 
-protocol FirebaseSyncable: class {
+protocol FirebaseRetrievable {
     
-    var uuid: String { get }
-    static var CollectionName: String { get }
+    var uuid: String? { get }
+    static var referenceName: String { get }
     init?(dictionary: [String : Any], uuid: String)
 }
 
+extension FirebaseRetrievable {
+    
+    static var databaseRef: DatabaseReference {
+        return FirebaseManager.ref.child(Self.referenceName)
+    }
+}
+
+protocol FirebaseSavable {
+    
+    var uuid: String? { get }
+    static var referenceName: String { get }
+    var dictionary: [String : Any] { get }
+    
+}
+
+extension FirebaseSavable {
+        
+    var databaseRef: DatabaseReference  {
+            return FirebaseManager.ref.child(Self.referenceName)
+    }
+}

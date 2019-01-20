@@ -53,10 +53,10 @@ class TripsListViewController: UIViewController {
         addTripBarButtonItem.format()
         TripController.shared.fetchAllTrips()
         
-//        for trip in TripController.shared.trips {
-//            trip.uid = nil
-//            CoreDataManager.save()
-//        }
+        for trip in TripController.shared.trips {
+            trip.uid = nil
+            CoreDataManager.save()
+        }
         
         if TripController.shared.trips.count == 0 {
             self.presentNoTripsView()

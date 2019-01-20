@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		640D44D39C850C2A96963BFD /* Pods_MyTravels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C480CB24B3A0B628223A89 /* Pods_MyTravels.framework */; };
 		B7073BE520DAF03D001B1F9F /* AddACrumbTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7073BE420DAF03D001B1F9F /* AddACrumbTableViewCell.swift */; };
+		B70E7D1521F408A000B2228A /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70E7D1421F4089F00B2228A /* Photo+CoreDataClass.swift */; };
+		B70E7D1921F408C100B2228A /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70E7D1821F408C100B2228A /* Photo+CoreDataProperties.swift */; };
 		B711157920549859000868BD /* TripDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B711157820549859000868BD /* TripDetailTableViewCell.swift */; };
 		B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */; };
 		B725034F20D9B64C00744B23 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B725034E20D9B64C00744B23 /* ProfileViewController.swift */; };
@@ -53,8 +55,6 @@
 		B7DA1B6F202E140C0007497A /* Trip+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B69202E140C0007497A /* Trip+CoreDataClass.swift */; };
 		B7DA1B71202E140C0007497A /* Place+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B6B202E140C0007497A /* Place+CoreDataClass.swift */; };
 		B7DA1B72202E140C0007497A /* Place+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B6C202E140C0007497A /* Place+CoreDataProperties.swift */; };
-		B7DA1B73202E140C0007497A /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B6D202E140C0007497A /* Photo+CoreDataClass.swift */; };
-		B7DA1B74202E140C0007497A /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B6E202E140C0007497A /* Photo+CoreDataProperties.swift */; };
 		B7DA1B78202E1AE20007497A /* InternalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B77202E1AE20007497A /* InternalUser.swift */; };
 		B7DA1B7D202E2B900007497A /* InternalUserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B7C202E2B900007497A /* InternalUserController.swift */; };
 		B7DA1B7F202F9FBC0007497A /* FetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */; };
@@ -76,6 +76,8 @@
 		66C480CB24B3A0B628223A89 /* Pods_MyTravels.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTravels.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A42438B3869DF1A1F6B9E358 /* Pods-MyTravels.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTravels.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels.debug.xcconfig"; sourceTree = "<group>"; };
 		B7073BE420DAF03D001B1F9F /* AddACrumbTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddACrumbTableViewCell.swift; sourceTree = "<group>"; };
+		B70E7D1421F4089F00B2228A /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B70E7D1821F408C100B2228A /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B711157820549859000868BD /* TripDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailTableViewCell.swift; sourceTree = "<group>"; };
 		B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B725034E20D9B64C00744B23 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -124,8 +126,6 @@
 		B7DA1B69202E140C0007497A /* Trip+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B7DA1B6B202E140C0007497A /* Place+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Place+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B7DA1B6C202E140C0007497A /* Place+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Place+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		B7DA1B6D202E140C0007497A /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B7DA1B6E202E140C0007497A /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B7DA1B77202E1AE20007497A /* InternalUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUser.swift; sourceTree = "<group>"; };
 		B7DA1B7C202E2B900007497A /* InternalUserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUserController.swift; sourceTree = "<group>"; };
 		B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchViewController.swift; sourceTree = "<group>"; };
@@ -306,9 +306,10 @@
 				B745843F203B7B1A00A686E7 /* Model outside of MOC */,
 				B7DA1B69202E140C0007497A /* Trip+CoreDataClass.swift */,
 				B735428C2174E36200D9A68D /* Trip+CoreDataProperties.swift */,
+				B70E7D1421F4089F00B2228A /* Photo+CoreDataClass.swift */,
+				B70E7D1821F408C100B2228A /* Photo+CoreDataProperties.swift */,
 				B7DA1B6B202E140C0007497A /* Place+CoreDataClass.swift */,
 				B7DA1B6C202E140C0007497A /* Place+CoreDataProperties.swift */,
-				B7DA1B6E202E140C0007497A /* Photo+CoreDataProperties.swift */,
 				B7C10CBB2020D19500818430 /* MyTravels.xcdatamodeld */,
 				B7C10CD2202111A300818430 /* CoreDataStack.swift */,
 				B762265421EFC94F0045F260 /* FirebaseSyncable.swift */,
@@ -353,7 +354,6 @@
 		B7DA1B80202FC9190007497A /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				B7DA1B6D202E140C0007497A /* Photo+CoreDataClass.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -563,11 +563,12 @@
 				B7C10CCF2020FD4B00818430 /* TripController.swift in Sources */,
 				B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */,
 				B7D652392024E24A00E975F1 /* TypeSelectionViewController.swift in Sources */,
+				B70E7D1921F408C100B2228A /* Photo+CoreDataProperties.swift in Sources */,
 				B7F7CF44217685150097198C /* SharedPlaceController.swift in Sources */,
 				B7DA1B78202E1AE20007497A /* InternalUser.swift in Sources */,
+				B70E7D1521F408A000B2228A /* Photo+CoreDataClass.swift in Sources */,
 				B7F75C20205A14D800C876A0 /* SharedTripDetailTableViewCell.swift in Sources */,
 				B7B0C36E203724F30031A92A /* SharedTrip.swift in Sources */,
-				B7DA1B73202E140C0007497A /* Photo+CoreDataClass.swift in Sources */,
 				B711157920549859000868BD /* TripDetailTableViewCell.swift in Sources */,
 				B7DA1B822030E70C0007497A /* SearchViewController.swift in Sources */,
 				B7F75C07205842E600C876A0 /* OnboardingPageViewController.swift in Sources */,
@@ -580,7 +581,6 @@
 				B7C10CB72020D19500818430 /* CreateAccountViewController.swift in Sources */,
 				B7F75C092058521C00C876A0 /* ExplanationViewController.swift in Sources */,
 				B7BDA845202A29F50080B81B /* EditPlaceTableViewController.swift in Sources */,
-				B7DA1B74202E140C0007497A /* Photo+CoreDataProperties.swift in Sources */,
 				B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */,
 				B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */,
 				B7C10CD12020FD5500818430 /* PlaceController.swift in Sources */,

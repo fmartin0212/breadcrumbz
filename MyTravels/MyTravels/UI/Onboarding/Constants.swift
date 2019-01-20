@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import FirebaseDatabase
+import FirebaseStorage
 
 class Constants {
     
@@ -25,5 +27,19 @@ class Constants {
     static public let emailInUse = "That email address is already in use. Please try again."
     static public let invalidEmail = "The email address that you entered is invalid. Please try again."
     static public let weakPassword = "That password is too short. Please enter a password that is at least 6 characters long."
+    
+    // MARK: - Firebase references
+    
+    static public let databaseRef = Database.database().reference()
+    static public let storageRef = Storage.storage().reference()
+    
+    // MARK: - Firebase child names
+    
+    static public let trip = "Trip"
+    static public let place = "Place"
+    static public let photo = "Photo"
+    static public let user = "User"
+    static public let sharedTripIDs = "sharedTripIDs"
+    static public let participantTripIDs = "participantTripIDs"
     
     }

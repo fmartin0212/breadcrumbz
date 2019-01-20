@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseDatabase
 
-class InternalUser {
+class InternalUser: FirebaseSavable, FirebaseRetrievable {
     
     let firstName: String
     let lastName: String?
@@ -20,6 +20,19 @@ class InternalUser {
     var participantTripIDs: [String]?
     var blockedUsernames: [String]?
     
+    // MARK: - Firebase Retrievable
+    var uuid: String?
+    static var referenceName: String = Constants.user
+    
+    // MARK: - Firebase Savable
+    var dictionary: [String : Any] {
+        return ["username" : self.username,
+                "email" : self.email,
+                "firstName" : self.firstName,
+                "lastName" : self.lastName ?? ""
+        ]
+    }
+    
     init(firstName: String, lastName: String?, username: String, email: String) {
         self.firstName = firstName
         self.lastName = lastName
@@ -27,6 +40,40 @@ class InternalUser {
         self.email = email
     }
     
+    
+    required init?(dictionary: [String : Any], uuid: String) {
+        
+        guard let firstName = dictionary["firstName"] as? String,
+            let lastName = dictionary["lastName"] as? String?,
+            let username = dictionary["username"] as? String,
+            let email = dictionary["email"] as? String
+            else { return nil }
+        
+        self.firstName = firstName
+        self.lastName = lastName
+        self.username = username
+        self.email = email
+        self.uuid = uuid
+        
+        if let photoURL = dictionary["photoURL"] as? String {
+            self.photoURL = photoURL
+            InternalUserController.shared.fetchProfilePhoto(from: photoURL) { (photo) in
+                guard let photo = photo else { return }
+                self.photo = photo
+                NotificationCenter.default.post(Notification(name: Notification.Name("profilePictureUpdatedNotification")))
+            }
+        }
+        
+        if let participantTripIDs = dictionary["participantTripIDs"] as? [String : Any] {
+            self.participantTripIDs = participantTripIDs.compactMap { $0.key }
+        }
+        
+        if let blockedUsernames = dictionary["blockedUsernames"] as? [String : Any] {
+            self.blockedUsernames = blockedUsernames.compactMap { $0.key }
+        }
+    }
+    
+    // FIXME: - REMOVE/REFACTOR
     // Turn snapshot into User
     init?(snapshot: DataSnapshot) {
         
@@ -35,7 +82,7 @@ class InternalUser {
             let lastName = tripDict["lastName"] as? String?,
             let username = tripDict["username"] as? String,
             let email = tripDict["email"] as? String
-
+            
             else { return nil }
         
         

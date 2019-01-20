@@ -82,50 +82,31 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
     func setUpArrays() {
         
         if let trip = trip {
-            guard let places = trip.places,
-                let placesArray = places.allObjects as? [Place] else { return }
+            guard let placesSet = trip.places,
+                let places = placesSet.allObjects as? [Place] else { return }
             
             var array: [[Place]] = []
-            var lodgingArray: [Place] = []
-            var restaurantsArray: [Place] = []
-            var activitiesArray: [Place] = []
             
+            let lodging = places.filter { $0.type == "Lodging" }
+            let restaurants = places.filter { $0.type == "Restaurants" }
+            let activities = places.filter { $0.type == "Activities" }
             
-            
-            for place in placesArray {
-                
-                if place.type == "Lodging" {
-                    lodgingArray.append(place)
-                    
-                } else if place.type == "Restaurant" {
-                    restaurantsArray.append(place)
-                    
-                } else if place.type == "Activity" {
-                    activitiesArray.append(place)
-                }
-                
+            if lodging.count > 0 {
+                array.append(lodging)
             }
             
-            if lodgingArray.count > 0 {
-                array.append(lodgingArray)
+            if restaurants.count > 0 {
+                array.append(restaurants)
             }
             
-            if restaurantsArray.count > 0 {
-                array.append(restaurantsArray)
+            if activities.count > 0 {
+                array.append(activities)
             }
             
-            if activitiesArray.count > 0 {
-                array.append(activitiesArray)
-            }
-            
-            print("Array count: \(array.count)")
-            print("Full array: \(array)")
             self.array = array
-            
         }
         
         tableView.reloadData()
-        
     }
     
     func presentShareAlertController() {

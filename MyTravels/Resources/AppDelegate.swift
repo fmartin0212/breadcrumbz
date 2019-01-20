@@ -19,6 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
+//        FirebaseManager.fetch(uuid: "fU2HTSJ6YJQdmebaob6FhdhTitj1") { (user: InternalUser?) in
+//            guard let user = user else { return }
+//            var participantTripIDs = [String : Any]()
+//            participantTripIDs = ["LU8EwrZLu6jY6L23c112" : true]
+//
+//            FirebaseManager.update(object: user, atChildren: ["participantTripIDs"], withValues: participantTripIDs) { (_) in
+//                print("adsF")
+//            }
+//        }
+        
         return true
     }
 }
