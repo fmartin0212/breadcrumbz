@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseDatabase
+import FirebaseStorage
 
 protocol FirebaseRetrievable {
     
@@ -36,4 +37,9 @@ extension FirebaseSavable {
     var databaseRef: DatabaseReference  {
             return FirebaseManager.ref.child(Self.referenceName)
     }
+}
+
+protocol FirebaseStorageSavable {
+    
+    var data: Data { get }
 }

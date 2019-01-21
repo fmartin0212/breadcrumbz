@@ -74,12 +74,6 @@ class CreateNewPlaceTableViewController: UITableViewController, CLLocationManage
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         
-        // Check to see if any required fields are empty, if so, present alertcontroller and jump out of function
-        guard let placeNameTF = placeNameTextField,
-            let placeTypeLabel = placeTypeLabel,
-            let placeAddressLabel = placeAddressLabel
-            else { return }
-        
 //        let textFields = [placeNameTF, placeTypeTF, placeAddressTV]
         
         if placeNameTextField.text?.isEmpty == true ||

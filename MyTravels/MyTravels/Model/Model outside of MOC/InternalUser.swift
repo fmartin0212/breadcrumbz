@@ -19,6 +19,7 @@ class InternalUser: FirebaseSavable, FirebaseRetrievable {
     var photo: UIImage?
     var participantTripIDs: [String]?
     var blockedUsernames: [String]?
+    var sharedTripIDs: [String]?
     
     // MARK: - Firebase Retrievable
     var uuid: String?
@@ -70,6 +71,10 @@ class InternalUser: FirebaseSavable, FirebaseRetrievable {
         
         if let blockedUsernames = dictionary["blockedUsernames"] as? [String : Any] {
             self.blockedUsernames = blockedUsernames.compactMap { $0.key }
+        }
+        
+        if let sharedTripIDs = dictionary["sharedTripIDs"] as? [String : Any] {
+            self.sharedTripIDs = sharedTripIDs.compactMap { $0.key }
         }
     }
     

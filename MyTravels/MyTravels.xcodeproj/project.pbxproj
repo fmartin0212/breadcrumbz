@@ -306,13 +306,12 @@
 				B745843F203B7B1A00A686E7 /* Model outside of MOC */,
 				B7DA1B69202E140C0007497A /* Trip+CoreDataClass.swift */,
 				B735428C2174E36200D9A68D /* Trip+CoreDataProperties.swift */,
-				B70E7D1421F4089F00B2228A /* Photo+CoreDataClass.swift */,
-				B70E7D1821F408C100B2228A /* Photo+CoreDataProperties.swift */,
 				B7DA1B6B202E140C0007497A /* Place+CoreDataClass.swift */,
 				B7DA1B6C202E140C0007497A /* Place+CoreDataProperties.swift */,
+				B70E7D1421F4089F00B2228A /* Photo+CoreDataClass.swift */,
+				B70E7D1821F408C100B2228A /* Photo+CoreDataProperties.swift */,
 				B7C10CBB2020D19500818430 /* MyTravels.xcdatamodeld */,
 				B7C10CD2202111A300818430 /* CoreDataStack.swift */,
-				B762265421EFC94F0045F260 /* FirebaseSyncable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -354,6 +353,7 @@
 		B7DA1B80202FC9190007497A /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				B762265421EFC94F0045F260 /* FirebaseSyncable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";

@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreData
-import FirebaseDatabase
 
 class TripController {
     
@@ -34,7 +33,7 @@ class TripController {
      - parameter tripDescription: An optional description of the trip.
      - parameter startDate: The start date of the trip.
      - parameter endDate: The end date of the trip.
-    */
+     */
     func createTripWith(name: String,
                         location: String,
                         tripDescription: String?,
@@ -53,7 +52,7 @@ class TripController {
     /**
      Deletes a trip from the Core Data persistent store.
      - parameter trip: The trip to be deleted.
-    */
+     */
     func delete(trip: Trip) {
         
         // Delete from Core Data
@@ -62,7 +61,7 @@ class TripController {
     
     /**
      Calls a fetch on the fetched results controller and returns all of the trips from the persistent store. Sets the trips property on the shared instance.
-    */
+     */
     func fetchAllTrips() {
         
         // Perform the fetch
@@ -83,7 +82,7 @@ class TripController {
      - parameter trip: The trip being shared.
      - parameter withReceiver: The username of the receiver.
      - parameter completion: A completion block which passes a boolean to inform the caller of whether the trip was successfully shared.
-    */
+     */
     func share(trip: Trip,
                withReceiver receiver: String,
                completion: @escaping (Bool) -> Void) {
@@ -115,7 +114,7 @@ class TripController {
                 // Trip has not been saved to the database, so we need to save a new Trip child and a child on the receiver.
                 let creatorName = loggedInUser.firstName + " " + (loggedInUser.lastName ?? "")
                 
-                upload(trip: trip, creatorName: creatorName) { (success) in
+                self.upload(trip: trip, creatorName: creatorName) { (success) in
                     if success {
                         guard let tripID = trip.uid else { completion(false) ; return }
                         self.addTripIDToReceiver(tripID: tripID, receiver: receiver, completion: { (success) in
@@ -127,43 +126,44 @@ class TripController {
                 }
             }
         }
+    }
+    
+    /**
+     Creates a dictionary from the trip's properties and the trip creator's name. Creates a Firebase reference for a new child node under 'Trip.' Calls on the Firebase Manager to have the trip uploaded.
+     - parameter trip: The trip to be uploaded.
+     - parameter creatorName: The username of the trip creator.
+     - parameter completion: A completion block which passes a boolean to indicate whether the trip was successfully saved to the Firebase database.
+     */
+    func upload(trip: Trip,
+                creatorName: String,
+                completion: @escaping (Bool) -> Void) {
         
-        /**
-         Creates a dictionary from the trip's properties and the trip creator's name. Creates a Firebase reference for a new child node under 'Trip.' Calls on the Firebase Manager to have the trip uploaded.
-         - parameter trip: The trip to be uploaded.
-         - parameter creatorName: The username of the trip creator.
-         - parameter completion: A completion block which passes a boolean to indicate whether the trip was successfully saved to the Firebase database.
-         */
-        func upload(trip: Trip,
-                    creatorName: String,
-                    completion: @escaping (Bool) -> Void) {
+        FirebaseManager.save(trip) { (errorMessage, tripUUID) in
+            if let errorMessage = errorMessage {
+                print(errorMessage)
+                completion(false)
+                return
+            }
+            trip.uuid = tripUUID
+            trip.uid = trip.uuid
+            CoreDataManager.save()
             
-            FirebaseManager.save(trip) { (errorMessage, tripUUID) in
-                if let errorMessage = errorMessage {
-                    print(errorMessage)
-                    completion(false)
-                    return
-                }
-                trip.uuid = tripUUID
-                trip.uid = trip.uuid
-                CoreDataManager.save()
-                
-                if let tripUUID = tripUUID {
-                    let children = [Constants.sharedTripIDs]
-                    let values = [tripUUID : true]
-                    FirebaseManager.update(object: InternalUserController.shared.loggedInUser!, atChildren: children, withValues: values, completion: { (_) in
-
-                        // Save the trip's photos to Firebase storage.
-                        PhotoController.shared.savePhotos(for: trip, completion: { (success) in
-                            if success {
-                                completion(true)
-                            }
-                        })
+            if let tripUUID = tripUUID {
+                let children = [Constants.sharedTripIDs]
+                let values = [tripUUID : true]
+                FirebaseManager.update(InternalUserController.shared.loggedInUser!, atChildren: children, withValues: values, completion: { (_) in
+                    
+                    // Save the trip's photos to Firebase storage.
+                    PhotoController.shared.savePhotos(for: trip, completion: { (success) in
+                        if success {
+                            completion(true)
+                        }
                     })
-                }
+                })
             }
         }
     }
+    
     
     /**
      Adds a shared trip ID to the receiver in the Firebase database.
@@ -180,8 +180,8 @@ class TripController {
         
         // Save the trip ID to the database reference.
         let value = [tripID : true]
-        FirebaseManager.update(at: userTripRef, value: value) { (_) in
-          print("break")
+        FirebaseManager.updateObject(at: userTripRef, value: value) { (_) in
+            print("break")
             completion(true)
         }
     }
@@ -190,7 +190,7 @@ class TripController {
      Checks whether the logged in user is blocked by receiver.
      - parameter receiver: The username of the receiver.
      - parameter completion: A completion block which passes a boolean to inform the caller of whether the logged in user is blocked by the receiver.
-    */
+     */
     func checkIfBlocked(_ receiver: String,
                         completion: @escaping (Bool) -> Void) {
         

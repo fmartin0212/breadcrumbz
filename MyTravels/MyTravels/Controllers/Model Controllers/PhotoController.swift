@@ -42,7 +42,7 @@ final class PhotoController {
         // Save the Core Data MOC.
         CoreDataManager.save()
     }
-
+    
     /**
      Loops over the photos parameter and initializes a new photo object. Saves the Core Data MOC.
      - parameter photos: The array of photos as data to be saved.
@@ -52,7 +52,7 @@ final class PhotoController {
         
         // Loop over the photos and initialize a Photo.
         for photo in photos {
-//            let _ = Photo(
+            //            let _ = Photo(
             let _ = Photo(photo: photo, place: place, trip: nil)
         }
         
@@ -100,15 +100,12 @@ final class PhotoController {
     func savePhotos(for trip: Trip,
                     completion: @escaping (Bool) -> Void) {
         
-        // Create a reference in the Firebase Storage.
-        let storeRef = FirebaseManager.storeRef.child("Trip").child(trip.uid!)
-        
         // Save the trip photo to the database reference.
-        saveTripPhoto(trip: trip, storeRef: storeRef) { (success) in
+        saveTripPhoto(trip) { (success) in
             if success {
                 
                 // Save the trip's places' photos.
-                self.savePlacePhotos(for: trip, to: storeRef, completion: { (success) in
+                self.savePlacePhotos(for: trip, completion: { (success) in
                     if success {
                         completion(true)
                     }
@@ -117,10 +114,34 @@ final class PhotoController {
         }
     }
     
-    func savePlacePhotos(for trip: Trip,
-                         to storeRef: StorageReference,
-                         completion: @escaping (Bool) -> Void) {
+    func saveTripPhoto(_ trip: Trip,
+                       completion: @escaping (Bool) -> Void) {
         
+        guard let tripPhoto = trip.photo else { completion(false) ; return }
+        
+        FirebaseManager.save(tripPhoto) { (metadata, errorMessage) in
+            if let _ = errorMessage {
+                completion(false)
+            } else if let metadata = metadata {
+                metadata.downloadURL()
+                let children = [Constants.photoURL]
+                let values = [tripPhoto.uid! : true]
+                
+                FirebaseManager.update(trip, atChildren: children, withValues: values, completion: { (errorMessage) in
+                    if let _ = errorMessage {
+                        completion(false)
+                        return
+                    } else {
+                        completion(false)
+                    }
+                })
+            }
+        }
+    }
+    
+    func savePlacePhotos(for trip: Trip,
+                         completion: @escaping (Bool) -> Void) {
+        // FIXME : - Need to update completions/error messages
         if let places = trip.places?.allObjects as? [Place] {
             
             for place in places {
@@ -129,26 +150,29 @@ final class PhotoController {
                     
                     let dispatchGroup = DispatchGroup()
                     
+                    let photoDictionary = [String : Any]()
+                    
                     for photo in photos {
                         
-                        let photoDBRef = FirebaseManager.ref.child("Trip").child(trip.uid!).child("places").child(place.name).child("photoURLs").childByAutoId()
-                        let photoRef = storeRef.child("Places").child(place.name).child(photoDBRef.key)
-                        
-                        guard let photoData = photo.photo
-                            else { completion(false) ; return }
-                        
-                        let data = Data(referencing: photoData)
-                        
                         dispatchGroup.enter()
-                        FirebaseManager.save(data: data, to: photoRef) { (metadata, error) in
+                        
+                        FirebaseManager.save(photo) { (metadata, errorMessage) in
+                            if let _ = errorMessage {
+                                
+                            }
                             
-                            photo.uid = photoRef.name
-                            CoreDataManager.save()
-                            
-                            let photoDictionary: [String : Any] = [photo.uid! : metadata?.downloadURL()?.absoluteString as Any]
+                            let value: [String : Any] = [photo.uid! : metadata?.downloadURL()?.absoluteString as Any]
                             
                             dispatchGroup.enter()
-                            FirebaseManager.save(photoDictionary, to: photoDBRef, completion: { (error) in
+                            
+                            let databaseRef = Constants.databaseRef.child(Constants.trip).child(trip.uid!).child(Constants.places).child(place.name)
+                            
+                            FirebaseManager.updateObject(at: databaseRef, value: value, completion: { (errorMessage) in
+                                if let _ = errorMessage {
+                                    
+                                }
+                            })
+                            FirebaseManager.save(photoDictionary, to: databaseRef, completion: { (error) in
                                 if let error = error {
                                     print(error)
                                     
@@ -163,18 +187,6 @@ final class PhotoController {
                     }
                 }
             }
-        }
-    }
-
-    func saveTripPhoto(trip: Trip,
-                       storeRef: StorageReference,
-                       completion: @escaping (Bool) -> Void) {
-        
-        guard let tripPhoto = trip.photo?.photo else { completion(false) ; return }
-        let data = Data(referencing: tripPhoto)
-        
-        FirebaseManager.save(data: data, to: storeRef) { (_, error) in
-            completion(true)
         }
     }
 }

@@ -83,8 +83,8 @@ class InternalUserController {
     }
     
     func saveProfilePhoto(photo: UIImage, for user: InternalUser, completion: @escaping (Bool) -> Void) {
-        let ref = FirebaseManager.ref.child("User").child(user.username).child("photoURL")
-        let storeRef = FirebaseManager.storeRef.child("User").child(user.username).child("photo")
+        let ref = FirebaseManager.ref.child("User").child(user.uuid!).child("photoURL")
+        let storeRef = FirebaseManager.storeRef.child("User").child(user.uuid!).child("photo")
         
         guard let imageAsData = UIImageJPEGRepresentation(photo, 0.1) else { completion(false) ; return }
         

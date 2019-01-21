@@ -44,7 +44,7 @@ final class FirebaseManager {
         }
     }
     
-    static func update<T: FirebaseSavable>(object: T,
+    static func update<T: FirebaseSavable>(_ object: T,
                                            atChildren children: [String]? = nil,
                                            withValues values: [String : Any],
                                            completion: @escaping (String?) -> Void) {
@@ -65,7 +65,7 @@ final class FirebaseManager {
         }
     }
     
-    static func update(at ref: DatabaseReference, value: [String : Any], completion: @escaping (_ errorMessage: String?) -> Void) {
+    static func updateObject(at ref: DatabaseReference, value: [String : Any], completion: @escaping (_ errorMessage: String?) -> Void) {
         ref.updateChildValues(value) { (error, _) in
             if let _ = error {
                 completion(Constants.somethingWentWrong)
@@ -204,6 +204,22 @@ final class FirebaseManager {
         
         storeRef.putData(data, metadata: nil) { (metadata, error) in
             completion(metadata, error)
+        }
+    }
+    
+    static func save<T: FirebaseStorageSavable>(_ object: T, completion: @escaping (StorageMetadata?, String?) -> Void) {
+        let storageRef = Storage.storage().reference()
+
+        storageRef.putData(object.data, metadata: nil) { (metadata, error) in
+            if let _ = error {
+                completion(nil, Constants.somethingWentWrong)
+                return
+            }
+            
+            if let metadata = metadata {
+                
+                completion(metadata, nil)
+            }
         }
     }
     

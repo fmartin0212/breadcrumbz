@@ -58,10 +58,7 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
         
         // FIXME: - Add alert for name text field
         // Check to see if any required fields are empty, if so, present alertcontroller and jump out of function
-        guard let tripNameTF = tripNameTextField,
-            let tripLocationTF = tripLocationTextField,
-            let tripDescriptionTV = tripDescriptionTextView,
-            let tripStartLabel = tripStartDateLabel,
+        guard let tripStartLabel = tripStartDateLabel,
             let tripEndLabel = tripEndDateLabel
             else { return }
         

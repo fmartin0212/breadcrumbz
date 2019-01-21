@@ -39,6 +39,9 @@ class Constants {
     static public let place = "Place"
     static public let photo = "Photo"
     static public let user = "User"
+    static public let places = "places"
+    static public let photoURL = "photoURL"
+    static public let photoURLs = "photoURLs"
     static public let sharedTripIDs = "sharedTripIDs"
     static public let participantTripIDs = "participantTripIDs"
     
