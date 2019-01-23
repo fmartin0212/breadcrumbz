@@ -137,7 +137,7 @@ extension CreateTripTableViewController {
         tripDescriptionTextView.resignFirstResponder()
         
         // Create a reference to the ChooseDateViewController
-        guard let chooseDateVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chooseDateViewController") as? ChooseDateViewController else { return }
+        guard let chooseDateVC = UIStoryboard.main.instantiateViewController(withIdentifier: "chooseDateViewController") as? ChooseDateViewController else { return }
         
         switch indexPath.row {
             

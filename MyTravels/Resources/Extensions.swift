@@ -133,3 +133,17 @@ extension UIView {
         return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)!.first! as! T
     }
 }
+
+extension UIStoryboard {
+    
+    static var main: UIStoryboard {
+        return UIStoryboard(name: "Main", bundle: nil)
+    }
+    
+    static var onboarding: UIStoryboard {
+        return UIStoryboard(name: "Onboarding", bundle: nil)
+    }
+}
+
+
+

@@ -18,7 +18,7 @@ extension Photo {
 
     @NSManaged public var firebaseURL: String?
     @NSManaged public var photo: NSData?
-    @NSManaged public var uid: String?
+    @NSManaged public var uid: String
     @NSManaged public var place: Place?
     @NSManaged public var trip: Trip?
 

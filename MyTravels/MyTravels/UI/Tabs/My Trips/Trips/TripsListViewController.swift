@@ -42,7 +42,8 @@ class TripsListViewController: UIViewController {
         
         // Set tableview properties
         tableView.separatorStyle = .none
-       
+        
+        
         // Set delegates
         tableView.dataSource = self
         tableView.delegate = self
@@ -52,11 +53,11 @@ class TripsListViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         addTripBarButtonItem.format()
         TripController.shared.fetchAllTrips()
-        
-        for trip in TripController.shared.trips {
-            trip.uid = nil
-            CoreDataManager.save()
-        }
+//
+//        for trip in TripController.shared.trips {
+//            CoreDataStack.context.delete(trip)
+//            CoreDataManager.save()
+//        }
         
         if TripController.shared.trips.count == 0 {
             self.presentNoTripsView()
@@ -94,12 +95,12 @@ class TripsListViewController: UIViewController {
     @objc func profileButtonTapped() {
         
         if let _ = InternalUserController.shared.loggedInUser {
-            let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "profileVC")
+            let profileVC = UIStoryboard.main.instantiateViewController(withIdentifier: "profileVC")
             UIView.animate(withDuration: 2) {
                 self.present(profileVC, animated: true, completion: nil)
             }
         } else {
-            let signUpVC = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "SignUp") as! SignUpViewController
+            let signUpVC = UIStoryboard.onboarding.instantiateViewController(withIdentifier: "SignUp") as! SignUpViewController
             signUpVC.isOnboarding = false
             signUpVC.loadViewIfNeeded()
             signUpVC.skipButton.isHidden = true
@@ -215,11 +216,11 @@ extension TripsListViewController: UITableViewDataSource {
 }
 
 extension TripsListViewController: UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let trip = TripController.shared.trips[indexPath.row]
         
-        guard let tripDetailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tripDetailVC") as? TripDetailViewController else { return }
+        guard let tripDetailVC = UIStoryboard.main.instantiateViewController(withIdentifier: "tripDetailVC") as? TripDetailViewController else { return }
         
         tripDetailVC.trip = trip
         

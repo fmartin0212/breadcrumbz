@@ -125,7 +125,7 @@ final class PhotoController {
             } else if let metadata = metadata {
                 metadata.downloadURL()
                 let children = [Constants.photoURL]
-                let values = [tripPhoto.uid! : true]
+                let values = [tripPhoto.uid : true]
                 
                 FirebaseManager.update(trip, atChildren: children, withValues: values, completion: { (errorMessage) in
                     if let _ = errorMessage {
@@ -161,7 +161,7 @@ final class PhotoController {
                                 
                             }
                             
-                            let value: [String : Any] = [photo.uid! : metadata?.downloadURL()?.absoluteString as Any]
+                            let value: [String : Any] = [photo.uid : metadata?.downloadURL()?.absoluteString as Any]
                             
                             dispatchGroup.enter()
                             

@@ -23,6 +23,9 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         
         super.viewDidLoad()
         
+        tableView.estimatedRowHeight = 134
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
         // Set navigation bar title/properties
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -140,9 +143,8 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let createAccountAction = UIAlertAction(title: "Create account", style: .default) { (_) in
-            let sb = UIStoryboard(name: "Onboarding", bundle: nil)
-            let createAccountVC = sb.instantiateViewController(withIdentifier: "SignUp")
-
+            let createAccountVC = UIStoryboard.onboarding.instantiateViewController(withIdentifier: "SignUp")
+            
             self.present(createAccountVC, animated: true, completion: nil)
         }
         
@@ -246,6 +248,11 @@ extension TripDetailViewController: UITableViewDelegate {
         return 30
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section > 1 {
             guard let placeArray = array as? [[Place]],
@@ -270,7 +277,8 @@ extension TripDetailViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.00001
+        
+        return .leastNonzeroMagnitude
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
@@ -292,8 +300,8 @@ extension TripDetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 && indexPath.row == 0 {
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            guard let addPlaceVC = sb.instantiateViewController(withIdentifier: "addAPlace") as? CreateNewPlaceTableViewController else { return }
+            
+            let addPlaceVC = UIStoryboard.main.instantiateViewController(withIdentifier: "addAPlace") as! CreateNewPlaceTableViewController
             
             guard let trip = trip else { return }
             

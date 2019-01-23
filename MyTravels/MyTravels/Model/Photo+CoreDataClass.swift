@@ -26,6 +26,7 @@ public class Photo: NSManagedObject, FirebaseStorageSavable {
     convenience init(photo: Data, place: Place?, trip: Trip?, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
         self.photo = NSData(data: photo)
+        self.uid = UUID().uuidString
         self.place = place
         self.trip = trip
     }

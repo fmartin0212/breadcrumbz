@@ -29,8 +29,7 @@ class OnboardingPageViewController: UIPageViewController {
     }
     
     private func viewController(identifier: String) -> UIViewController {
-        let sb = UIStoryboard(name: "Onboarding", bundle: nil)
-        let viewController = sb.instantiateViewController(withIdentifier: identifier)
+        let viewController = UIStoryboard.onboarding.instantiateViewController(withIdentifier: identifier)
         return viewController
     }
 

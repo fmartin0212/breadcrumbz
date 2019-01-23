@@ -242,7 +242,7 @@ final class FirebaseManager {
         ref.observeSingleEvent(of: .value) { (snapshot) in
             for child in snapshot.children {
                 print(child)
-                print("dsaf")
+                
             }
         }
     }

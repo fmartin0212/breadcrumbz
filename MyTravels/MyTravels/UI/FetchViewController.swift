@@ -35,8 +35,7 @@ class FetchViewController: UIViewController {
                     }
                 }
             } else if !success && UserDefaults.standard.value(forKey: "userSkippedSignUp") as! Bool == false {
-                let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-                let tripListNavigationController = storyboard.instantiateViewController(withIdentifier: "OnboardingPageVC")
+                let tripListNavigationController = UIStoryboard.main.instantiateViewController(withIdentifier: "OnboardingPageVC")
                 DispatchQueue.main.async {
                     self.present(tripListNavigationController, animated: true, completion: nil)
                 }

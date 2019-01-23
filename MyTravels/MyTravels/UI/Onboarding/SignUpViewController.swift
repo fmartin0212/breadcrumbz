@@ -185,7 +185,7 @@ extension SignUpViewController {
                         self.dismiss(animated: true, completion: nil)
                     } else {
                         
-                        let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController
+                        let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController
                         let tripListVC = ((tabBarController?.customizableViewControllers?.first! as! UINavigationController).viewControllers.first!) as! TripsListViewController
                         tripListVC.fromSignUpVC = true
                         self.present(tabBarController!, animated: true, completion: nil)
