@@ -22,6 +22,8 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        let tripDetailCellNib = UINib(nibName: "TripDetailCell", bundle: nil)
+        tableView.register(tripDetailCellNib, forCellReuseIdentifier: "TripDetailCell")
         
         tableView.estimatedRowHeight = 134
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -91,8 +93,8 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
             var array: [[Place]] = []
             
             let lodging = places.filter { $0.type == "Lodging" }
-            let restaurants = places.filter { $0.type == "Restaurants" }
-            let activities = places.filter { $0.type == "Activities" }
+            let restaurants = places.filter { $0.type == "Restaurant" }
+            let activities = places.filter { $0.type == "Activity" }
             
             if lodging.count > 0 {
                 array.append(lodging)

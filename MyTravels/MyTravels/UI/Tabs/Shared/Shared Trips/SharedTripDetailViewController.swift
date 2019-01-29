@@ -22,18 +22,6 @@ class SharedTripDetailViewController: UIViewController {
         return button
     }()
     
-    lazy var loadingView: UIView = {
-        var view = UIView(frame: CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y, width: self.view.frame.width * 0.10, height: self.view.frame.height * 0.10))
-        
-        view.backgroundColor = .black
-        view.layer.opacity = 0.3
-        
-        let loadingLabel = UILabel()
-        loadingLabel.text = "Loading"
-        view.addSubview(loadingLabel)
-        return view
-    }()
-    
     // MARK: - IBOutlets
     @IBOutlet var sharedTripPhotoImageView: UIImageView!
     @IBOutlet var tableView: UITableView!
@@ -109,9 +97,7 @@ class SharedTripDetailViewController: UIViewController {
         if activitiesArray.count > 0 {
             array.append(activitiesArray)
         }
-        
-        print("Array count: \(array.count)")
-        print("Full array: \(array)")
+
         self.sharedPlaces = array
         
         tableView.reloadData()

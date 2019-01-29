@@ -106,7 +106,7 @@
                     <viewLayoutGuide key="safeArea" id="QQm-oV-szE"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="1052" y="544"/>
+            <point key="canvasLocation" x="1991.2" y="543.77811094452773"/>
         </scene>
         <!--Add a trip-->
         <scene sceneID="dU5-i9-rsU">
@@ -386,93 +386,8 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TripDetailCell" rowHeight="134" id="Moq-Z9-9uQ" customClass="TripDetailTableViewCell" customModule="MyTravels" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="402" width="375" height="134"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Moq-Z9-9uQ" id="wkz-Wv-5uJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="133.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="h6f-AG-aiR">
-                                                    <rect key="frame" x="15" y="0.0" width="137.5" height="133.5"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip Name" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IlB-FI-uQc">
-                                                            <rect key="frame" x="0.0" y="0.0" width="124.5" height="35.5"/>
-                                                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="25"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="FuK-0h-BtA">
-                                                            <rect key="frame" x="0.0" y="43.5" width="103" height="25"/>
-                                                            <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="YIl-an-EiQ">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" constant="25" id="dYC-Ml-c8u"/>
-                                                                        <constraint firstAttribute="height" constant="25" id="sgk-xy-hLj"/>
-                                                                    </constraints>
-                                                                </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QSC-uO-aYM">
-                                                                    <rect key="frame" x="29" y="0.0" width="74" height="25"/>
-                                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="19"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="25" id="MAh-qx-wM7"/>
-                                                            </constraints>
-                                                        </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="zaM-Ur-X54">
-                                                            <rect key="frame" x="0.0" y="76.5" width="137.5" height="25"/>
-                                                            <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" translatesAutoresizingMaskIntoConstraints="NO" id="FlW-fE-SeD">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="25" id="6x3-lj-gm1"/>
-                                                                        <constraint firstAttribute="width" constant="25" id="aVD-SB-dpb"/>
-                                                                    </constraints>
-                                                                </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uvG-SH-0j6">
-                                                                    <rect key="frame" x="29" y="0.0" width="52" height="25"/>
-                                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="19"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bq-Od-NZA">
-                                                                    <rect key="frame" x="85" y="0.0" width="52.5" height="25"/>
-                                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="19"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                        </stackView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZg-zj-hOI">
-                                                            <rect key="frame" x="0.0" y="109.5" width="79.5" height="24"/>
-                                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="IlB-FI-uQc" firstAttribute="top" secondItem="wkz-Wv-5uJ" secondAttribute="top" id="1DT-NK-98k"/>
-                                                <constraint firstItem="h6f-AG-aiR" firstAttribute="top" secondItem="wkz-Wv-5uJ" secondAttribute="top" id="Eyi-9Q-8nP"/>
-                                                <constraint firstItem="h6f-AG-aiR" firstAttribute="leading" secondItem="wkz-Wv-5uJ" secondAttribute="leading" constant="15" id="b51-eI-zln"/>
-                                                <constraint firstAttribute="bottom" secondItem="h6f-AG-aiR" secondAttribute="bottom" id="vKi-rP-sm1"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="tripDescriptionLabel" destination="NZg-zj-hOI" id="UGi-X8-NCZ"/>
-                                            <outlet property="tripEndDateLabel" destination="1bq-Od-NZA" id="70L-ur-Rbi"/>
-                                            <outlet property="tripLocationLabel" destination="QSC-uO-aYM" id="tBr-xg-mXb"/>
-                                            <outlet property="tripNameLabel" destination="IlB-FI-uQc" id="nJc-Hv-eI7"/>
-                                            <outlet property="tripStartDateLabel" destination="uvG-SH-0j6" id="aVz-2f-eIf"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AddACrumbCell" rowHeight="100" id="Han-PS-7tR" customClass="AddACrumbTableViewCell" customModule="MyTravels" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="536" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="402" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Han-PS-7tR" id="X3R-Eh-ynE">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
@@ -529,14 +444,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PlaceCell" rowHeight="106" id="6VW-sp-LTE" customClass="PlaceTableViewCell" customModule="MyTravels" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="636" width="375" height="106"/>
+                                        <rect key="frame" x="0.0" y="502" width="375" height="106"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6VW-sp-LTE" id="4Fi-QH-7Pw">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="105.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="H9E-Gc-WOv">
-                                                    <rect key="frame" x="8" y="4" width="333" height="97.5"/>
+                                                    <rect key="frame" x="8" y="4" width="326" height="97.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="syN-cl-QlC">
                                                             <rect key="frame" x="0.0" y="0.0" width="97.5" height="97.5"/>
@@ -547,48 +462,48 @@
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="IQp-gC-Igg">
-                                                            <rect key="frame" x="102.5" y="0.0" width="230.5" height="76.5"/>
+                                                            <rect key="frame" x="102.5" y="0.0" width="223.5" height="76"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="(Place name)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVh-Jk-J2K">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="230.5" height="27.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="223.5" height="27.5"/>
                                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Address)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86Y-g2-WGl">
-                                                                    <rect key="frame" x="0.0" y="29.5" width="230.5" height="22"/>
+                                                                    <rect key="frame" x="0.0" y="29.5" width="223.5" height="22"/>
                                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bZR-Ub-PLt">
-                                                                    <rect key="frame" x="0.0" y="53.5" width="230.5" height="23"/>
+                                                                    <rect key="frame" x="0.0" y="53.5" width="223.5" height="22.5"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Guh-31-NaM">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="115.5" height="23"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="112" height="22.5"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star-black-16" translatesAutoresizingMaskIntoConstraints="NO" id="nKY-HA-vdQ">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="23" height="23"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="22.5" height="22.5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" secondItem="nKY-HA-vdQ" secondAttribute="height" multiplier="1:1" id="Pmy-D8-cnk"/>
                                                                                     </constraints>
                                                                                 </imageView>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star-black-16" translatesAutoresizingMaskIntoConstraints="NO" id="bmb-px-PDs">
-                                                                                    <rect key="frame" x="23" y="0.0" width="23" height="23"/>
+                                                                                    <rect key="frame" x="22.5" y="0.0" width="22" height="22.5"/>
                                                                                 </imageView>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star-black-16" translatesAutoresizingMaskIntoConstraints="NO" id="WdM-yf-IYn">
-                                                                                    <rect key="frame" x="46" y="0.0" width="23" height="23"/>
+                                                                                    <rect key="frame" x="44.5" y="0.0" width="22.5" height="22.5"/>
                                                                                 </imageView>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star-black-16" translatesAutoresizingMaskIntoConstraints="NO" id="BNF-L6-OWn">
-                                                                                    <rect key="frame" x="69" y="0.0" width="23" height="23"/>
+                                                                                    <rect key="frame" x="67" y="0.0" width="22.5" height="22.5"/>
                                                                                 </imageView>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star-black-16" translatesAutoresizingMaskIntoConstraints="NO" id="gHH-Tw-uID">
-                                                                                    <rect key="frame" x="92" y="0.0" width="23.5" height="23"/>
+                                                                                    <rect key="frame" x="89.5" y="0.0" width="22.5" height="22.5"/>
                                                                                 </imageView>
                                                                             </subviews>
                                                                         </stackView>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BKX-Om-asv">
-                                                                            <rect key="frame" x="115.5" y="0.0" width="115" height="23"/>
+                                                                            <rect key="frame" x="112" y="0.0" width="111.5" height="22.5"/>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </view>
                                                                     </subviews>
@@ -644,7 +559,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p1c-eZ-JcY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2140" y="558"/>
+            <point key="canvasLocation" x="3079.1999999999998" y="557.27136431784118"/>
         </scene>
         <!--Add a place-->
         <scene sceneID="Dfv-Dp-NUR">
@@ -1182,7 +1097,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1oJ-M5-SgJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2941.5999999999999" y="557.27136431784118"/>
+            <point key="canvasLocation" x="3880.8000000000002" y="557.27136431784118"/>
         </scene>
         <!--Fetch View Controller-->
         <scene sceneID="eBJ-cy-VN9">
@@ -1232,11 +1147,28 @@
                     <connections>
                         <segue destination="0zI-oT-TDR" kind="relationship" relationship="viewControllers" id="ikh-dU-HZa"/>
                         <segue destination="Zem-Li-kKU" kind="relationship" relationship="viewControllers" id="pFz-8F-1ff"/>
+                        <segue destination="OP6-JP-hvB" kind="relationship" relationship="viewControllers" id="xtc-xG-62a"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b3i-54-Otm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1118" y="116"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ttD-N9-aB7">
+            <objects>
+                <viewController id="K8M-XH-lvY" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QQy-gh-QTQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="uIG-ec-mwj"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="HNF-cv-Jtq"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W8n-fp-tJZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-572" y="1142"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="J6O-8t-z3C">
@@ -1384,7 +1316,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dIa-e0-PBp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="148" y="559"/>
+            <point key="canvasLocation" x="1087.2" y="558.17091454272872"/>
         </scene>
         <!--Type Selection View Controller-->
         <scene sceneID="bRI-h6-lyB">
@@ -1782,7 +1714,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4426" y="726"/>
+            <point key="canvasLocation" x="5364" y="725.48725637181417"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iEc-nF-mdU">
@@ -2059,7 +1991,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EaC-97-FiI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="511" y="1453"/>
+            <point key="canvasLocation" x="1448.8" y="1452.3238380809596"/>
         </scene>
         <!--Shared-->
         <scene sceneID="d3P-QV-NUj">
@@ -2086,7 +2018,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Csx-6V-GYG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-215" y="1454"/>
+            <point key="canvasLocation" x="724" y="1453.2233883058473"/>
         </scene>
         <!--Shared Trip Detail View Controller-->
         <scene sceneID="YrH-kd-x19">
@@ -2306,7 +2238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uoQ-pa-Vlj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1316" y="1452"/>
+            <point key="canvasLocation" x="2255.1999999999998" y="1451.4242878560722"/>
         </scene>
         <!--Shared Place Detail Table View Controller-->
         <scene sceneID="zKr-Nd-N8T">
@@ -2540,7 +2472,26 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="So9-tC-Brb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2248.8000000000002" y="1452.3238380809596"/>
+            <point key="canvasLocation" x="3188" y="1452.3238380809596"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="L9d-3Y-HUU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OP6-JP-hvB" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" id="jRx-Fo-BCT"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="STH-0b-NqG">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="K8M-XH-lvY" kind="relationship" relationship="rootViewController" id="UxI-gP-n6h"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VXP-um-SK1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1362.4000000000001" y="904.49775112443785"/>
         </scene>
     </scenes>
     <resources>
