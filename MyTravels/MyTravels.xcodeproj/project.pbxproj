@@ -342,9 +342,9 @@
 			isa = PBXGroup;
 			children = (
 				B7C83FC421C1FA3B00A9F86C /* LoadingView.swift */,
-				B7B1A93B21CD319300544056 /* NoSharedTripsView.xib */,
-				B7B1A93D21CD334700544056 /* NoSharedTripsView.swift */,
 				B7C83FC021C1F88700A9F86C /* LoadingView.xib */,
+				B7B1A93D21CD334700544056 /* NoSharedTripsView.swift */,
+				B7B1A93B21CD319300544056 /* NoSharedTripsView.xib */,
 			);
 			name = xibs;
 			path = ../../xibs;

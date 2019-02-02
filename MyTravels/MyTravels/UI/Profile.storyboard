@@ -1,26 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MGR-Gz-72m">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="5s7-sy-A36">
             <objects>
-                <viewController id="d3a-nj-MMW" sceneMemberID="viewController">
+                <viewController id="d3a-nj-MMW" customClass="ProfileViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="60P-7x-DQl">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9No-fg-Wsq">
+                                <rect key="frame" x="94" y="100" width="187.5" height="187.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="9No-fg-Wsq" secondAttribute="height" multiplier="1:1" id="ezI-cT-vZA"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="ProfileTabBarButton_Unselected"/>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="e2N-2b-aST">
+                                <rect key="frame" x="16" y="323.5" width="359" height="155"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fLR-Fk-BhW">
+                                        <rect key="frame" x="0.0" y="0.0" width="359" height="43"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USERNAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LaF-y9-GzS">
+                                                <rect key="frame" x="0.0" y="0.0" width="359" height="15.5"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="11"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Username)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ug5-9Z-aCj">
+                                                <rect key="frame" x="0.0" y="15.5" width="359" height="27.5"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zFw-RO-Vpz">
+                                        <rect key="frame" x="0.0" y="56" width="359" height="43"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FIRST NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyF-Vi-nWJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="359" height="15.5"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="11"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(First name)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGL-CE-3Sc">
+                                                <rect key="frame" x="0.0" y="15.5" width="359" height="27.5"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WCp-E9-7MI">
+                                        <rect key="frame" x="0.0" y="112" width="359" height="43"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LAST NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YEm-LA-Z3S">
+                                                <rect key="frame" x="0.0" y="0.0" width="359" height="15.5"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="11"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Last name)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXU-bc-YeE">
+                                                <rect key="frame" x="0.0" y="15.5" width="359" height="27.5"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9No-fg-Wsq" firstAttribute="centerX" secondItem="Rax-G0-Bex" secondAttribute="centerX" id="CIG-Ll-mRL"/>
+                            <constraint firstItem="Rax-G0-Bex" firstAttribute="trailing" secondItem="e2N-2b-aST" secondAttribute="trailing" id="D23-zl-0B8"/>
+                            <constraint firstItem="9No-fg-Wsq" firstAttribute="top" secondItem="Rax-G0-Bex" secondAttribute="top" constant="36" id="F9U-Nw-6f3"/>
+                            <constraint firstItem="e2N-2b-aST" firstAttribute="leading" secondItem="Rax-G0-Bex" secondAttribute="leading" constant="16" id="iDZ-TT-X5k"/>
+                            <constraint firstItem="9No-fg-Wsq" firstAttribute="width" secondItem="60P-7x-DQl" secondAttribute="width" multiplier="0.5" id="oEM-VP-JSY"/>
+                            <constraint firstItem="e2N-2b-aST" firstAttribute="top" secondItem="9No-fg-Wsq" secondAttribute="bottom" constant="36" id="ywi-Dc-vYX"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Rax-G0-Bex"/>
                     </view>
-                    <navigationItem key="navigationItem" id="IqL-L8-iFw"/>
+                    <navigationItem key="navigationItem" id="IqL-L8-iFw">
+                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="36p-95-SGM">
+                            <connections>
+                                <action selector="logOutButtonTapped:" destination="d3a-nj-MMW" id="aLX-m7-bkI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="firstNameLabel" destination="VGL-CE-3Sc" id="PKv-AU-PRf"/>
+                        <outlet property="lastNameLabel" destination="jXU-bc-YeE" id="GMX-cL-TGA"/>
+                        <outlet property="profilePictureButton" destination="9No-fg-Wsq" id="sWi-ex-CLY"/>
+                        <outlet property="usernameLabel" destination="ug5-9Z-aCj" id="xkC-MS-pbW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qO8-eF-IZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-697" y="963"/>
+            <point key="canvasLocation" x="-698.39999999999998" y="962.96851574212906"/>
         </scene>
         <!--Item-->
         <scene sceneID="cNH-nY-Yaw">
@@ -42,4 +131,7 @@
             <point key="canvasLocation" x="-1498" y="963"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ProfileTabBarButton_Unselected" width="24" height="23"/>
+    </resources>
 </document>

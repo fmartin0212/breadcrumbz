@@ -79,7 +79,6 @@ class InternalUserController {
         FirebaseManager.logOutUser()
         InternalUserController.shared.loggedInUser = nil
         SharedTripsController.shared.clearSharedTrips()
-        NotificationCenter.default.post(name: Constants.profilePictureUpdatedNotif, object: nil)
     }
     
     func saveProfilePhoto(photo: UIImage, for user: InternalUser, completion: @escaping (Bool) -> Void) {

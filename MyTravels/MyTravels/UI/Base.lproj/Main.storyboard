@@ -1956,20 +1956,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Shared with me" largeTitleDisplayMode="always" id="KIz-kb-zeE">
                         <barButtonItem key="backBarButtonItem" title=" " id="eem-ZO-7T9"/>
-                        <leftBarButtonItems>
-                            <barButtonItem id="A6N-8r-IDn">
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </barButtonItem>
-                            <barButtonItem title="Item" image="user" id="lDq-Vi-7Pv">
-                                <color key="tintColor" red="0.1696610677" green="0.32706386389999997" blue="0.72726690770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="profileBarButtonItemTapped:" destination="QWT-hB-9W2" id="MxE-IU-3PK"/>
-                                </connections>
-                            </barButtonItem>
-                        </leftBarButtonItems>
+                        <barButtonItem key="leftBarButtonItem" id="A6N-8r-IDn">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="profileBarButtonItem" destination="lDq-Vi-7Pv" id="CuR-Is-dhw"/>
                         <outlet property="tableView" destination="Zx4-VD-yip" id="89Y-bR-56A"/>
                     </connections>
                 </viewController>
@@ -2482,7 +2473,6 @@
         <image name="star-black-16" width="50" height="50"/>
         <image name="star-clear-16" width="50" height="50"/>
         <image name="star-clear-24" width="24" height="24"/>
-        <image name="user" width="24" height="24"/>
         <namedColor name="Tint">
             <color red="0.1439999938" green="0.61400002239999996" blue="0.55000001190000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

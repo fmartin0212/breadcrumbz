@@ -17,7 +17,6 @@ class TripsListViewController: UIViewController {
     @IBOutlet var addTripBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addATripButton: UIButton!
-    @IBOutlet weak var profileBarButtonItem: UIBarButtonItem!
     
     // MARK: - Constants & Variables
     
@@ -37,12 +36,9 @@ class TripsListViewController: UIViewController {
         
         let nib = UINib(nibName: "TripCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TripCell")
-     
-        setupLeftBarButton()
         
         // Set tableview properties
         tableView.separatorStyle = .none
-        
         
         // Set delegates
         tableView.dataSource = self
@@ -63,19 +59,7 @@ class TripsListViewController: UIViewController {
             self.presentNoTripsView()
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateProfilePicture), name: Constants.profilePictureUpdatedNotif, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(loadUserInfo), name: Constants.userLoggedInNotif, object: nil)
-        
-    }
-    
-    @objc func updateProfilePicture() {
-        let image = InternalUserController.shared.loggedInUser != nil ? InternalUserController.shared.loggedInUser!.photo : UIImage(named: "user")
-        let resizedImage = image?.resize(to: CGSize(width: 35, height: 35))
-        
-        DispatchQueue.main.async {
-            self.profileButton?.setImage(resizedImage, for: .normal)
-            self.profileButton?.clipsToBounds = true
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -144,22 +128,6 @@ extension TripsListViewController {
     
     }
     
-    private func setupLeftBarButton() {
-        let button = UIButton(type: .custom)
-        let image = InternalUserController.shared.loggedInUser?.photo != nil ? InternalUserController.shared.loggedInUser?.photo : UIImage(named: "user")
-        let resizedImage = image?.resize(to: CGSize(width: 35, height: 35))
-        button.setImage(resizedImage, for: .normal)
-        button.clipsToBounds = true
-        button.layer.cornerRadius = 17.5
-        button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
-        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        profileButton = button
-        
-        let barButton = UIBarButtonItem(customView: button)
-        //assign button to navigationbar
-        self.navigationItem.leftBarButtonItem = barButton
-    }
-    
     private func fetchUserInfo(completion: @escaping (Bool) -> Void) {
         
         guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(false) ; return }
@@ -169,7 +137,6 @@ extension TripsListViewController {
                 if let photoURL = loggedInUser.photoURL {
                     InternalUserController.shared.fetchProfilePhoto(from: photoURL, completion: { (photo) in
                         DispatchQueue.main.async {
-                            self.updateProfilePicture()
                             completion(true)
                         }
                     })
