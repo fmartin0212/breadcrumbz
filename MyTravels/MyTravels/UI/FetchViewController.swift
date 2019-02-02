@@ -13,8 +13,6 @@ class FetchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        try? Auth.auth().signOut()
 
         UserDefaults.standard.setValue(false, forKey: "userSkippedSignUp")
         
@@ -35,9 +33,9 @@ class FetchViewController: UIViewController {
                     }
                 }
             } else if !success && UserDefaults.standard.value(forKey: "userSkippedSignUp") as! Bool == false {
-                let tripListNavigationController = UIStoryboard.main.instantiateViewController(withIdentifier: "OnboardingPageVC")
+                let onboardingPVC = UIStoryboard.onboarding.instantiateViewController(withIdentifier: "OnboardingPageVC")
                 DispatchQueue.main.async {
-                    self.present(tripListNavigationController, animated: true, completion: nil)
+                    self.present(onboardingPVC, animated: true, completion: nil)
                 }
             } else {
                 DispatchQueue.main.async {
@@ -47,5 +45,4 @@ class FetchViewController: UIViewController {
         }
     }
 }
-
 

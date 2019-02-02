@@ -25,15 +25,13 @@ class SharedTripsListViewController: UIViewController {
         tableView.addSubview(refreshControl)
         refreshControl.addTarget(self, action: #selector(fetchSharedTrips), for: .valueChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Constants.sharedTripsReceivedNotif, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateProfilePicture), name: Constants.profilePictureUpdatedNotif, object: nil)
+        
         // Set tableview properties
         tableView.separatorStyle = .none
         
         // Set delegates
         tableView.dataSource = self
         tableView.delegate = self
-        
-        setupLeftBarButton()
         
         NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Constants.refreshSharedTripsListNotif, object: nil)
     }
@@ -70,23 +68,6 @@ class SharedTripsListViewController: UIViewController {
         }
     }
     
-    private func setupLeftBarButton() {
-        let button = UIButton(type: .custom)
-        let image = InternalUserController.shared.loggedInUser?.photo != nil ? InternalUserController.shared.loggedInUser?.photo : UIImage(named: "user")
-        let resizedImage = image?.resize(to: CGSize(width: 35, height: 35))
-        button.setImage(resizedImage, for: .normal)
-        button.clipsToBounds = true
-        button.layer.cornerRadius = 17.5
-        button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
-        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        profileButton = button
-        
-        let barButton = UIBarButtonItem(customView: button)
-        //assign button to navigationbar
-        self.navigationItem.leftBarButtonItem = nil
-        self.navigationItem.leftBarButtonItem = barButton
-    }
-    
     @objc func profileButtonTapped() {
         
         if let _ = InternalUserController.shared.loggedInUser {
@@ -99,16 +80,6 @@ class SharedTripsListViewController: UIViewController {
             signUpVC.loadViewIfNeeded()
             signUpVC.skipButton.isHidden = true
             self.present(signUpVC, animated: true, completion: nil)
-        }
-    }
-    
-    @objc func updateProfilePicture() {
-        let image = InternalUserController.shared.loggedInUser != nil ? InternalUserController.shared.loggedInUser!.photo : UIImage(named: "user")
-        let resizedImage = image?.resize(to: CGSize(width: 35, height: 35))
-        
-        DispatchQueue.main.async {
-            self.profileButton?.setImage(resizedImage, for: .normal)
-            self.profileButton?.clipsToBounds = true
         }
     }
     

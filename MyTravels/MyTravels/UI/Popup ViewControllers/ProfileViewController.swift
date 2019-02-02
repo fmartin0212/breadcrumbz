@@ -15,33 +15,29 @@ class ProfileViewController: UIViewController {
     
     let profilePictureSetNotification = Notification.Name("profilePictureSet")
 
-    @IBOutlet weak var overlayView: UIView!
     @IBOutlet weak var logOutButton: UIButton!
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var profilePictureButton: UIButton!
-    
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var firstNameLabel: UILabel!
+    @IBOutlet weak var lastNameLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setPropertiesFor(overlayView: overlayView)
-        
-        tableView.dataSource = self
-        tableView.delegate = self
    
-        if let loggedInUserPhoto = InternalUserController.shared.loggedInUser?.photo {
+        if let loggedInUser = InternalUserController.shared.loggedInUser, let loggedInUserPhoto = loggedInUser.photo {
+        
+            usernameLabel.text = loggedInUser.username
+            firstNameLabel.text = loggedInUser.firstName
+            lastNameLabel.text = loggedInUser.lastName
             profilePictureButton.setBackgroundImage(loggedInUserPhoto, for: .normal)
             profilePictureButton.setImage(nil, for: .normal)
             
             profilePictureButton.clipsToBounds = true
-            profilePictureButton.layer.cornerRadius = 61
-        }
-        
-        if let _ = InternalUserController.shared.loggedInUser {
-            logOutButton.isHidden = false
+            profilePictureButton.layer.cornerRadius = profilePictureButton.frame.width / 2
         }
     }
+    
+    // MARK: - Actions
     
     @IBAction func profileButtonTapped(_ sender: Any) {
         let imagePickerController = UIImagePickerController()
@@ -57,7 +53,7 @@ class ProfileViewController: UIViewController {
             InternalUserController.shared.logOut()
             NotificationCenter.default.post(name: Constants.sharedTripsReceivedNotif, object: nil)
             DispatchQueue.main.async {
-                self.dismiss(animated: true, completion: nil)                
+                self.clearViews()
             }
         }
         
@@ -68,65 +64,15 @@ class ProfileViewController: UIViewController {
         
         self.present(confirmationAlertController, animated: true, completion: nil)
     }
-    
-    @IBAction func saveButtonTapped(_ sender: Any) {
-        
-    }
-    
-    @IBAction func tapGestureRecognized(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
 }
 
-extension ProfileViewController: UITableViewDataSource {
+extension ProfileViewController {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "profileDetailCell", for: indexPath)
-        
-        guard let loggedInUser = InternalUserController.shared.loggedInUser else { return UITableViewCell() }
-        
-        switch indexPath.section {
-        case 0:
-            cell.textLabel?.text = loggedInUser.username
-        case 1:
-            cell.textLabel?.text = loggedInUser.firstName
-        case 2:
-            cell.textLabel?.text = loggedInUser.lastName ?? ""
-        default:
-            break
-        }
-        return cell
-    }
-}
-
-extension ProfileViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
-        let headerLabel = UILabel()
-        headerLabel.backgroundColor = UIColor.white
-        headerLabel.font = UIFont(name: "AvenirNext", size: 15)
-        headerLabel.textColor = UIColor.gray
-        
-        switch section {
-        case 0:
-            headerLabel.text = "   Username"
-        case 1:
-            headerLabel.text = "   First name"
-        case 2:
-            headerLabel.text = "   Last name"
-        default:
-            break
-        }
-        
-        return headerLabel
+    func clearViews() {
+        profilePictureButton.setBackgroundImage(UIImage(named:"ProfileTabBarButton_Unselected"), for: .normal)
+        usernameLabel.text = ""
+        firstNameLabel.text = ""
+        lastNameLabel.text = ""
     }
 }
 

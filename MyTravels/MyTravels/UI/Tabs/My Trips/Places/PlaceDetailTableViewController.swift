@@ -147,7 +147,6 @@ class PlaceDetailTableViewController: UITableViewController {
             
             self.mapView.setRegion(region, animated: false)
             self.mapView.addAnnotation(annotation)
-            
         }
     }
     
