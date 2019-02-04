@@ -3,7 +3,7 @@ spipeline {
     stages {
         stage('build') {
             steps {
-		sh 'cd MyTravels'
+		sh 'ls'
             }
         }
     }
