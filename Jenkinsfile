@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'fastlane beta'
+                sh 'sudo bundle install'
+		sh 'fastlane beta'
             }
         }
     }
