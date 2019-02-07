@@ -92,9 +92,9 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
             
             var array: [[Place]] = []
             
-            let lodging = places.filter { $0.type == "Lodging" }
-            let restaurants = places.filter { $0.type == "Restaurant" }
-            let activities = places.filter { $0.type == "Activity" }
+            let lodging = places.filter { $0.type == .lodging }
+            let restaurants = places.filter { $0.type == .restaurant }
+            let activities = places.filter { $0.type == .activity }
             
             if lodging.count > 0 {
                 array.append(lodging)
@@ -259,21 +259,21 @@ extension TripDetailViewController: UITableViewDelegate {
         if section > 1 {
             guard let placeArray = array as? [[Place]],
                 let firstItemInArray = placeArray[section - 2].first
-                //                let firstItemInArrayType = firstItemInArray.type
                 else { return UIView() }
             
-            if firstItemInArray.type == "Lodging" {
-                let text = "  Lodging"
-                return sectionHeaderLabelWith(text: text)
-                
-            } else if firstItemInArray.type == "Restaurant" {
-                let text = "  Restaurants"
-                return sectionHeaderLabelWith(text: text)
-                
-            } else if firstItemInArray.type == "Activity" {
-                let text = "  Activities"
-                return sectionHeaderLabelWith(text: text)
+            var text = ""
+            switch firstItemInArray.type {
+            case .lodging?:
+                text = "  Lodging"
+            case .restaurant?:
+                text = "  Restaurants"
+            case .activity?:
+                text = "  Activities"
+            default:
+                break
             }
+            return sectionHeaderLabelWith(text: text)
+          
         }
         return UIView()
     }

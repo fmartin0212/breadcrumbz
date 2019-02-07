@@ -21,6 +21,10 @@ class PlaceController {
     }()
     
     static var shared = PlaceController()
+//    
+//    init() {
+//        
+//    }
 }
 
 extension PlaceController {
@@ -35,15 +39,15 @@ extension PlaceController {
      - parameter trip: The trip that the place belongs to.
      */
     func createNewPlaceWith(name: String,
-                type: String,
+                type: Place.types,
                 address: String,
                 comments: String,
                 rating: Int16,
                 trip: Trip) -> Place {
         
         // Initialize a new place
-        let newPlace = Place(name: name, type: type, address: address, comments: comments, rating: rating, trip: trip)
-        
+        let newPlace = Place(name: name, address: address, comments: comments, rating: rating, trip: trip)
+        let _ = PlaceType(type: type, place: newPlace)
         // Save the Core Data MOC.
         CoreDataManager.save()
         
@@ -60,17 +64,20 @@ extension PlaceController {
     */
     func update(place: Place,
                 name: String,
-                type: String,
+                type: Place.types,
                 address: String,
                 comments: String,
                 rating: Int16) {
         
         // Update the place's properties.
         place.name = name
-        place.type = type
         place.address = address
         place.comments = comments
         place.rating = rating
+        
+        if let placeType = place.placeType {
+            placeType.type = type.rawValue
+        }
         
         // Save the Core Data MOC.
         CoreDataManager.save()

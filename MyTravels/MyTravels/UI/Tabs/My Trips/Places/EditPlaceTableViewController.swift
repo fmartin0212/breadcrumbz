@@ -68,7 +68,7 @@ class EditPlaceTableViewController: UITableViewController, UIImagePickerControll
     func updateViews(place: Place) {
         
         placeNameTextField.text = place.name
-        placeTypeTextField.text = place.type
+        placeTypeTextField.text = place.type?.rawValue
         placeAddressTextField.text = place.address
         placeCommentsTextView.text = place.comments
         
@@ -103,7 +103,8 @@ class EditPlaceTableViewController: UITableViewController, UIImagePickerControll
         guard let trip = self.trip,
             let place = self.place,
             let name = placeNameTextField.text,
-            let type = placeTypeTextField.text,
+            let typeAsString = placeTypeTextField.text,
+            let type = Place.types(rawValue: typeAsString),
             let address = placeAddressTextField.text,
             let comments = placeCommentsTextView.text
             else { return }

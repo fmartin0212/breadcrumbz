@@ -85,7 +85,8 @@ class CreateNewPlaceTableViewController: UITableViewController, CLLocationManage
         
         guard let trip = self.trip,
             let name = placeNameTextField.text,
-            let type = placeTypeLabel.text,
+            let typeAsString = placeTypeLabel.text?.lowercased(),
+            let type = Place.types(rawValue: typeAsString),
             let address = placeAddressLabel.text,
             let comments = placeCommentsTextView.text
             else { return }
@@ -137,7 +138,7 @@ class CreateNewPlaceTableViewController: UITableViewController, CLLocationManage
     
     @IBAction func addressTapGestureRecognizerTapped(_ sender: UITapGestureRecognizer) {
         locationManager.requestWhenInUseAuthorization()
-        guard let searchVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "searchVC") as? SearchViewController else { return }
+        guard let searchVC = UIStoryboard.main.instantiateViewController(withIdentifier: "searchVC") as? SearchViewController else { return }
         searchVC.delegate = self
         
         present(searchVC, animated: true, completion: nil)

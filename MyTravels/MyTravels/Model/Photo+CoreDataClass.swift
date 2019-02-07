@@ -20,7 +20,6 @@ public class Photo: NSManagedObject, FirebaseStorageSavable {
             else { return Data() }
         
         return compressedJPEGData
-        
     }
     
     convenience init(photo: Data, place: Place?, trip: Trip?, context: NSManagedObjectContext = CoreDataStack.context) {
