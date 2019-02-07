@@ -52,15 +52,16 @@ class PlaceTableViewCell: UITableViewCell {
             placeAddressLabel.text = place.address
             updateStarsImageViews(place: place)
         } else {
+            
             var placeholderImage = UIImage()
-            if place.type == "Lodging" {
-                guard let lodgingPlaceholderImage = UIImage(named: "Lodging") else { return }
+            if place.type == .lodging {
+                guard let lodgingPlaceholderImage = UIImage(named: Place.types.lodging.rawValue) else { return }
                 placeholderImage = lodgingPlaceholderImage
-            } else if place.type == "Restaurant" {
-                guard let restaurantPlaceholderImage = UIImage(named: "Restaurant") else { return }
+            } else if place.type == .restaurant {
+                guard let restaurantPlaceholderImage = UIImage(named: Place.types.restaurant.rawValue) else { return }
                 placeholderImage = restaurantPlaceholderImage
-            } else if place.type == "Activity" {
-                guard let activityPlaceholderImage = UIImage(named: "Activity") else { return }
+            } else if place.type == .activity {
+                guard let activityPlaceholderImage = UIImage(named: Place.types.activity.rawValue) else { return }
                 placeholderImage = activityPlaceholderImage
             }
             

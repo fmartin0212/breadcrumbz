@@ -19,23 +19,31 @@ public class Place: NSManagedObject, FirebaseSavable {
     var dictionary: [String : Any] {
         return [
             "name" : self.name,
-            "type" : self.type,
+//            "type" : self.type,
             "address" : self.address,
             "rating" : self.rating,
             "comments" : (self.comments ?? "")
         ]
     }
     
-    convenience init(name: String, type: String, address: String, comments: String, rating: Int16, trip: Trip, context: NSManagedObjectContext = CoreDataStack.context) {
-        
+    enum types: String {
+        case restaurant = "restaurant"
+        case lodging = "lodging"
+        case activity = "activity"
+    }
+    
+    var type: types? {
+        guard let placeType = placeType else { return nil }
+        return Place.types(rawValue: placeType.type)!
+    }
+    
+    convenience init(name: String, address: String, comments: String, rating: Int16, trip: Trip, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
         self.name = name
-        self.type = type
         self.address = address
         self.comments = comments
         self.rating = rating
         self.trip = trip
     }
 }
-
 

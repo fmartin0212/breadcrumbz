@@ -11,9 +11,13 @@
         <attribute name="comments" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="place" inverseEntity="Photo" syncable="YES"/>
+        <relationship name="placeType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlaceType" inverseName="place" inverseEntity="PlaceType" syncable="YES"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="places" inverseEntity="Trip" syncable="YES"/>
+    </entity>
+    <entity name="PlaceType" representedClassName="PlaceType" syncable="YES" codeGenerationType="class">
+        <attribute name="type" attributeType="String" syncable="YES"/>
+        <relationship name="place" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Place" inverseName="placeType" inverseEntity="Place" syncable="YES"/>
     </entity>
     <entity name="Trip" representedClassName="Trip" syncable="YES">
         <attribute name="endDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -27,7 +31,8 @@
     </entity>
     <elements>
         <element name="Photo" positionX="-270" positionY="36" width="128" height="105"/>
-        <element name="Place" positionX="-99" positionY="117" width="128" height="150"/>
+        <element name="Place" positionX="-99" positionY="117" width="128" height="148"/>
         <element name="Trip" positionX="-452" positionY="117" width="128" height="165"/>
+        <element name="PlaceType" positionX="-273.3984375" positionY="167.578125" width="128" height="73"/>
     </elements>
 </model>

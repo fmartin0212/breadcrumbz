@@ -35,10 +35,12 @@
 		B7BA6F8621FD31F5004A3C70 /* AddTrip.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7BA6F8521FD31F5004A3C70 /* AddTrip.xib */; };
 		B7BA6FCC22009408004A3C70 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7BA6FCB22009408004A3C70 /* Profile.storyboard */; };
 		B7BDA845202A29F50080B81B /* EditPlaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */; };
+		B7C0B596220BC2EF009FAAEB /* PlaceType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0B594220BC2EF009FAAEB /* PlaceType+CoreDataClass.swift */; };
+		B7C0B597220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0B595220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift */; };
+		B7C0B598220BC7AB009FAAEB /* MyTravels.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = B7C10CBB2020D19500818430 /* MyTravels.xcdatamodeld */; };
 		B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CB42020D19500818430 /* AppDelegate.swift */; };
 		B7C10CB72020D19500818430 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CB62020D19500818430 /* CreateAccountViewController.swift */; };
 		B7C10CBA2020D19500818430 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7C10CB82020D19500818430 /* Main.storyboard */; };
-		B7C10CBD2020D19500818430 /* MyTravels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CBB2020D19500818430 /* MyTravels.xcdatamodeld */; };
 		B7C10CC22020D19500818430 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7C10CC02020D19500818430 /* LaunchScreen.storyboard */; };
 		B7C10CCB2020EDB400818430 /* TripsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CCA2020EDB400818430 /* TripsListViewController.swift */; };
 		B7C10CCD2020EFB000818430 /* TripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CCC2020EFB000818430 /* TripTableViewCell.swift */; };
@@ -106,6 +108,8 @@
 		B7BA6F8521FD31F5004A3C70 /* AddTrip.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTrip.xib; sourceTree = "<group>"; };
 		B7BA6FCB22009408004A3C70 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlaceTableViewController.swift; sourceTree = "<group>"; };
+		B7C0B594220BC2EF009FAAEB /* PlaceType+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceType+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B7C0B595220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceType+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B7C10CB12020D19500818430 /* MyTravels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTravels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7C10CB42020D19500818430 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7C10CB62020D19500818430 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -317,6 +321,8 @@
 				B735428C2174E36200D9A68D /* Trip+CoreDataProperties.swift */,
 				B7DA1B6B202E140C0007497A /* Place+CoreDataClass.swift */,
 				B7DA1B6C202E140C0007497A /* Place+CoreDataProperties.swift */,
+				B7C0B594220BC2EF009FAAEB /* PlaceType+CoreDataClass.swift */,
+				B7C0B595220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift */,
 				B70E7D1421F4089F00B2228A /* Photo+CoreDataClass.swift */,
 				B70E7D1821F408C100B2228A /* Photo+CoreDataProperties.swift */,
 				B7C10CBB2020D19500818430 /* MyTravels.xcdatamodeld */,
@@ -494,6 +500,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7C0B598220BC7AB009FAAEB /* MyTravels.xcdatamodeld in Resources */,
 				B7C10CC22020D19500818430 /* LaunchScreen.storyboard in Resources */,
 				B7A5A708217FD2E70034D52B /* TripCell.xib in Resources */,
 				B7BA6FCC22009408004A3C70 /* Profile.storyboard in Resources */,
@@ -570,9 +577,11 @@
 				B7F92BCF20291DEE0021A8CA /* PhotoController.swift in Sources */,
 				B739261320362E5F0050B580 /* SharedTripsController.swift in Sources */,
 				B7F75C0B2058523300C876A0 /* FeaturesViewController.swift in Sources */,
+				B7C0B596220BC2EF009FAAEB /* PlaceType+CoreDataClass.swift in Sources */,
 				B7B1A93E21CD334700544056 /* NoSharedTripsView.swift in Sources */,
 				B7D652432027F5C300E975F1 /* CreateTripTableViewController.swift in Sources */,
 				B7C10CCF2020FD4B00818430 /* TripController.swift in Sources */,
+				B7C0B597220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift in Sources */,
 				B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */,
 				B7D652392024E24A00E975F1 /* TypeSelectionViewController.swift in Sources */,
 				B70E7D1921F408C100B2228A /* Photo+CoreDataProperties.swift in Sources */,
@@ -585,7 +594,6 @@
 				B7DA1B822030E70C0007497A /* SearchViewController.swift in Sources */,
 				B7F75C07205842E600C876A0 /* OnboardingPageViewController.swift in Sources */,
 				B7DA1B7D202E2B900007497A /* InternalUserController.swift in Sources */,
-				B7C10CBD2020D19500818430 /* MyTravels.xcdatamodeld in Sources */,
 				B7C10CCB2020EDB400818430 /* TripsListViewController.swift in Sources */,
 				B7C10CE2202226ED00818430 /* TripDetailViewController.swift in Sources */,
 				B7F75C0D205871ED00C876A0 /* SharedTripsListViewController.swift in Sources */,
