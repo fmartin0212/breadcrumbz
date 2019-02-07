@@ -27,9 +27,9 @@ public class Place: NSManagedObject, FirebaseSavable {
     }
     
     enum types: String {
-        case restaurant = "restaurant"
-        case lodging = "lodging"
-        case activity = "activity"
+        case restaurant
+        case lodging
+        case activity
     }
     
     var type: types? {

@@ -293,7 +293,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2776.8000000000002" y="-965.6671664167917"/>
+            <point key="canvasLocation" x="4655.1999999999998" y="-965.6671664167917"/>
         </scene>
         <!--Choose Date View Controller-->
         <scene sceneID="1SP-vW-oew">
@@ -366,7 +366,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HxM-v2-75a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3670" y="-965"/>
+            <point key="canvasLocation" x="5548" y="-965.6671664167917"/>
         </scene>
         <!--Trip Detail View Controller-->
         <scene sceneID="l1B-77-bXp">
@@ -1154,6 +1154,33 @@
             </objects>
             <point key="canvasLocation" x="-1118" y="116"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="WSf-zv-iDv">
+            <objects>
+                <viewController id="MXI-cM-d2s" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="G9e-BU-R1W">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sis-hB-Rrx">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Sis-hB-Rrx" firstAttribute="top" secondItem="Wca-W5-w2J" secondAttribute="top" id="4bF-UM-C7c"/>
+                            <constraint firstItem="Wca-W5-w2J" firstAttribute="bottom" secondItem="Sis-hB-Rrx" secondAttribute="bottom" id="epW-Fd-hS3"/>
+                            <constraint firstItem="Wca-W5-w2J" firstAttribute="trailing" secondItem="Sis-hB-Rrx" secondAttribute="trailing" id="kx5-pT-GHn"/>
+                            <constraint firstItem="Sis-hB-Rrx" firstAttribute="leading" secondItem="Wca-W5-w2J" secondAttribute="leading" id="njz-JA-pgd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Wca-W5-w2J"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="UA6-CU-Gec"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GU7-6Z-wCz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1364" y="-1169.865067466267"/>
+        </scene>
         <!--Profile View Controller-->
         <scene sceneID="J6O-8t-z3C">
             <objects>
@@ -1724,7 +1751,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O1L-7r-Hh1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1937" y="-965"/>
+            <point key="canvasLocation" x="3815.1999999999998" y="-965.6671664167917"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="zrI-9I-bcL">
@@ -2458,6 +2485,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zTO-bF-81O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1498" y="963"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="D9c-Q4-5Qd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3uK-DV-HdV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Clf-dn-vMN">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="MXI-cM-d2s" kind="relationship" relationship="rootViewController" id="W6g-8o-Nre"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bFe-sD-v34" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="424.80000000000001" y="-1169.865067466267"/>
         </scene>
     </scenes>
     <resources>
