@@ -93,9 +93,16 @@ class TripsListViewController: UIViewController {
     }
     
     @IBAction func addATripButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "addATripSegue", sender: nil)
+        let addTripVC = AddTripViewController(nibName: "AddTrip", bundle: nil)
+        self.present(addTripVC, animated: true, completion: nil)
+//        performSegue(withIdentifier: "addATripSegue", sender: nil)
+        
     }
     
+    @IBAction func addTripBarButtonItemTapped(_ sender: Any) {
+        let addTripVC = AddTripViewController(nibName: "AddTrip", bundle: nil)
+        self.present(addTripVC, animated: true, completion: nil)
+    }
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

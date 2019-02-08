@@ -41,7 +41,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Add a trip" id="Xfr-BE-SpC">
                             <color key="tintColor" red="0.1696610677" green="0.32706386389999997" blue="0.72726690770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="6cL-fW-Y2U" kind="presentation" identifier="addATripSegue" id="7TT-N8-fxt"/>
+                                <action selector="addTripBarButtonItemTapped:" destination="KSc-Yg-SqR" id="BtZ-rg-nYC"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -50,6 +50,7 @@
                         <outlet property="addTripBarButtonItem" destination="Xfr-BE-SpC" id="1nh-ya-bEc"/>
                         <outlet property="noTripsView" destination="05W-bJ-ChF" id="MVi-OS-hAM"/>
                         <outlet property="tableView" destination="HlD-A1-XiZ" id="SPg-it-kX6"/>
+                        <segue destination="6cL-fW-Y2U" kind="presentation" identifier="addATripSegue" id="IJk-nM-FuZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="opj-gv-CMe" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -145,5 +145,54 @@ extension UIStoryboard {
     }
 }
 
+extension UIView {
+    
+    func format() {
+        self.layer.cornerRadius = 2
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.borderWidth = 0.3
+        self.layer.shadowRadius = 2
+        self.layer.shadowOpacity = 1
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+        
+        let bezierPath = UIBezierPath()
+        
+        // Start in the top lefthand corner
+        bezierPath.move(to: CGPoint(x: self.frame.origin.x , y: self.frame.origin.y))
+        
+        // Move to the bottom lefthand corner
+        bezierPath.addLine(to: CGPoint(x: self.frame.origin.x , y: self.frame.height))
+        
+//        // Move to the bottom righthand corner
+//        bezierPath.addLine(to: CGPoint(x: self.frame.origin.x +  self.frame.width, y: self.frame.origin.y))
+////
+//        // Move to the top righthand corner
+//        bezierPath.move(to: CGPoint(x: self.frame.origin.x + self.frame.width, y: self.frame.origin.y - self.frame.height))
+        bezierPath.stroke()
+        bezierPath.fill()
+        self.layer.shadowPath = bezierPath.cgPath
+    }
+}
 
+extension UIButton {
+    
+    func format(withFontColor fontColor: UIColor, borderColor: UIColor, backgroundColor: UIColor) {
+        self.layer.cornerRadius = 6
+        self.layer.borderWidth = 3
+        self.layer.borderColor = borderColor.cgColor
+        self.backgroundColor = backgroundColor
+        self.setTitleColor(fontColor, for: .normal)
+    }
+}
+
+extension UIView {
+    
+    func formatLine() {
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.borderWidth = 0.1
+        self.layer.shadowRadius = 0.8
+        self.layer.shadowOpacity = 0.1
+        self.layer.shadowOffset = CGSize(width: 0, height: 2)
+    }
+}
 
