@@ -241,6 +241,13 @@
 			path = "Model outside of MOC";
 			sourceTree = "<group>";
 		};
+		B7C0AA042210F8B10030A5B1 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		B7C10CA82020D19500818430 = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +282,7 @@
 		B7C10CC92020D24300818430 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B7C0AA042210F8B10030A5B1 /* New Group */,
 				B77E4F7220C835EE007EB266 /* Assets.xcassets */,
 				B7C10CB42020D19500818430 /* AppDelegate.swift */,
 				B77E4F7020C6D481007EB266 /* Extensions.swift */,

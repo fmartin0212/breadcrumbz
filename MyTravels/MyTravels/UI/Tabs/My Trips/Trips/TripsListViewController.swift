@@ -171,7 +171,11 @@ extension TripsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TripCell", for: indexPath) as! TripTableViewCell
+        
+        // Cell and cell element formatting
         cell.selectionStyle = .none
+        cell.crumbBackgroundView.layer.cornerRadius = cell.crumbBackgroundView.frame.width / 2
+        cell.viewLineSeparator.formatLine()
         
         guard let trips = TripController.shared.frc.fetchedObjects else { return UITableViewCell() }
         let trip = trips[indexPath.row]
@@ -199,6 +203,10 @@ extension TripsListViewController: UITableViewDelegate {
         tripDetailVC.trip = trip
         
         navigationController?.pushViewController(tripDetailVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 344
     }
 }
 
