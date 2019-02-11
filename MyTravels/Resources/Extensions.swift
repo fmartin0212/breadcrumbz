@@ -100,6 +100,14 @@ extension Date {
         
         return date
     }
+    
+    func shortWithFullYear() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        let date = dateFormatter.string(from: self)
+        
+        return date
+    }
 }
 
 extension UIImage {
@@ -176,12 +184,10 @@ extension UIView {
 
 extension UIButton {
     
-    func format(withFontColor fontColor: UIColor, borderColor: UIColor, backgroundColor: UIColor) {
-        self.layer.cornerRadius = 6
-        self.layer.borderWidth = 3
-        self.layer.borderColor = borderColor.cgColor
-        self.backgroundColor = backgroundColor
-        self.setTitleColor(fontColor, for: .normal)
+    func addBorder(with color: UIColor, andWidth width: CGFloat) {
+        self.layer.cornerRadius = 14
+        self.layer.borderWidth = width
+        self.layer.borderColor = color.cgColor
     }
 }
 
@@ -196,3 +202,6 @@ extension UIView {
     }
 }
 
+struct Colorss {
+    static let lightRed = UIColor(red: 255.0, green: 77.0, blue: 77.0, alpha: 0.0)
+}
