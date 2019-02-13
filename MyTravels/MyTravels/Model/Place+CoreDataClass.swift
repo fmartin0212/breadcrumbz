@@ -19,7 +19,7 @@ public class Place: NSManagedObject, FirebaseSavable {
     var dictionary: [String : Any] {
         return [
             "name" : self.name,
-//            "type" : self.type,
+            "type" : self.type?.rawValue,
             "address" : self.address,
             "rating" : self.rating,
             "comments" : (self.comments ?? "")
@@ -27,9 +27,9 @@ public class Place: NSManagedObject, FirebaseSavable {
     }
     
     enum types: String {
-        case restaurant = "restaurant"
-        case lodging = "lodging"
-        case activity = "activity"
+        case restaurant
+        case lodging
+        case activity
     }
     
     var type: types? {

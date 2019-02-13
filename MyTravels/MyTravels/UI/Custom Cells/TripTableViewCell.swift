@@ -32,7 +32,9 @@ class TripTableViewCell: UITableViewCell {
     @IBOutlet weak var tripDatesLabel: UILabel!
     @IBOutlet weak var tripStartDateLabel: UILabel!
     @IBOutlet weak var tripEndDateLabel: UILabel!
-    @IBOutlet weak var tripCreatorLabel: UILabel!
+    @IBOutlet weak var crumbBackgroundView: UIView!
+    @IBOutlet weak var crumbCountLabel: UILabel!
+    @IBOutlet weak var viewLineSeparator: UIView!
     
     }
 
@@ -46,7 +48,6 @@ extension TripTableViewCell {
         
         if let trip = trip {
             
-            tripCreatorLabel.isHidden = true
             if let photo = trip.photo?.photo as Data? {
                 guard let image = UIImage(data: photo) else { return }
                 tripPhoto = image
@@ -62,6 +63,10 @@ extension TripTableViewCell {
             tripStartDateLabel.text = (trip.startDate as Date).short() + " - "
             tripEndDateLabel.text = (trip.endDate as Date).short()
             
+            if let places = trip.places {
+                crumbCountLabel.text = "\(places.count)"
+            }
+            
         } else if let sharedTrip = sharedTrip {
             if let photo = sharedTrip.photo {
                 tripPhoto = photo
@@ -75,8 +80,6 @@ extension TripTableViewCell {
             tripLocationLabel.text = sharedTrip.location
             tripStartDateLabel.text = (sharedTrip.startDate as Date).short() + " - "
             tripEndDateLabel.text = (sharedTrip.endDate as Date).short()
-            tripCreatorLabel.text = sharedTrip.creatorName
-            
         }
     }
 }

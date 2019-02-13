@@ -12,14 +12,13 @@ import FirebaseStorage
 import FirebaseDatabase
 
 class ProfileViewController: UIViewController {
-    
-    let profilePictureSetNotification = Notification.Name("profilePictureSet")
 
     @IBOutlet weak var logOutButton: UIButton!
     @IBOutlet weak var profilePictureButton: UIButton!
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var firstNameLabel: UILabel!
-    @IBOutlet weak var lastNameLabel: UILabel!
+    @IBOutlet weak var lineView1: UIView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var lineView2: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,14 +26,15 @@ class ProfileViewController: UIViewController {
         if let loggedInUser = InternalUserController.shared.loggedInUser, let loggedInUserPhoto = loggedInUser.photo {
         
             usernameLabel.text = loggedInUser.username
-            firstNameLabel.text = loggedInUser.firstName
-            lastNameLabel.text = loggedInUser.lastName
+            nameLabel.text = "\(loggedInUser.firstName) \(loggedInUser.lastName ?? "")"
             profilePictureButton.setBackgroundImage(loggedInUserPhoto, for: .normal)
             profilePictureButton.setImage(nil, for: .normal)
             
             profilePictureButton.clipsToBounds = true
             profilePictureButton.layer.cornerRadius = profilePictureButton.frame.width / 2
         }
+        lineView1.formatLine()
+        lineView2.formatLine()
     }
     
     // MARK: - Actions
@@ -71,8 +71,7 @@ extension ProfileViewController {
     func clearViews() {
         profilePictureButton.setBackgroundImage(UIImage(named:"ProfileTabBarButton_Unselected"), for: .normal)
         usernameLabel.text = ""
-        firstNameLabel.text = ""
-        lastNameLabel.text = ""
+        nameLabel.text = ""
     }
 }
 
@@ -102,7 +101,6 @@ extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationC
                     self.dismiss(animated: true, completion: nil)
                 }
             }
-
         }
     }
 }

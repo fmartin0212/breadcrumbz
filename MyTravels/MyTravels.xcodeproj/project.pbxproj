@@ -18,6 +18,10 @@
 		B739261320362E5F0050B580 /* SharedTripsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B739261220362E5F0050B580 /* SharedTripsController.swift */; };
 		B75E335C20D3150500839678 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E335B20D3150500839678 /* SignUpViewController.swift */; };
 		B75E335E20D316DD00839678 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E335D20D316DD00839678 /* TextFieldTableViewCell.swift */; };
+		B76107182212331D001F79B6 /* Poppins-ExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B76107172212331A001F79B6 /* Poppins-ExtraLightItalic.otf */; };
+		B761071A22123634001F79B6 /* Poppins-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = B761071922123634001F79B6 /* Poppins-ExtraLight.otf */; };
+		B761071B2212378C001F79B6 /* Poppins-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B7C0AA0B221100700030A5B1 /* Poppins-Regular.otf */; };
+		B761071C2212378E001F79B6 /* Poppins-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = B7C0AA0C2211008F0030A5B1 /* Poppins-Medium.otf */; };
 		B762265521EFC9510045F260 /* FirebaseSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B762265421EFC94F0045F260 /* FirebaseSyncable.swift */; };
 		B774A1C621BDA85E008D7483 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B774A1C521BDA85E008D7483 /* Constants.swift */; };
 		B77E4F7120C6D482007EB266 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E4F7020C6D481007EB266 /* Extensions.swift */; };
@@ -32,12 +36,16 @@
 		B7B1A93C21CD319300544056 /* NoSharedTripsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7B1A93B21CD319300544056 /* NoSharedTripsView.xib */; };
 		B7B1A93E21CD334700544056 /* NoSharedTripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B1A93D21CD334700544056 /* NoSharedTripsView.swift */; };
 		B7BA6F5521F82424004A3C70 /* TripDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7BA6F5421F82424004A3C70 /* TripDetailCell.xib */; };
-		B7BA6F8621FD31F5004A3C70 /* AddTrip.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7BA6F8521FD31F5004A3C70 /* AddTrip.xib */; };
 		B7BA6FCC22009408004A3C70 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7BA6FCB22009408004A3C70 /* Profile.storyboard */; };
 		B7BDA845202A29F50080B81B /* EditPlaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */; };
+		B7C0AA072210F9420030A5B1 /* Poppins-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = B7C0AA062210F93A0030A5B1 /* Poppins-Light.otf */; };
+		B7C0AA082210F9450030A5B1 /* Poppins-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B7C0AA052210F93A0030A5B1 /* Poppins-SemiBold.otf */; };
+		B7C0AA0A2210FE6E0030A5B1 /* Poppins-ExtraBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B7C0AA092210FE680030A5B1 /* Poppins-ExtraBoldItalic.otf */; };
 		B7C0B596220BC2EF009FAAEB /* PlaceType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0B594220BC2EF009FAAEB /* PlaceType+CoreDataClass.swift */; };
 		B7C0B597220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0B595220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift */; };
 		B7C0B598220BC7AB009FAAEB /* MyTravels.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = B7C10CBB2020D19500818430 /* MyTravels.xcdatamodeld */; };
+		B7C0B59A220C75BB009FAAEB /* AddTrip.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7C0B599220C75BA009FAAEB /* AddTrip.xib */; };
+		B7C0B59C220CB393009FAAEB /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0B59B220CB393009FAAEB /* AddTripViewController.swift */; };
 		B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CB42020D19500818430 /* AppDelegate.swift */; };
 		B7C10CB72020D19500818430 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CB62020D19500818430 /* CreateAccountViewController.swift */; };
 		B7C10CBA2020D19500818430 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7C10CB82020D19500818430 /* Main.storyboard */; };
@@ -90,6 +98,8 @@
 		B739261220362E5F0050B580 /* SharedTripsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripsController.swift; sourceTree = "<group>"; };
 		B75E335B20D3150500839678 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B75E335D20D316DD00839678 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		B76107172212331A001F79B6 /* Poppins-ExtraLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLightItalic.otf"; sourceTree = "<group>"; };
+		B761071922123634001F79B6 /* Poppins-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.otf"; sourceTree = "<group>"; };
 		B762265421EFC94F0045F260 /* FirebaseSyncable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSyncable.swift; sourceTree = "<group>"; };
 		B76D944720C0C5BB003E8BBE /* Gilroy-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Light.otf"; sourceTree = "<group>"; };
 		B774A1C521BDA85E008D7483 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -105,11 +115,17 @@
 		B7B1A93B21CD319300544056 /* NoSharedTripsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoSharedTripsView.xib; sourceTree = "<group>"; };
 		B7B1A93D21CD334700544056 /* NoSharedTripsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSharedTripsView.swift; sourceTree = "<group>"; };
 		B7BA6F5421F82424004A3C70 /* TripDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripDetailCell.xib; sourceTree = "<group>"; };
-		B7BA6F8521FD31F5004A3C70 /* AddTrip.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTrip.xib; sourceTree = "<group>"; };
 		B7BA6FCB22009408004A3C70 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlaceTableViewController.swift; sourceTree = "<group>"; };
+		B7C0AA052210F93A0030A5B1 /* Poppins-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.otf"; sourceTree = "<group>"; };
+		B7C0AA062210F93A0030A5B1 /* Poppins-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.otf"; sourceTree = "<group>"; };
+		B7C0AA092210FE680030A5B1 /* Poppins-ExtraBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBoldItalic.otf"; sourceTree = "<group>"; };
+		B7C0AA0B221100700030A5B1 /* Poppins-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.otf"; sourceTree = "<group>"; };
+		B7C0AA0C2211008F0030A5B1 /* Poppins-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.otf"; sourceTree = "<group>"; };
 		B7C0B594220BC2EF009FAAEB /* PlaceType+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceType+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B7C0B595220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceType+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B7C0B599220C75BA009FAAEB /* AddTrip.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTrip.xib; sourceTree = "<group>"; };
+		B7C0B59B220CB393009FAAEB /* AddTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripViewController.swift; sourceTree = "<group>"; };
 		B7C10CB12020D19500818430 /* MyTravels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTravels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7C10CB42020D19500818430 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7C10CB62020D19500818430 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -190,7 +206,6 @@
 				B75E335D20D316DD00839678 /* TextFieldTableViewCell.swift */,
 				B7C10CCC2020EFB000818430 /* TripTableViewCell.swift */,
 				B711157820549859000868BD /* TripDetailTableViewCell.swift */,
-				B7BA6F8521FD31F5004A3C70 /* AddTrip.xib */,
 				B7F75C1F205A14D800C876A0 /* SharedTripDetailTableViewCell.swift */,
 				B7073BE420DAF03D001B1F9F /* AddACrumbTableViewCell.swift */,
 				B7D6523C202620E700E975F1 /* PlaceTableViewCell.swift */,
@@ -240,6 +255,20 @@
 			path = "Model outside of MOC";
 			sourceTree = "<group>";
 		};
+		B7C0AA042210F8B10030A5B1 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B7C0AA062210F93A0030A5B1 /* Poppins-Light.otf */,
+				B7C0AA052210F93A0030A5B1 /* Poppins-SemiBold.otf */,
+				B7C0AA092210FE680030A5B1 /* Poppins-ExtraBoldItalic.otf */,
+				B7C0AA0C2211008F0030A5B1 /* Poppins-Medium.otf */,
+				B7C0AA0B221100700030A5B1 /* Poppins-Regular.otf */,
+				B76107172212331A001F79B6 /* Poppins-ExtraLightItalic.otf */,
+				B761071922123634001F79B6 /* Poppins-ExtraLight.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		B7C10CA82020D19500818430 = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +303,7 @@
 		B7C10CC92020D24300818430 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B7C0AA042210F8B10030A5B1 /* Fonts */,
 				B77E4F7220C835EE007EB266 /* Assets.xcassets */,
 				B7C10CB42020D19500818430 /* AppDelegate.swift */,
 				B77E4F7020C6D481007EB266 /* Extensions.swift */,
@@ -347,6 +377,8 @@
 		B7C83FBF21C1F83A00A9F86C /* xibs */ = {
 			isa = PBXGroup;
 			children = (
+				B7C0B599220C75BA009FAAEB /* AddTrip.xib */,
+				B7C0B59B220CB393009FAAEB /* AddTripViewController.swift */,
 				B7C83FC421C1FA3B00A9F86C /* LoadingView.swift */,
 				B7C83FC021C1F88700A9F86C /* LoadingView.xib */,
 				B7B1A93D21CD334700544056 /* NoSharedTripsView.swift */,
@@ -503,16 +535,23 @@
 				B7C0B598220BC7AB009FAAEB /* MyTravels.xcdatamodeld in Resources */,
 				B7C10CC22020D19500818430 /* LaunchScreen.storyboard in Resources */,
 				B7A5A708217FD2E70034D52B /* TripCell.xib in Resources */,
+				B7C0AA0A2210FE6E0030A5B1 /* Poppins-ExtraBoldItalic.otf in Resources */,
+				B761071C2212378E001F79B6 /* Poppins-Medium.otf in Resources */,
+				B76107182212331D001F79B6 /* Poppins-ExtraLightItalic.otf in Resources */,
 				B7BA6FCC22009408004A3C70 /* Profile.storyboard in Resources */,
 				B78FB5982070317700EE40C2 /* Gilroy-ExtraBold.otf in Resources */,
+				B7C0AA082210F9450030A5B1 /* Poppins-SemiBold.otf in Resources */,
 				B77E4F7320C835EF007EB266 /* Assets.xcassets in Resources */,
+				B7C0B59A220C75BB009FAAEB /* AddTrip.xib in Resources */,
 				B7B1A93C21CD319300544056 /* NoSharedTripsView.xib in Resources */,
+				B761071A22123634001F79B6 /* Poppins-ExtraLight.otf in Resources */,
 				B7C10CBA2020D19500818430 /* Main.storyboard in Resources */,
 				B7C83FC121C1F88700A9F86C /* LoadingView.xib in Resources */,
 				B7F75C0220577BB200C876A0 /* Onboarding.storyboard in Resources */,
 				B78BC0742159587100827394 /* GoogleService-Info.plist in Resources */,
+				B7C0AA072210F9420030A5B1 /* Poppins-Light.otf in Resources */,
 				B7BA6F5521F82424004A3C70 /* TripDetailCell.xib in Resources */,
-				B7BA6F8621FD31F5004A3C70 /* AddTrip.xib in Resources */,
+				B761071B2212378C001F79B6 /* Poppins-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -610,6 +649,7 @@
 				B735428D2174E36300D9A68D /* Trip+CoreDataProperties.swift in Sources */,
 				B725034F20D9B64C00744B23 /* ProfileViewController.swift in Sources */,
 				B7C10CCD2020EFB000818430 /* TripTableViewCell.swift in Sources */,
+				B7C0B59C220CB393009FAAEB /* AddTripViewController.swift in Sources */,
 				B762265521EFC9510045F260 /* FirebaseSyncable.swift in Sources */,
 				B7DA1B71202E140C0007497A /* Place+CoreDataClass.swift in Sources */,
 				B7DA1B72202E140C0007497A /* Place+CoreDataProperties.swift in Sources */,

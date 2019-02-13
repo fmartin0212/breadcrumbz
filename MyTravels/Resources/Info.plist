@@ -30,7 +30,7 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Gilroy-ExtraBold</string>
+		<string>Poppins-ExtraBoldItalic.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

@@ -33,7 +33,7 @@ class TripsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let nib = UINib(nibName: "TripCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TripCell")
         
@@ -46,14 +46,13 @@ class TripsListViewController: UIViewController {
         TripController.shared.frc.delegate = self
         
         // Set navigation bar properties
-        navigationController?.navigationBar.prefersLargeTitles = true
         addTripBarButtonItem.format()
         TripController.shared.fetchAllTrips()
 //
-//        for trip in TripController.shared.trips {
-//            CoreDataStack.context.delete(trip)
-//            CoreDataManager.save()
-//        }
+        for trip in TripController.shared.trips {
+            trip.uid = nil
+            CoreDataManager.save()
+        }
         
         if TripController.shared.trips.count == 0 {
             self.presentNoTripsView()
@@ -93,9 +92,16 @@ class TripsListViewController: UIViewController {
     }
     
     @IBAction func addATripButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "addATripSegue", sender: nil)
+        let addTripVC = AddTripViewController(nibName: "AddTrip", bundle: nil)
+        self.present(addTripVC, animated: true, completion: nil)
+//        performSegue(withIdentifier: "addATripSegue", sender: nil)
+        
     }
     
+    @IBAction func addTripBarButtonItemTapped(_ sender: Any) {
+        let addTripVC = AddTripViewController(nibName: "AddTrip", bundle: nil)
+        self.present(addTripVC, animated: true, completion: nil)
+    }
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -164,7 +170,11 @@ extension TripsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TripCell", for: indexPath) as! TripTableViewCell
+        
+        // Cell and cell element formatting
         cell.selectionStyle = .none
+        cell.crumbBackgroundView.layer.cornerRadius = cell.crumbBackgroundView.frame.width / 2
+        cell.viewLineSeparator.formatLine()
         
         guard let trips = TripController.shared.frc.fetchedObjects else { return UITableViewCell() }
         let trip = trips[indexPath.row]
@@ -192,6 +202,10 @@ extension TripsListViewController: UITableViewDelegate {
         tripDetailVC.trip = trip
         
         navigationController?.pushViewController(tripDetailVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 344
     }
 }
 

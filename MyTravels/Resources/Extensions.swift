@@ -100,6 +100,14 @@ extension Date {
         
         return date
     }
+    
+    func shortWithFullYear() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        let date = dateFormatter.string(from: self)
+        
+        return date
+    }
 }
 
 extension UIImage {
@@ -145,5 +153,43 @@ extension UIStoryboard {
     }
 }
 
+extension UIView {
+    
+    func format() {
+        self.layer.cornerRadius = 2
+        
+        // Border
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.borderWidth = 0.3
+    
+        // Shadow
+        self.layer.shadowColor = UIColor.lightGray.cgColor
+        self.layer.shadowRadius = 1.7
+        self.layer.shadowOpacity = 0.2
+        self.layer.shadowOffset = CGSize(width: 0, height: 3)
+        self.layer.masksToBounds = false
+        self.layer.backgroundColor = UIColor.white.cgColor
 
+    }
+}
+
+extension UIButton {
+    
+    func addBorder(with color: UIColor, andWidth width: CGFloat) {
+        self.layer.cornerRadius = 14
+        self.layer.borderWidth = width
+        self.layer.borderColor = color.cgColor
+    }
+}
+
+extension UIView {
+    
+    func formatLine() {
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.borderWidth = 0.1
+        self.layer.shadowRadius = 0.8
+        self.layer.shadowOpacity = 0.1
+        self.layer.shadowOffset = CGSize(width: 0, height: 2)
+    }
+}
 

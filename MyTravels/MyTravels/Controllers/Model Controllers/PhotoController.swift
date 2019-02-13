@@ -106,9 +106,7 @@ final class PhotoController {
                 
                 // Save the trip's places' photos.
                 self.savePlacePhotos(for: trip, completion: { (success) in
-                    if success {
-                        completion(true)
-                    }
+                    completion(true)
                 })
             }
         }
@@ -132,7 +130,7 @@ final class PhotoController {
                         completion(false)
                         return
                     } else {
-                        completion(false)
+                        completion(true)
                     }
                 })
             }
@@ -188,5 +186,6 @@ final class PhotoController {
                 }
             }
         }
+        completion(true)
     }
 }
