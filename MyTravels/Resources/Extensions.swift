@@ -157,28 +157,19 @@ extension UIView {
     
     func format() {
         self.layer.cornerRadius = 2
+        
+        // Border
         self.layer.borderColor = UIColor.lightGray.cgColor
         self.layer.borderWidth = 0.3
-        self.layer.shadowRadius = 2
-        self.layer.shadowOpacity = 1
-        self.layer.shadowOffset = CGSize(width: 0, height: 0)
-        
-        let bezierPath = UIBezierPath()
-        
-        // Start in the top lefthand corner
-        bezierPath.move(to: CGPoint(x: self.frame.origin.x , y: self.frame.origin.y))
-        
-        // Move to the bottom lefthand corner
-        bezierPath.addLine(to: CGPoint(x: self.frame.origin.x , y: self.frame.height))
-        
-//        // Move to the bottom righthand corner
-//        bezierPath.addLine(to: CGPoint(x: self.frame.origin.x +  self.frame.width, y: self.frame.origin.y))
-////
-//        // Move to the top righthand corner
-//        bezierPath.move(to: CGPoint(x: self.frame.origin.x + self.frame.width, y: self.frame.origin.y - self.frame.height))
-        bezierPath.stroke()
-        bezierPath.fill()
-        self.layer.shadowPath = bezierPath.cgPath
+    
+        // Shadow
+        self.layer.shadowColor = UIColor.lightGray.cgColor
+        self.layer.shadowRadius = 1.7
+        self.layer.shadowOpacity = 0.2
+        self.layer.shadowOffset = CGSize(width: 0, height: 3)
+        self.layer.masksToBounds = false
+        self.layer.backgroundColor = UIColor.white.cgColor
+
     }
 }
 
@@ -202,6 +193,3 @@ extension UIView {
     }
 }
 
-struct Colorss {
-    static let lightRed = UIColor(red: 255.0, green: 77.0, blue: 77.0, alpha: 0.0)
-}

@@ -42,4 +42,5 @@ extension FirebaseSavable {
 protocol FirebaseStorageSavable {
     
     var data: Data { get }
+    var uid: String { get }
 }

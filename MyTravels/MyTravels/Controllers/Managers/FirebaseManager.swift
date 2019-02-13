@@ -208,8 +208,8 @@ final class FirebaseManager {
     }
     
     static func save<T: FirebaseStorageSavable>(_ object: T, completion: @escaping (StorageMetadata?, String?) -> Void) {
-        let storageRef = Storage.storage().reference()
-
+        let storageRef = Storage.storage().reference().child(object.uid)
+        print(object)
         storageRef.putData(object.data, metadata: nil) { (metadata, error) in
             if let _ = error {
                 completion(nil, Constants.somethingWentWrong)

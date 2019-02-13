@@ -17,20 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        FirebaseApp.configure()
-        
-//        FirebaseManager.fetch(uuid: "fU2HTSJ6YJQdmebaob6FhdhTitj1") { (user: InternalUser?) in
-//            guard let user = user else { return }
-//            var participantTripIDs = [String : Any]()
-//            participantTripIDs = ["LU8EwrZLu6jY6L23c112" : true]
-//
-//            FirebaseManager.update(object: user, atChildren: ["participantTripIDs"], withValues: participantTripIDs) { (_) in
-//                print("adsF")
-//            }
-//        }
-        
-        
-        
+        FirebaseApp.configure() 
         return true
     }
 }

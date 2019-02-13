@@ -12,6 +12,9 @@ final class AddTripViewController: UIViewController {
     
     // MARK: - Outlets
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var saveBottomContraint: NSLayoutConstraint!
+    @IBOutlet weak var nameLocOuterStackView: UIStackView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var addPhotoButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -40,20 +43,29 @@ final class AddTripViewController: UIViewController {
         }
     }
     var endDate: Date?
+    var keyboardHeight: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        nameTextField.delegate = self
+        
         NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardDidShow, object: nil, queue: .main) { (notification) in
-            guard let userInfo = notification.userInfo else { return }
-            let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect
-            let keyboardHeight = keyboardFrame?.height
-            print(self.contentView.frame.height)
-            self.contentView.frame = CGRect(x: self.contentView.frame.origin.x, y: self.contentView.frame.origin.y, width: self.contentView.frame.width, height: self.contentView.frame.height + keyboardHeight!)
-            print(self.contentView.frame.height)
+//            guard let userInfo = notification.userInfo else { return }
+//            let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect
+//            let keyboardHeight = keyboardFrame?.height
+//            self.keyboardHeight = keyboardFrame!.height
+//            print(self.contentView.frame.height)
+//            self.saveBottomContraint.constant = 100 + keyboardHeight!
+//            print(self.contentView.frame.height)
+        }
+        
+        NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardDidHide, object: nil, queue: .main) { (notification) in
+            self.saveBottomContraint.constant = 100
         }
         
         setupViews()
+        nameTextField.addKeyboardDone(targetVC: self, selector: #selector(dismissKeyboard))
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -66,6 +78,14 @@ final class AddTripViewController: UIViewController {
     
     // MARK: - Actions
     
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        saveNewTrip()
+    }
+    
     @IBAction func addPhotoButtonTapped(_ sender: Any) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -74,11 +94,8 @@ final class AddTripViewController: UIViewController {
         present(imagePickerController, animated: true, completion: nil)
     }
     
-    @IBAction func cancelButtonTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    @IBAction func saveButtonTapped(_ sender: Any) {
-        
+    @IBAction func saveBarButtonItemTapped(_ sender: Any) {
+        saveNewTrip()
     }
 }
 
@@ -98,7 +115,10 @@ extension AddTripViewController {
         
         // Photo backdrop
         photoBackdropView.layer.cornerRadius = photoBackdropView.frame.width / 2
-        photoBackdropView.clipsToBounds = true
+        photoBackdropView.layer.shadowColor = #colorLiteral(red: 1, green: 0.4002141953, blue: 0.372333765, alpha: 1)
+        photoBackdropView.layer.shadowRadius = 10
+        photoBackdropView.layer.shadowOpacity = 1.0
+        photoBackdropView.layer.shadowOffset = CGSize(width: 0, height: 0)
         
         // Buttons
         addPhotoButton.addBorder(with: #colorLiteral(red: 1, green: 0.4002141953, blue: 0.372333765, alpha: 1), andWidth: 4)
@@ -110,8 +130,7 @@ extension AddTripViewController {
         // Photo image view
         photoImageView.layer.cornerRadius = 6
         photoImageView.clipsToBounds = true
-    
-        
+
         // Date Pickers
         startDateTextField.inputView = startDatePicker
         startDatePicker.datePickerMode = .date
@@ -122,6 +141,13 @@ extension AddTripViewController {
         endDatePicker.datePickerMode = .date
         endDatePicker.tag = 2
         endDatePicker.addTarget(self, action: #selector(setDate(sender:)), for: .valueChanged)
+        
+        let path = UIBezierPath()
+        path.lineWidth = 4
+        let trueY = nameLocOuterStackView.frame.origin.y + nameTextField.frame.origin.y
+        path.move(to: CGPoint(x: nameLocOuterStackView.frame.origin.x, y: trueY))
+        print(path.currentPoint)
+        path.addLine(to: CGPoint(x: nameLocOuterStackView.frame.origin.x, y: trueY + nameTextField.frame.height))
     }
     
     @objc func setDate(sender: UIDatePicker) {
@@ -136,6 +162,27 @@ extension AddTripViewController {
             print("Someting went wrong")
         }
     }
+    
+    @objc func dismissKeyboard() {
+        contentView.endEditing(true)
+    }
+    
+    func saveNewTrip() {
+        guard let name = nameTextField.text, !name.isEmpty,
+            let location = locationTextField.text, !location.isEmpty,
+            let startDate = startDate,
+            let endDate = endDate
+            else { return }
+        
+        let newTrip = TripController.shared.createTripWith(name: name, location: location, tripDescription: descriptionTextView.text, startDate: startDate, endDate: endDate)
+        
+        if let photo = photoImageView.image,
+            let compressedImage = UIImageJPEGRepresentation(photo, 0.1) {
+        
+        PhotoController.shared.add(photo: compressedImage, trip: newTrip)
+        }
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 extension AddTripViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -147,7 +194,7 @@ extension AddTripViewController: UIImagePickerControllerDelegate, UINavigationCo
         view.bringSubview(toFront: photoImageView)
         
         photoIcon.isHidden = true
-        addPhotoButtonTopConstraint.constant = addPhotoButton.frame.minY - photoImageView.frame.minY
+        addPhotoButtonTopConstraint.constant = 10
         contentView.layoutIfNeeded()
         addPhotoButton.setTitle("Change Photo", for: .normal)
         
@@ -156,5 +203,16 @@ extension AddTripViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension AddTripViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+
+        let trueRect = textField.convert(textField.frame, to: contentView)
+        print(trueRect)
+        scrollView.setContentOffset(CGPoint(x: trueRect.origin.x, y: -(trueRect.origin.y + 15)), animated: true)
+        contentView.layoutIfNeeded()
     }
 }

@@ -31,12 +31,15 @@
                 <outlet property="endDateTextField" destination="e7U-Na-i2W" id="x9d-8p-4aj"/>
                 <outlet property="largeLineView" destination="b45-bx-Apa" id="2Yq-JN-5oX"/>
                 <outlet property="locationTextField" destination="iEh-bQ-acK" id="0VK-qt-BP4"/>
+                <outlet property="nameLocOuterStackView" destination="Kb7-dQ-CbC" id="2GE-I3-oXF"/>
                 <outlet property="nameTextField" destination="IZ7-Mw-cYD" id="n7o-F0-MEh"/>
                 <outlet property="navigationBar" destination="CbB-qI-YJU" id="pVR-bE-puz"/>
                 <outlet property="photoBackdropView" destination="Pfb-h0-ASM" id="vAm-Rv-6O4"/>
                 <outlet property="photoIcon" destination="NNI-XH-qLZ" id="Yyr-pj-elj"/>
                 <outlet property="photoImageView" destination="w6V-Ih-0pd" id="JA3-bo-PpZ"/>
+                <outlet property="saveBottomContraint" destination="CK4-4R-gsD" id="Huv-ex-Fr4"/>
                 <outlet property="saveButton" destination="DEu-hf-yfT" id="uwI-xf-tjE"/>
+                <outlet property="scrollView" destination="bij-io-R0n" id="Ikc-gR-Phw"/>
                 <outlet property="startDateLineView" destination="HmB-Tc-eHd" id="RZP-Qq-WwW"/>
                 <outlet property="startDateTextField" destination="Ah9-fu-b1W" id="E9z-CS-LDe"/>
                 <outlet property="view" destination="iN0-l3-epB" id="UNL-GJ-DG2"/>
@@ -72,8 +75,11 @@
                                         <constraint firstItem="NNI-XH-qLZ" firstAttribute="width" secondItem="Pfb-h0-ASM" secondAttribute="width" multiplier="0.6" id="jTv-xQ-KYO"/>
                                     </constraints>
                                 </view>
-                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w6V-Ih-0pd">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w6V-Ih-0pd">
                                     <rect key="frame" x="8" y="8" width="334" height="237"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="237" id="BV0-6W-HwY"/>
+                                    </constraints>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ee0-fh-Txn">
                                     <rect key="frame" x="87.5" y="185" width="175" height="48"/>
@@ -235,7 +241,7 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <connections>
-                                        <action selector="saveButtonTapped:" destination="-1" eventType="touchUpInside" id="Esx-7l-z9Q"/>
+                                        <action selector="saveBarButtonItemTapped:" destination="-1" eventType="touchUpInside" id="Esx-7l-z9Q"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -249,7 +255,6 @@
                                 <constraint firstItem="w6V-Ih-0pd" firstAttribute="top" secondItem="UvZ-Yl-oqF" secondAttribute="top" constant="8" id="BEu-HS-9RL"/>
                                 <constraint firstAttribute="bottom" secondItem="DEu-hf-yfT" secondAttribute="bottom" constant="100" id="CK4-4R-gsD"/>
                                 <constraint firstItem="9ew-Lz-iel" firstAttribute="centerY" secondItem="22a-vm-We0" secondAttribute="centerY" id="G4q-GD-KAe"/>
-                                <constraint firstItem="w6V-Ih-0pd" firstAttribute="bottom" secondItem="b45-bx-Apa" secondAttribute="top" constant="-8" id="KkM-B5-xQ1"/>
                                 <constraint firstItem="NOJ-Us-X1m" firstAttribute="leading" secondItem="QN8-jC-Cl6" secondAttribute="leading" id="Kln-1j-DyB"/>
                                 <constraint firstItem="b45-bx-Apa" firstAttribute="width" secondItem="UvZ-Yl-oqF" secondAttribute="width" multiplier="0.85" id="LfK-rG-pPz"/>
                                 <constraint firstItem="RZR-CL-OvK" firstAttribute="centerY" secondItem="AgM-ms-zZp" secondAttribute="centerY" id="O0n-p9-B9A"/>

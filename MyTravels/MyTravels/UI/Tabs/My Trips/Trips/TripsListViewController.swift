@@ -33,7 +33,7 @@ class TripsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let nib = UINib(nibName: "TripCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TripCell")
         
@@ -46,14 +46,13 @@ class TripsListViewController: UIViewController {
         TripController.shared.frc.delegate = self
         
         // Set navigation bar properties
-        navigationController?.navigationBar.prefersLargeTitles = true
         addTripBarButtonItem.format()
         TripController.shared.fetchAllTrips()
 //
-//        for trip in TripController.shared.trips {
-//            CoreDataStack.context.delete(trip)
-//            CoreDataManager.save()
-//        }
+        for trip in TripController.shared.trips {
+            trip.uid = nil
+            CoreDataManager.save()
+        }
         
         if TripController.shared.trips.count == 0 {
             self.presentNoTripsView()
