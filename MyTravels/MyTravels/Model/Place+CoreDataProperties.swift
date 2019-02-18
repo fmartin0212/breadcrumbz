@@ -21,7 +21,6 @@ extension Place {
     @NSManaged public var comments: String?
     @NSManaged public var name: String
     @NSManaged public var rating: Int16
-//    @NSManaged public var type: String
     @NSManaged public var photos: NSSet?
     @NSManaged public var trip: Trip
     @NSManaged public var placeType: PlaceType?

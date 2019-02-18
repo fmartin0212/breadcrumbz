@@ -29,7 +29,7 @@
                                     <constraint firstAttribute="width" constant="140" id="cNw-Xd-GqS"/>
                                     <constraint firstAttribute="width" secondItem="9No-fg-Wsq" secondAttribute="height" multiplier="1:1" id="ezI-cT-vZA"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="ProfileTabBarButton_Unselected"/>
+                                <state key="normal" backgroundImage="user"/>
                                 <connections>
                                     <action selector="profileButtonTapped:" destination="d3a-nj-MMW" eventType="touchUpInside" id="y0h-bM-xkH"/>
                                 </connections>
@@ -117,11 +117,11 @@
             </objects>
             <point key="canvasLocation" x="-698.39999999999998" y="962.96851574212906"/>
         </scene>
-        <!--Item-->
+        <!--Profile-->
         <scene sceneID="cNH-nY-Yaw">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MGR-Gz-72m" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="9an-ut-Et2"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="user" id="9an-ut-Et2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="eNF-P6-KSE">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
@@ -146,6 +146,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ProfileTabBarButton_Unselected" width="24" height="23"/>
+        <image name="user" width="22" height="24"/>
     </resources>
 </document>
