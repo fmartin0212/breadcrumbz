@@ -102,18 +102,6 @@ class TripsListViewController: UIViewController {
         let addTripVC = AddTripViewController(nibName: "AddTrip", bundle: nil)
         self.present(addTripVC, animated: true, completion: nil)
     }
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toTripDetailViewSegue" {
-            guard let destinationVC = segue.destination as? TripDetailViewController,
-                let trips = TripController.shared.frc.fetchedObjects,
-                let indexPath = tableView.indexPathForSelectedRow
-                else { return }
-            let trip = trips[indexPath.row]
-            destinationVC.trip = trip
-        }
-    }
 }
 
 extension TripsListViewController {
@@ -197,7 +185,10 @@ extension TripsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let trip = TripController.shared.trips[indexPath.row]
         
-        guard let tripDetailVC = UIStoryboard.main.instantiateViewController(withIdentifier: "tripDetailVC") as? TripDetailViewController else { return }
+//        let tripDetailVC: TripDetailVC = UIViewController(nibName: <#T##String?#>, bundle: <#T##Bundle?#>)
+        let tripDetailVC = TripDetailVC(nibName: "TripDetail", bundle: nil)
+        
+//        guard let tripDetailVC = UIStoryboard.main.instantiateViewController(withIdentifier: "tripDetailVC") as? TripDetailViewController else { return }
         
         tripDetailVC.trip = trip
         

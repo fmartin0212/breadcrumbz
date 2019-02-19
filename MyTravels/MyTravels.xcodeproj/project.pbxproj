@@ -31,6 +31,10 @@
 		B78FB5982070317700EE40C2 /* Gilroy-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B78FB5972070317000EE40C2 /* Gilroy-ExtraBold.otf */; };
 		B796DD3A204B5F9500CAF093 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B796DD39204B5F9500CAF093 /* MapViewController.swift */; };
 		B7A5A708217FD2E70034D52B /* TripCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7A5A707217FD2E70034D52B /* TripCell.xib */; };
+		B7AC4084221B4A7600645BC2 /* TripDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7AC4083221B4A7600645BC2 /* TripDetail.xib */; };
+		B7AC4086221B4DC300645BC2 /* CrumbTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7AC4085221B4DC300645BC2 /* CrumbTableViewCell.xib */; };
+		B7AC4088221B681600645BC2 /* TripDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AC4087221B681600645BC2 /* TripDetailVC.swift */; };
+		B7AC408A221B6C0100645BC2 /* CrumbTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AC4089221B6C0100645BC2 /* CrumbTableViewCell.swift */; };
 		B7B0C36E203724F30031A92A /* SharedTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B0C36D203724F30031A92A /* SharedTrip.swift */; };
 		B7B0C3702037446E0031A92A /* SharedPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B0C36F2037446E0031A92A /* SharedPlace.swift */; };
 		B7B1A93C21CD319300544056 /* NoSharedTripsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7B1A93B21CD319300544056 /* NoSharedTripsView.xib */; };
@@ -110,6 +114,10 @@
 		B78FB5972070317000EE40C2 /* Gilroy-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-ExtraBold.otf"; sourceTree = "<group>"; };
 		B796DD39204B5F9500CAF093 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B7A5A707217FD2E70034D52B /* TripCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripCell.xib; sourceTree = "<group>"; };
+		B7AC4083221B4A7600645BC2 /* TripDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripDetail.xib; sourceTree = "<group>"; };
+		B7AC4085221B4DC300645BC2 /* CrumbTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CrumbTableViewCell.xib; sourceTree = "<group>"; };
+		B7AC4087221B681600645BC2 /* TripDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailVC.swift; sourceTree = "<group>"; };
+		B7AC4089221B6C0100645BC2 /* CrumbTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrumbTableViewCell.swift; sourceTree = "<group>"; };
 		B7B0C36D203724F30031A92A /* SharedTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTrip.swift; sourceTree = "<group>"; };
 		B7B0C36F2037446E0031A92A /* SharedPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPlace.swift; sourceTree = "<group>"; };
 		B7B1A93B21CD319300544056 /* NoSharedTripsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoSharedTripsView.xib; sourceTree = "<group>"; };
@@ -377,12 +385,16 @@
 		B7C83FBF21C1F83A00A9F86C /* xibs */ = {
 			isa = PBXGroup;
 			children = (
+				B7AC4083221B4A7600645BC2 /* TripDetail.xib */,
+				B7AC4087221B681600645BC2 /* TripDetailVC.swift */,
 				B7C0B599220C75BA009FAAEB /* AddTrip.xib */,
 				B7C0B59B220CB393009FAAEB /* AddTripViewController.swift */,
 				B7C83FC421C1FA3B00A9F86C /* LoadingView.swift */,
 				B7C83FC021C1F88700A9F86C /* LoadingView.xib */,
 				B7B1A93D21CD334700544056 /* NoSharedTripsView.swift */,
 				B7B1A93B21CD319300544056 /* NoSharedTripsView.xib */,
+				B7AC4085221B4DC300645BC2 /* CrumbTableViewCell.xib */,
+				B7AC4089221B6C0100645BC2 /* CrumbTableViewCell.swift */,
 			);
 			name = xibs;
 			path = ../../xibs;
@@ -534,6 +546,7 @@
 			files = (
 				B7C0B598220BC7AB009FAAEB /* MyTravels.xcdatamodeld in Resources */,
 				B7C10CC22020D19500818430 /* LaunchScreen.storyboard in Resources */,
+				B7AC4084221B4A7600645BC2 /* TripDetail.xib in Resources */,
 				B7A5A708217FD2E70034D52B /* TripCell.xib in Resources */,
 				B7C0AA0A2210FE6E0030A5B1 /* Poppins-ExtraBoldItalic.otf in Resources */,
 				B761071C2212378E001F79B6 /* Poppins-Medium.otf in Resources */,
@@ -548,6 +561,7 @@
 				B7C10CBA2020D19500818430 /* Main.storyboard in Resources */,
 				B7C83FC121C1F88700A9F86C /* LoadingView.xib in Resources */,
 				B7F75C0220577BB200C876A0 /* Onboarding.storyboard in Resources */,
+				B7AC4086221B4DC300645BC2 /* CrumbTableViewCell.xib in Resources */,
 				B78BC0742159587100827394 /* GoogleService-Info.plist in Resources */,
 				B7C0AA072210F9420030A5B1 /* Poppins-Light.otf in Resources */,
 				B7BA6F5521F82424004A3C70 /* TripDetailCell.xib in Resources */,
@@ -641,6 +655,7 @@
 				B7F75C092058521C00C876A0 /* ExplanationViewController.swift in Sources */,
 				B7BDA845202A29F50080B81B /* EditPlaceTableViewController.swift in Sources */,
 				B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */,
+				B7AC4088221B681600645BC2 /* TripDetailVC.swift in Sources */,
 				B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */,
 				B7C10CD12020FD5500818430 /* PlaceController.swift in Sources */,
 				B7D6523B202514C700E975F1 /* CreateNewPlaceTableViewController.swift in Sources */,
@@ -659,6 +674,7 @@
 				B7D6523D202620E700E975F1 /* PlaceTableViewCell.swift in Sources */,
 				B75E335C20D3150500839678 /* SignUpViewController.swift in Sources */,
 				B75E335E20D316DD00839678 /* TextFieldTableViewCell.swift in Sources */,
+				B7AC408A221B6C0100645BC2 /* CrumbTableViewCell.swift in Sources */,
 				B77E4F7120C6D482007EB266 /* Extensions.swift in Sources */,
 				B7D6523F2026526700E975F1 /* ViewControllerExtensions.swift in Sources */,
 				B7C10CD3202111A300818430 /* CoreDataStack.swift in Sources */,

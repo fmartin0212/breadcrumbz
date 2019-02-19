@@ -868,7 +868,7 @@
         <!--Place Detail Table View Controller-->
         <scene sceneID="Usw-uB-umN">
             <objects>
-                <tableViewController id="JfA-zy-tb2" customClass="PlaceDetailTableViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="crumbDetailVC" id="JfA-zy-tb2" customClass="PlaceDetailTableViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="neD-Ey-IVc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

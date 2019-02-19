@@ -11,7 +11,7 @@ import Foundation
 import CoreData
 
 @objc(Trip)
-public class Trip: NSManagedObject, FirebaseSavable {
+public class Trip: NSManagedObject, FirebaseDBSavable {
 
     // Firebase Savable
     var uuid: String?

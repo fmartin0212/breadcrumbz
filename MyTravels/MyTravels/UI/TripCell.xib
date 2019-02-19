@@ -43,16 +43,16 @@
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="y7f-tT-xeL">
-                        <rect key="frame" x="24" y="245" width="105.5" height="71"/>
+                        <rect key="frame" x="24" y="245" width="116.5" height="74.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Trip name)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MxW-X6-d9f">
-                                <rect key="frame" x="0.0" y="0.0" width="79" height="19"/>
+                                <rect key="frame" x="0.0" y="0.0" width="98" height="22.5"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Wmm-y1-nuM">
-                                <rect key="frame" x="0.0" y="25" width="105.5" height="20"/>
+                                <rect key="frame" x="0.0" y="28.5" width="116.5" height="20"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="Zk0-4o-n7f">
                                         <rect key="frame" x="0.0" y="0.0" width="19" height="20"/>
@@ -62,7 +62,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="(Trip location)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIJ-fe-xLw">
-                                        <rect key="frame" x="22" y="0.0" width="83.5" height="16.5"/>
+                                        <rect key="frame" x="22" y="0.0" width="94.5" height="20"/>
                                         <fontDescription key="fontDescription" name="Poppins-ExtraLight" family="Poppins" pointSize="14"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -70,13 +70,13 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="mK6-cA-E1j">
-                                <rect key="frame" x="0.0" y="51" width="65" height="20"/>
+                                <rect key="frame" x="0.0" y="54.5" width="70.5" height="20"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="473-NK-38Y">
                                         <rect key="frame" x="0.0" y="0.0" width="19" height="20"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Knv-du-xpB">
-                                                <rect key="frame" x="6.5" y="4" width="6" height="12"/>
+                                                <rect key="frame" x="6.5" y="3" width="6" height="14"/>
                                                 <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="10"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -89,7 +89,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crumbs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KoX-50-3NR">
-                                        <rect key="frame" x="22" y="3" width="43" height="14"/>
+                                        <rect key="frame" x="22" y="1.5" width="48.5" height="17"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                         <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -103,16 +103,16 @@
                         </constraints>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yGA-eo-ESt">
-                        <rect key="frame" x="270" y="245" width="95" height="12"/>
+                        <rect key="frame" x="256.5" y="245" width="108.5" height="14"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="(Start date)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ub-Sg-5Vt">
-                                <rect key="frame" x="0.0" y="0.0" width="49.5" height="12"/>
+                                <rect key="frame" x="0.0" y="0.0" width="56.5" height="14"/>
                                 <fontDescription key="fontDescription" name="Poppins-ExtraLightItalic" family="Poppins" pointSize="10"/>
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="(End date)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="823-mC-OQK">
-                                <rect key="frame" x="49.5" y="0.0" width="45.5" height="12"/>
+                                <rect key="frame" x="56.5" y="0.0" width="52" height="14"/>
                                 <fontDescription key="fontDescription" name="Poppins-ExtraLightItalic" family="Poppins" pointSize="10"/>
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -128,7 +128,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View &gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kk6-Ez-0Da">
-                        <rect key="frame" x="323" y="400" width="42" height="16.5"/>
+                        <rect key="frame" x="320.5" y="396.5" width="44.5" height="20"/>
                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                         <color key="textColor" red="1" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>

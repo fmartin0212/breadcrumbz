@@ -30,9 +30,9 @@
         <relationship name="places" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Place" inverseName="trip" inverseEntity="Place" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Photo" positionX="-270" positionY="36" width="128" height="105"/>
+        <element name="Photo" positionX="-270" positionY="36" width="128" height="103"/>
         <element name="Place" positionX="-99" positionY="117" width="128" height="148"/>
-        <element name="Trip" positionX="-452" positionY="117" width="128" height="165"/>
         <element name="PlaceType" positionX="-273.3984375" positionY="167.578125" width="128" height="73"/>
+        <element name="Trip" positionX="-452" positionY="117" width="128" height="165"/>
     </elements>
 </model>
