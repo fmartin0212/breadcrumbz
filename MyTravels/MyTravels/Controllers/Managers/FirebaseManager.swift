@@ -20,17 +20,17 @@ final class FirebaseManager {
     
     // MARK: - Database
     
-    static func save<T: FirebaseSavable>(_ object: T,
+    static func save<T: FirebaseDBSavable>(_ object: T,
                                          uuid: String? = nil,
                                          completion: @escaping (_ errorMessage: String?, _ uuid: String?) -> Void) {
         
-        var databaseRef = object.databaseRef
+        var databaseRef = T.databaseRef
         
         // Used for Auth
         if let uuid = uuid {
-            databaseRef = databaseRef.child(uuid)
+            databaseRef = T.databaseRef.child(uuid)
         } else {
-            databaseRef = object.databaseRef.childByAutoId()
+            databaseRef = T.databaseRef.childByAutoId()
         }
     
         databaseRef.setValue(object.dictionary) { (error, databaseRef) in
@@ -44,12 +44,12 @@ final class FirebaseManager {
         }
     }
     
-    static func update<T: FirebaseSavable>(_ object: T,
+    static func update<T: FirebaseDBSavable>(_ object: T,
                                            atChildren children: [String]? = nil,
                                            withValues values: [String : Any],
                                            completion: @escaping (String?) -> Void) {
         
-        var databaseRef = object.databaseRef.child(object.uuid!)
+        var databaseRef = T.databaseRef.child(object.uuid!)
         
         if let children = children {
             children.forEach { databaseRef = databaseRef.child($0) }
@@ -75,7 +75,7 @@ final class FirebaseManager {
         }
     }
     
-    static func fetch<T: FirebaseRetrievable>(uuid: String? = nil,
+    static func fetch<T: FirebaseDBRetrievable>(uuid: String? = nil,
                                               atChildren children: [String]? = nil,
                                               withQuery query: String? = nil,
                                               completion: @escaping (T?) -> Void) {

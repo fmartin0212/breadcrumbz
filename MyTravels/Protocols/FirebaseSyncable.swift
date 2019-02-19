@@ -10,37 +10,26 @@ import Foundation
 import FirebaseDatabase
 import FirebaseStorage
 
-protocol FirebaseRetrievable {
-    
-    var uuid: String? { get }
+protocol FirebaseSyncable {
+    var uuid: String? { get set }
     static var referenceName: String { get }
-    init?(dictionary: [String : Any], uuid: String)
 }
 
-extension FirebaseRetrievable {
-    
+extension FirebaseSyncable {
     static var databaseRef: DatabaseReference {
         return FirebaseManager.ref.child(Self.referenceName)
     }
 }
 
-protocol FirebaseSavable {
-    
-    var uuid: String? { get }
-    static var referenceName: String { get }
-    var dictionary: [String : Any] { get }
-    
+protocol FirebaseDBRetrievable: FirebaseSyncable {
+    init?(dictionary: [String : Any], uuid: String)
 }
 
-extension FirebaseSavable {
-        
-    var databaseRef: DatabaseReference  {
-            return FirebaseManager.ref.child(Self.referenceName)
-    }
+protocol FirebaseDBSavable: FirebaseSyncable {
+    var dictionary: [String : Any] { get }
 }
 
 protocol FirebaseStorageSavable {
-    
     var data: Data { get }
     var uid: String { get }
 }

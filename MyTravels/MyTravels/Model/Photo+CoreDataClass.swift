@@ -12,6 +12,10 @@ import CoreData
 @objc(Photo)
 public class Photo: NSManagedObject, FirebaseStorageSavable {
     
+    static var referenceName: String {
+        return "Photo"
+    }
+    
     var data: Data {
         guard let photo = self.photo else { return Data() }
         let data = Data(referencing: photo)

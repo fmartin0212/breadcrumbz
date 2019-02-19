@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseDatabase
 
-class InternalUser: FirebaseSavable, FirebaseRetrievable {
+class InternalUser: FirebaseDBSavable, FirebaseDBRetrievable {
     
     let firstName: String
     let lastName: String?
