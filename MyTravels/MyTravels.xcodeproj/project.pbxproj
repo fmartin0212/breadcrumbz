@@ -578,7 +578,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-MyTravels/Pods-MyTravels-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -595,7 +595,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyTravels/Pods-MyTravels-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DFF1DB9B59DB479D49482023 /* [CP] Check Pods Manifest.lock */ = {
