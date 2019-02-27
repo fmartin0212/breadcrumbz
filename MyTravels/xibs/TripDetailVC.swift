@@ -98,7 +98,7 @@ extension TripDetailVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == places.count {
-            let createCrumbVC = UIStoryboard.main.instantiateViewController(withIdentifier: "addAPlace") as! CreateNewPlaceTableViewController
+            let createCrumbVC = AddCrumbViewController(nibName: "AddCrumb", bundle: nil)
             createCrumbVC.trip = trip
             self.present(createCrumbVC, animated: true, completion: nil)
             return

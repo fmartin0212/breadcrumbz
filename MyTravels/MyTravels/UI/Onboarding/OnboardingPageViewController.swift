@@ -18,7 +18,7 @@ class OnboardingPageViewController: UIPageViewController {
         super.viewDidLoad()
         dataSource = self
         delegate = self
-        
+      
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController],
                                direction: .forward,
@@ -64,18 +64,6 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
         }
         else {
             return nil }
-    }
-    
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return orderedViewControllers.count
-    }
-    
-    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        guard let firstViewController = orderedViewControllers.first,
-        let firstViewControllerIndex = orderedViewControllers.index(of: firstViewController)
-        else { return 0 }
-        
-        return firstViewControllerIndex
     }
 }
 

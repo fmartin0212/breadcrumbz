@@ -33,9 +33,9 @@ class FetchViewController: UIViewController {
                     }
                 }
             } else if !success && UserDefaults.standard.value(forKey: "userSkippedSignUp") as! Bool == false {
-                let onboardingPVC = UIStoryboard.onboarding.instantiateViewController(withIdentifier: "OnboardingPageVC")
+                let onboardingPVC = UIStoryboard.onboarding.instantiateInitialViewController()
                 DispatchQueue.main.async {
-                    self.present(onboardingPVC, animated: true, completion: nil)
+                    self.present(onboardingPVC!, animated: true, completion: nil)
                 }
             } else {
                 DispatchQueue.main.async {

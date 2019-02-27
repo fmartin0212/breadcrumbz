@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9ph-Lb-1Q9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qt0-DW-eTo">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,14 +9,61 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Regular.otf">
+            <string>Poppins-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Onboarding Page View Controller-->
         <scene sceneID="vl7-pM-on1">
             <objects>
-                <pageViewController storyboardIdentifier="OnboardingPageVC" autoresizesArchivedViewToFullSize="NO" modalTransitionStyle="crossDissolve" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="max" doubleSided="YES" id="7kg-fl-qzV" customClass="OnboardingPageViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="OnboardingPageVC" autoresizesArchivedViewToFullSize="NO" modalTransitionStyle="crossDissolve" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="7kg-fl-qzV" customClass="OnboardingPageViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n5P-8A-HlR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-260" y="-1479"/>
+            <point key="canvasLocation" x="-737" y="-1460"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ae5-ZP-GYM">
+            <objects>
+                <viewController id="qt0-DW-eTo" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sOx-01-JCb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9AO-q9-9Nh">
+                                <rect key="frame" x="0.0" y="100" width="375" height="487"/>
+                                <connections>
+                                    <segue destination="7kg-fl-qzV" kind="embed" id="0C7-wz-uKb"/>
+                                </connections>
+                            </containerView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="KTk-Ks-KJQ">
+                                <rect key="frame" x="168" y="587" width="39" height="37"/>
+                                <color key="pageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="currentPageIndicatorTintColor" red="0.92826980349999999" green="0.43999382850000002" blue="0.39598500730000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8C-TB-qz7">
+                                <rect key="frame" x="333" y="50" width="30" height="30"/>
+                                <state key="normal" title="Skip"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96798938512802124" green="0.957408607006073" blue="0.92547351121902466" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="9AO-q9-9Nh" firstAttribute="top" secondItem="Dg1-Z5-foh" secondAttribute="top" constant="80" id="2RO-vJ-Aw0"/>
+                            <constraint firstItem="Dg1-Z5-foh" firstAttribute="trailing" secondItem="9AO-q9-9Nh" secondAttribute="trailing" id="7cL-6d-W7L"/>
+                            <constraint firstItem="KTk-Ks-KJQ" firstAttribute="centerX" secondItem="9AO-q9-9Nh" secondAttribute="centerX" id="Hm2-Jb-keC"/>
+                            <constraint firstItem="Y8C-TB-qz7" firstAttribute="trailing" secondItem="9AO-q9-9Nh" secondAttribute="trailing" constant="-12" id="Vkd-xJ-xqe"/>
+                            <constraint firstItem="KTk-Ks-KJQ" firstAttribute="top" secondItem="9AO-q9-9Nh" secondAttribute="bottom" id="X0k-z5-QRG"/>
+                            <constraint firstItem="Dg1-Z5-foh" firstAttribute="bottom" secondItem="9AO-q9-9Nh" secondAttribute="bottom" constant="80" id="bxs-HX-xCT"/>
+                            <constraint firstItem="9AO-q9-9Nh" firstAttribute="leading" secondItem="Dg1-Z5-foh" secondAttribute="leading" id="xNG-CQ-hNQ"/>
+                            <constraint firstItem="Y8C-TB-qz7" firstAttribute="top" secondItem="Dg1-Z5-foh" secondAttribute="top" constant="30" id="zpk-h6-mc0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Dg1-Z5-foh"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Vc-Kx-tnW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="47.200000000000003" y="-1614.2428785607199"/>
         </scene>
         <!--Explanation View Controller-->
         <scene sceneID="O4n-cy-Ztb">
@@ -27,41 +74,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="AJN-MN-wXU">
-                                <rect key="frame" x="0.0" y="163" width="375" height="361"/>
+                                <rect key="frame" x="8" y="189" width="359" height="309"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding-3" translatesAutoresizingMaskIntoConstraints="NO" id="qfF-PZ-Mwb">
-                                        <rect key="frame" x="91" y="0.0" width="193" height="193"/>
+                                        <rect key="frame" x="83" y="0.0" width="193" height="193"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="193" id="14I-dz-nnm"/>
                                             <constraint firstAttribute="height" constant="193" id="VRW-4D-Dhz"/>
                                         </constraints>
                                     </imageView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Ensure that you rememeber all of the places that you loved by logging your trip experience." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="L27-FZ-w81">
-                                        <rect key="frame" x="4.5" y="233" width="366" height="128"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="128" id="nm2-45-dkN"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ensure that you rememeber all of the places that you loved by logging your trip experience." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfa-tj-xig">
+                                        <rect key="frame" x="7.5" y="233" width="344" height="76"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ez-yY-4lQ">
-                                <rect key="frame" x="321" y="30" width="30" height="30"/>
-                                <state key="normal" title="Skip"/>
-                                <connections>
-                                    <action selector="skipButtonTapped:" destination="fEg-ce-nRm" eventType="touchUpInside" id="uXX-SO-3uj"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745098039216" green="0.95686274509803915" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="mVt-zd-b4x" firstAttribute="leading" secondItem="AJN-MN-wXU" secondAttribute="leading" id="HHB-44-BKp"/>
-                            <constraint firstItem="AJN-MN-wXU" firstAttribute="centerY" secondItem="mVt-zd-b4x" secondAttribute="centerY" id="OhR-An-aVq"/>
-                            <constraint firstItem="AJN-MN-wXU" firstAttribute="trailing" secondItem="mVt-zd-b4x" secondAttribute="trailing" id="T15-51-TCr"/>
-                            <constraint firstItem="1Ez-yY-4lQ" firstAttribute="top" secondItem="mVt-zd-b4x" secondAttribute="top" constant="10" id="kdl-Wq-zfk"/>
-                            <constraint firstItem="mVt-zd-b4x" firstAttribute="trailing" secondItem="1Ez-yY-4lQ" secondAttribute="trailing" constant="24" id="sgu-5n-LQu"/>
-                            <constraint firstItem="AJN-MN-wXU" firstAttribute="centerX" secondItem="mVt-zd-b4x" secondAttribute="centerX" id="w8J-gZ-F9j"/>
+                            <constraint firstItem="AJN-MN-wXU" firstAttribute="centerX" secondItem="mVt-zd-b4x" secondAttribute="centerX" id="FEg-dt-sVH"/>
+                            <constraint firstItem="mVt-zd-b4x" firstAttribute="leading" secondItem="AJN-MN-wXU" secondAttribute="leading" constant="-8" id="HHB-44-BKp"/>
+                            <constraint firstItem="AJN-MN-wXU" firstAttribute="trailing" secondItem="mVt-zd-b4x" secondAttribute="trailing" constant="-8" id="T15-51-TCr"/>
+                            <constraint firstItem="AJN-MN-wXU" firstAttribute="centerY" secondItem="mVt-zd-b4x" secondAttribute="centerY" id="qfC-ha-gly"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mVt-zd-b4x"/>
                     </view>
@@ -79,35 +115,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-Mc-5gA">
-                                <rect key="frame" x="32.5" y="206.5" width="311.5" height="274"/>
+                                <rect key="frame" x="8" y="206.5" width="359" height="274.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding-2" translatesAutoresizingMaskIntoConstraints="NO" id="qJu-Ja-ZO0">
-                                        <rect key="frame" x="58" y="0.0" width="196" height="184"/>
+                                        <rect key="frame" x="81.5" y="0.0" width="196" height="184"/>
                                     </imageView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Share your experiences with friends and family." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="opA-ow-JMB">
-                                        <rect key="frame" x="19.5" y="224" width="273" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="y1a-ln-mk6"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share your experiences with friends and family." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBw-Zf-3bl">
+                                        <rect key="frame" x="18" y="224" width="323.5" height="50.5"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWW-pY-kaG">
-                                <rect key="frame" x="321" y="30" width="30" height="30"/>
-                                <state key="normal" title="Skip"/>
-                                <connections>
-                                    <action selector="skipButtonTapped:" destination="xmk-1n-76C" eventType="touchUpInside" id="DnW-zk-xiu"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.95686274510000002" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Prf-Mc-5gA" firstAttribute="leading" secondItem="mzv-uh-CB9" secondAttribute="leading" constant="32.5" id="0I9-0K-AKO"/>
-                            <constraint firstItem="mzv-uh-CB9" firstAttribute="trailing" secondItem="Prf-Mc-5gA" secondAttribute="trailing" constant="31" id="7Z2-a7-F7J"/>
-                            <constraint firstItem="mzv-uh-CB9" firstAttribute="trailing" secondItem="bWW-pY-kaG" secondAttribute="trailing" constant="24" id="CC1-Wo-L3g"/>
-                            <constraint firstItem="bWW-pY-kaG" firstAttribute="top" secondItem="mzv-uh-CB9" secondAttribute="top" constant="10" id="WLC-XE-V21"/>
+                            <constraint firstItem="Prf-Mc-5gA" firstAttribute="leading" secondItem="mzv-uh-CB9" secondAttribute="leading" constant="8" id="0I9-0K-AKO"/>
+                            <constraint firstItem="mzv-uh-CB9" firstAttribute="trailing" secondItem="Prf-Mc-5gA" secondAttribute="trailing" constant="8" id="7Z2-a7-F7J"/>
                             <constraint firstItem="Prf-Mc-5gA" firstAttribute="centerX" secondItem="mzv-uh-CB9" secondAttribute="centerX" id="iCU-uA-57h"/>
                             <constraint firstItem="Prf-Mc-5gA" firstAttribute="centerY" secondItem="mzv-uh-CB9" secondAttribute="centerY" id="rcu-MG-bJm"/>
                         </constraints>
@@ -123,7 +148,7 @@
             <objects>
                 <viewController storyboardIdentifier="SignUp" id="9ph-Lb-1Q9" customClass="SignUpViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JTm-aG-yhH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L5B-qp-p3z">

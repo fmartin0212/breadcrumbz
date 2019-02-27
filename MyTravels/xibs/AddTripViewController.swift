@@ -60,13 +60,13 @@ final class AddTripViewController: UIViewController {
        
             var point = CGPoint(x: 0, y: 0)
             
-            switch self.selectedTextField!.tag {
-            case 1:
-                point = CGPoint(x: self.contentView.frame.origin.x, y: self.nameLocOuterStackView.frame.origin.y)
-            default:
-                print("adsf")
-            }
-            self.scrollView.setContentOffset(point, animated: true)
+//            switch self.selectedTextField!.tag {
+//            case 1:
+//                point = CGPoint(x: self.contentView.frame.origin.x, y: self.nameLocOuterStackView.frame.origin.y)
+//            default:
+//                print("adsf")
+//            }
+//            self.scrollView.setContentOffset(point, animated: true)
 
         }
         
