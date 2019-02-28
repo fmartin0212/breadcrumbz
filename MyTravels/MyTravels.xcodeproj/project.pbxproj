@@ -25,6 +25,9 @@
 		B761071B2212378C001F79B6 /* Poppins-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B7C0AA0B221100700030A5B1 /* Poppins-Regular.otf */; };
 		B761071C2212378E001F79B6 /* Poppins-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = B7C0AA0C2211008F0030A5B1 /* Poppins-Medium.otf */; };
 		B762265521EFC9510045F260 /* FirebaseSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B762265421EFC94F0045F260 /* FirebaseSyncable.swift */; };
+		B7655AF922273B3D002D33F7 /* FMTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7655AF822273B3D002D33F7 /* FMTextField.swift */; };
+		B7655AFD22274182002D33F7 /* FMTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7655AFC22274182002D33F7 /* FMTextView.swift */; };
+		B7655B2A22277B9B002D33F7 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7655B2922277B9B002D33F7 /* SignUpVC.swift */; };
 		B774A1C621BDA85E008D7483 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B774A1C521BDA85E008D7483 /* Constants.swift */; };
 		B77E4F7120C6D482007EB266 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E4F7020C6D481007EB266 /* Extensions.swift */; };
 		B77E4F7320C835EF007EB266 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B77E4F7220C835EE007EB266 /* Assets.xcassets */; };
@@ -108,6 +111,9 @@
 		B76107172212331A001F79B6 /* Poppins-ExtraLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLightItalic.otf"; sourceTree = "<group>"; };
 		B761071922123634001F79B6 /* Poppins-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.otf"; sourceTree = "<group>"; };
 		B762265421EFC94F0045F260 /* FirebaseSyncable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSyncable.swift; sourceTree = "<group>"; };
+		B7655AF822273B3D002D33F7 /* FMTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMTextField.swift; sourceTree = "<group>"; };
+		B7655AFC22274182002D33F7 /* FMTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMTextView.swift; sourceTree = "<group>"; };
+		B7655B2922277B9B002D33F7 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpVC.swift; path = Onboarding/SignUpVC.swift; sourceTree = "<group>"; };
 		B774A1C521BDA85E008D7483 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B77E4F7020C6D481007EB266 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B77E4F7220C835EE007EB266 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -335,6 +341,9 @@
 		B7C10CDA20214F5400818430 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				B7655AF822273B3D002D33F7 /* FMTextField.swift */,
+				B7655AFC22274182002D33F7 /* FMTextView.swift */,
+				B7655B2922277B9B002D33F7 /* SignUpVC.swift */,
 				B7C83FBF21C1F83A00A9F86C /* xibs */,
 				B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */,
 				B7F75C0520577C2900C876A0 /* Onboarding */,
@@ -639,8 +648,10 @@
 				B7C0B597220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift in Sources */,
 				B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */,
 				B7D652392024E24A00E975F1 /* TypeSelectionViewController.swift in Sources */,
+				B7655AF922273B3D002D33F7 /* FMTextField.swift in Sources */,
 				B70E7D1921F408C100B2228A /* Photo+CoreDataProperties.swift in Sources */,
 				B7F7CF44217685150097198C /* SharedPlaceController.swift in Sources */,
+				B7655B2A22277B9B002D33F7 /* SignUpVC.swift in Sources */,
 				B7DA1B78202E1AE20007497A /* InternalUser.swift in Sources */,
 				B70E7D1521F408A000B2228A /* Photo+CoreDataClass.swift in Sources */,
 				B7F75C20205A14D800C876A0 /* SharedTripDetailTableViewCell.swift in Sources */,
@@ -649,6 +660,7 @@
 				B7DA1B822030E70C0007497A /* SearchViewController.swift in Sources */,
 				B7F75C07205842E600C876A0 /* OnboardingPageViewController.swift in Sources */,
 				B7DA1B7D202E2B900007497A /* InternalUserController.swift in Sources */,
+				B7655AFD22274182002D33F7 /* FMTextView.swift in Sources */,
 				B7C10CCB2020EDB400818430 /* TripsListViewController.swift in Sources */,
 				B7C10CE2202226ED00818430 /* TripDetailViewController.swift in Sources */,
 				B7F75C0D205871ED00C876A0 /* SharedTripsListViewController.swift in Sources */,

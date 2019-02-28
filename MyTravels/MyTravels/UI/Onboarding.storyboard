@@ -10,6 +10,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Poppins-ExtraBoldItalic.otf">
+            <string>Poppins-ExtraBoldItalic</string>
+        </array>
+        <array key="Poppins-Light.otf">
+            <string>Poppins-Light</string>
+        </array>
+        <array key="Poppins-Medium.otf">
+            <string>Poppins-Medium</string>
+        </array>
         <array key="Poppins-Regular.otf">
             <string>Poppins-Regular</string>
         </array>
@@ -143,10 +152,190 @@
             </objects>
             <point key="canvasLocation" x="-196" y="-781.25937031484261"/>
         </scene>
+        <!--Sign UpVC-->
+        <scene sceneID="iAw-jQ-O28">
+            <objects>
+                <viewController storyboardIdentifier="SignUp" id="leN-ly-T71" customClass="SignUpVC" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zfx-SW-34u">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="va5-UY-vc5">
+                                <rect key="frame" x="0.0" y="20" width="375" height="1000"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vv8-BK-v65">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZK-VG-tRf">
+                                                <rect key="frame" x="0.0" y="24" width="375" height="43.5"/>
+                                                <fontDescription key="fontDescription" name="Poppins-ExtraBoldItalic" family="Poppins" pointSize="31"/>
+                                                <color key="textColor" red="0.92826980349999999" green="0.43999382850000002" blue="0.39598500730000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="ysT-x5-CG9">
+                                                <rect key="frame" x="28" y="117.5" width="319" height="442"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Bo5-Iq-8JH">
+                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="78"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sY6-jo-VP7">
+                                                                <rect key="frame" x="0.0" y="0.0" width="319" height="20"/>
+                                                                <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="14"/>
+                                                                <color key="textColor" red="0.60779035091400146" green="0.60787814855575562" blue="0.60776275396347046" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hT0-tq-eWO" customClass="FMTextField" customModule="MyTravels" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="28" width="319" height="50"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="50" id="CUY-lJ-L8B"/>
+                                                                </constraints>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lOb-Uw-4Xh">
+                                                        <rect key="frame" x="0.0" y="91" width="319" height="78"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Au4-Qr-b6W">
+                                                                <rect key="frame" x="0.0" y="0.0" width="319" height="20"/>
+                                                                <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="14"/>
+                                                                <color key="textColor" red="0.60779035091400146" green="0.60787814855575562" blue="0.60776275396347046" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e8c-u3-25Z" customClass="FMTextField" customModule="MyTravels" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="28" width="319" height="50"/>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="G02-Ui-YYm">
+                                                        <rect key="frame" x="0.0" y="182" width="319" height="78"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZC3-kQ-7wj">
+                                                                <rect key="frame" x="0.0" y="0.0" width="319" height="20"/>
+                                                                <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="14"/>
+                                                                <color key="textColor" red="0.60779035091400146" green="0.60787814855575562" blue="0.60776275396347046" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zJV-1Y-dja" customClass="FMTextField" customModule="MyTravels" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="28" width="319" height="50"/>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hkl-98-zt7">
+                                                        <rect key="frame" x="0.0" y="273" width="319" height="78"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U16-4u-yWK">
+                                                                <rect key="frame" x="0.0" y="0.0" width="319" height="20"/>
+                                                                <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="14"/>
+                                                                <color key="textColor" red="0.60779035091400146" green="0.60787814855575562" blue="0.60776275396347046" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Abq-Ot-VfP" customClass="FMTextField" customModule="MyTravels" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="28" width="319" height="50"/>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Tnl-3L-7dp">
+                                                        <rect key="frame" x="0.0" y="364" width="319" height="78"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMO-Jp-Hme">
+                                                                <rect key="frame" x="0.0" y="0.0" width="319" height="20"/>
+                                                                <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="14"/>
+                                                                <color key="textColor" red="0.60779035091400146" green="0.60787814855575562" blue="0.60776275396347046" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="waR-gl-CYW" customClass="FMTextField" customModule="MyTravels" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="28" width="319" height="50"/>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5PN-Yt-YKR">
+                                                <rect key="frame" x="50" y="604" width="275" height="36"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="17"/>
+                                                <state key="normal" title="Get Started"/>
+                                                <connections>
+                                                    <action selector="getStartedButtonTapped:" destination="leN-ly-T71" eventType="touchUpInside" id="EUe-Et-Dtt"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46w-ID-Q0G">
+                                                <rect key="frame" x="179.5" y="648" width="16" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.96798938509999999" green="0.95740860699999997" blue="0.92547351119999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstItem="ysT-x5-CG9" firstAttribute="top" secondItem="GZK-VG-tRf" secondAttribute="bottom" constant="50" id="1jD-fi-16d"/>
+                                            <constraint firstAttribute="bottom" secondItem="46w-ID-Q0G" secondAttribute="bottom" constant="30" id="9rp-of-ZAd"/>
+                                            <constraint firstAttribute="trailing" secondItem="5PN-Yt-YKR" secondAttribute="trailing" constant="50" id="BQa-c0-xYp"/>
+                                            <constraint firstItem="46w-ID-Q0G" firstAttribute="centerX" secondItem="5PN-Yt-YKR" secondAttribute="centerX" id="MGp-kt-SOD"/>
+                                            <constraint firstAttribute="trailing" secondItem="ysT-x5-CG9" secondAttribute="trailing" constant="28" id="MZB-sG-6Eq"/>
+                                            <constraint firstItem="GZK-VG-tRf" firstAttribute="leading" secondItem="vv8-BK-v65" secondAttribute="leading" id="MbX-H8-hm3"/>
+                                            <constraint firstItem="46w-ID-Q0G" firstAttribute="top" secondItem="5PN-Yt-YKR" secondAttribute="bottom" constant="8" id="Q8B-ch-RJW"/>
+                                            <constraint firstItem="ysT-x5-CG9" firstAttribute="leading" secondItem="vv8-BK-v65" secondAttribute="leading" constant="28" id="TnF-cI-uAG"/>
+                                            <constraint firstAttribute="trailing" secondItem="GZK-VG-tRf" secondAttribute="trailing" id="dZZ-w5-qMe"/>
+                                            <constraint firstItem="5PN-Yt-YKR" firstAttribute="centerX" secondItem="ysT-x5-CG9" secondAttribute="centerX" id="iB0-jG-aYN"/>
+                                            <constraint firstItem="5PN-Yt-YKR" firstAttribute="top" secondItem="ysT-x5-CG9" secondAttribute="bottom" constant="44.5" id="kjx-O4-4I8"/>
+                                            <constraint firstItem="5PN-Yt-YKR" firstAttribute="leading" secondItem="vv8-BK-v65" secondAttribute="leading" constant="50" id="uPU-fr-q7X"/>
+                                            <constraint firstItem="GZK-VG-tRf" firstAttribute="top" secondItem="vv8-BK-v65" secondAttribute="top" constant="24" id="y0e-Xv-ccK"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="vv8-BK-v65" secondAttribute="bottom" id="15h-7Y-vOB"/>
+                                    <constraint firstItem="vv8-BK-v65" firstAttribute="top" secondItem="va5-UY-vc5" secondAttribute="top" id="66Q-n5-dEA"/>
+                                    <constraint firstItem="vv8-BK-v65" firstAttribute="leading" secondItem="va5-UY-vc5" secondAttribute="leading" id="ADF-v7-6I0"/>
+                                    <constraint firstItem="vv8-BK-v65" firstAttribute="width" secondItem="va5-UY-vc5" secondAttribute="width" id="asD-Td-GaC"/>
+                                    <constraint firstAttribute="trailing" secondItem="vv8-BK-v65" secondAttribute="trailing" id="kVH-g5-ptK"/>
+                                    <constraint firstItem="vv8-BK-v65" firstAttribute="height" secondItem="va5-UY-vc5" secondAttribute="height" priority="250" id="pi1-qR-1GN"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96798938509999999" green="0.95740860699999997" blue="0.92547351119999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="va5-UY-vc5" firstAttribute="width" secondItem="Zfx-SW-34u" secondAttribute="width" id="8gw-6U-mKH"/>
+                            <constraint firstItem="va5-UY-vc5" firstAttribute="bottom" secondItem="85E-ni-hED" secondAttribute="bottom" constant="20" id="Xci-MH-MfK"/>
+                            <constraint firstItem="va5-UY-vc5" firstAttribute="leading" secondItem="85E-ni-hED" secondAttribute="leading" id="YDC-eE-TOr"/>
+                            <constraint firstItem="85E-ni-hED" firstAttribute="trailing" secondItem="va5-UY-vc5" secondAttribute="trailing" id="cD2-dT-7Jg"/>
+                            <constraint firstItem="va5-UY-vc5" firstAttribute="top" secondItem="85E-ni-hED" secondAttribute="top" id="drZ-r2-Dhg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="85E-ni-hED"/>
+                    </view>
+                    <size key="freeformSize" width="375" height="1000"/>
+                    <connections>
+                        <outlet property="confirmPasswordTextField" destination="waR-gl-CYW" id="Xpt-ZZ-ek8"/>
+                        <outlet property="emailTextField" destination="e8c-u3-25Z" id="DnK-SX-Q3h"/>
+                        <outlet property="getStartedButton" destination="5PN-Yt-YKR" id="MmE-1T-v0A"/>
+                        <outlet property="nameTextField" destination="hT0-tq-eWO" id="VbK-fZ-9qd"/>
+                        <outlet property="passwordTextField" destination="Abq-Ot-VfP" id="0IO-gV-cyI"/>
+                        <outlet property="usernameTextField" destination="zJV-1Y-dja" id="uFH-LK-MjU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nyf-li-e7Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-196" y="22"/>
+        </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="wsc-RW-RQA">
             <objects>
-                <viewController storyboardIdentifier="SignUp" id="9ph-Lb-1Q9" customClass="SignUpViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpOld" id="9ph-Lb-1Q9" customClass="SignUpViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JTm-aG-yhH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
