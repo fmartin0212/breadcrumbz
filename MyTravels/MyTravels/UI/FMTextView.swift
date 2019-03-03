@@ -26,9 +26,23 @@ class FMTextView: UITextView {
         self.layer.shadowOffset = CGSize(width: 0, height: 3)
         self.layer.masksToBounds = false
         self.layer.backgroundColor = UIColor.white.cgColor
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
+        
+        toolbar.setItems([flexibleSpace, doneButton], animated: false)
+        
+        self.inputAccessoryView = toolbar
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    @objc private func dismissKeyboard() {
+        self.resignFirstResponder()
     }
 }

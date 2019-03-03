@@ -51,7 +51,6 @@ class SearchViewController: UIViewController {
     }
 }
 
-
 extension SearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -75,7 +74,7 @@ extension SearchViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        view.isUserInteractionEnabled = false
+//        view.isUserInteractionEnabled = false
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         guard let location = locations.first else { return }

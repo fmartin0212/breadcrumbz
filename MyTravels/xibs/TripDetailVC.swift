@@ -19,6 +19,9 @@ class TripDetailVC: UIViewController {
     @IBOutlet weak var tripEndDateLabel: UILabel!
     @IBOutlet weak var lineViewSeparator: UIView!
     @IBOutlet weak var crumbsTableView: UITableView!
+    lazy var shareBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(presentShareAlertController))
+    }()
     
     // MARK: - Constants & Variables
     
@@ -47,6 +50,8 @@ class TripDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.rightBarButtonItem = shareBarButtonItem
+        self.navigationItem.largeTitleDisplayMode = .never
         
         let crumbTableViewCell = UINib(nibName: "CrumbTableViewCell", bundle: nil)
         crumbsTableView.register(crumbTableViewCell, forCellReuseIdentifier: "crumbCell")
@@ -73,9 +78,10 @@ extension TripDetailVC: UITableViewDataSource {
         cell.selectionStyle = .none
         
         if indexPath.row == places.count {
-            cell.numberBackdropView.backgroundColor = UIColor.white
+            cell.numberBackdropView.layer.cornerRadius = cell.numberBackdropView.frame.height / 2
+            cell.numberBackdropView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             cell.numberBackdropView.layer.borderColor = #colorLiteral(red: 1, green: 0.4002141953, blue: 0.372333765, alpha: 1)
-            cell.numberBackdropView.layer.borderWidth = 10
+            cell.numberBackdropView.layer.borderWidth = 2
             cell.numberLabel.textColor = #colorLiteral(red: 1, green: 0.4002141953, blue: 0.372333765, alpha: 1)
             cell.numberLabel.text = "+"
             cell.nameLabel.text = "Add Crumb"
@@ -132,8 +138,33 @@ extension TripDetailVC {
     }
     
     func formatViews() {
-        lineViewSeparator.formatLine()
+//        lineViewSeparator.formatLine()
         tripImageView.layer.cornerRadius = 4
         tripImageView.clipsToBounds = true
+        
+        title = trip?.name
+
+    }
+    
+    @objc private func presentShareAlertController() {
+        
+        let alertController = UIAlertController(title: "Share trip", message: "Enter a username below to share your trip", preferredStyle: .alert)
+        alertController.addTextField(configurationHandler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let shareAction = UIAlertAction(title: "Share", style: .default) { (action) in
+            
+            guard let trip = self.trip,
+                let receiver = alertController.textFields?[0].text
+                else { return }
+            let loadingView = self.enableLoadingState()
+            loadingView.loadingLabel.text = "Sharing"
+            TripController.shared.share(trip: trip, withReceiver: receiver, completion: { (success) in
+                self.disableLoadingState(loadingView)
+            })
+        }
+        alertController.addAction(shareAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
 }

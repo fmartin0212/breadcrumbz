@@ -8,8 +8,8 @@
 
 import UIKit
 
-final class AddTripViewController: UIViewController {
-    
+final class AddTripViewController: UIViewController, ScrollableViewController {
+
     // MARK: - Outlets
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -45,29 +45,22 @@ final class AddTripViewController: UIViewController {
     }
     var endDate: Date?
     var selectedTextField: UITextField?
+    var selectedTextView: UITextView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nameTextField.delegate = self
         locationTextField.delegate = self
         startDateTextField.delegate = self
+        endDateTextField.delegate = self
+        descriptionTextView.delegate = self
+        
         NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillShow, object: nil, queue: .main) { (notification) in
             guard let userInfo = notification.userInfo else { return }
             let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect
-            let keyboardHeight = keyboardFrame?.height
-            self.saveBottomContraint.constant = 100 + keyboardHeight!
-            self.view.layoutIfNeeded()
-       
-            var point = CGPoint(x: 0, y: 0)
-            
-//            switch self.selectedTextField!.tag {
-//            case 1:
-//                point = CGPoint(x: self.contentView.frame.origin.x, y: self.nameLocOuterStackView.frame.origin.y)
-//            default:
-//                print("adsf")
-//            }
-//            self.scrollView.setContentOffset(point, animated: true)
-
+            self.adjustScrollView(keyboardFrame: keyboardFrame!, bottomConstraint: self.saveBottomContraint)
+            self.selectedTextField = nil
+            self.selectedTextView = nil
         }
         
         NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardDidHide, object: nil, queue: .main) { (notification) in
@@ -76,9 +69,6 @@ final class AddTripViewController: UIViewController {
         }
         
         setupViews()
-        nameTextField.addKeyboardDone(targetVC: self, selector: #selector(dismissKeyboard))
-        locationTextField.addKeyboardDone(targetVC: self, selector: #selector(dismissKeyboard))
-        startDateTextField.addKeyboardDone(targetVC: self, selector: #selector(dismissKeyboard))
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -123,8 +113,10 @@ extension AddTripViewController {
         endDateLineView.formatLine()
         
         // Text Fields
-        nameTextField.format()
-        locationTextField.format()
+        startDateTextField.layer.borderWidth = 0
+        startDateTextField.layer.shadowOpacity = 0
+        endDateTextField.layer.borderWidth = 0
+        endDateTextField.layer.shadowOpacity = 0
         
         // Photo backdrop
         photoBackdropView.layer.cornerRadius = photoBackdropView.frame.width / 2
@@ -215,17 +207,24 @@ extension AddTripViewController: UIImagePickerControllerDelegate, UINavigationCo
 extension AddTripViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-      
-//        var point = CGPoint(x: 0, y: 0)
-//        switch textField.tag {
-//        case 1:
-//            point = CGPoint(x: contentView.frame.origin.x, y: nameLocOuterStackView.frame.maxY - nameLocOuterStackView.frame.height)
-//        default:
-//            print("adsf")
-//        }
-//        scrollView.setContentOffset(point, animated: true)
         selectedTextField = textField
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.tag == 4 {
+            descriptionTextView.becomeFirstResponder()
+            return true
+        } else {
+            view.viewWithTag(textField.tag + 1)?.becomeFirstResponder()
+            return true
+        }
     }
 }
 
-//(0, (textField.superview.frame.origin.y + (textField.frame.origin.y)))
+extension AddTripViewController: UITextViewDelegate {
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        selectedTextView = textView
+        return true
+    }
+}

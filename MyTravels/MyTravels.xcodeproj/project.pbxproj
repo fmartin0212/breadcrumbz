@@ -12,6 +12,8 @@
 		B70E7D1521F408A000B2228A /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70E7D1421F4089F00B2228A /* Photo+CoreDataClass.swift */; };
 		B70E7D1921F408C100B2228A /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70E7D1821F408C100B2228A /* Photo+CoreDataProperties.swift */; };
 		B711157920549859000868BD /* TripDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B711157820549859000868BD /* TripDetailTableViewCell.swift */; };
+		B71248D4222A292B00D6C4A5 /* ViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71248D3222A292B00D6C4A5 /* ViewControllerProtocols.swift */; };
+		B71248D6222B60DB00D6C4A5 /* FMLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71248D5222B60DB00D6C4A5 /* FMLineView.swift */; };
 		B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */; };
 		B725034F20D9B64C00744B23 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B725034E20D9B64C00744B23 /* ProfileViewController.swift */; };
 		B735428D2174E36300D9A68D /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B735428C2174E36200D9A68D /* Trip+CoreDataProperties.swift */; };
@@ -100,6 +102,8 @@
 		B70E7D1421F4089F00B2228A /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B70E7D1821F408C100B2228A /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B711157820549859000868BD /* TripDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailTableViewCell.swift; sourceTree = "<group>"; };
+		B71248D3222A292B00D6C4A5 /* ViewControllerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocols.swift; sourceTree = "<group>"; };
+		B71248D5222B60DB00D6C4A5 /* FMLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FMLineView.swift; path = MyTravels/UI/FMLineView.swift; sourceTree = SOURCE_ROOT; };
 		B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B725034E20D9B64C00744B23 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B735428C2174E36200D9A68D /* Trip+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -343,6 +347,7 @@
 			children = (
 				B7655AF822273B3D002D33F7 /* FMTextField.swift */,
 				B7655AFC22274182002D33F7 /* FMTextView.swift */,
+				B71248D5222B60DB00D6C4A5 /* FMLineView.swift */,
 				B7655B2922277B9B002D33F7 /* SignUpVC.swift */,
 				B7C83FBF21C1F83A00A9F86C /* xibs */,
 				B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */,
@@ -423,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				B762265421EFC94F0045F260 /* FirebaseSyncable.swift */,
+				B71248D3222A292B00D6C4A5 /* ViewControllerProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -657,6 +663,7 @@
 				B7F75C20205A14D800C876A0 /* SharedTripDetailTableViewCell.swift in Sources */,
 				B7B0C36E203724F30031A92A /* SharedTrip.swift in Sources */,
 				B711157920549859000868BD /* TripDetailTableViewCell.swift in Sources */,
+				B71248D4222A292B00D6C4A5 /* ViewControllerProtocols.swift in Sources */,
 				B7DA1B822030E70C0007497A /* SearchViewController.swift in Sources */,
 				B7F75C07205842E600C876A0 /* OnboardingPageViewController.swift in Sources */,
 				B7DA1B7D202E2B900007497A /* InternalUserController.swift in Sources */,
@@ -688,6 +695,7 @@
 				B7D6523D202620E700E975F1 /* PlaceTableViewCell.swift in Sources */,
 				B75E335C20D3150500839678 /* SignUpViewController.swift in Sources */,
 				B75E335E20D316DD00839678 /* TextFieldTableViewCell.swift in Sources */,
+				B71248D6222B60DB00D6C4A5 /* FMLineView.swift in Sources */,
 				B7AC408A221B6C0100645BC2 /* CrumbTableViewCell.swift in Sources */,
 				B77E4F7120C6D482007EB266 /* Extensions.swift in Sources */,
 				B7D6523F2026526700E975F1 /* ViewControllerExtensions.swift in Sources */,

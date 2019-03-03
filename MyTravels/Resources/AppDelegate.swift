@@ -12,11 +12,16 @@ import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-// my change another change
-    var window: UIWindow?
+
+    let window = UIWindow(frame: UIScreen.main.bounds)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        FirebaseApp.configure() 
+        FirebaseApp.configure()
+        
+        let fetchViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "fetchVC")
+        window.rootViewController = fetchViewController
+        window.makeKeyAndVisible()
+        
         return true
     }
 }

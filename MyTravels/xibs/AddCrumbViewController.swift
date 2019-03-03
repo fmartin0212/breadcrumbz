@@ -41,6 +41,7 @@ class AddCrumbViewController: UIViewController {
         imagePickerController.delegate = self
         pickerView.dataSource = self
         pickerView.delegate = self
+        addressTextField.delegate = self
 
     }
     
@@ -65,9 +66,9 @@ extension AddCrumbViewController {
     func formatViews() {
         
         // Text Fields
-        nameTextField.format()
-        addressTextField.format()
-        typeTextField.format()
+//        nameTextField.format()
+//        addressTextField.format()
+//        typeTextField.format()
         typeTextField.inputView = pickerView
         
         // Photo backdrop
@@ -148,5 +149,18 @@ extension AddCrumbViewController: UIPickerViewDelegate {
             print("Something went wrong")
         }
         typeTextField.text = type
+    }
+}
+
+extension AddCrumbViewController: UITextFieldDelegate {
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField.tag == 2 {
+            
+            let searchVC = UIStoryboard.main.instantiateViewController(withIdentifier: "searchVC")
+            present(searchVC, animated: true, completion: nil)
+            return true
+        }
+        return true
     }
 }
