@@ -25,21 +25,26 @@ class FetchViewController: UIViewController {
                 SharedTripsController.shared.fetchSharedTrips() { (success) in
                     if !success {
                         print("trips not fetched")
-                        self.presentTripListVC()
+//                        self.presentTripListVC()
+                        let tripListNavigationController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarController")
+                        UIApplication.shared.windows.first!.rootViewController = tripListNavigationController
                         return
                     }
                     DispatchQueue.main.async {
-                        self.presentTripListVC()
+                        let tripListNavigationController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarController")
+                        UIApplication.shared.windows.first!.rootViewController = tripListNavigationController
                     }
                 }
             } else if !success && UserDefaults.standard.value(forKey: "userSkippedSignUp") as! Bool == false {
-                let onboardingPVC = UIStoryboard.onboarding.instantiateViewController(withIdentifier: "OnboardingPageVC")
                 DispatchQueue.main.async {
-                    self.present(onboardingPVC, animated: true, completion: nil)
+                        let onboardingVC = UIStoryboard.onboarding.instantiateInitialViewController()
+                        UIApplication.shared.windows.first!.rootViewController = onboardingVC
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.presentTripListVC()
+//                    self.presentTripListVC()
+                    let tripListNavigationController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarController")
+                    UIApplication.shared.windows.first!.rootViewController = tripListNavigationController
                 }
             }
         }

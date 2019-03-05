@@ -61,11 +61,13 @@ class PlaceDetailTableViewController: UITableViewController {
     
     // MARK: - Functions
     func updateViews() {
-        guard let place = place,
-            let photos = place.photos?.allObjects as? [Photo]
+        guard let place = place
             else { return }
         
-        self.photos = photos
+        if let photos = place.photos?.allObjects as? [Photo] {
+            self.photos = photos
+            
+        }
         
         if photos.count > 0 {
             guard let photo = photos[0].photo as Data?,

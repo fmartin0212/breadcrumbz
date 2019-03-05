@@ -98,7 +98,6 @@ class TripController {
             }
             
             if let tripID = trip.uid {
-                
                 // Trip has already been saved to the database, only a child needs to be saved on the receiver.
                 self.addTripIDToReceiver(tripID: tripID, receiver: receiver) { (success) in
                     if success {
@@ -108,11 +107,10 @@ class TripController {
                         print("Something went wrong with adding a tripID to a user in: ", #function)
                     }
                 }
-                
             } else {
                 
                 // Trip has not been saved to the database, so we need to save a new Trip child and a child on the receiver.
-                let creatorName = loggedInUser.firstName + " " + (loggedInUser.lastName ?? "")
+                let creatorName = loggedInUser.firstName
                 
                 self.upload(trip: trip, creatorName: creatorName) { (success) in
                     if success {
@@ -175,14 +173,15 @@ class TripController {
                              receiver: String,
                              completion: @escaping (Bool) -> Void) {
         
-        // Get a database reference to the receiver's participant trip ID child node.
-        let userTripRef = Constants.databaseRef.child(Constants.user).child(receiver).child(Constants.participantTripIDs)
-        
-        // Save the trip ID to the database reference.
-        let value = [tripID : true]
-        FirebaseManager.updateObject(at: userTripRef, value: value) { (_) in
-            print("break")
-            completion(true)
+        FirebaseManager.fetch(uuid: nil, atChildKey: "username", withQuery: receiver) { (user: InternalUser?) in
+            let participantTripIDDictionary: [String : Bool] = [tripID : true]
+            FirebaseManager.update(InternalUserController.shared.loggedInUser!, atChildren: ["participantTripIDs"], withValues: participantTripIDDictionary, completion: { (errorMessage) in
+                if let errorMessage = errorMessage {
+                    completion(false)
+                    return
+                }
+                completion(true)
+            })
         }
     }
     

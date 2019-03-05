@@ -11,8 +11,7 @@ import UIKit
 class SharedTripsListViewController: UIViewController {
     
     // MARK: - Properties
-    
-    @IBOutlet weak var profileBarButtonItem: UIBarButtonItem!
+
     @IBOutlet weak var tableView: UITableView!
     private let refreshControl = UIRefreshControl()
     private var profileButton: UIButton?
@@ -94,14 +93,6 @@ class SharedTripsListViewController: UIViewController {
             let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
             destinationVC.sharedTrip = sharedTrip
             
-        }
-    }
-    
-    @IBAction func profileBarButtonItemTapped(_ sender: Any) {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let profileVC = sb.instantiateViewController(withIdentifier: "profileVC")
-        UIView.animate(withDuration: 2) {
-            self.present(profileVC, animated: true, completion: nil)
         }
     }
 }

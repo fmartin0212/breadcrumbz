@@ -75,22 +75,6 @@ class TripsListViewController: UIViewController {
         view.endEditing(true)
     }
     
-    @objc func profileButtonTapped() {
-        
-        if let _ = InternalUserController.shared.loggedInUser {
-            let profileVC = UIStoryboard.main.instantiateViewController(withIdentifier: "profileVC")
-            UIView.animate(withDuration: 2) {
-                self.present(profileVC, animated: true, completion: nil)
-            }
-        } else {
-            let signUpVC = UIStoryboard.onboarding.instantiateViewController(withIdentifier: "SignUp") as! SignUpViewController
-            signUpVC.isOnboarding = false
-            signUpVC.loadViewIfNeeded()
-            signUpVC.skipButton.isHidden = true
-            self.present(signUpVC, animated: true, completion: nil)
-        }
-    }
-    
     @IBAction func addATripButtonTapped(_ sender: Any) {
         let addTripVC = AddTripViewController(nibName: "AddTrip", bundle: nil)
         self.present(addTripVC, animated: true, completion: nil)

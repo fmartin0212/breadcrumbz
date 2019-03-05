@@ -12,12 +12,22 @@ import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-// my change another change
-    var window: UIWindow?
+
+    let window = UIWindow(frame: UIScreen.main.bounds)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
+        //rRRRASJMaVPHpV8qSVNqRni7M0q2
+        FirebaseManager.fetch(uuid: nil, atChildKey: "username", withQuery: "fmartin0212", completion: { (user: InternalUser?) in
+            print("adsf")
+        })
+//        FirebaseManager.fetch(uuid: nil, atChildKey: "username", withQuery: "rRRRASJMaVPHpV8qSVNqRni7M0q2") { (user: User?) in
+//            print("adsf")
+//        }
         
-        FirebaseApp.configure() 
+        let fetchViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "fetchVC")
+        window.rootViewController = fetchViewController
+        window.makeKeyAndVisible()
         return true
     }
 }

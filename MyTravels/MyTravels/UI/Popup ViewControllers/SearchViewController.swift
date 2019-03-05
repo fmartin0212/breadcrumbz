@@ -35,8 +35,11 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         // Delegates
         searchCompleter.delegate = self
+        addKeyboardDone(searchBar: searchBar)
+        searchBar.becomeFirstResponder()
         tableView.delegate = self
         tableView.dataSource = self
         locationManager.delegate = self
@@ -50,7 +53,6 @@ class SearchViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 }
-
 
 extension SearchViewController: UISearchBarDelegate {
     
@@ -75,7 +77,7 @@ extension SearchViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        view.isUserInteractionEnabled = false
+//        view.isUserInteractionEnabled = false
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         guard let location = locations.first else { return }
@@ -201,3 +203,21 @@ extension SearchViewController: UITableViewDelegate {
     }
 }
 
+extension SearchViewController {
+    
+    func addKeyboardDone(searchBar: UISearchBar) {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
+        
+        toolbar.setItems([flexibleSpace, doneButton], animated: false)
+        
+        searchBar.inputAccessoryView = toolbar
+    }
+    
+    @objc func dismissKeyboard(to searchBar: UISearchBar) {
+        self.view.endEditing(true)
+    }
+}
