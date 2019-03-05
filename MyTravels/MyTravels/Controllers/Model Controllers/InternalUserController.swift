@@ -29,10 +29,10 @@ class InternalUserController {
                 return
             }
             
-            guard let _ = firebaseUser else { completion(Constants.somethingWentWrong) ; return }
+            guard let firebaseUser = firebaseUser else { completion(Constants.somethingWentWrong) ; return }
             
             // Save the user to the Firebase Database
-            FirebaseManager.save(newUser, uuid: firebaseUser?.uid, completion: { (errorMessage, uuid) in
+            FirebaseManager.save(newUser, uuid: firebaseUser.uid, completion: { (errorMessage, uuid) in
                 if let errorMessage = errorMessage {
                     completion(errorMessage)
                     return
@@ -66,7 +66,7 @@ class InternalUserController {
             } else {
                 guard let uuid = firebaseUser?.uid else { completion(nil) ; return }
                 
-                FirebaseManager.fetch(uuid: uuid, atChildren: nil, completion: { (loggedInUser: InternalUser?) in
+                FirebaseManager.fetch(uuid: uuid, atChildKey: nil, completion: { (loggedInUser: InternalUser?) in
                     guard let loggedInUser = loggedInUser else { completion(Constants.somethingWentWrong) ; return  }
                     self.loggedInUser = loggedInUser
                     completion(nil)
@@ -125,75 +125,41 @@ class InternalUserController {
         dataTask.resume()
     }
     
-    func blockUserWith(username: String, completion: @escaping (Bool) -> Void) {
+    func blockUserWith(creatorID: String, completion: @escaping (String?) -> Void) {
         // Add user to loggedInUser's blocked list
-        let blockRef = FirebaseManager.ref.child("User").child(loggedInUser!.username).child("blockedUsernames").child(username)
-        FirebaseManager.save(username, to: blockRef) { (error) in
-            if let error = error {
-                print("There was an error saving the username to the loggedInUser's blockedUser list : \(error.localizedDescription)")
-                completion(false)
+        let blockRef = FirebaseManager.ref.child("User").child(loggedInUser!.uuid!).child("blockedIDs")
+        FirebaseManager.updateObject(at: blockRef, value: [creatorID : true]) { (errorMessage) in
+            if let errorMessage = errorMessage {
+                print("There was an error saving the username to the loggedInUser's blockedUser list : \(errorMessage)")
+                completion(errorMessage)
                 return
-            } else {
+        } else {
                 // Unwrap logged in user's participant trip IDs
-                guard var loggedInUserPartcipantIDs = InternalUserController.shared.loggedInUser!.participantTripIDs else { completion(false) ; return }
+                guard let loggedInUserPartcipantIDs = InternalUserController.shared.loggedInUser!.participantTripIDs else { completion(Constants.somethingWentWrong) ; return }
                 
                 // Fetch all the sharedTripIDs for the user that is going to be blocked
-                let ref =  FirebaseManager.ref.child("User").child(username).child("sharedTripIDs")
+                let ref =  FirebaseManager.ref.child("User").child(creatorID).child("sharedTripIDs")
                 FirebaseManager.fetchObject(from: ref) { (snapshot) in
-                    guard let sharedTripIDDictionary = snapshot.value as? [String : Any] else { completion(false) ; return }
+                    guard let sharedTripIDDictionary = snapshot.value as? [String : Any] else { completion(Constants.somethingWentWrong) ; return }
                     let sharedTripIDs = sharedTripIDDictionary.compactMap { $0.key }
-                    
+                
                     // Remove the participantTripIDs for the logged in user if it matches a sharedTripID from the blocked user.
-                    for participantTripID in loggedInUserPartcipantIDs {
-                        if sharedTripIDs.contains(participantTripID) {
-                            guard let index = loggedInUserPartcipantIDs.firstIndex(of: participantTripID) else { completion(false) ; return }
-                            loggedInUserPartcipantIDs.remove(at: index)
-                            print("break")
-                        }
-                    }
+                    let participatTripIDs = loggedInUserPartcipantIDs.filter { !sharedTripIDs.contains($0) }
                     
-                    // Update Firebase
-                    // If loggedInUserPartcipantIDs.count is 0, then all of the user's shared trips were from the blocked user; therefore, this node can be removed altogether.
-                    if loggedInUserPartcipantIDs.count == 0 {
-                        let ref = FirebaseManager.ref.child("User").child(self.loggedInUser!.username).child("participantTripIDs")
-                        FirebaseManager.removeObject(ref: ref, completion: { (error) in
-                            if let error = error {
-                                print("error saving tripID : \(error.localizedDescription)")
-                                completion(false)
-                                return
-                            }
-                            
-                            let sharedTrips = SharedTripsController.shared.sharedTrips.filter { $0.creatorUsername != username }
-                            SharedTripsController.shared.sharedTrips = sharedTrips
-                            
-                            completion(true)
+                    var participantTripIDDictionary: [String : Any] = [:]
+                    participatTripIDs.forEach { participantTripIDDictionary[$0] = true }
+                    
+                    FirebaseManager.update(self.loggedInUser!, atChildren: ["participantTripIDs"], withValues: participantTripIDDictionary, completion: { (errorMessage) in
+                        if let errorMessage = errorMessage {
+                            completion(errorMessage)
                             return
-                        })
-                    } else {
-                        
-                        let dispatchGroup = DispatchGroup()
-                        for participantTripID in loggedInUserPartcipantIDs {
-                            let ref = FirebaseManager.ref.child("User").child(self.loggedInUser!.username).child("participantTripIDs").child(participantTripID)
-                            dispatchGroup.enter()
-                            FirebaseManager.save(participantTripID, to: ref, completion: { (error) in
-                                if let error = error {
-                                    print("error saving tripID : \(error.localizedDescription)")
-                                    completion(false)
-                                    return
-                                }
-                                dispatchGroup.leave()
-                            })
-                        }
-                        
-                  
-                        dispatchGroup.notify(queue: .main, execute: {
-                            let sharedTrips = SharedTripsController.shared.sharedTrips.filter { $0.creatorUsername != username }
+                        } else {
+                            let sharedTrips = SharedTripsController.shared.sharedTrips.filter { $0.creatorID != creatorID }
                             SharedTripsController.shared.sharedTrips = sharedTrips
-                            
                             self.loggedInUser!.participantTripIDs = loggedInUserPartcipantIDs
-                            completion(true)
-                        })
-                    }
+                            completion(nil)
+                        }
+                    })
                 }
             }
         }

@@ -35,8 +35,11 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         // Delegates
         searchCompleter.delegate = self
+        addKeyboardDone(searchBar: searchBar)
+        searchBar.becomeFirstResponder()
         tableView.delegate = self
         tableView.dataSource = self
         locationManager.delegate = self
@@ -200,3 +203,21 @@ extension SearchViewController: UITableViewDelegate {
     }
 }
 
+extension SearchViewController {
+    
+    func addKeyboardDone(searchBar: UISearchBar) {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
+        
+        toolbar.setItems([flexibleSpace, doneButton], animated: false)
+        
+        searchBar.inputAccessoryView = toolbar
+    }
+    
+    @objc func dismissKeyboard(to searchBar: UISearchBar) {
+        self.view.endEditing(true)
+    }
+}

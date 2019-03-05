@@ -38,7 +38,7 @@ extension PlaceController {
      - parameter rating: The place's rating ranging from 1-5.
      - parameter trip: The trip that the place belongs to.
      */
-    func createNewPlaceWith(name: String,
+    @discardableResult func createNewPlaceWith(name: String,
                 type: Place.types,
                 address: String,
                 comments: String,

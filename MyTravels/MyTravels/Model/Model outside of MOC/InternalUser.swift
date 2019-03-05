@@ -45,13 +45,12 @@ class InternalUser: FirebaseDBSavable, FirebaseDBRetrievable {
     required init?(dictionary: [String : Any], uuid: String) {
         
         guard let firstName = dictionary["firstName"] as? String,
-            let lastName = dictionary["lastName"] as? String?,
             let username = dictionary["username"] as? String,
             let email = dictionary["email"] as? String
             else { return nil }
         
         self.firstName = firstName
-        self.lastName = lastName
+        self.lastName = ""
         self.username = username
         self.email = email
         self.uuid = uuid

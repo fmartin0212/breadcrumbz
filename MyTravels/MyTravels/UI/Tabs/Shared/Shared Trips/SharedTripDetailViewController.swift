@@ -16,9 +16,9 @@ class SharedTripDetailViewController: UIViewController {
     let rightBarButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("...", for: .normal)
-//        let attributedString = NSAttributedString(string: "...", attributes: [NSAttributedStringKey.font : UIFont(name: "AvenirNext", size: 22)])
-//        button.setAttributedTitle(attributedString, for: .normal)
-//        button.setAttributedTitle(attributedString, for: .highlighted)
+        //        let attributedString = NSAttributedString(string: "...", attributes: [NSAttributedStringKey.font : UIFont(name: "AvenirNext", size: 22)])
+        //        button.setAttributedTitle(attributedString, for: .normal)
+        //        button.setAttributedTitle(attributedString, for: .highlighted)
         return button
     }()
     
@@ -32,7 +32,7 @@ class SharedTripDetailViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
         rightBarButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
         guard let sharedTrip = sharedTrip else { return }
-    
+        
         // Set shared trip photo
         var tripPhoto = UIImage()
         guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
@@ -41,7 +41,7 @@ class SharedTripDetailViewController: UIViewController {
         if let photo = sharedTrip.photo {
             tripPhoto = photo
         }
-
+        
         sharedTripPhotoImageView.image = tripPhoto
         
         // Delegates
@@ -97,18 +97,18 @@ class SharedTripDetailViewController: UIViewController {
         if activitiesArray.count > 0 {
             array.append(activitiesArray)
         }
-
+        
         self.sharedPlaces = array
         
         tableView.reloadData()
         
     }
-
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "toSharedPlaceDetailTableViewController" {
-           
+            
             guard let sharedTrip = sharedTrip,
                 let sharedPlaces = sharedPlaces,
                 let destinationVC = segue.destination as? SharedPlaceDetailTableViewController,
@@ -125,7 +125,7 @@ class SharedTripDetailViewController: UIViewController {
 extension SharedTripDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-   
+        
         // Use shared places array as datasource
         guard let sharedPlacesArray = sharedPlaces else { return 0 }
         return sharedPlacesArray.count + 1
@@ -169,7 +169,7 @@ extension SharedTripDetailViewController: UITableViewDelegate, UITableViewDataSo
         }
         
         if section > 0 {
-        
+            
             guard let sharedPlaces = sharedPlaces else { return 0 }
             return sharedPlaces[section - 1].count
         }
@@ -182,7 +182,7 @@ extension SharedTripDetailViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         if indexPath.row == 0 && indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SharedTripDetailCell") as! SharedTripDetailTableViewCell
             cell.sharedTrip = sharedTrip
@@ -205,19 +205,7 @@ extension SharedTripDetailViewController: UITableViewDelegate, UITableViewDataSo
 
 extension SharedTripDetailViewController {
     
-    private func blockUserWith(username: String, completion: @escaping (Bool) -> Void) {
-        guard let sharedTrip = sharedTrip else { completion(false) ; return }
-        
-        InternalUserController.shared.blockUserWith(username: username) { (success) in
-            if success {
-                completion(true)
-            } else {
-                // Handle error UI
-            }
-        }
-    }
-    
-    @objc func actionButtonTapped() {
+    @objc private func actionButtonTapped() {
         
         let actionAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -229,8 +217,10 @@ extension SharedTripDetailViewController {
                 let loadingView = self.enableLoadingState()
                 loadingView.loadingLabel.text = "Blocking user"
                 
-                InternalUserController.shared.blockUserWith(username: self.sharedTrip!.creatorUsername, completion: { (success) in
-                    if success {
+                InternalUserController.shared.blockUserWith(creatorID: self.sharedTrip!.creatorID, completion: { (errorMessage) in
+                    if let errorMessage = errorMessage {
+                        self.presentStandardAlertController(withTitle: "Uh Oh!", message: errorMessage)
+                    } else {
                         DispatchQueue.main.async {
                             loadingView.removeFromSuperview()
                             self.navigationController?.popViewController(animated: true)
@@ -238,6 +228,7 @@ extension SharedTripDetailViewController {
                     }
                 })
             })
+            
             let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
             
             confirmationAlertController.addAction(blockAction)
@@ -252,4 +243,5 @@ extension SharedTripDetailViewController {
         self.present(actionAlertController, animated: true, completion: nil)
         
     }
+    
 }

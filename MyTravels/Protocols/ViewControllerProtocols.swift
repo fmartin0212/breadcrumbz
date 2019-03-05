@@ -36,3 +36,26 @@ extension ScrollableViewController {
         }
     }
 }
+
+//protocol KeyboardFormatted where Self: UIView {
+//    func addKeyboardDone()
+//}
+
+//extension KeyboardFormatted {
+//    func addkeyboardDone() {
+//
+//        let toolbar = UIToolbar()
+//        toolbar.sizeToFit()
+//
+//        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+//        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
+//
+//        toolbar.setItems([flexibleSpace, doneButton], animated: false)
+//
+//        self.inputAccessoryView = toolbar
+//    }
+//}
+//
+//extension UIView: KeyboardFormatted {
+//
+//}

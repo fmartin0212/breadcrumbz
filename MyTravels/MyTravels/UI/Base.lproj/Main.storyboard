@@ -1120,7 +1120,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="tripCreatorLabel" destination="HEA-IE-HJC" id="Aqj-he-o0Y"/>
                                             <outlet property="tripDatesLabel" destination="m7X-4q-Ns9" id="alM-qn-KQD"/>
                                             <outlet property="tripEndDateLabel" destination="mZC-Ac-bSb" id="Qgg-R6-Jql"/>
                                             <outlet property="tripImageView" destination="ln1-ha-ZS3" id="ZGB-TM-0bh"/>

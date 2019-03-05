@@ -25,6 +25,7 @@ public class Trip: NSManagedObject, FirebaseDBSavable {
             "endDate" : self.endDate.timeIntervalSince1970,
             "creatorName" : InternalUserController.shared.loggedInUser!.firstName,
             "creatorUsername" : InternalUserController.shared.loggedInUser!.username,
+            "creatorID" : InternalUserController.shared.loggedInUser!.uuid ?? "",
             "places" : self.placesDictionary
         ]
     }

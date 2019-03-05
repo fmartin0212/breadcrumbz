@@ -76,7 +76,7 @@ final class FirebaseManager {
     }
     
     static func fetch<T: FirebaseDBRetrievable>(uuid: String? = nil,
-                                              atChildren children: [String]? = nil,
+                                              atChildKey childKey: String? = nil,
                                               withQuery query: String? = nil,
                                               completion: @escaping (T?) -> Void) {
         var databaseRef = T.databaseRef
@@ -85,21 +85,27 @@ final class FirebaseManager {
             databaseRef = databaseRef.child(uuid)
         }
         
-        if let query = query {
-            databaseRef.queryEqual(toValue: query)
-        }
-        
-        if let children = children {
-            children.forEach { databaseRef = databaseRef.child($0) }
-        }
-        
-        databaseRef.observeSingleEvent(of: .value) { (snapshot) in
-            guard snapshot.exists(),
-                let dictionary = snapshot.value as? [String : Any]
-                else { completion(nil) ; return }
-            
-            let object = T(dictionary: dictionary, uuid: snapshot.key)
-            completion(object)
+        if let childKey = childKey,
+            let query = query {
+            databaseRef.queryOrdered(byChild: childKey).queryEqual(toValue: query) .observeSingleEvent(of: .value) { (snapshot) in
+                guard snapshot.exists(),
+                let topLevelDictionary = snapshot.value as? [String : [String : Any]],
+                let uuid = topLevelDictionary.keys.first,
+                let dictionary = topLevelDictionary.values.first
+                    else { completion(nil) ; return }
+                
+                let object = T(dictionary: dictionary, uuid: uuid)
+                completion(object)
+            }
+        } else {
+            databaseRef.observeSingleEvent(of: .value) { (snapshot) in
+                guard snapshot.exists(),
+                    let dictionary = snapshot.value as? [String : Any]
+                    else { completion(nil) ; return }
+                
+                let object = T(dictionary: dictionary, uuid: snapshot.key)
+                completion(object)
+            }
         }
     }
     

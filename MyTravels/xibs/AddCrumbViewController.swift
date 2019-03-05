@@ -8,8 +8,16 @@
 
 import UIKit
 
-class AddCrumbViewController: UIViewController {
-
+class AddCrumbViewController: UIViewController, ScrollableViewController {
+    
+    // MARK: - Properties
+    
+    // Scrollable View Controller
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
+    var selectedTextField: UITextField?
+    var selectedTextView: UITextView?
+    
     @IBOutlet weak var photoBackdropView: UIView!
     @IBOutlet weak var photoImage: UIImageView!
     @IBOutlet weak var crumbPhotoImageView: UIImageView!
@@ -26,6 +34,7 @@ class AddCrumbViewController: UIViewController {
     let imagePickerController = UIImagePickerController()
     let pickerView = UIPickerView()
     var type: String?
+    var fromSearchVC = false
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -41,14 +50,39 @@ class AddCrumbViewController: UIViewController {
         imagePickerController.delegate = self
         pickerView.dataSource = self
         pickerView.delegate = self
+        nameTextField.delegate = self
+        typeTextField.delegate = self
         addressTextField.delegate = self
-
+        commentsTextView.delegate = self
+        
+        NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillShow, object: nil, queue: .main) { (notification) in
+            guard let userInfo = notification.userInfo else { return }
+            let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect
+            self.adjustScrollView(keyboardFrame: keyboardFrame!, bottomConstraint: self.saveButtonBottomConstraint)
+            self.selectedTextField = nil
+            self.selectedTextView = nil
+        }
+        
+        NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardDidHide, object: nil, queue: .main) { (notification) in
+            self.saveButtonBottomConstraint.constant = 100
+            
+        }
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let name = nameTextField.text,
             !name.isEmpty,
-            let location = addressTextField.text else { return }
+            let address = addressTextField.text,
+            !address.isEmpty,
+            let type = typeTextField.text,
+            !type.isEmpty,
+            let placeType = Place.types(rawValue: type.lowercased()),
+            let trip = trip
+        else { return }
+        
+        PlaceController.shared.createNewPlaceWith(name: name, type: placeType, address: address, comments: commentsTextView.text, rating: 0, trip: trip)
+        
+        self.dismiss(animated: true, completion: nil)
         
     }
     
@@ -154,13 +188,44 @@ extension AddCrumbViewController: UIPickerViewDelegate {
 
 extension AddCrumbViewController: UITextFieldDelegate {
     
+    // Part of ScrollableViewController implementation
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        selectedTextField = textField
+    }
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField.tag == 2 {
-            
-            let searchVC = UIStoryboard.main.instantiateViewController(withIdentifier: "searchVC")
+        if fromSearchVC {
+            fromSearchVC = false
+            return false
+        }
+        if textField.tag == 3 {
+            let searchVC = UIStoryboard.main.instantiateViewController(withIdentifier: "searchVC") as! SearchViewController
+            searchVC.delegate = self
             present(searchVC, animated: true, completion: nil)
-            return true
+            return false
         }
         return true
     }
+    
+}
+
+extension AddCrumbViewController: SearchViewControllerDelegate {
+    
+    func set(address: String) {
+        addressTextField.text = address
+        fromSearchVC = true
+    }
+}
+
+extension AddCrumbViewController: UITextViewDelegate {
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        self.selectedTextView = textView
+        return true
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.returnKeyType = .done
+    }
+    
 }

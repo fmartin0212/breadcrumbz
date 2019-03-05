@@ -26,12 +26,14 @@
                 <outlet property="addPhotoButton" destination="PpY-fH-cFO" id="7Wb-zl-H93"/>
                 <outlet property="addressTextField" destination="tOo-Dz-lcJ" id="Cpv-Ip-829"/>
                 <outlet property="commentsTextView" destination="Sba-jD-Trz" id="cB4-K4-R8Z"/>
+                <outlet property="contentView" destination="8En-ic-zfp" id="BC5-pc-VqR"/>
                 <outlet property="crumbPhotoImageView" destination="syO-1d-9r5" id="DMA-pu-eOl"/>
                 <outlet property="nameTextField" destination="ggJ-6U-JW0" id="tva-OO-kMU"/>
                 <outlet property="photoBackdropView" destination="wwv-GP-18q" id="Jbl-3S-5mp"/>
                 <outlet property="photoImage" destination="qjq-N5-d4N" id="kzT-VF-fe3"/>
                 <outlet property="saveButton" destination="rAz-VI-UDY" id="6P5-hb-Gpz"/>
                 <outlet property="saveButtonBottomConstraint" destination="tC1-PL-BC9" id="9a2-dy-HZZ"/>
+                <outlet property="scrollView" destination="yqx-F9-zDm" id="8xm-d0-Gg3"/>
                 <outlet property="typeTextField" destination="g3N-P6-zoO" id="20K-3z-bbf"/>
                 <outlet property="view" destination="iN0-l3-epB" id="D60-sM-UdJ"/>
             </connections>
@@ -139,7 +141,7 @@
                                                     <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tOo-Dz-lcJ" customClass="FMTextField" customModule="MyTravels" customModuleProvider="target">
+                                                <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tOo-Dz-lcJ" customClass="FMTextField" customModule="MyTravels" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="22" width="352" height="44"/>
                                                     <gestureRecognizers/>
                                                     <constraints>
@@ -162,7 +164,7 @@
                                             <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Sba-jD-Trz" customClass="FMTextView" customModule="MyTravels" customModuleProvider="target">
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="4" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Sba-jD-Trz" customClass="FMTextView" customModule="MyTravels" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="28" width="352" height="128"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>

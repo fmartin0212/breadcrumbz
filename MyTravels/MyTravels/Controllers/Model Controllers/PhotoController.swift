@@ -52,7 +52,6 @@ final class PhotoController {
         
         // Loop over the photos and initialize a Photo.
         for photo in photos {
-            //            let _ = Photo(
             let _ = Photo(photo: photo, place: place, trip: nil)
         }
         
@@ -115,7 +114,7 @@ final class PhotoController {
     func saveTripPhoto(_ trip: Trip,
                        completion: @escaping (Bool) -> Void) {
         
-        guard let tripPhoto = trip.photo else { completion(false) ; return }
+        guard let tripPhoto = trip.photo else { completion(true) ; return }
         
         FirebaseManager.save(tripPhoto) { (metadata, errorMessage) in
             if let _ = errorMessage {
