@@ -84,14 +84,14 @@ class TripController {
      - parameter completion: A completion block which passes a boolean to inform the caller of whether the trip was successfully shared.
      */
     func share(trip: Trip,
-               withReceiver receiver: String,
+               withReceiver receiveUsername: String,
                completion: @escaping (Bool) -> Void) {
         
         // Check for a logged in user
         guard let loggedInUser = InternalUserController.shared.loggedInUser else { return completion(false) }
         
         // Check to see if the receiver has blocked the loggedInUser
-        self.checkIfBlocked(receiver) { (isBlocked) in
+        self.checkIfBlocked(receiverUsername: receiveUsername) { (isBlocked) in
             if isBlocked {
                 completion(false)
                 return
@@ -99,12 +99,13 @@ class TripController {
             
             if let tripID = trip.uid {
                 // Trip has already been saved to the database, only a child needs to be saved on the receiver.
-                self.addTripIDToReceiver(tripID: tripID, receiver: receiver) { (success) in
+                self.addTripIDToReceiver(tripID: tripID, receiver: receiveUsername) { (success) in
                     if success {
                         completion(true)
                         return
                     } else {
                         print("Something went wrong with adding a tripID to a user in: ", #function)
+                        completion(false)
                     }
                 }
             } else {
@@ -115,7 +116,7 @@ class TripController {
                 self.upload(trip: trip, creatorName: creatorName) { (success) in
                     if success {
                         guard let tripID = trip.uid else { completion(false) ; return }
-                        self.addTripIDToReceiver(tripID: tripID, receiver: receiver, completion: { (success) in
+                        self.addTripIDToReceiver(tripID: tripID, receiver: receiveUsername, completion: { (success) in
                             if success {
                                 completion(true)
                             }
@@ -174,8 +175,9 @@ class TripController {
                              completion: @escaping (Bool) -> Void) {
         
         FirebaseManager.fetch(uuid: nil, atChildKey: "username", withQuery: receiver) { (user: InternalUser?) in
+            guard let user = user else { completion(false) ; return }
             let participantTripIDDictionary: [String : Bool] = [tripID : true]
-            FirebaseManager.update(InternalUserController.shared.loggedInUser!, atChildren: ["participantTripIDs"], withValues: participantTripIDDictionary, completion: { (errorMessage) in
+            FirebaseManager.update(user, atChildren: ["participantTripIDs"], withValues: participantTripIDDictionary, completion: { (errorMessage) in
                 if let errorMessage = errorMessage {
                     completion(false)
                     return
@@ -190,24 +192,16 @@ class TripController {
      - parameter receiver: The username of the receiver.
      - parameter completion: A completion block which passes a boolean to inform the caller of whether the logged in user is blocked by the receiver.
      */
-    func checkIfBlocked(_ receiver: String,
+    func checkIfBlocked(receiverUsername: String,
                         completion: @escaping (Bool) -> Void) {
         
-        // Get a database reference to the receiver's blocked usernames.
-        let ref = FirebaseManager.ref.child("User").child(receiver).child("blockedUsernames")
-        
-        // Fetches all of the receiver's blocked usernames from the Firebase database.
-        FirebaseManager.fetchObject(from: ref) { (snapshot) in
-            guard let blockedUsernames = snapshot.value as? [String : String] else { completion(false) ; return }
-            
-            // Loops through each username dictionary, checking if the logged in user's username is blocked by the receiver.
-            for (username, _) in blockedUsernames {
-                if username == InternalUserController.shared.loggedInUser!.username {
-                    completion(true)
-                    return
-                }
+        FirebaseManager.fetch(uuid: nil, atChildKey: "username", withQuery: receiverUsername) { (user: InternalUser?) in
+            guard let user = user, let blockedUserIDs = user.blockedUserIDs else { completion(false) ; return }
+            if blockedUserIDs.contains(InternalUserController.shared.loggedInUser!.uuid!) {
+                completion(true) ; return
+            } else {
+                completion(false)
             }
-            completion(false)
         }
     }
 }

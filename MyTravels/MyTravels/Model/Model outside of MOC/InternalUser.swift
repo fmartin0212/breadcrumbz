@@ -18,7 +18,7 @@ class InternalUser: FirebaseDBSavable, FirebaseDBRetrievable {
     var photoURL: String?
     var photo: UIImage?
     var participantTripIDs: [String]?
-    var blockedUsernames: [String]?
+    var blockedUserIDs: [String]?
     var sharedTripIDs: [String]?
     
     // MARK: - Firebase Retrievable
@@ -68,8 +68,8 @@ class InternalUser: FirebaseDBSavable, FirebaseDBRetrievable {
             self.participantTripIDs = participantTripIDs.compactMap { $0.key }
         }
         
-        if let blockedUsernames = dictionary["blockedUsernames"] as? [String : Any] {
-            self.blockedUsernames = blockedUsernames.compactMap { $0.key }
+        if let blockedUserIDs = dictionary["blockedUserIDs"] as? [String : Any] {
+            self.blockedUserIDs = blockedUserIDs.compactMap { $0.key }
         }
         
         if let sharedTripIDs = dictionary["sharedTripIDs"] as? [String : Any] {
@@ -100,7 +100,6 @@ class InternalUser: FirebaseDBSavable, FirebaseDBRetrievable {
             InternalUserController.shared.fetchProfilePhoto(from: photoURL) { (photo) in
                 guard let photo = photo else { return }
                 self.photo = photo
-                NotificationCenter.default.post(Notification(name: Notification.Name("profilePictureUpdatedNotification")))
             }
         }
         
@@ -108,8 +107,8 @@ class InternalUser: FirebaseDBSavable, FirebaseDBRetrievable {
             self.participantTripIDs = participantTripIDs.compactMap { $0.key }
         }
         
-        if let blockedUsernames = tripDict["blockedUsernames"] as? [String : Any] {
-            self.blockedUsernames = blockedUsernames.compactMap { $0.key }
+        if let blockedUserIDs = tripDict["blockedUserIDs"] as? [String : Any] {
+            self.blockedUserIDs = blockedUserIDs.compactMap { $0.key }
         }
         
     }

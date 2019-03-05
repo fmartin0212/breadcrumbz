@@ -22,21 +22,24 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-   
-        if let loggedInUser = InternalUserController.shared.loggedInUser, let loggedInUserPhoto = loggedInUser.photo {
         
+        if let loggedInUser = InternalUserController.shared.loggedInUser {
+            
             usernameLabel.text = loggedInUser.username
             nameLabel.text = "\(loggedInUser.firstName) \(loggedInUser.lastName ?? "")"
-            profilePictureButton.setBackgroundImage(loggedInUserPhoto, for: .normal)
-            profilePictureButton.setImage(nil, for: .normal)
             
-            profilePictureButton.clipsToBounds = true
-            profilePictureButton.layer.cornerRadius = profilePictureButton.frame.width / 2
+            if let photo = loggedInUser.photo {
+                profilePictureButton.setBackgroundImage(photo, for: .normal)
+                profilePictureButton.setImage(nil, for: .normal)
+                
+                profilePictureButton.clipsToBounds = true
+                profilePictureButton.layer.cornerRadius = profilePictureButton.frame.width / 2
+            }
+            lineView1.formatLine()
+            lineView2.formatLine()
         }
-        lineView1.formatLine()
-        lineView2.formatLine()
     }
-    
+        
     // MARK: - Actions
     
     @IBAction func profileButtonTapped(_ sender: Any) {

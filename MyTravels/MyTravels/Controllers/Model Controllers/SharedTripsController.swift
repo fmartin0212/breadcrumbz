@@ -24,7 +24,7 @@ extension SharedTripsController {
             let participantTripIDs = loggedInUser.participantTripIDs,
             participantTripIDs.count > 0
             else { completion(false) ; return }
-        
+        self.sharedTrips = []
         let dispatchGroup = DispatchGroup()
         for tripID in participantTripIDs {
             dispatchGroup.enter()
@@ -36,19 +36,20 @@ extension SharedTripsController {
                     self.sharedTrips.append(sharedTrip)
                     
                     dispatchGroup.enter()
-                    let storeRef = FirebaseManager.storeRef.child("Trip").child(sharedTrip.uid)
-                    FirebaseManager.fetchImage(storeRef: storeRef, completion: { (image) in
-                        if let image = image {
-                            sharedTrip.photo = image
-                        }
-                        dispatchGroup.leave()
-                    })
+                    if let photoID = sharedTrip.photoID {
+                        let storeRef = FirebaseManager.storeRef.child(photoID)
+                        FirebaseManager.fetchImage(storeRef: storeRef, completion: { (image) in
+                            if let image = image {
+                                sharedTrip.photo = image
+                                dispatchGroup.leave()
+                            }
+                        })
+                    } else { dispatchGroup.leave() }
                 }
                 dispatchGroup.leave()
             })
         }
         dispatchGroup.notify(queue: .main, execute: {
-            //                self.sharedTrips = sharedTripsPlaceholder
             completion(true)
         })
     }
