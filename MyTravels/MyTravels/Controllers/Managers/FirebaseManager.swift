@@ -65,6 +65,27 @@ final class FirebaseManager {
         }
     }
     
+    static func overwrite<T: FirebaseDBSavable>(_ object: T,
+                                             atChildren children: [String]? = nil,
+                                             withValues values: [String : Any],
+                                             completion: @escaping (String?) -> Void) {
+        
+        var databaseRef = T.databaseRef.child(object.uuid!)
+        
+        if let children = children {
+            children.forEach { databaseRef = databaseRef.child($0) }
+        }
+        
+        databaseRef.setValue(values) { (error, _) in
+            if let error = error {
+                print(error)
+                completion(Constants.somethingWentWrong)
+                return
+            }
+            completion(nil)
+        }
+    }
+    
     static func updateObject(at ref: DatabaseReference, value: [String : Any], completion: @escaping (_ errorMessage: String?) -> Void) {
         ref.updateChildValues(value) { (error, _) in
             if let _ = error {
@@ -215,7 +236,6 @@ final class FirebaseManager {
     
     static func save<T: FirebaseStorageSavable>(_ object: T, completion: @escaping (StorageMetadata?, String?) -> Void) {
         let storageRef = Storage.storage().reference().child(object.uid)
-        print(object)
         storageRef.putData(object.data, metadata: nil) { (metadata, error) in
             if let _ = error {
                 completion(nil, Constants.somethingWentWrong)

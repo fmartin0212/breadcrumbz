@@ -38,7 +38,7 @@
                         <barButtonItem key="leftBarButtonItem" id="qPx-EC-HeT">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Add a trip" id="Xfr-BE-SpC">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Xfr-BE-SpC">
                             <color key="tintColor" red="0.1696610677" green="0.32706386389999997" blue="0.72726690770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="addTripBarButtonItemTapped:" destination="KSc-Yg-SqR" id="BtZ-rg-nYC"/>

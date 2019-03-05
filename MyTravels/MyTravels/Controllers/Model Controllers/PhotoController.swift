@@ -115,13 +115,13 @@ final class PhotoController {
                        completion: @escaping (Bool) -> Void) {
         
         guard let tripPhoto = trip.photo else { completion(true) ; return }
-        
+
         FirebaseManager.save(tripPhoto) { (metadata, errorMessage) in
             if let _ = errorMessage {
                 completion(false)
             } else if let metadata = metadata {
                 metadata.downloadURL()
-                let children = [Constants.photoURL]
+                let children = [Constants.photoID]
                 let values = [tripPhoto.uid : true]
                 
                 FirebaseManager.update(trip, atChildren: children, withValues: values, completion: { (errorMessage) in

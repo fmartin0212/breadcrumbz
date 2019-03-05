@@ -19,6 +19,7 @@ class SharedTrip {
     let creatorName: String
     let creatorUsername: String
     let creatorID: String
+    var photoID: String?
     var photo: UIImage?
     var places: [SharedPlace] = []
     var isAcceptedTrip: Bool = true
@@ -47,6 +48,11 @@ class SharedTrip {
         self.creatorName = creator
         self.creatorUsername = creatorUsername
         self.creatorID = creatorID
+        
+        if let photoIDDictionary = tripDictionary["photoID"] as? [String : Bool],
+            let photoID = photoIDDictionary.keys.first {
+            self.photoID = photoID
+        }
         
         SharedPlaceController.parsePlacesFrom(tripDictionary: tripDictionary) { (places) in
             self.places = places

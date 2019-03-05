@@ -127,7 +127,7 @@ class InternalUserController {
     
     func blockUserWith(creatorID: String, completion: @escaping (String?) -> Void) {
         // Add user to loggedInUser's blocked list
-        let blockRef = FirebaseManager.ref.child("User").child(loggedInUser!.uuid!).child("blockedIDs")
+        let blockRef = FirebaseManager.ref.child("User").child(loggedInUser!.uuid!).child("blockedUserIDs")
         FirebaseManager.updateObject(at: blockRef, value: [creatorID : true]) { (errorMessage) in
             if let errorMessage = errorMessage {
                 print("There was an error saving the username to the loggedInUser's blockedUser list : \(errorMessage)")
@@ -144,12 +144,12 @@ class InternalUserController {
                     let sharedTripIDs = sharedTripIDDictionary.compactMap { $0.key }
                 
                     // Remove the participantTripIDs for the logged in user if it matches a sharedTripID from the blocked user.
-                    let participatTripIDs = loggedInUserPartcipantIDs.filter { !sharedTripIDs.contains($0) }
+                    let participantTripIDs = loggedInUserPartcipantIDs.filter { !sharedTripIDs.contains($0) }
                     
                     var participantTripIDDictionary: [String : Any] = [:]
-                    participatTripIDs.forEach { participantTripIDDictionary[$0] = true }
+                    participantTripIDs.forEach { participantTripIDDictionary[$0] = true }
                     
-                    FirebaseManager.update(self.loggedInUser!, atChildren: ["participantTripIDs"], withValues: participantTripIDDictionary, completion: { (errorMessage) in
+                    FirebaseManager.overwrite(self.loggedInUser!, atChildren: ["participantTripIDs"], withValues: participantTripIDDictionary, completion: { (errorMessage) in
                         if let errorMessage = errorMessage {
                             completion(errorMessage)
                             return

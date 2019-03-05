@@ -106,7 +106,7 @@ extension PlaceController {
         
         // Loop through each place and create a new dictionary using the place's properties.
         for place in places {
-
+            
             // Add the new place to the 'parent' dictionary using the place's name as a key.
             placesDict[place.name] = place.dictionary
             
