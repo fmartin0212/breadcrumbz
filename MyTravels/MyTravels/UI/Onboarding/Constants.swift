@@ -36,7 +36,7 @@ class Constants {
     // MARK: - Firebase child names
     
     static public let trip = "Trip"
-    static public let place = "Place"
+    static public let crumb = "Crumb"
     static public let photo = "Photo"
     static public let user = "User"
     static public let places = "places"

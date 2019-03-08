@@ -24,6 +24,7 @@ extension Place {
     @NSManaged public var photos: NSSet?
     @NSManaged public var trip: Trip
     @NSManaged public var placeType: PlaceType?
+    @NSManaged public var uid: String?
 }
 
 // MARK: Generated accessors for photos

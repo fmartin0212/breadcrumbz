@@ -15,11 +15,11 @@ public class Place: NSManagedObject, FirebaseDBSavable {
 
     // FirebaseSavable
     var uuid: String?
-    static var referenceName: String = Constants.place
+    static var referenceName: String = Constants.crumb
     var dictionary: [String : Any] {
         return [
             "name" : self.name,
-            "type" : self.type?.rawValue,
+            "type" : self.type!.rawValue,
             "address" : self.address,
             "rating" : self.rating,
             "comments" : (self.comments ?? "")
