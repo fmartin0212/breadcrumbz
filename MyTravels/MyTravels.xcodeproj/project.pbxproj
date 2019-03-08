@@ -56,6 +56,8 @@
 		B7C0B598220BC7AB009FAAEB /* MyTravels.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = B7C10CBB2020D19500818430 /* MyTravels.xcdatamodeld */; };
 		B7C0B59A220C75BB009FAAEB /* AddTrip.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7C0B599220C75BA009FAAEB /* AddTrip.xib */; };
 		B7C0B59C220CB393009FAAEB /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0B59B220CB393009FAAEB /* AddTripViewController.swift */; };
+		B7C0E3C22232EDBA00438299 /* TripDataSourceAndDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0E3C12232EDBA00438299 /* TripDataSourceAndDelegate.swift */; };
+		B7C0E3C42232EDC300438299 /* SharedTripDataSourceAndDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0E3C32232EDC300438299 /* SharedTripDataSourceAndDelegate.swift */; };
 		B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CB42020D19500818430 /* AppDelegate.swift */; };
 		B7C10CB72020D19500818430 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CB62020D19500818430 /* CreateAccountViewController.swift */; };
 		B7C10CBA2020D19500818430 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7C10CB82020D19500818430 /* Main.storyboard */; };
@@ -145,6 +147,8 @@
 		B7C0B595220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceType+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B7C0B599220C75BA009FAAEB /* AddTrip.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTrip.xib; sourceTree = "<group>"; };
 		B7C0B59B220CB393009FAAEB /* AddTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripViewController.swift; sourceTree = "<group>"; };
+		B7C0E3C12232EDBA00438299 /* TripDataSourceAndDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDataSourceAndDelegate.swift; sourceTree = "<group>"; };
+		B7C0E3C32232EDC300438299 /* SharedTripDataSourceAndDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripDataSourceAndDelegate.swift; sourceTree = "<group>"; };
 		B7C10CB12020D19500818430 /* MyTravels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTravels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7C10CB42020D19500818430 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7C10CB62020D19500818430 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -269,6 +273,8 @@
 			children = (
 				B7DA1B77202E1AE20007497A /* InternalUser.swift */,
 				B7B0C36D203724F30031A92A /* SharedTrip.swift */,
+				B7C0E3C12232EDBA00438299 /* TripDataSourceAndDelegate.swift */,
+				B7C0E3C32232EDC300438299 /* SharedTripDataSourceAndDelegate.swift */,
 				B7B0C36F2037446E0031A92A /* SharedPlace.swift */,
 			);
 			path = "Model outside of MOC";
@@ -686,6 +692,7 @@
 				B725034F20D9B64C00744B23 /* ProfileViewController.swift in Sources */,
 				B7C10CCD2020EFB000818430 /* TripTableViewCell.swift in Sources */,
 				B7C0B59C220CB393009FAAEB /* AddTripViewController.swift in Sources */,
+				B7C0E3C42232EDC300438299 /* SharedTripDataSourceAndDelegate.swift in Sources */,
 				B762265521EFC9510045F260 /* FirebaseSyncable.swift in Sources */,
 				B7DA1B71202E140C0007497A /* Place+CoreDataClass.swift in Sources */,
 				B7DA1B72202E140C0007497A /* Place+CoreDataProperties.swift in Sources */,
@@ -696,6 +703,7 @@
 				B75E335C20D3150500839678 /* SignUpViewController.swift in Sources */,
 				B75E335E20D316DD00839678 /* TextFieldTableViewCell.swift in Sources */,
 				B71248D6222B60DB00D6C4A5 /* FMLineView.swift in Sources */,
+				B7C0E3C22232EDBA00438299 /* TripDataSourceAndDelegate.swift in Sources */,
 				B7AC408A221B6C0100645BC2 /* CrumbTableViewCell.swift in Sources */,
 				B77E4F7120C6D482007EB266 /* Extensions.swift in Sources */,
 				B7D6523F2026526700E975F1 /* ViewControllerExtensions.swift in Sources */,
