@@ -11,7 +11,7 @@ import UIKit
 class SharedTripDataSourceAndDelegate: NSObject {
     private let viewController: UIViewController
     
-    init(_ viewController:termina UIViewController) {
+    init(_ viewController: UIViewController) {
         self.viewController = viewController
     }
 }

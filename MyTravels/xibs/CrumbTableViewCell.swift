@@ -23,6 +23,12 @@ class CrumbTableViewCell: UITableViewCell {
             updateViews()
         }
     }
+    
+    var sharedCrumb: SharedPlace? {
+        didSet {
+            
+        }
+    }
 }
 
 extension CrumbTableViewCell {

@@ -32,6 +32,20 @@ class TripDetailVC: UIViewController {
         }
     }
     
+    var sharedTrip: SharedTrip? {
+        didSet {
+            SharedPlaceController.fetchPlaces(for: sharedTrip!) { (sharedCrumbs) in
+                guard let sharedCrumbs = sharedCrumbs else { return }
+                self.sharedCrumbs = sharedCrumbs
+            }
+        }
+    }
+    var sharedCrumbs: [SharedPlace] = [] {
+        didSet {
+            updateViws()
+        }
+    }
+
     var places: [Place] {
         guard let trip = trip,
             let placesSet = trip.places,
@@ -70,33 +84,45 @@ class TripDetailVC: UIViewController {
 extension TripDetailVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return places.count + 1
+        if let _ = sharedTrip {
+            return sharedCrumbs.count
+        } else {
+            return places.count + 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "crumbCell", for: indexPath) as? CrumbTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
         
-        if indexPath.row == places.count {
-            cell.numberBackdropView.layer.cornerRadius = cell.numberBackdropView.frame.height / 2
-            cell.numberBackdropView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            cell.numberBackdropView.layer.borderColor = #colorLiteral(red: 1, green: 0.4002141953, blue: 0.372333765, alpha: 1)
-            cell.numberBackdropView.layer.borderWidth = 2
-            cell.numberLabel.textColor = #colorLiteral(red: 1, green: 0.4002141953, blue: 0.372333765, alpha: 1)
-            cell.numberLabel.text = "+"
-            cell.nameLabel.text = "Add Crumb"
-            cell.typeLabel.text = nil
-            cell.accessoryLabel.text = nil
+        if let _ = sharedTrip {
+            cell.number = indexPath.row + 1
+            let sharedCrumb = sharedCrumbs[indexPath.row]
+            cell.sharedCrumb = sharedCrumb
+            
+            return cell
+        } else {
+            if indexPath.row == places.count {
+                cell.numberBackdropView.layer.cornerRadius = cell.numberBackdropView.frame.height / 2
+                cell.numberBackdropView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                cell.numberBackdropView.layer.borderColor = #colorLiteral(red: 1, green: 0.4002141953, blue: 0.372333765, alpha: 1)
+                cell.numberBackdropView.layer.borderWidth = 2
+                cell.numberLabel.textColor = #colorLiteral(red: 1, green: 0.4002141953, blue: 0.372333765, alpha: 1)
+                cell.numberLabel.text = "+"
+                cell.nameLabel.text = "Add Crumb"
+                cell.typeLabel.text = nil
+                cell.accessoryLabel.text = nil
+                
+                return cell
+            }
+            
+            let number = indexPath.row + 1
+            let place = places[indexPath.row]
+            cell.number = number
+            cell.crumb = place
             
             return cell
         }
-        
-        let number = indexPath.row + 1
-        let place = places[indexPath.row]
-        cell.number = number
-        cell.crumb = place
-        
-        return cell
     }
 }
 
@@ -123,27 +149,37 @@ extension TripDetailVC: UITableViewDelegate {
 extension TripDetailVC {
     
     func updateViws() {
-        guard let trip = trip else { return }
-        tripNameLabel.text = trip.name
         
-        if let photo = trip.photo?.photo {
-            tripImageView.image = UIImage(data: photo as Data)
+        if let trip = trip {
+            tripNameLabel.text = trip.name
+            
+            if let photo = trip.photo?.photo {
+                tripImageView.image = UIImage(data: photo as Data)
+            } else {
+                tripImageView.image = UIImage(named: "map")
+            }
+            
+            tripLocationLabel.text = trip.location
+            tripStartDateLabel.text = "\((trip.startDate as Date).short()) - "
+            tripEndDateLabel.text = (trip.endDate as Date).short()
         } else {
-            tripImageView.image = UIImage(named: "map")
+            guard let sharedTrip = sharedTrip else { return }
+            tripNameLabel.text = sharedTrip.name
+            
+            tripImageView.image = sharedTrip.photo != nil ? sharedTrip.photo : UIImage(named: "map")
+
+            tripLocationLabel.text = sharedTrip.location
+            tripStartDateLabel.text = "\((sharedTrip.startDate as Date).short()) - "
+            tripEndDateLabel.text = (sharedTrip.endDate as Date).short()
+            }
         }
-        
-        tripLocationLabel.text = trip.location
-        tripStartDateLabel.text = "\((trip.startDate as Date).short()) - "
-        tripEndDateLabel.text = (trip.endDate as Date).short()
-    }
     
     func formatViews() {
-//        lineViewSeparator.formatLine()
         tripImageView.layer.cornerRadius = 4
         tripImageView.clipsToBounds = true
         
         title = trip?.name
-
+        
     }
     
     @objc private func presentShareAlertController() {

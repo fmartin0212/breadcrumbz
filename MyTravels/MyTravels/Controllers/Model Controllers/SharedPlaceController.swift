@@ -19,8 +19,8 @@ class SharedPlaceController {
         var sharedPlaces: [SharedPlace] = []
         
         for (_, value) in placesDictionary {
-            guard let sharedPlace = SharedPlace(dictionary: value) else { completion([]) ; return }
-            sharedPlaces.append(sharedPlace)
+//            guard let sharedPlace = SharedPlace(dictionary: value) else { completion([]) ; return }
+//            sharedPlaces.append(sharedPlace)
         }
         
         self.fetchSharedPlacesPhotos(sharedPlaces: sharedPlaces) { (success) in
@@ -28,6 +28,31 @@ class SharedPlaceController {
 //            if success {
                 completion(sharedPlaces)
 //            }
+        }
+    }
+    
+    static func fetchPlaces(for sharedTrip: SharedTrip, completion: @escaping ([SharedPlace]?) -> Void) {
+        var sharedPlaces: [SharedPlace] = []
+        guard sharedTrip.placeIDs.count > 0 else { completion(nil) ; return }
+        let dispatchGroup = DispatchGroup()
+        
+        for placeID in sharedTrip.placeIDs {
+            dispatchGroup.enter()
+            FirebaseManager.fetch(uuid: placeID, atChildKey: nil, withQuery: nil) { (sharedPlace: SharedPlace?) in
+                if let sharedPlace = sharedPlace {
+                    sharedPlaces.append(sharedPlace)
+                }
+                dispatchGroup.leave()
+            }
+        }
+        dispatchGroup.notify(queue: .main) {
+            fetchSharedPlacesPhotos(sharedPlaces: sharedPlaces, completion: { (success) in
+                if success {
+                    completion(sharedPlaces)
+                } else {
+                    completion(nil)
+                }
+            })
         }
     }
     
