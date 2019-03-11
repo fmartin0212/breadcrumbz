@@ -18,15 +18,9 @@ class CrumbTableViewCell: UITableViewCell {
     @IBOutlet weak var accessoryLabel: UILabel!
     
     var number: Int?
-    var crumb: Place? {
+    var crumb: CrumbObject? {
         didSet {
             updateViews()
-        }
-    }
-    
-    var sharedCrumb: SharedPlace? {
-        didSet {
-            
         }
     }
 }

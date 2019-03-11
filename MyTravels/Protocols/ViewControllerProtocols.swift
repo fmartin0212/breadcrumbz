@@ -39,11 +39,3 @@ extension ScrollableViewController {
     }
 }
 
-protocol Tripp {
-    var name: String { get set }
-    var startDate: NSDate { get set }
-}
-
-extension Tripp where Self: Trip {
-    
-}

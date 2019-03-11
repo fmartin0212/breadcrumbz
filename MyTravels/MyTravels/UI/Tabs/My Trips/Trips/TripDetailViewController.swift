@@ -173,7 +173,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
             
             let place = placeArray[indexPath.section - 2][indexPath.row]
             destinationVC.trip = trip
-            destinationVC.place = place
+//            destinationVC.crumb = place
             
         }
     }

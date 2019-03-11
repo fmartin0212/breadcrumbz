@@ -25,10 +25,10 @@ class TripDetailVC: UIViewController {
     
     // MARK: - Constants & Variables
     
-    var trip: Trip? {
+    var trip: TripObject? {
         didSet {
             loadViewIfNeeded()
-            updateViws()
+            updateViews()
         }
     }
     
@@ -42,17 +42,11 @@ class TripDetailVC: UIViewController {
     }
     var sharedCrumbs: [SharedPlace] = [] {
         didSet {
-            updateViws()
+            updateViews()
         }
     }
 
-    var places: [Place] {
-        guard let trip = trip,
-            let placesSet = trip.places,
-            let places = placesSet.allObjects as? [Place]
-            else { return [] }
-        return places
-    }
+    var crumbs: [CrumbObject] = []
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -66,6 +60,18 @@ class TripDetailVC: UIViewController {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = shareBarButtonItem
         self.navigationItem.largeTitleDisplayMode = .never
+        
+        if let trip = trip as? Trip,
+            let placesSet = trip.places,
+            let places = placesSet.allObjects as? [Place] {
+            self.crumbs = places
+        } else {
+            SharedPlaceController.fetchPlaces(for: trip! as! SharedTrip) { (sharedCrumbs) in
+                if let sharedCrumbs = sharedCrumbs {
+                    self.crumbs = sharedCrumbs
+                }
+            }
+        }
         
         let crumbTableViewCell = UINib(nibName: "CrumbTableViewCell", bundle: nil)
         crumbsTableView.register(crumbTableViewCell, forCellReuseIdentifier: "crumbCell")
@@ -84,25 +90,17 @@ class TripDetailVC: UIViewController {
 extension TripDetailVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let _ = sharedTrip {
-            return sharedCrumbs.count
-        } else {
-            return places.count + 1
-        }
+        guard let _ = trip as? Trip else { return crumbs.count }
+        return crumbs.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "crumbCell", for: indexPath) as? CrumbTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
         
-        if let _ = sharedTrip {
-            cell.number = indexPath.row + 1
-            let sharedCrumb = sharedCrumbs[indexPath.row]
-            cell.sharedCrumb = sharedCrumb
-            
-            return cell
-        } else {
-            if indexPath.row == places.count {
+        
+        if let _ = trip as? Trip {
+            if indexPath.row == crumbs.count {
                 cell.numberBackdropView.layer.cornerRadius = cell.numberBackdropView.frame.height / 2
                 cell.numberBackdropView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
                 cell.numberBackdropView.layer.borderColor = #colorLiteral(red: 1, green: 0.4002141953, blue: 0.372333765, alpha: 1)
@@ -115,29 +113,34 @@ extension TripDetailVC: UITableViewDataSource {
                 
                 return cell
             }
-            
             let number = indexPath.row + 1
-            let place = places[indexPath.row]
+            let place = crumbs[indexPath.row]
             cell.number = number
             cell.crumb = place
             
             return cell
         }
+        
+        let number = indexPath.row
+        let crumb = crumbs[indexPath.row]
+        cell.number = number
+        cell.crumb = crumb
+        return cell
     }
 }
 
 extension TripDetailVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == places.count {
+        if indexPath.row == crumbs.count {
             let createCrumbVC = AddCrumbViewController(nibName: "AddCrumb", bundle: nil)
             createCrumbVC.trip = trip
             self.present(createCrumbVC, animated: true, completion: nil)
             return
         }
-        let crumb = places[indexPath.row]
+        let crumb = crumbs[indexPath.row]
         let crumbDetailVC = UIStoryboard.main.instantiateViewController(withIdentifier: "crumbDetailVC") as! PlaceDetailTableViewController
-        crumbDetailVC.place = crumb
+        crumbDetailVC.crumb = crumb
         self.navigationController?.pushViewController(crumbDetailVC, animated: true)
     }
     
@@ -148,38 +151,30 @@ extension TripDetailVC: UITableViewDelegate {
 
 extension TripDetailVC {
     
-    func updateViws() {
+    func updateViews() {
         
-        if let trip = trip {
-            tripNameLabel.text = trip.name
-            
-            if let photo = trip.photo?.photo {
-                tripImageView.image = UIImage(data: photo as Data)
-            } else {
-                tripImageView.image = UIImage(named: "map")
+        guard let trip = trip else { return }
+        if let managedTrip = trip as? Trip {
+            if let managedPhoto = managedTrip.photo?.photo {
+                tripImageView.image = UIImage(data: managedPhoto as Data)
             }
-            
-            tripLocationLabel.text = trip.location
-            tripStartDateLabel.text = "\((trip.startDate as Date).short()) - "
-            tripEndDateLabel.text = (trip.endDate as Date).short()
+        } else if let nonManagedPhoto = sharedTrip?.photo {
+            tripImageView.image = nonManagedPhoto
         } else {
-            guard let sharedTrip = sharedTrip else { return }
-            tripNameLabel.text = sharedTrip.name
-            
-            tripImageView.image = sharedTrip.photo != nil ? sharedTrip.photo : UIImage(named: "map")
-
-            tripLocationLabel.text = sharedTrip.location
-            tripStartDateLabel.text = "\((sharedTrip.startDate as Date).short()) - "
-            tripEndDateLabel.text = (sharedTrip.endDate as Date).short()
-            }
+            tripImageView.image = UIImage(named: "map")
         }
+        
+        tripNameLabel.text = trip.name
+        tripLocationLabel.text = trip.location
+        tripStartDateLabel.text = "\((trip.startDate as Date).short()) - "
+        tripEndDateLabel.text = (trip.endDate as Date).short()
+    }
     
     func formatViews() {
         tripImageView.layer.cornerRadius = 4
         tripImageView.clipsToBounds = true
         
         title = trip?.name
-        
     }
     
     @objc private func presentShareAlertController() {
@@ -194,7 +189,7 @@ extension TripDetailVC {
                 else { return }
             let loadingView = self.enableLoadingState()
             loadingView.loadingLabel.text = "Sharing"
-            TripController.shared.share(trip: trip, withReceiver: receiver, completion: { (success) in
+            TripController.shared.share(trip: trip as! Trip, withReceiver: receiver, completion: { (success) in
                 self.disableLoadingState(loadingView)
             })
         }

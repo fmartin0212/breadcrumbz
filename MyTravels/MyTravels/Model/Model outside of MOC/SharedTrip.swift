@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseDatabase
 
-class SharedTrip: FirebaseDBRetrievable {
+class SharedTrip: FirebaseDBRetrievable, TripObject {
     
     var uuid: String?
     
@@ -17,11 +17,11 @@ class SharedTrip: FirebaseDBRetrievable {
         return "Trip"
     }
     
-    let name: String
-    let location: String
-    let description: String?
-    let startDate: Date
-    let endDate: Date
+    var name: String
+    var location: String
+    var tripDescription: String?
+    var startDate: NSDate
+    var endDate: NSDate
     let creatorName: String
     let creatorUsername: String
     let creatorID: String
@@ -46,9 +46,9 @@ class SharedTrip: FirebaseDBRetrievable {
         
         self.name = name
         self.location = location
-        self.description = description
-        self.startDate = Date(timeIntervalSince1970: startDate)
-        self.endDate = Date(timeIntervalSince1970: endDate)
+        self.tripDescription = description
+        self.startDate = Date(timeIntervalSince1970: startDate) as NSDate
+        self.endDate = Date(timeIntervalSince1970: endDate) as NSDate
         self.creatorName = creator
         self.creatorUsername = creatorUsername
         self.creatorID = creatorID
@@ -80,9 +80,9 @@ class SharedTrip: FirebaseDBRetrievable {
         
         self.name = name
         self.location = location
-        self.description = description
-        self.startDate = Date(timeIntervalSince1970: startDate)
-        self.endDate = Date(timeIntervalSince1970: endDate)
+        self.tripDescription = description
+        self.startDate = Date(timeIntervalSince1970: startDate) as NSDate
+        self.endDate = Date(timeIntervalSince1970: endDate) as NSDate
         self.creatorName = creator
         self.creatorUsername = creatorUsername
         self.creatorID = creatorID
@@ -93,7 +93,7 @@ class SharedTrip: FirebaseDBRetrievable {
         }
         
         if let placeIDs = tripDictionary["placeIDs"] as? [String : Bool] {
-            self.placeIDs = tripDictionary.compactMap { $0.key }
+            self.placeIDs = placeIDs.compactMap { $0.key }
         }
         
         SharedPlaceController.parsePlacesFrom(tripDictionary: tripDictionary) { (places) in

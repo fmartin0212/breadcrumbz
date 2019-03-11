@@ -10,11 +10,16 @@ import UIKit
 import MapKit
 
 class PlaceDetailTableViewController: UITableViewController {
-
+    
     // MARK: Properties
     
-    var trip: Trip?
-    var place: Place?
+    var trip: TripObject?
+    var crumb: CrumbObject? {
+        didSet {
+            loadViewIfNeeded()
+            updateViews()
+        }
+    }
     var photos: [Photo] = []
     var placemark: CLPlacemark?
     
@@ -41,11 +46,6 @@ class PlaceDetailTableViewController: UITableViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        // Set the title to the user-owned place's name
-        if let _ = place {
-            updateViews()
-        }
-        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         
@@ -55,52 +55,35 @@ class PlaceDetailTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        updateViews()
+        //        updateViews()
         collectionView.reloadData()
     }
     
     // MARK: - Functions
     func updateViews() {
-        guard let place = place
+        guard let crumb = crumb
             else { return }
         
-        if let photos = place.photos?.allObjects as? [Photo] {
+        if let crumb = crumb as? Place,
+            let photos = crumb.photos?.allObjects as? [Photo] {
             self.photos = photos
-            
         }
         
         if photos.count > 0 {
             guard let photo = photos[0].photo as Data?,
                 let image = UIImage(data: photo) else { return }
             placeMainPhotoImageView.image = image
-            placeNameLabel.text = place.name
-            placeAddressLabel.text = place.address
-            updateStarsImageViews(place: place)
+            placeNameLabel.text = crumb.name
+            placeAddressLabel.text = crumb.address
+            //            updateStarsImageViews(place: crumb)
         } else {
-            var placeholderImage = UIImage()
-            if place.type == .lodging {
-                guard let lodgingPlaceholderImage = UIImage(named: Place.types.lodging.rawValue) else { return }
-                placeholderImage = lodgingPlaceholderImage
-            } else if place.type == .restaurant {
-                guard let restaurantPlaceholderImage = UIImage(named: Place.types.restaurant.rawValue) else { return }
-                placeholderImage = restaurantPlaceholderImage
-            } else if place.type == .activity {
-                guard let activityPlaceholderImage = UIImage(named: Place.types.activity.rawValue) else { return }
-                placeholderImage = activityPlaceholderImage
-            }
-            placeMainPhotoImageView.image = placeholderImage
-            placeNameLabel.text = place.name
-            placeAddressLabel.text = place.address
-            updateStarsImageViews(place: place)
+            placeMainPhotoImageView.image = UIImage(named: crumb.type!.rawValue)
         }
         
-        if place.comments == "Comments" {
-            placeCommentsTextView.text = ""
-        } else {
-            placeCommentsTextView.text = place.comments
-        }
-        
-        addAnnotation(for: place)
+        placeNameLabel.text = crumb.name
+        placeAddressLabel.text = crumb.address
+        placeCommentsTextView.text = crumb.comments
+        addAnnotation(for: crumb)
     }
     
     func updateStarsImageViews(place: Place) {
@@ -126,8 +109,7 @@ class PlaceDetailTableViewController: UITableViewController {
         }
     }
     
-    
-    func addAnnotation(for place: Place) {
+    func addAnnotation(for place: CrumbObject) {
         
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(place.address) { (placemarks, error) in
@@ -154,14 +136,14 @@ class PlaceDetailTableViewController: UITableViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "toEditPlaceTableViewControllerSegue" {
-            guard let destinationVC = segue.destination as? EditPlaceTableViewController,
-            let place = place
-                else { return }
-            destinationVC.trip = trip
-            destinationVC.place = place
-        }
+        //
+        //        if segue.identifier == "toEditPlaceTableViewControllerSegue" {
+        //            guard let destinationVC = segue.destination as? EditPlaceTableViewController,
+        //            let place = place
+        //                else { return }
+        //            destinationVC.trip = trip
+        //            destinationVC.place = place
+        //        }
     }
 }
 
@@ -173,15 +155,15 @@ extension PlaceDetailTableViewController: UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
-
-            guard let photo = photos[indexPath.row].photo
-                else { return UICollectionViewCell() }
-            
-            cell.photo = photo as Data
-            
-            return cell
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCollectionViewCell
+        
+        guard let photo = photos[indexPath.row].photo
+            else { return UICollectionViewCell() }
+        
+        cell.photo = photo as Data
+        
+        return cell
+    }
 }
 
 extension PlaceDetailTableViewController {

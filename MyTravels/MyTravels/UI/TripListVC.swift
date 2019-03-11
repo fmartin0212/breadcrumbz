@@ -1,56 +1,48 @@
 //
-//  TripsListViewController.swift
+//  TripListVC.swift
 //  MyTravels
 //
-//  Created by Frank Martin Jr on 1/30/18.
-//  Copyright © 2018 Frank Martin Jr. All rights reserved.
+//  Created by Frank Martin on 3/9/19.
+//  Copyright © 2019 Frank Martin Jr. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class TripsListViewController: UIViewController {
+class TripListVC: UIViewController {
     
     // MARK: - IBOutlets
-    
-    @IBOutlet var noTripsView: UIView!
-    @IBOutlet var addTripBarButtonItem: UIBarButtonItem!
-    @IBOutlet weak var tableView: UITableView!
-
     @IBOutlet weak var addATripButton: UIButton!
     
     // MARK: - Constants & Variables
     
+    @IBOutlet weak var tableView: UITableView!
     var profileButton: UIButton?
-//    var fromSignUpVC = false
-//        didSet {
-//            let loadingView = enableLoadingState()
-//            fetchUserInfo { (success) in
-//                NotificationCenter.default.post(name: Constants.profilePictureUpdatedNotif, object: nil)
-//                self.disableLoadingState(loadingView)
-//            }
-//        }
+    //    var fromSignUpVC = false
+    //        didSet {
+    //            let loadingView = enableLoadingState()
+    //            fetchUserInfo { (success) in
+    //                NotificationCenter.default.post(name: Constants.profilePictureUpdatedNotif, object: nil)
+    //                self.disableLoadingState(loadingView)
+    //            }
+    //        }
     
     var isSharedTripsView: Bool = false
     lazy var tripDataSourceAndDelegate = TripDataSourceAndDelegate(self)
     lazy var sharedTripDataSourceAndDelegate = SharedTripDataSourceAndDelegate(self)
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        loadViewIfNeeded()
         let nib = UINib(nibName: "TripCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TripCell")
         
         // Set tableview properties
         tableView.separatorStyle = .none
-        
-        // Set delegates
-//        tableView.dataSource = self
-//        tableView.delegate = self
+
         TripController.shared.frc.delegate = self
         
         // Set navigation bar properties
-        addTripBarButtonItem.format()
         TripController.shared.fetchAllTrips()
         
         if isSharedTripsView {
@@ -60,30 +52,70 @@ class TripsListViewController: UIViewController {
             tableView.dataSource = tripDataSourceAndDelegate
             tableView.delegate = tripDataSourceAndDelegate
         }
-
+        
         for trip in TripController.shared.trips {
             trip.uid = nil
             CoreDataManager.save()
         }
-    
+        
         if TripController.shared.trips.count == 0 {
-            self.presentNoTripsView()
+            //            self.presentNoTripsView()
         }
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+//        let nib = UINib(nibName: "TripCell", bundle: nil)
+//        tableView.register(nib, forCellReuseIdentifier: "TripCell")
+//
+//        // Set tableview properties
+//        tableView.separatorStyle = .none
+//
+//        // Set delegates
+//        //        tableView.dataSource = self
+//        //        tableView.delegate = self
+//        TripController.shared.frc.delegate = self
+//
+//        // Set navigation bar properties
+//        TripController.shared.fetchAllTrips()
+//
+//        if isSharedTripsView {
+//            tableView.dataSource = sharedTripDataSourceAndDelegate
+//            tableView.delegate = sharedTripDataSourceAndDelegate
+//        } else {
+//            tableView.dataSource = tripDataSourceAndDelegate
+//            tableView.delegate = tripDataSourceAndDelegate
+//        }
+//
+//        for trip in TripController.shared.trips {
+//            trip.uid = nil
+//            CoreDataManager.save()
+//        }
+//
+//        if TripController.shared.trips.count == 0 {
+////            self.presentNoTripsView()
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         refreshTableView()
     }
-//
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        view.endEditing(true)
-//    }
+    //
+    //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    //        view.endEditing(true)
+    //    }
     
     @IBAction func addATripButtonTapped(_ sender: Any) {
         let addTripVC = AddTripViewController(nibName: "AddTrip", bundle: nil)
         self.present(addTripVC, animated: true, completion: nil)
-//        performSegue(withIdentifier: "addATripSegue", sender: nil)
+        //        performSegue(withIdentifier: "addATripSegue", sender: nil)
         
     }
     
@@ -93,22 +125,22 @@ class TripsListViewController: UIViewController {
     }
 }
 
-extension TripsListViewController {
+extension TripListVC {
     
-    private func presentNoTripsView() {
-        view.addSubview(noTripsView)
-        noTripsView.isHidden = false
-        noTripsView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint(item: noTripsView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: noTripsView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: noTripsView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: noTripsView, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-        
-        self.navigationItem.rightBarButtonItem = nil
-        addATripButton.clipsToBounds = true
-        addATripButton.layer.cornerRadius = 25
-    }
+//    private func presentNoTripsView() {
+//        view.addSubview(noTripsView)
+//        noTripsView.isHidden = false
+//        noTripsView.translatesAutoresizingMaskIntoConstraints = false
+//
+//        NSLayoutConstraint(item: noTripsView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0).isActive = true
+//        NSLayoutConstraint(item: noTripsView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+//        NSLayoutConstraint(item: noTripsView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 0).isActive = true
+//        NSLayoutConstraint(item: noTripsView, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
+//
+//        self.navigationItem.rightBarButtonItem = nil
+//        addATripButton.clipsToBounds = true
+//        addATripButton.layer.cornerRadius = 25
+//    }
     
     private func fetchUserInfo(completion: @escaping (Bool) -> Void) {
         
@@ -133,14 +165,14 @@ extension TripsListViewController {
         } else {
             TripController.shared.fetchAllTrips()
             if TripController.shared.trips.count > 0 {
-                noTripsView.removeFromSuperview()
-                self.navigationItem.rightBarButtonItem = addTripBarButtonItem
+//                noTripsView.removeFromSuperview()
+               
             }
         }
     }
 }
 
-extension TripsListViewController: NSFetchedResultsControllerDelegate {
+extension TripListVC: NSFetchedResultsControllerDelegate {
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
@@ -151,7 +183,7 @@ extension TripsListViewController: NSFetchedResultsControllerDelegate {
             
             guard let trips = TripController.shared.frc.fetchedObjects else { return }
             if trips.count == 0 {
-                presentNoTripsView()
+//                presentNoTripsView()
             }
         case .insert:
             guard let newIndexPath = newIndexPath else { return }
@@ -166,5 +198,4 @@ extension TripsListViewController: NSFetchedResultsControllerDelegate {
         }
     }
 }
-
 

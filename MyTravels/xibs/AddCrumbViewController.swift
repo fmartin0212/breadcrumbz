@@ -30,7 +30,7 @@ class AddCrumbViewController: UIViewController, ScrollableViewController {
     @IBOutlet weak var saveButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var addPhotoButtonTopConstraint: NSLayoutConstraint!
     
-    var trip: Trip?
+    var trip: TripObject?
     var photoData: Data?
     let imagePickerController = UIImagePickerController()
     let pickerView = UIPickerView()
@@ -83,7 +83,7 @@ class AddCrumbViewController: UIViewController, ScrollableViewController {
             let trip = trip
         else { return }
         
-        let place = PlaceController.shared.createNewPlaceWith(name: name, type: placeType, address: address, comments: commentsTextView.text, rating: 0, trip: trip)
+        let place = PlaceController.shared.createNewPlaceWith(name: name, type: placeType, address: address, comments: commentsTextView.text, rating: 0, trip: trip as! Trip)
         PhotoController.shared.add(photos: self.photos, place: place)
         self.dismiss(animated: true, completion: nil)
         

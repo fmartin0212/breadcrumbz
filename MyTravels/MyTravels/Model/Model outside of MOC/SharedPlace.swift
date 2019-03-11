@@ -8,13 +8,24 @@
 
 import UIKit
 
-class SharedPlace: FirebaseDBRetrievable {
+class SharedPlace: FirebaseDBRetrievable, CrumbObject {
+    
+    var address: String
+    var comments: String?
+    var name: String
+    var rating: Int16
+    var typeString: String
+    var type: Place.types? {
+        return Place.types(rawValue: typeString)
+    }
+    var photos: [UIImage] = []
+    var photoURLs: [String]?
     
     required init?(dictionary: [String : Any], uuid: String) {
         guard let name = dictionary["name"] as? String,
             let address = dictionary["address"] as? String,
             let rating = dictionary["rating"] as? Int16,
-            let type = dictionary["type"] as? String,
+            let typeString = dictionary["type"] as? String,
             let comments = dictionary["comments"] as? String
             else { return nil }
         
@@ -31,7 +42,7 @@ class SharedPlace: FirebaseDBRetrievable {
         self.name = name
         self.address = address
         self.rating = rating
-        self.type = type
+        self.typeString = typeString
         self.comments = comments
         self.uuid = uuid
     }
@@ -41,15 +52,6 @@ class SharedPlace: FirebaseDBRetrievable {
     static var referenceName: String {
         return "Crumb"
     }
-    
-    
-    var address: String
-    var comments: String?
-    var name: String
-    var rating: Int16
-    var type: String
-    var photos: [UIImage] = []
-    var photoURLs: [String]?
 
 //    init?(dictionary: [String : Any]) {
 //

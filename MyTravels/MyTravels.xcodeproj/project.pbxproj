@@ -58,6 +58,10 @@
 		B7C0B59C220CB393009FAAEB /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0B59B220CB393009FAAEB /* AddTripViewController.swift */; };
 		B7C0E3C22232EDBA00438299 /* TripDataSourceAndDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0E3C12232EDBA00438299 /* TripDataSourceAndDelegate.swift */; };
 		B7C0E3C42232EDC300438299 /* SharedTripDataSourceAndDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0E3C32232EDC300438299 /* SharedTripDataSourceAndDelegate.swift */; };
+		B7C0E3C8223458A700438299 /* Trip+CrumbProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0E3C7223458A700438299 /* Trip+CrumbProtocols.swift */; };
+		B7C0E3CA2234999A00438299 /* TripListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7C0E3C92234999A00438299 /* TripListVC.xib */; };
+		B7C0E3CC22349A2D00438299 /* TripListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0E3CB22349A2D00438299 /* TripListVC.swift */; };
+		B7C0E3CE22349F8F00438299 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0E3CD22349F8F00438299 /* MainTabBarController.swift */; };
 		B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CB42020D19500818430 /* AppDelegate.swift */; };
 		B7C10CB72020D19500818430 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CB62020D19500818430 /* CreateAccountViewController.swift */; };
 		B7C10CBA2020D19500818430 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7C10CB82020D19500818430 /* Main.storyboard */; };
@@ -149,6 +153,10 @@
 		B7C0B59B220CB393009FAAEB /* AddTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripViewController.swift; sourceTree = "<group>"; };
 		B7C0E3C12232EDBA00438299 /* TripDataSourceAndDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDataSourceAndDelegate.swift; sourceTree = "<group>"; };
 		B7C0E3C32232EDC300438299 /* SharedTripDataSourceAndDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripDataSourceAndDelegate.swift; sourceTree = "<group>"; };
+		B7C0E3C7223458A700438299 /* Trip+CrumbProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CrumbProtocols.swift"; sourceTree = "<group>"; };
+		B7C0E3C92234999A00438299 /* TripListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripListVC.xib; sourceTree = "<group>"; };
+		B7C0E3CB22349A2D00438299 /* TripListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripListVC.swift; sourceTree = "<group>"; };
+		B7C0E3CD22349F8F00438299 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		B7C10CB12020D19500818430 /* MyTravels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTravels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7C10CB42020D19500818430 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7C10CB62020D19500818430 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -351,6 +359,9 @@
 		B7C10CDA20214F5400818430 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				B7C0E3C92234999A00438299 /* TripListVC.xib */,
+				B7C0E3CD22349F8F00438299 /* MainTabBarController.swift */,
+				B7C0E3CB22349A2D00438299 /* TripListVC.swift */,
 				B7655AF822273B3D002D33F7 /* FMTextField.swift */,
 				B7655AFC22274182002D33F7 /* FMTextView.swift */,
 				B71248D5222B60DB00D6C4A5 /* FMLineView.swift */,
@@ -435,6 +446,7 @@
 			children = (
 				B762265421EFC94F0045F260 /* FirebaseSyncable.swift */,
 				B71248D3222A292B00D6C4A5 /* ViewControllerProtocols.swift */,
+				B7C0E3C7223458A700438299 /* Trip+CrumbProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -584,6 +596,7 @@
 				B7F75C0220577BB200C876A0 /* Onboarding.storyboard in Resources */,
 				B7AC4086221B4DC300645BC2 /* CrumbTableViewCell.xib in Resources */,
 				B78BC0742159587100827394 /* GoogleService-Info.plist in Resources */,
+				B7C0E3CA2234999A00438299 /* TripListVC.xib in Resources */,
 				B7C0AA072210F9420030A5B1 /* Poppins-Light.otf in Resources */,
 				B73804F52224E37B00CD9E59 /* AddCrumb.xib in Resources */,
 				B7BA6F5521F82424004A3C70 /* TripDetailCell.xib in Resources */,
@@ -646,6 +659,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7B0C3702037446E0031A92A /* SharedPlace.swift in Sources */,
+				B7C0E3CC22349A2D00438299 /* TripListVC.swift in Sources */,
 				B7073BE520DAF03D001B1F9F /* AddACrumbTableViewCell.swift in Sources */,
 				B7DA1B6F202E140C0007497A /* Trip+CoreDataClass.swift in Sources */,
 				B7C83FC521C1FA3B00A9F86C /* LoadingView.swift in Sources */,
@@ -661,6 +675,7 @@
 				B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */,
 				B7D652392024E24A00E975F1 /* TypeSelectionViewController.swift in Sources */,
 				B7655AF922273B3D002D33F7 /* FMTextField.swift in Sources */,
+				B7C0E3C8223458A700438299 /* Trip+CrumbProtocols.swift in Sources */,
 				B70E7D1921F408C100B2228A /* Photo+CoreDataProperties.swift in Sources */,
 				B7F7CF44217685150097198C /* SharedPlaceController.swift in Sources */,
 				B7655B2A22277B9B002D33F7 /* SignUpVC.swift in Sources */,
@@ -693,6 +708,7 @@
 				B7C10CCD2020EFB000818430 /* TripTableViewCell.swift in Sources */,
 				B7C0B59C220CB393009FAAEB /* AddTripViewController.swift in Sources */,
 				B7C0E3C42232EDC300438299 /* SharedTripDataSourceAndDelegate.swift in Sources */,
+				B7C0E3CE22349F8F00438299 /* MainTabBarController.swift in Sources */,
 				B762265521EFC9510045F260 /* FirebaseSyncable.swift in Sources */,
 				B7DA1B71202E140C0007497A /* Place+CoreDataClass.swift in Sources */,
 				B7DA1B72202E140C0007497A /* Place+CoreDataProperties.swift in Sources */,
