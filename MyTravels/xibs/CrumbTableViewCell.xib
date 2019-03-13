@@ -18,76 +18,85 @@
         <array key="Poppins-Regular.otf">
             <string>Poppins-Regular</string>
         </array>
-        <array key="Poppins-SemiBold.otf">
-            <string>Poppins-SemiBold</string>
-        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="55" id="VEC-zp-K4b" customClass="CrumbTableViewCell" customModule="MyTravels" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="378" height="55"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="64" id="VEC-zp-K4b" customClass="CrumbTableViewCell" customModule="MyTravels" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="441" height="64"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VEC-zp-K4b" id="4hq-gN-TiE">
-                <rect key="frame" x="0.0" y="0.0" width="378" height="54.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="441" height="63.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUF-eU-ckf">
-                        <rect key="frame" x="8" y="4" width="24" height="24"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSH-KH-0R7">
-                                <rect key="frame" x="9.5" y="3" width="5" height="18.5"/>
-                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="13"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="zSH-KH-0R7" firstAttribute="centerX" secondItem="uUF-eU-ckf" secondAttribute="centerX" id="AJJ-Nl-IiR"/>
-                            <constraint firstItem="zSH-KH-0R7" firstAttribute="centerY" secondItem="uUF-eU-ckf" secondAttribute="centerY" id="Dfh-qj-B9N"/>
-                            <constraint firstAttribute="width" secondItem="uUF-eU-ckf" secondAttribute="height" multiplier="1:1" id="KMe-TP-ucj"/>
-                            <constraint firstAttribute="height" constant="24" id="YJj-t3-UVK"/>
-                        </constraints>
-                    </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crumb name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lH9-DD-goe">
-                        <rect key="frame" x="38" y="4.5" width="108" height="23"/>
-                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
-                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crumb type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vvi-P9-EGL">
-                        <rect key="frame" x="38" y="30" width="83.5" height="20"/>
-                        <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="14"/>
-                        <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rE7-35-9tB">
-                        <rect key="frame" x="365" y="7" width="13" height="41"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rE7-35-9tB">
+                        <rect key="frame" x="441" y="160" width="0.0" height="41"/>
                         <fontDescription key="fontDescription" name="Poppins-ExtraLight" family="Poppins" pointSize="29"/>
                         <color key="textColor" red="1" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="epA-rl-IHt">
+                        <rect key="frame" x="0.0" y="0.0" width="340" height="340.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lodging" translatesAutoresizingMaskIntoConstraints="NO" id="2Sl-WC-Ivp">
+                                <rect key="frame" x="0.0" y="0.0" width="340" height="340.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="2Sl-WC-Ivp" secondAttribute="height" multiplier="1:1" id="KQM-D1-iiF"/>
+                                    <constraint firstAttribute="width" constant="90" id="Nei-yr-MrI"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                    </stackView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PCG-0p-3oG">
+                        <rect key="frame" x="348" y="8" width="93" height="332.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Crumb name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lH9-DD-goe">
+                                <rect key="frame" x="0.0" y="0.0" width="93" height="22.5"/>
+                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
+                                <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crumb description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vvi-P9-EGL">
+                                <rect key="frame" x="0.0" y="22.5" width="93" height="310"/>
+                                <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="10"/>
+                                <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lmq-qT-m99">
+                        <rect key="frame" x="0.0" y="340.5" width="441" height="20"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Lzb-Oe-eOf"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="uUF-eU-ckf" firstAttribute="leading" secondItem="4hq-gN-TiE" secondAttribute="leading" constant="8" id="0pX-8k-bWd"/>
+                    <constraint firstItem="epA-rl-IHt" firstAttribute="leading" secondItem="4hq-gN-TiE" secondAttribute="leading" id="0aB-hG-OV7"/>
                     <constraint firstItem="rE7-35-9tB" firstAttribute="centerY" secondItem="4hq-gN-TiE" secondAttribute="centerY" id="7c9-j4-0t4"/>
-                    <constraint firstAttribute="trailing" secondItem="rE7-35-9tB" secondAttribute="trailing" id="8p4-s3-dIW"/>
-                    <constraint firstItem="uUF-eU-ckf" firstAttribute="top" secondItem="4hq-gN-TiE" secondAttribute="top" constant="4" id="8wH-dQ-fZB"/>
-                    <constraint firstItem="lH9-DD-goe" firstAttribute="leading" secondItem="uUF-eU-ckf" secondAttribute="trailing" constant="6" id="E64-vE-yrq"/>
-                    <constraint firstItem="lH9-DD-goe" firstAttribute="centerY" secondItem="uUF-eU-ckf" secondAttribute="centerY" id="KyA-MY-EWc"/>
-                    <constraint firstItem="Vvi-P9-EGL" firstAttribute="top" secondItem="lH9-DD-goe" secondAttribute="bottom" constant="2.5" id="Rg6-AN-dEK"/>
-                    <constraint firstItem="Vvi-P9-EGL" firstAttribute="leading" secondItem="lH9-DD-goe" secondAttribute="leading" id="dFt-af-Axo"/>
+                    <constraint firstAttribute="trailing" secondItem="Lmq-qT-m99" secondAttribute="trailing" id="8aA-im-a9s"/>
+                    <constraint firstItem="rE7-35-9tB" firstAttribute="trailing" secondItem="4hq-gN-TiE" secondAttribute="trailing" id="8p4-s3-dIW"/>
+                    <constraint firstItem="Lmq-qT-m99" firstAttribute="top" secondItem="PCG-0p-3oG" secondAttribute="bottom" id="BFT-kG-UUB"/>
+                    <constraint firstItem="PCG-0p-3oG" firstAttribute="top" secondItem="2Sl-WC-Ivp" secondAttribute="top" constant="8" id="FNh-SU-YT2"/>
+                    <constraint firstItem="PCG-0p-3oG" firstAttribute="leading" secondItem="epA-rl-IHt" secondAttribute="trailing" constant="8" id="NII-VY-tgQ"/>
+                    <constraint firstAttribute="bottom" secondItem="Lmq-qT-m99" secondAttribute="bottom" id="a3i-vl-Wro"/>
+                    <constraint firstItem="rE7-35-9tB" firstAttribute="leading" secondItem="PCG-0p-3oG" secondAttribute="trailing" id="fC6-dt-9sy"/>
+                    <constraint firstItem="epA-rl-IHt" firstAttribute="bottom" secondItem="Lmq-qT-m99" secondAttribute="top" id="lTl-a6-pwI"/>
+                    <constraint firstItem="epA-rl-IHt" firstAttribute="top" secondItem="4hq-gN-TiE" secondAttribute="top" id="qMK-Hw-RMe"/>
+                    <constraint firstItem="Lmq-qT-m99" firstAttribute="leading" secondItem="4hq-gN-TiE" secondAttribute="leading" id="wcq-9Y-gRq"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="accessoryLabel" destination="rE7-35-9tB" id="Dwe-6L-8ef"/>
+                <outlet property="crumbImageView" destination="2Sl-WC-Ivp" id="NLc-O3-cfx"/>
                 <outlet property="nameLabel" destination="lH9-DD-goe" id="KtK-LE-aHD"/>
-                <outlet property="numberBackdropView" destination="uUF-eU-ckf" id="q60-lj-oa0"/>
-                <outlet property="numberLabel" destination="zSH-KH-0R7" id="rJv-tU-saE"/>
                 <outlet property="typeLabel" destination="Vvi-P9-EGL" id="smY-Sm-8mt"/>
             </connections>
-            <point key="canvasLocation" x="145.59999999999999" y="18.440779610194905"/>
+            <point key="canvasLocation" x="197.59999999999999" y="-11.694152923538232"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="lodging" width="2448" height="3264"/>
+    </resources>
 </document>

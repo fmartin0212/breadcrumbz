@@ -580,14 +580,14 @@
                         </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
-                        <segue destination="0zI-oT-TDR" kind="relationship" relationship="viewControllers" id="ikh-dU-HZa"/>
-                        <segue destination="Zem-Li-kKU" kind="relationship" relationship="viewControllers" id="pFz-8F-1ff"/>
-                        <segue destination="aLb-w1-6Mf" kind="relationship" relationship="viewControllers" id="ami-JX-UtW"/>
+                        <segue destination="0zI-oT-TDR" kind="relationship" relationship="viewControllers" id="ARN-sa-Q04"/>
+                        <segue destination="Zem-Li-kKU" kind="relationship" relationship="viewControllers" id="0L4-rF-V7a"/>
+                        <segue destination="aLb-w1-6Mf" kind="relationship" relationship="viewControllers" id="33g-I7-gev"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b3i-54-Otm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1118" y="116"/>
+            <point key="canvasLocation" x="-1113" y="142"/>
         </scene>
         <!--My Trips-->
         <scene sceneID="Rwp-mg-H5f">
@@ -1023,7 +1023,7 @@
         <!--Shared with me-->
         <scene sceneID="hwf-PC-n6l">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" id="QWT-hB-9W2" customClass="TripListViewController" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" id="QWT-hB-9W2" customClass="SharedTripsListViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NVq-9r-NgT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1048,6 +1048,9 @@
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="Zx4-VD-yip" id="mNv-MQ-S3u"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EaC-97-FiI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1551,7 +1554,7 @@
         <image name="SharedTripTabBarButton" width="24" height="24"/>
         <image name="addDetail" width="33" height="33"/>
         <image name="breadcrumbz" width="180" height="146"/>
-        <image name="calendar" width="24" height="25"/>
+        <image name="calendar" width="24" height="24"/>
         <image name="location" width="24" height="24"/>
         <image name="map-1x" width="18.399999618530273" height="18.399999618530273"/>
         <image name="notrips_feed" width="198" height="188"/>

@@ -17,11 +17,10 @@ class TripDetailVC: UIViewController {
     @IBOutlet weak var tripLocationLabel: UILabel!
     @IBOutlet weak var tripStartDateLabel: UILabel!
     @IBOutlet weak var tripEndDateLabel: UILabel!
-    @IBOutlet weak var lineViewSeparator: UIView!
+    @IBOutlet weak var tripDescription: UILabel!
     @IBOutlet weak var crumbsTableView: UITableView!
-    lazy var shareBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(presentShareAlertController))
-    }()
+    @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var addCrumbButton: UIButton!
     
     // MARK: - Constants & Variables
     
@@ -58,8 +57,9 @@ class TripDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = shareBarButtonItem
         self.navigationItem.largeTitleDisplayMode = .never
+        actionButton.layer.cornerRadius = actionButton.frame.width / 2
+        actionButton.clipsToBounds = true
         
         if let trip = trip as? Trip,
             let placesSet = trip.places,
@@ -84,46 +84,35 @@ class TripDetailVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         crumbsTableView.reloadData()
+        
+        if let trip = trip as? Trip,
+            let placesSet = trip.places,
+            let places = placesSet.allObjects as? [Place] {
+            self.crumbs = places
+        }
+    }
+    
+    @IBAction func actionButtonTapped(_ sender: Any) {
+        presentShareAlertController()
+    }
+    @IBAction func addCrumbButtonTapped(_ sender: Any) {
+        let createCrumbVC = AddCrumbViewController(nibName: "AddCrumb", bundle: nil)
+        createCrumbVC.trip = trip
+        self.present(createCrumbVC, animated: true, completion: nil)
     }
 }
 
 extension TripDetailVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let _ = trip as? Trip else { return crumbs.count }
-        return crumbs.count + 1
+        return crumbs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "crumbCell", for: indexPath) as? CrumbTableViewCell else { return UITableViewCell() }
         cell.selectionStyle = .none
         
-        
-        if let _ = trip as? Trip {
-            if indexPath.row == crumbs.count {
-                cell.numberBackdropView.layer.cornerRadius = cell.numberBackdropView.frame.height / 2
-                cell.numberBackdropView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-                cell.numberBackdropView.layer.borderColor = #colorLiteral(red: 1, green: 0.4002141953, blue: 0.372333765, alpha: 1)
-                cell.numberBackdropView.layer.borderWidth = 2
-                cell.numberLabel.textColor = #colorLiteral(red: 1, green: 0.4002141953, blue: 0.372333765, alpha: 1)
-                cell.numberLabel.text = "+"
-                cell.nameLabel.text = "Add Crumb"
-                cell.typeLabel.text = nil
-                cell.accessoryLabel.text = nil
-                
-                return cell
-            }
-            let number = indexPath.row + 1
-            let place = crumbs[indexPath.row]
-            cell.number = number
-            cell.crumb = place
-            
-            return cell
-        }
-        
-        let number = indexPath.row
         let crumb = crumbs[indexPath.row]
-        cell.number = number
         cell.crumb = crumb
         return cell
     }
@@ -132,12 +121,7 @@ extension TripDetailVC: UITableViewDataSource {
 extension TripDetailVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == crumbs.count {
-            let createCrumbVC = AddCrumbViewController(nibName: "AddCrumb", bundle: nil)
-            createCrumbVC.trip = trip
-            self.present(createCrumbVC, animated: true, completion: nil)
-            return
-        }
+
         let crumb = crumbs[indexPath.row]
         let crumbDetailVC = UIStoryboard.main.instantiateViewController(withIdentifier: "crumbDetailVC") as! PlaceDetailTableViewController
         crumbDetailVC.crumb = crumb
@@ -145,13 +129,13 @@ extension TripDetailVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
+        return 110
     }
 }
 
 extension TripDetailVC {
     
-    func updateViews() {
+    private func updateViews() {
         
         guard let trip = trip else { return }
         if let managedTrip = trip as? Trip {
@@ -168,16 +152,27 @@ extension TripDetailVC {
         tripLocationLabel.text = trip.location
         tripStartDateLabel.text = "\((trip.startDate as Date).short()) - "
         tripEndDateLabel.text = (trip.endDate as Date).short()
+        tripDescription.text = "My really really long trip description. My really really long trip description.My really really long trip description.My really really long trip description.My really really long trip description.My really really long trip description."
+        
     }
     
-    func formatViews() {
+    private func formatViews() {
         tripImageView.layer.cornerRadius = 4
         tripImageView.clipsToBounds = true
         
         title = trip?.name
+        
+        if trip is SharedTrip {
+            addCrumbButton.isHidden = true
+        } else {
+            addCrumbButton.layer.cornerRadius = addCrumbButton.frame.width / 2
+            addCrumbButton.layer.borderColor = #colorLiteral(red: 0.9725490196, green: 0.3490196078, blue: 0.3490196078, alpha: 1)
+            addCrumbButton.layer.borderWidth = 1.5
+        
+        }
     }
     
-    @objc private func presentShareAlertController() {
+    private func presentShareAlertController() {
         
         let alertController = UIAlertController(title: "Share trip", message: "Enter a username below to share your trip", preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)

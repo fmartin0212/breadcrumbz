@@ -11,13 +11,12 @@ import UIKit
 class CrumbTableViewCell: UITableViewCell {
 
     // MARK: - IBOutlets
-    @IBOutlet weak var numberBackdropView: UIView!
-    @IBOutlet weak var numberLabel: UILabel!
+    
+    @IBOutlet weak var crumbImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var accessoryLabel: UILabel!
     
-    var number: Int?
     var crumb: CrumbObject? {
         didSet {
             updateViews()
@@ -28,12 +27,10 @@ class CrumbTableViewCell: UITableViewCell {
 extension CrumbTableViewCell {
     
     func updateViews() {
-        guard let crumb = crumb,
-            let number = number
-            else { return }
-        numberBackdropView.layer.cornerRadius = numberBackdropView.frame.height / 2
-        numberLabel.text = String(number)
+        guard let crumb = crumb else { return }
+        crumbImageView.clipsToBounds = true
+        crumbImageView.layer.cornerRadius = 8
         nameLabel.text = crumb.name
-        typeLabel.text = crumb.type?.rawValue
+        typeLabel.text = "Really really long textReally reallReally really long textReally reallReally really long textReally reallReally really long textReally reallReally really long textReally reallReally really long textReally reallReally really long textReally reallReally really long textReally reallReally really long textReally reall"
     }
 }

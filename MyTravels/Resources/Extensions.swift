@@ -151,6 +151,10 @@ extension UIStoryboard {
     static var onboarding: UIStoryboard {
         return UIStoryboard(name: "Onboarding", bundle: nil)
     }
+    
+    static var profile: UIStoryboard {
+        return UIStoryboard(name: "Profile", bundle: nil)
+    }
 }
 
 extension UIView {

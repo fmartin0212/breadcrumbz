@@ -12,20 +12,27 @@ import FirebaseAuth
 class FetchViewController: UIViewController {
     
     var tripTabBarController: UITabBarController = {
-//        let tripTabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
-        let tripTabBarController = UITabBarController()
+        let tripTabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
         let myTripListVC = TripListVC(nibName: "TripListVC", bundle: nil)
+        let myTripsNavigationController = UINavigationController(rootViewController: myTripListVC)
         let sharedTripListVC = TripListVC(nibName: "TripListVC", bundle: nil)
-        let myTripsItem = UITabBarItem(title: "My Trips", image: UIImage(named: "TripsTabBarIcon"), selectedImage: UIImage(named: "TripsTabBarIcon"))
-        let sharedTripsItem = UITabBarItem(title: "Shared", image: UIImage(named: "TripsTabBarIcon"), selectedImage: UIImage(named: "TripsTabBarIcon"))
-        tripTabBarController.tabBar.setItems([myTripsItem, sharedTripsItem], animated: true)
-        tripTabBarController.viewControllers = [myTripListVC, sharedTripListVC]
+        let profileVC = UIStoryboard.profile.instantiateViewController(withIdentifier: "ProfileNavController")
+        sharedTripListVC.isSharedTripsView = true
+        let mySharedTripsNavigationController = UINavigationController(rootViewController: sharedTripListVC)
+        //        tripTabBarController.tabBar.setItems([myTripsItem, sharedTripsItem], animated: true)
+        tripTabBarController.setViewControllers([myTripsNavigationController, mySharedTripsNavigationController, profileVC], animated: true)
+        tripTabBarController.tabBar.items!.first!.title = "My Trips"
+        tripTabBarController.tabBar.items!.first!.image = UIImage(named: "MyTrips")
+        tripTabBarController.tabBar.items![1].title = "Shared"
+        tripTabBarController.tabBar.items![1].image = UIImage(named: "Shared")
+        tripTabBarController.tabBar.items![2].title = "Profile"
+        tripTabBarController.tabBar.items![2].image = UIImage(named: "User")
         return tripTabBarController
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         UserDefaults.standard.setValue(false, forKey: "userSkippedSignUp")
         
         if UserDefaults.standard.value(forKey: "userSkippedSignUp") == nil {

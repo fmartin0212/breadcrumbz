@@ -47,4 +47,8 @@ extension SharedTripDataSourceAndDelegate: UITableViewDelegate {
         sharedTripDetailVC.sharedTrip = sharedTrip
         viewController.navigationController?.pushViewController(sharedTripDetailVC, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 344
+    }
 }

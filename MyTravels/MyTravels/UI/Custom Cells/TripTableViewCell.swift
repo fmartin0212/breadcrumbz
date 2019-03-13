@@ -42,7 +42,7 @@ extension TripTableViewCell {
     
     func updateViews(trip: Trip? = nil, sharedTrip: SharedTrip? = nil) {
         
-        tripImageView.layer.cornerRadius = 4
+        tripImageView.layer.cornerRadius = 12
         tripImageView.clipsToBounds = true
         var tripPhoto = UIImage()
         

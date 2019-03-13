@@ -18,39 +18,41 @@ class TripListVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     var profileButton: UIButton?
-    //    var fromSignUpVC = false
-    //        didSet {
-    //            let loadingView = enableLoadingState()
-    //            fetchUserInfo { (success) in
-    //                NotificationCenter.default.post(name: Constants.profilePictureUpdatedNotif, object: nil)
-    //                self.disableLoadingState(loadingView)
-    //            }
-    //        }
-    
     var isSharedTripsView: Bool = false
     lazy var tripDataSourceAndDelegate = TripDataSourceAndDelegate(self)
     lazy var sharedTripDataSourceAndDelegate = SharedTripDataSourceAndDelegate(self)
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        loadViewIfNeeded()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         let nib = UINib(nibName: "TripCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TripCell")
         
         // Set tableview properties
         tableView.separatorStyle = .none
-
-        TripController.shared.frc.delegate = self
+        
         
         // Set navigation bar properties
         TripController.shared.fetchAllTrips()
         
         if isSharedTripsView {
+            self.title = "Shared"
             tableView.dataSource = sharedTripDataSourceAndDelegate
             tableView.delegate = sharedTripDataSourceAndDelegate
         } else {
+            self.title = "My Trips"
+            self.navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(presentAddTripVC))
             tableView.dataSource = tripDataSourceAndDelegate
             tableView.delegate = tripDataSourceAndDelegate
+            TripController.shared.frc.delegate = self
         }
         
         for trip in TripController.shared.trips {
@@ -61,52 +63,14 @@ class TripListVC: UIViewController {
         if TripController.shared.trips.count == 0 {
             //            self.presentNoTripsView()
         }
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-//        let nib = UINib(nibName: "TripCell", bundle: nil)
-//        tableView.register(nib, forCellReuseIdentifier: "TripCell")
-//
-//        // Set tableview properties
-//        tableView.separatorStyle = .none
-//
-//        // Set delegates
-//        //        tableView.dataSource = self
-//        //        tableView.delegate = self
-//        TripController.shared.frc.delegate = self
-//
-//        // Set navigation bar properties
-//        TripController.shared.fetchAllTrips()
-//
-//        if isSharedTripsView {
-//            tableView.dataSource = sharedTripDataSourceAndDelegate
-//            tableView.delegate = sharedTripDataSourceAndDelegate
-//        } else {
-//            tableView.dataSource = tripDataSourceAndDelegate
-//            tableView.delegate = tripDataSourceAndDelegate
-//        }
-//
-//        for trip in TripController.shared.trips {
-//            trip.uid = nil
-//            CoreDataManager.save()
-//        }
-//
-//        if TripController.shared.trips.count == 0 {
-////            self.presentNoTripsView()
-//        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        navigationController?.navigationBar.prefersLargeTitles = true
         refreshTableView()
-    }
+        }
     //
     //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     //        view.endEditing(true)
@@ -169,6 +133,11 @@ extension TripListVC {
                
             }
         }
+    }
+    
+    @objc private func presentAddTripVC() {
+        let addTripVC = AddTripViewController(nibName: "AddTrip", bundle: nil)
+        self.present(addTripVC, animated: true, completion: nil)
     }
 }
 
