@@ -39,6 +39,7 @@ class TripDetailVC: UIViewController {
             }
         }
     }
+    
     var sharedCrumbs: [SharedPlace] = [] {
         didSet {
             updateViews()
@@ -95,6 +96,7 @@ class TripDetailVC: UIViewController {
     @IBAction func actionButtonTapped(_ sender: Any) {
         presentShareAlertController()
     }
+    
     @IBAction func addCrumbButtonTapped(_ sender: Any) {
         let createCrumbVC = AddCrumbViewController(nibName: "AddCrumb", bundle: nil)
         createCrumbVC.trip = trip
@@ -125,6 +127,7 @@ extension TripDetailVC: UITableViewDelegate {
         let crumb = crumbs[indexPath.row]
         let crumbDetailVC = UIStoryboard.main.instantiateViewController(withIdentifier: "crumbDetailVC") as! PlaceDetailTableViewController
         crumbDetailVC.crumb = crumb
+        
         self.navigationController?.pushViewController(crumbDetailVC, animated: true)
     }
     

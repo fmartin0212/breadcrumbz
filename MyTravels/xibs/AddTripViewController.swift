@@ -16,22 +16,23 @@ final class AddTripViewController: UIViewController, ScrollableViewController {
     @IBOutlet weak var saveBottomContraint: NSLayoutConstraint!
     @IBOutlet weak var nameLocOuterStackView: UIStackView!
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var addPhotoButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var photoImageView: UIImageView!
-    @IBOutlet weak var photoBackdropView: UIView!
-    @IBOutlet weak var photoIcon: UIImageView!
     @IBOutlet weak var addPhotoButton: UIButton!
-    @IBOutlet weak var largeLineView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
-    @IBOutlet weak var startDateTextField: UITextField!
-    @IBOutlet weak var startDateLineView: UIView!
-    @IBOutlet weak var endDateTextField: UITextField!
-    @IBOutlet weak var endDateLineView: UIView!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var saveButton: UIButton!
+    
+    @IBOutlet weak var startDateView: UIView!
+    @IBOutlet weak var startDayLabel: UILabel!
+    @IBOutlet weak var startMonthTextField: UITextField!
+    @IBOutlet weak var startDayOfWeekLabel: UILabel!
+    
+    @IBOutlet weak var endDateView: UIView!
+    @IBOutlet weak var endDayLabel: UILabel!
+    @IBOutlet weak var endMonthTextField: UITextField!
+    @IBOutlet weak var endDayOfWeekLabel: UILabel!
     
     // MARK: - Constants & Variables
     
@@ -51,9 +52,12 @@ final class AddTripViewController: UIViewController, ScrollableViewController {
         super.viewDidLoad()
         nameTextField.delegate = self
         locationTextField.delegate = self
-        startDateTextField.delegate = self
-        endDateTextField.delegate = self
         descriptionTextView.delegate = self
+        
+        startDatePicker.addTarget(self, action: #selector(setDate(sender:)), for: .valueChanged)
+        startDatePicker.tag = 8
+        endDatePicker.addTarget(self, action: #selector(setDate(sender:)), for: .valueChanged)
+        endDatePicker.tag = 9
         
         NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillShow, object: nil, queue: .main) { (notification) in
             guard let userInfo = notification.userInfo else { return }
@@ -107,59 +111,49 @@ extension AddTripViewController {
     /// Sets up the views for the AddTripViewController.
     func setupViews() {
         
-        // Line views
-        largeLineView.formatLine()
-        startDateLineView.formatLine()
-        endDateLineView.formatLine()
-        
-        // Text Fields
-        startDateTextField.layer.borderWidth = 0
-        startDateTextField.layer.shadowOpacity = 0
-        endDateTextField.layer.borderWidth = 0
-        endDateTextField.layer.shadowOpacity = 0
-        
-        // Photo backdrop
-        photoBackdropView.layer.cornerRadius = photoBackdropView.frame.width / 2
-        photoBackdropView.layer.shadowColor = #colorLiteral(red: 1, green: 0.4002141953, blue: 0.372333765, alpha: 1)
-        photoBackdropView.layer.shadowRadius = 10
-        photoBackdropView.layer.shadowOpacity = 1.0
-        photoBackdropView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        
         // Buttons
-        addPhotoButton.addBorder(with: #colorLiteral(red: 1, green: 0.4002141953, blue: 0.372333765, alpha: 1), andWidth: 4)
         saveButton.layer.cornerRadius = 12
+        
+        addPhotoButton.clipsToBounds = true
+        addPhotoButton.layer.cornerRadius = 4
         
         // Text View
         descriptionTextView.format()
         
-        // Photo image view
-        photoImageView.layer.cornerRadius = 6
-        photoImageView.clipsToBounds = true
+        // Views
+        startDateView.layer.cornerRadius = 6
+        startDateView.layer.borderColor = UIColor.gray.cgColor
+        startDateView.layer.borderWidth = 0.3
+        endDateView.layer.cornerRadius = 6
+        endDateView.layer.borderColor = UIColor.gray.cgColor
+        endDateView.layer.borderWidth = 0.3
         
-        // Date Pickers
-        startDateTextField.inputView = startDatePicker
+        // Text Fields
+        startMonthTextField.inputView = startDatePicker
+        startMonthTextField.borderStyle = .none
+        startMonthTextField.tintColor = UIColor.clear
+        endMonthTextField.inputView = endDatePicker
+        endMonthTextField.borderStyle = .none
+        endMonthTextField.tintColor = UIColor.clear
+        
+        // Date Picker
         startDatePicker.datePickerMode = .date
-        startDatePicker.tag = 1
-        startDatePicker.addTarget(self, action: #selector(setDate(sender:)), for: .valueChanged)
-        
-        endDateTextField.inputView = endDatePicker
         endDatePicker.datePickerMode = .date
-        endDatePicker.tag = 2
-        endDatePicker.addTarget(self, action: #selector(setDate(sender:)), for: .valueChanged)
+        
+        
         
     }
     
     @objc func setDate(sender: UIDatePicker) {
         switch sender.tag {
-        case 1:
-            startDate = sender.date
-            startDateTextField.text = startDate?.shortWithFullYear()
-        case 2:
-            endDate = sender.date
-            endDateTextField.text = endDate?.shortWithFullYear()
+//        case 8:
+//            
+//        case 9:
+            
         default:
-            print("Someting went wrong")
+            return
         }
+       
     }
     
     @objc func dismissKeyboard() {
@@ -175,11 +169,11 @@ extension AddTripViewController {
         
         let newTrip = TripController.shared.createTripWith(name: name, location: location, tripDescription: descriptionTextView.text, startDate: startDate, endDate: endDate)
         
-        if let photo = photoImageView.image,
-            let compressedImage = UIImageJPEGRepresentation(photo, 0.1) {
-            
-            PhotoController.shared.add(photo: compressedImage, trip: newTrip)
-        }
+//        if let photo = addPhotoButton.image,
+//            let compressedImage = UIImageJPEGRepresentation(photo, 0.1) {
+//
+//            PhotoController.shared.add(photo: compressedImage, trip: newTrip)
+//        }
         dismiss(animated: true, completion: nil)
     }
 }
@@ -188,13 +182,8 @@ extension AddTripViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         guard let editedPhoto = info[UIImagePickerControllerEditedImage] as? UIImage else { return }
-        photoImageView.image = editedPhoto
-        photoImageView.isHidden = false
-        
-        photoIcon.isHidden = true
-        addPhotoButtonTopConstraint.constant = 10
-        contentView.layoutIfNeeded()
-        addPhotoButton.setTitle("Change Photo", for: .normal)
+        addPhotoButton.setBackgroundImage(editedPhoto, for: .normal)
+        addPhotoButton.imageView?.contentMode = .scaleAspectFit
         
         picker.dismiss(animated: true, completion: nil)
     }

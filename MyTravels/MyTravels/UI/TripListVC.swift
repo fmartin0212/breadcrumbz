@@ -30,6 +30,8 @@ class TripListVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    lazy var addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(presentAddTripVC))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,7 +51,7 @@ class TripListVC: UIViewController {
             tableView.delegate = sharedTripDataSourceAndDelegate
         } else {
             self.title = "My Trips"
-            self.navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(presentAddTripVC))
+            self.navigationItem.rightBarButtonItem = addButton
             tableView.dataSource = tripDataSourceAndDelegate
             tableView.delegate = tripDataSourceAndDelegate
             TripController.shared.frc.delegate = self
