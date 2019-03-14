@@ -24,6 +24,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddCrumbViewController" customModule="MyTravels" customModuleProvider="target">
             <connections>
                 <outlet property="addPhotoButton" destination="PpY-fH-cFO" id="7Wb-zl-H93"/>
+                <outlet property="addPhotoButtonTopConstraint" destination="Qpi-Md-npY" id="rFz-bK-kVu"/>
                 <outlet property="addressTextField" destination="tOo-Dz-lcJ" id="Cpv-Ip-829"/>
                 <outlet property="commentsTextView" destination="Sba-jD-Trz" id="cB4-K4-R8Z"/>
                 <outlet property="contentView" destination="8En-ic-zfp" id="BC5-pc-VqR"/>
@@ -32,7 +33,7 @@
                 <outlet property="photoBackdropView" destination="wwv-GP-18q" id="Jbl-3S-5mp"/>
                 <outlet property="photoImage" destination="qjq-N5-d4N" id="kzT-VF-fe3"/>
                 <outlet property="saveButton" destination="rAz-VI-UDY" id="6P5-hb-Gpz"/>
-                <outlet property="saveButtonBottomConstraint" destination="tC1-PL-BC9" id="9a2-dy-HZZ"/>
+                <outlet property="saveButtonBottomConstraint" destination="Qpi-Md-npY" id="Mqs-iy-R5Y"/>
                 <outlet property="scrollView" destination="yqx-F9-zDm" id="8xm-d0-Gg3"/>
                 <outlet property="typeTextField" destination="g3N-P6-zoO" id="20K-3z-bbf"/>
                 <outlet property="view" destination="iN0-l3-epB" id="D60-sM-UdJ"/>

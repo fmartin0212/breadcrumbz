@@ -104,9 +104,9 @@ final class PhotoController {
             if success {
                 
                 // Save the trip's places' photos.
-                self.savePlacePhotos(for: trip, completion: { (success) in
+//                self.savePlacePhotos(for: trip, completion: { (success) in
                     completion(true)
-                })
+//                })
             }
         }
     }
@@ -187,4 +187,35 @@ final class PhotoController {
         }
         completion(true)
     }
+    
+    func savePhotos(for place: Place,
+                   completion: @escaping (Bool) -> Void) {
+        guard let photos = place.photos?.allObjects as? [Photo] else { completion(false) ; return }
+        
+        let dispatchGroup = DispatchGroup()
+        var photoDict: [String : Any] = [:]
+        var int = 0
+        for photo in photos {
+            int += 1
+            dispatchGroup.enter()
+            FirebaseManager.save(photo) { (metadata, _) in
+                if let metadata = metadata {
+                    let downloadURL = metadata.downloadURL()?.absoluteString
+                    photoDict[String(int)] = downloadURL!
+                }
+                dispatchGroup.leave()
+            }
+        }
+        dispatchGroup.notify(queue: .main) {
+            let child = "photoURLs"
+            FirebaseManager.update(place, atChildren: [child], withValues: photoDict, completion: { (errorMessage) in
+                if let _ = errorMessage {
+                    completion(false)
+                } else {
+                    completion(true)
+                }
+            })
+        }
+    }
 }
+

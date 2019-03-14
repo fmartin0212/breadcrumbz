@@ -16,20 +16,24 @@ class TripsListViewController: UIViewController {
     @IBOutlet var noTripsView: UIView!
     @IBOutlet var addTripBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
+
     @IBOutlet weak var addATripButton: UIButton!
     
     // MARK: - Constants & Variables
     
     var profileButton: UIButton?
-    var fromSignUpVC = false {
-        didSet {
-            let loadingView = enableLoadingState()
-            fetchUserInfo { (success) in
-                NotificationCenter.default.post(name: Constants.profilePictureUpdatedNotif, object: nil)
-                self.disableLoadingState(loadingView)
-            }
-        }
-    }
+//    var fromSignUpVC = false
+//        didSet {
+//            let loadingView = enableLoadingState()
+//            fetchUserInfo { (success) in
+//                NotificationCenter.default.post(name: Constants.profilePictureUpdatedNotif, object: nil)
+//                self.disableLoadingState(loadingView)
+//            }
+//        }
+    
+    var isSharedTripsView: Bool = false
+    lazy var tripDataSourceAndDelegate = TripDataSourceAndDelegate(self)
+    lazy var sharedTripDataSourceAndDelegate = SharedTripDataSourceAndDelegate(self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,39 +45,40 @@ class TripsListViewController: UIViewController {
         tableView.separatorStyle = .none
         
         // Set delegates
-        tableView.dataSource = self
-        tableView.delegate = self
+//        tableView.dataSource = self
+//        tableView.delegate = self
         TripController.shared.frc.delegate = self
         
         // Set navigation bar properties
         addTripBarButtonItem.format()
         TripController.shared.fetchAllTrips()
-//
-//        for trip in TripController.shared.trips {
-//            trip.uid = nil
-//            CoreDataManager.save()
-//        }
         
+        if isSharedTripsView {
+            tableView.dataSource = sharedTripDataSourceAndDelegate
+            tableView.delegate = sharedTripDataSourceAndDelegate
+        } else {
+            tableView.dataSource = tripDataSourceAndDelegate
+            tableView.delegate = tripDataSourceAndDelegate
+        }
+
+        for trip in TripController.shared.trips {
+            trip.uid = nil
+            CoreDataManager.save()
+        }
+    
         if TripController.shared.trips.count == 0 {
             self.presentNoTripsView()
         }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(loadUserInfo), name: Constants.userLoggedInNotif, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        TripController.shared.fetchAllTrips()
-        if TripController.shared.trips.count > 0 {
-                noTripsView.removeFromSuperview()
-                self.navigationItem.rightBarButtonItem = addTripBarButtonItem
-        }
+        refreshTableView()
     }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
+//
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        view.endEditing(true)
+//    }
     
     @IBAction func addATripButtonTapped(_ sender: Any) {
         let addTripVC = AddTripViewController(nibName: "AddTrip", bundle: nil)
@@ -103,7 +108,6 @@ extension TripsListViewController {
         self.navigationItem.rightBarButtonItem = nil
         addATripButton.clipsToBounds = true
         addATripButton.layer.cornerRadius = 25
-    
     }
     
     private func fetchUserInfo(completion: @escaping (Bool) -> Void) {
@@ -123,64 +127,16 @@ extension TripsListViewController {
         }
     }
     
-    @objc func loadUserInfo() {
-        let loadingView = enableLoadingState()
-        fetchUserInfo { (success) in
-            NotificationCenter.default.post(name: Constants.profilePictureUpdatedNotif, object: nil)
-            self.disableLoadingState(loadingView)
+    func refreshTableView() {
+        if isSharedTripsView {
+            
+        } else {
+            TripController.shared.fetchAllTrips()
+            if TripController.shared.trips.count > 0 {
+                noTripsView.removeFromSuperview()
+                self.navigationItem.rightBarButtonItem = addTripBarButtonItem
+            }
         }
-    }
-}
-
-extension TripsListViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let trips = TripController.shared.frc.fetchedObjects else { return 0 }
-        return trips.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TripCell", for: indexPath) as! TripTableViewCell
-        
-        // Cell and cell element formatting
-        cell.selectionStyle = .none
-        cell.crumbBackgroundView.layer.cornerRadius = cell.crumbBackgroundView.frame.width / 2
-        cell.viewLineSeparator.formatLine()
-        
-        guard let trips = TripController.shared.frc.fetchedObjects else { return UITableViewCell() }
-        let trip = trips[indexPath.row]
-        cell.trip = trip
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            guard let trips = TripController.shared.frc.fetchedObjects else { return }
-            let trip = trips[indexPath.row]
-            TripController.shared.delete(trip: trip)
-        }
-    }
-}
-
-extension TripsListViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let trip = TripController.shared.trips[indexPath.row]
-        
-//        let tripDetailVC: TripDetailVC = UIViewController(nibName: <#T##String?#>, bundle: <#T##Bundle?#>)
-        let tripDetailVC = TripDetailVC(nibName: "TripDetail", bundle: nil)
-        
-//        guard let tripDetailVC = UIStoryboard.main.instantiateViewController(withIdentifier: "tripDetailVC") as? TripDetailViewController else { return }
-        
-        tripDetailVC.trip = trip
-        
-        navigationController?.pushViewController(tripDetailVC, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 344
     }
 }
 

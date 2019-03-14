@@ -21,10 +21,7 @@ class PlaceController {
     }()
     
     static var shared = PlaceController()
-//    
-//    init() {
-//        
-//    }
+
 }
 
 extension PlaceController {
@@ -113,6 +110,53 @@ extension PlaceController {
         }
         
         return placesDict
+    }
+    
+    func uploadPlaces(for trip: Trip,
+                      completion: @escaping ([String : Bool]) -> Void) {
+        
+        guard let places = trip.places?.allObjects as? [Place],
+            places.count > 0
+            else { completion([:]) ; return }
+        let dispatchGroup = DispatchGroup()
+        var uuidDictionary: [String : Bool] = [:]
+        for place in places {
+            dispatchGroup.enter()
+            upload(place, completion: { (uuid) in
+                if let uuid = uuid {
+                    place.uuid = uuid
+                    place.uid = uuid
+                    CoreDataManager.save()
+                    uuidDictionary[uuid] = true
+                }
+                dispatchGroup.leave()
+            })
+        }
+        dispatchGroup.notify(queue: .main) {
+            let secondDispatchGroup = DispatchGroup()
+            for place in places {
+                secondDispatchGroup.enter()
+                PhotoController.shared.savePhotos(for: place, completion: { (success) in
+                    secondDispatchGroup.leave()
+                })
+            }
+            secondDispatchGroup.notify(queue: .main, execute: {
+                completion(uuidDictionary)
+            })
+        }
+    }
+    
+    
+    func upload(_ place: Place,
+                completion: @escaping (String?) -> Void)  {
+        FirebaseManager.save(place) { (errorMessage, uuid) in
+            if let _ = errorMessage {
+                completion(nil)
+                return
+            } else {
+                completion(uuid)
+            }
+        }
     }
 }
 

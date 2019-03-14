@@ -74,16 +74,16 @@ class SharedTripDetailViewController: UIViewController {
         
         for place in places {
             
-            if place.type == "Lodging" {
-                lodgingArray.append(place)
-                
-            } else if place.type == "Restaurant" {
-                restaurantsArray.append(place)
-                
-            } else if place.type == "Activity" {
-                activitiesArray.append(place)
-            }
-            
+//            if place.type == "Lodging" {
+//                lodgingArray.append(place)
+//
+//            } else if place.type == "Restaurant" {
+//                restaurantsArray.append(place)
+//
+//            } else if place.type == "Activity" {
+//                activitiesArray.append(place)
+//            }
+//
         }
         
         if lodgingArray.count > 0 {
@@ -144,18 +144,18 @@ extension SharedTripDetailViewController: UITableViewDelegate, UITableViewDataSo
                 let firstItemInArray = sharedPlacesArray[section - 1].first
                 else { return UIView() }
             
-            if firstItemInArray.type == "Lodging" {
-                let text = "  Lodging"
-                return sectionHeaderLabelWith(text: text)
-                
-            } else if firstItemInArray.type == "Restaurant" {
-                let text = "  Restaurants"
-                return sectionHeaderLabelWith(text: text)
-                
-            } else if firstItemInArray.type == "Activity" {
-                let text = "  Activities"
-                return sectionHeaderLabelWith(text: text)
-            }
+//            if firstItemInArray.type == "Lodging" {
+//                let text = "  Lodging"
+//                return sectionHeaderLabelWith(text: text)
+//
+//            } else if firstItemInArray.type == "Restaurant" {
+//                let text = "  Restaurants"
+//                return sectionHeaderLabelWith(text: text)
+//
+//            } else if firstItemInArray.type == "Activity" {
+//                let text = "  Activities"
+//                return sectionHeaderLabelWith(text: text)
+//            }
             return UIView()
         }
         return UIView()

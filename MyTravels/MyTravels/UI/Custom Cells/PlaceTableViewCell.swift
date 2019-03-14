@@ -116,16 +116,16 @@ class PlaceTableViewCell: UITableViewCell {
 
         } else {
             var placeholderImage = UIImage()
-            if sharedPlace.type == "Lodging" {
-                guard let lodgingPlaceholderImage = UIImage(named: "Lodging") else { return }
-                placeholderImage = lodgingPlaceholderImage
-            } else if sharedPlace.type == "Restaurant" {
-                guard let restaurantPlaceholderImage = UIImage(named: "Restaurant") else { return }
-                placeholderImage = restaurantPlaceholderImage
-            } else if sharedPlace.type == "Activity" {
-                guard let activityPlaceholderImage = UIImage(named: "Activity") else { return }
-                placeholderImage = activityPlaceholderImage
-            }
+//            if sharedPlace.type == "Lodging" {
+//                guard let lodgingPlaceholderImage = UIImage(named: "Lodging") else { return }
+//                placeholderImage = lodgingPlaceholderImage
+//            } else if sharedPlace.type == "Restaurant" {
+//                guard let restaurantPlaceholderImage = UIImage(named: "Restaurant") else { return }
+//                placeholderImage = restaurantPlaceholderImage
+//            } else if sharedPlace.type == "Activity" {
+//                guard let activityPlaceholderImage = UIImage(named: "Activity") else { return }
+//                placeholderImage = activityPlaceholderImage
+//            }
             
             placeImageView.image = placeholderImage
             placeNameLabel.text = sharedPlace.name

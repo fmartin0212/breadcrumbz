@@ -155,14 +155,23 @@ class TripController {
                     // Save the trip's photos to Firebase storage.
                     PhotoController.shared.savePhotos(for: trip, completion: { (success) in
                         if success {
-                            completion(true)
+                            PlaceController.shared.uploadPlaces(for: trip, completion: { (placeIDs) in
+                                let child = "placeIDs"
+                                FirebaseManager.update(trip, atChildren: [child], withValues: placeIDs, completion: { (errorMessage) in
+                                    if let _ = errorMessage {
+                                        completion(false)
+                                    } else {
+                                        completion(true)
+                                    }
+                                })
+                            })
+                            
                         }
                     })
                 })
             }
         }
     }
-    
     
     /**
      Adds a shared trip ID to the receiver in the Firebase database.
@@ -178,7 +187,7 @@ class TripController {
             guard let user = user else { completion(false) ; return }
             let participantTripIDDictionary: [String : Bool] = [tripID : true]
             FirebaseManager.update(user, atChildren: ["participantTripIDs"], withValues: participantTripIDDictionary, completion: { (errorMessage) in
-                if let errorMessage = errorMessage {
+                if let _ = errorMessage {
                     completion(false)
                     return
                 }

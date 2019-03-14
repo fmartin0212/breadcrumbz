@@ -11,8 +11,7 @@ import Foundation
 import CoreData
 
 @objc(Trip)
-public class Trip: NSManagedObject, FirebaseDBSavable {
-
+public class Trip: NSManagedObject, FirebaseDBSavable, TripObject {
     // Firebase Savable
     var uuid: String?
     static var referenceName: String = Constants.trip
@@ -25,19 +24,19 @@ public class Trip: NSManagedObject, FirebaseDBSavable {
             "endDate" : self.endDate.timeIntervalSince1970,
             "creatorName" : InternalUserController.shared.loggedInUser!.firstName,
             "creatorUsername" : InternalUserController.shared.loggedInUser!.username,
-            "creatorID" : InternalUserController.shared.loggedInUser!.uuid ?? "",
-            "places" : self.placesDictionary
+            "creatorID" : InternalUserController.shared.loggedInUser!.uuid ?? ""
+//            "places" : self.placesDictionary
         ]
     }
     
-    var placesDictionary: [String : [String : Any]] {
-        var dictionary = [String : [String : Any]]()
-        guard let places = self.places?.allObjects as? [Place] else { return dictionary }
-        places.forEach {
-            dictionary[$0.name] = $0.dictionary
-        }
-        return dictionary
-    }
+//    var placesDictionary: [String : [String : Any]] {
+//        var dictionary = [String : [String : Any]]()
+//        guard let places = self.places?.allObjects as? [Place] else { return dictionary }
+//        places.forEach {
+//            dictionary[$0.name] = $0.dictionary
+//        }
+//        return dictionary
+//    }
     
     convenience init(name: String, location: String, tripDescription: String?, startDate: Date, endDate: Date, context: NSManagedObjectContext = CoreDataStack.context) {
         

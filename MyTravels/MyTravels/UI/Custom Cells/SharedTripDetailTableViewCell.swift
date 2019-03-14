@@ -32,7 +32,7 @@ class SharedTripDetailTableViewCell: UITableViewCell {
         tripLocationLabel.text = sharedTrip.location
         tripStartDateLabel.text = "\(shortDateString(date: sharedTrip.startDate as Date)) -"
         tripEndDateLabel.text = "\(shortDateString(date: sharedTrip.endDate as Date))"
-        tripDescriptionLabel.text = sharedTrip.description
+        tripDescriptionLabel.text = sharedTrip.tripDescription
         
     }
     

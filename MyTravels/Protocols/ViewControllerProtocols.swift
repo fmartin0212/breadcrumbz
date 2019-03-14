@@ -27,35 +27,15 @@ extension ScrollableViewController {
             let trueFrame = selectedTextField.convert(selectedTextField.bounds, to: self.contentView)
             let offsetPoint = CGPoint(x: 0, y: (trueFrame.origin.y - selectedTextField.frame.height))
             self.scrollView.setContentOffset(offsetPoint, animated: true)
+            return
         }
         
         if let selectedTextView = self.selectedTextView {
             let trueFrame = selectedTextView.convert(selectedTextView.bounds, to: self.contentView)
             let offsetPoint = CGPoint(x: 0, y: trueFrame.origin.y - (selectedTextView.frame.height / 3))
             self.scrollView.setContentOffset(offsetPoint, animated: true)
+            return
         }
     }
 }
 
-//protocol KeyboardFormatted where Self: UIView {
-//    func addKeyboardDone()
-//}
-
-//extension KeyboardFormatted {
-//    func addkeyboardDone() {
-//
-//        let toolbar = UIToolbar()
-//        toolbar.sizeToFit()
-//
-//        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
-//
-//        toolbar.setItems([flexibleSpace, doneButton], animated: false)
-//
-//        self.inputAccessoryView = toolbar
-//    }
-//}
-//
-//extension UIView: KeyboardFormatted {
-//
-//}

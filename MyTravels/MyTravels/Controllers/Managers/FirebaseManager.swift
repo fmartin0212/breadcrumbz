@@ -130,7 +130,10 @@ final class FirebaseManager {
         }
     }
     
-    static func save(_ object: Any, to databaseReference: DatabaseReference, atChildren children: [String]? = nil, completion: @escaping (Error?) -> Void) {
+    static func save(_ object: Any,
+                     to databaseReference: DatabaseReference,
+                     atChildren children: [String]? = nil,
+                     completion: @escaping (Error?) -> Void) {
         
         databaseReference.setValue(object) { (error, _) in
             if let error = error {
@@ -142,13 +145,15 @@ final class FirebaseManager {
         }
     }
     
-    static func removeObject(ref: DatabaseReference, completion: @escaping (Error?) -> Void) {
+    static func removeObject(ref: DatabaseReference,
+                             completion: @escaping (Error?) -> Void) {
         ref.removeValue { (error, _) in
             completion(error)
         }
     }
     
-    static func fetchObject(from ref: DatabaseReference, completion: @escaping (DataSnapshot) -> Void) {
+    static func fetchObject(from ref: DatabaseReference,
+                            completion: @escaping (DataSnapshot) -> Void) {
         ref.observeSingleEvent(of: .value) { (snapshot) in
             completion(snapshot)
         }
@@ -189,7 +194,10 @@ final class FirebaseManager {
         }
     }
     
-    static func login(withEmail email: String, and password: String, completion: @escaping (User?, String?) -> Void) {
+    static func login(withEmail email: String,
+                      and password: String,
+                      completion: @escaping (User?, String?) -> Void) {
+        
         Auth.auth().signIn(withEmail: email, password: password) { (firebaseUser, error) in
             if let error = error {
                 if let errorCode = AuthErrorCode(rawValue: error._code) {
@@ -234,7 +242,9 @@ final class FirebaseManager {
         }
     }
     
-    static func save<T: FirebaseStorageSavable>(_ object: T, completion: @escaping (StorageMetadata?, String?) -> Void) {
+    static func save<T: FirebaseStorageSavable>(_ object: T,
+                                                completion: @escaping (StorageMetadata?, String?) -> Void) {
+        
         let storageRef = Storage.storage().reference().child(object.uid)
         storageRef.putData(object.data, metadata: nil) { (metadata, error) in
             if let _ = error {
@@ -249,7 +259,9 @@ final class FirebaseManager {
         }
     }
     
-    static func fetchImage(storeRef: StorageReference, completion: @escaping (UIImage?) -> Void) {
+    static func fetchImage(storeRef: StorageReference,
+                           completion: @escaping (UIImage?) -> Void) {
+        
         storeRef.getData(maxSize: 9999999) { (data, error) in
             if let error = error {
                 print("There was an error getting the image: \(error.localizedDescription)")

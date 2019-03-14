@@ -28,13 +28,15 @@ class AddCrumbViewController: UIViewController, ScrollableViewController {
     @IBOutlet weak var commentsTextView: UITextView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var saveButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var addPhotoButtonTopConstraint: NSLayoutConstraint!
     
-    var trip: Trip?
+    var trip: TripObject?
     var photoData: Data?
     let imagePickerController = UIImagePickerController()
     let pickerView = UIPickerView()
     var type: String?
     var fromSearchVC = false
+    var photos: [Data] = []
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -48,6 +50,7 @@ class AddCrumbViewController: UIViewController, ScrollableViewController {
         super.viewDidLoad()
         formatViews()
         imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
         pickerView.dataSource = self
         pickerView.delegate = self
         nameTextField.delegate = self
@@ -80,8 +83,8 @@ class AddCrumbViewController: UIViewController, ScrollableViewController {
             let trip = trip
         else { return }
         
-        PlaceController.shared.createNewPlaceWith(name: name, type: placeType, address: address, comments: commentsTextView.text, rating: 0, trip: trip)
-        
+        let place = PlaceController.shared.createNewPlaceWith(name: name, type: placeType, address: address, comments: commentsTextView.text, rating: 0, trip: trip as! Trip)
+        PhotoController.shared.add(photos: self.photos, place: place)
         self.dismiss(animated: true, completion: nil)
         
     }
@@ -139,7 +142,14 @@ extension AddCrumbViewController: UIImagePickerControllerDelegate, UINavigationC
             else { return }
         
         self.photoData = photoData
+        self.photos = [photoData]
         self.crumbPhotoImageView.image = photo
+        crumbPhotoImageView.isHidden = false
+        
+        photoImage.isHidden = true
+//        addPhotoButtonTopConstraint.constant = 10
+        contentView.layoutIfNeeded()
+        addPhotoButton.setTitle("Change Photo", for: .normal)
         
         dismiss(animated: true, completion: nil)
     }
