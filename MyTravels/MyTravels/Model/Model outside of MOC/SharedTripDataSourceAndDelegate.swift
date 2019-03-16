@@ -39,13 +39,11 @@ extension SharedTripDataSourceAndDelegate: UITableViewDataSource {
 
 extension SharedTripDataSourceAndDelegate: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
-        
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        guard let sharedTripDetailVC = sb.instantiateViewController(withIdentifier: "sharedTripDetail") as? SharedTripDetailViewController else { return }
-        sharedTripDetailVC.sharedTrip = sharedTrip
-        viewController.navigationController?.pushViewController(sharedTripDetailVC, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {        
+        let trip = SharedTripsController.shared.sharedTrips[indexPath.row]
+        let tripDetailVC = TripDetailVC(nibName: "TripDetail", bundle: nil)
+        tripDetailVC.trip = trip
+        viewController.navigationController?.pushViewController(tripDetailVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

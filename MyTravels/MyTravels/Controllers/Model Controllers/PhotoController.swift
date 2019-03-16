@@ -48,10 +48,10 @@ final class PhotoController {
      - parameter photos: The array of photos as data to be saved.
      - parameter place: The place that the photos belong to.
      */
-    func add(photos: [Data], place: Place) {
+    func add(photos: [Int : Data], place: Place) {
         
         // Loop over the photos and initialize a Photo.
-        for photo in photos {
+        for (_, photo) in photos {
             let _ = Photo(photo: photo, place: place, trip: nil)
         }
         
@@ -64,16 +64,16 @@ final class PhotoController {
      - parameter photos: The array of photos as data to be saved.
      - parameter place: The place that the photos belong to.
      */
-    func update(photos: [Data], for place: Place) {
+    func update(photos: [Int : Data], for place: Place) {
         guard let photoArray = place.photos?.allObjects as? [Photo] else { return }
         
         // Remove all of the existing photos from the place.
         for photo in photoArray {
-            photo.managedObjectContext?.delete(photo)
+            CoreDataManager.delete(object: photo)
         }
         
         // Initialize a new photo for each photo in the photos array.
-        for photo in photos {
+        for (_, photo) in photos {
             let _ = Photo(photo: photo, place: place, trip: nil)
         }
         

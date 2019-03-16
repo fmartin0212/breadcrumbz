@@ -22,7 +22,7 @@ extension ScrollableViewController {
         bottomConstraint.constant = 100 + keyboardHeight
         self.view.layoutIfNeeded()
         
-        if let selectedTextField = self.selectedTextField {
+        if let selectedTextField = selectedTextField, selectedTextField.isEditing {
             // Convert text field's bounds to content view
             let trueFrame = selectedTextField.convert(selectedTextField.bounds, to: self.contentView)
             let offsetPoint = CGPoint(x: 0, y: (trueFrame.origin.y - selectedTextField.frame.height))

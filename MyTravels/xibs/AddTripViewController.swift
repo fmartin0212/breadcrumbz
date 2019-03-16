@@ -74,12 +74,9 @@ final class AddTripViewController: UIViewController, ScrollableViewController {
                 self.saveBottomContraint.constant += keyboardFrame!.height
                 self.view.layoutIfNeeded()
                 self.scrollView.setContentOffset(CGPoint(x: self.contentView.frame.origin.x, y: (self.selectedTextField!.superview!.frame.origin.y - (self.selectedTextField!.superview!.frame.origin.y * 1 / 7))), animated: true)
-                self.selectedTextField = nil
                 return
             }
             self.adjustScrollView(keyboardFrame: keyboardFrame!, bottomConstraint: self.saveBottomContraint)
-            self.selectedTextField = nil
-            self.selectedTextView = nil
         }
         
         NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardDidHide, object: nil, queue: .main) { (notification) in
@@ -108,16 +105,16 @@ final class AddTripViewController: UIViewController, ScrollableViewController {
         saveNewTrip()
     }
     
-    @IBAction func addPhotoButtonTapped(_ sender: Any) {
+    @IBAction func saveBarButtonItemTapped(_ sender: Any) {
+        saveNewTrip()
+    }
+    
+    @IBAction func addPhotoButton(_ sender: Any) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         imagePickerController.sourceType = .photoLibrary
         present(imagePickerController, animated: true, completion: nil)
-    }
-    
-    @IBAction func saveBarButtonItemTapped(_ sender: Any) {
-        saveNewTrip()
     }
 }
 
@@ -130,7 +127,7 @@ extension AddTripViewController {
         saveButton.layer.cornerRadius = 12
         
         addPhotoButton.clipsToBounds = true
-        addPhotoButton.layer.cornerRadius = 4
+        addPhotoButton.layer.cornerRadius = 8
         
         // Text View
         descriptionTextView.format()
@@ -193,11 +190,12 @@ extension AddTripViewController {
         
         let newTrip = TripController.shared.createTripWith(name: name, location: location, tripDescription: descriptionTextView.text, startDate: startDate, endDate: endDate)
         
-//        if let photo = addPhotoButton.image,
-//            let compressedImage = UIImageJPEGRepresentation(photo, 0.1) {
-//
-//            PhotoController.shared.add(photo: compressedImage, trip: newTrip)
-//        }
+        if let photo = addPhotoButton.currentImage,
+            let compressedImage = UIImageJPEGRepresentation(photo, 0.1) {
+            
+            PhotoController.shared.add(photo: compressedImage, trip: newTrip)
+        }
+        
         dismiss(animated: true, completion: nil)
     }
 }
@@ -206,8 +204,8 @@ extension AddTripViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         guard let editedPhoto = info[UIImagePickerControllerEditedImage] as? UIImage else { return }
-        addPhotoButton.setBackgroundImage(editedPhoto, for: .normal)
-        addPhotoButton.imageView?.contentMode = .scaleAspectFit
+        addPhotoButton.setImage(editedPhoto, for: .normal)
+        addPhotoButton.imageView?.contentMode = .scaleAspectFill
         
         picker.dismiss(animated: true, completion: nil)
     }

@@ -96,7 +96,7 @@ class CreateNewPlaceTableViewController: UITableViewController, CLLocationManage
         let place = PlaceController.shared.createNewPlaceWith(name: name, type: type, address: address, comments: comments, rating: rating, trip: trip)
         
         if self.photos.count > 0 {
-            PhotoController.shared.add(photos: self.photos, place: place)
+//            PhotoController.shared.add(photos: self.photos, place: place)
             dismiss(animated: true, completion: nil)
         }
         

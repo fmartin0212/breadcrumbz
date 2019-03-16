@@ -66,14 +66,14 @@ class TripListVC: UIViewController {
         if TripController.shared.trips.count == 0 {
             //            self.presentNoTripsView()
         }
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.navigationBar.prefersLargeTitles = true
         refreshTableView()
-        }
+    }
     //
     //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     //        view.endEditing(true)

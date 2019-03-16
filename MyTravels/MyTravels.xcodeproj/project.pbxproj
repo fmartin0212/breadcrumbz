@@ -97,6 +97,8 @@
 		B7F75C172058771900C876A0 /* SharedPlaceDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C162058771900C876A0 /* SharedPlaceDetailTableViewController.swift */; };
 		B7F75C20205A14D800C876A0 /* SharedTripDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C1F205A14D800C876A0 /* SharedTripDetailTableViewCell.swift */; };
 		B7F7CF44217685150097198C /* SharedPlaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7CF43217685150097198C /* SharedPlaceController.swift */; };
+		B7F88E2C223D4B2100BD16DC /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F88E2B223D4B2100BD16DC /* ImageCollectionViewCell.xib */; };
+		B7F88E2E223D4C0E00BD16DC /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F88E2D223D4C0E00BD16DC /* ImageCollectionViewCell.swift */; };
 		B7F92BCF20291DEE0021A8CA /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F92BCE20291DEE0021A8CA /* PhotoController.swift */; };
 		B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -196,6 +198,8 @@
 		B7F75C162058771900C876A0 /* SharedPlaceDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPlaceDetailTableViewController.swift; sourceTree = "<group>"; };
 		B7F75C1F205A14D800C876A0 /* SharedTripDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripDetailTableViewCell.swift; sourceTree = "<group>"; };
 		B7F7CF43217685150097198C /* SharedPlaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SharedPlaceController.swift; path = "MyTravels/Controllers/Model Controllers/SharedPlaceController.swift"; sourceTree = SOURCE_ROOT; };
+		B7F88E2B223D4B2100BD16DC /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		B7F88E2D223D4C0E00BD16DC /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		B7F92BCE20291DEE0021A8CA /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
 		B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		D8CD1BB41D947506D15EDEB5 /* Pods-MyTravels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTravels.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels.release.xcconfig"; sourceTree = "<group>"; };
@@ -420,6 +424,8 @@
 				B73804F42224E37B00CD9E59 /* AddCrumb.xib */,
 				B73804FA2224EA3700CD9E59 /* AddCrumbViewController.swift */,
 				B7C0B599220C75BA009FAAEB /* AddTrip.xib */,
+				B7F88E2B223D4B2100BD16DC /* ImageCollectionViewCell.xib */,
+				B7F88E2D223D4C0E00BD16DC /* ImageCollectionViewCell.swift */,
 				B7C0B59B220CB393009FAAEB /* AddTripViewController.swift */,
 				B7C83FC421C1FA3B00A9F86C /* LoadingView.swift */,
 				B7C83FC021C1F88700A9F86C /* LoadingView.xib */,
@@ -600,6 +606,7 @@
 				B7C0AA072210F9420030A5B1 /* Poppins-Light.otf in Resources */,
 				B73804F52224E37B00CD9E59 /* AddCrumb.xib in Resources */,
 				B7BA6F5521F82424004A3C70 /* TripDetailCell.xib in Resources */,
+				B7F88E2C223D4B2100BD16DC /* ImageCollectionViewCell.xib in Resources */,
 				B761071B2212378C001F79B6 /* Poppins-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -697,6 +704,7 @@
 				B7F75C092058521C00C876A0 /* ExplanationViewController.swift in Sources */,
 				B7BDA845202A29F50080B81B /* EditPlaceTableViewController.swift in Sources */,
 				B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */,
+				B7F88E2E223D4C0E00BD16DC /* ImageCollectionViewCell.swift in Sources */,
 				B7AC4088221B681600645BC2 /* TripDetailVC.swift in Sources */,
 				B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */,
 				B7C10CD12020FD5500818430 /* PlaceController.swift in Sources */,
