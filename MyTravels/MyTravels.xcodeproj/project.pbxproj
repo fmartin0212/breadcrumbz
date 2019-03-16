@@ -99,6 +99,7 @@
 		B7F7CF44217685150097198C /* SharedPlaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F7CF43217685150097198C /* SharedPlaceController.swift */; };
 		B7F88E2C223D4B2100BD16DC /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F88E2B223D4B2100BD16DC /* ImageCollectionViewCell.xib */; };
 		B7F88E2E223D4C0E00BD16DC /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F88E2D223D4C0E00BD16DC /* ImageCollectionViewCell.swift */; };
+		B7F88E30223D857C00BD16DC /* CrumbDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F88E2F223D857C00BD16DC /* CrumbDetail.xib */; };
 		B7F92BCF20291DEE0021A8CA /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F92BCE20291DEE0021A8CA /* PhotoController.swift */; };
 		B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -200,6 +201,7 @@
 		B7F7CF43217685150097198C /* SharedPlaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SharedPlaceController.swift; path = "MyTravels/Controllers/Model Controllers/SharedPlaceController.swift"; sourceTree = SOURCE_ROOT; };
 		B7F88E2B223D4B2100BD16DC /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		B7F88E2D223D4C0E00BD16DC /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		B7F88E2F223D857C00BD16DC /* CrumbDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CrumbDetail.xib; sourceTree = "<group>"; };
 		B7F92BCE20291DEE0021A8CA /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
 		B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		D8CD1BB41D947506D15EDEB5 /* Pods-MyTravels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTravels.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels.release.xcconfig"; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 				B7AC4087221B681600645BC2 /* TripDetailVC.swift */,
 				B73804F42224E37B00CD9E59 /* AddCrumb.xib */,
 				B73804FA2224EA3700CD9E59 /* AddCrumbViewController.swift */,
+				B7F88E2F223D857C00BD16DC /* CrumbDetail.xib */,
 				B7C0B599220C75BA009FAAEB /* AddTrip.xib */,
 				B7F88E2B223D4B2100BD16DC /* ImageCollectionViewCell.xib */,
 				B7F88E2D223D4C0E00BD16DC /* ImageCollectionViewCell.swift */,
@@ -601,6 +604,7 @@
 				B7C83FC121C1F88700A9F86C /* LoadingView.xib in Resources */,
 				B7F75C0220577BB200C876A0 /* Onboarding.storyboard in Resources */,
 				B7AC4086221B4DC300645BC2 /* CrumbTableViewCell.xib in Resources */,
+				B7F88E30223D857C00BD16DC /* CrumbDetail.xib in Resources */,
 				B78BC0742159587100827394 /* GoogleService-Info.plist in Resources */,
 				B7C0E3CA2234999A00438299 /* TripListVC.xib in Resources */,
 				B7C0AA072210F9420030A5B1 /* Poppins-Light.otf in Resources */,

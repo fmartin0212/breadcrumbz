@@ -20,7 +20,7 @@ class FMTextView: UITextView {
         
         // Shadow
         //        self.layer.shadowColor = UIColor.lightGray.cgColor
-        //        self.layer.shadowRadius = 1.7
+                self.layer.shadowRadius = 0
         //        self.layer.shadowOpacity = 0.2
         //        self.layer.shadowOffset = CGSize(width: 0, height: 3)
         //        self.layer.masksToBounds = false

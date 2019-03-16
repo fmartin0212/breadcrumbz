@@ -28,10 +28,27 @@ class AddCrumbViewController: UIViewController, ScrollableViewController {
     var trip: TripObject?
     var photoData: Data?
     let imagePickerController = UIImagePickerController()
-    var type: String?
+    var type: Place.types = .activity
     var fromSearchVC = false
     var photos: [Int : Data] = [:]
     var selectedCollectionViewCell: ImageCollectionViewCell?
+
+    let checkmarkView: UIView = {
+        let checkmarkView = UIView()
+        checkmarkView.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.3490196078, blue: 0.3490196078, alpha: 1)
+        checkmarkView.clipsToBounds = true
+        checkmarkView.layer.cornerRadius = 8
+        checkmarkView.translatesAutoresizingMaskIntoConstraints = false
+        let checkmarkImageView = UIImageView()
+        checkmarkImageView.image = UIImage(named: "checkmark")
+        checkmarkView.addSubview(checkmarkImageView)
+        checkmarkImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint(item: checkmarkImageView, attribute: .centerX, relatedBy: .equal, toItem: checkmarkView, attribute: .centerX, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: checkmarkImageView, attribute: .centerY, relatedBy: .equal, toItem: checkmarkView, attribute: .centerY, multiplier: 1.0, constant: 0).isActive = true
+        return checkmarkView
+    }()
+    
+    @IBOutlet var typeButtons: [UIButton]!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -85,10 +102,11 @@ class AddCrumbViewController: UIViewController, ScrollableViewController {
     @IBAction func cancelButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
-    @IBAction func addPhotoButtonTapped(_ sender: Any) {
-        self.present(imagePickerController, animated: true, completion: nil)
+
+    @IBAction func typeButton(_ sender: UIButton) {
+        setType(for: sender)
     }
+    
 }
 
 extension AddCrumbViewController {
@@ -97,9 +115,35 @@ extension AddCrumbViewController {
         
         // Buttons
         saveButton.layer.cornerRadius = 12
+        typeButtons.forEach { $0.layer.cornerRadius = 6 }
+        setType(for: typeButtons.first!)
         
         // Text View
         commentsTextView.format()
+    }
+    
+    func setType(for button: UIButton) {
+        guard let typeString = button.restorationIdentifier,
+            let type = Place.types(rawValue: typeString)
+            else { return }
+        
+        checkmarkView.removeFromSuperview()
+        
+        typeButtons.forEach { $0.layer.borderWidth = 0; $0.setTitleColor(#colorLiteral(red: 0.6077903509, green: 0.6078781486, blue: 0.607762754, alpha: 1), for: .normal) }
+        
+        self.type = type
+        
+        button.layer.borderColor = #colorLiteral(red: 0.9725490196, green: 0.3490196078, blue: 0.3490196078, alpha: 1)
+        button.layer.borderWidth = 1.5
+        button.setTitleColor(#colorLiteral(red: 0.3621281683, green: 0.3621373773, blue: 0.3621324301, alpha: 1), for: .normal)
+        
+        contentView.addSubview(checkmarkView)
+        NSLayoutConstraint.activate([
+            NSLayoutConstraint(item: checkmarkView, attribute: .centerX, relatedBy: .equal, toItem: button, attribute: .trailing, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint(item: checkmarkView, attribute: .centerY, relatedBy: .equal, toItem: button, attribute: .top, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint(item: checkmarkView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 16),
+            NSLayoutConstraint(item: checkmarkView, attribute: .width, relatedBy: .equal, toItem: checkmarkView, attribute: .height, multiplier: 1.0, constant: 0)
+            ])
     }
 }
 
@@ -118,16 +162,12 @@ extension AddCrumbViewController: UIImagePickerControllerDelegate, UINavigationC
             let indexPath = imageCollectionView.indexPath(for: cell)
             else { return }
         
-        if self.photos[indexPath.row] != nil {
-            self.photos.removeValue(forKey: indexPath.row)
-        }
         self.photos[indexPath.row] = photoData
         cell.addPhotoButton.setImage(photo, for: .normal)
         cell.addPhotoButton.imageView?.contentMode = .scaleAspectFill
         dismiss(animated: true, completion: nil)
     }
 }
-
 
 extension AddCrumbViewController: UITextFieldDelegate {
     
@@ -198,7 +238,9 @@ extension AddCrumbViewController: UICollectionViewDelegateFlowLayout {
         if indexPath.row == 0 {
             return CGSize(width: collectionView.frame.width, height: 200)
         } else {
-            return CGSize(width: (collectionView.frame.width / 3) - 8, height: 100)
+            let width = collectionView.frame.width / 3
+            let minSpacInterimSpacing: CGFloat = 8
+            return CGSize(width: width - minSpacInterimSpacing, height: width)
         }
     }
     
