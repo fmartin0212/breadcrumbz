@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TripListVC" customModule="MyTravels" customModuleProvider="target">
             <connections>
+                <outlet property="searchBar" destination="DcM-Nk-chJ" id="uyH-pu-aSh"/>
                 <outlet property="tableView" destination="wGd-dM-ITT" id="OvM-OT-vEU"/>
                 <outlet property="view" destination="iN0-l3-epB" id="ExZ-It-7vr"/>
             </connections>
@@ -28,6 +29,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                         <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                        <scopeButtonTitles>
+                            <string>Title</string>
+                            <string>Title</string>
+                        </scopeButtonTitles>
                     </searchBar>
                 </tableView>
             </subviews>

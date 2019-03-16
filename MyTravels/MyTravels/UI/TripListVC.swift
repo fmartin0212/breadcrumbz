@@ -15,6 +15,7 @@ class TripListVC: UIViewController {
     @IBOutlet weak var addATripButton: UIButton!
     
     // MARK: - Constants & Variables
+    @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet weak var tableView: UITableView!
     var profileButton: UIButton?
@@ -34,7 +35,7 @@ class TripListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        searchBar.delegate = self
         let nib = UINib(nibName: "TripCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TripCell")
         
@@ -170,3 +171,17 @@ extension TripListVC: NSFetchedResultsControllerDelegate {
     }
 }
 
+extension TripListVC: UISearchBarDelegate {
+   
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+              searchBar.setShowsCancelButton(false, animated: true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
+}

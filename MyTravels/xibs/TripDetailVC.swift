@@ -22,6 +22,8 @@ class TripDetailVC: UIViewController {
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var addCrumbButton: UIButton!
     
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    
     // MARK: - Constants & Variables
     
     var trip: TripObject? {
@@ -84,13 +86,14 @@ class TripDetailVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        crumbsTableView.reloadData()
         
         if let trip = trip as? Trip,
             let placesSet = trip.places,
             let places = placesSet.allObjects as? [Place] {
             self.crumbs = places
         }
+//        crumbsTableView.reloadData()
+//        tableViewHeightConstraint.constant = crumbsTableView.contentSize.height
     }
     
     @IBAction func actionButtonTapped(_ sender: Any) {

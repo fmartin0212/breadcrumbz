@@ -159,7 +159,7 @@
                                             <color key="textColor" red="0.60779035091400146" green="0.60787814855575562" blue="0.60776275396347046" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="04f-z8-v1A">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="04f-z8-v1A" customClass="FMTextField" customModule="MyTravels" customModuleProvider="target">
                                             <rect key="frame" x="45" y="42.5" width="75" height="31"/>
                                             <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="17"/>
@@ -213,7 +213,7 @@
                                             <color key="textColor" red="0.60779035091400146" green="0.60787814855575562" blue="0.60776275396347046" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1aS-66-tXq">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1aS-66-tXq" customClass="FMTextField" customModule="MyTravels" customModuleProvider="target">
                                             <rect key="frame" x="45" y="42.5" width="75" height="31"/>
                                             <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="17"/>
@@ -248,6 +248,9 @@
                                         <constraint firstAttribute="trailing" secondItem="Gbp-KS-0rg" secondAttribute="trailing" id="eZf-1L-ATx"/>
                                         <constraint firstItem="mIW-bS-PE0" firstAttribute="leading" secondItem="imP-Dy-bba" secondAttribute="leading" id="efa-t0-HgB"/>
                                     </constraints>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="ob8-1t-I6t" appends="YES" id="dn1-xR-13k"/>
+                                    </connections>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -323,7 +326,16 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="-434.39999999999998" y="769.11544227886066"/>
         </view>
-        <tapGestureRecognizer id="LUe-Wh-eSe"/>
+        <tapGestureRecognizer id="LUe-Wh-eSe">
+            <connections>
+                <action selector="startTapGestureRecognizer:" destination="-1" id="vhf-kt-d74"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="ob8-1t-I6t">
+            <connections>
+                <action selector="endTapGestureRecognizer:" destination="-1" id="MR8-dP-4K7"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="imageDefault" width="88" height="88"/>

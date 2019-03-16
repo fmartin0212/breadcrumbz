@@ -34,6 +34,12 @@ final class AddTripViewController: UIViewController, ScrollableViewController {
     @IBOutlet weak var endMonthTextField: UITextField!
     @IBOutlet weak var endDayOfWeekLabel: UILabel!
     
+    @IBAction func startTapGestureRecognizer(_ sender: Any) {
+        startMonthTextField.becomeFirstResponder()
+    }
+    @IBAction func endTapGestureRecognizer(_ sender: Any) {
+        endMonthTextField.becomeFirstResponder()
+    }
     // MARK: - Constants & Variables
     
     var startDatePicker = UIDatePicker()
@@ -53,15 +59,24 @@ final class AddTripViewController: UIViewController, ScrollableViewController {
         nameTextField.delegate = self
         locationTextField.delegate = self
         descriptionTextView.delegate = self
+        startMonthTextField.delegate = self
+        endMonthTextField.delegate = self
         
         startDatePicker.addTarget(self, action: #selector(setDate(sender:)), for: .valueChanged)
-        startDatePicker.tag = 8
+        startMonthTextField.tag = 8
         endDatePicker.addTarget(self, action: #selector(setDate(sender:)), for: .valueChanged)
-        endDatePicker.tag = 9
+        endMonthTextField.tag = 9
         
         NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillShow, object: nil, queue: .main) { (notification) in
             guard let userInfo = notification.userInfo else { return }
             let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect
+            if self.selectedTextField?.tag == 8 || self.selectedTextField?.tag == 9 {
+                self.saveBottomContraint.constant += keyboardFrame!.height
+                self.view.layoutIfNeeded()
+                self.scrollView.setContentOffset(CGPoint(x: self.contentView.frame.origin.x, y: (self.selectedTextField!.superview!.frame.origin.y - (self.selectedTextField!.superview!.frame.origin.y * 1 / 7))), animated: true)
+                self.selectedTextField = nil
+                return
+            }
             self.adjustScrollView(keyboardFrame: keyboardFrame!, bottomConstraint: self.saveBottomContraint)
             self.selectedTextField = nil
             self.selectedTextView = nil
@@ -132,28 +147,37 @@ extension AddTripViewController {
         startMonthTextField.inputView = startDatePicker
         startMonthTextField.borderStyle = .none
         startMonthTextField.tintColor = UIColor.clear
+        startMonthTextField.layer.borderWidth = 0
         endMonthTextField.inputView = endDatePicker
         endMonthTextField.borderStyle = .none
         endMonthTextField.tintColor = UIColor.clear
+        endMonthTextField.layer.borderWidth = 0 
         
         // Date Picker
         startDatePicker.datePickerMode = .date
         endDatePicker.datePickerMode = .date
-        
-        
-        
     }
     
     @objc func setDate(sender: UIDatePicker) {
-        switch sender.tag {
-//        case 8:
-//            
-//        case 9:
-            
+        let date = sender.date
+        let dateComponents = Calendar.current.dateComponents([.day, .month, .weekday], from: date)
+        let day = "\(dateComponents.day!)"
+        let dayOfWeek = Calendar.current.weekdaySymbols[dateComponents.weekday! - 1]
+        let month = String(Calendar.current.monthSymbols[dateComponents.month! - 1].prefix(3))
+        switch selectedTextField?.tag {
+        case 8:
+            startDayLabel.text = day
+            startDayOfWeekLabel.text = dayOfWeek
+            startMonthTextField.text = month
+            startDate = date
+        case 9:
+            endDayLabel.text = day
+            endDayOfWeekLabel.text = dayOfWeek
+            endMonthTextField.text = month
+            endDate = date
         default:
             return
         }
-       
     }
     
     @objc func dismissKeyboard() {
