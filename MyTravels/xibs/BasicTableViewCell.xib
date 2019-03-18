@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Regular.otf">
+            <string>Poppins-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="96" id="RWv-GG-laX">
+            <rect key="frame" x="0.0" y="0.0" width="415" height="96"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RWv-GG-laX" id="dYT-xw-FF7">
+                <rect key="frame" x="0.0" y="0.0" width="415" height="95.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQD-oM-s9c">
+                        <rect key="frame" x="0.0" y="37.5" width="40" height="21"/>
+                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EDG-tb-luS">
+                        <rect key="frame" x="346" y="32.5" width="51" height="31"/>
+                    </switch>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="tQD-oM-s9c" firstAttribute="leading" secondItem="dYT-xw-FF7" secondAttribute="leading" id="0DF-Qt-q0s"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="EDG-tb-luS" secondAttribute="trailing" id="8Tw-zm-GCS"/>
+                    <constraint firstItem="EDG-tb-luS" firstAttribute="centerY" secondItem="dYT-xw-FF7" secondAttribute="centerY" id="Aa3-0S-MSF"/>
+                    <constraint firstItem="tQD-oM-s9c" firstAttribute="centerY" secondItem="dYT-xw-FF7" secondAttribute="centerY" id="HIu-ub-p0w"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="-268" y="-297.75112443778113"/>
+        </tableViewCell>
+    </objects>
+</document>

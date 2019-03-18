@@ -117,7 +117,7 @@ extension TripDetailVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let crumb = crumbs[indexPath.row]
-        let crumbDetailVC = UIStoryboard.main.instantiateViewController(withIdentifier: "crumbDetailVC") as! PlaceDetailTableViewController
+        let crumbDetailVC = CrumbDetailVC(nibName: "CrumbDetail", bundle: nil)
         crumbDetailVC.crumb = crumb
         
         self.navigationController?.pushViewController(crumbDetailVC, animated: true)

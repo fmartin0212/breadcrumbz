@@ -124,7 +124,7 @@ extension AddTripViewController {
     func setupViews() {
         
         // Buttons
-        saveButton.layer.cornerRadius = 12
+//        saveButton.layer.cornerRadius = 12
         
         addPhotoButton.clipsToBounds = true
         addPhotoButton.layer.cornerRadius = 8

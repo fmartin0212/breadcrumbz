@@ -7,9 +7,6 @@
 //
 
 import UIKit
-import CloudKit
-import FirebaseStorage
-import FirebaseDatabase
 
 class ProfileViewController: UIViewController {
 
