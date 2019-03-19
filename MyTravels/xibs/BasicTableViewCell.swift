@@ -8,17 +8,23 @@
 
 import UIKit
 
+protocol BasicTableViewCellDelegate: class {
+    func switchToggled()
+}
+
 class BasicTableViewCell: UITableViewCell {
+    
+    // MARK: - Properties
+    
+    weak var delegate: BasicTableViewCellDelegate?
+    
+    // Outlets
+    @IBOutlet weak var basicLabel: UILabel!
+    @IBOutlet weak var basicSwitch: UISwitch!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    // MARK: - Actions
+    
+    @IBAction func switchToggled(_ sender: Any) {
+        delegate?.switchToggled()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

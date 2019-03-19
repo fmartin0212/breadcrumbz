@@ -16,7 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="96" id="RWv-GG-laX">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="96" id="RWv-GG-laX" customClass="BasicTableViewCell" customModule="MyTravels" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="415" height="96"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RWv-GG-laX" id="dYT-xw-FF7">
@@ -31,6 +31,10 @@
                     </label>
                     <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EDG-tb-luS">
                         <rect key="frame" x="346" y="32.5" width="51" height="31"/>
+                        <color key="onTintColor" red="0.97254901959999995" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <connections>
+                            <action selector="switchToggled:" destination="RWv-GG-laX" eventType="valueChanged" id="zAe-Yo-tfG"/>
+                        </connections>
                     </switch>
                 </subviews>
                 <constraints>
@@ -40,6 +44,10 @@
                     <constraint firstItem="tQD-oM-s9c" firstAttribute="centerY" secondItem="dYT-xw-FF7" secondAttribute="centerY" id="HIu-ub-p0w"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="basicLabel" destination="tQD-oM-s9c" id="Uc7-fa-F3E"/>
+                <outlet property="basicSwitch" destination="EDG-tb-luS" id="493-fv-8LS"/>
+            </connections>
             <point key="canvasLocation" x="-268" y="-297.75112443778113"/>
         </tableViewCell>
     </objects>
