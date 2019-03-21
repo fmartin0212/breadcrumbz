@@ -164,4 +164,9 @@ class InternalUserController {
             }
         }
     }
+    
+    func updateUser(name: String?, username: String?, email: String?, password: String?, completion: @escaping (Bool) -> Void) {
+        
+        
+    }
 }

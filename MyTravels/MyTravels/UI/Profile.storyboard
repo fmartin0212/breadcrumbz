@@ -33,95 +33,95 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRD-NR-rzr" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="660"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="642.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="bfK-Kp-4Cn">
-                                                <rect key="frame" x="24" y="188" width="327" height="442"/>
+                                                <rect key="frame" x="24" y="188" width="327" height="424.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rjW-g9-hvx">
-                                                        <rect key="frame" x="0.0" y="0.0" width="327" height="78"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="327" height="74.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4hf-7b-3we">
-                                                                <rect key="frame" x="0.0" y="0.0" width="327" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="327" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xDl-Nk-7mx" customClass="FMTextField" customModule="MyTravels" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="327" height="50"/>
+                                                                <rect key="frame" x="0.0" y="24.5" width="327" height="50"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="50" id="KVK-4e-FH3"/>
                                                                 </constraints>
                                                                 <nil key="textColor"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="d93-qS-26e">
-                                                        <rect key="frame" x="0.0" y="91" width="327" height="78"/>
+                                                        <rect key="frame" x="0.0" y="87.5" width="327" height="74.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8X-d7-GXY">
-                                                                <rect key="frame" x="0.0" y="0.0" width="327" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="327" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oxi-Ew-eRn" customClass="FMTextField" customModule="MyTravels" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="327" height="50"/>
+                                                                <rect key="frame" x="0.0" y="24.5" width="327" height="50"/>
                                                                 <nil key="textColor"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ak2-oc-VcS">
-                                                        <rect key="frame" x="0.0" y="182" width="327" height="78"/>
+                                                        <rect key="frame" x="0.0" y="175" width="327" height="74.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVC-ql-9Rq">
-                                                                <rect key="frame" x="0.0" y="0.0" width="327" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="327" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BFf-vS-rsB" customClass="FMTextField" customModule="MyTravels" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="327" height="50"/>
+                                                                <rect key="frame" x="0.0" y="24.5" width="327" height="50"/>
                                                                 <nil key="textColor"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="V4C-xh-AXM">
-                                                        <rect key="frame" x="0.0" y="273" width="327" height="78"/>
+                                                        <rect key="frame" x="0.0" y="262.5" width="327" height="74.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCi-Ip-Bqx">
-                                                                <rect key="frame" x="0.0" y="0.0" width="327" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="327" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qEk-o2-Ohf" customClass="FMTextField" customModule="MyTravels" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="327" height="50"/>
+                                                                <rect key="frame" x="0.0" y="24.5" width="327" height="50"/>
                                                                 <nil key="textColor"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9ex-oS-Cps">
-                                                        <rect key="frame" x="0.0" y="364" width="327" height="78"/>
+                                                        <rect key="frame" x="0.0" y="350" width="327" height="74.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPD-eL-WBq">
-                                                                <rect key="frame" x="0.0" y="0.0" width="327" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="327" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="14"/>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7ES-5u-hFo" customClass="FMTextField" customModule="MyTravels" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="327" height="50"/>
+                                                                <rect key="frame" x="0.0" y="24.5" width="327" height="50"/>
                                                                 <nil key="textColor"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                         </subviews>
@@ -175,6 +175,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addPhotoButton" destination="bks-W7-zYm" id="lem-6w-GzY"/>
+                        <outlet property="bottomConstraint" destination="XeN-WO-Vfa" id="McC-Jm-bMt"/>
                         <outlet property="changePasswordTextField" destination="qEk-o2-Ohf" id="DpQ-BH-pbg"/>
                         <outlet property="confirmPasswordTextFIeld" destination="7ES-5u-hFo" id="OAT-cP-trE"/>
                         <outlet property="contentView" destination="YRD-NR-rzr" id="Q0z-M3-gfP"/>
@@ -182,6 +183,11 @@
                         <outlet property="nameTextField" destination="xDl-Nk-7mx" id="Qsu-T2-Ulf"/>
                         <outlet property="scrollView" destination="XSy-By-Ix9" id="dNH-jb-4Wy"/>
                         <outlet property="usernameTextField" destination="Oxi-Ew-eRn" id="Fiw-wT-cLf"/>
+                        <outletCollection property="allTextFields" destination="Oxi-Ew-eRn" collectionClass="NSMutableArray" id="VBC-G5-vao"/>
+                        <outletCollection property="allTextFields" destination="xDl-Nk-7mx" collectionClass="NSMutableArray" id="LIh-0Z-Egz"/>
+                        <outletCollection property="allTextFields" destination="BFf-vS-rsB" collectionClass="NSMutableArray" id="gHe-uE-PwN"/>
+                        <outletCollection property="allTextFields" destination="qEk-o2-Ohf" collectionClass="NSMutableArray" id="Q3N-IG-ntz"/>
+                        <outletCollection property="allTextFields" destination="7ES-5u-hFo" collectionClass="NSMutableArray" id="wEG-99-Oey"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qO8-eF-IZU" userLabel="First Responder" sceneMemberID="firstResponder"/>

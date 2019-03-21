@@ -80,41 +80,11 @@ extension ProfileViewController {
     }
     
     func clearViews() {
-//        profilePhoto.setBackgroundImage(UIImage(named:"ProfileTabBarButton_Unselected"), for: .normal)
+        profilePhoto.image = UIImage(named:"ProfileTabBarButton_Unselected")
         usernameLabel.text = ""
         nameLabel.text = ""
     }
 }
-
-//extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-//
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-//
-//        let profilePicture = info[UIImagePickerControllerEditedImage] as? UIImage
-//        profilePictureButton.setBackgroundImage(profilePicture, for: .normal)
-//        profilePictureButton.setImage(nil, for: .normal)
-//        profilePictureButton.clipsToBounds = true
-//        profilePictureButton.layer.cornerRadius = 61
-//        profilePictureButton.backgroundColor = UIColor.clear
-//        picker.dismiss(animated: true) {
-//            // Present the loading view
-//            let loadingView = self.presentLoadingView()
-//            loadingView.loadingLabel.text = "Saving"
-//
-//            guard let loggedInUser = InternalUserController.shared.loggedInUser,
-//                let updatedProfileImage = self.profilePictureButton.backgroundImage(for: .normal)
-//                else { return }
-//
-//            InternalUserController.shared.saveProfilePhoto(photo: updatedProfileImage, for: loggedInUser) { (success) in
-//                if success {
-//                    NotificationCenter.default.post(Notification(name: Notification.Name("profilePictureUpdatedNotification")))
-//                    loadingView.removeFromSuperview()
-//                    self.dismiss(animated: true, completion: nil)
-//                }
-//            }
-//        }
-//    }
-//}
 
 extension ProfileViewController: UITableViewDataSource {
     
@@ -124,7 +94,7 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? BasicTableViewCell else { return UITableViewCell() }
-     
+        cell.selectionStyle = .none
         switch indexPath.row {
         case 0:
             cell.basicLabel.text = "Edit Profile"
@@ -144,7 +114,6 @@ extension ProfileViewController: UITableViewDataSource {
         default:
             print("Something went wrong")
         }
-        
         return cell
     }
 }
@@ -156,7 +125,8 @@ extension ProfileViewController: UITableViewDelegate {
         case 0:
             let editProfileVC = UIStoryboard.profile.instantiateViewController(withIdentifier: "EditProfile")
             navigationController?.pushViewController(editProfileVC, animated: true)
-            default:
+        // FIXME: - Need to add for terms of service & privacy policy
+        default:
             return
         }
     }

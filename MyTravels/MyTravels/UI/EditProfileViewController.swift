@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditProfileViewController: UIViewController {
+class EditProfileViewController: UIViewController, ScrollableViewController {
     
     // MARK: - Properties
     
@@ -25,12 +25,28 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var emailTextField: FMTextField!
     @IBOutlet weak var changePasswordTextField: FMTextField!
     @IBOutlet weak var confirmPasswordTextFIeld: FMTextField!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet var allTextFields: [FMTextField]!
+    
+    let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        allTextFields.forEach { $0.delegate = self }
+        
+        NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillShow, object: nil, queue: .main) { (notification) in
+            guard let userInfo = notification.userInfo else { return }
+            let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect
+            self.adjustScrollView(keyboardFrame: keyboardFrame!, bottomConstraint: self.bottomConstraint)
+        }
+        
+        NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardDidHide, object: nil, queue: .main) { (notification) in
+            self.bottomConstraint.constant = 30
+        }
     }
     
     @IBAction func addPhotoButtonTapped(_ sender: Any) {
+        present(imagePicker, animated: true, completion: nil)
     }
 }
 
@@ -61,5 +77,13 @@ extension EditProfileViewController : UIImagePickerControllerDelegate, UINavigat
                 }
             }
         }
+    }
+}
+
+extension EditProfileViewController: UITextFieldDelegate {
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        selectedTextField = textField
+        return true
     }
 }
