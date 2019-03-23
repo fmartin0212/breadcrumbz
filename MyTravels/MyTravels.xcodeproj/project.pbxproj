@@ -31,6 +31,8 @@
 		B7655AFD22274182002D33F7 /* FMTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7655AFC22274182002D33F7 /* FMTextView.swift */; };
 		B7655B2A22277B9B002D33F7 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7655B2922277B9B002D33F7 /* SignUpVC.swift */; };
 		B76B2F6C22432B6500E688F4 /* OnboardingParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B2F6B22432B6500E688F4 /* OnboardingParentViewController.swift */; };
+		B76B2F722245D50F00E688F4 /* EmptyTripStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B2F712245D50F00E688F4 /* EmptyTripStateView.swift */; };
+		B76B2F732245DC9300E688F4 /* EmptyTripStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B76B2F6F2244533800E688F4 /* EmptyTripStateView.xib */; };
 		B774A1C621BDA85E008D7483 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B774A1C521BDA85E008D7483 /* Constants.swift */; };
 		B77E4F7120C6D482007EB266 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77E4F7020C6D481007EB266 /* Extensions.swift */; };
 		B77E4F7320C835EF007EB266 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B77E4F7220C835EE007EB266 /* Assets.xcassets */; };
@@ -135,6 +137,8 @@
 		B7655B2922277B9B002D33F7 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpVC.swift; path = Onboarding/SignUpVC.swift; sourceTree = "<group>"; };
 		B76B2F6B22432B6500E688F4 /* OnboardingParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingParentViewController.swift; sourceTree = "<group>"; };
 		B76B2F6E22442A9300E688F4 /* NoTrips.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoTrips.xib; sourceTree = "<group>"; };
+		B76B2F6F2244533800E688F4 /* EmptyTripStateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyTripStateView.xib; sourceTree = "<group>"; };
+		B76B2F712245D50F00E688F4 /* EmptyTripStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTripStateView.swift; sourceTree = "<group>"; };
 		B774A1C521BDA85E008D7483 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B77E4F7020C6D481007EB266 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B77E4F7220C835EE007EB266 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -437,6 +441,8 @@
 		B7C83FBF21C1F83A00A9F86C /* xibs */ = {
 			isa = PBXGroup;
 			children = (
+				B76B2F712245D50F00E688F4 /* EmptyTripStateView.swift */,
+				B76B2F6F2244533800E688F4 /* EmptyTripStateView.xib */,
 				B7F88E35223F2E3100BD16DC /* BasicTableViewCell.xib */,
 				B7F88E37223F2E4000BD16DC /* BasicTableViewCell.swift */,
 				B7AC4083221B4A7600645BC2 /* TripDetail.xib */,
@@ -607,6 +613,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B76B2F732245DC9300E688F4 /* EmptyTripStateView.xib in Resources */,
 				B7C0B598220BC7AB009FAAEB /* MyTravels.xcdatamodeld in Resources */,
 				B7C10CC22020D19500818430 /* LaunchScreen.storyboard in Resources */,
 				B7F88E36223F2E3100BD16DC /* BasicTableViewCell.xib in Resources */,
@@ -746,6 +753,7 @@
 				B7C0B59C220CB393009FAAEB /* AddTripViewController.swift in Sources */,
 				B7C0E3C42232EDC300438299 /* SharedTripDataSourceAndDelegate.swift in Sources */,
 				B7C0E3CE22349F8F00438299 /* MainTabBarController.swift in Sources */,
+				B76B2F722245D50F00E688F4 /* EmptyTripStateView.swift in Sources */,
 				B762265521EFC9510045F260 /* FirebaseSyncable.swift in Sources */,
 				B7DA1B71202E140C0007497A /* Place+CoreDataClass.swift in Sources */,
 				B7DA1B72202E140C0007497A /* Place+CoreDataProperties.swift in Sources */,

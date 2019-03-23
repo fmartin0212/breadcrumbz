@@ -53,6 +53,8 @@ final class AddTripViewController: UIViewController, ScrollableViewController {
     var endDate: Date?
     var selectedTextField: UITextField?
     var selectedTextView: UITextView?
+    var trip: Trip?
+    var state: State = .add
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,6 +155,18 @@ extension AddTripViewController {
         // Date Picker
         startDatePicker.datePickerMode = .date
         endDatePicker.datePickerMode = .date
+        
+        if state == .edit {
+            updateViews()
+        }
+    }
+    
+    func updateViews() {
+        guard let trip = trip else { return }
+        nameTextField.text = trip.name
+        locationTextField.text = trip.location
+        
+    
     }
     
     @objc func setDate(sender: UIDatePicker) {

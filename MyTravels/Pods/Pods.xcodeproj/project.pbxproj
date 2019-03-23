@@ -726,7 +726,6 @@
 		B20965E58212EE82680DBC843C1AD016 /* SDWebImageTransition.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageTransition.h; path = SDWebImage/SDWebImageTransition.h; sourceTree = "<group>"; };
 		B33547F17F12400B7EC3DDCD97B8A77C /* Pods-MyTravels.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MyTravels.debug.xcconfig"; sourceTree = "<group>"; };
 		B50CA7DD1AB4DB460B44C313F5336C36 /* GTMDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
-		B76B2F6D22442A8B00E688F4 /* NoTrips.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = NoTrips.xib; path = "../MyTravels/UI/Custom Cells/NoTrips.xib"; sourceTree = "<group>"; };
 		B81AF2BB312631414C09ED6F4BC99057 /* SDWebImage-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SDWebImage-Info.plist"; sourceTree = "<group>"; };
 		B82FCF3FF98C7F29147D0D947BCF707D /* coding.cc */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = coding.cc; path = util/coding.cc; sourceTree = "<group>"; };
 		B96B1C30123323CF8CB291796CD68237 /* pb_decode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = pb_decode.h; sourceTree = "<group>"; };
@@ -1424,7 +1423,6 @@
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
-				B76B2F6D22442A8B00E688F4 /* NoTrips.xib */,
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				03C5C200A0787E300053CFA8F53CA094 /* Frameworks */,
 				1BE0B0782090F8777E7D8D077B48AD6C /* Pods */,
