@@ -22,7 +22,8 @@ public class Place: NSManagedObject, FirebaseDBSavable, CrumbObject {
             "type" : self.type!.rawValue,
             "address" : self.address,
             "rating" : self.rating,
-            "comments" : (self.comments ?? "")
+            "comments" : (self.comments ?? ""),
+            "tripID" : (self.trip.uid ?? "")
         ]
     }
     

@@ -13,27 +13,17 @@ class TripsListViewController: UIViewController {
     
     // MARK: - IBOutlets
     
-    @IBOutlet var noTripsView: UIView!
     @IBOutlet var addTripBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
-
     @IBOutlet weak var addATripButton: UIButton!
     
     // MARK: - Constants & Variables
     
     var profileButton: UIButton?
-//    var fromSignUpVC = false
-//        didSet {
-//            let loadingView = enableLoadingState()
-//            fetchUserInfo { (success) in
-//                NotificationCenter.default.post(name: Constants.profilePictureUpdatedNotif, object: nil)
-//                self.disableLoadingState(loadingView)
-//            }
-//        }
-    
     var isSharedTripsView: Bool = false
     lazy var tripDataSourceAndDelegate = TripDataSourceAndDelegate(self)
     lazy var sharedTripDataSourceAndDelegate = SharedTripDataSourceAndDelegate(self)
+    lazy var noTripsView: EmptyTripStateView = UIView.fromNib()
     
     override func viewDidLoad() {
         super.viewDidLoad()

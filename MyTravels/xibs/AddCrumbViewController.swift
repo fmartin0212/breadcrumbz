@@ -75,7 +75,7 @@ class AddCrumbViewController: UIViewController, ScrollableViewController {
         NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillShow, object: nil, queue: .main) { (notification) in
             guard let userInfo = notification.userInfo else { return }
             let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect
-            self.adjustScrollView(keyboardFrame: keyboardFrame!, bottomConstraint: self.saveButtonBottomConstraint)
+            self.adjustScrollView(keyboardFrame: keyboardFrame!)
         }
         
         NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardDidHide, object: nil, queue: .main) { (notification) in

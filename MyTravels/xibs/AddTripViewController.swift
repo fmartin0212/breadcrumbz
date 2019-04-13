@@ -78,17 +78,17 @@ final class AddTripViewController: UIViewController, ScrollableViewController {
                 self.scrollView.setContentOffset(CGPoint(x: self.contentView.frame.origin.x, y: (self.selectedTextField!.superview!.frame.origin.y - (self.selectedTextField!.superview!.frame.origin.y * 1 / 7))), animated: true)
                 return
             }
-            self.adjustScrollView(keyboardFrame: keyboardFrame!, bottomConstraint: self.saveBottomContraint)
+            self.adjustScrollView(keyboardFrame: keyboardFrame!)
         }
         
-        NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardDidHide, object: nil, queue: .main) { (notification) in
+        NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillHide, object: nil, queue: .main) { (notification) in
             self.saveBottomContraint.constant = 100
             
         }
         
         setupViews()
     }
-    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }

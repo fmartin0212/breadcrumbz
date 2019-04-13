@@ -32,6 +32,7 @@ class SharedPlaceController {
     }
     
     static func fetchPlaces(for sharedTrip: SharedTrip, completion: @escaping ([SharedPlace]?) -> Void) {
+    
         var sharedPlaces: [SharedPlace] = []
         guard sharedTrip.placeIDs.count > 0 else { completion(nil) ; return }
         let dispatchGroup = DispatchGroup()

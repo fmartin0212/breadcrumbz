@@ -132,7 +132,9 @@ extension TripListVC {
         } else {
             TripController.shared.fetchAllTrips()
             if TripController.shared.trips.count > 0 {
-                emptyTripStateView!.removeFromSuperview()
+                if let emptyTripStateView = emptyTripStateView {
+                    emptyTripStateView.removeFromSuperview()
+                }
             } else {
                 self.presentEmptyTripStateView()
             }

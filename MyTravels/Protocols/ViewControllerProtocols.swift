@@ -13,13 +13,13 @@ protocol ScrollableViewController where Self: UIViewController {
     var scrollView: UIScrollView! { get }
     var selectedTextField: UITextField? { get set }
     var selectedTextView: UITextView? { get set }
-    func adjustScrollView(keyboardFrame: CGRect, bottomConstraint: NSLayoutConstraint)
+    func adjustScrollView(keyboardFrame: CGRect)
 }
 
 extension ScrollableViewController {
-    func adjustScrollView(keyboardFrame: CGRect, bottomConstraint: NSLayoutConstraint) {
+    func adjustScrollView(keyboardFrame: CGRect) {
         let keyboardHeight = keyboardFrame.height
-        bottomConstraint.constant = 100 + keyboardHeight
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
         self.view.layoutIfNeeded()
         
         if let selectedTextField = selectedTextField, selectedTextField.isEditing {
