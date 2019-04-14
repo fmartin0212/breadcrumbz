@@ -11,14 +11,10 @@ import FirebaseDatabase
 
 class SharedTrip: FirebaseDBRetrievable, FirestoreRetrievable, TripObject {
     internal static var collectionName: String = "Trip"
-    
-    
     var uuid: String?
-    
     static var referenceName: String {
         return "Trip"
     }
-    
     var name: String
     var location: String
     var tripDescription: String?

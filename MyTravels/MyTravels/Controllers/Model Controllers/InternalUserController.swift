@@ -121,13 +121,14 @@ class InternalUserController {
                     case .failure(let error):
                         completion(.failure(error))
                     case .success(_):
+                        CoreDataManager.delete(object: photo)
                         completion(.success(true))
                     }
                 })
             }
         }
         
-        func fetchProfilePhoto(from urlAsString: String, completion: @escaping (UIImage?) -> Void) {
+        func fetchProfilePhoto(from path: String, completion: @escaping (UIImage?) -> Void) {
             
             guard let url = URL(string: urlAsString) else { completion(nil) ; return }
             

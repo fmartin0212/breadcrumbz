@@ -20,6 +20,7 @@
 		B7336E8322631D5200143812 /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E8222631D5200143812 /* FirebaseStorageService.swift */; };
 		B7336E8522631DE000143812 /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E8422631DE000143812 /* FirebaseAuthService.swift */; };
 		B7336E8722632A9500143812 /* FireErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E8622632A9500143812 /* FireErrors.swift */; };
+		B7336E892263E9E000143812 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E882263E9E000143812 /* CacheManager.swift */; };
 		B735428D2174E36300D9A68D /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B735428C2174E36200D9A68D /* Trip+CoreDataProperties.swift */; };
 		B73804F52224E37B00CD9E59 /* AddCrumb.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73804F42224E37B00CD9E59 /* AddCrumb.xib */; };
 		B73804FB2224EA3700CD9E59 /* AddCrumbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73804FA2224EA3700CD9E59 /* AddCrumbViewController.swift */; };
@@ -131,6 +132,7 @@
 		B7336E8222631D5200143812 /* FirebaseStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
 		B7336E8422631DE000143812 /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
 		B7336E8622632A9500143812 /* FireErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireErrors.swift; sourceTree = "<group>"; };
+		B7336E882263E9E000143812 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		B735428C2174E36200D9A68D /* Trip+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B73804F42224E37B00CD9E59 /* AddCrumb.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCrumb.xib; sourceTree = "<group>"; };
 		B73804FA2224EA3700CD9E59 /* AddCrumbViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCrumbViewController.swift; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 		B7C10CB32020D19500818430 /* MyTravels */ = {
 			isa = PBXGroup;
 			children = (
+				B7336E882263E9E000143812 /* CacheManager.swift */,
 				B7336E802262D93A00143812 /* FirestoreService.swift */,
 				B7336E8622632A9500143812 /* FireErrors.swift */,
 				B7336E8422631DE000143812 /* FirebaseAuthService.swift */,
@@ -794,6 +797,7 @@
 				B7AC408A221B6C0100645BC2 /* CrumbTableViewCell.swift in Sources */,
 				B77E4F7120C6D482007EB266 /* Extensions.swift in Sources */,
 				B7D6523F2026526700E975F1 /* ViewControllerExtensions.swift in Sources */,
+				B7336E892263E9E000143812 /* CacheManager.swift in Sources */,
 				B7C10CD3202111A300818430 /* CoreDataStack.swift in Sources */,
 				B7DA1B7F202F9FBC0007497A /* FetchViewController.swift in Sources */,
 				B774A1C621BDA85E008D7483 /* Constants.swift in Sources */,
