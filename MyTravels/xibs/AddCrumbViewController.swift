@@ -72,13 +72,13 @@ class AddCrumbViewController: UIViewController, ScrollableViewController {
         let imageCollectionViewCell = UINib(nibName: "ImageCollectionViewCell", bundle: nil)
         imageCollectionView.register(imageCollectionViewCell, forCellWithReuseIdentifier: "imageCell")
         
-        NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillShow, object: nil, queue: .main) { (notification) in
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (notification) in
             guard let userInfo = notification.userInfo else { return }
-            let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect
+            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
             self.adjustScrollView(keyboardFrame: keyboardFrame!)
         }
         
-        NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardDidHide, object: nil, queue: .main) { (notification) in
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardDidHideNotification, object: nil, queue: .main) { (notification) in
             self.saveButtonBottomConstraint.constant = 100
         }
     }
@@ -154,10 +154,13 @@ extension AddCrumbViewController: UIImagePickerControllerDelegate, UINavigationC
         dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         
-        guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage,
-            let photoData = UIImageJPEGRepresentation(photo, 0.1),
+        guard let photo = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage,
+            let photoData = photo.jpegData(compressionQuality: 0.1),
             let cell = selectedCollectionViewCell,
             let indexPath = imageCollectionView.indexPath(for: cell)
             else { return }
@@ -255,4 +258,14 @@ extension AddCrumbViewController: ImageCollectionViewCellDelegate {
         selectedCollectionViewCell = cell
         present(imagePickerController, animated: true, completion: nil)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

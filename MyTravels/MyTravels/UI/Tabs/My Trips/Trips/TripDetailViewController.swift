@@ -26,7 +26,7 @@ class TripDetailViewController: UIViewController, NSFetchedResultsControllerDele
         tableView.register(tripDetailCellNib, forCellReuseIdentifier: "TripDetailCell")
         
         tableView.estimatedRowHeight = 134
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         
         // Set navigation bar title/properties
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -248,7 +248,7 @@ extension TripDetailViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     
@@ -280,14 +280,14 @@ extension TripDetailViewController: UITableViewDelegate {
         return .leastNonzeroMagnitude
     }
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         if indexPath.row == 0 && indexPath.section == 0 || indexPath.row == 0 && indexPath.section == 1  {
-            return UITableViewCellEditingStyle.none
+            return UITableViewCell.EditingStyle.none
         }
-        return UITableViewCellEditingStyle.delete
+        return UITableViewCell.EditingStyle.delete
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
             guard let placeArray = array as? [[Place]] else { return }

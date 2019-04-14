@@ -35,14 +35,14 @@ class SignUpViewController: UIViewController {
         self.tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         signUpButton.formatBlue()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc func keyboardDidShow(notification: NSNotification) {
         
         var info = notification.userInfo!
-        let keyBoardSize = info[UIKeyboardFrameEndUserInfoKey] as! CGRect
+        let keyBoardSize = info[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
         scrollView.contentInset.bottom = keyBoardSize.height
         scrollView.scrollIndicatorInsets.bottom = keyBoardSize.height
     }

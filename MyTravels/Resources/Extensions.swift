@@ -12,7 +12,7 @@ extension UIBarButtonItem {
     
     func format() {
         let attributes = [
-            NSAttributedStringKey.font : UIFont(name: "AvenirNext-Regular", size: 17) as Any
+            NSAttributedString.Key.font : UIFont(name: "AvenirNext-Regular", size: 17) as Any
         ]
         
         self.setTitleTextAttributes(attributes, for: .normal)
@@ -42,7 +42,7 @@ extension UIViewController {
         
         // Add view and bring it to the front of the superview.
         view.addSubview(loadingView)
-        view.bringSubview(toFront: loadingView)
+        view.bringSubviewToFront(loadingView)
    
         // Add constraints
         loadingView.translatesAutoresizingMaskIntoConstraints = false

@@ -20,7 +20,7 @@ class OnboardingParentViewController: UIViewController {
         super.viewDidLoad()
         nextButton.layer.cornerRadius = nextButton.frame.width / 2
         nextButton.clipsToBounds = true
-        let child = self.childViewControllers.first! as! OnboardingPageViewController
+        let child = self.children.first! as! OnboardingPageViewController
     }
     @IBAction func skipButtonTapped(_ sender: Any) {
     }

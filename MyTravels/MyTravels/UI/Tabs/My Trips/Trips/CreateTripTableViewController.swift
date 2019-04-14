@@ -99,15 +99,18 @@ class CreateTripTableViewController: UITableViewController, UIImagePickerControl
     
     // MARK: - Image Picker Controller Delegate
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
 
         picker.sourceType = .photoLibrary
 
         guard let availableMediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary) else { return }
         picker.mediaTypes = availableMediaTypes
-        guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage
+        guard let photo = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage
             else { print("photo nil") ; return }
-        guard let photoAsData = UIImageJPEGRepresentation(photo, 0.1) else { return }
+        guard let photoAsData = photo.jpegData(compressionQuality: 0.1) else { return }
         self.photo = photoAsData
         
         self.tripPhotoImageView.image = photo
@@ -200,3 +203,13 @@ extension CreateTripTableViewController: UITextViewDelegate {
 
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
+}

@@ -69,9 +69,9 @@ final class AddTripViewController: UIViewController, ScrollableViewController {
         endDatePicker.addTarget(self, action: #selector(setDate(sender:)), for: .valueChanged)
         endMonthTextField.tag = 9
         
-        NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillShow, object: nil, queue: .main) { (notification) in
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (notification) in
             guard let userInfo = notification.userInfo else { return }
-            let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect
+            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
             if self.selectedTextField?.tag == 8 || self.selectedTextField?.tag == 9 {
                 self.saveBottomContraint.constant += keyboardFrame!.height
                 self.view.layoutIfNeeded()
@@ -81,7 +81,7 @@ final class AddTripViewController: UIViewController, ScrollableViewController {
             self.adjustScrollView(keyboardFrame: keyboardFrame!)
         }
         
-        NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillHide, object: nil, queue: .main) { (notification) in
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (notification) in
             self.saveBottomContraint.constant = 100
             
         }
@@ -205,7 +205,7 @@ extension AddTripViewController {
         let newTrip = TripController.shared.createTripWith(name: name, location: location, tripDescription: descriptionTextView.text, startDate: startDate, endDate: endDate)
         
         if let photo = addPhotoButton.currentImage,
-            let compressedImage = UIImageJPEGRepresentation(photo, 0.1) {
+            let compressedImage = photo.jpegData(compressionQuality: 0.1) {
             
             PhotoController.shared.add(photo: compressedImage, trip: newTrip)
         }
@@ -216,8 +216,11 @@ extension AddTripViewController {
 
 extension AddTripViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        guard let editedPhoto = info[UIImagePickerControllerEditedImage] as? UIImage else { return }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
+        guard let editedPhoto = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage else { return }
         addPhotoButton.setImage(editedPhoto, for: .normal)
         addPhotoButton.imageView?.contentMode = .scaleAspectFill
         
@@ -252,4 +255,14 @@ extension AddTripViewController: UITextViewDelegate {
         selectedTextView = textView
         return true
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

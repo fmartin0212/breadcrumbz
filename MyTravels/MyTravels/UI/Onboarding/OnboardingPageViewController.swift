@@ -39,7 +39,7 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        guard let currentVCIndex = orderedViewControllers.index(of: viewController) else { return nil }
+        guard let currentVCIndex = orderedViewControllers.firstIndex(of: viewController) else { return nil }
        
         if currentVCIndex > 0 {
             let previousIndex = currentVCIndex - 1
@@ -54,7 +54,7 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        guard let currentVCIndex = orderedViewControllers.index(of: viewController) else { return nil }
+        guard let currentVCIndex = orderedViewControllers.firstIndex(of: viewController) else { return nil }
         
         if currentVCIndex < (orderedViewControllers.count - 1) {
             let nextIndex = currentVCIndex + 1

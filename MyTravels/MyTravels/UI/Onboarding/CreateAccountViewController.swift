@@ -58,7 +58,7 @@ class CreateAccountViewController: UIViewController {
             let placeholderProfilePicture = UIImage(named: "user")
             else { return }
         
-        let placeholderProfilePictureAsData = UIImageJPEGRepresentation(placeholderProfilePicture, 0.1)
+        let placeholderProfilePictureAsData = placeholderProfilePicture.jpegData(compressionQuality: 0.1)
         
       
     }

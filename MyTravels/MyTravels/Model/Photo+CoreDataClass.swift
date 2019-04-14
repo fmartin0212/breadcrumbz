@@ -20,7 +20,7 @@ public class Photo: NSManagedObject, FirebaseStorageSavable {
         guard let photo = self.photo else { return Data() }
         let data = Data(referencing: photo)
         guard let image = UIImage(data: data),
-            let compressedJPEGData = UIImageJPEGRepresentation(image, 0.1)
+            let compressedJPEGData = image.jpegData(compressionQuality: 0.1)
             else { return Data() }
         
         return compressedJPEGData
