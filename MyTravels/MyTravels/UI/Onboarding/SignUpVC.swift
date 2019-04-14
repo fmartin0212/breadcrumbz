@@ -61,6 +61,8 @@ class SignUpVC: UIViewController {
             login()
         case .signUp:
             signUp()
+        default:
+            return
         }
     }
     
@@ -70,6 +72,8 @@ class SignUpVC: UIViewController {
             state = .signUp
         case .signUp:
             state = .logIn
+        default:
+            return
         }
     }
     
@@ -98,6 +102,8 @@ class SignUpVC: UIViewController {
             self.emailLabel.text = "Email"
             self.submitButton.setTitle("Get Started", for: .normal)
             logInSignUpButton.setTitle("Log In", for: .normal)
+        default:
+            return
         }
         allTextfields.forEach { $0.text = "" }
     }
@@ -189,4 +195,8 @@ class SignUpVC: UIViewController {
 enum State: Int {
     case logIn
     case signUp
+    case managed
+    case shared
+    case add
+    case edit
 }

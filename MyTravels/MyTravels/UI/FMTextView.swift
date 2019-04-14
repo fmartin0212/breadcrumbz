@@ -9,9 +9,8 @@
 import UIKit
 
 class FMTextView: UITextView {
-
-    init() {
-        super.init(frame: .zero, textContainer: NSTextContainer())
+    
+    override func awakeFromNib() {
         
         self.layer.cornerRadius = 2
         
@@ -20,12 +19,12 @@ class FMTextView: UITextView {
         self.layer.borderWidth = 0.3
         
         // Shadow
-        self.layer.shadowColor = UIColor.lightGray.cgColor
-        self.layer.shadowRadius = 1.7
-        self.layer.shadowOpacity = 0.2
-        self.layer.shadowOffset = CGSize(width: 0, height: 3)
-        self.layer.masksToBounds = false
-        self.layer.backgroundColor = UIColor.white.cgColor
+        //        self.layer.shadowColor = UIColor.lightGray.cgColor
+                self.layer.shadowRadius = 0
+        //        self.layer.shadowOpacity = 0.2
+        //        self.layer.shadowOffset = CGSize(width: 0, height: 3)
+        //        self.layer.masksToBounds = false
+        //        self.layer.backgroundColor = UIColor.white.cgColor
         
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -36,7 +35,9 @@ class FMTextView: UITextView {
         toolbar.setItems([flexibleSpace, doneButton], animated: false)
         
         self.inputAccessoryView = toolbar
+
     }
+
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

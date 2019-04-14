@@ -114,7 +114,6 @@ final class FirebaseManager {
                 let uuid = topLevelDictionary.keys.first,
                 let dictionary = topLevelDictionary.values.first
                     else { completion(nil) ; return }
-                
                 let object = T(dictionary: dictionary, uuid: uuid)
                 completion(object)
             }

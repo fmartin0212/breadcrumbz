@@ -46,65 +46,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addATripButton" destination="MHs-GW-2Zi" id="e3A-WQ-NsO"/>
                         <outlet property="addTripBarButtonItem" destination="Xfr-BE-SpC" id="1nh-ya-bEc"/>
-                        <outlet property="noTripsView" destination="05W-bJ-ChF" id="MVi-OS-hAM"/>
                         <outlet property="tableView" destination="HlD-A1-XiZ" id="SPg-it-kX6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="opj-gv-CMe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="05W-bJ-ChF">
-                    <rect key="frame" x="0.0" y="0.0" width="338" height="667"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="1sJ-lB-8oh">
-                            <rect key="frame" x="20.5" y="168.5" width="297.5" height="350.5"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notrips_feed" translatesAutoresizingMaskIntoConstraints="NO" id="v2x-Vl-Ufh">
-                                    <rect key="frame" x="73.5" y="0.0" width="150" height="150"/>
-                                    <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" secondItem="v2x-Vl-Ufh" secondAttribute="height" multiplier="1:1" id="Jd0-FX-OAG"/>
-                                        <constraint firstAttribute="height" constant="150" id="mun-NB-kAr"/>
-                                    </constraints>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
-                                            <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't currently have any trips. Tap below to add a trip now!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNu-z0-3dk">
-                                    <rect key="frame" x="0.0" y="200" width="297.5" height="46.5"/>
-                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHs-GW-2Zi">
-                                    <rect key="frame" x="67" y="296.5" width="163" height="54"/>
-                                    <color key="backgroundColor" red="0.1696610677" green="0.32706386389999997" blue="0.72726690770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
-                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <inset key="contentEdgeInsets" minX="40" minY="15" maxX="40" maxY="15"/>
-                                    <state key="normal" title="Add a trip">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="addATripButtonTapped:" destination="KSc-Yg-SqR" eventType="touchUpInside" id="2To-9i-i6C"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                        </stackView>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="1sJ-lB-8oh" firstAttribute="top" relation="lessThanOrEqual" secondItem="QQm-oV-szE" secondAttribute="top" constant="187.5" id="HRp-DR-nVg"/>
-                        <constraint firstItem="1sJ-lB-8oh" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="QQm-oV-szE" secondAttribute="trailing" constant="-10" id="U2D-xI-d6y"/>
-                        <constraint firstItem="QQm-oV-szE" firstAttribute="leading" relation="lessThanOrEqual" secondItem="1sJ-lB-8oh" secondAttribute="leading" constant="-10" id="Zpz-2n-9wB"/>
-                        <constraint firstItem="QQm-oV-szE" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="1sJ-lB-8oh" secondAttribute="bottom" constant="187" id="igj-ec-iWG"/>
-                        <constraint firstItem="1sJ-lB-8oh" firstAttribute="centerX" secondItem="QQm-oV-szE" secondAttribute="centerX" id="ivV-xg-84B"/>
-                        <constraint firstItem="1sJ-lB-8oh" firstAttribute="centerY" secondItem="QQm-oV-szE" secondAttribute="centerY" id="l9w-8h-jqL"/>
-                    </constraints>
-                    <viewLayoutGuide key="safeArea" id="QQm-oV-szE"/>
-                </view>
             </objects>
             <point key="canvasLocation" x="2930.4000000000001" y="542.87856071964018"/>
         </scene>
@@ -1555,9 +1501,8 @@
         <image name="addDetail" width="33" height="33"/>
         <image name="breadcrumbz" width="180" height="146"/>
         <image name="calendar" width="24" height="24"/>
-        <image name="location" width="24" height="24"/>
+        <image name="location" width="14" height="16"/>
         <image name="map-1x" width="18.399999618530273" height="18.399999618530273"/>
-        <image name="notrips_feed" width="198" height="188"/>
         <image name="star-black-16" width="50" height="50"/>
         <image name="star-clear-24" width="24" height="24"/>
         <namedColor name="Tint">

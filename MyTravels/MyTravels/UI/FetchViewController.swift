@@ -17,7 +17,7 @@ class FetchViewController: UIViewController {
         let myTripsNavigationController = UINavigationController(rootViewController: myTripListVC)
         let sharedTripListVC = TripListVC(nibName: "TripListVC", bundle: nil)
         let profileVC = UIStoryboard.profile.instantiateViewController(withIdentifier: "ProfileNavController")
-        sharedTripListVC.isSharedTripsView = true
+        sharedTripListVC.state = .shared
         let mySharedTripsNavigationController = UINavigationController(rootViewController: sharedTripListVC)
         //        tripTabBarController.tabBar.setItems([myTripsItem, sharedTripsItem], animated: true)
         tripTabBarController.setViewControllers([myTripsNavigationController, mySharedTripsNavigationController, profileVC], animated: true)

@@ -23,7 +23,7 @@ class SharedTripsListViewController: UIViewController {
         tableView.refreshControl = refreshControl
         tableView.addSubview(refreshControl)
         refreshControl.addTarget(self, action: #selector(fetchSharedTrips), for: .valueChanged)
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Constants.sharedTripsReceivedNotif, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(refreshViews), name: Constants.sharedTripsReceivedNotif, object: nil)
         
         // Set tableview properties
         tableView.separatorStyle = .none
@@ -32,7 +32,7 @@ class SharedTripsListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshTableView), name: Constants.refreshSharedTripsListNotif, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(refreshViews), name: Constants.refreshSharedTripsListNotif, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

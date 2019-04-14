@@ -20,13 +20,15 @@ class SharedPlace: FirebaseDBRetrievable, CrumbObject {
     }
     var photos: [UIImage] = []
     var photoURLs: [String]?
+    let tripID: String
     
     required init?(dictionary: [String : Any], uuid: String) {
         guard let name = dictionary["name"] as? String,
             let address = dictionary["address"] as? String,
             let rating = dictionary["rating"] as? Int16,
             let typeString = dictionary["type"] as? String,
-            let comments = dictionary["comments"] as? String
+            let comments = dictionary["comments"] as? String,
+            let tripID = dictionary["tripID"] as? String
             else { return nil }
         
         if let photoURLs = dictionary["photoURLs"] as? [String: [String : Any]] {
@@ -44,6 +46,7 @@ class SharedPlace: FirebaseDBRetrievable, CrumbObject {
         self.rating = rating
         self.typeString = typeString
         self.comments = comments
+        self.tripID = tripID
         self.uuid = uuid
     }
     

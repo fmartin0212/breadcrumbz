@@ -22,25 +22,13 @@ class TripDetailVC: UIViewController {
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var addCrumbButton: UIButton!
     
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    
     // MARK: - Constants & Variables
     
     var trip: TripObject? {
         didSet {
             loadViewIfNeeded()
-            updateViews()
-        }
-    }
-    
-    var sharedTrip: SharedTrip? {
-        didSet {
-            SharedPlaceController.fetchPlaces(for: sharedTrip!) { (sharedCrumbs) in
-                guard let sharedCrumbs = sharedCrumbs else { return }
-                self.sharedCrumbs = sharedCrumbs
-            }
-        }
-    }
-    var sharedCrumbs: [SharedPlace] = [] {
-        didSet {
             updateViews()
         }
     }
@@ -83,18 +71,24 @@ class TripDetailVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        crumbsTableView.reloadData()
         
         if let trip = trip as? Trip,
             let placesSet = trip.places,
             let places = placesSet.allObjects as? [Place] {
             self.crumbs = places
         }
+//        crumbsTableView.reloadData()
+//        tableViewHeightConstraint.constant = crumbsTableView.contentSize.height
     }
     
     @IBAction func actionButtonTapped(_ sender: Any) {
-        presentShareAlertController()
+        if trip is Trip {
+            presentShareAlertController()
+        } else {
+            actionButtonTapped()
+        }
     }
+    
     @IBAction func addCrumbButtonTapped(_ sender: Any) {
         let createCrumbVC = AddCrumbViewController(nibName: "AddCrumb", bundle: nil)
         createCrumbVC.trip = trip
@@ -123,8 +117,9 @@ extension TripDetailVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let crumb = crumbs[indexPath.row]
-        let crumbDetailVC = UIStoryboard.main.instantiateViewController(withIdentifier: "crumbDetailVC") as! PlaceDetailTableViewController
+        let crumbDetailVC = CrumbDetailVC(nibName: "CrumbDetail", bundle: nil)
         crumbDetailVC.crumb = crumb
+        
         self.navigationController?.pushViewController(crumbDetailVC, animated: true)
     }
     
@@ -142,7 +137,7 @@ extension TripDetailVC {
             if let managedPhoto = managedTrip.photo?.photo {
                 tripImageView.image = UIImage(data: managedPhoto as Data)
             }
-        } else if let nonManagedPhoto = sharedTrip?.photo {
+        } else if let sharedTrip = trip as? SharedTrip, let nonManagedPhoto = sharedTrip.photo {
             tripImageView.image = nonManagedPhoto
         } else {
             tripImageView.image = UIImage(named: "map")
@@ -157,13 +152,14 @@ extension TripDetailVC {
     }
     
     private func formatViews() {
-        tripImageView.layer.cornerRadius = 4
+//        tripImageView.layer.cornerRadius = 4
         tripImageView.clipsToBounds = true
         
         title = trip?.name
         
         if trip is SharedTrip {
             addCrumbButton.isHidden = true
+            actionButton.setImage(UIImage(named: "more"), for: .normal)
         } else {
             addCrumbButton.layer.cornerRadius = addCrumbButton.frame.width / 2
             addCrumbButton.layer.borderColor = #colorLiteral(red: 0.9725490196, green: 0.3490196078, blue: 0.3490196078, alpha: 1)
@@ -193,4 +189,43 @@ extension TripDetailVC {
         
         present(alertController, animated: true, completion: nil)
     }
+    
+    @objc private func actionButtonTapped() {
+        
+        let actionAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let blockUserAction = UIAlertAction(title: "Block user", style: .default) { (_) in
+            let confirmationAlertController = UIAlertController(title: nil, message: "Are you sure you want to block this user?", preferredStyle: .alert)
+            
+            let blockAction = UIAlertAction(title: "Block", style: .destructive, handler: { (_) in
+                guard let sharedTrip = self.trip as? SharedTrip else { return }
+                let loadingView = self.enableLoadingState()
+                loadingView.loadingLabel.text = "Blocking user"
+                
+                InternalUserController.shared.blockUserWith(creatorID: sharedTrip.creatorID, completion: { (errorMessage) in
+                    if let errorMessage = errorMessage {
+                        self.presentStandardAlertController(withTitle: "Uh Oh!", message: errorMessage)
+                    } else {
+                        DispatchQueue.main.async {
+                            loadingView.removeFromSuperview()
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }
+                })
+            })
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+            
+            confirmationAlertController.addAction(blockAction)
+            confirmationAlertController.addAction(cancelAction)
+            
+            self.present(confirmationAlertController, animated: true, completion: nil)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        actionAlertController.addAction(blockUserAction)
+        actionAlertController.addAction(cancelAction)
+        self.present(actionAlertController, animated: true, completion: nil)
+    }
+    
 }

@@ -122,11 +122,11 @@ extension SearchViewController: MKLocalSearchCompleterDelegate {
         
         let attributedText = NSMutableAttributedString(string: text)
         let regular = UIFont.systemFont(ofSize: size)
-        attributedText.addAttribute(NSAttributedStringKey.font, value:regular, range:NSMakeRange(0, text.count))
+        attributedText.addAttribute(NSAttributedString.Key.font, value:regular, range:NSMakeRange(0, text.count))
         
         let bold = UIFont.boldSystemFont(ofSize: size)
         for value in ranges {
-            attributedText.addAttribute(NSAttributedStringKey.font, value:bold, range:value.rangeValue)
+            attributedText.addAttribute(NSAttributedString.Key.font, value:bold, range:value.rangeValue)
         }
         return attributedText
     }
@@ -168,7 +168,7 @@ extension SearchViewController: UITableViewDelegate {
         else {
             let completion = searchResults[indexPath.row - 1]
             
-            let searchRequest = MKLocalSearchRequest(completion: completion)
+            let searchRequest = MKLocalSearch.Request(completion: completion)
             let search = MKLocalSearch(request: searchRequest)
             search.start { (response, error) in
                 

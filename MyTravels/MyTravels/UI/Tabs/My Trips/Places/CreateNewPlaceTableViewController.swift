@@ -49,7 +49,7 @@ class CreateNewPlaceTableViewController: UITableViewController, CLLocationManage
         self.stars = stars
         
         guard let addPhotoImage = UIImage(named: "AddTripPhoto256"),
-            let addPhotoImageAsData = UIImagePNGRepresentation(addPhotoImage) else { return }
+            let addPhotoImageAsData = addPhotoImage.pngData() else { return }
         self.photos.insert(addPhotoImageAsData, at: 0)
         
         imagePickerController.allowsEditing = true
@@ -96,7 +96,7 @@ class CreateNewPlaceTableViewController: UITableViewController, CLLocationManage
         let place = PlaceController.shared.createNewPlaceWith(name: name, type: type, address: address, comments: comments, rating: rating, trip: trip)
         
         if self.photos.count > 0 {
-            PhotoController.shared.add(photos: self.photos, place: place)
+//            PhotoController.shared.add(photos: self.photos, place: place)
             dismiss(animated: true, completion: nil)
         }
         
@@ -208,10 +208,13 @@ extension CreateNewPlaceTableViewController: UIImagePickerControllerDelegate, UI
         dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         
-        guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage,
-            let photoAsData = UIImagePNGRepresentation(photo)
+        guard let photo = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage,
+            let photoAsData = photo.pngData()
             else { return }
         
         self.photos.append(photoAsData)
@@ -304,4 +307,14 @@ extension CreateNewPlaceTableViewController {
             return 60
         }
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

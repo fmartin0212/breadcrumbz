@@ -46,7 +46,7 @@ class PlaceDetailTableViewController: UITableViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         
         mapView.isScrollEnabled = false

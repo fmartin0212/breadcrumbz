@@ -18,25 +18,37 @@ class AddCrumbViewController: UIViewController, ScrollableViewController {
     var selectedTextField: UITextField?
     var selectedTextView: UITextView?
     
-    @IBOutlet weak var photoBackdropView: UIView!
-    @IBOutlet weak var photoImage: UIImageView!
-    @IBOutlet weak var crumbPhotoImageView: UIImageView!
-    @IBOutlet weak var addPhotoButton: UIButton!
+    @IBOutlet weak var imageCollectionView: UICollectionView!
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var typeTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var commentsTextView: UITextView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var saveButtonBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var addPhotoButtonTopConstraint: NSLayoutConstraint!
     
     var trip: TripObject?
     var photoData: Data?
     let imagePickerController = UIImagePickerController()
-    let pickerView = UIPickerView()
-    var type: String?
+    var type: Place.types = .activity
     var fromSearchVC = false
-    var photos: [Data] = []
+    var photos: [Int : Data] = [:]
+    var selectedCollectionViewCell: ImageCollectionViewCell?
+
+    let checkmarkView: UIView = {
+        let checkmarkView = UIView()
+        checkmarkView.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.3490196078, blue: 0.3490196078, alpha: 1)
+        checkmarkView.clipsToBounds = true
+        checkmarkView.layer.cornerRadius = 8
+        checkmarkView.translatesAutoresizingMaskIntoConstraints = false
+        let checkmarkImageView = UIImageView()
+        checkmarkImageView.image = UIImage(named: "checkmark")
+        checkmarkView.addSubview(checkmarkImageView)
+        checkmarkImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint(item: checkmarkImageView, attribute: .centerX, relatedBy: .equal, toItem: checkmarkView, attribute: .centerX, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: checkmarkImageView, attribute: .centerY, relatedBy: .equal, toItem: checkmarkView, attribute: .centerY, multiplier: 1.0, constant: 0).isActive = true
+        return checkmarkView
+    }()
+    
+    @IBOutlet var typeButtons: [UIButton]!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -51,24 +63,23 @@ class AddCrumbViewController: UIViewController, ScrollableViewController {
         formatViews()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
-        pickerView.dataSource = self
-        pickerView.delegate = self
         nameTextField.delegate = self
-        typeTextField.delegate = self
         addressTextField.delegate = self
         commentsTextView.delegate = self
+        imageCollectionView.dataSource = self
+        imageCollectionView.delegate = self
         
-        NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillShow, object: nil, queue: .main) { (notification) in
+        let imageCollectionViewCell = UINib(nibName: "ImageCollectionViewCell", bundle: nil)
+        imageCollectionView.register(imageCollectionViewCell, forCellWithReuseIdentifier: "imageCell")
+        
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (notification) in
             guard let userInfo = notification.userInfo else { return }
-            let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect
-            self.adjustScrollView(keyboardFrame: keyboardFrame!, bottomConstraint: self.saveButtonBottomConstraint)
-            self.selectedTextField = nil
-            self.selectedTextView = nil
+            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
+            self.adjustScrollView(keyboardFrame: keyboardFrame!)
         }
         
-        NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardDidHide, object: nil, queue: .main) { (notification) in
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardDidHideNotification, object: nil, queue: .main) { (notification) in
             self.saveButtonBottomConstraint.constant = 100
-            
         }
     }
     
@@ -77,9 +88,8 @@ class AddCrumbViewController: UIViewController, ScrollableViewController {
             !name.isEmpty,
             let address = addressTextField.text,
             !address.isEmpty,
-            let type = typeTextField.text,
-            !type.isEmpty,
-            let placeType = Place.types(rawValue: type.lowercased()),
+            // FIXME : -
+            let placeType = Place.types(rawValue: "restaurant"),
             let trip = trip
         else { return }
         
@@ -92,39 +102,48 @@ class AddCrumbViewController: UIViewController, ScrollableViewController {
     @IBAction func cancelButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
-    @IBAction func addPhotoButtonTapped(_ sender: Any) {
-        self.present(imagePickerController, animated: true, completion: nil)
+
+    @IBAction func typeButton(_ sender: UIButton) {
+        setType(for: sender)
     }
+    
 }
 
 extension AddCrumbViewController {
     
     func formatViews() {
         
-        // Text Fields
-//        nameTextField.format()
-//        addressTextField.format()
-//        typeTextField.format()
-        typeTextField.inputView = pickerView
-        
-        // Photo backdrop
-        photoBackdropView.layer.cornerRadius = photoBackdropView.frame.width / 2
-        photoBackdropView.layer.shadowColor = #colorLiteral(red: 1, green: 0.4002141953, blue: 0.372333765, alpha: 1)
-        photoBackdropView.layer.shadowRadius = 10
-        photoBackdropView.layer.shadowOpacity = 1.0
-        photoBackdropView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        
         // Buttons
-        addPhotoButton.addBorder(with: #colorLiteral(red: 1, green: 0.4002141953, blue: 0.372333765, alpha: 1), andWidth: 4)
         saveButton.layer.cornerRadius = 12
+        typeButtons.forEach { $0.layer.cornerRadius = 6 }
+        setType(for: typeButtons.first!)
         
         // Text View
         commentsTextView.format()
-
-        // Photo image view
-        photoImage.layer.cornerRadius = 6
-        photoImage.clipsToBounds = true
+    }
+    
+    func setType(for button: UIButton) {
+        guard let typeString = button.restorationIdentifier,
+            let type = Place.types(rawValue: typeString)
+            else { return }
+        
+        checkmarkView.removeFromSuperview()
+        
+        typeButtons.forEach { $0.layer.borderWidth = 0; $0.setTitleColor(#colorLiteral(red: 0.6077903509, green: 0.6078781486, blue: 0.607762754, alpha: 1), for: .normal) }
+        
+        self.type = type
+        
+        button.layer.borderColor = #colorLiteral(red: 0.9725490196, green: 0.3490196078, blue: 0.3490196078, alpha: 1)
+        button.layer.borderWidth = 1.5
+        button.setTitleColor(#colorLiteral(red: 0.3621281683, green: 0.3621373773, blue: 0.3621324301, alpha: 1), for: .normal)
+        
+        contentView.addSubview(checkmarkView)
+        NSLayoutConstraint.activate([
+            NSLayoutConstraint(item: checkmarkView, attribute: .centerX, relatedBy: .equal, toItem: button, attribute: .trailing, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint(item: checkmarkView, attribute: .centerY, relatedBy: .equal, toItem: button, attribute: .top, multiplier: 1.0, constant: 0),
+            NSLayoutConstraint(item: checkmarkView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 16),
+            NSLayoutConstraint(item: checkmarkView, attribute: .width, relatedBy: .equal, toItem: checkmarkView, attribute: .height, multiplier: 1.0, constant: 0)
+            ])
     }
 }
 
@@ -135,64 +154,21 @@ extension AddCrumbViewController: UIImagePickerControllerDelegate, UINavigationC
         dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         
-        guard let photo = info[UIImagePickerControllerEditedImage] as? UIImage,
-            let photoData = UIImageJPEGRepresentation(photo, 0.1)
+        guard let photo = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage,
+            let photoData = photo.jpegData(compressionQuality: 0.1),
+            let cell = selectedCollectionViewCell,
+            let indexPath = imageCollectionView.indexPath(for: cell)
             else { return }
         
-        self.photoData = photoData
-        self.photos = [photoData]
-        self.crumbPhotoImageView.image = photo
-        crumbPhotoImageView.isHidden = false
-        
-        photoImage.isHidden = true
-//        addPhotoButtonTopConstraint.constant = 10
-        contentView.layoutIfNeeded()
-        addPhotoButton.setTitle("Change Photo", for: .normal)
-        
+        self.photos[indexPath.row] = photoData
+        cell.addPhotoButton.setImage(photo, for: .normal)
+        cell.addPhotoButton.imageView?.contentMode = .scaleAspectFill
         dismiss(animated: true, completion: nil)
-    }
-}
-
-extension AddCrumbViewController: UIPickerViewDataSource {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 3
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch row {
-        case 0:
-            return "Restaurant"
-        case 1:
-            return "Lodging"
-        case 2:
-            return "Activity"
-        default:
-            return ""
-        }
-    }
-}
-
-extension AddCrumbViewController: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        var type = ""
-        switch row {
-        case 0:
-            type = "Restaurant"
-        case 1:
-            type = "Lodging"
-        case 2:
-            type = "Activity"
-        default:
-            print("Something went wrong")
-        }
-        typeTextField.text = type
     }
 }
 
@@ -238,4 +214,58 @@ extension AddCrumbViewController: UITextViewDelegate {
         textView.returnKeyType = .done
     }
     
+}
+
+extension AddCrumbViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
+        if indexPath.row > 0 {
+            cell.addPhotoButton.setImage(UIImage(named: "uploadcloudonly"), for: .normal)
+        }
+        
+        cell.delegate = self
+        cell.clipsToBounds = true
+        cell.layer.cornerRadius = 8
+        
+        return cell
+    }
+}
+
+extension AddCrumbViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.row == 0 {
+            return CGSize(width: collectionView.frame.width, height: 200)
+        } else {
+            let width = collectionView.frame.width / 3
+            let minSpacInterimSpacing: CGFloat = 8
+            return CGSize(width: width - minSpacInterimSpacing, height: width)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+    }
+}
+
+extension AddCrumbViewController: ImageCollectionViewCellDelegate {
+    
+    func addPhotoButtonTapped(cell: ImageCollectionViewCell) {
+        selectedCollectionViewCell = cell
+        present(imagePickerController, animated: true, completion: nil)
+    }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

@@ -50,7 +50,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="425" height="1121"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="CJx-0E-kBc">
-                                    <rect key="frame" x="24" y="259" width="138" height="54"/>
+                                    <rect key="frame" x="24" y="284" width="138" height="54"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Trip name)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D2i-yn-VoP">
                                             <rect key="frame" x="0.0" y="0.0" width="110.5" height="25.5"/>
@@ -80,7 +80,7 @@
                                     <viewLayoutGuide key="safeArea" id="dUZ-Cp-XKy"/>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0PQ-P1-IeH">
-                                    <rect key="frame" x="314" y="270" width="108.5" height="14"/>
+                                    <rect key="frame" x="314" y="295" width="108.5" height="14"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="(Start date)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rty-S1-UxI">
                                             <rect key="frame" x="0.0" y="0.0" width="56.5" height="14"/>
@@ -98,46 +98,47 @@
                                     <viewLayoutGuide key="safeArea" id="98s-rh-yxn"/>
                                 </stackView>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zzF-L7-dln">
-                                    <rect key="frame" x="24" y="464.5" width="401" height="656.5"/>
+                                    <rect key="frame" x="24" y="489.5" width="401" height="631.5"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </tableView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n4Z-6k-Qk0">
-                                    <rect key="frame" x="0.0" y="0.0" width="425" height="235"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="425" height="260"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="235" id="sYr-jK-fFl"/>
+                                        <constraint firstAttribute="height" constant="260" id="sYr-jK-fFl"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cqK-2r-0rY">
-                                    <rect key="frame" x="343" y="210" width="50" height="50"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cqK-2r-0rY">
+                                    <rect key="frame" x="343" y="235" width="50" height="50"/>
                                     <color key="backgroundColor" red="0.92826980349999999" green="0.43999382850000002" blue="0.39598500730000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="cqK-2r-0rY" secondAttribute="height" multiplier="1:1" id="i7J-RK-Te6"/>
                                         <constraint firstAttribute="width" constant="50" id="z1R-Fd-2vv"/>
                                     </constraints>
+                                    <state key="normal" image="Share"/>
                                     <connections>
                                         <action selector="actionButtonTapped:" destination="-1" eventType="touchUpInside" id="4bI-on-7Ux"/>
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JoW-WI-vRD">
-                                    <rect key="frame" x="24" y="343" width="91.5" height="22.5"/>
+                                    <rect key="frame" x="24" y="368" width="91.5" height="22.5"/>
                                     <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                     <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Trip Description)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mw3-zz-57d">
-                                    <rect key="frame" x="24" y="373.5" width="377" height="20"/>
+                                    <rect key="frame" x="24" y="398.5" width="377" height="20"/>
                                     <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                     <color key="textColor" red="0.60779035091400146" green="0.60787814855575562" blue="0.60776275396347046" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crumbs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qjN-Ne-RNR">
-                                    <rect key="frame" x="24" y="413.5" width="65" height="39"/>
+                                    <rect key="frame" x="24" y="438.5" width="65" height="39"/>
                                     <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xy0-8u-9D9">
-                                    <rect key="frame" x="362" y="413.5" width="39" height="39"/>
+                                    <rect key="frame" x="362" y="438.5" width="39" height="39"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="xy0-8u-9D9" secondAttribute="height" multiplier="1:1" id="eDL-qq-kVU"/>
@@ -203,6 +204,7 @@
         </view>
     </objects>
     <resources>
-        <image name="location" width="24" height="24"/>
+        <image name="Share" width="16" height="21"/>
+        <image name="location" width="14" height="16"/>
     </resources>
 </document>

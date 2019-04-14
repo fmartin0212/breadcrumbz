@@ -48,10 +48,10 @@ final class PhotoController {
      - parameter photos: The array of photos as data to be saved.
      - parameter place: The place that the photos belong to.
      */
-    func add(photos: [Data], place: Place) {
+    func add(photos: [Int : Data], place: Place) {
         
         // Loop over the photos and initialize a Photo.
-        for photo in photos {
+        for (_, photo) in photos {
             let _ = Photo(photo: photo, place: place, trip: nil)
         }
         
@@ -64,16 +64,16 @@ final class PhotoController {
      - parameter photos: The array of photos as data to be saved.
      - parameter place: The place that the photos belong to.
      */
-    func update(photos: [Data], for place: Place) {
+    func update(photos: [Int : Data], for place: Place) {
         guard let photoArray = place.photos?.allObjects as? [Photo] else { return }
         
         // Remove all of the existing photos from the place.
         for photo in photoArray {
-            photo.managedObjectContext?.delete(photo)
+            CoreDataManager.delete(object: photo)
         }
         
         // Initialize a new photo for each photo in the photos array.
-        for photo in photos {
+        for (_, photo) in photos {
             let _ = Photo(photo: photo, place: place, trip: nil)
         }
         
@@ -104,9 +104,9 @@ final class PhotoController {
             if success {
                 
                 // Save the trip's places' photos.
-//                self.savePlacePhotos(for: trip, completion: { (success) in
-                    completion(true)
-//                })
+                //                self.savePlacePhotos(for: trip, completion: { (success) in
+                completion(true)
+                //                })
             }
         }
     }
@@ -115,7 +115,7 @@ final class PhotoController {
                        completion: @escaping (Bool) -> Void) {
         
         guard let tripPhoto = trip.photo else { completion(true) ; return }
-
+        
         FirebaseManager.save(tripPhoto) { (metadata, errorMessage) in
             if let _ = errorMessage {
                 completion(false)
@@ -189,7 +189,7 @@ final class PhotoController {
     }
     
     func savePhotos(for place: Place,
-                   completion: @escaping (Bool) -> Void) {
+                    completion: @escaping (Bool) -> Void) {
         guard let photos = place.photos?.allObjects as? [Photo] else { completion(false) ; return }
         
         let dispatchGroup = DispatchGroup()
@@ -217,5 +217,41 @@ final class PhotoController {
             })
         }
     }
+    
+    func fetchPhotos(for crumb: CrumbObject, completion: @escaping ([UIImage]?) -> Void) {
+        if let crumb = crumb as? Place,
+            let photosObjects = crumb.photos?.allObjects as? [Photo],
+            photosObjects.count >= 1 {
+            let photos = photosObjects.compactMap { UIImage(data: $0.data) }
+            completion(photos)
+            return
+        }
+        guard let sharedCrumb = crumb as? SharedPlace,
+            let photoURLs = sharedCrumb.photoURLs,
+            photoURLs.count > 0
+            else { completion(nil) ; return }
+        var photos: [UIImage] = []
+        let dispatchGroup = DispatchGroup()
+        for photoURL in photoURLs {
+            dispatchGroup.enter()
+            let dataTask = URLSession.shared.dataTask(with: URL(string: photoURL)!) { (data, _, error) in
+                if let _ = error {
+                    dispatchGroup.leave()
+                }
+                guard let data = data,
+                    let photo = UIImage(data: data)
+                    else { return }
+                photos.append(photo)
+                dispatchGroup.leave()
+                
+            }
+            dataTask.resume()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            completion(photos)
+        }
+    }
 }
+
 

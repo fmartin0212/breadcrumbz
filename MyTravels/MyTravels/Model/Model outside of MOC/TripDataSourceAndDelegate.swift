@@ -38,7 +38,7 @@ extension TripDataSourceAndDelegate: UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let trips = TripController.shared.frc.fetchedObjects else { return }
             let trip = trips[indexPath.row]

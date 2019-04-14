@@ -156,7 +156,7 @@ extension SharedPlaceDetailTableViewController {
                 let location = placemark.location
             else { return }
             
-            let region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0))
+            let region = MKCoordinateRegion.init(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0))
             
             let options = [
                 MKLaunchOptionsCameraKey: NSValue(mkCoordinate: region.center),
