@@ -179,16 +179,16 @@ final class FirebaseManager {
                 }
             }
             
-            guard let user = user else { completion(nil, Constants.somethingWentWrong) ; return }
+            guard let authDataResult = user else { completion(nil, Constants.somethingWentWrong) ; return }
             
             // Update displayName in Authentication storage
-            let changeRequest = user.createProfileChangeRequest()
+            let changeRequest = authDataResult.user.createProfileChangeRequest()
             changeRequest.displayName = username
             changeRequest.commitChanges(completion: { (error) in
                 if let error = error {
                     print(error as Any)
                 }
-                completion(user, nil)
+                completion(authDataResult.user, nil)
             })
         }
     }
@@ -197,7 +197,7 @@ final class FirebaseManager {
                       and password: String,
                       completion: @escaping (User?, String?) -> Void) {
         
-        Auth.auth().signIn(withEmail: email, password: password) { (firebaseUser, error) in
+        Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, error) in
             if let error = error {
                 if let errorCode = AuthErrorCode(rawValue: error._code) {
                     switch errorCode  {
@@ -213,7 +213,7 @@ final class FirebaseManager {
                     return
                 }
             } else {
-                completion(firebaseUser, nil)
+                completion(authDataResult?.user, nil)
             }
         }
     }

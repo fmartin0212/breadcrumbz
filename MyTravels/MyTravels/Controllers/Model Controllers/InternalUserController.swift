@@ -94,10 +94,9 @@ class InternalUserController {
                 return
             }
             
-            user.photoURL = metadata?.downloadURL()?.absoluteString
-            user.photo = photo
+//            user.photoURL = metadata?.storageReference.            user.photo = photo
             
-            FirebaseManager.save(metadata?.downloadURL()?.absoluteString as Any, to: ref, completion: { (error) in
+            FirebaseManager.save(metadata?.path as Any, to: ref, completion: { (error) in
                 if let error = error {
                     print("There was an error saving the photo URL to the Firebase DB: \(error.localizedDescription)")
                     completion(false)

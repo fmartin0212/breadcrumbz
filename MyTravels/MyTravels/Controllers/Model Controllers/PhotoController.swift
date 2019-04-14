@@ -119,8 +119,7 @@ final class PhotoController {
         FirebaseManager.save(tripPhoto) { (metadata, errorMessage) in
             if let _ = errorMessage {
                 completion(false)
-            } else if let metadata = metadata {
-                metadata.downloadURL()
+            } else if let _ = metadata {
                 let children = [Constants.photoID]
                 let values = [tripPhoto.uid : true]
                 
@@ -158,7 +157,7 @@ final class PhotoController {
                                 
                             }
                             
-                            let value: [String : Any] = [photo.uid : metadata?.downloadURL()?.absoluteString as Any]
+                            let value: [String : Any] = [photo.uid : metadata?.path as Any]
                             
                             dispatchGroup.enter()
                             
@@ -200,7 +199,7 @@ final class PhotoController {
             dispatchGroup.enter()
             FirebaseManager.save(photo) { (metadata, _) in
                 if let metadata = metadata {
-                    let downloadURL = metadata.downloadURL()?.absoluteString
+                    let downloadURL = metadata.path
                     photoDict[String(int)] = downloadURL!
                 }
                 dispatchGroup.leave()

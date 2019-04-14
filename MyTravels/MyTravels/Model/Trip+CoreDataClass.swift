@@ -11,7 +11,9 @@ import Foundation
 import CoreData
 
 @objc(Trip)
-public class Trip: NSManagedObject, FirebaseDBSavable, TripObject {
+public class Trip: NSManagedObject, FirebaseDBSavable, FirestoreSavable, TripObject {
+    internal static var collectionName: String = "Trip"
+    
     // Firebase Savable
     var uuid: String?
     static var referenceName: String = Constants.trip
