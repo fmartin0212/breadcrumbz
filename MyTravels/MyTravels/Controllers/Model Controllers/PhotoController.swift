@@ -24,8 +24,13 @@ final class PhotoController {
         
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
     }()
+    private let firebaseStorageService: FirebaseStorageServiceProtocol
     
     var photos: [Photo] = []
+    
+    init() {
+        self.firebaseStorageService = FirebaseStorageService()
+    }
     
     // CRUD Functions
     
@@ -249,6 +254,18 @@ final class PhotoController {
         
         dispatchGroup.notify(queue: .main) {
             completion(photos)
+        }
+    }
+    
+    func fetchPhoto(withPath path: String, completion: @escaping (Result<UIImage, FireError>) -> Void) {
+        firebaseStorageService.fetchFromStorage(path: path) { (result) in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let data):
+                guard let image = UIImage(data: data) else { completion(.failure(.generic)) ; return }
+                completion(.success(image))
+            }
         }
     }
 }

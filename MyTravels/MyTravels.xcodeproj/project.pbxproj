@@ -16,7 +16,10 @@
 		B71248D6222B60DB00D6C4A5 /* FMLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71248D5222B60DB00D6C4A5 /* FMLineView.swift */; };
 		B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */; };
 		B725034F20D9B64C00744B23 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B725034E20D9B64C00744B23 /* ProfileViewController.swift */; };
-		B7336E812262D93A00143812 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E802262D93A00143812 /* FirebaseService.swift */; };
+		B7336E812262D93A00143812 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E802262D93A00143812 /* FirestoreService.swift */; };
+		B7336E8322631D5200143812 /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E8222631D5200143812 /* FirebaseStorageService.swift */; };
+		B7336E8522631DE000143812 /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E8422631DE000143812 /* FirebaseAuthService.swift */; };
+		B7336E8722632A9500143812 /* FireErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E8622632A9500143812 /* FireErrors.swift */; };
 		B735428D2174E36300D9A68D /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B735428C2174E36200D9A68D /* Trip+CoreDataProperties.swift */; };
 		B73804F52224E37B00CD9E59 /* AddCrumb.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73804F42224E37B00CD9E59 /* AddCrumb.xib */; };
 		B73804FB2224EA3700CD9E59 /* AddCrumbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73804FA2224EA3700CD9E59 /* AddCrumbViewController.swift */; };
@@ -124,7 +127,10 @@
 		B71248D5222B60DB00D6C4A5 /* FMLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FMLineView.swift; path = MyTravels/UI/FMLineView.swift; sourceTree = SOURCE_ROOT; };
 		B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B725034E20D9B64C00744B23 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		B7336E802262D93A00143812 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		B7336E802262D93A00143812 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		B7336E8222631D5200143812 /* FirebaseStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
+		B7336E8422631DE000143812 /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
+		B7336E8622632A9500143812 /* FireErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireErrors.swift; sourceTree = "<group>"; };
 		B735428C2174E36200D9A68D /* Trip+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B73804F42224E37B00CD9E59 /* AddCrumb.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCrumb.xib; sourceTree = "<group>"; };
 		B73804FA2224EA3700CD9E59 /* AddCrumbViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCrumbViewController.swift; sourceTree = "<group>"; };
@@ -351,7 +357,10 @@
 		B7C10CB32020D19500818430 /* MyTravels */ = {
 			isa = PBXGroup;
 			children = (
-				B7336E802262D93A00143812 /* FirebaseService.swift */,
+				B7336E802262D93A00143812 /* FirestoreService.swift */,
+				B7336E8622632A9500143812 /* FireErrors.swift */,
+				B7336E8422631DE000143812 /* FirebaseAuthService.swift */,
+				B7336E8222631D5200143812 /* FirebaseStorageService.swift */,
 				B7C10CD420214D4200818430 /* MyTravels.entitlements */,
 				B7C10CDB20214F6900818430 /* Model */,
 				B7DA1B79202E2A020007497A /* Controllers */,
@@ -732,6 +741,7 @@
 				B7F7CF44217685150097198C /* SharedPlaceController.swift in Sources */,
 				B7655B2A22277B9B002D33F7 /* SignUpVC.swift in Sources */,
 				B7DA1B78202E1AE20007497A /* InternalUser.swift in Sources */,
+				B7336E8722632A9500143812 /* FireErrors.swift in Sources */,
 				B70E7D1521F408A000B2228A /* Photo+CoreDataClass.swift in Sources */,
 				B7F75C20205A14D800C876A0 /* SharedTripDetailTableViewCell.swift in Sources */,
 				B7B0C36E203724F30031A92A /* SharedTrip.swift in Sources */,
@@ -747,7 +757,7 @@
 				B7F75C0D205871ED00C876A0 /* SharedTripsListViewController.swift in Sources */,
 				B7F88E3A224085A200BD16DC /* EditProfileViewController.swift in Sources */,
 				B7D652412026DF0E00E975F1 /* PlaceDetailTableViewController.swift in Sources */,
-				B7336E812262D93A00143812 /* FirebaseService.swift in Sources */,
+				B7336E812262D93A00143812 /* FirestoreService.swift in Sources */,
 				B7C10CB72020D19500818430 /* CreateAccountViewController.swift in Sources */,
 				B7F75C092058521C00C876A0 /* ExplanationViewController.swift in Sources */,
 				B7BDA845202A29F50080B81B /* EditPlaceTableViewController.swift in Sources */,
@@ -766,6 +776,8 @@
 				B7C0B59C220CB393009FAAEB /* AddTripViewController.swift in Sources */,
 				B7C0E3C42232EDC300438299 /* SharedTripDataSourceAndDelegate.swift in Sources */,
 				B7C0E3CE22349F8F00438299 /* MainTabBarController.swift in Sources */,
+				B7336E8322631D5200143812 /* FirebaseStorageService.swift in Sources */,
+				B7336E8522631DE000143812 /* FirebaseAuthService.swift in Sources */,
 				B76B2F722245D50F00E688F4 /* EmptyTripStateView.swift in Sources */,
 				B762265521EFC9510045F260 /* FirebaseSyncable.swift in Sources */,
 				B7DA1B71202E140C0007497A /* Place+CoreDataClass.swift in Sources */,

@@ -8,7 +8,8 @@
 
 import UIKit
 
-class SharedPlace: FirebaseDBRetrievable, CrumbObject {
+class SharedPlace: FirebaseDBRetrievable, FirestoreRetrievable, CrumbObject {
+    internal static var collectionName: String = "Crumb"
     
     var address: String
     var comments: String?

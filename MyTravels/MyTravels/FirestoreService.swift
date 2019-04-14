@@ -8,9 +8,13 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseAuth
 
 protocol FirestoreServiceProtocol {
-    
+    func save<T: FirestoreSavable>(object: T, completion: @escaping(Result<String, FireError>) -> Void)
+    func update<T: FirestoreSavable>(object: T, atChildren children: [AnyHashable : Any], completion: @escaping (Result<Bool, FireError>) -> Void)
+    func delete<T: FirestoreSavable>(object: T, completion: @escaping (Result<Bool, FireError>) -> Void)
+    func fetch<T: FirestoreRetrievable>(uuid: String?, field: String?, criteria: String?, queryType: FirestoreQueryType?, completion: @escaping (Result<[T], FireError>) -> Void)
 }
 
 protocol FirestoreSyncable {
@@ -33,28 +37,20 @@ protocol FirestoreSavable: FirestoreSyncable {
     var dictionary: [String : Any] { get }
 }
 
-enum FirestoreError: String, Error {
-    case saving
-    case updating
-    case deleting
-    case generic
-    case fetching
-}
-
 enum FirestoreQueryType {
     case fieldEqual
     case fieldArrayContains
 }
 
-struct FirestoreService: FirestoreServiceProtocol {
+public struct FirestoreService: FirestoreServiceProtocol {
     
     func save<T: FirestoreSavable>(object: T,
-                                   completion: @escaping(Result<String, FirestoreError>) -> Void) {
+                                   completion: @escaping(Result<String, FireError>) -> Void) {
         let document = T.collectionReference.document()
         document.setData(object.dictionary) { (error) in
             if let error = error {
                 print("Error saving to Firestore: \(error.localizedDescription)")
-                completion(.failure(.saving))
+                completion(.failure(.deleting))
                 return
             }
             completion(.success(document.documentID))
@@ -63,7 +59,7 @@ struct FirestoreService: FirestoreServiceProtocol {
     
     func update<T: FirestoreSavable>(object: T,
                                      atChildren children: [AnyHashable : Any],
-                                     completion: @escaping (Result<Bool, FirestoreError>) -> Void) {
+                                     completion: @escaping (Result<Bool, FireError>) -> Void) {
         guard let uuid = object.uuid else { completion(.failure(.generic)) ; return }
         T.collectionReference.document(uuid).updateData(children) { (error) in
             if let error = error {
@@ -76,7 +72,7 @@ struct FirestoreService: FirestoreServiceProtocol {
     }
     
     func delete<T: FirestoreSavable>(object: T,
-                                     completion: @escaping (Result<Bool, FirestoreError>) -> Void) {
+                                     completion: @escaping (Result<Bool, FireError>) -> Void) {
         guard let uuid = object.uuid else { completion(.failure(.generic)) ; return }
         T.collectionReference.document(uuid).delete { (error) in
             if let error = error {
@@ -88,7 +84,11 @@ struct FirestoreService: FirestoreServiceProtocol {
         }
     }
     
-    func fetch<T: FirestoreRetrievable>(uuid: String?, field: String?, criteria: String?, queryType: FirestoreQueryType?, completion: @escaping (Result<[T], FirestoreError>) -> Void) {
+    func fetch<T: FirestoreRetrievable>(uuid: String?,
+                                        field: String?,
+                                        criteria: String?,
+                                        queryType: FirestoreQueryType?,
+                                        completion: @escaping (Result<[T], FireError>) -> Void) {
         if let uuid = uuid {
             T.collectionReference.document(uuid).getDocument { (snapshot, error) in
                 if let error = error {
@@ -124,7 +124,8 @@ struct FirestoreService: FirestoreServiceProtocol {
                 completion(.failure(.fetching))
                 return
             }
-            guard let snapshot = snapshot
+            guard let snapshot = snapshot,
+            snapshot.documents.count > 0
                 else { completion(.failure(.fetching)) ; return }
             let objects = snapshot.documents.compactMap { T(dictionary: $0.data(), uuid: $0.documentID) }
             completion(.success(objects))

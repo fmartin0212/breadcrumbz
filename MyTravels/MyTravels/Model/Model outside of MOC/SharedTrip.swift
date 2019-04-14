@@ -9,7 +9,9 @@
 import UIKit
 import FirebaseDatabase
 
-class SharedTrip: FirebaseDBRetrievable, TripObject {
+class SharedTrip: FirebaseDBRetrievable, FirestoreRetrievable, TripObject {
+    internal static var collectionName: String = "Trip"
+    
     
     var uuid: String?
     

@@ -21,12 +21,8 @@ class Constants {
     
     // MARK: - Error messages
     
-    static public let wrongPassword = "The password that you entered was incorrect. Please try again."
-    static public let noAccount = "An account was not found for that email address. Please try again."
     static public let somethingWentWrong = "Something went wrong. Please try again."
-    static public let emailInUse = "That email address is already in use. Please try again."
-    static public let invalidEmail = "The email address that you entered is invalid. Please try again."
-    static public let weakPassword = "That password is too short. Please enter a password that is at least 6 characters long."
+
     
     // MARK: - Firebase references
     

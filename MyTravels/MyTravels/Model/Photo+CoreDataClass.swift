@@ -10,7 +10,10 @@ import UIKit
 import CoreData
 
 @objc(Photo)
-public class Photo: NSManagedObject, FirebaseStorageSavable {
+public class Photo: NSManagedObject, FirebaseStorageSavable, FirestoreSyncable {
+    var uuid: String?
+    
+    internal static var collectionName: String = "Photo"
     
     static var referenceName: String {
         return "Photo"

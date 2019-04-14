@@ -9,7 +9,8 @@
 import UIKit
 import FirebaseDatabase
 
-class InternalUser: FirebaseDBSavable, FirebaseDBRetrievable {
+class InternalUser: FirebaseDBSavable, FirestoreSavable, FirestoreRetrievable, FirebaseDBRetrievable {
+    internal static var collectionName: String = "User"
     
     let firstName: String
     let lastName: String?
@@ -55,7 +56,7 @@ class InternalUser: FirebaseDBSavable, FirebaseDBRetrievable {
         self.email = email
         self.uuid = uuid
         
-        if let photoURL = dictionary["photoURL"] as? String {
+        if let photoURL = dictionary["photoPath"] as? String {
             self.photoURL = photoURL
             InternalUserController.shared.fetchProfilePhoto(from: photoURL) { (photo) in
                 guard let photo = photo else { return }
@@ -88,7 +89,6 @@ class InternalUser: FirebaseDBSavable, FirebaseDBRetrievable {
             let email = tripDict["email"] as? String
             
             else { return nil }
-        
         
         self.firstName = firstName
         self.lastName = lastName
