@@ -125,54 +125,49 @@ class InternalUserController {
                 case .failure(let error):
                     completion(.failure(error))
                 case .success(let image):
+                    
                     completion(.success(image))
                 }
             }
-        }
+    }
+    
+    func blockUserWith(creatorID: String, completion: @escaping (Result<Bool, FireError>) -> Void) {
         
-        func blockUserWith(creatorID: String, completion: @escaping (Result<Bool, FireError>) -> Void) {
-            
-            guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(.failure(.generic)) ; return }
-            // Add user to loggedInUser's blocked list
-            let children = [creatorID : true]
-            firestoreService.update(object: loggedInUser, atChildren: children) { [weak self] (result) in
-                switch result {
-                    
-                case .failure(let error):
-                    completion(.failure(error))
-                    
-                case .success(_):
-                    
-                    // Unwrap logged in user's participant trip IDs
-                    guard let loggedInUserPartcipantIDs = InternalUserController.shared.loggedInUser!.participantTripIDs else { completion(.failure(.generic)) ; return }
-                    
-                    self?.firestoreService.fetch(uuid: nil, field: "uuid", criteria: creatorID, queryType: .fieldEqual, completion: { (result: Result<[InternalUser], FireError>) in
-                        switch result {
-                            
-                        case .failure(let error):
-                            completion(.failure(error))
-                            
-                        case .success(let blockedUserArray):
-                            guard let blockedUser = blockedUserArray.first,
-                                let blockedUserSharedTripIDs = blockedUser.sharedTripIDs
-                                else { completion(.failure(.generic)) ; return }
-                            let participantTripIDs = loggedInUserPartcipantIDs.filter { !blockedUserSharedTripIDs.contains($0) }
-                            let children = ["participantTripIDs" : participantTripIDs]
-                            
-                            self?.firestoreService.update(object: loggedInUser, atChildren: children, completion: { (result) in
-                                switch result {
-                                case .failure(let error):
-                                    completion(.failure(error))
-                                case .success(_):
-                                    completion(.success(true))
-                                }
-                            })
-                        }
-                    })
-                }
+        guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(.failure(.generic)) ; return }
+        // Add user to loggedInUser's blocked list
+        firestoreService.update(object: loggedInUser, atField: "blockedUserIDs", withCriteria: [creatorID], with: .arrayAddtion) { [weak self] (result) in
+            switch result {
+                
+            case .failure(let error):
+                completion(.failure(error))
+                
+            case .success(_):
+                
+                self?.firestoreService.fetch(uuid: nil, field: "uuid", criteria: creatorID, queryType: .fieldEqual, completion: { (result: Result<[InternalUser], FireError>) in
+                    switch result {
+                        
+                    case .failure(let error):
+                        completion(.failure(error))
+                        
+                    case .success(let blockedUserArray):
+                        guard let blockedUser = blockedUserArray.first,
+                            let blockedUserSharedTripIDs = blockedUser.sharedTripIDs
+                            else { completion(.failure(.generic)) ; return }
+                        
+                        self?.firestoreService.update(object: loggedInUser, atField: "participantTripIDs", withCriteria: blockedUserSharedTripIDs, with: .arrayDeletion, completion: { (result) in
+                            switch result {
+                            case .failure(let error):
+                                completion(.failure(error))
+                            case .success(_):
+                                completion(.success(true))
+                            }
+                        })
+                    }
+                })
             }
         }
-        
+    }
+    
         
         func updateUser(name: String?, username: String?, email: String?, password: String?, completion: @escaping (Bool) -> Void) {
             

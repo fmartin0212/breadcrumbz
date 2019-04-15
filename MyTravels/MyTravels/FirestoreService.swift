@@ -44,7 +44,8 @@ enum FirestoreQueryType {
 
 enum FirestoreUpdateType {
     case update
-    case arrayUpdate
+    case arrayAddtion
+    case arrayDeletion
 }
 public struct FirestoreService: FirestoreServiceProtocol {
     
@@ -67,12 +68,14 @@ public struct FirestoreService: FirestoreServiceProtocol {
                                      with updateType: FirestoreUpdateType,
                                      completion: @escaping (Result<Bool, FireError>) -> Void) {
         guard let uuid = object.uuid,
-        let singleCriteria = criteria.first
-        else { completion(.failure(.generic)) ; return }
+            criteria.count > 0,
+            let singleCriteria = criteria.first
+            else { completion(.failure(.generic)) ; return }
+        let docRef = T.collectionReference.document(uuid)
         switch updateType {
-       
+            
         case .update:
-            T.collectionReference.document(uuid).updateData([field : singleCriteria]) { (error) in
+            docRef.updateData([field : singleCriteria]) { (error) in
                 if let error = error {
                     print("Error updating to Firestore: \(error.localizedDescription)")
                     completion(.failure(.updating))
@@ -81,14 +84,24 @@ public struct FirestoreService: FirestoreServiceProtocol {
                 completion(.success(true))
             }
             
-        case .arrayUpdate:
-            T.collectionReference.document(uuid).updateData([field : FieldValue.arrayUnion(criteria)]) { (error) in
+        case .arrayAddtion:
+            docRef.updateData([field : FieldValue.arrayUnion(criteria)]) { (error) in
                 if let error = error {
                     print("Error updating to Firestore: \(error.localizedDescription)")
                     completion(.failure(.updating))
                     return
                 }
-                 completion(.success(true))
+                completion(.success(true))
+            }
+            
+        case .arrayDeletion:
+            docRef.updateData([field : FieldValue.arrayRemove(criteria)]) { (error) in
+                if let error = error {
+                    print("Error updating to Firestore: \(error.localizedDescription)")
+                    completion(.failure(.updating))
+                    return
+                }
+                completion(.success(true))
             }
         }
     }

@@ -128,7 +128,7 @@ final class PhotoController {
             case .failure(let error):
                 completion(.failure(error))
             case .success(let path):
-                self?.firestoreService.update(object: trip, atChildren: ["photoPath" : path], completion: { (result) in
+                self?.firestoreService.update(object: trip, atField: "photoPath", withCriteria: [path], with: .update, completion: { (result) in
                     switch result {
                     case .failure(let error):
                         completion(.failure(error))
@@ -268,6 +268,7 @@ final class PhotoController {
                 completion(.failure(error))
             case .success(let data):
                 guard let image = UIImage(data: data) else { completion(.failure(.generic)) ; return }
+                image.addToImageCache(path: path)
                 completion(.success(image))
             }
         }
@@ -287,7 +288,7 @@ final class PhotoController {
                 completion(.failure(error))
                 
             case .success(let path):
-                self?.firestoreService.update(object: user, atChildren: ["photoPath" : path], completion: { (result) in
+                self?.firestoreService.update(object: user, atField: "photoPath", withCriteria: [path], with: .update, completion: { (result) in
                     switch result {
                     case .failure(let error):
                         completion(.failure(error))
