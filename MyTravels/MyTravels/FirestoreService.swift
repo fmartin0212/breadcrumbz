@@ -12,7 +12,7 @@ import FirebaseAuth
 
 protocol FirestoreServiceProtocol {
     func save<T: FirestoreSavable>(object: T, completion: @escaping(Result<String, FireError>) -> Void)
-    func update<T: FirestoreSavable>(object: T, atChildren children: [AnyHashable : Any], completion: @escaping (Result<Bool, FireError>) -> Void)
+    func update<T: FirestoreSavable>(object: T, atField field: String, withCriteria criteria: [String], with updateType: FirestoreUpdateType, completion: @escaping (Result<Bool, FireError>) -> Void)
     func delete<T: FirestoreSavable>(object: T, completion: @escaping (Result<Bool, FireError>) -> Void)
     func fetch<T: FirestoreRetrievable>(uuid: String?, field: String?, criteria: String?, queryType: FirestoreQueryType?, completion: @escaping (Result<[T], FireError>) -> Void)
 }
@@ -42,6 +42,10 @@ enum FirestoreQueryType {
     case fieldArrayContains
 }
 
+enum FirestoreUpdateType {
+    case update
+    case arrayUpdate
+}
 public struct FirestoreService: FirestoreServiceProtocol {
     
     func save<T: FirestoreSavable>(object: T,
@@ -58,16 +62,34 @@ public struct FirestoreService: FirestoreServiceProtocol {
     }
     
     func update<T: FirestoreSavable>(object: T,
-                                     atChildren children: [AnyHashable : Any],
+                                     atField field: String,
+                                     withCriteria criteria: [String],
+                                     with updateType: FirestoreUpdateType,
                                      completion: @escaping (Result<Bool, FireError>) -> Void) {
-        guard let uuid = object.uuid else { completion(.failure(.generic)) ; return }
-        T.collectionReference.document(uuid).updateData(children) { (error) in
-            if let error = error {
-                print("Error updating to Firestore: \(error.localizedDescription)")
-                completion(.failure(.updating))
-                return
+        guard let uuid = object.uuid,
+        let singleCriteria = criteria.first
+        else { completion(.failure(.generic)) ; return }
+        switch updateType {
+       
+        case .update:
+            T.collectionReference.document(uuid).updateData([field : singleCriteria]) { (error) in
+                if let error = error {
+                    print("Error updating to Firestore: \(error.localizedDescription)")
+                    completion(.failure(.updating))
+                    return
+                }
+                completion(.success(true))
             }
-            completion(.success(true))
+            
+        case .arrayUpdate:
+            T.collectionReference.document(uuid).updateData([field : FieldValue.arrayUnion(criteria)]) { (error) in
+                if let error = error {
+                    print("Error updating to Firestore: \(error.localizedDescription)")
+                    completion(.failure(.updating))
+                    return
+                }
+                 completion(.success(true))
+            }
         }
     }
     
@@ -93,14 +115,14 @@ public struct FirestoreService: FirestoreServiceProtocol {
             T.collectionReference.document(uuid).getDocument { (snapshot, error) in
                 if let error = error {
                     print("Error fetching object from Firestore: \(error.localizedDescription)")
-                    completion(.failure(.fetching))
+                    completion(.failure(.fetchingFromStore))
                     return
                 }
                 guard let snapshot = snapshot,
                     snapshot.exists,
                     let dictionary = snapshot.data(),
                     let object = T(dictionary: dictionary, uuid: snapshot.documentID)
-                    else { completion(.failure(.fetching)) ; return }
+                    else { completion(.failure(.fetchingFromStore)) ; return }
                 completion(.success([object]))
                 return
             }
@@ -109,7 +131,7 @@ public struct FirestoreService: FirestoreServiceProtocol {
         guard let field = field,
             let criteria = criteria,
             let queryType = queryType
-            else { completion(.failure(.fetching)) ; return }
+            else { completion(.failure(.fetchingFromStore)) ; return }
         
         let query: Query
         switch queryType {
@@ -121,12 +143,12 @@ public struct FirestoreService: FirestoreServiceProtocol {
         query.getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error fetching objects from Firestore: \(error.localizedDescription)")
-                completion(.failure(.fetching))
+                completion(.failure(.fetchingFromStore))
                 return
             }
             guard let snapshot = snapshot,
             snapshot.documents.count > 0
-                else { completion(.failure(.fetching)) ; return }
+                else { completion(.failure(.fetchingFromStore)) ; return }
             let objects = snapshot.documents.compactMap { T(dictionary: $0.data(), uuid: $0.documentID) }
             completion(.success(objects))
         }

@@ -118,6 +118,10 @@ extension UIImage {
             draw(in: CGRect(origin: .zero, size: newSize))
         }
     }
+    
+    func addToImageCache(path: String) {
+        CacheManager.shared.addImage(path: path, image: self)
+    }
 }
 
 extension UITextField {

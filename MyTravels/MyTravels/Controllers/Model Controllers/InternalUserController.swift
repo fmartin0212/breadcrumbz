@@ -17,7 +17,6 @@ class InternalUserController {
     var loggedInUser: InternalUser?
     let firebaseAuthService: FirebaseAuthServiceProtocol
     let firestoreService: FirestoreServiceProtocol
-    let firebaseStorageService: FirebaseStorageServiceProtocol
     
     init() {
         self.firebaseAuthService = FirebaseAuthService()
@@ -105,85 +104,75 @@ class InternalUserController {
     func saveProfilePhoto(photo: UIImage,
                           for user: InternalUser,
                           completion: @escaping (Result<Bool, FireError>) -> Void) {
-        guard let imageAsData = photo.jpegData(compressionQuality: 0.1) else { completion(.failure(.generic)) ; return }
-        
-        let photo = Photo(photo: imageAsData, place: nil, trip: nil)
-        
-        firebaseStorageService.save(photo) { [weak self] (result) in
+        PhotoController.shared.savePhoto(photo: photo, for: user) { (result) in
             switch result {
-                
             case .failure(let error):
                 completion(.failure(error))
-                
-            case .success(let path):
-                self?.firestoreService.update(object: user, atChildren: ["photoPath" : path], completion: { (result) in
-                    switch result {
-                    case .failure(let error):
-                        completion(.failure(error))
-                    case .success(_):
-                        CoreDataManager.delete(object: photo)
-                        completion(.success(true))
-                    }
-                })
+            case .success(_):
+                completion(.success(true))
             }
         }
-        
-        func fetchProfilePhoto(from path: String, completion: @escaping (UIImage?) -> Void) {
+    }
+    
+    func fetchProfilePhoto(from path: String, completion: @escaping (Result<UIImage, FireError>) -> Void) {
+            if let image = CacheManager.shared.queryImageCache(path: path) {
+                completion(.success(image))
+                return
+            }
             
-            guard let url = URL(string: urlAsString) else { completion(nil) ; return }
-            
-            let dataTask = URLSession.shared.dataTask(with: url) { (data, _, error) in
-                if let error = error {
-                    print("There was an error retrieving the profile photo from Firebase: \(error.localizedDescription)")
-                    completion(nil)
-                    return
+            PhotoController.shared.fetchPhoto(withPath: path) { (result) in
+                switch result {
+                case .failure(let error):
+                    completion(.failure(error))
+                case .success(let image):
+                    completion(.success(image))
                 }
-                guard let data = data else { completion(nil) ; return }
-                let image = UIImage(data: data)
-                completion(image)
             }
-            dataTask.resume()
         }
         
-        func blockUserWith(creatorID: String, completion: @escaping (String?) -> Void) {
+        func blockUserWith(creatorID: String, completion: @escaping (Result<Bool, FireError>) -> Void) {
+            
+            guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(.failure(.generic)) ; return }
             // Add user to loggedInUser's blocked list
-            let blockRef = FirebaseManager.ref.child("User").child(loggedInUser!.uuid!).child("blockedUserIDs")
-            FirebaseManager.updateObject(at: blockRef, value: [creatorID : true]) { (errorMessage) in
-                if let errorMessage = errorMessage {
-                    print("There was an error saving the username to the loggedInUser's blockedUser list : \(errorMessage)")
-                    completion(errorMessage)
-                    return
-                } else {
-                    // Unwrap logged in user's participant trip IDs
-                    guard let loggedInUserPartcipantIDs = InternalUserController.shared.loggedInUser!.participantTripIDs else { completion(Constants.somethingWentWrong) ; return }
+            let children = [creatorID : true]
+            firestoreService.update(object: loggedInUser, atChildren: children) { [weak self] (result) in
+                switch result {
                     
-                    // Fetch all the sharedTripIDs for the user that is going to be blocked
-                    let ref =  FirebaseManager.ref.child("User").child(creatorID).child("sharedTripIDs")
-                    FirebaseManager.fetchObject(from: ref) { (snapshot) in
-                        guard let sharedTripIDDictionary = snapshot.value as? [String : Any] else { completion(Constants.somethingWentWrong) ; return }
-                        let sharedTripIDs = sharedTripIDDictionary.compactMap { $0.key }
-                        
-                        // Remove the participantTripIDs for the logged in user if it matches a sharedTripID from the blocked user.
-                        let participantTripIDs = loggedInUserPartcipantIDs.filter { !sharedTripIDs.contains($0) }
-                        
-                        var participantTripIDDictionary: [String : Any] = [:]
-                        participantTripIDs.forEach { participantTripIDDictionary[$0] = true }
-                        
-                        FirebaseManager.overwrite(self.loggedInUser!, atChildren: ["participantTripIDs"], withValues: participantTripIDDictionary, completion: { (errorMessage) in
-                            if let errorMessage = errorMessage {
-                                completion(errorMessage)
-                                return
-                            } else {
-                                let sharedTrips = SharedTripsController.shared.sharedTrips.filter { $0.creatorID != creatorID }
-                                SharedTripsController.shared.sharedTrips = sharedTrips
-                                self.loggedInUser!.participantTripIDs = loggedInUserPartcipantIDs
-                                completion(nil)
-                            }
-                        })
-                    }
+                case .failure(let error):
+                    completion(.failure(error))
+                    
+                case .success(_):
+                    
+                    // Unwrap logged in user's participant trip IDs
+                    guard let loggedInUserPartcipantIDs = InternalUserController.shared.loggedInUser!.participantTripIDs else { completion(.failure(.generic)) ; return }
+                    
+                    self?.firestoreService.fetch(uuid: nil, field: "uuid", criteria: creatorID, queryType: .fieldEqual, completion: { (result: Result<[InternalUser], FireError>) in
+                        switch result {
+                            
+                        case .failure(let error):
+                            completion(.failure(error))
+                            
+                        case .success(let blockedUserArray):
+                            guard let blockedUser = blockedUserArray.first,
+                                let blockedUserSharedTripIDs = blockedUser.sharedTripIDs
+                                else { completion(.failure(.generic)) ; return }
+                            let participantTripIDs = loggedInUserPartcipantIDs.filter { !blockedUserSharedTripIDs.contains($0) }
+                            let children = ["participantTripIDs" : participantTripIDs]
+                            
+                            self?.firestoreService.update(object: loggedInUser, atChildren: children, completion: { (result) in
+                                switch result {
+                                case .failure(let error):
+                                    completion(.failure(error))
+                                case .success(_):
+                                    completion(.success(true))
+                                }
+                            })
+                        }
+                    })
                 }
             }
         }
+        
         
         func updateUser(name: String?, username: String?, email: String?, password: String?, completion: @escaping (Bool) -> Void) {
             

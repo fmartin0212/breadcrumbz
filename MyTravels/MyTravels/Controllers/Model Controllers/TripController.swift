@@ -23,6 +23,11 @@ class TripController {
     }()
     
     var trips: [Trip] = []
+    let firestoreService: FirestoreServiceProtocol
+    
+    init() {
+        self.firestoreService = FirestoreService()
+    }
     
     // MARK: - CRUD Functions
     
@@ -135,26 +140,25 @@ class TripController {
      */
     func upload(trip: Trip,
                 creatorName: String,
-                completion: @escaping (Bool) -> Void) {
+                completion: @escaping (Result<Bool, FireError>) -> Void) {
         
-        FirebaseManager.save(trip) { (errorMessage, tripUUID) in
-            if let errorMessage = errorMessage {
-                print(errorMessage)
-                completion(false)
-                return
-            }
-            trip.uuid = tripUUID
-            trip.uid = trip.uuid
-            CoreDataManager.save()
-            
-            if let tripUUID = tripUUID {
-                let children = [Constants.sharedTripIDs]
-                let values = [tripUUID : true]
-                FirebaseManager.update(InternalUserController.shared.loggedInUser!, atChildren: children, withValues: values, completion: { (_) in
+        firestoreService.save(object: trip) { (result) in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let uuid):
+                trip.uuid = uuid
+                trip.uid = uuid
+                CoreDataManager.save()
+                
+            FirebaseManager.update(InternalUserController.shared.loggedInUser!, atChildren: children, withValues: values, completion: { (_) in
                     
                     // Save the trip's photos to Firebase storage.
-                    PhotoController.shared.savePhotos(for: trip, completion: { (success) in
-                        if success {
+                    PhotoController.shared.savePhotos(for: trip, completion: { (result) in
+                        switch result {
+                        case .failure(let error):
+                            completion(.failure(error))
+                        case .success(_):
                             PlaceController.shared.uploadPlaces(for: trip, completion: { (placeIDs) in
                                 let child = "placeIDs"
                                 FirebaseManager.update(trip, atChildren: [child], withValues: placeIDs, completion: { (errorMessage) in
