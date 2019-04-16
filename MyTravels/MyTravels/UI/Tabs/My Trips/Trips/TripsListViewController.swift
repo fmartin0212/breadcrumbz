@@ -15,7 +15,6 @@ class TripsListViewController: UIViewController {
     
     @IBOutlet var addTripBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var addATripButton: UIButton!
     
     // MARK: - Constants & Variables
     
@@ -96,27 +95,27 @@ extension TripsListViewController {
         NSLayoutConstraint(item: noTripsView, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
         
         self.navigationItem.rightBarButtonItem = nil
-        addATripButton.clipsToBounds = true
-        addATripButton.layer.cornerRadius = 25
+//        addATripButton.clipsToBounds = true
+//        addATripButton.layer.cornerRadius = 25
     }
     
-    private func fetchUserInfo(completion: @escaping (Bool) -> Void) {
-        
-        guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(false) ; return }
-        SharedTripsController.shared.fetchSharedTrips { (success) in
-            if success {
-                NotificationCenter.default.post(name: Constants.sharedTripsReceivedNotif, object: nil)
-                if let photoURL = loggedInUser.photoURL {
-                    InternalUserController.shared.fetchProfilePhoto(from: photoURL, completion: { (photo) in
-                        DispatchQueue.main.async {
-                            completion(true)
-                        }
-                    })
-                }
-            } else { completion(false) }
-        }
-    }
-    
+//    private func fetchUserInfo(completion: @escaping (Bool) -> Void) {
+//
+//        guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(false) ; return }
+//        SharedTripsController.shared.fetchSharedTrips { (success) in
+//            if success {
+//                NotificationCenter.default.post(name: Constants.sharedTripsReceivedNotif, object: nil)
+//                if let photoURL = loggedInUser.photoURL {
+//                    InternalUserController.shared.fetchProfilePhoto(from: photoURL, completion: { (photo) in
+//                        DispatchQueue.main.async {
+//                            completion(true)
+//                        }
+//                    })
+//                }
+//            } else { completion(false) }
+//        }
+//    }
+//
     func refreshTableView() {
         if isSharedTripsView {
             

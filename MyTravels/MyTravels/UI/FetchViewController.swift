@@ -12,7 +12,7 @@ import FirebaseAuth
 class FetchViewController: UIViewController {
     
     var tripTabBarController: UITabBarController = {
-        let tripTabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
+        let tripTabBarController = UITabBarController()
         let myTripListVC = TripListVC(nibName: "TripListVC", bundle: nil)
         let myTripsNavigationController = UINavigationController(rootViewController: myTripListVC)
         let sharedTripListVC = TripListVC(nibName: "TripListVC", bundle: nil)
@@ -33,36 +33,43 @@ class FetchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        UserDefaults.standard.setValue(false, forKey: "userSkippedSignUp")
+        UserDefaults.standard.setValue(true, forKey: "userSkippedSignUp")
         
         if UserDefaults.standard.value(forKey: "userSkippedSignUp") == nil {
-            UserDefaults.standard.setValue(false, forKey: "userSkippedSignUp")
+            UserDefaults.standard.setValue(true, forKey: "userSkippedSignUp")
         }
         
-        InternalUserController.shared.checkForLoggedInUser { (success) in
-            if success {
-                SharedTripsController.shared.fetchSharedTrips() { (success) in
-                    if !success {
+        InternalUserController.shared.checkForLoggedInUser { (result) in
+            switch result {
+            case .success(_):
+                SharedTripsController.shared.fetchSharedTrips() { (result) in
+                    switch result {
+                    case .success(_):
                         DispatchQueue.main.async {
                             UIApplication.shared.windows.first!.rootViewController = self.tripTabBarController
                             return
                         }
+                    case .failure(_):
+                        print("Something went wrong in the fetch results controller")
                     }
+                }
+            case .failure(_):
+                if UserDefaults.standard.bool(forKey: "userSkippedSignUp") == false {
+                    DispatchQueue.main.async {
+                        let onboardingVC = UIStoryboard.onboarding.instantiateInitialViewController()
+                        UIApplication.shared.windows.first!.rootViewController = onboardingVC
+                    }
+                } else {
                     DispatchQueue.main.async {
                         UIApplication.shared.windows.first!.rootViewController = self.tripTabBarController
+                        return
                     }
-                }
-            } else if !success && UserDefaults.standard.value(forKey: "userSkippedSignUp") as! Bool == false {
-                DispatchQueue.main.async {
-                    let onboardingVC = UIStoryboard.onboarding.instantiateInitialViewController()
-                    UIApplication.shared.windows.first!.rootViewController = onboardingVC
-                }
-            } else {
-                DispatchQueue.main.async {
-                    UIApplication.shared.windows.first!.rootViewController = self.tripTabBarController
                 }
             }
         }
     }
 }
+
+
+
 

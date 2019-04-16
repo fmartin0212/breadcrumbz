@@ -62,7 +62,7 @@ class SharedPlaceController {
         let dispatchGroup  = DispatchGroup()
         for sharedPlace in sharedPlaces {
            
-            if let photoURLs = sharedPlace.photoURLs {
+            if let photoURLs = sharedPlace.photoPaths {
                 for urlAsString in photoURLs {
                     guard let url = URL(string: urlAsString) else { completion(false) ; return }
                     

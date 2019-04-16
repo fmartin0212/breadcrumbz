@@ -36,17 +36,21 @@ class InternalUserController {
         // Save the user to Firebase Auth
         firebaseAuthService.addUser(with: email, password: password, username: username) { [weak self] (result) in
             switch result {
+                
             case .failure(let error):
                 completion(.failure(error))
-            case .success(_):
+                
+            case .success(let user):
+                newUser.uuid = user.uid
                 // Save InternalUser object to Firestore
                 self?.firestoreService.save(object: newUser, completion: { (result) in
                     switch result {
+                    
                     case .failure(let error):
                         // FIXME: - failure should not pass .generic
                         completion(.failure(error))
-                    case .success(let uuid):
-                        newUser.uuid = uuid
+                    case .success(_):
+                        
                         self?.loggedInUser = newUser
                         completion(.success(true))
                     }
@@ -69,6 +73,8 @@ class InternalUserController {
                     completion(.success(true))
                 }
             }
+        } else {
+            completion(.failure(.generic))
         }
     }
     
@@ -142,7 +148,6 @@ class InternalUserController {
                 completion(.failure(error))
                 
             case .success(_):
-                
                 self?.firestoreService.fetch(uuid: nil, field: "uuid", criteria: creatorID, queryType: .fieldEqual, completion: { (result: Result<[InternalUser], FireError>) in
                     switch result {
                         
@@ -168,9 +173,9 @@ class InternalUserController {
         }
     }
     
+    
+    func updateUser(name: String?, username: String?, email: String?, password: String?, completion: @escaping (Bool) -> Void) {
         
-        func updateUser(name: String?, username: String?, email: String?, password: String?, completion: @escaping (Bool) -> Void) {
-            
-        }
     }
 }
+

@@ -11,7 +11,8 @@ import Foundation
 import CoreData
 
 @objc(Place)
-public class Place: NSManagedObject, FirebaseDBSavable, CrumbObject {
+public class Place: NSManagedObject, FirestoreSavable, FirebaseDBSavable, CrumbObject {
+    internal static var collectionName: String = "Crumb"
 
     // FirebaseSavable
     var uuid: String?

@@ -20,7 +20,7 @@ class SharedPlace: FirebaseDBRetrievable, FirestoreRetrievable, CrumbObject {
         return Place.types(rawValue: typeString)
     }
     var photos: [UIImage] = []
-    var photoURLs: [String]?
+    var photoPaths: [String]?
     let tripID: String
     
     required init?(dictionary: [String : Any], uuid: String) {
@@ -33,7 +33,7 @@ class SharedPlace: FirebaseDBRetrievable, FirestoreRetrievable, CrumbObject {
             else { return nil }
         
         if let photoURLs = dictionary["photoURLs"] as? [String: [String : Any]] {
-            self.photoURLs = photoURLs.compactMap({ (key, value) -> String? in
+            self.photoPaths = photoURLs.compactMap({ (key, value) -> String? in
                 let photoDict = value as! [String: String]
                 for (_, value) in photoDict {
                     return value

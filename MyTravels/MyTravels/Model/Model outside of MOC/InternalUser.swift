@@ -58,11 +58,10 @@ class InternalUser: FirebaseDBSavable, FirestoreSavable, FirestoreRetrievable, F
         
         if let photoURL = dictionary["photoPath"] as? String {
             self.photoURL = photoURL
-            InternalUserController.shared.fetchProfilePhoto(from: photoURL) { (photo) in
-                guard let photo = photo else { return }
-                self.photo = photo
-                NotificationCenter.default.post(Notification(name: Notification.Name("profilePictureUpdatedNotification")))
-            }
+//            InternalUserController.shared.fetchProfilePhoto(from: photoURL) { (result   ) in
+//                self.photo = photo
+//                NotificationCenter.default.post(Notification(name: Notification.Name("profilePictureUpdatedNotification")))
+//            }
         }
         
         if let participantTripIDs = dictionary["participantTripIDs"] as? [String : Any] {
@@ -97,10 +96,10 @@ class InternalUser: FirebaseDBSavable, FirestoreSavable, FirestoreRetrievable, F
         
         if let photoURL = tripDict["photoURL"] as? String {
             self.photoURL = photoURL
-            InternalUserController.shared.fetchProfilePhoto(from: photoURL) { (photo) in
-                guard let photo = photo else { return }
-                self.photo = photo
-            }
+//            InternalUserController.shared.fetchProfilePhoto(from: photoURL) { (photo) in
+//                guard let photo = photo else { return }
+//                self.photo = photo
+//            }
         }
         
         if let participantTripIDs = tripDict["participantTripIDs"] as? [String : Any] {

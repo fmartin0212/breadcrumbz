@@ -22,7 +22,7 @@ class SharedTripsListViewController: UIViewController {
         extendedLayoutIncludesOpaqueBars = true
         tableView.refreshControl = refreshControl
         tableView.addSubview(refreshControl)
-        refreshControl.addTarget(self, action: #selector(fetchSharedTrips), for: .valueChanged)
+//        refreshControl.addTarget(self, action: #selector(fetchSharedTrips), for: .valueChanged)
 //        NotificationCenter.default.addObserver(self, selector: #selector(refreshViews), name: Constants.sharedTripsReceivedNotif, object: nil)
         
         // Set tableview properties
@@ -47,19 +47,19 @@ class SharedTripsListViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-    
-    @objc func fetchSharedTrips() {
-        SharedTripsController.shared.fetchSharedTrips { (success) in
-            if success {
-                DispatchQueue.main.async {
-                    self.checkForNoSharedTrips()
-                    self.tableView.reloadData()
-                    self.refreshControl.endRefreshing()                    
-                }
-            }
-        }
-    }
-    
+//    
+//    @objc func fetchSharedTrips() {
+//        SharedTripsController.shared.fetchSharedTrips { (success) in
+//            if success {
+//                DispatchQueue.main.async {
+//                    self.checkForNoSharedTrips()
+//                    self.tableView.reloadData()
+//                    self.refreshControl.endRefreshing()
+//                }
+//            }
+//        }
+//    }
+//
     @objc func refreshTableView() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -69,17 +69,17 @@ class SharedTripsListViewController: UIViewController {
     
     @objc func profileButtonTapped() {
         
-        if let _ = InternalUserController.shared.loggedInUser {
-            let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "profileVC")
-            UIView.animate(withDuration: 2) {
-                self.present(profileVC, animated: true, completion: nil)
-            }
-        } else {
-            let signUpVC = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "SignUp") as! SignUpViewController
-            signUpVC.loadViewIfNeeded()
-            signUpVC.skipButton.isHidden = true
-            self.present(signUpVC, animated: true, completion: nil)
-        }
+//        if let _ = InternalUserController.shared.loggedInUser {
+//            let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "profileVC")
+//            UIView.animate(withDuration: 2) {
+//                self.present(profileVC, animated: true, completion: nil)
+//            }
+//        } else {
+//            let signUpVC = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "SignUp") as! SignUpViewController
+//            signUpVC.loadViewIfNeeded()
+//            signUpVC.skipButton.isHidden = true
+//            self.present(signUpVC, animated: true, completion: nil)
+//        }
     }
     
     // MARK: - Navigation

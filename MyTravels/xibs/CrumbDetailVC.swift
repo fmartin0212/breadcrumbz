@@ -65,13 +65,17 @@ class CrumbDetailVC: UIViewController {
     }
     
     func fetchPhotos(for crumb: CrumbObject) {
-        PhotoController.shared.fetchPhotos(for: crumb) { (photos) in
-            guard let photos = photos  else { return }
-            self.photos = photos
-            
-            DispatchQueue.main.async {
-                self.pageControl.numberOfPages = photos.count
-                self.imageCollectionView.reloadData()
+        
+        PhotoController.shared.fetchPhotos(for: crumb) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .success(let photos):
+                self?.photos = photos
+                DispatchQueue.main.async {
+                    self?.pageControl.numberOfPages = photos.count
+                    self?.imageCollectionView.reloadData()
+                }
             }
         }
     }

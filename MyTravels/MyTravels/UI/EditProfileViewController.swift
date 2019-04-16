@@ -53,9 +53,9 @@ class EditProfileViewController: UIViewController, ScrollableViewController {
 extension EditProfileViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-
+        // Local variable inserted by Swift 4.2 migrator.
+        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+        
         
         let profilePicture = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage
         
@@ -70,12 +70,15 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             guard let loggedInUser = InternalUserController.shared.loggedInUser
                 else { return }
             
-            InternalUserController.shared.saveProfilePhoto(photo: profilePicture!, for: loggedInUser) { (success) in
-                if success {
+            InternalUserController.shared.saveProfilePhoto(photo: profilePicture!, for: loggedInUser) { [weak self] (result) in
+                switch result {
+                case .failure(_):
+                    self?.presentStandardAlertController(withTitle: "Something went wrong", message: FireError.generic.rawValue)
+                case .success(_):
                     DispatchQueue.main.async {
                         NotificationCenter.default.post(Notification(name: Notification.Name("profilePictureUpdatedNotification")))
                         loadingView.removeFromSuperview()
-                        self.dismiss(animated: true, completion: nil)
+                        self?.dismiss(animated: true, completion: nil)
                     }
                 }
             }

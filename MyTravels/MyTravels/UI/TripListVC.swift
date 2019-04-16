@@ -105,23 +105,23 @@ extension TripListVC {
         self.emptyTripStateView = emptyTripStateView
         self.emptyTripStateView?.delegate = self
     }
-    
-    private func fetchUserInfo(completion: @escaping (Bool) -> Void) {
-        
-        guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(false) ; return }
-        SharedTripsController.shared.fetchSharedTrips { (success) in
-            if success {
-                NotificationCenter.default.post(name: Constants.sharedTripsReceivedNotif, object: nil)
-                if let photoURL = loggedInUser.photoURL {
-                    InternalUserController.shared.fetchProfilePhoto(from: photoURL, completion: { (photo) in
-                        DispatchQueue.main.async {
-                            completion(true)
-                        }
-                    })
-                }
-            } else { completion(false) }
-        }
-    }
+//    
+//    private func fetchUserInfo(completion: @escaping (Bool) -> Void) {
+//
+//        guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(false) ; return }
+//        SharedTripsController.shared.fetchSharedTrips { (success) in
+//            if success {
+//                NotificationCenter.default.post(name: Constants.sharedTripsReceivedNotif, object: nil)
+//                if let photoURL = loggedInUser.photoURL {
+//                    InternalUserController.shared.fetchProfilePhoto(from: photoURL, completion: { (photo) in
+//                        DispatchQueue.main.async {
+//                            completion(true)
+//                        }
+//                    })
+//                }
+//            } else { completion(false) }
+//        }
+//    }
     
     func refreshViews() {
         if state == .shared {

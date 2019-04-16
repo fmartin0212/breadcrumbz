@@ -77,8 +77,8 @@ class TripDetailVC: UIViewController {
             let places = placesSet.allObjects as? [Place] {
             self.crumbs = places
         }
-//        crumbsTableView.reloadData()
-//        tableViewHeightConstraint.constant = crumbsTableView.contentSize.height
+        crumbsTableView.reloadData()
+        tableViewHeightConstraint.constant = CGFloat(crumbsTableView.numberOfRows(inSection: 0) * 110)
     }
     
     @IBAction func actionButtonTapped(_ sender: Any) {
@@ -202,10 +202,11 @@ extension TripDetailVC {
                 let loadingView = self.enableLoadingState()
                 loadingView.loadingLabel.text = "Blocking user"
                 
-                InternalUserController.shared.blockUserWith(creatorID: sharedTrip.creatorID, completion: { (errorMessage) in
-                    if let errorMessage = errorMessage {
-                        self.presentStandardAlertController(withTitle: "Uh Oh!", message: errorMessage)
-                    } else {
+                InternalUserController.shared.blockUserWith(creatorID: sharedTrip.creatorID, completion: { (result) in
+                    switch result {
+                    case .failure(let error):
+                        self.presentStandardAlertController(withTitle: "Uh Oh!", message: error.rawValue)
+                    case .success(_):
                         DispatchQueue.main.async {
                             loadingView.removeFromSuperview()
                             self.navigationController?.popViewController(animated: true)

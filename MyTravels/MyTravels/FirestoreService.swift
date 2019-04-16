@@ -51,14 +51,19 @@ public struct FirestoreService: FirestoreServiceProtocol {
     
     func save<T: FirestoreSavable>(object: T,
                                    completion: @escaping(Result<String, FireError>) -> Void) {
-        let document = T.collectionReference.document()
-        document.setData(object.dictionary) { (error) in
+        var docRef: DocumentReference?
+        if let uuid = object.uuid {
+            docRef = T.collectionReference.document(uuid)
+        } else {
+            docRef = T.collectionReference.document()            
+        }
+        docRef?.setData(object.dictionary) { (error) in
             if let error = error {
                 print("Error saving to Firestore: \(error.localizedDescription)")
                 completion(.failure(.deleting))
                 return
             }
-            completion(.success(document.documentID))
+            completion(.success(docRef!.documentID))
         }
     }
     

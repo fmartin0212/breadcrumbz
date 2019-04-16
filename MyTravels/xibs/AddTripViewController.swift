@@ -10,7 +10,7 @@ import UIKit
 
 final class AddTripViewController: UIViewController, ScrollableViewController {
 
-    // MARK: - Outlets
+    // MARK: - Properties
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var saveBottomContraint: NSLayoutConstraint!
@@ -28,19 +28,11 @@ final class AddTripViewController: UIViewController, ScrollableViewController {
     @IBOutlet weak var startDayLabel: UILabel!
     @IBOutlet weak var startMonthTextField: UITextField!
     @IBOutlet weak var startDayOfWeekLabel: UILabel!
-    
+
     @IBOutlet weak var endDateView: UIView!
     @IBOutlet weak var endDayLabel: UILabel!
     @IBOutlet weak var endMonthTextField: UITextField!
     @IBOutlet weak var endDayOfWeekLabel: UILabel!
-    
-    @IBAction func startTapGestureRecognizer(_ sender: Any) {
-        startMonthTextField.becomeFirstResponder()
-    }
-    @IBAction func endTapGestureRecognizer(_ sender: Any) {
-        endMonthTextField.becomeFirstResponder()
-    }
-    // MARK: - Constants & Variables
     
     var startDatePicker = UIDatePicker()
     var endDatePicker = UIDatePicker()
@@ -56,13 +48,17 @@ final class AddTripViewController: UIViewController, ScrollableViewController {
     var trip: Trip?
     var state: State = .add
     
+    // MARK: - Actions
+    
+    @IBAction func startTapGestureRecognizer(_ sender: Any) {
+        startMonthTextField.becomeFirstResponder()
+    }
+    @IBAction func endTapGestureRecognizer(_ sender: Any) {
+        endMonthTextField.becomeFirstResponder()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameTextField.delegate = self
-        locationTextField.delegate = self
-        descriptionTextView.delegate = self
-        startMonthTextField.delegate = self
-        endMonthTextField.delegate = self
         
         startDatePicker.addTarget(self, action: #selector(setDate(sender:)), for: .valueChanged)
         startMonthTextField.tag = 8
@@ -104,11 +100,11 @@ final class AddTripViewController: UIViewController, ScrollableViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        saveNewTrip()
+        save()
     }
     
     @IBAction func saveBarButtonItemTapped(_ sender: Any) {
-        saveNewTrip()
+        save()
     }
     
     @IBAction func addPhotoButton(_ sender: Any) {
@@ -166,7 +162,31 @@ extension AddTripViewController {
         nameTextField.text = trip.name
         locationTextField.text = trip.location
         
+        startDate = trip.startDate as Date
+        endDate = trip.endDate as Date
+        setDateViews(for: startDate!)
+        setDateViews(for: endDate!)     
+    }
     
+    func setDateViews(for date: Date) {
+        let dateComponents = Calendar.current.dateComponents([.day, .month, .weekday], from: date)
+        let day = "\(dateComponents.day!)"
+        let dayOfWeek = Calendar.current.weekdaySymbols[dateComponents.weekday! - 1]
+        let month = String(Calendar.current.monthSymbols[dateComponents.month! - 1].prefix(3))
+        switch date {
+        case startDate:
+            startDayLabel.text = day
+            startDayOfWeekLabel.text = dayOfWeek
+            startMonthTextField.text = month
+            startDate = date
+        case endDate:
+            endDayLabel.text = day
+            endDayOfWeekLabel.text = dayOfWeek
+            endMonthTextField.text = month
+            endDate = date
+        default:
+            print("something went wrong")
+        }
     }
     
     @objc func setDate(sender: UIDatePicker) {
@@ -175,13 +195,13 @@ extension AddTripViewController {
         let day = "\(dateComponents.day!)"
         let dayOfWeek = Calendar.current.weekdaySymbols[dateComponents.weekday! - 1]
         let month = String(Calendar.current.monthSymbols[dateComponents.month! - 1].prefix(3))
-        switch selectedTextField?.tag {
-        case 8:
+        switch sender {
+        case startDatePicker:
             startDayLabel.text = day
             startDayOfWeekLabel.text = dayOfWeek
             startMonthTextField.text = month
             startDate = date
-        case 9:
+        case endDatePicker:
             endDayLabel.text = day
             endDayOfWeekLabel.text = dayOfWeek
             endMonthTextField.text = month
@@ -195,7 +215,7 @@ extension AddTripViewController {
         contentView.endEditing(true)
     }
     
-    func saveNewTrip() {
+    func save() {
         guard let name = nameTextField.text, !name.isEmpty,
             let location = locationTextField.text, !location.isEmpty,
             let startDate = startDate,

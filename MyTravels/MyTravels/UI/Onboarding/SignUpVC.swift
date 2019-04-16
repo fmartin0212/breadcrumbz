@@ -9,7 +9,7 @@
 import UIKit
 
 class SignUpVC: UIViewController {
-
+    
     @IBOutlet var allTextfields: [FMTextField]!
     // MARK: - Outlets
     @IBOutlet weak var nameLabel: UILabel!
@@ -30,7 +30,7 @@ class SignUpVC: UIViewController {
     @IBOutlet weak var logInSignUpButton: UIButton!
     @IBOutlet weak var stackView: UIStackView!
     var bottomConstraintToStackView: NSLayoutConstraint {
-         return NSLayoutConstraint(item: submitButton, attribute: .top, relatedBy: .equal, toItem: stackView, attribute: .bottom, multiplier: 1.0, constant: 20)
+        return NSLayoutConstraint(item: submitButton, attribute: .top, relatedBy: .equal, toItem: stackView, attribute: .bottom, multiplier: 1.0, constant: 20)
     }
     var state: State = .signUp {
         didSet {
@@ -118,30 +118,31 @@ class SignUpVC: UIViewController {
         let loadingView = enableLoadingState()
         loadingView.loadingLabel.text = "Logging in"
         
-        InternalUserController.shared.login(withEmail: email, password: password) { (errorMessage) in
-            if let errorMessage = errorMessage {
+        InternalUserController.shared.login(withEmail: email, password: password) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
                 DispatchQueue.main.async {
-                    self.disableLoadingState(loadingView)
-                    self.presentStandardAlertController(withTitle: "Oops!", message: errorMessage)
-                    print("There was an error logging in the user: \(errorMessage)")
-                    return
+                    self?.disableLoadingState(loadingView)
+                    self?.presentStandardAlertController(withTitle: "Oops!", message: error.rawValue)
                 }
-            } else {
+                
+            case .success(_):
                 DispatchQueue.main.async {
-                    self.disableLoadingState(loadingView)
-                    if self.isOnboarding == false {
+                    self?.disableLoadingState(loadingView)
+                    if self?.isOnboarding == false {
                         NotificationCenter.default.post(name: Constants.userLoggedInNotif, object: nil)
-                        self.dismiss(animated: true, completion: nil)
+                        self?.dismiss(animated: true, completion: nil)
                     } else {
                         let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController
                         let tripListVC = ((tabBarController?.customizableViewControllers?.first! as! UINavigationController).viewControllers.first!) as! TripsListViewController
-//                        tripListVC.fromSignUpVC = true
-                        self.present(tabBarController!, animated: true, completion: nil)
+                        //                        tripListVC.fromSignUpVC = true
+                        self?.present(tabBarController!, animated: true, completion: nil)
                     }
                 }
             }
         }
     }
+    
     
     func signUp() {
         guard let name = nameTextField.text,
@@ -160,11 +161,13 @@ class SignUpVC: UIViewController {
             let loadingView = self.enableLoadingState()
             loadingView.loadingLabel.text = "Creating account"
             
-            InternalUserController.shared.createNewUserWith(firstName: name, lastName: "", username: username, email: email, password: password) { (errorMessage) in
-                if let errorMessage = errorMessage {
+            InternalUserController.shared.createNewUserWith(firstName: name, lastName: "", username: username, email: email, password: password) { (result) in
+                
+                switch result {
+                case .failure(let error):
                     self.disableLoadingState(loadingView)
-                    self.presentStandardAlertController(withTitle: "Oops!", message: errorMessage)
-                } else {
+                    self.presentStandardAlertController(withTitle: "Oops!", message: error.rawValue)
+                case .success(_):
                     DispatchQueue.main.async {
                         self.disableLoadingState(loadingView)
                         if self.isOnboarding == false {
@@ -172,22 +175,14 @@ class SignUpVC: UIViewController {
                             self.dismiss(animated: true, completion: nil)
                             
                         }
-                        self.presentTripListVC()
+                         let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController
+                        self.present(tabBarController!, animated: true, completion: nil)
                     }
                 }
             }
         }
         else {
-            
-            let alertController = UIAlertController(title: "Oops!", message: "Your passwords do not match -- please re-enter your passwords", preferredStyle: .alert)
-            let OKAction = UIAlertAction(title: "OK", style: .default, handler: { (_) in
-                self.passwordTextField.text = ""
-                self.confirmPasswordTextField.text = ""
-            })
-            alertController.addAction(OKAction)
-            DispatchQueue.main.async {
-                self.present(alertController, animated: true, completion: nil)
-            }
+            self.presentStandardAlertController(withTitle: "Oops!", message: "Your passwords do not match -- please re-enter your passwords")
         }
     }
 }

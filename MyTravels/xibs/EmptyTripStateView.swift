@@ -14,11 +14,12 @@ protocol EmptyTripStateViewDelegate: class {
 
 class EmptyTripStateView: UIView {
 
-    // MARK: - Outlets
+    // MARK: - Properties
     
     @IBOutlet var tripImageView: UIImageView!
     @IBOutlet var topLabel: UILabel!
     @IBOutlet var bottomLabel: UILabel!
+    @IBOutlet weak var getStartedButton: FMButton!
     
     var state: State = .managed {
         didSet {
@@ -37,7 +38,8 @@ class EmptyTripStateView: UIView {
         if state == .shared {
             tripImageView.image = UIImage(named: "airplane")
             topLabel.text = "No shared trips!"
-            bottomLabel.text = "When somenoe shared a trip with you, you'll see it here."
+            bottomLabel.text = "When someone shares a trip with you, you'll see it here."
+            getStartedButton.isHidden = true
         }
     }
 }

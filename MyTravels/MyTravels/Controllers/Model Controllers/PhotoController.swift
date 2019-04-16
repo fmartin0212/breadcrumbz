@@ -197,66 +197,64 @@ final class PhotoController {
     
     func savePhotos(for place: Place,
                     completion: @escaping (Bool) -> Void) {
-//        guard let photos = place.photos?.allObjects as? [Photo] else { completion(false) ; return }
-//
-//        let dispatchGroup = DispatchGroup()
-//        var photoDict: [String : Any] = [:]
-//        var int = 0
-//        for photo in photos {
-//            int += 1
-//            dispatchGroup.enter()
-//            FirebaseManager.save(photo) { (metadata, _) in
-//                if let metadata = metadata {
-//                    let downloadURL = metadata.path
-//                    photoDict[String(int)] = downloadURL!
-//                }
-//                dispatchGroup.leave()
-//            }
-//        }
-//        dispatchGroup.notify(queue: .main) {
-//            let child = "photoURLs"
-//            FirebaseManager.update(place, atChildren: [child], withValues: photoDict, completion: { (errorMessage) in
-//                if let _ = errorMessage {
-//                    completion(false)
-//                } else {
-                    completion(true)
-//                }
-//            })
-//        }
+        guard let photos = place.photos?.allObjects as? [Photo] else { completion(false) ; return }
+        
+        let dispatchGroup = DispatchGroup()
+        for photo in photos {
+            dispatchGroup.enter()
+            firebaseStorageService.save(photo) { [weak self] (result) in
+                switch result {
+                case .failure(let error):
+                    print("Error saving crumb photo: \(error.localizedDescription)")
+                    dispatchGroup.leave()
+                case .success(let path):
+                    dispatchGroup.enter()
+                    self?.firestoreService.update(object: place, atField: "photoPaths", withCriteria: [path], with: .arrayAddtion, completion: { (result) in
+                        switch result {
+                        case .failure(let error):
+                            print("Error updating crumb: \(error.localizedDescription)")
+                            dispatchGroup.leave()
+                        case .success(_):
+                            dispatchGroup.leave()
+                        }
+                    })
+                }
+            }
+        }
+        dispatchGroup.notify(queue: .main) {
+            completion(true)
+        }
     }
     
-    func fetchPhotos(for crumb: CrumbObject, completion: @escaping ([UIImage]?) -> Void) {
+    func fetchPhotos(for crumb: CrumbObject, completion: @escaping (Result<[UIImage], FireError>) -> Void) {
         if let crumb = crumb as? Place,
             let photosObjects = crumb.photos?.allObjects as? [Photo],
             photosObjects.count >= 1 {
             let photos = photosObjects.compactMap { UIImage(data: $0.data) }
-            completion(photos)
+            completion(.success(photos))
             return
         }
         guard let sharedCrumb = crumb as? SharedPlace,
-            let photoURLs = sharedCrumb.photoURLs,
-            photoURLs.count > 0
-            else { completion(nil) ; return }
-        var photos: [UIImage] = []
+            let photoPaths = sharedCrumb.photoPaths,
+            photoPaths.count > 0
+            else { completion(.failure(.generic)) ; return }
+        var photoDatum: [Data] = []
         let dispatchGroup = DispatchGroup()
-        for photoURL in photoURLs {
+        for photoPath in photoPaths {
             dispatchGroup.enter()
-            let dataTask = URLSession.shared.dataTask(with: URL(string: photoURL)!) { (data, _, error) in
-                if let _ = error {
+            firebaseStorageService.fetchFromStorage(path: photoPath) { (result) in
+                switch result {
+                case .failure(_):
+                    dispatchGroup.leave()
+                case .success(let photoData):
+                    photoDatum.append(photoData)
                     dispatchGroup.leave()
                 }
-                guard let data = data,
-                    let photo = UIImage(data: data)
-                    else { return }
-                photos.append(photo)
-                dispatchGroup.leave()
-                
             }
-            dataTask.resume()
         }
-        
         dispatchGroup.notify(queue: .main) {
-            completion(photos)
+            let photos = photoDatum.compactMap { UIImage(data: $0) }
+            completion(.success(photos))
         }
     }
     
@@ -275,8 +273,8 @@ final class PhotoController {
     }
     
     func savePhoto(photo: UIImage,
-                          for user: InternalUser,
-                          completion: @escaping (Result<Bool, FireError>) -> Void) {
+                   for user: InternalUser,
+                   completion: @escaping (Result<Bool, FireError>) -> Void) {
         guard let imageAsData = photo.jpegData(compressionQuality: 0.1) else { completion(.failure(.generic)) ; return }
         
         let photo = Photo(photo: imageAsData, place: nil, trip: nil)
@@ -301,5 +299,6 @@ final class PhotoController {
         }
     }
 }
+
 
 

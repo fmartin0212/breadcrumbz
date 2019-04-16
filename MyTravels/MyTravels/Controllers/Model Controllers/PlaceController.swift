@@ -21,7 +21,10 @@ class PlaceController {
     }()
     
     static var shared = PlaceController()
-
+    let firestoreService: FirestoreServiceProtocol
+    init() {
+        firestoreService = FirestoreService()
+    }
 }
 
 extension PlaceController {
@@ -88,61 +91,40 @@ extension PlaceController {
         CoreDataManager.delete(object: place)
     }
     
-    /**
-     Loops over a trip's places and creates dictionaries for each one so that they can be saved to Firebase. Adds each dictionary to a parent dictionary and returns it to the caller.
-     - parameter trip: The trip which places are being turned into dictionaries.
-     
-     */
-    func createPlaces(for trip: Trip) -> [String : [String : Any]]? {
-        
-        // Unwrap the trip's places and cast them as an array
-        guard let places = trip.places?.allObjects as? [Place], places.count > 0 else { return nil }
-        
-        // Create an empty dictionary. The 'parent' dictionary.
-        var placesDict = [String : [String : Any]]()
-        
-        // Loop through each place and create a new dictionary using the place's properties.
-        for place in places {
-            
-            // Add the new place to the 'parent' dictionary using the place's name as a key.
-            placesDict[place.name] = place.dictionary
-            
-        }
-        
-        return placesDict
-    }
-    
     func uploadPlaces(for trip: Trip,
-                      completion: @escaping ([String : Bool]) -> Void) {
+                      completion: @escaping ([String]) -> Void) {
         
         guard let places = trip.places?.allObjects as? [Place],
             places.count > 0
-            else { completion([:]) ; return }
+            else { completion([]) ; return }
         let dispatchGroup = DispatchGroup()
-        var uuidDictionary: [String : Bool] = [:]
         for place in places {
             dispatchGroup.enter()
-            upload(place, completion: { (uuid) in
-                if let uuid = uuid {
+            var crumbIDs: [String] = []
+            firestoreService.save(object: place) { (result) in
+                switch result {
+                case .failure(let error):
+                    print("Error saving crumb: \(error.localizedDescription)")
+                    dispatchGroup.leave()
+                case .success(let uuid):
                     place.uuid = uuid
-                    place.uid = uuid
-                    CoreDataManager.save()
-                    uuidDictionary[uuid] = true
+                    crumbIDs.append(uuid)
+                    dispatchGroup.leave()
                 }
-                dispatchGroup.leave()
-            })
-        }
-        dispatchGroup.notify(queue: .main) {
-            let secondDispatchGroup = DispatchGroup()
-            for place in places {
-                secondDispatchGroup.enter()
-                PhotoController.shared.savePhotos(for: place, completion: { (success) in
-                    secondDispatchGroup.leave()
+            }
+            
+            dispatchGroup.notify(queue: .main) {
+                let secondDispatchGroup = DispatchGroup()
+                for place in places {
+                    secondDispatchGroup.enter()
+                    PhotoController.shared.savePhotos(for: place, completion: { (success) in
+                        secondDispatchGroup.leave()
+                    })
+                }
+                secondDispatchGroup.notify(queue: .main, execute: {
+                    completion(crumbIDs)
                 })
             }
-            secondDispatchGroup.notify(queue: .main, execute: {
-                completion(uuidDictionary)
-            })
         }
     }
     
