@@ -41,8 +41,10 @@ class EditProfileViewController: UIViewController, ScrollableViewController {
         }
         
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (notification) in
-            self.bottomConstraint.constant = 30
+            self.scrollView.contentInset = UIEdgeInsets.zero
         }
+        imagePicker.delegate = self
+        addPhotoButton.layer.cornerRadius = addPhotoButton.frame.width / 2
     }
     
     @IBAction func addPhotoButtonTapped(_ sender: Any) {

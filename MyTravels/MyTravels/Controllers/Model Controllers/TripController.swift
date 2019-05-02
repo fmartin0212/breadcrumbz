@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import PSOperations
 
 class TripController {
     
@@ -24,6 +25,7 @@ class TripController {
     
     var trips: [Trip] = []
     let firestoreService: FirestoreServiceProtocol
+    let operationQueue = PSOperationQueue()
     
     init() {
         self.firestoreService = FirestoreService()
@@ -147,6 +149,13 @@ class TripController {
                 completion: @escaping (Result<Bool, FireError>) -> Void) {
         
         guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(.failure(.generic)) ; return }
+        
+        let save = SaveTripOperation(trip: trip, service: firestoreService, completion: completion)
+        
+        operationQueue.addOperation(save)
+        
+        
+        
         firestoreService.save(object: trip) { (result) in
             switch result {
                 

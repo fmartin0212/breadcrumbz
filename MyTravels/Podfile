@@ -13,5 +13,6 @@ pod 'Firebase/Auth'
 pod 'Firebase/Storage'
 pod 'FirebaseUI/Storage'
 pod 'FirebaseFirestore'
+pod 'PSOperations/Core', '~> 4.0'
 
 end

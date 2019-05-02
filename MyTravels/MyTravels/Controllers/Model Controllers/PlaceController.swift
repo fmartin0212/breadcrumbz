@@ -112,19 +112,19 @@ extension PlaceController {
                     dispatchGroup.leave()
                 }
             }
+        }
             
-            dispatchGroup.notify(queue: .main) {
-                let secondDispatchGroup = DispatchGroup()
-                for place in places {
-                    secondDispatchGroup.enter()
-                    PhotoController.shared.savePhotos(for: place, completion: { (success) in
-                        secondDispatchGroup.leave()
-                    })
-                }
-                secondDispatchGroup.notify(queue: .main, execute: {
-                    completion(crumbIDs)
+        dispatchGroup.notify(queue: .main) {
+            let secondDispatchGroup = DispatchGroup()
+            for place in places {
+                secondDispatchGroup.enter()
+                PhotoController.shared.savePhotos(for: place, completion: { (success) in
+                    secondDispatchGroup.leave()
                 })
             }
+            secondDispatchGroup.notify(queue: .main, execute: {
+                completion(crumbIDs)
+            })
         }
     }
     
