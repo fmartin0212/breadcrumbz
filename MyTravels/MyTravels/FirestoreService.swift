@@ -78,7 +78,6 @@ public struct FirestoreService: FirestoreServiceProtocol {
             else { completion(.failure(.generic)) ; return }
         let docRef = T.collectionReference.document(uuid)
         switch updateType {
-            
         case .update:
             docRef.updateData([field : singleCriteria]) { (error) in
                 if let error = error {

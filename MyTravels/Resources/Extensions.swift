@@ -65,8 +65,8 @@ extension UIViewController {
     }
     
     @discardableResult func enableLoadingState() -> LoadingView {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         let loadingView = presentLoadingView()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         toggleEnabledNavBarItems()
         toggleEnabledTabBarItems()
         return loadingView
@@ -78,6 +78,7 @@ extension UIViewController {
         toggleEnabledTabBarItems()
         loadingView.removeFromSuperview()
     }
+    
     
     func presentStandardAlertController(withTitle title: String, message: String, completion: (() -> Void)? = nil) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)

@@ -10,16 +10,27 @@ import Foundation
 import PSOperations
 
 class SavePlaceOperation: PSOperation {
+    let place: Place
+    let context: SaveTripContext
     
     init(place: Place, context: SaveTripContext) {
-        context.service.save(object: place) { (result) in
+        self.place = place
+        self.context = context
+    }
+    
+    override func execute() {
+        context.service.save(object: place) { [weak self] (result) in
             switch result {
             case .failure(let error):
-                context.error = error
+                self?.context.error = error
+                self?.finish()
             case .success(let placeUID):
-                context.placeUIDs.append(placeUID)
+                self?.context.placeUIDs.append(placeUID)
+                self?.place.uuid = placeUID
+                self?.place.uid = placeUID
+                CoreDataManager.save()
+                self?.finish()
             }
         }
-        super.init()
     }
 }

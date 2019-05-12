@@ -1,31 +1,30 @@
 //
-//  UpdateUserOperation.swift
+//  AddPhotoPathsToCrumbOp.swift
 //  MyTravels
 //
-//  Created by Frank Martin on 4/25/19.
+//  Created by Frank Martin on 5/9/19.
 //  Copyright © 2019 Frank Martin Jr. All rights reserved.
 //
 
 import Foundation
 import PSOperations
 
-class UpdateUserOperation: PSOperation {
+class AddPhotoPathToCrumbOp: PSOperation {
     
-    let trip: Trip
+    let crumb: Place
+    let photoPath: String
     let firestoreService: FirestoreServiceProtocol
     let context: SaveTripContext
     
-    init(trip: Trip, context: SaveTripContext) {
-        self.trip = trip
+    init(crumb: Place, photoPath: String, context: SaveTripContext) {
+        self.crumb = crumb
+        self.photoPath = photoPath
         self.firestoreService = context.service
         self.context = context
     }
-
+    
     override func execute() {
-        guard let user = InternalUserController.shared.loggedInUser,
-            let tripUUID = trip.uuid
-            else { finish() ; return }
-        firestoreService.update(object: user, atField: "sharedTripIDs", withCriteria: [tripUUID], with: .arrayAddtion) { [weak self] (result) in
+        firestoreService.update(object: crumb, atField: "photoPaths", withCriteria: [photoPath], with: .arrayAddtion) { [weak self] (result) in
             switch result {
             case .success(_):
                 self?.finish()

@@ -23,8 +23,10 @@ class DidSaveTripOperation: PSOperation {
     override func execute() {
         if let e = context.error {
             completion(.failure(e))
+            finish()
         } else {
             completion(.success(true))
+            finish()
         }
     }
     

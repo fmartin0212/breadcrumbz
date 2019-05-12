@@ -1,31 +1,28 @@
 //
-//  UpdateUserOperation.swift
+//  AddCrumbIDsToTrip.swift
 //  MyTravels
 //
-//  Created by Frank Martin on 4/25/19.
+//  Created by Frank Martin on 5/9/19.
 //  Copyright © 2019 Frank Martin Jr. All rights reserved.
 //
 
 import Foundation
 import PSOperations
 
-class UpdateUserOperation: PSOperation {
-    
+class AddCrumbIDsToTrip: PSOperation {
     let trip: Trip
     let firestoreService: FirestoreServiceProtocol
     let context: SaveTripContext
     
-    init(trip: Trip, context: SaveTripContext) {
+    init(_ trip: Trip, context: SaveTripContext) {
         self.trip = trip
-        self.firestoreService = context.service
         self.context = context
+        self.firestoreService = context.service
     }
-
+    
     override func execute() {
-        guard let user = InternalUserController.shared.loggedInUser,
-            let tripUUID = trip.uuid
-            else { finish() ; return }
-        firestoreService.update(object: user, atField: "sharedTripIDs", withCriteria: [tripUUID], with: .arrayAddtion) { [weak self] (result) in
+        guard context.placeUIDs.count > 0 else { finish() ; return }
+        firestoreService.update(object: trip, atField: "crumbIDs", withCriteria: context.placeUIDs, with: .arrayAddtion) { [weak self] (result) in
             switch result {
             case .success(_):
                 self?.finish()

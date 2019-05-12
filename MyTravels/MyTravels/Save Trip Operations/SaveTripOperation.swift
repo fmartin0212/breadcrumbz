@@ -11,21 +11,25 @@ import PSOperations
 
 class SaveTripOperation: GroupOperation {
     
-    init(trip: Trip, service: FirestoreServiceProtocol, completion: @escaping (Result<Bool, SaveTripError>) -> Void) {
+    init(trip: Trip, receiverUsername: String, service: FirestoreServiceProtocol, completion: @escaping (Result<Bool, FireError>) -> Void) {
         
         let context = SaveTripContext(trip: trip, service: service)
-        let uploadTrip = UploadTripOperation(context: context)
         let saveTripToCD = SaveCoreDataOperation()
-        
-        let savePhotos = SavePhotoOperation()
-        let done = DidSaveTripOperation(context: context, completion: completion)
-        
+        let uploadTrip = UploadTripOperation(context: context)
+        let updateUserOp = UpdateUserOperation(trip: trip, context: context)
+        let uploadPlacesOp = UploadPlacesOperation(for: trip, with: context)
+        let addCrumbIDsToTripOp = AddCrumbIDsToTrip(trip, context: context)
+        let updateReceiverOp = UpdateReceiverOp(receiverUsername: receiverUsername, context: context)
+        let doneOp = DidSaveTripOperation(context: context, completion: completion)
         saveTripToCD.addDependency(uploadTrip)
-        done.addDependency(savePhotos)
+        uploadPlacesOp.addDependency(uploadTrip)
+        updateUserOp.addDependency(uploadTrip)
+        addCrumbIDsToTripOp.addDependency(uploadPlacesOp)
+        updateReceiverOp.addDependency(uploadTrip)
+        doneOp.addDependency(uploadPlacesOp)
         
-        super.init(operations: [save, saveCD, savePhotos, done])
+        super.init(operations: [uploadTrip, saveTripToCD, uploadPlacesOp, updateUserOp, addCrumbIDsToTripOp, updateReceiverOp, doneOp])
     }
-    
 }
 
 class UploadTripOperation: PSOperation {
@@ -43,16 +47,13 @@ class UploadTripOperation: PSOperation {
         }
         
         context.service.save(object: context.trip) { result in
-            
             switch result {
-                
                 case .success(let uuid):
                     self.context.trip.uuid = uuid
                     self.context.trip.uid = uuid
                 case .failure(let error):
-                    self.context.error = .uploadTripFailed(error)
+                    self.context.error = error
             }
-            
             self.finish()
         }
     }

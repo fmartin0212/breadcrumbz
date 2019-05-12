@@ -123,7 +123,7 @@ extension PlaceController {
                 })
             }
             secondDispatchGroup.notify(queue: .main, execute: {
-                completion(crumbIDs)
+                completion([])
             })
         }
     }

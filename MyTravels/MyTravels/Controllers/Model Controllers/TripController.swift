@@ -119,19 +119,21 @@ class TripController {
                 // Trip has not been saved to the database, so we need to save a new Trip child and a child on the receiver.
                 let creatorName = loggedInUser.firstName
                 
-                self.upload(trip: trip, creatorName: creatorName) { (result) in
+                self.upload(trip: trip, receiverUUID: receiveUsername, creatorName: creatorName) { (result) in
                     switch result {
                     case .failure(let error):
                         completion(.failure(error))
                     case .success(_):
-                        self.addTripIDToReceiver(for: trip, receiver: receiveUsername, completion: { (result) in
-                            switch result {
-                            case .failure(let error):
-                                completion(.failure(error))
-                            case .success(_):
-                                completion(.success(true))
-                            }
-                        })
+                        print("asd")
+                        completion(.success(true))
+//                        self.addTripIDToReceiver(for: trip, receiver: receiveUsername, completion: { (result) in
+//                            switch result {
+//                            case .failure(let error):
+//                                completion(.failure(error))
+//                            case .success(_):
+//                                completion(.success(true))
+//                            }
+//                        })
                     }
                 }
             }
@@ -145,58 +147,16 @@ class TripController {
      - parameter completion: A completion block which passes a boolean to indicate whether the trip was successfully saved to the Firebase database.
      */
     func upload(trip: Trip,
+                receiverUUID: String,
                 creatorName: String,
                 completion: @escaping (Result<Bool, FireError>) -> Void) {
         
-        guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(.failure(.generic)) ; return }
+        guard InternalUserController.shared.loggedInUser != nil else { completion(.failure(.generic)) ; return }
         
-        let save = SaveTripOperation(trip: trip, service: firestoreService, completion: completion)
+        let save = SaveTripOperation(trip: trip, receiverUsername: receiverUUID, service: firestoreService, completion: completion)
         
         operationQueue.addOperation(save)
-        
-        
-        
-        firestoreService.save(object: trip) { (result) in
-            switch result {
-                
-            case .failure(let error):
-                completion(.failure(error))
-                
-            case .success(let uuid):
-                trip.uuid = uuid
-                trip.uid = uuid
-                CoreDataManager.save()
-                
-                self.firestoreService.update(object: loggedInUser, atField: "sharedTripIDs", withCriteria: [trip.uid!], with: .arrayAddtion, completion: { (result) in
-                    switch result {
-                        
-                    case .failure(let error):
-                        completion(.failure(error))
-                        
-                    case .success(_):
-                        PhotoController.shared.savePhotos(for: trip, completion: { (result) in
-                            switch result {
-                                
-                            case .failure(let error):
-                                completion(.failure(error))
-                                
-                            case .success(_):
-                                PlaceController.shared.uploadPlaces(for: trip, completion: { (crumbIDs) in
-                                    self.firestoreService.update(object: trip, atField: "crumbIDs", withCriteria: crumbIDs, with: .arrayAddtion, completion: { (result) in
-                                        switch result {
-                                        case .failure(let error):
-                                            completion(.failure(error))
-                                        case .success(_):
-                                            completion(.success(true))
-                                        }
-                                    })
-                                })
-                            }
-                        })
-                    }
-                })
-            }
-        }
+      
     }
     
     /**

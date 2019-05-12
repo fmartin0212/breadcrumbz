@@ -181,7 +181,9 @@ extension TripDetailVC {
             let loadingView = self.enableLoadingState()
             loadingView.loadingLabel.text = "Sharing"
             TripController.shared.share(trip: trip as! Trip, withReceiver: receiver, completion: { (success) in
-                self.disableLoadingState(loadingView)
+                DispatchQueue.main.async { [weak self] in
+                    self?.disableLoadingState(loadingView)
+                }
             })
         }
         alertController.addAction(shareAction)

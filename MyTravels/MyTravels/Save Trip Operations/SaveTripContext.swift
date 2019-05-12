@@ -11,8 +11,7 @@ import Foundation
 enum SaveTripError: Error {
     case uploadTripFailed(FireError)
     case savePhotoFailed(Photo)
-    case updateUserFailed(FireError)
-    
+    case updateUserFailed(FireError)    
 }
 
 class SaveTripContext {
@@ -22,6 +21,7 @@ class SaveTripContext {
     var error: FireError?
     var placeUIDs: [String] = []
     var photoPaths: [String] = []
+    var receiver: InternalUser?
     
     init(trip: Trip, service: FirestoreServiceProtocol) {
         self.trip = trip

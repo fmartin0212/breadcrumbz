@@ -11,16 +11,24 @@ import PSOperations
 
 class SavePhotoOperation: PSOperation {
     let photo: Photo
+    let context: SaveTripContext
     let firebaseStorageService: FirebaseStorageServiceProtocol
     
     init(photo: Photo, context: SaveTripContext) {
         self.photo = photo
         self.firebaseStorageService = FirebaseStorageService()
+        self.context = context
     }
     
     override func execute() {
         firebaseStorageService.save(photo) { [weak self] (result) in
-            self?.finish()
+            switch result {
+            case .success(_):
+                self?.finish()
+            case .failure(let error):
+                self?.context.error = error
+                self?.finish()
+            }
         }
     }
 }
