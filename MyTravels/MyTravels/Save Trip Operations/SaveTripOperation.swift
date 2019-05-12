@@ -18,17 +18,19 @@ class SaveTripOperation: GroupOperation {
         let uploadTrip = UploadTripOperation(context: context)
         let updateUserOp = UpdateUserOperation(trip: trip, context: context)
         let uploadPlacesOp = UploadPlacesOperation(for: trip, with: context)
-        let addCrumbIDsToTripOp = AddCrumbIDsToTrip(trip, context: context)
+        let addCrumbIDsToTripOp = AddCrumbUIDsToTrip(trip, context: context)
         let updateReceiverOp = UpdateReceiverOp(receiverUsername: receiverUsername, context: context)
+        let addFollowerUIDToTripOp = AddFollowerUIDToTripOp(trip: trip, context: context)
         let doneOp = DidSaveTripOperation(context: context, completion: completion)
         saveTripToCD.addDependency(uploadTrip)
         uploadPlacesOp.addDependency(uploadTrip)
         updateUserOp.addDependency(uploadTrip)
         addCrumbIDsToTripOp.addDependency(uploadPlacesOp)
         updateReceiverOp.addDependency(uploadTrip)
+        addFollowerUIDToTripOp.addDependency(updateReceiverOp)
         doneOp.addDependency(uploadPlacesOp)
         
-        super.init(operations: [uploadTrip, saveTripToCD, uploadPlacesOp, updateUserOp, addCrumbIDsToTripOp, updateReceiverOp, doneOp])
+        super.init(operations: [uploadTrip, saveTripToCD, uploadPlacesOp, updateUserOp, addFollowerUIDToTripOp, addCrumbIDsToTripOp, updateReceiverOp, doneOp])
     }
 }
 

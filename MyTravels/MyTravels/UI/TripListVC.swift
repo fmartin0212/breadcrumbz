@@ -10,13 +10,10 @@ import UIKit
 import CoreData
 
 class TripListVC: UIViewController {
-    
-    // MARK: - IBOutlets
-    @IBOutlet weak var addATripButton: UIButton!
-    
+
     // MARK: - Constants & Variables
+    @IBOutlet weak var addATripButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
-    
     @IBOutlet weak var tableView: UITableView!
     var profileButton: UIButton?
     lazy var tripDataSourceAndDelegate = TripDataSourceAndDelegate(self)

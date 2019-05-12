@@ -1,5 +1,5 @@
 //
-//  AddPhotoPathsToCrumbOp.swift
+//  AddCrumbIDsToTrip.swift
 //  MyTravels
 //
 //  Created by Frank Martin on 5/9/19.
@@ -9,22 +9,20 @@
 import Foundation
 import PSOperations
 
-class AddPhotoUIDsToCrumbOp: PSOperation {
-    
-    let crumb: Place
-    let photoPath: String
+class AddCrumbUIDsToTrip: PSOperation {
+    let trip: Trip
     let firestoreService: FirestoreServiceProtocol
     let context: SaveTripContext
     
-    init(crumb: Place, photoPath: String, context: SaveTripContext) {
-        self.crumb = crumb
-        self.photoPath = photoPath
-        self.firestoreService = context.service
+    init(_ trip: Trip, context: SaveTripContext) {
+        self.trip = trip
         self.context = context
+        self.firestoreService = context.service
     }
     
     override func execute() {
-        firestoreService.update(object: crumb, atField: "photoUIDs", withCriteria: [photoPath], with: .arrayAddtion) { [weak self] (result) in
+        guard context.placeUIDs.count > 0 else { finish() ; return }
+        firestoreService.update(object: trip, atField: "crumbUIDs", withCriteria: context.placeUIDs, with: .arrayAddtion) { [weak self] (result) in
             switch result {
             case .success(_):
                 self?.finish()

@@ -18,6 +18,8 @@
 		B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */; };
 		B725034F20D9B64C00744B23 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B725034E20D9B64C00744B23 /* ProfileViewController.swift */; };
 		B72E239A2285C49A002CA1EC /* UpdateReceiverOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72E23992285C49A002CA1EC /* UpdateReceiverOp.swift */; };
+		B72E239E228896F1002CA1EC /* AddFollowerUIDToTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72E239D228896F1002CA1EC /* AddFollowerUIDToTrip.swift */; };
+		B72E23A022889CF5002CA1EC /* FetchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72E239F22889CF5002CA1EC /* FetchOperations.swift */; };
 		B7336E812262D93A00143812 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E802262D93A00143812 /* FirestoreService.swift */; };
 		B7336E8322631D5200143812 /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E8222631D5200143812 /* FirebaseStorageService.swift */; };
 		B7336E8522631DE000143812 /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E8422631DE000143812 /* FirebaseAuthService.swift */; };
@@ -27,7 +29,7 @@
 		B73804F52224E37B00CD9E59 /* AddCrumb.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73804F42224E37B00CD9E59 /* AddCrumb.xib */; };
 		B73804FB2224EA3700CD9E59 /* AddCrumbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73804FA2224EA3700CD9E59 /* AddCrumbViewController.swift */; };
 		B73880002285097A00D875AA /* AddPhotoPathToCrumbOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7387FFF2285097A00D875AA /* AddPhotoPathToCrumbOp.swift */; };
-		B73880022285192A00D875AA /* AddCrumbIDsToTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73880012285192A00D875AA /* AddCrumbIDsToTrip.swift */; };
+		B73880022285192A00D875AA /* AddCrumbUIDsToTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73880012285192A00D875AA /* AddCrumbUIDsToTrip.swift */; };
 		B739261320362E5F0050B580 /* SharedTripsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B739261220362E5F0050B580 /* SharedTripsController.swift */; };
 		B75E335C20D3150500839678 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E335B20D3150500839678 /* SignUpViewController.swift */; };
 		B75E335E20D316DD00839678 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E335D20D316DD00839678 /* TextFieldTableViewCell.swift */; };
@@ -142,6 +144,8 @@
 		B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B725034E20D9B64C00744B23 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B72E23992285C49A002CA1EC /* UpdateReceiverOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateReceiverOp.swift; sourceTree = "<group>"; };
+		B72E239D228896F1002CA1EC /* AddFollowerUIDToTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFollowerUIDToTrip.swift; sourceTree = "<group>"; };
+		B72E239F22889CF5002CA1EC /* FetchOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchOperations.swift; sourceTree = "<group>"; };
 		B7336E802262D93A00143812 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
 		B7336E8222631D5200143812 /* FirebaseStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
 		B7336E8422631DE000143812 /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
@@ -151,7 +155,7 @@
 		B73804F42224E37B00CD9E59 /* AddCrumb.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCrumb.xib; sourceTree = "<group>"; };
 		B73804FA2224EA3700CD9E59 /* AddCrumbViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCrumbViewController.swift; sourceTree = "<group>"; };
 		B7387FFF2285097A00D875AA /* AddPhotoPathToCrumbOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoPathToCrumbOp.swift; sourceTree = "<group>"; };
-		B73880012285192A00D875AA /* AddCrumbIDsToTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCrumbIDsToTrip.swift; sourceTree = "<group>"; };
+		B73880012285192A00D875AA /* AddCrumbUIDsToTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCrumbUIDsToTrip.swift; sourceTree = "<group>"; };
 		B739261220362E5F0050B580 /* SharedTripsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripsController.swift; sourceTree = "<group>"; };
 		B75E335B20D3150500839678 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B75E335D20D316DD00839678 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
@@ -334,6 +338,14 @@
 			path = Places;
 			sourceTree = "<group>";
 		};
+		B72E23A122889D03002CA1EC /* Fetch Operations */ = {
+			isa = PBXGroup;
+			children = (
+				B72E239F22889CF5002CA1EC /* FetchOperations.swift */,
+			);
+			path = "Fetch Operations";
+			sourceTree = "<group>";
+		};
 		B745843F203B7B1A00A686E7 /* Model outside of MOC */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,6 +400,7 @@
 				B7336E8622632A9500143812 /* FireErrors.swift */,
 				B7336E8422631DE000143812 /* FirebaseAuthService.swift */,
 				B70346792266D1F5000997FA /* Operations.swift */,
+				B72E23A122889D03002CA1EC /* Fetch Operations */,
 				B7FC2D9E22722B3B0086CC3B /* Save Trip Operations */,
 				B7336E8222631D5200143812 /* FirebaseStorageService.swift */,
 				B7C10CD420214D4200818430 /* MyTravels.entitlements */,
@@ -592,10 +605,11 @@
 				B7FC2DA122722B520086CC3B /* SaveCoreDataOperation.swift */,
 				B7FC2DA522722B620086CC3B /* UpdateUserOperation.swift */,
 				B7FC2DA722722B6C0086CC3B /* UploadPlacesOperation.swift */,
+				B72E239D228896F1002CA1EC /* AddFollowerUIDToTrip.swift */,
 				B7FC2DAF22728F710086CC3B /* SavePlaceOperation.swift */,
 				B7FC2DA322722B590086CC3B /* SavePhotoOperation.swift */,
 				B7387FFF2285097A00D875AA /* AddPhotoPathToCrumbOp.swift */,
-				B73880012285192A00D875AA /* AddCrumbIDsToTrip.swift */,
+				B73880012285192A00D875AA /* AddCrumbUIDsToTrip.swift */,
 				B72E23992285C49A002CA1EC /* UpdateReceiverOp.swift */,
 				B7FC2DAB22722B7B0086CC3B /* DidSaveTripOperation.swift */,
 				B7FC2DAD22722B810086CC3B /* SaveTripContext.swift */,
@@ -767,7 +781,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B73880022285192A00D875AA /* AddCrumbIDsToTrip.swift in Sources */,
+				B73880022285192A00D875AA /* AddCrumbUIDsToTrip.swift in Sources */,
 				B7B0C3702037446E0031A92A /* SharedPlace.swift in Sources */,
 				B7C0E3CC22349A2D00438299 /* TripListVC.swift in Sources */,
 				B7FC2DAE22722B810086CC3B /* SaveTripContext.swift in Sources */,
@@ -780,6 +794,7 @@
 				B7C0B596220BC2EF009FAAEB /* PlaceType+CoreDataClass.swift in Sources */,
 				B73804FB2224EA3700CD9E59 /* AddCrumbViewController.swift in Sources */,
 				B7FC2DA222722B520086CC3B /* SaveCoreDataOperation.swift in Sources */,
+				B72E239E228896F1002CA1EC /* AddFollowerUIDToTrip.swift in Sources */,
 				B7B1A93E21CD334700544056 /* NoSharedTripsView.swift in Sources */,
 				B7F88E32223DB3DB00BD16DC /* CrumbDetailVC.swift in Sources */,
 				B7FC2DAC22722B7B0086CC3B /* DidSaveTripOperation.swift in Sources */,
@@ -836,6 +851,7 @@
 				B7C0E3CE22349F8F00438299 /* MainTabBarController.swift in Sources */,
 				B7336E8322631D5200143812 /* FirebaseStorageService.swift in Sources */,
 				B7336E8522631DE000143812 /* FirebaseAuthService.swift in Sources */,
+				B72E23A022889CF5002CA1EC /* FetchOperations.swift in Sources */,
 				B76B2F722245D50F00E688F4 /* EmptyTripStateView.swift in Sources */,
 				B762265521EFC9510045F260 /* FirebaseSyncable.swift in Sources */,
 				B7DA1B71202E140C0007497A /* Place+CoreDataClass.swift in Sources */,

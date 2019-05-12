@@ -31,8 +31,8 @@ class UploadPlaceOperation: GroupOperation {
             photos.count > 0 {
             let savePhotos = photos.map { SavePhotoOperation(photo: $0, context: context) }
             savePhotos.forEach { $0.addDependency(savePlace) }
-            var addPhotoPathToCrumbOps: [AddPhotoPathToCrumbOp] = []
-            savePhotos.forEach { let addPhotoOp = AddPhotoPathToCrumbOp(crumb: place, photoPath: $0.photo.uid, context: context) ; addPhotoOp.addDependency($0) ; addPhotoPathToCrumbOps.append(addPhotoOp) }
+            var addPhotoPathToCrumbOps: [AddPhotoUIDsToCrumbOp] = []
+            savePhotos.forEach { let addPhotoOp = AddPhotoUIDsToCrumbOp(crumb: place, photoPath: $0.photo.uid, context: context) ; addPhotoOp.addDependency($0) ; addPhotoPathToCrumbOps.append(addPhotoOp) }
             super.init(operations: [savePlace] + savePhotos + addPhotoPathToCrumbOps)
         } else {
             super.init(operations: [savePlace])
