@@ -19,6 +19,7 @@ class TripListVC: UIViewController {
     lazy var tripDataSourceAndDelegate = TripDataSourceAndDelegate(self)
     lazy var sharedTripDataSourceAndDelegate = SharedTripDataSourceAndDelegate(self)
     var emptyTripStateView: EmptyTripStateView?
+    var trips: [TripObject] = []
     var state: State = .managed
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

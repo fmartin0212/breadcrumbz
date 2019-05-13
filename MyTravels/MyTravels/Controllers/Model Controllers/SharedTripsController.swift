@@ -23,7 +23,7 @@ class SharedTripsController {
 
 extension SharedTripsController {
     
-    func fetchSharedTrips(completion: @escaping (Result<Bool, FireError>) -> Void) {
+    func fetchSharedTrips(completion: @escaping (Result<[SharedTrip], FireError>) -> Void) {
         guard let loggedInUser = InternalUserController.shared.loggedInUser,
             let participantTripIDs = loggedInUser.participantTripIDs,
             participantTripIDs.count > 0,
@@ -35,8 +35,8 @@ extension SharedTripsController {
             switch result {
             case .failure(let error):
                 completion(.failure(error))
-            case .success(_):
-                completion(.success(true))
+            case .success(let sharedTrips):
+                completion(.success(sharedTrips))
             }
         }
     }

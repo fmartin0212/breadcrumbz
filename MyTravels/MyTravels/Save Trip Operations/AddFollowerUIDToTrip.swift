@@ -17,6 +17,7 @@ class AddFollowerUIDToTripOp: PSOperation {
     init(trip: Trip, context: SaveTripContext) {
         self.trip = trip
         self.context = context
+        super.init()
     }
     
     override func execute() {

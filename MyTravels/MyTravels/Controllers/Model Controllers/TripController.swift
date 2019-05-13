@@ -17,9 +17,7 @@ class TripController {
     static var shared = TripController()
     var frc: NSFetchedResultsController<Trip> = {
         let fetchRequest: NSFetchRequest<Trip> = Trip.fetchRequest()
-        
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startDate", ascending: false)]
-        
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
     }()
     
@@ -96,6 +94,8 @@ class TripController {
         
         // Check for a logged in user
         guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(.failure(.generic)) ; return }
+        
+        
         
         // Check to see if the receiver has blocked the loggedInUser
         self.checkIfBlocked(receiverUsername: receiveUsername) { (isBlocked) in

@@ -16,6 +16,7 @@ class SavePlaceOperation: PSOperation {
     init(place: Place, context: SaveTripContext) {
         self.place = place
         self.context = context
+        super.init()
     }
     
     override func execute() {

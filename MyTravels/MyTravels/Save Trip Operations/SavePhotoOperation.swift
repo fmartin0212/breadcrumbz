@@ -18,6 +18,7 @@ class SavePhotoOperation: PSOperation {
         self.photo = photo
         self.firebaseStorageService = FirebaseStorageService()
         self.context = context
+        super.init()
     }
     
     override func execute() {

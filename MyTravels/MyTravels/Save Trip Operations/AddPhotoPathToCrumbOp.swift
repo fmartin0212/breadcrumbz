@@ -21,6 +21,7 @@ class AddPhotoUIDsToCrumbOp: PSOperation {
         self.photoPath = photoPath
         self.firestoreService = context.service
         self.context = context
+        super.init()
     }
     
     override func execute() {

@@ -24,34 +24,11 @@ class UpdateReceiverOp: GroupOperation {
     }
 }
 
-class FetchReceiverOp: PSOperation {
-    let receiverUsername: String
-    let context: SaveTripContext
-    
-    init(receiverUsername: String, context: SaveTripContext) {
-        self.receiverUsername = receiverUsername
-        self.context = context
-    }
-    
-    override func execute() {
-        context.service.fetch(uuid: nil, field: "username", criteria: receiverUsername, queryType: .fieldEqual) { [weak self] (result: Result<[InternalUser], FireError>) in
-            switch result {
-            case .success(let receiverUserArray):
-                guard let receiver = receiverUserArray.first else { self?.finish() ; return }
-                self?.context.receiver = receiver
-                self?.finish()
-            case .failure(let error):
-                self?.context.error = error
-                self?.finish()
-            }
-        }
-    }
-}
-
 class AddTripIDToReceiverOp: PSOperation {
     let context: SaveTripContext
     init(context: SaveTripContext) {
         self.context = context
+        super.init()
     }
     
     override func execute() {

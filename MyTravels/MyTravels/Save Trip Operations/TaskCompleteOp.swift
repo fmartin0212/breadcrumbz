@@ -9,11 +9,11 @@
 import Foundation
 import PSOperations
 
-class DidSaveTripOperation: PSOperation {
+class TaskCompleteOp: PSOperation {
     
     let context: SaveTripContext
     let completion: (Result<Bool, FireError>) -> Void
-    
+
     init(context: SaveTripContext, completion: @escaping (Result<Bool, FireError>) -> Void) {
         self.context = context
         self.completion = completion

@@ -19,6 +19,7 @@ class UpdateUserOperation: PSOperation {
         self.trip = trip
         self.firestoreService = context.service
         self.context = context
+        super.init()
     }
 
     override func execute() {

@@ -20,6 +20,7 @@
 		B72E239A2285C49A002CA1EC /* UpdateReceiverOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72E23992285C49A002CA1EC /* UpdateReceiverOp.swift */; };
 		B72E239E228896F1002CA1EC /* AddFollowerUIDToTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72E239D228896F1002CA1EC /* AddFollowerUIDToTrip.swift */; };
 		B72E23A022889CF5002CA1EC /* FetchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72E239F22889CF5002CA1EC /* FetchOperations.swift */; };
+		B72E23A32289196A002CA1EC /* CheckIfBlockedOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72E23A22289196A002CA1EC /* CheckIfBlockedOp.swift */; };
 		B7336E812262D93A00143812 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E802262D93A00143812 /* FirestoreService.swift */; };
 		B7336E8322631D5200143812 /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E8222631D5200143812 /* FirebaseStorageService.swift */; };
 		B7336E8522631DE000143812 /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E8422631DE000143812 /* FirebaseAuthService.swift */; };
@@ -126,7 +127,7 @@
 		B7FC2DA422722B590086CC3B /* SavePhotoOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DA322722B590086CC3B /* SavePhotoOperation.swift */; };
 		B7FC2DA622722B620086CC3B /* UpdateUserOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DA522722B620086CC3B /* UpdateUserOperation.swift */; };
 		B7FC2DA822722B6C0086CC3B /* UploadPlacesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DA722722B6C0086CC3B /* UploadPlacesOperation.swift */; };
-		B7FC2DAC22722B7B0086CC3B /* DidSaveTripOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DAB22722B7B0086CC3B /* DidSaveTripOperation.swift */; };
+		B7FC2DAC22722B7B0086CC3B /* TaskCompleteOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DAB22722B7B0086CC3B /* TaskCompleteOp.swift */; };
 		B7FC2DAE22722B810086CC3B /* SaveTripContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DAD22722B810086CC3B /* SaveTripContext.swift */; };
 		B7FC2DB022728F710086CC3B /* SavePlaceOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DAF22728F710086CC3B /* SavePlaceOperation.swift */; };
 /* End PBXBuildFile section */
@@ -146,6 +147,7 @@
 		B72E23992285C49A002CA1EC /* UpdateReceiverOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateReceiverOp.swift; sourceTree = "<group>"; };
 		B72E239D228896F1002CA1EC /* AddFollowerUIDToTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFollowerUIDToTrip.swift; sourceTree = "<group>"; };
 		B72E239F22889CF5002CA1EC /* FetchOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchOperations.swift; sourceTree = "<group>"; };
+		B72E23A22289196A002CA1EC /* CheckIfBlockedOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckIfBlockedOp.swift; sourceTree = "<group>"; };
 		B7336E802262D93A00143812 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
 		B7336E8222631D5200143812 /* FirebaseStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
 		B7336E8422631DE000143812 /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
@@ -256,7 +258,7 @@
 		B7FC2DA322722B590086CC3B /* SavePhotoOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePhotoOperation.swift; sourceTree = "<group>"; };
 		B7FC2DA522722B620086CC3B /* UpdateUserOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserOperation.swift; sourceTree = "<group>"; };
 		B7FC2DA722722B6C0086CC3B /* UploadPlacesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPlacesOperation.swift; sourceTree = "<group>"; };
-		B7FC2DAB22722B7B0086CC3B /* DidSaveTripOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidSaveTripOperation.swift; sourceTree = "<group>"; };
+		B7FC2DAB22722B7B0086CC3B /* TaskCompleteOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCompleteOp.swift; sourceTree = "<group>"; };
 		B7FC2DAD22722B810086CC3B /* SaveTripContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTripContext.swift; sourceTree = "<group>"; };
 		B7FC2DAF22728F710086CC3B /* SavePlaceOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePlaceOperation.swift; sourceTree = "<group>"; };
 		D8CD1BB41D947506D15EDEB5 /* Pods-MyTravels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTravels.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels.release.xcconfig"; sourceTree = "<group>"; };
@@ -611,7 +613,8 @@
 				B7387FFF2285097A00D875AA /* AddPhotoPathToCrumbOp.swift */,
 				B73880012285192A00D875AA /* AddCrumbUIDsToTrip.swift */,
 				B72E23992285C49A002CA1EC /* UpdateReceiverOp.swift */,
-				B7FC2DAB22722B7B0086CC3B /* DidSaveTripOperation.swift */,
+				B72E23A22289196A002CA1EC /* CheckIfBlockedOp.swift */,
+				B7FC2DAB22722B7B0086CC3B /* TaskCompleteOp.swift */,
 				B7FC2DAD22722B810086CC3B /* SaveTripContext.swift */,
 			);
 			path = "Save Trip Operations";
@@ -797,8 +800,9 @@
 				B72E239E228896F1002CA1EC /* AddFollowerUIDToTrip.swift in Sources */,
 				B7B1A93E21CD334700544056 /* NoSharedTripsView.swift in Sources */,
 				B7F88E32223DB3DB00BD16DC /* CrumbDetailVC.swift in Sources */,
-				B7FC2DAC22722B7B0086CC3B /* DidSaveTripOperation.swift in Sources */,
+				B7FC2DAC22722B7B0086CC3B /* TaskCompleteOp.swift in Sources */,
 				B7D652432027F5C300E975F1 /* CreateTripTableViewController.swift in Sources */,
+				B72E23A32289196A002CA1EC /* CheckIfBlockedOp.swift in Sources */,
 				B7C10CCF2020FD4B00818430 /* TripController.swift in Sources */,
 				B7C0B597220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift in Sources */,
 				B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */,

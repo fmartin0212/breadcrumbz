@@ -18,6 +18,7 @@ class AddCrumbUIDsToTrip: PSOperation {
         self.trip = trip
         self.context = context
         self.firestoreService = context.service
+        super.init()
     }
     
     override func execute() {

@@ -22,6 +22,7 @@ class SaveTripContext {
     var placeUIDs: [String] = []
     var photoPaths: [String] = []
     var receiver: InternalUser?
+    var receiverIsBlocked: Bool = false
     
     init(trip: Trip, service: FirestoreServiceProtocol) {
         self.trip = trip

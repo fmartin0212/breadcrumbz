@@ -17,6 +17,7 @@ enum FireError: String, Error {
     case deleting = "fdfsfa"
     case generic = "fdssffa"
     case fetchingFromStore = "fdasaaffa"
+    case loggedInUserBlocked = ""
     
     // MARK: - FirebaseStorage
     
