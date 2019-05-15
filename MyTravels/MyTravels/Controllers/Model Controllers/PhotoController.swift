@@ -171,6 +171,25 @@ final class PhotoController {
         }
     }
     
+    func fetchPhoto(for trip: TripObject, completion: @escaping (Result<UIImage, FireError>) -> Void) {
+        if let sharedTrip = trip as? SharedTrip {
+            if let photoUID = sharedTrip.photoUID {
+                fetchPhoto(withPath: photoUID) { (result) in
+                    switch result {
+                    case .success(let photo):
+                        completion(.success(photo))
+                    case .failure(_):
+                        print("Something went wrong fetching a trip's photo")
+                    }
+                }
+            }
+        } else {
+            let trip = trip as! Trip
+            guard let photo = trip.photo else { completion(.failure(.generic)) ; return }
+            completion(.success(photo.image))
+        }
+    }
+    
     func fetchPhotos(for crumb: CrumbObject, completion: @escaping (Result<[UIImage], FireError>) -> Void) {
         if let crumb = crumb as? Place,
             let photosObjects = crumb.photos?.allObjects as? [Photo],

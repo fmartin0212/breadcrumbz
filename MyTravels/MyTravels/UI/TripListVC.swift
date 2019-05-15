@@ -110,20 +110,13 @@ extension TripListVC: UITableViewDataSource {
         let trip = trips[indexPath.row]
         cell.trip = trip
         
-        if let sharedTrip = trip as? SharedTrip {
-            if let photoUID = sharedTrip.photoUID {
-                PhotoController.shared.fetchPhoto(withPath: photoUID) { (result) in
-                    switch result {
-                    case .success(let photo):
-                        cell.photo = photo
-                    case .failure(_):
-                        print("Something went wrong fetching a trip's photo")
-                    }
-                }
+        PhotoController.shared.fetchPhoto(for: trip) { (result) in
+            switch result {
+            case .success(let photo):
+                cell.photo = photo
+            case .failure(_):
+                print("Something went wrong fetching a trip photo")
             }
-        } else {
-            let trip = trip as! Trip
-            cell.photo = trip.photo?.image
         }
         
         return cell
