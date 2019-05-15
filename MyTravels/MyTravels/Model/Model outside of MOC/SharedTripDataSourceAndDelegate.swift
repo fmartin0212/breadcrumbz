@@ -29,7 +29,7 @@ extension SharedTripDataSourceAndDelegate: UITableViewDataSource {
         
         let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
         
-        cell.sharedTrip = sharedTrip
+//        cell.sharedTrip = sharedTrip
         
         return cell
         

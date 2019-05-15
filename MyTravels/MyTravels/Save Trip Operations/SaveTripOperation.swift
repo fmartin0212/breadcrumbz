@@ -11,8 +11,8 @@ import PSOperations
 
 class ShareTripOperation: GroupOperation {
     
-    init(trip: Trip, service: FirestoreServiceProtocol, receiverUsername: String, completion: @escaping (Result<Bool, FireError>) -> Void) {
-        let context = SaveTripContext(trip: trip, service: service)
+    init(trip: Trip, service: FirestoreServiceProtocol, storageService: FirebaseStorageServiceProtocol, receiverUsername: String, completion: @escaping (Result<Bool, FireError>) -> Void) {
+        let context = SaveTripContext(trip: trip, service: service, storageService: storageService)
         let checkIfBlockedOp = CheckIfBlockedOp(receiverUsername: receiverUsername, context: context)
         let addTripIDToReceiverOp = AddTripIDToReceiverOp(context: context)
         let addFollowerUIDToTripOp = AddFollowerUIDToTripOp(trip: trip, context: context)
@@ -28,11 +28,12 @@ class ShareTripOperation: GroupOperation {
 
 class SaveTripOperation: GroupOperation {
     
-    init(trip: Trip, receiverUsername: String, service: FirestoreServiceProtocol, completion: @escaping (Result<Bool, FireError>) -> Void) {
-        let context = SaveTripContext(trip: trip, service: service)
+    init(trip: Trip, receiverUsername: String, service: FirestoreServiceProtocol, storageService: FirebaseStorageServiceProtocol, completion: @escaping (Result<Bool, FireError>) -> Void) {
+        let context = SaveTripContext(trip: trip, service: service, storageService: storageService)
         let checkIfBlockedOp = CheckIfBlockedOp(receiverUsername: receiverUsername, context: context)
         let uploadTrip = UploadTripOperation(context: context)
         let saveTripToCD = SaveCoreDataOperation()
+        let uploadTripPhotoGroupOp = UploadTripPhotoGroupOp(trip: trip, context: context)
         let addTripIDToReceiverOp = AddTripIDToReceiverOp(context: context)
         let addFollowerUIDToTripOp = AddFollowerUIDToTripOp(trip: trip, context: context)
         let updateUserOp = UpdateUserOperation(trip: trip, context: context)
@@ -50,7 +51,7 @@ class SaveTripOperation: GroupOperation {
         taskCompleteOp.addDependency(addFollowerUIDToTripOp)
         taskCompleteOp.addDependency(uploadPlacesOp)
         
-        super.init(operations: [checkIfBlockedOp, uploadTrip, saveTripToCD, addTripIDToReceiverOp, uploadPlacesOp, updateUserOp, addFollowerUIDToTripOp, addCrumbIDsToTripOp, updateReceiverOp, taskCompleteOp])
+        super.init(operations: [checkIfBlockedOp, uploadTrip, saveTripToCD, uploadTripPhotoGroupOp, addTripIDToReceiverOp, uploadPlacesOp, updateUserOp, addFollowerUIDToTripOp, addCrumbIDsToTripOp, updateReceiverOp, taskCompleteOp])
     }
 }
 

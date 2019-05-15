@@ -8,7 +8,11 @@
 
 import UIKit
 
-final class AddTripViewController: UIViewController, ScrollableViewController {
+protocol AddTripVCDelegate: class {
+    func saveButtonTapped()
+}
+
+final class AddTripVC: UIViewController, ScrollableViewController {
 
     // MARK: - Properties
     
@@ -47,6 +51,7 @@ final class AddTripViewController: UIViewController, ScrollableViewController {
     var selectedTextView: UITextView?
     var trip: Trip?
     var state: State = .add
+    weak var delegate: AddTripVCDelegate?
     
     // MARK: - Actions
     
@@ -101,6 +106,7 @@ final class AddTripViewController: UIViewController, ScrollableViewController {
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         save()
+        
     }
     
     @IBAction func saveBarButtonItemTapped(_ sender: Any) {
@@ -116,7 +122,7 @@ final class AddTripViewController: UIViewController, ScrollableViewController {
     }
 }
 
-extension AddTripViewController {
+extension AddTripVC {
     
     /// Sets up the views for the AddTripViewController.
     func setupViews() {
@@ -230,16 +236,17 @@ extension AddTripViewController {
             PhotoController.shared.add(photo: compressedImage, trip: newTrip)
         }
         
+        delegate?.saveButtonTapped()
         dismiss(animated: true, completion: nil)
     }
 }
 
-extension AddTripViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension AddTripVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-
+        
+        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+        
         guard let editedPhoto = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage else { return }
         addPhotoButton.setImage(editedPhoto, for: .normal)
         addPhotoButton.imageView?.contentMode = .scaleAspectFill
@@ -252,7 +259,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     }
 }
 
-extension AddTripViewController: UITextFieldDelegate {
+extension AddTripVC: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         selectedTextField = textField
@@ -269,7 +276,7 @@ extension AddTripViewController: UITextFieldDelegate {
     }
 }
 
-extension AddTripViewController: UITextViewDelegate {
+extension AddTripVC: UITextViewDelegate {
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         selectedTextView = textView

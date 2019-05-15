@@ -65,7 +65,7 @@ public struct FirebaseStorageService: FirebaseStorageServiceProtocol  {
     
     func fetchFromStorage(path: String,
                           completion: @escaping (Result<Data, FireError>) -> Void) {
-        Storage.storage().reference(withPath: path).getData(maxSize: 9999) { (data, error) in
+        Storage.storage().reference(withPath: path).getData(maxSize: 9999999) { (data, error) in
             if let error = error {
                 print("There was an error getting the image: \(error.localizedDescription)")
                 completion(.failure(.fetchingFromStorage))

@@ -29,6 +29,13 @@ public class Photo: NSManagedObject, FirebaseStorageSavable, FirestoreSyncable {
         return compressedJPEGData
     }
     
+    var image: UIImage {
+        guard let data = self.photo,
+            let image = UIImage(data: data as Data)
+            else { return UIImage() }
+        return image
+    }
+    
     convenience init(photo: Data, place: Place?, trip: Trip?, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
         self.photo = NSData(data: photo)

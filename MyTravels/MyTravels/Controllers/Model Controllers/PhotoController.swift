@@ -140,61 +140,6 @@ final class PhotoController {
         }
     }
     
-//    func savePlacePhotos(for trip: Trip,
-//                         completion: @escaping (Result<Bool, FireError>) -> Void) {
-//        if let places = trip.places?.allObjects as? [Place] {
-//
-//            for place in places {
-//
-//                if let photos = place.photos?.allObjects as? [Photo] {
-//
-//                    let dispatchGroup = DispatchGroup()
-//
-//                    let photoDictionary = [String : Any]()
-//
-//                    for photo in photos {
-//
-//                        dispatchGroup.enter()
-//
-//                        firestoreService.save(object: photo) { (result) in
-//                            <#code#>
-//                        }
-//
-//                        FirebaseManager.save(photo) { (metadata, errorMessage) in
-//                            if let _ = errorMessage {
-//
-//                            }
-//
-//                            let value: [String : Any] = [photo.uid : metadata?.path as Any]
-//
-//                            dispatchGroup.enter()
-//
-//                            let databaseRef = Constants.databaseRef.child(Constants.trip).child(trip.uid!).child(Constants.places).child(place.name)
-//
-//                            FirebaseManager.updateObject(at: databaseRef, value: value, completion: { (errorMessage) in
-//                                if let _ = errorMessage {
-//
-//                                }
-//                            })
-//                            FirebaseManager.save(photoDictionary, to: databaseRef, completion: { (error) in
-//                                if let error = error {
-//                                    print(error)
-//
-//                                }
-//                                dispatchGroup.leave()
-//                            })
-//                            dispatchGroup.leave()
-//                        }
-//                    }
-//                    dispatchGroup.notify(queue: .main) {
-//                        completion(true)
-//                    }
-//                }
-//            }
-//        }
-//        completion(true)
-//    }
-    
     func savePhotos(for place: Place,
                     completion: @escaping (Bool) -> Void) {
         guard let photos = place.photos?.allObjects as? [Photo] else { completion(false) ; return }

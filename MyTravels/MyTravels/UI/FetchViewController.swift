@@ -29,10 +29,10 @@ class FetchViewController: UIViewController {
         tripTabBarController.tabBar.items![2].image = UIImage(named: "User")
         return tripTabBarController
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         UserDefaults.standard.setValue(true, forKey: "userSkippedSignUp")
         
         if UserDefaults.standard.value(forKey: "userSkippedSignUp") == nil {
@@ -42,27 +42,15 @@ class FetchViewController: UIViewController {
         InternalUserController.shared.checkForLoggedInUser { (result) in
             switch result {
             case .success(_):
-                SharedTripsController.shared.fetchSharedTrips() { (result) in
-                    switch result {
-                    case .success(_):
-                        DispatchQueue.main.async {
-                            UIApplication.shared.windows.first!.rootViewController = self.tripTabBarController
-                            return
-                        }
-                    case .failure(_):
-                        print("Something went wrong in the fetch results controller")
-                    }
+                DispatchQueue.main.async {
+                    UIApplication.shared.windows.first!.rootViewController = self.tripTabBarController
+                    return
                 }
             case .failure(_):
                 if UserDefaults.standard.bool(forKey: "userSkippedSignUp") == false {
                     DispatchQueue.main.async {
                         let onboardingVC = UIStoryboard.onboarding.instantiateInitialViewController()
                         UIApplication.shared.windows.first!.rootViewController = onboardingVC
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        UIApplication.shared.windows.first!.rootViewController = self.tripTabBarController
-                        return
                     }
                 }
             }

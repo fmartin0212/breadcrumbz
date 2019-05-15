@@ -12,15 +12,17 @@ class TripTableViewCell: UITableViewCell {
     
     // MARK: - Constants & Variables
     
-    var trip: Trip? {
+    var trip: TripObject? {
         didSet {
-            updateViews(trip: trip)
+            guard let trip = trip else { return }
+            updateViews(for: trip)
         }
     }
-    
-    var sharedTrip: SharedTrip? {
+
+    var photo: UIImage? {
         didSet {
-            updateViews(sharedTrip: sharedTrip)
+            guard let photo = photo else { return }
+            updateImageView(with: photo)
         }
     }
     
@@ -40,46 +42,18 @@ class TripTableViewCell: UITableViewCell {
 
 extension TripTableViewCell {
     
-    func updateViews(trip: Trip? = nil, sharedTrip: SharedTrip? = nil) {
-        
+    func updateViews(for trip: TripObject) {
         tripImageView.layer.cornerRadius = 12
         tripImageView.clipsToBounds = true
-        var tripPhoto = UIImage()
-        
-        if let trip = trip {
-            
-            if let photo = trip.photo?.photo as Data? {
-                guard let image = UIImage(data: photo) else { return }
-                tripPhoto = image
-            } else {
-                guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
-                tripPhoto = tripPhotoPlaceholderImage
-            }
-            
-            tripNameLabel.text = trip.name
-            tripImageView.image = tripPhoto
-            tripLocationLabel.text = trip.location
-            
-            tripStartDateLabel.text = (trip.startDate as Date).short() + " - "
-            tripEndDateLabel.text = (trip.endDate as Date).short()
-            
-            if let places = trip.places {
-                crumbCountLabel.text = "\(places.count)"
-            }
-            
-        } else if let sharedTrip = sharedTrip {
-            if let photo = sharedTrip.photo {
-                tripPhoto = photo
-            } else {
-                guard let tripPhotoPlaceholderImage = UIImage(named: "map") else { return }
-                tripPhoto = tripPhotoPlaceholderImage
-            }
-            
-            tripNameLabel.text = sharedTrip.name
-            tripImageView.image = tripPhoto
-            tripLocationLabel.text = sharedTrip.location
-            tripStartDateLabel.text = (sharedTrip.startDate as Date).short() + " - "
-            tripEndDateLabel.text = (sharedTrip.endDate as Date).short()
+        tripNameLabel.text = trip.name
+        tripLocationLabel.text = trip.location
+        tripStartDateLabel.text = (trip.startDate as Date).short() + " - "
+        tripEndDateLabel.text = (trip.endDate as Date).short()
+    }
+    
+    func updateImageView(with photo: UIImage) {
+        DispatchQueue.main.async { [weak self] in
+            self?.tripImageView.image = photo
         }
     }
 }

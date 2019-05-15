@@ -17,6 +17,7 @@ class TripDataSourceAndDelegate: NSObject {
 }
 
 extension TripDataSourceAndDelegate: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let trips = TripController.shared.frc.fetchedObjects else { return 0 }
         return trips.count
@@ -34,8 +35,14 @@ extension TripDataSourceAndDelegate: UITableViewDataSource {
         guard let trips = TripController.shared.frc.fetchedObjects else { return UITableViewCell() }
         let trip = trips[indexPath.row]
         cell.trip = trip
-        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if 1 > 0 {
+            return false
+        }
+        return true
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

@@ -39,6 +39,6 @@ class Constants {
     static public let photoID = "photoID"
     static public let photoURLs = "photoURLs"
     static public let sharedTripIDs = "sharedTripIDs"
-    static public let participantTripIDs = "participantTripIDs"
+    static public let participantTripIDs = "tripsFollowingUIDs"
     
     }

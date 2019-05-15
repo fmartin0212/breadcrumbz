@@ -9,18 +9,21 @@
 import UIKit
 import CoreData
 
-class TripListVC: UIViewController {
+final class TripListVC: UIViewController {
 
     // MARK: - Constants & Variables
-    @IBOutlet weak var addATripButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    lazy var activityIndicator = UIActivityIndicatorView()
     var profileButton: UIButton?
-    lazy var tripDataSourceAndDelegate = TripDataSourceAndDelegate(self)
-    lazy var sharedTripDataSourceAndDelegate = SharedTripDataSourceAndDelegate(self)
     var emptyTripStateView: EmptyTripStateView?
     var trips: [TripObject] = []
     var state: State = .managed
+
+    init(state: State, nibName: String) {
+        self.state = state
+        super.init(nibName: nibName, bundle: nil)
+    }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -34,7 +37,7 @@ class TripListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBar.delegate = self
+        activityIndicator.isHidden = true
         let nib = UINib(nibName: "TripCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TripCell")
         
@@ -43,45 +46,114 @@ class TripListVC: UIViewController {
         
         if state == .shared {
             self.title = "Shared"
-            tableView.dataSource = sharedTripDataSourceAndDelegate
-            tableView.delegate = sharedTripDataSourceAndDelegate
+            presentActivityIndicator()
+            SharedTripsController.shared.fetchSharedTrips { [weak self] (result) in
+                switch result {
+                case .success(let sharedTrips):
+                    self?.trips = sharedTrips
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                        self?.removeActivityIndicator()
+                        self?.refreshViews()
+                    }
+                case .failure(let error):
+                    self?.presentStandardAlertController(withTitle: "Uh Oh!", message: error.rawValue)
+                }
+            }
         } else {
             self.title = "My Trips"
             self.navigationItem.rightBarButtonItem = addButton
-            tableView.dataSource = tripDataSourceAndDelegate
-            tableView.delegate = tripDataSourceAndDelegate
             TripController.shared.frc.delegate = self
             TripController.shared.fetchAllTrips()
+            self.trips = TripController.shared.trips
+            refreshViews()
         }
         
         for trip in TripController.shared.trips {
             trip.uid = nil
             CoreDataManager.save()
         }
-        
-        refreshViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.navigationBar.prefersLargeTitles = true
-        refreshViews()
     }
-    //
-    //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    //        view.endEditing(true)
-    //    }
-    
+
     @IBAction func addATripButtonTapped(_ sender: Any) {
-        let addTripVC = AddTripViewController(nibName: "AddTrip", bundle: nil)
+        let addTripVC = AddTripVC(nibName: "AddTrip", bundle: nil)
+        addTripVC.delegate = self
         self.present(addTripVC, animated: true, completion: nil)
-        //        performSegue(withIdentifier: "addATripSegue", sender: nil)
-        
     }
     
     @IBAction func addTripBarButtonItemTapped(_ sender: Any) {
-        let addTripVC = AddTripViewController(nibName: "AddTrip", bundle: nil)
+        let addTripVC = AddTripVC(nibName: "AddTrip", bundle: nil)
+        addTripVC.delegate = self
         self.present(addTripVC, animated: true, completion: nil)
+    }
+}
+
+extension TripListVC: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return trips.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TripCell", for: indexPath) as! TripTableViewCell
+        
+        // Cell and cell element formatting
+        cell.selectionStyle = .none
+        cell.crumbBackgroundView.layer.cornerRadius = cell.crumbBackgroundView.frame.width / 2
+        cell.viewLineSeparator.formatLine()
+        
+        let trip = trips[indexPath.row]
+        cell.trip = trip
+        
+        if let sharedTrip = trip as? SharedTrip {
+            if let photoUID = sharedTrip.photoUID {
+                PhotoController.shared.fetchPhoto(withPath: photoUID) { (result) in
+                    switch result {
+                    case .success(let photo):
+                        cell.photo = photo
+                    case .failure(_):
+                        print("Something went wrong fetching a trip's photo")
+                    }
+                }
+            }
+        } else {
+            let trip = trip as! Trip
+            cell.photo = trip.photo?.image
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let trip = trips[indexPath.row]
+            trips.remove(at: indexPath.row)
+            TripController.shared.delete(trip: trip as! Trip)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if state == .shared { return false }
+        else { return true }
+    }
+}
+
+extension TripListVC: UITableViewDelegate {
+  
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let trip = trips[indexPath.row]
+        let tripDetailVC = TripDetailVC(nibName: "TripDetail", bundle: nil)
+        tripDetailVC.trip = trip
+        navigationController?.pushViewController(tripDetailVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 344
     }
 }
 
@@ -99,48 +171,49 @@ extension TripListVC {
         NSLayoutConstraint(item: emptyTripStateView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 0).isActive = true
         NSLayoutConstraint(item: emptyTripStateView, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
         
-        
         self.emptyTripStateView = emptyTripStateView
         self.emptyTripStateView?.delegate = self
     }
-//    
-//    private func fetchUserInfo(completion: @escaping (Bool) -> Void) {
-//
-//        guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(false) ; return }
-//        SharedTripsController.shared.fetchSharedTrips { (success) in
-//            if success {
-//                NotificationCenter.default.post(name: Constants.sharedTripsReceivedNotif, object: nil)
-//                if let photoURL = loggedInUser.photoURL {
-//                    InternalUserController.shared.fetchProfilePhoto(from: photoURL, completion: { (photo) in
-//                        DispatchQueue.main.async {
-//                            completion(true)
-//                        }
-//                    })
-//                }
-//            } else { completion(false) }
-//        }
-//    }
     
-    func refreshViews() {
-        if state == .shared {
-            if SharedTripsController.shared.sharedTrips.count == 0 {
-                self.navigationItem.rightBarButtonItem = nil
-                self.presentEmptyTripStateView()
-            }
-        } else {
+    private func removeEmptyTripStateView() {
+        DispatchQueue.main.async { [weak self] in
+            guard let emptyTripStateView = self?.emptyTripStateView else { return }
+            emptyTripStateView.removeFromSuperview()
+        }
+    }
+    
+    private func presentActivityIndicator() {
+        view.addSubview(activityIndicator)
+        view.bringSubviewToFront(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint(item: activityIndicator, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: activityIndicator, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1.0, constant: 0).isActive = true
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = false
+    }
+    
+    private func removeActivityIndicator() {
+        activityIndicator.removeFromSuperview()
+    }
+    
+    private func refreshViews() {
+        let tripsIsEmpty = trips.count == 0 ? true : false
+        if !tripsIsEmpty {
+            removeEmptyTripStateView()
+            return
+        }
+        if state == .shared && tripsIsEmpty == true {
+            self.presentEmptyTripStateView()
+        } else if state == .managed {
             TripController.shared.fetchAllTrips()
-            if TripController.shared.trips.count > 0 {
-                if let emptyTripStateView = emptyTripStateView {
-                    emptyTripStateView.removeFromSuperview()
-                }
-            } else {
-                self.presentEmptyTripStateView()
+            if tripsIsEmpty == true {
+                presentEmptyTripStateView()
             }
         }
     }
     
     @objc private func presentAddTripVC() {
-        let addTripVC = AddTripViewController(nibName: "AddTrip", bundle: nil)
+        let addTripVC = AddTripVC(nibName: "AddTrip", bundle: nil)
         self.present(addTripVC, animated: true, completion: nil)
     }
 }
@@ -153,11 +226,7 @@ extension TripListVC: NSFetchedResultsControllerDelegate {
         case .delete:
             guard let indexPath = indexPath else { return }
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
-            guard let trips = TripController.shared.frc.fetchedObjects else { return }
-            if trips.count == 0 {
-//                presentemptyTripStateView()
-            }
+            refreshViews()
         case .insert:
             guard let newIndexPath = newIndexPath else { return }
             tableView.insertRows(at: [newIndexPath], with: .automatic)
@@ -168,18 +237,20 @@ extension TripListVC: NSFetchedResultsControllerDelegate {
         case .update:
             guard let indexPath = indexPath else { return }
             tableView.reloadRows(at: [indexPath], with: .automatic)
+        @unknown default:
+            fatalError()
         }
     }
 }
 
 extension TripListVC: UISearchBarDelegate {
-   
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-              searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.setShowsCancelButton(false, animated: true)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -190,5 +261,14 @@ extension TripListVC: UISearchBarDelegate {
 extension TripListVC: EmptyTripStateViewDelegate {
     func getStartedButtonTapped() {
         self.presentAddTripVC()
+    }
+}
+
+extension TripListVC: AddTripVCDelegate {
+    
+    func saveButtonTapped() {
+        DispatchQueue.main.async { [weak self] in
+            self?.refreshViews()
+        }
     }
 }

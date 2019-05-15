@@ -27,6 +27,7 @@
 		B7336E8722632A9500143812 /* FireErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E8622632A9500143812 /* FireErrors.swift */; };
 		B7336E892263E9E000143812 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E882263E9E000143812 /* CacheManager.swift */; };
 		B735428D2174E36300D9A68D /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B735428C2174E36200D9A68D /* Trip+CoreDataProperties.swift */; };
+		B737CD72228B58D50007FF80 /* UploadTripPhotoOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737CD71228B58D50007FF80 /* UploadTripPhotoOp.swift */; };
 		B73804F52224E37B00CD9E59 /* AddCrumb.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73804F42224E37B00CD9E59 /* AddCrumb.xib */; };
 		B73804FB2224EA3700CD9E59 /* AddCrumbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73804FA2224EA3700CD9E59 /* AddCrumbViewController.swift */; };
 		B73880002285097A00D875AA /* AddPhotoPathToCrumbOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7387FFF2285097A00D875AA /* AddPhotoPathToCrumbOp.swift */; };
@@ -70,7 +71,7 @@
 		B7C0B597220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0B595220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift */; };
 		B7C0B598220BC7AB009FAAEB /* MyTravels.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = B7C10CBB2020D19500818430 /* MyTravels.xcdatamodeld */; };
 		B7C0B59A220C75BB009FAAEB /* AddTrip.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7C0B599220C75BA009FAAEB /* AddTrip.xib */; };
-		B7C0B59C220CB393009FAAEB /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0B59B220CB393009FAAEB /* AddTripViewController.swift */; };
+		B7C0B59C220CB393009FAAEB /* AddTripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0B59B220CB393009FAAEB /* AddTripVC.swift */; };
 		B7C0E3C22232EDBA00438299 /* TripDataSourceAndDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0E3C12232EDBA00438299 /* TripDataSourceAndDelegate.swift */; };
 		B7C0E3C42232EDC300438299 /* SharedTripDataSourceAndDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0E3C32232EDC300438299 /* SharedTripDataSourceAndDelegate.swift */; };
 		B7C0E3C8223458A700438299 /* Trip+CrumbProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0E3C7223458A700438299 /* Trip+CrumbProtocols.swift */; };
@@ -154,6 +155,7 @@
 		B7336E8622632A9500143812 /* FireErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireErrors.swift; sourceTree = "<group>"; };
 		B7336E882263E9E000143812 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		B735428C2174E36200D9A68D /* Trip+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B737CD71228B58D50007FF80 /* UploadTripPhotoOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTripPhotoOp.swift; sourceTree = "<group>"; };
 		B73804F42224E37B00CD9E59 /* AddCrumb.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCrumb.xib; sourceTree = "<group>"; };
 		B73804FA2224EA3700CD9E59 /* AddCrumbViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCrumbViewController.swift; sourceTree = "<group>"; };
 		B7387FFF2285097A00D875AA /* AddPhotoPathToCrumbOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoPathToCrumbOp.swift; sourceTree = "<group>"; };
@@ -197,7 +199,7 @@
 		B7C0B594220BC2EF009FAAEB /* PlaceType+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceType+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B7C0B595220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceType+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B7C0B599220C75BA009FAAEB /* AddTrip.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTrip.xib; sourceTree = "<group>"; };
-		B7C0B59B220CB393009FAAEB /* AddTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripViewController.swift; sourceTree = "<group>"; };
+		B7C0B59B220CB393009FAAEB /* AddTripVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripVC.swift; sourceTree = "<group>"; };
 		B7C0E3C12232EDBA00438299 /* TripDataSourceAndDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDataSourceAndDelegate.swift; sourceTree = "<group>"; };
 		B7C0E3C32232EDC300438299 /* SharedTripDataSourceAndDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripDataSourceAndDelegate.swift; sourceTree = "<group>"; };
 		B7C0E3C7223458A700438299 /* Trip+CrumbProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CrumbProtocols.swift"; sourceTree = "<group>"; };
@@ -509,7 +511,7 @@
 				B7F88E31223DB3DB00BD16DC /* CrumbDetailVC.swift */,
 				B7F88E2B223D4B2100BD16DC /* ImageCollectionViewCell.xib */,
 				B7F88E2D223D4C0E00BD16DC /* ImageCollectionViewCell.swift */,
-				B7C0B59B220CB393009FAAEB /* AddTripViewController.swift */,
+				B7C0B59B220CB393009FAAEB /* AddTripVC.swift */,
 				B7C0B599220C75BA009FAAEB /* AddTrip.xib */,
 				B7C83FC421C1FA3B00A9F86C /* LoadingView.swift */,
 				B7C83FC021C1F88700A9F86C /* LoadingView.xib */,
@@ -608,6 +610,7 @@
 				B7FC2DA522722B620086CC3B /* UpdateUserOperation.swift */,
 				B7FC2DA722722B6C0086CC3B /* UploadPlacesOperation.swift */,
 				B72E239D228896F1002CA1EC /* AddFollowerUIDToTrip.swift */,
+				B737CD71228B58D50007FF80 /* UploadTripPhotoOp.swift */,
 				B7FC2DAF22728F710086CC3B /* SavePlaceOperation.swift */,
 				B7FC2DA322722B590086CC3B /* SavePhotoOperation.swift */,
 				B7387FFF2285097A00D875AA /* AddPhotoPathToCrumbOp.swift */,
@@ -850,7 +853,7 @@
 				B735428D2174E36300D9A68D /* Trip+CoreDataProperties.swift in Sources */,
 				B725034F20D9B64C00744B23 /* ProfileViewController.swift in Sources */,
 				B7C10CCD2020EFB000818430 /* TripTableViewCell.swift in Sources */,
-				B7C0B59C220CB393009FAAEB /* AddTripViewController.swift in Sources */,
+				B7C0B59C220CB393009FAAEB /* AddTripVC.swift in Sources */,
 				B7C0E3C42232EDC300438299 /* SharedTripDataSourceAndDelegate.swift in Sources */,
 				B7C0E3CE22349F8F00438299 /* MainTabBarController.swift in Sources */,
 				B7336E8322631D5200143812 /* FirebaseStorageService.swift in Sources */,
@@ -879,6 +882,7 @@
 				B7DA1B7F202F9FBC0007497A /* FetchViewController.swift in Sources */,
 				B774A1C621BDA85E008D7483 /* Constants.swift in Sources */,
 				B7FC2DA022722B4A0086CC3B /* SaveTripOperation.swift in Sources */,
+				B737CD72228B58D50007FF80 /* UploadTripPhotoOp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

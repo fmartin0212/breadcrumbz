@@ -23,7 +23,7 @@ class SharedTrip: FirebaseDBRetrievable, FirestoreRetrievable, TripObject {
     let creatorName: String
     let creatorUsername: String
     let creatorID: String
-    var photoID: String?
+    var photoUID: String?
     var photo: UIImage?
     var places: [SharedPlace] = []
     var isAcceptedTrip: Bool = true
@@ -52,13 +52,12 @@ class SharedTrip: FirebaseDBRetrievable, FirestoreRetrievable, TripObject {
         self.creatorID = creatorID
         self.uuid = uuid
         
-        if let photoIDDictionary = dictionary["photoID"] as? [String : Bool],
-            let photoID = photoIDDictionary.keys.first {
-            self.photoID = photoID
+        if let photoUID = dictionary["photoUID"] as? String {
+            self.photoUID = photoUID
         }
         
-        if let placeIDs = dictionary["placeIDs"] as? [String : Bool] {
-            self.placeIDs = placeIDs.compactMap { $0.key }
+        if let placeIDs = dictionary["placeIDs"] as? [String] {
+            self.placeIDs = placeIDs
         }
     }
     
@@ -85,13 +84,12 @@ class SharedTrip: FirebaseDBRetrievable, FirestoreRetrievable, TripObject {
         self.creatorUsername = creatorUsername
         self.creatorID = creatorID
         
-        if let photoIDDictionary = tripDictionary["photoID"] as? [String : Bool],
-            let photoID = photoIDDictionary.keys.first {
-            self.photoID = photoID
+        if let photoUID = tripDictionary["photoUID"] as? String {
+            self.photoUID = photoUID
         }
         
-        if let placeIDs = tripDictionary["placeIDs"] as? [String : Bool] {
-            self.placeIDs = placeIDs.compactMap { $0.key }
+        if let placeIDs = tripDictionary["placeIDs"] as? [String] {
+            self.placeIDs = placeIDs
         }
         
         SharedPlaceController.parsePlacesFrom(tripDictionary: tripDictionary) { (places) in

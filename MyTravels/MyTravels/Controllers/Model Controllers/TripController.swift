@@ -23,10 +23,12 @@ class TripController {
     
     var trips: [Trip] = []
     let firestoreService: FirestoreServiceProtocol
+    let firebaseStorageService: FirebaseStorageServiceProtocol
     let operationQueue = PSOperationQueue()
     
     init() {
         self.firestoreService = FirestoreService()
+        self.firebaseStorageService = FirebaseStorageService()
     }
     
     // MARK: - CRUD Functions
@@ -153,7 +155,7 @@ class TripController {
         
         guard InternalUserController.shared.loggedInUser != nil else { completion(.failure(.generic)) ; return }
         
-        let save = SaveTripOperation(trip: trip, receiverUsername: receiverUUID, service: firestoreService, completion: completion)
+        let save = SaveTripOperation(trip: trip, receiverUsername: receiverUUID, service: firestoreService, storageService: firebaseStorageService, completion: completion)
         
         operationQueue.addOperation(save)
       

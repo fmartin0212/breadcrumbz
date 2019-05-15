@@ -39,6 +39,11 @@ class TripDetailVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    init(trip: TripObject, nibName: String) {
+        self.trip = trip
+        super.init(nibName: nibName, bundle: nil)
+    }
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
