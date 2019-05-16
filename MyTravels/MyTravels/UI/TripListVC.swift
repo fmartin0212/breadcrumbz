@@ -14,6 +14,7 @@ final class TripListVC: UIViewController {
     // MARK: - Constants & Variables
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    let tripObjectManager = TripObjectManager()
     lazy var activityIndicator = UIActivityIndicatorView()
     var profileButton: UIButton?
     var emptyTripStateView: EmptyTripStateView?
@@ -37,36 +38,25 @@ final class TripListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator.isHidden = true
+        setupViews()
         let nib = UINib(nibName: "TripCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TripCell")
-        
-        // Set tableview properties
         tableView.separatorStyle = .none
-        
-        if state == .shared {
-            self.title = "Shared"
-            presentActivityIndicator()
-            SharedTripsController.shared.fetchSharedTrips { [weak self] (result) in
-                switch result {
-                case .success(let sharedTrips):
-                    self?.trips = sharedTrips
-                    DispatchQueue.main.async {
-                        self?.tableView.reloadData()
-                        self?.removeActivityIndicator()
-                        self?.refreshViews()
-                    }
-                case .failure(let error):
-                    self?.presentStandardAlertController(withTitle: "Uh Oh!", message: error.rawValue)
+        TripController.shared.frc.delegate = self
+        tripObjectManager.fetchTrips(for: state) { (result) in
+            switch result {
+            case .success(let trips):
+                self.trips = trips
+                DispatchQueue.main.async { [weak self] in
+                    self?.refreshViews()
+                    self?.tableView.reloadData()
+                    
+                }
+            case .failure(let error):
+                DispatchQueue.main.async { [weak self] in
+                    self?.presentStandardAlertController(withTitle: "Uh Oh", message: error.localizedDescription)
                 }
             }
-        } else {
-            self.title = "My Trips"
-            self.navigationItem.rightBarButtonItem = addButton
-            TripController.shared.frc.delegate = self
-            TripController.shared.fetchAllTrips()
-            self.trips = TripController.shared.trips
-            refreshViews()
         }
         
         for trip in TripController.shared.trips {
@@ -110,15 +100,14 @@ extension TripListVC: UITableViewDataSource {
         let trip = trips[indexPath.row]
         cell.trip = trip
         
-        PhotoController.shared.fetchPhoto(for: trip) { (result) in
+        tripObjectManager.fetchPhoto(for: trip) { [weak cell] (result) in
             switch result {
             case .success(let photo):
-                cell.photo = photo
+                cell?.photo = photo
             case .failure(_):
-                print("Something went wrong fetching a trip photo")
+                return
             }
         }
-        
         return cell
     }
     
@@ -202,6 +191,17 @@ extension TripListVC {
             if tripsIsEmpty == true {
                 presentEmptyTripStateView()
             }
+        }
+    }
+    
+    private func setupViews() {
+        if state == .shared {
+            self.title = "Shared"
+            
+        } else {
+            self.title = "My Trips"
+            self.navigationItem.rightBarButtonItem = addButton
+            TripController.shared.frc.delegate = self
         }
     }
     

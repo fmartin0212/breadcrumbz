@@ -106,32 +106,32 @@ class PlaceTableViewCell: UITableViewCell {
         
         guard let sharedPlace = sharedPlace
             else { return }
-        
-        if sharedPlace.photos.count > 0 {
-            let mainPhoto = sharedPlace.photos[0]
-            placeImageView.image = mainPhoto
-            placeNameLabel.text = sharedPlace.name
-            placeAddressLabel.text = sharedPlace.address
-            updateStarsImageViews(sharedPlace: sharedPlace)
-
-        } else {
-            var placeholderImage = UIImage()
-//            if sharedPlace.type == "Lodging" {
-//                guard let lodgingPlaceholderImage = UIImage(named: "Lodging") else { return }
-//                placeholderImage = lodgingPlaceholderImage
-//            } else if sharedPlace.type == "Restaurant" {
-//                guard let restaurantPlaceholderImage = UIImage(named: "Restaurant") else { return }
-//                placeholderImage = restaurantPlaceholderImage
-//            } else if sharedPlace.type == "Activity" {
-//                guard let activityPlaceholderImage = UIImage(named: "Activity") else { return }
-//                placeholderImage = activityPlaceholderImage
-//            }
-            
-            placeImageView.image = placeholderImage
-            placeNameLabel.text = sharedPlace.name
-            placeAddressLabel.text = sharedPlace.address
-            updateStarsImageViews(sharedPlace: sharedPlace)
-        }
+//
+//        if sharedPlace.photoUIDs.count > 0 {
+//            let mainPhoto = sharedPlace.photoUIDs[0]
+//            placeImageView.image = mainPhoto
+//            placeNameLabel.text = sharedPlace.name
+//            placeAddressLabel.text = sharedPlace.address
+//            updateStarsImageViews(sharedPlace: sharedPlace)
+//
+//        } else {
+//            var placeholderImage = UIImage()
+////            if sharedPlace.type == "Lodging" {
+////                guard let lodgingPlaceholderImage = UIImage(named: "Lodging") else { return }
+////                placeholderImage = lodgingPlaceholderImage
+////            } else if sharedPlace.type == "Restaurant" {
+////                guard let restaurantPlaceholderImage = UIImage(named: "Restaurant") else { return }
+////                placeholderImage = restaurantPlaceholderImage
+////            } else if sharedPlace.type == "Activity" {
+////                guard let activityPlaceholderImage = UIImage(named: "Activity") else { return }
+////                placeholderImage = activityPlaceholderImage
+////            }
+//
+//            placeImageView.image = placeholderImage
+//            placeNameLabel.text = sharedPlace.name
+//            placeAddressLabel.text = sharedPlace.address
+//            updateStarsImageViews(sharedPlace: sharedPlace)
+//        }
         
     }
     

@@ -182,6 +182,8 @@ final class PhotoController {
                         print("Something went wrong fetching a trip's photo")
                     }
                 }
+            } else {
+                completion(.failure(.generic))
             }
         } else {
             let trip = trip as! Trip
@@ -199,7 +201,7 @@ final class PhotoController {
             return
         }
         guard let sharedCrumb = crumb as? SharedPlace,
-            let photoPaths = sharedCrumb.photoPaths,
+            let photoPaths = sharedCrumb.photoUIDs,
             photoPaths.count > 0
             else { completion(.failure(.generic)) ; return }
         var photoDatum: [Data] = []

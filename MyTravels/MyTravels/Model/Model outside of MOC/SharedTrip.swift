@@ -92,9 +92,9 @@ class SharedTrip: FirebaseDBRetrievable, FirestoreRetrievable, TripObject {
             self.placeIDs = placeIDs
         }
         
-        SharedPlaceController.parsePlacesFrom(tripDictionary: tripDictionary) { (places) in
-            self.places = places
-        }
+//        SharedPlaceController.parsePlacesFrom(tripDictionary: tripDictionary) { (places) in
+//            self.places = places
+//        }
     }
 }
 

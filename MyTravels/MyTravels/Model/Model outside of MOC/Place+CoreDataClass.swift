@@ -24,7 +24,7 @@ public class Place: NSManagedObject, FirestoreSavable, FirebaseDBSavable, CrumbO
             "address" : self.address,
             "rating" : self.rating,
             "comments" : (self.comments ?? ""),
-            "tripID" : (self.trip.uid ?? "")
+            "tripUID" : (self.trip.uid ?? "")
         ]
     }
     

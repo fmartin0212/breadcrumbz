@@ -104,6 +104,10 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="100" id="YYQ-Z3-G6F"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="vqH-7P-epH"/>
+                                        <outlet property="delegate" destination="-1" id="ezZ-Sc-Hcg"/>
+                                    </connections>
                                 </tableView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n4Z-6k-Qk0">
                                     <rect key="frame" x="0.0" y="0.0" width="381" height="260"/>

@@ -10,7 +10,7 @@ import UIKit
 
 class TripDetailVC: UIViewController {
 
-    // MARK: - Outlets
+    // MARK: - Constants & Variables
     
     @IBOutlet weak var tripImageView: UIImageView!
     @IBOutlet weak var tripNameLabel: UILabel!
@@ -21,11 +21,9 @@ class TripDetailVC: UIViewController {
     @IBOutlet weak var crumbsTableView: UITableView!
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var addCrumbButton: UIButton!
-    
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
-    
-    // MARK: - Constants & Variables
-    
+
+    let crumbObjectManager = CrumbObjectManager()
     var trip: TripObject? {
         didSet {
             loadViewIfNeeded()
@@ -50,27 +48,27 @@ class TripDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let trip = trip else { return }
         self.navigationItem.largeTitleDisplayMode = .never
         actionButton.layer.cornerRadius = actionButton.frame.width / 2
         actionButton.clipsToBounds = true
         
-        if let trip = trip as? Trip,
-            let placesSet = trip.places,
-            let places = placesSet.allObjects as? [Place] {
-            self.crumbs = places
-        } else {
-            SharedPlaceController.fetchPlaces(for: trip! as! SharedTrip) { (sharedCrumbs) in
-                if let sharedCrumbs = sharedCrumbs {
-                    self.crumbs = sharedCrumbs
+        crumbObjectManager.fetchCrumbs(for: trip) { [weak self] (result) in
+            switch result {
+            case .success(let crumbs):
+                DispatchQueue.main.async {
+                    self?.crumbs = crumbs
+                    self?.crumbsTableView.reloadData()
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.presentStandardAlertController(withTitle: "Uh Oh!", message: error.rawValue)
                 }
             }
         }
         
         let crumbTableViewCell = UINib(nibName: "CrumbTableViewCell", bundle: nil)
         crumbsTableView.register(crumbTableViewCell, forCellReuseIdentifier: "crumbCell")
-        
-        crumbsTableView.dataSource = self
-        crumbsTableView.delegate = self
         formatViews()
     }
     

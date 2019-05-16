@@ -19,8 +19,7 @@ class SharedPlace: FirebaseDBRetrievable, FirestoreRetrievable, CrumbObject {
     var type: Place.types? {
         return Place.types(rawValue: typeString)
     }
-    var photos: [UIImage] = []
-    var photoPaths: [String]?
+    var photoUIDs: [String]?
     let tripID: String
     
     required init?(dictionary: [String : Any], uuid: String) {
@@ -29,17 +28,11 @@ class SharedPlace: FirebaseDBRetrievable, FirestoreRetrievable, CrumbObject {
             let rating = dictionary["rating"] as? Int16,
             let typeString = dictionary["type"] as? String,
             let comments = dictionary["comments"] as? String,
-            let tripID = dictionary["tripID"] as? String
+            let tripID = dictionary["tripUID"] as? String
             else { return nil }
         
-        if let photoURLs = dictionary["photoURLs"] as? [String: [String : Any]] {
-            self.photoPaths = photoURLs.compactMap({ (key, value) -> String? in
-                let photoDict = value as! [String: String]
-                for (_, value) in photoDict {
-                    return value
-                }
-                return ""
-            })
+        if let photoUIDs = dictionary["photoUIDs"] as? [String] {
+            self.photoUIDs = photoUIDs
         }
         
         self.name = name
@@ -56,30 +49,4 @@ class SharedPlace: FirebaseDBRetrievable, FirestoreRetrievable, CrumbObject {
     static var referenceName: String {
         return "Crumb"
     }
-
-//    init?(dictionary: [String : Any]) {
-//
-//        guard let name = dictionary["name"] as? String,
-//            let address = dictionary["address"] as? String,
-//            let rating = dictionary["rating"] as? Int16,
-//            let type = dictionary["type"] as? String,
-//            let comments = dictionary["comments"] as? String
-//            else { return nil }
-//
-//        if let photoURLs = dictionary["photoURLs"] as? [String: [String : Any]] {
-//            self.photoURLs = photoURLs.compactMap({ (key, value) -> String? in
-//                let photoDict = value as! [String: String]
-//                for (_, value) in photoDict {
-//                    return value
-//                }
-//                return ""
-//            })
-//        }
-//
-//        self.name = name
-//        self.address = address
-//        self.rating = rating
-//        self.type = type
-//        self.comments = comments
-//    }
 }
