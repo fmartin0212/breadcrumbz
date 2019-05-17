@@ -88,12 +88,10 @@ class AddCrumbViewController: UIViewController, ScrollableViewController {
             !name.isEmpty,
             let address = addressTextField.text,
             !address.isEmpty,
-            // FIXME : -
-            let placeType = Place.types(rawValue: "restaurant"),
             let trip = trip
         else { return }
         
-        let place = PlaceController.shared.createNewPlaceWith(name: name, type: placeType, address: address, comments: commentsTextView.text, rating: 0, trip: trip as! Trip)
+        let place = PlaceController.shared.createNewPlaceWith(name: name, type: type, address: address, comments: commentsTextView.text, rating: 0, trip: trip as! Trip)
         PhotoController.shared.add(photos: self.photos, place: place)
         self.dismiss(animated: true, completion: nil)
         
@@ -123,7 +121,7 @@ extension AddCrumbViewController {
     }
     
     func setType(for button: UIButton) {
-        guard let typeString = button.restorationIdentifier,
+        guard let typeString = button.titleLabel?.text?.lowercased(),
             let type = Place.types(rawValue: typeString)
             else { return }
         

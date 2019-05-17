@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -22,24 +22,24 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="64" id="VEC-zp-K4b" customClass="CrumbTableViewCell" customModule="MyTravels" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="441" height="64"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="382" id="VEC-zp-K4b" customClass="CrumbTableViewCell" customModule="MyTravels" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="441" height="382"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VEC-zp-K4b" id="4hq-gN-TiE">
-                <rect key="frame" x="0.0" y="0.0" width="441" height="63.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="441" height="381.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rE7-35-9tB">
-                        <rect key="frame" x="441" y="160" width="0.0" height="41"/>
+                        <rect key="frame" x="441" y="159.5" width="0.0" height="41"/>
                         <fontDescription key="fontDescription" name="Poppins-ExtraLight" family="Poppins" pointSize="29"/>
                         <color key="textColor" red="1" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="epA-rl-IHt">
-                        <rect key="frame" x="0.0" y="0.0" width="340" height="340.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="340" height="340"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lodging" translatesAutoresizingMaskIntoConstraints="NO" id="2Sl-WC-Ivp">
-                                <rect key="frame" x="0.0" y="0.0" width="340" height="340.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="340" height="340"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="2Sl-WC-Ivp" secondAttribute="height" multiplier="1:1" id="KQM-D1-iiF"/>
                                     <constraint firstAttribute="width" constant="90" id="Nei-yr-MrI"/>
@@ -48,16 +48,16 @@
                         </subviews>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PCG-0p-3oG">
-                        <rect key="frame" x="348" y="8" width="93" height="332.5"/>
+                        <rect key="frame" x="348" y="8" width="93" height="332"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Crumb name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lH9-DD-goe">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Crumb name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lH9-DD-goe">
                                 <rect key="frame" x="0.0" y="0.0" width="93" height="22.5"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crumb description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vvi-P9-EGL">
-                                <rect key="frame" x="0.0" y="22.5" width="93" height="310"/>
+                                <rect key="frame" x="0.0" y="22.5" width="93" height="309.5"/>
                                 <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="10"/>
                                 <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -65,7 +65,7 @@
                         </subviews>
                     </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lmq-qT-m99">
-                        <rect key="frame" x="0.0" y="340.5" width="441" height="20"/>
+                        <rect key="frame" x="0.0" y="340" width="441" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Lzb-Oe-eOf"/>
@@ -89,11 +89,11 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="accessoryLabel" destination="rE7-35-9tB" id="Dwe-6L-8ef"/>
+                <outlet property="commentsLabel" destination="Vvi-P9-EGL" id="smY-Sm-8mt"/>
                 <outlet property="crumbImageView" destination="2Sl-WC-Ivp" id="NLc-O3-cfx"/>
                 <outlet property="nameLabel" destination="lH9-DD-goe" id="KtK-LE-aHD"/>
-                <outlet property="typeLabel" destination="Vvi-P9-EGL" id="smY-Sm-8mt"/>
             </connections>
-            <point key="canvasLocation" x="197.59999999999999" y="-11.694152923538232"/>
+            <point key="canvasLocation" x="197.59999999999999" y="131.33433283358323"/>
         </tableViewCell>
     </objects>
     <resources>

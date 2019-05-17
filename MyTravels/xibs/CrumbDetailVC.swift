@@ -60,7 +60,7 @@ class CrumbDetailVC: UIViewController {
         fetchPhotos(for: crumb)
         name.text = crumb.name
         address.text = crumb.address
-        comments.text = crumb.address
+        comments.text = crumb.comments
         type.text = crumb.type?.rawValue
         addAnnotation(for: crumb)
     }

@@ -107,6 +107,8 @@ extension TripDetailVC: UITableViewDataSource {
         
         let crumb = crumbs[indexPath.row]
         cell.crumb = crumb
+        let image = UIImage(named: (crumb.type?.rawValue)!)
+        cell.crumbImageView.image = image
         return cell
     }
 }
@@ -136,7 +138,6 @@ extension TripDetailVC {
         tripStartDateLabel.text = "\((trip.startDate as Date).short()) - "
         tripEndDateLabel.text = (trip.endDate as Date).short()
         tripDescription.text = trip.tripDescription
-        
     }
     
     private func formatViews() {

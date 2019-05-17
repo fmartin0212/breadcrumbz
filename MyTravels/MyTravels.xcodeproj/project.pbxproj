@@ -30,6 +30,7 @@
 		B737CD72228B58D50007FF80 /* UploadTripPhotoOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737CD71228B58D50007FF80 /* UploadTripPhotoOp.swift */; };
 		B737CD74228C85870007FF80 /* TripObjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737CD73228C85870007FF80 /* TripObjectManager.swift */; };
 		B737CD76228C90250007FF80 /* CrumbObjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737CD75228C90250007FF80 /* CrumbObjectManager.swift */; };
+		B737CD78228F114F0007FF80 /* SaveTripOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737CD77228F114E0007FF80 /* SaveTripOperation.swift */; };
 		B73804F52224E37B00CD9E59 /* AddCrumb.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73804F42224E37B00CD9E59 /* AddCrumb.xib */; };
 		B73804FB2224EA3700CD9E59 /* AddCrumbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73804FA2224EA3700CD9E59 /* AddCrumbViewController.swift */; };
 		B73880002285097A00D875AA /* AddPhotoPathToCrumbOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7387FFF2285097A00D875AA /* AddPhotoPathToCrumbOp.swift */; };
@@ -125,7 +126,6 @@
 		B7F88E3A224085A200BD16DC /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F88E39224085A200BD16DC /* EditProfileViewController.swift */; };
 		B7F92BCF20291DEE0021A8CA /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F92BCE20291DEE0021A8CA /* PhotoController.swift */; };
 		B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */; };
-		B7FC2DA022722B4A0086CC3B /* SaveTripOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2D9F22722B4A0086CC3B /* SaveTripOperation.swift */; };
 		B7FC2DA222722B520086CC3B /* SaveCoreDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DA122722B520086CC3B /* SaveCoreDataOperation.swift */; };
 		B7FC2DA422722B590086CC3B /* SavePhotoOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DA322722B590086CC3B /* SavePhotoOperation.swift */; };
 		B7FC2DA622722B620086CC3B /* UpdateUserOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DA522722B620086CC3B /* UpdateUserOperation.swift */; };
@@ -160,6 +160,7 @@
 		B737CD71228B58D50007FF80 /* UploadTripPhotoOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTripPhotoOp.swift; sourceTree = "<group>"; };
 		B737CD73228C85870007FF80 /* TripObjectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripObjectManager.swift; sourceTree = "<group>"; };
 		B737CD75228C90250007FF80 /* CrumbObjectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrumbObjectManager.swift; sourceTree = "<group>"; };
+		B737CD77228F114E0007FF80 /* SaveTripOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveTripOperation.swift; sourceTree = "<group>"; };
 		B73804F42224E37B00CD9E59 /* AddCrumb.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCrumb.xib; sourceTree = "<group>"; };
 		B73804FA2224EA3700CD9E59 /* AddCrumbViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCrumbViewController.swift; sourceTree = "<group>"; };
 		B7387FFF2285097A00D875AA /* AddPhotoPathToCrumbOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoPathToCrumbOp.swift; sourceTree = "<group>"; };
@@ -259,7 +260,6 @@
 		B7F88E39224085A200BD16DC /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		B7F92BCE20291DEE0021A8CA /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
 		B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
-		B7FC2D9F22722B4A0086CC3B /* SaveTripOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTripOperation.swift; sourceTree = "<group>"; };
 		B7FC2DA122722B520086CC3B /* SaveCoreDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCoreDataOperation.swift; sourceTree = "<group>"; };
 		B7FC2DA322722B590086CC3B /* SavePhotoOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePhotoOperation.swift; sourceTree = "<group>"; };
 		B7FC2DA522722B620086CC3B /* UpdateUserOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserOperation.swift; sourceTree = "<group>"; };
@@ -611,7 +611,7 @@
 		B7FC2D9E22722B3B0086CC3B /* Save Trip Operations */ = {
 			isa = PBXGroup;
 			children = (
-				B7FC2D9F22722B4A0086CC3B /* SaveTripOperation.swift */,
+				B737CD77228F114E0007FF80 /* SaveTripOperation.swift */,
 				B7FC2DA122722B520086CC3B /* SaveCoreDataOperation.swift */,
 				B7FC2DA522722B620086CC3B /* UpdateUserOperation.swift */,
 				B7FC2DA722722B6C0086CC3B /* UploadPlacesOperation.swift */,
@@ -850,6 +850,7 @@
 				B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */,
 				B7F88E2E223D4C0E00BD16DC /* ImageCollectionViewCell.swift in Sources */,
 				B7FC2DA822722B6C0086CC3B /* UploadPlacesOperation.swift in Sources */,
+				B737CD78228F114F0007FF80 /* SaveTripOperation.swift in Sources */,
 				B7AC4088221B681600645BC2 /* TripDetailVC.swift in Sources */,
 				B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */,
 				B7C10CD12020FD5500818430 /* PlaceController.swift in Sources */,
@@ -889,7 +890,6 @@
 				B7C10CD3202111A300818430 /* CoreDataStack.swift in Sources */,
 				B7DA1B7F202F9FBC0007497A /* FetchViewController.swift in Sources */,
 				B774A1C621BDA85E008D7483 /* Constants.swift in Sources */,
-				B7FC2DA022722B4A0086CC3B /* SaveTripOperation.swift in Sources */,
 				B737CD72228B58D50007FF80 /* UploadTripPhotoOp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

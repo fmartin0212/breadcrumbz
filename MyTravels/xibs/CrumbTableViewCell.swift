@@ -14,7 +14,7 @@ class CrumbTableViewCell: UITableViewCell {
     
     @IBOutlet weak var crumbImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var commentsLabel: UILabel!
     @IBOutlet weak var accessoryLabel: UILabel!
     
     var crumb: CrumbObject? {
@@ -31,6 +31,6 @@ extension CrumbTableViewCell {
         crumbImageView.clipsToBounds = true
         crumbImageView.layer.cornerRadius = 8
         nameLabel.text = crumb.name
-        typeLabel.text = "Really really long textReally reallReally really long textReally reallReally really long textReally reallReally really long textReally reallReally really long textReally reallReally really long textReally reallReally really long textReally reallReally really long textReally reallReally really long textReally reall"
+        commentsLabel.text = crumb.comments
     }
 }

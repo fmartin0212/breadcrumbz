@@ -276,16 +276,16 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cfg-Kz-PPf">
-                                                <rect key="frame" x="24" y="111" width="229" height="42.5"/>
+                                                <rect key="frame" x="24" y="111" width="213" height="42.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WRd-B8-O0w">
-                                                        <rect key="frame" x="0.0" y="0.0" width="229" height="25.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="213" height="25.5"/>
                                                         <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ni-EM-4Ac">
-                                                        <rect key="frame" x="0.0" y="25.5" width="229" height="17"/>
+                                                        <rect key="frame" x="0.0" y="25.5" width="213" height="17"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                         <color key="textColor" red="0.60779035091400146" green="0.60787814855575562" blue="0.60776275396347046" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -304,7 +304,10 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="7BL-m6-OmZ"/>
                                                 </constraints>
-                                                <state key="normal" title="Sign Out"/>
+                                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="18"/>
+                                                <state key="normal" title="Sign Out">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="logOutButtonTapped:" destination="LGG-iX-GFv" eventType="touchUpInside" id="MI0-2z-faz"/>
                                                 </connections>
@@ -327,7 +330,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Ucg-AP-HB8" firstAttribute="trailing" secondItem="Cfd-x3-TJ7" secondAttribute="trailing" id="0GN-1K-sP5"/>
-                                            <constraint firstItem="28a-81-CCc" firstAttribute="leading" secondItem="cfg-Kz-PPf" secondAttribute="trailing" constant="8" id="1YZ-cj-Pdc"/>
+                                            <constraint firstItem="28a-81-CCc" firstAttribute="leading" secondItem="cfg-Kz-PPf" secondAttribute="trailing" constant="24" id="1YZ-cj-Pdc"/>
                                             <constraint firstItem="KLy-aw-xXg" firstAttribute="leading" secondItem="9lW-jP-xZy" secondAttribute="leading" id="2kZ-HO-SYP"/>
                                             <constraint firstItem="9lW-jP-xZy" firstAttribute="leading" secondItem="Ucg-AP-HB8" secondAttribute="leading" id="6e3-aA-5hc"/>
                                             <constraint firstItem="Ucg-AP-HB8" firstAttribute="leading" secondItem="cfg-Kz-PPf" secondAttribute="leading" id="893-zT-CdC"/>
