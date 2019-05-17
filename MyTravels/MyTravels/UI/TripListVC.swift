@@ -50,7 +50,6 @@ final class TripListVC: UIViewController {
                 DispatchQueue.main.async { [weak self] in
                     self?.refreshViews()
                     self?.tableView.reloadData()
-                    
                 }
             case .failure(let error):
                 DispatchQueue.main.async { [weak self] in
@@ -126,11 +125,16 @@ extension TripListVC: UITableViewDataSource {
 }
 
 extension TripListVC: UITableViewDelegate {
-  
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let trip = trips[indexPath.row]
-        let tripDetailVC = TripDetailVC(nibName: "TripDetail", bundle: nil)
-        tripDetailVC.trip = trip
+        guard let cell = tableView.cellForRow(at: indexPath) as? TripTableViewCell,
+            let trip = cell.trip
+            else { return }
+        var photo: UIImage?
+        if let tripPhoto = cell.photo {
+            photo = tripPhoto
+        }
+        let tripDetailVC = TripDetailVC(trip: trip, photo: photo, nibName: "TripDetail")
         navigationController?.pushViewController(tripDetailVC, animated: true)
     }
     
@@ -221,7 +225,10 @@ extension TripListVC: NSFetchedResultsControllerDelegate {
             tableView.deleteRows(at: [indexPath], with: .fade)
             refreshViews()
         case .insert:
-            guard let newIndexPath = newIndexPath else { return }
+            guard let newIndexPath = newIndexPath,
+            let trip = anObject as? Trip
+            else { return }
+            trips.append(trip)
             tableView.insertRows(at: [newIndexPath], with: .automatic)
         case .move:
             guard let indexPath = indexPath,
@@ -259,7 +266,7 @@ extension TripListVC: EmptyTripStateViewDelegate {
 
 extension TripListVC: AddTripVCDelegate {
     
-    func saveButtonTapped() {
+    func saveButtonTapped(trip: TripObject) {
         DispatchQueue.main.async { [weak self] in
             self?.refreshViews()
         }

@@ -165,7 +165,7 @@ public struct FirestoreService: FirestoreServiceProtocol {
             }
             guard let snapshot = snapshot,
             snapshot.documents.count > 0
-                else { completion(.failure(.fetchingFromStore)) ; return }
+                else { completion(.success([])) ; return }
             let objects = snapshot.documents.compactMap { T(dictionary: $0.data(), uuid: $0.documentID) }
             completion(.success(objects))
         }

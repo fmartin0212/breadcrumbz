@@ -12,6 +12,7 @@ import MapKit
 class CrumbDetailVC: UIViewController {
     
     // MARK: - Properties
+    
     var crumb: CrumbObject? {
         didSet {
             loadViewIfNeeded()
@@ -65,7 +66,6 @@ class CrumbDetailVC: UIViewController {
     }
     
     func fetchPhotos(for crumb: CrumbObject) {
-        
         PhotoController.shared.fetchPhotos(for: crumb) { [weak self] (result) in
             switch result {
             case .failure(let error):

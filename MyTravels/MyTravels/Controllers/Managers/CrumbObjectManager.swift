@@ -20,7 +20,7 @@ class CrumbObjectManager {
             guard let sharedTrip = trip as? SharedTrip,
                 let sharedTripUID = sharedTrip.uuid
                 else { completion(.failure(.generic)) ; return }
-            firestoreService.fetch(uuid: nil, field: "tripUIDs", criteria: sharedTripUID, queryType: .fieldArrayContains) { (result: Result<[SharedPlace], FireError>) in
+            firestoreService.fetch(uuid: nil, field: "tripUID", criteria: sharedTripUID, queryType: .fieldEqual) { (result: Result<[SharedPlace], FireError>) in
                 switch result {
                 case .success(let crumbs):
                     completion(.success(crumbs))

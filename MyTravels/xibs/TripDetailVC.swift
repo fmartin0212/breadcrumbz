@@ -24,31 +24,22 @@ class TripDetailVC: UIViewController {
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
 
     let crumbObjectManager = CrumbObjectManager()
-    var trip: TripObject? {
-        didSet {
-            loadViewIfNeeded()
-            updateViews()
-        }
-    }
-
+    var trip: TripObject
+    var photo: UIImage?
     var crumbs: [CrumbObject] = []
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(trip: TripObject, nibName: String) {
+    init(trip: TripObject, photo: UIImage?, nibName: String) {
         self.trip = trip
+        self.photo = photo
         super.init(nibName: nibName, bundle: nil)
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let trip = trip else { return }
         self.navigationItem.largeTitleDisplayMode = .never
         actionButton.layer.cornerRadius = actionButton.frame.width / 2
         actionButton.clipsToBounds = true
@@ -59,6 +50,9 @@ class TripDetailVC: UIViewController {
                 DispatchQueue.main.async {
                     self?.crumbs = crumbs
                     self?.crumbsTableView.reloadData()
+                    guard let numberOfRows = self?.crumbsTableView.numberOfRows(inSection: 0) else { return }
+                    self?.tableViewHeightConstraint.constant = CGFloat(numberOfRows * 110)
+                    self?.view.layoutIfNeeded()
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
@@ -69,7 +63,9 @@ class TripDetailVC: UIViewController {
         
         let crumbTableViewCell = UINib(nibName: "CrumbTableViewCell", bundle: nil)
         crumbsTableView.register(crumbTableViewCell, forCellReuseIdentifier: "crumbCell")
+        
         formatViews()
+        updateViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,31 +130,20 @@ extension TripDetailVC: UITableViewDelegate {
 extension TripDetailVC {
     
     private func updateViews() {
-        
-        guard let trip = trip else { return }
-        if let managedTrip = trip as? Trip {
-            if let managedPhoto = managedTrip.photo?.photo {
-                tripImageView.image = UIImage(data: managedPhoto as Data)
-            }
-        } else if let sharedTrip = trip as? SharedTrip, let nonManagedPhoto = sharedTrip.photo {
-            tripImageView.image = nonManagedPhoto
-        } else {
-            tripImageView.image = UIImage(named: "map")
-        }
-        
+        tripImageView.image = photo
         tripNameLabel.text = trip.name
         tripLocationLabel.text = trip.location
         tripStartDateLabel.text = "\((trip.startDate as Date).short()) - "
         tripEndDateLabel.text = (trip.endDate as Date).short()
-        tripDescription.text = "My really really long trip description. My really really long trip description.My really really long trip description.My really really long trip description.My really really long trip description.My really really long trip description."
+        tripDescription.text = trip.tripDescription
         
     }
     
     private func formatViews() {
-//        tripImageView.layer.cornerRadius = 4
+        //        tripImageView.layer.cornerRadius = 4
         tripImageView.clipsToBounds = true
         
-        title = trip?.name
+        title = trip.name
         
         if trip is SharedTrip {
             addCrumbButton.isHidden = true
@@ -167,7 +152,7 @@ extension TripDetailVC {
             addCrumbButton.layer.cornerRadius = addCrumbButton.frame.width / 2
             addCrumbButton.layer.borderColor = #colorLiteral(red: 0.9725490196, green: 0.3490196078, blue: 0.3490196078, alpha: 1)
             addCrumbButton.layer.borderWidth = 1.5
-        
+            
         }
     }
     
@@ -176,15 +161,14 @@ extension TripDetailVC {
         let alertController = UIAlertController(title: "Share trip", message: "Enter a username below to share your trip", preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let shareAction = UIAlertAction(title: "Share", style: .default) { (action) in
+        let shareAction = UIAlertAction(title: "Share", style: .default) { [weak self] (action) in
             
-            guard let trip = self.trip,
-                let receiver = alertController.textFields?[0].text
-                else { return }
-            let loadingView = self.enableLoadingState()
-            loadingView.loadingLabel.text = "Sharing"
-            TripController.shared.share(trip: trip as! Trip, withReceiver: receiver, completion: { (success) in
+            guard let receiver = alertController.textFields?[0].text else { return }
+            let loadingView = self?.enableLoadingState()
+            loadingView?.loadingLabel.text = "Sharing"
+            TripController.shared.share(trip: self?.trip as! Trip, withReceiver: receiver, completion: { (success) in
                 DispatchQueue.main.async { [weak self] in
+                    guard let loadingView = loadingView else { return }
                     self?.disableLoadingState(loadingView)
                 }
             })

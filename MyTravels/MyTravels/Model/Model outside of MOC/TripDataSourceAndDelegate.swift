@@ -58,10 +58,10 @@ extension TripDataSourceAndDelegate: UITableViewDataSource {
 extension TripDataSourceAndDelegate: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let trip = TripController.shared.trips[indexPath.row]
-        let tripDetailVC = TripDetailVC(nibName: "TripDetail", bundle: nil)
-        tripDetailVC.trip = trip
-        viewController.navigationController?.pushViewController(tripDetailVC, animated: true)
+//        let trip = TripController.shared.trips[indexPath.row]
+//        let tripDetailVC = TripDetailVC(nibName: "TripDetail", bundle: nil)
+//        tripDetailVC.trip = trip
+//        viewController.navigationController?.pushViewController(tripDetailVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

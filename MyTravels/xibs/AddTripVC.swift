@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AddTripVCDelegate: class {
-    func saveButtonTapped()
+    func saveButtonTapped(trip: TripObject)
 }
 
 final class AddTripVC: UIViewController, ScrollableViewController {
@@ -236,7 +236,7 @@ extension AddTripVC {
             PhotoController.shared.add(photo: compressedImage, trip: newTrip)
         }
         
-        delegate?.saveButtonTapped()
+        delegate?.saveButtonTapped(trip: newTrip)
         dismiss(animated: true, completion: nil)
     }
 }
