@@ -109,8 +109,9 @@
                                         <outlet property="delegate" destination="-1" id="ezZ-Sc-Hcg"/>
                                     </connections>
                                 </tableView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n4Z-6k-Qk0">
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageDefault" translatesAutoresizingMaskIntoConstraints="NO" id="n4Z-6k-Qk0">
                                     <rect key="frame" x="0.0" y="0.0" width="381" height="260"/>
+                                    <color key="backgroundColor" red="0.9623151421546936" green="0.95623189210891724" blue="0.95560926198959351" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="260" id="sYr-jK-fFl"/>
                                     </constraints>
@@ -213,6 +214,7 @@
     </objects>
     <resources>
         <image name="Share" width="16" height="21"/>
+        <image name="imageDefault" width="88" height="88"/>
         <image name="location" width="14" height="16"/>
     </resources>
 </document>

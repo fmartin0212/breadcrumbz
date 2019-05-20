@@ -13,7 +13,7 @@ protocol AddTripVCDelegate: class {
 }
 
 final class AddTripVC: UIViewController, ScrollableViewController {
-
+    
     // MARK: - Properties
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -22,6 +22,7 @@ final class AddTripVC: UIViewController, ScrollableViewController {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var addPhotoButton: UIButton!
+    @IBOutlet weak var removeButton: FMCloseButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
@@ -32,7 +33,7 @@ final class AddTripVC: UIViewController, ScrollableViewController {
     @IBOutlet weak var startDayLabel: UILabel!
     @IBOutlet weak var startMonthTextField: UITextField!
     @IBOutlet weak var startDayOfWeekLabel: UILabel!
-
+    
     @IBOutlet weak var endDateView: UIView!
     @IBOutlet weak var endDayLabel: UILabel!
     @IBOutlet weak var endMonthTextField: UITextField!
@@ -50,7 +51,7 @@ final class AddTripVC: UIViewController, ScrollableViewController {
     var selectedTextField: UITextField?
     var selectedTextView: UITextView?
     var trip: Trip?
-    var state: State = .add
+    var state: State
     weak var delegate: AddTripVCDelegate?
     
     // MARK: - Actions
@@ -62,9 +63,18 @@ final class AddTripVC: UIViewController, ScrollableViewController {
         endMonthTextField.becomeFirstResponder()
     }
     
+    init(trip: Trip?, state: State, nibName: String) {
+        self.trip = trip
+        self.state = state
+        super.init(nibName: nibName, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         startDatePicker.addTarget(self, action: #selector(setDate(sender:)), for: .valueChanged)
         startMonthTextField.tag = 8
         endDatePicker.addTarget(self, action: #selector(setDate(sender:)), for: .valueChanged)
@@ -88,14 +98,7 @@ final class AddTripVC: UIViewController, ScrollableViewController {
         }
         
         setupViews()
-    }
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        updateViews()
     }
     
     // MARK: - Actions
@@ -120,6 +123,13 @@ final class AddTripVC: UIViewController, ScrollableViewController {
         imagePickerController.sourceType = .photoLibrary
         present(imagePickerController, animated: true, completion: nil)
     }
+    @IBAction func removeButtonTapped(_ sender: Any) {
+        if let photo = trip?.photo {
+            PhotoController.shared.delete(photo: photo)
+        }
+        addPhotoButton.setImage(UIImage(named: "imageDefault"), for: .normal)
+        removeButton.isHidden = true
+    }
 }
 
 extension AddTripVC {
@@ -127,8 +137,12 @@ extension AddTripVC {
     /// Sets up the views for the AddTripViewController.
     func setupViews() {
         
+        if state == .edit && trip?.photo != nil {
+            removeButton.isHidden = false
+        }
+        
         // Buttons
-//        saveButton.layer.cornerRadius = 12
+        //        saveButton.layer.cornerRadius = 12
         
         addPhotoButton.clipsToBounds = true
         addPhotoButton.layer.cornerRadius = 8
@@ -167,11 +181,13 @@ extension AddTripVC {
         guard let trip = trip else { return }
         nameTextField.text = trip.name
         locationTextField.text = trip.location
-        
         startDate = trip.startDate as Date
         endDate = trip.endDate as Date
         setDateViews(for: startDate!)
-        setDateViews(for: endDate!)     
+        setDateViews(for: endDate!)
+        descriptionTextView.text = trip.tripDescription
+        guard let photo = trip.photo else { return }
+        addPhotoButton.setImage(photo.image, for: .normal)
     }
     
     func setDateViews(for date: Date) {
@@ -184,12 +200,10 @@ extension AddTripVC {
             startDayLabel.text = day
             startDayOfWeekLabel.text = dayOfWeek
             startMonthTextField.text = month
-            startDate = date
         case endDate:
             endDayLabel.text = day
             endDayOfWeekLabel.text = dayOfWeek
             endMonthTextField.text = month
-            endDate = date
         default:
             print("something went wrong")
         }
@@ -250,7 +264,7 @@ extension AddTripVC: UIImagePickerControllerDelegate, UINavigationControllerDele
         guard let editedPhoto = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage else { return }
         addPhotoButton.setImage(editedPhoto, for: .normal)
         addPhotoButton.imageView?.contentMode = .scaleAspectFill
-        
+        removeButton.isHidden = false
         picker.dismiss(animated: true, completion: nil)
     }
     
@@ -286,10 +300,11 @@ extension AddTripVC: UITextViewDelegate {
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+    return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
 }
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-	return input.rawValue
+    return input.rawValue
 }
+

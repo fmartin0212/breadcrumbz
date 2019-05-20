@@ -70,7 +70,7 @@ class UploadTripOperation: PSOperation {
             return
         }
         
-        context.service.save(object: context.trip) { result in
+        context.firestoreService.save(object: context.trip) { result in
             switch result {
                 case .success(let uuid):
                     self.context.trip.uuid = uuid

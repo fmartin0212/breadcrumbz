@@ -11,10 +11,10 @@ import PSOperations
 
 class SavePhotoOperation: PSOperation {
     let photo: Photo
-    let context: SaveTripContext
+    var context: TripContextProtocol
     let firebaseStorageService: FirebaseStorageServiceProtocol
     
-    init(photo: Photo, context: SaveTripContext) {
+    init(photo: Photo, context: TripContextProtocol) {
         self.photo = photo
         self.firebaseStorageService = FirebaseStorageService()
         self.context = context

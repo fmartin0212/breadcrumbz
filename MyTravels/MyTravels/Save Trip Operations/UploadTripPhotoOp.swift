@@ -11,7 +11,7 @@ import PSOperations
 
 class UploadTripPhotoGroupOp: GroupOperation {
     
-    init(trip: Trip, context: SaveTripContext) {
+    init(trip: Trip, context: TripContextProtocol) {
         if let photo = trip.photo {
             let saveTripPhotoOp = SavePhotoOperation(photo: photo, context: context)
             let addPhotoUIDToTripOp = AddPhotoUIDToTripOp(context: context)
@@ -24,16 +24,16 @@ class UploadTripPhotoGroupOp: GroupOperation {
 }
 
 class AddPhotoUIDToTripOp: PSOperation {
-    let context: SaveTripContext
+    var context: TripContextProtocol
     
-    init(context: SaveTripContext) {
+    init(context: TripContextProtocol) {
         self.context = context
         super.init()
     }
     
     override func execute() {
-            guard let tripPhoto = context.trip.photo else { finish() ; return }
-        context.service.update(object: context.trip, atField: "photoUID", withCriteria: [tripPhoto.uid], with: .update) { [weak self] (result) in
+        guard let tripPhoto = context.trip.photo else { finish() ; return }
+        context.firestoreService.update(object: context.trip, atField: "photoUID", withCriteria: [tripPhoto.uid], with: .update) { [weak self] (result) in
             switch result {
             case .success(_):
                 self?.finish()

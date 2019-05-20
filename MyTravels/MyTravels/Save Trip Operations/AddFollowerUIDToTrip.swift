@@ -24,7 +24,7 @@ class AddFollowerUIDToTripOp: PSOperation {
         guard let receiver = context.receiver,
             let receiverUID = receiver.uuid
             else { finish() ; return }
-        context.service.update(object: trip, atField: "followerUIDs", withCriteria: [receiverUID], with: .arrayAddtion) { [weak self] (result) in
+        context.firestoreService.update(object: trip, atField: "followerUIDs", withCriteria: [receiverUID], with: .arrayAddtion) { [weak self] (result) in
             switch result {
             case .success(_):
                 self?.finish()

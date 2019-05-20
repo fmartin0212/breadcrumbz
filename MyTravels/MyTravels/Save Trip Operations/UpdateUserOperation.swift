@@ -17,7 +17,7 @@ class UpdateUserOperation: PSOperation {
     
     init(trip: Trip, context: SaveTripContext) {
         self.trip = trip
-        self.firestoreService = context.service
+        self.firestoreService = context.firestoreService
         self.context = context
         super.init()
     }

@@ -14,11 +14,11 @@ enum SaveTripError: Error {
     case updateUserFailed(FireError)    
 }
 
-class SaveTripContext {
+class SaveTripContext: TripContextProtocol {
     
-    let trip: Trip
-    let service: FirestoreServiceProtocol
-    let storageService: FirebaseStorageServiceProtocol
+    var trip: Trip
+    var firestoreService: FirestoreServiceProtocol
+    var firebaseStorageService: FirebaseStorageServiceProtocol
     var error: FireError?
     var tripPhotoUID: String?
     var placeUIDs: [String] = []
@@ -28,8 +28,7 @@ class SaveTripContext {
     
     init(trip: Trip, service: FirestoreServiceProtocol, storageService: FirebaseStorageServiceProtocol) {
         self.trip = trip
-        self.service = service
-        self.storageService = storageService
+        self.firestoreService = service
+        self.firebaseStorageService = storageService
     }
-    
 }

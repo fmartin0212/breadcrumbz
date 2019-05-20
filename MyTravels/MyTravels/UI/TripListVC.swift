@@ -12,6 +12,7 @@ import CoreData
 final class TripListVC: UIViewController {
 
     // MARK: - Constants & Variables
+    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     let tripObjectManager = TripObjectManager()
@@ -70,13 +71,13 @@ final class TripListVC: UIViewController {
     }
 
     @IBAction func addATripButtonTapped(_ sender: Any) {
-        let addTripVC = AddTripVC(nibName: "AddTrip", bundle: nil)
+        let addTripVC = AddTripVC(trip: nil, state: .add, nibName: "AddTrip")
         addTripVC.delegate = self
         self.present(addTripVC, animated: true, completion: nil)
     }
     
     @IBAction func addTripBarButtonItemTapped(_ sender: Any) {
-        let addTripVC = AddTripVC(nibName: "AddTrip", bundle: nil)
+        let addTripVC = AddTripVC(trip: nil, state: .add, nibName: "AddTrip")
         addTripVC.delegate = self
         self.present(addTripVC, animated: true, completion: nil)
     }
@@ -134,7 +135,7 @@ extension TripListVC: UITableViewDelegate {
         if let tripPhoto = cell.photo {
             photo = tripPhoto
         }
-        let tripDetailVC = TripDetailVC(trip: trip, photo: photo, nibName: "TripDetail")
+        let tripDetailVC = TripDetailVC(trip: trip, photo: photo, state: state, nibName: "TripDetail")
         navigationController?.pushViewController(tripDetailVC, animated: true)
     }
     
@@ -210,7 +211,7 @@ extension TripListVC {
     }
     
     @objc private func presentAddTripVC() {
-        let addTripVC = AddTripVC(nibName: "AddTrip", bundle: nil)
+        let addTripVC = AddTripVC(trip: nil, state: .add, nibName: "AddTrip")
         self.present(addTripVC, animated: true, completion: nil)
     }
 }

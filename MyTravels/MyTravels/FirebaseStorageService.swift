@@ -14,6 +14,7 @@ protocol FirebaseStorageServiceProtocol {
     func save<T: FirebaseStorageSavable>(_ object: T, completion: @escaping (Result<String, FireError>) -> Void)
     func fetchImage(storeRef: StorageReference, completion: @escaping (Result<UIImage, FireError>) -> Void)
     func fetchFromStorage(path: String, completion: @escaping (Result<Data, FireError>) -> Void)
+    func delete(object: FirebaseStorageSavable, completion: @escaping (Result<Bool, FireError>) -> Void)
 }
 
 public struct FirebaseStorageService: FirebaseStorageServiceProtocol  {
@@ -73,6 +74,16 @@ public struct FirebaseStorageService: FirebaseStorageServiceProtocol  {
             }
             guard let data = data else { completion(.failure(.generic)) ; return }
             completion(.success(data))
+        }
+    }
+    
+    func delete(object: FirebaseStorageSavable, completion: @escaping (Result<Bool, FireError>) -> Void) {
+        Storage.storage().reference(withPath: object.uid).delete { (error) in
+            if let _ = error {
+                completion(.failure(.deleting))
+                return
+            }
+            completion(.success(true))
         }
     }
 }

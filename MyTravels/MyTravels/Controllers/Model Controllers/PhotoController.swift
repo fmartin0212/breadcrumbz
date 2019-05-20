@@ -173,7 +173,8 @@ final class PhotoController {
     
     func fetchPhoto(for trip: TripObject, completion: @escaping (Result<UIImage, FireError>) -> Void) {
         if let sharedTrip = trip as? SharedTrip {
-            if let photoUID = sharedTrip.photoUID {
+            if let photoUID = sharedTrip.photoUID,
+                photoUID != "" {
                 fetchPhoto(withPath: photoUID) { (result) in
                     switch result {
                     case .success(let photo):

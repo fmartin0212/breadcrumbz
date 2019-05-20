@@ -17,7 +17,7 @@ class AddCrumbUIDsToTrip: PSOperation {
     init(_ trip: Trip, context: SaveTripContext) {
         self.trip = trip
         self.context = context
-        self.firestoreService = context.service
+        self.firestoreService = context.firestoreService
         super.init()
     }
     

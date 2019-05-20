@@ -15,7 +15,7 @@ class PlaceController {
     
     var frc: NSFetchedResultsController<Place> = {
         let fetchRequest: NSFetchRequest<Place> = Place.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "type", ascending: true)]
         
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
     }()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TripDetailVC: UIViewController {
+final class TripDetailVC: UIViewController {
 
     // MARK: - Constants & Variables
     
@@ -23,18 +23,24 @@ class TripDetailVC: UIViewController {
     @IBOutlet weak var addCrumbButton: UIButton!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
 
-    let crumbObjectManager = CrumbObjectManager()
-    var trip: TripObject
-    var photo: UIImage?
-    var crumbs: [CrumbObject] = []
+    private let crumbObjectManager = CrumbObjectManager()
+    private var trip: TripObject
+    private var photo: UIImage?
+    private var crumbs: [CrumbObject] = []
+    private let state: State
+    private lazy var editBarButtonItem: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonTapped))
+        return barButtonItem
+    }()
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(trip: TripObject, photo: UIImage?, nibName: String) {
+    init(trip: TripObject, photo: UIImage?, state: State, nibName: String) {
         self.trip = trip
         self.photo = photo
+        self.state = state
         super.init(nibName: nibName, bundle: nil)
     }
     
@@ -118,21 +124,23 @@ extension TripDetailVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let crumb = crumbs[indexPath.row]
-        let crumbDetailVC = CrumbDetailVC(nibName: "CrumbDetail", bundle: nil)
+        let crumbDetailVC = CrumbDetailVC(crumb: crumb, nibName: "CrumbDetail")
         crumbDetailVC.crumb = crumb
         
         self.navigationController?.pushViewController(crumbDetailVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110
+        return 80
     }
 }
 
 extension TripDetailVC {
     
     private func updateViews() {
-        tripImageView.image = photo
+        if let photo = photo {
+            tripImageView.image = photo
+        }
         tripNameLabel.text = trip.name
         tripLocationLabel.text = trip.location
         tripStartDateLabel.text = "\((trip.startDate as Date).short()) - "
@@ -141,9 +149,6 @@ extension TripDetailVC {
     }
     
     private func formatViews() {
-        //        tripImageView.layer.cornerRadius = 4
-        tripImageView.clipsToBounds = true
-        
         title = trip.name
         
         if trip is SharedTrip {
@@ -153,7 +158,7 @@ extension TripDetailVC {
             addCrumbButton.layer.cornerRadius = addCrumbButton.frame.width / 2
             addCrumbButton.layer.borderColor = #colorLiteral(red: 0.9725490196, green: 0.3490196078, blue: 0.3490196078, alpha: 1)
             addCrumbButton.layer.borderWidth = 1.5
-            
+            navigationItem.rightBarButtonItem = editBarButtonItem
         }
     }
     
@@ -178,6 +183,12 @@ extension TripDetailVC {
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc private func editButtonTapped() {
+        guard let trip = trip as? Trip else { return }
+        let editTripVC = AddTripVC(trip: trip, state: .edit, nibName: "AddTrip")
+        present(editTripVC, animated: true, completion: nil)
     }
     
     @objc private func actionButtonTapped() {

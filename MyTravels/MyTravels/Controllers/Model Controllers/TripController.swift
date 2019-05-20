@@ -56,6 +56,25 @@ class TripController {
         return trip
     }
     
+    func update(trip: Trip,
+                with photo: Photo?,
+                name: String,
+                location: String,
+                tripDescription: String?,
+                startDate: Date,
+                endDate: Date,
+                completion: @escaping (Result<Bool, FireError>) -> Void) {
+        trip.photo = photo
+        trip.name = name
+        trip.location = location
+        trip.tripDescription = tripDescription
+        trip.startDate = startDate as NSDate
+        trip.endDate = endDate as NSDate
+        
+        
+        
+    }
+    
     /**
      Deletes a trip from the Core Data persistent store.
      - parameter trip: The trip to be deleted.
@@ -91,52 +110,36 @@ class TripController {
      - parameter completion: A completion block which passes a boolean to inform the caller of whether the trip was successfully shared.
      */
     func share(trip: Trip,
-               withReceiver receiveUsername: String,
+               withReceiver receiverUsername: String,
                completion: @escaping (Result<Bool, FireError>) -> Void) {
         
         // Check for a logged in user
         guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(.failure(.generic)) ; return }
         
-        
-        
-        // Check to see if the receiver has blocked the loggedInUser
-        self.checkIfBlocked(receiverUsername: receiveUsername) { (isBlocked) in
-            if isBlocked {
-                completion(.failure(.generic))
-                return
-            }
-            
-            if trip.uid != nil {
-                // Trip has already been saved to the database, only a child needs to be saved on the receiver.
-                self.addTripIDToReceiver(for: trip, receiver: receiveUsername) { (result) in
-                    switch result {
-                    case .failure(let error):
-                        completion(.failure(error))
-                    case .success(_):
-                        completion(.success(true))
-                    }
+        if trip.uid != nil {
+            // Trip has already been saved to the database, only a child needs to be saved on the receiver.
+            let shareTripOperation = ShareTripOperation(trip: trip, service: firestoreService, storageService: firebaseStorageService, receiverUsername: receiverUsername) { (result) in
+                switch result {
+                case .failure(let error):
+                    completion(.failure(error))
+                case .success(_):
+                    print("asd")
+                    completion(.success(true))
                 }
-            } else {
-                
-                // Trip has not been saved to the database, so we need to save a new Trip child and a child on the receiver.
-                let creatorName = loggedInUser.firstName
-                
-                self.upload(trip: trip, receiverUUID: receiveUsername, creatorName: creatorName) { (result) in
-                    switch result {
-                    case .failure(let error):
-                        completion(.failure(error))
-                    case .success(_):
-                        print("asd")
-                        completion(.success(true))
-//                        self.addTripIDToReceiver(for: trip, receiver: receiveUsername, completion: { (result) in
-//                            switch result {
-//                            case .failure(let error):
-//                                completion(.failure(error))
-//                            case .success(_):
-//                                completion(.success(true))
-//                            }
-//                        })
-                    }
+            }
+            operationQueue.addOperation(shareTripOperation)
+        } else {
+            
+            // Trip has not been saved to the database, so we need to save a new Trip child and a child on the receiver.
+            let creatorName = loggedInUser.firstName
+            
+            self.upload(trip: trip, receiverUUID: receiverUsername, creatorName: creatorName) { (result) in
+                switch result {
+                case .failure(let error):
+                    completion(.failure(error))
+                case .success(_):
+                    print("asd")
+                    completion(.success(true))
                 }
             }
         }

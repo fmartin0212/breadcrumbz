@@ -35,7 +35,7 @@ class FetchReceiverOp: PSOperation {
     }
     
     override func execute() {
-        context.service.fetch(uuid: nil, field: "username", criteria: receiverUsername, queryType: .fieldEqual) { [weak self] (result: Result<[InternalUser], FireError>) in
+        context.firestoreService.fetch(uuid: nil, field: "username", criteria: receiverUsername, queryType: .fieldEqual) { [weak self] (result: Result<[InternalUser], FireError>) in
             switch result {
             case .success(let receiverUserArray):
                 guard let receiver = receiverUserArray.first else { self?.finish() ; return }

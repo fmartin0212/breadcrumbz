@@ -19,7 +19,7 @@ class AddPhotoUIDsToCrumbOp: PSOperation {
     init(crumb: Place, photoPath: String, context: SaveTripContext) {
         self.crumb = crumb
         self.photoPath = photoPath
-        self.firestoreService = context.service
+        self.firestoreService = context.firestoreService
         self.context = context
         super.init()
     }

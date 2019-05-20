@@ -11,16 +11,19 @@ import UIKit
 class FMTextView: UITextView {
     
     override func awakeFromNib() {
-        
+        super.awakeFromNib()
         self.layer.cornerRadius = 2
         
         // Border
-        self.layer.borderColor = UIColor.lightGray.cgColor
-        self.layer.borderWidth = 0.3
+//        self.layer.borderColor = UIColor.lightGray.cgColor
+//        self.layer.borderWidth = 0.3
         
         // Shadow
         //        self.layer.shadowColor = UIColor.lightGray.cgColor
                 self.layer.shadowRadius = 0
+//        self.layer.masksToBounds = true
+        self.clipsToBounds = true
+        self.contentInset = .zero
         //        self.layer.shadowOpacity = 0.2
         //        self.layer.shadowOffset = CGSize(width: 0, height: 3)
         //        self.layer.masksToBounds = false

@@ -13,12 +13,7 @@ class CrumbDetailVC: UIViewController {
     
     // MARK: - Properties
     
-    var crumb: CrumbObject? {
-        didSet {
-            loadViewIfNeeded()
-            updateViews()
-        }
-    }
+    var crumb: CrumbObject?
     
     var photos: [UIImage] = []
     var cellIndex: Int = 0
@@ -32,10 +27,11 @@ class CrumbDetailVC: UIViewController {
     @IBOutlet weak var comments: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(crumb: CrumbObject, nibName: String) {
+        self.crumb = crumb
+        super.init(nibName: nibName, bundle: nil)
     }
-    
+  
     required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
@@ -46,6 +42,7 @@ class CrumbDetailVC: UIViewController {
         imageCollectionView.dataSource = self
         imageCollectionView.delegate = self
         formatViews()
+        updateViews()
     }
     
     func formatViews() {
@@ -112,7 +109,7 @@ extension CrumbDetailVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath)
-       guard photos.count > 0 else { return UICollectionViewCell() }
+        guard photos.count > 0 else { return UICollectionViewCell() }
         let photo = photos[indexPath.row]
         let photoImageView = UIImageView(image: photo)
         photoImageView.contentMode = .scaleAspectFill

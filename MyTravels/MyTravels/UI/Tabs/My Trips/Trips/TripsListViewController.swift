@@ -70,14 +70,14 @@ class TripsListViewController: UIViewController {
 //    }
     
     @IBAction func addATripButtonTapped(_ sender: Any) {
-        let addTripVC = AddTripVC(nibName: "AddTrip", bundle: nil)
+        let addTripVC = AddTripVC(trip: nil, state: .add, nibName: "AddTrip")
         self.present(addTripVC, animated: true, completion: nil)
 //        performSegue(withIdentifier: "addATripSegue", sender: nil)
         
     }
     
     @IBAction func addTripBarButtonItemTapped(_ sender: Any) {
-        let addTripVC = AddTripVC(nibName: "AddTrip", bundle: nil)
+        let addTripVC = AddTripVC(trip: nil, state: .add, nibName: "AddTrip")
         self.present(addTripVC, animated: true, completion: nil)
     }
 }

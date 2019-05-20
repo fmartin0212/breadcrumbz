@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoadingView: UIView {
+final class LoadingView: UIView {
 
     // MARK: - Properties
     
@@ -18,7 +18,6 @@ class LoadingView: UIView {
         super.awakeFromNib()
         blackView.layer.cornerRadius = 7
         blackView.layer.opacity = 0.5
-        
         self.backgroundColor = nil
     }
     
