@@ -141,7 +141,7 @@ class InternalUserController {
         
         guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(.failure(.generic)) ; return }
         // Add user to loggedInUser's blocked list
-        firestoreService.update(object: loggedInUser, atField: "blockedUserIDs", withCriteria: [creatorID], with: .arrayAddtion) { [weak self] (result) in
+        firestoreService.update(object: loggedInUser, atField: "blockedUserIDs", withCriteria: [creatorID], with: .arrayAddition) { [weak self] (result) in
             switch result {
                 
             case .failure(let error):

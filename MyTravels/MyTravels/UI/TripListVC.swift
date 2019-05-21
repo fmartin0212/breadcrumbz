@@ -58,11 +58,11 @@ final class TripListVC: UIViewController {
                 }
             }
         }
-
-        for trip in TripController.shared.trips {
-            trip.uid = nil
-            CoreDataManager.save()
-        }
+//
+//        for trip in TripController.shared.trips {
+//            trip.uid = nil
+//            CoreDataManager.save()
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -192,7 +192,7 @@ class TripController {
                         completion(.failure(error))
                         
                     case .success(_):
-                        self?.firestoreService.update(object: trip, atField: "followers", withCriteria: [loggedInUser.uuid ?? ""], with: .arrayAddtion, completion: { (result) in
+                        self?.firestoreService.update(object: trip, atField: "followers", withCriteria: [loggedInUser.uuid ?? ""], with: .arrayAddition, completion: { (result) in
                             switch result {
                             case .failure(let error):
                                 completion(.failure(error))

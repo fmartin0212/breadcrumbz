@@ -154,7 +154,7 @@ final class PhotoController {
                     dispatchGroup.leave()
                 case .success(let path):
                     dispatchGroup.enter()
-                    self?.firestoreService.update(object: place, atField: "photoPaths", withCriteria: [path], with: .arrayAddtion, completion: { (result) in
+                    self?.firestoreService.update(object: place, atField: "photoPaths", withCriteria: [path], with: .arrayAddition, completion: { (result) in
                         switch result {
                         case .failure(let error):
                             print("Error updating crumb: \(error.localizedDescription)")

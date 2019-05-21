@@ -10,7 +10,7 @@ import Foundation
 import PSOperations
 
 class UpdateTripPhotoGroupOp: GroupOperation {
-
+    
     init(context: TripContextProtocol) {
         let context = context as! UpdateTripContext
         
@@ -20,7 +20,7 @@ class UpdateTripPhotoGroupOp: GroupOperation {
             let uploadTripPhotoGroupOp = UploadTripPhotoGroupOp(trip: context.trip, context: context)
             let updateTripPhotoCDOp = UpdateTripPhotoCD(context: context)
             updateTripPhotoCDOp.addDependency(uploadTripPhotoGroupOp)
-            operations = [uploadTripPhotoGroupOp, uploadTripPhotoGroupOp]
+            operations = [uploadTripPhotoGroupOp, updateTripPhotoCDOp]
         } else if context.trip.photo != nil && context.image == nil {
             // Originally, the trip contained a photo, but the user deleted the trip
             // Delete the current photo on firebase, update the trip's properties, then update the trips photoUID, and then update core data

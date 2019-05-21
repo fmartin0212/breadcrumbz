@@ -44,7 +44,7 @@ enum FirestoreQueryType {
 
 enum FirestoreUpdateType {
     case update
-    case arrayAddtion
+    case arrayAddition
     case arrayDeletion
 }
 public struct FirestoreService: FirestoreServiceProtocol {
@@ -88,7 +88,7 @@ public struct FirestoreService: FirestoreServiceProtocol {
                 completion(.success(true))
             }
             
-        case .arrayAddtion:
+        case .arrayAddition:
             docRef.updateData([field : FieldValue.arrayUnion(criteria)]) { (error) in
                 if let error = error {
                     print("Error updating to Firestore: \(error.localizedDescription)")
@@ -99,6 +99,8 @@ public struct FirestoreService: FirestoreServiceProtocol {
             }
             
         case .arrayDeletion:
+            let dict: [String : Any] = [:]
+            dict.values.first!
             docRef.updateData([field : FieldValue.arrayRemove(criteria)]) { (error) in
                 if let error = error {
                     print("Error updating to Firestore: \(error.localizedDescription)")
