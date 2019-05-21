@@ -53,6 +53,7 @@ extension TripTableViewCell {
     
     func updateImageView(with photo: UIImage) {
         DispatchQueue.main.async { [weak self] in
+            self?.tripImageView.contentMode = .scaleAspectFill
             self?.tripImageView.image = photo
         }
     }

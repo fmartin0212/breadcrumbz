@@ -140,6 +140,8 @@ extension TripDetailVC {
     private func updateViews() {
         if let photo = photo {
             tripImageView.image = photo
+            tripImageView.clipsToBounds = true
+            tripImageView.contentMode = .scaleAspectFill
         }
         tripNameLabel.text = trip.name
         tripLocationLabel.text = trip.location

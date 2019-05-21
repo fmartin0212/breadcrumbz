@@ -58,7 +58,7 @@ final class TripListVC: UIViewController {
                 }
             }
         }
-        
+
         for trip in TripController.shared.trips {
             trip.uid = nil
             CoreDataManager.save()

@@ -36,6 +36,7 @@ public class Photo: NSManagedObject, FirebaseStorageSavable, FirestoreSyncable {
         return image
     }
     
+    @discardableResult
     convenience init(photo: Data, place: Place?, trip: Trip?, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
         self.photo = NSData(data: photo)

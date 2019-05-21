@@ -9,10 +9,10 @@
 import Foundation
 import PSOperations
 
-class UpdateTripOp: PSOperation {
-    let context: UpdateTripContext
+class UpdateTripOnCloudPersistenceOp: PSOperation {
+    var context: TripContextProtocol
     
-    init(context: UpdateTripContext) {
+    init(context: TripContextProtocol) {
         self.context = context
     }
     
@@ -23,19 +23,9 @@ class UpdateTripOp: PSOperation {
                 self?.finish()
             case .failure(let error):
                 self?.context.error = error
+                self?.finish()
             }
         }
     }
 }
 
-class SaveToLocalPersistence: PSOperation {
-    let context: UpdateTripContext
-    
-    init(context: UpdateTripContext) {
-        self.context = context
-    }
-    
-    override func execute() {
-        
-    }
-}

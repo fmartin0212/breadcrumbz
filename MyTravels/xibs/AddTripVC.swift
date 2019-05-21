@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PSOperations
 
 protocol AddTripVCDelegate: class {
     func saveButtonTapped(trip: TripObject)
@@ -53,6 +54,7 @@ final class AddTripVC: UIViewController, ScrollableViewController {
     var trip: Trip?
     var state: State
     weak var delegate: AddTripVCDelegate?
+    let operationQueue = PSOperationQueue()
     
     // MARK: - Actions
     
@@ -242,15 +244,27 @@ extension AddTripVC {
             let endDate = endDate
             else { return }
         
+        let image: UIImage? = addPhotoButton.currentImage == UIImage(named: "imageDefault") ? nil : addPhotoButton.currentImage
+        
+        if let trip = trip {
+            let updateTripGroupOp = UpdateTripGroupOp(trip: trip, image: image, name: name, location: location, startDate: startDate, endDate: endDate, tripDescription: descriptionTextView.text) { [weak self] (result) in
+                DispatchQueue.main.async {
+                    self?.dismiss(animated: true, completion: nil)
+                }
+            }
+            operationQueue.addOperation(updateTripGroupOp)
+            return
+        }
+        
         let newTrip = TripController.shared.createTripWith(name: name, location: location, tripDescription: descriptionTextView.text, startDate: startDate, endDate: endDate)
         
-        if let photo = addPhotoButton.currentImage,
+        if let photo = image,
             let compressedImage = photo.jpegData(compressionQuality: 0.1) {
-            
             PhotoController.shared.add(photo: compressedImage, trip: newTrip)
         }
         
         delegate?.saveButtonTapped(trip: newTrip)
+        
         dismiss(animated: true, completion: nil)
     }
 }

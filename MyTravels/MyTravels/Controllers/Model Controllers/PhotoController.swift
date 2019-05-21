@@ -265,6 +265,10 @@ final class PhotoController {
             }
         }
     }
+    
+    func updatePhoto(for trip: Trip, with image: UIImage) {
+        
+    }
 }
 
 
