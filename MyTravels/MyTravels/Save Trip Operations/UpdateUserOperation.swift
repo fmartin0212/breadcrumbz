@@ -26,7 +26,7 @@ class UpdateUserOperation: PSOperation {
         guard let user = InternalUserController.shared.loggedInUser,
             let tripUUID = trip.uuid
             else { finish() ; return }
-        firestoreService.update(object: user, atField: "sharedTripIDs", withCriteria: [tripUUID], with: .arrayAddition) { [weak self] (result) in
+        firestoreService.update(object: user, fieldsAndCriteria: ["sharedTripIDs" : [tripUUID]], with: .arrayAddition) { [weak self] (result) in
             switch result {
             case .success(_):
                 self?.finish()

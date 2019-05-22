@@ -185,14 +185,14 @@ class TripController {
                 guard internalUserArray.count > 0,
                     let internalUser = internalUserArray.first
                     else { completion(.failure(.generic)) ; return }
-                self?.firestoreService.update(object: internalUser, atField: "tripsFollowingIDs", withCriteria: [trip.uid ?? ""], with: .update, completion: { (result) in
+                self?.firestoreService.update(object: internalUser, fieldsAndCriteria: ["tripsFollowingIDs" : trip.uid ?? ""], with: .update, completion: { (result) in
                     switch result {
                         
                     case .failure(let error):
                         completion(.failure(error))
                         
                     case .success(_):
-                        self?.firestoreService.update(object: trip, atField: "followers", withCriteria: [loggedInUser.uuid ?? ""], with: .arrayAddition, completion: { (result) in
+                        self?.firestoreService.update(object: trip, fieldsAndCriteria: ["followers" : [loggedInUser.uuid ?? ""]], with: .arrayAddition, completion: { (result) in
                             switch result {
                             case .failure(let error):
                                 completion(.failure(error))

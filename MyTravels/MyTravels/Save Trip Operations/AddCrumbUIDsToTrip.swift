@@ -23,7 +23,7 @@ class AddCrumbUIDsToTrip: PSOperation {
     
     override func execute() {
         guard context.placeUIDs.count > 0 else { finish() ; return }
-        firestoreService.update(object: trip, atField: "crumbUIDs", withCriteria: context.placeUIDs, with: .arrayAddition) { [weak self] (result) in
+        firestoreService.update(object: trip, fieldsAndCriteria: ["crumbUIDs" : context.placeUIDs], with: .arrayAddition) { [weak self] (result) in
             switch result {
             case .success(_):
                 self?.finish()

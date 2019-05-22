@@ -33,7 +33,7 @@ class AddPhotoUIDToTripOp: PSOperation {
     
     override func execute() {
         guard let tripPhoto = context.trip.photo else { finish() ; return }
-        context.firestoreService.update(object: context.trip, atField: "photoUID", withCriteria: [tripPhoto.uid], with: .update) { [weak self] (result) in
+        context.firestoreService.update(object: context.trip, fieldsAndCriteria: ["photoUID" : tripPhoto.uid], with: .update) { [weak self] (result) in
             switch result {
             case .success(_):
                 self?.finish()

@@ -12,7 +12,7 @@ import FirebaseAuth
 
 protocol FirestoreServiceProtocol {
     func save<T: FirestoreSavable>(object: T, completion: @escaping(Result<String, FireError>) -> Void)
-    func update<T: FirestoreSavable>(object: T, atField field: String, withCriteria criteria: [String], with updateType: FirestoreUpdateType, completion: @escaping (Result<Bool, FireError>) -> Void)
+    func update<T: FirestoreSavable>(object: T, fieldsAndCriteria: [String : Any], with updateType: FirestoreUpdateType, completion: @escaping (Result<Bool, FireError>) -> Void)
     func delete<T: FirestoreSavable>(object: T, completion: @escaping (Result<Bool, FireError>) -> Void)
     func fetch<T: FirestoreRetrievable>(uuid: String?, field: String?, criteria: String?, queryType: FirestoreQueryType?, completion: @escaping (Result<[T], FireError>) -> Void)
 }
@@ -68,18 +68,16 @@ public struct FirestoreService: FirestoreServiceProtocol {
     }
     
     func update<T: FirestoreSavable>(object: T,
-                                     atField field: String,
-                                     withCriteria criteria: [String],
+                                     fieldsAndCriteria: [String : Any],
                                      with updateType: FirestoreUpdateType,
                                      completion: @escaping (Result<Bool, FireError>) -> Void) {
         guard let uuid = object.uuid,
-            criteria.count > 0,
-            let singleCriteria = criteria.first
+            fieldsAndCriteria.keys.count > 0
             else { completion(.failure(.generic)) ; return }
         let docRef = T.collectionReference.document(uuid)
         switch updateType {
         case .update:
-            docRef.updateData([field : singleCriteria]) { (error) in
+            docRef.updateData(fieldsAndCriteria) { (error) in
                 if let error = error {
                     print("Error updating to Firestore: \(error.localizedDescription)")
                     completion(.failure(.updating))
@@ -89,6 +87,10 @@ public struct FirestoreService: FirestoreServiceProtocol {
             }
             
         case .arrayAddition:
+            guard fieldsAndCriteria.values.count == 1,
+                let field = fieldsAndCriteria.keys.first,
+                let criteria = fieldsAndCriteria.values.first as? [Any]
+                else { completion(.failure(.generic)) ; return }
             docRef.updateData([field : FieldValue.arrayUnion(criteria)]) { (error) in
                 if let error = error {
                     print("Error updating to Firestore: \(error.localizedDescription)")
@@ -99,8 +101,10 @@ public struct FirestoreService: FirestoreServiceProtocol {
             }
             
         case .arrayDeletion:
-            let dict: [String : Any] = [:]
-            dict.values.first!
+            guard fieldsAndCriteria.values.count == 1,
+                let field = fieldsAndCriteria.keys.first,
+                let criteria = fieldsAndCriteria.values.first as? [Any]
+                else { completion(.failure(.generic)) ; return }
             docRef.updateData([field : FieldValue.arrayRemove(criteria)]) { (error) in
                 if let error = error {
                     print("Error updating to Firestore: \(error.localizedDescription)")
@@ -166,7 +170,7 @@ public struct FirestoreService: FirestoreServiceProtocol {
                 return
             }
             guard let snapshot = snapshot,
-            snapshot.documents.count > 0
+                snapshot.documents.count > 0
                 else { completion(.success([])) ; return }
             let objects = snapshot.documents.compactMap { T(dictionary: $0.data(), uuid: $0.documentID) }
             completion(.success(objects))

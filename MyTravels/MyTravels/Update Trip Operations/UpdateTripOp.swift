@@ -14,10 +14,11 @@ class UpdateTripOnCloudPersistenceOp: PSOperation {
     
     init(context: TripContextProtocol) {
         self.context = context
+        super.init()
     }
     
     override func execute() {
-        context.firestoreService.save(object: context.trip) { [weak self] (result) in
+        context.firestoreService.update(object: context.trip, fieldsAndCriteria: context.trip.dictionary, with: .update) { [weak self] (result) in
             switch result {
             case .success(_):
                 self?.finish()

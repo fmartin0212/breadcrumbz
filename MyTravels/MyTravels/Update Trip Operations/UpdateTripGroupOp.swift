@@ -28,6 +28,7 @@ class UpdateCompleteOp: PSOperation {
     init(context: TripContextProtocol, completion: @escaping (Result<Bool, FireError>) -> Void) {
         self.context = context
         self.completion = completion
+        super.init()
     }
     
     override func execute() {

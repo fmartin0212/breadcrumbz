@@ -51,6 +51,7 @@ class DeleteCurrentTripPhotoOp: PSOperation {
     
     init(context: TripContextProtocol) {
         self.context = context
+        super.init()
     }
     
     override func execute() {
@@ -73,10 +74,11 @@ class RemoveTripUID: PSOperation {
     
     init(context: TripContextProtocol) {
         self.context = context
+        super.init()
     }
     
     override func execute() {
-        context.firestoreService.update(object: context.trip, atField: "photoUID", withCriteria: [""], with: .update) { [weak self] (result) in
+        context.firestoreService.update(object: context.trip, fieldsAndCriteria: ["photoUID" : [""]], with: .update) { [weak self] (result) in
             switch result {
             case .success(_):
                 self?.finish()
@@ -93,6 +95,7 @@ class UpdateTripPhotoCD: PSOperation {
     
     init(context: TripContextProtocol) {
         self.context = context
+        super.init()
     }
     
     override func execute() {

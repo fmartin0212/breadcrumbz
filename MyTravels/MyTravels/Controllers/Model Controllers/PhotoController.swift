@@ -128,7 +128,7 @@ final class PhotoController {
             case .failure(let error):
                 completion(.failure(error))
             case .success(let path):
-                self?.firestoreService.update(object: trip, atField: "photoPath", withCriteria: [path], with: .update, completion: { (result) in
+                self?.firestoreService.update(object: trip, fieldsAndCriteria: ["photoPath" : path], with: .update, completion: { (result) in
                     switch result {
                     case .failure(let error):
                         completion(.failure(error))
@@ -154,7 +154,7 @@ final class PhotoController {
                     dispatchGroup.leave()
                 case .success(let path):
                     dispatchGroup.enter()
-                    self?.firestoreService.update(object: place, atField: "photoPaths", withCriteria: [path], with: .arrayAddition, completion: { (result) in
+                    self?.firestoreService.update(object: place, fieldsAndCriteria: ["photoPaths" : [path]], with: .arrayAddition, completion: { (result) in
                         switch result {
                         case .failure(let error):
                             print("Error updating crumb: \(error.localizedDescription)")
@@ -253,7 +253,7 @@ final class PhotoController {
                 completion(.failure(error))
                 
             case .success(let path):
-                self?.firestoreService.update(object: user, atField: "photoPath", withCriteria: [path], with: .update, completion: { (result) in
+                self?.firestoreService.update(object: user, fieldsAndCriteria: ["photoPath" : [path]], with: .update, completion: { (result) in
                     switch result {
                     case .failure(let error):
                         completion(.failure(error))
