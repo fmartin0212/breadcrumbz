@@ -45,13 +45,17 @@ class SignUpVC: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.post(name: Constants.viewWillAppearForVC, object: nil, userInfo: ["viewController": self])
+    }
+    
     @IBAction func getStartedButtonTapped(_ sender: Any) {
         UIView.animate(withDuration: 0.25) {
             self.nameLabel.isHidden = false
             self.nameTextField.isHidden = false
             self.emailLabel.isHidden = false
             self.emailTextField.isHidden = false
-            
         }
     }
     
@@ -142,7 +146,6 @@ class SignUpVC: UIViewController {
             }
         }
     }
-    
     
     func signUp() {
         guard let name = nameTextField.text,

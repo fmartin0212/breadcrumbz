@@ -18,6 +18,7 @@ class Constants {
     static public let profilePictureUpdatedNotif = Notification.Name("profilePictureUpdatedNotification")
     static public let refreshSharedTripsListNotif = Notification.Name("refreshSharedTripsListNotif")
     static public let userLoggedInNotif = Notification.Name("userLoggedInNotif")
+    static public let viewWillAppearForVC = Notification.Name("userLoggedInNotif")
     
     // MARK: - Error messages
     

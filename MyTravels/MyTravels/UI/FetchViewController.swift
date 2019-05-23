@@ -33,12 +33,12 @@ class FetchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UserDefaults.standard.setValue(true, forKey: "userSkippedSignUp")
-        
+        UserDefaults.standard.setValue(false, forKey: "userSkippedSignUp")
+
         if UserDefaults.standard.value(forKey: "userSkippedSignUp") == nil {
             UserDefaults.standard.setValue(true, forKey: "userSkippedSignUp")
         }
-        
+
         InternalUserController.shared.checkForLoggedInUser { (result) in
             switch result {
             case .success(_):

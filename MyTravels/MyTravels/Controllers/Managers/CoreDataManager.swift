@@ -24,8 +24,8 @@ final class CoreDataManager {
     
     static func delete<T: NSManagedObject>(object: T) {
         DispatchQueue.main.async {
-            CoreDataStack.updateContext.delete(object)
-            try? CoreDataStack.updateContext.save()
+            CoreDataStack.context.delete(object)
+            save()
         }
     }
 }

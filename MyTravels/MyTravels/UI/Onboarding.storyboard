@@ -40,11 +40,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="KTk-Ks-KJQ">
+                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="KTk-Ks-KJQ">
                                 <rect key="frame" x="140.5" y="308" width="39" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="pageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" red="0.92826980349999999" green="0.43999382850000002" blue="0.39598500730000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </pageControl>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9AO-q9-9Nh">
+                                <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                                <connections>
+                                    <segue destination="7kg-fl-qzV" kind="embed" id="0C7-wz-uKb"/>
+                                </connections>
+                            </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8C-TB-qz7">
                                 <rect key="frame" x="24" y="408" width="30" height="32"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
@@ -67,31 +74,22 @@
                                     <action selector="nextButtonTapped:" destination="qt0-DW-eTo" eventType="touchUpInside" id="KMD-3m-S4t"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9AO-q9-9Nh">
-                                <rect key="frame" x="0.0" y="20" width="320" height="288"/>
-                                <connections>
-                                    <segue destination="7kg-fl-qzV" kind="embed" id="0C7-wz-uKb"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="9AO-q9-9Nh" firstAttribute="top" secondItem="Dg1-Z5-foh" secondAttribute="top" id="2RO-vJ-Aw0"/>
                             <constraint firstItem="Dg1-Z5-foh" firstAttribute="trailing" secondItem="9AO-q9-9Nh" secondAttribute="trailing" id="7cL-6d-W7L"/>
-                            <constraint firstItem="KTk-Ks-KJQ" firstAttribute="centerX" secondItem="9AO-q9-9Nh" secondAttribute="centerX" id="Hm2-Jb-keC"/>
                             <constraint firstItem="Dg1-Z5-foh" firstAttribute="trailing" secondItem="jTm-4E-9ry" secondAttribute="trailing" constant="24" id="TrR-ol-JMj"/>
-                            <constraint firstItem="KTk-Ks-KJQ" firstAttribute="top" secondItem="9AO-q9-9Nh" secondAttribute="bottom" id="X0k-z5-QRG"/>
-                            <constraint firstItem="9AO-q9-9Nh" firstAttribute="height" secondItem="sOx-01-JCb" secondAttribute="height" multiplier="0.6" id="hFK-sJ-VIf"/>
                             <constraint firstItem="Y8C-TB-qz7" firstAttribute="leading" secondItem="Dg1-Z5-foh" secondAttribute="leading" constant="24" id="rwq-Li-Qpp"/>
                             <constraint firstItem="Dg1-Z5-foh" firstAttribute="bottom" secondItem="jTm-4E-9ry" secondAttribute="bottom" constant="36" id="sSc-mu-kEk"/>
                             <constraint firstItem="9AO-q9-9Nh" firstAttribute="leading" secondItem="Dg1-Z5-foh" secondAttribute="leading" id="xNG-CQ-hNQ"/>
                             <constraint firstItem="Y8C-TB-qz7" firstAttribute="centerY" secondItem="jTm-4E-9ry" secondAttribute="centerY" id="z1c-z6-I9o"/>
+                            <constraint firstItem="9AO-q9-9Nh" firstAttribute="bottom" secondItem="Dg1-Z5-foh" secondAttribute="bottom" id="z3u-Oj-CSN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Dg1-Z5-foh"/>
                     </view>
                     <connections>
                         <outlet property="containerView" destination="9AO-q9-9Nh" id="C8a-Ia-eKg"/>
-                        <outlet property="containerViewHeightConstraint" destination="hFK-sJ-VIf" id="ELS-6k-jFu"/>
                         <outlet property="nextButton" destination="jTm-4E-9ry" id="37N-1b-9sE"/>
                         <outlet property="pageControl" destination="KTk-Ks-KJQ" id="qPe-O7-Gz3"/>
                         <outlet property="skipButton" destination="Y8C-TB-qz7" id="8qD-R6-AxW"/>

@@ -14,8 +14,8 @@ class FeaturesViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    @IBAction func skipButtonTapped(_ sender: Any) {
-        UserDefaults.standard.setValue(true, forKey: "userSkippedSignUp")
-        presentTripListVC()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.post(name: Constants.viewWillAppearForVC, object: nil, userInfo: ["viewController": self])
     }
 }

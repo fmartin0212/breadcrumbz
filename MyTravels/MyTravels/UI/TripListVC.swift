@@ -43,7 +43,9 @@ final class TripListVC: UIViewController {
         let nib = UINib(nibName: "TripCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TripCell")
         tableView.separatorStyle = .none
-        TripController.shared.frc.delegate = self
+        if state == .managed {
+            TripController.shared.frc.delegate = self
+        }
         tripObjectManager.fetchTrips(for: state) { (result) in
             switch result {
             case .success(let trips):

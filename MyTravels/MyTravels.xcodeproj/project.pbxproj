@@ -577,12 +577,12 @@
 		B7F75C0520577C2900C876A0 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				B76B2F6B22432B6500E688F4 /* OnboardingParentViewController.swift */,
 				B7F75C06205842E600C876A0 /* OnboardingPageViewController.swift */,
 				B7F75C082058521C00C876A0 /* ExplanationViewController.swift */,
 				B7F75C0A2058523300C876A0 /* FeaturesViewController.swift */,
 				B7C10CB62020D19500818430 /* CreateAccountViewController.swift */,
 				B75E335B20D3150500839678 /* SignUpViewController.swift */,
-				B76B2F6B22432B6500E688F4 /* OnboardingParentViewController.swift */,
 				B774A1C521BDA85E008D7483 /* Constants.swift */,
 			);
 			path = Onboarding;
