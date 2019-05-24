@@ -28,6 +28,7 @@ class OnboardingPageViewController: UIPageViewController {
                                direction: .forward,
                                animated: true,
                                completion: nil)
+            
         }
     }
     

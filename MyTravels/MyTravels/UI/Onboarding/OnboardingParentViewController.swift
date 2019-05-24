@@ -10,16 +10,18 @@ import UIKit
 
 class OnboardingParentViewController: UIViewController {
 
-    @IBOutlet weak var containterViewHeightConstraint: NSLayoutConstraint!
+    // MARK: - Properties
+    
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var skipButton: UIButton!
-    @IBOutlet weak var containerViewHeightConstraint: NSLayoutConstraint!
+    
     lazy var pageViewController: OnboardingPageViewController? = {
         guard let pageViewController = self.children.first as? OnboardingPageViewController else { return nil }
         return pageViewController
     }()
+    
     lazy var currentViewController: UIViewController? = {
         guard let pageViewController = self.pageViewController,
         let firstVC = pageViewController.orderedViewControllers.first
@@ -29,7 +31,6 @@ class OnboardingParentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         nextButton.layer.cornerRadius = nextButton.frame.width / 2
         nextButton.clipsToBounds = true
         pageViewController?.onboardingDelegate = self
@@ -46,13 +47,6 @@ class OnboardingParentViewController: UIViewController {
     func handle(_ notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
         currentViewController = userInfo["viewController"] as? UIViewController
-        if currentViewController is SignUpVC {
-            containterViewHeightConstraint =  NSLayoutConstraint(item: containerView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 1, constant: 0)
-        } else {
-            containterViewHeightConstraint =  NSLayoutConstraint(item: containerView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.6, constant: 0)
-            view.layoutIfNeeded()
-        }
-        print("foo")
     }
     
     @IBAction func skipButtonTapped(_ sender: Any) {
@@ -66,8 +60,6 @@ class OnboardingParentViewController: UIViewController {
             let nextVC = pageViewController.pageViewController(pageViewController, viewControllerAfter: currentViewController)
             else { return }
         pageViewController.setViewControllers([nextVC], direction: .forward, animated: true, completion: nil)
-            containterViewHeightConstraint =  NSLayoutConstraint(item: containerView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 1, constant: 0)
-        print("foo")
     }
 }
 

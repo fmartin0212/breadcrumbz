@@ -9,7 +9,13 @@
 import UIKit
 
 class ExplanationViewController: UIViewController {
+    
+    // MARK: - Properties
 
+    @IBOutlet weak var obImageView: UIImageView!
+    @IBOutlet weak var largeBlurb: UILabel!
+    @IBOutlet weak var smallBlurb: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

@@ -108,7 +108,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWt-JE-Px0">
-                                <rect key="frame" x="69.5" y="365" width="181.5" height="25.5"/>
+                                <rect key="frame" x="69.5" y="226" width="181.5" height="25.5"/>
                                 <string key="text">Log travel moments
 
 </string>
@@ -117,7 +117,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfa-tj-xig">
-                                <rect key="frame" x="8" y="427" width="304" height="45"/>
+                                <rect key="frame" x="8" y="288" width="304" height="36"/>
                                 <string key="text">Log the best places you traveled
 so you can charish the moments!</string>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
@@ -125,7 +125,7 @@ so you can charish the moments!</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PAe-nT-BRC">
-                                <rect key="frame" x="135" y="402.5" width="50" height="2"/>
+                                <rect key="frame" x="135" y="263.5" width="50" height="2"/>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="2Sr-tA-Wd8"/>
@@ -133,83 +133,47 @@ so you can charish the moments!</string>
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" image="list" translatesAutoresizingMaskIntoConstraints="NO" id="qfF-PZ-Mwb">
-                                <rect key="frame" x="83" y="182.5" width="154" height="154"/>
+                                <rect key="frame" x="83" y="60" width="154" height="154"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="qfF-PZ-Mwb" secondAttribute="height" multiplier="1:1" id="8rF-J0-WZg"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXP-q0-sb8">
+                                <rect key="frame" x="256" y="404" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.032125217740000003" green="1" blue="3.3306690740000002e-16" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="GGt-iT-qJS"/>
+                                    <constraint firstAttribute="width" secondItem="yXP-q0-sb8" secondAttribute="height" multiplier="1:1" id="LkU-tI-yb9"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="PAe-nT-BRC" firstAttribute="top" secondItem="jWt-JE-Px0" secondAttribute="bottom" constant="12" id="1eR-tO-3Y3"/>
                             <constraint firstItem="tfa-tj-xig" firstAttribute="leading" secondItem="mVt-zd-b4x" secondAttribute="leading" constant="8" id="22U-FU-qJl"/>
-                            <constraint firstItem="jWt-JE-Px0" firstAttribute="top" secondItem="qfF-PZ-Mwb" secondAttribute="bottom" constant="28.5" id="C4D-3B-O5C"/>
+                            <constraint firstItem="qfF-PZ-Mwb" firstAttribute="centerY" secondItem="mVt-zd-b4x" secondAttribute="centerY" priority="250" constant="-50" id="2an-kd-Lfz"/>
+                            <constraint firstItem="yXP-q0-sb8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="tfa-tj-xig" secondAttribute="bottom" constant="80" id="FWq-XY-Be7"/>
                             <constraint firstItem="tfa-tj-xig" firstAttribute="top" secondItem="PAe-nT-BRC" secondAttribute="bottom" constant="22.5" id="GPP-3O-Mv9"/>
+                            <constraint firstItem="jWt-JE-Px0" firstAttribute="top" secondItem="qfF-PZ-Mwb" secondAttribute="bottom" constant="12" id="K2K-Qc-Bb2"/>
                             <constraint firstItem="PAe-nT-BRC" firstAttribute="centerX" secondItem="tfa-tj-xig" secondAttribute="centerX" id="OdN-G1-M1j"/>
-                            <constraint firstItem="mVt-zd-b4x" firstAttribute="bottom" secondItem="tfa-tj-xig" secondAttribute="bottom" constant="8" id="RX9-nI-96A"/>
+                            <constraint firstItem="qfF-PZ-Mwb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="mVt-zd-b4x" secondAttribute="top" constant="40" id="d9A-9U-qG2"/>
+                            <constraint firstItem="mVt-zd-b4x" firstAttribute="bottom" secondItem="yXP-q0-sb8" secondAttribute="bottom" constant="36" id="gxd-1y-ohg"/>
+                            <constraint firstItem="yXP-q0-sb8" firstAttribute="trailing" secondItem="mVt-zd-b4x" secondAttribute="trailing" constant="-24" id="mvB-xZ-uUK"/>
                             <constraint firstItem="mVt-zd-b4x" firstAttribute="trailing" secondItem="tfa-tj-xig" secondAttribute="trailing" constant="8" id="oeH-Hm-ujB"/>
                             <constraint firstItem="qfF-PZ-Mwb" firstAttribute="centerX" secondItem="tfa-tj-xig" secondAttribute="centerX" id="osw-Uw-LQR"/>
                             <constraint firstItem="jWt-JE-Px0" firstAttribute="centerX" secondItem="PAe-nT-BRC" secondAttribute="centerX" id="x7Q-z1-gE3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mVt-zd-b4x"/>
                     </view>
+                    <connections>
+                        <outlet property="largeBlurb" destination="jWt-JE-Px0" id="GqZ-ny-lel"/>
+                        <outlet property="obImageView" destination="qfF-PZ-Mwb" id="QF9-pJ-sD2"/>
+                        <outlet property="smallBlurb" destination="tfa-tj-xig" id="KJr-xK-EhS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RvW-11-RKJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-935.20000000000005" y="-781.25937031484261"/>
-        </scene>
-        <!--Features View Controller-->
-        <scene sceneID="f3P-lN-HZk">
-            <objects>
-                <viewController storyboardIdentifier="FeaturesViewController" id="xmk-1n-76C" customClass="FeaturesViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="aj0-Mw-iZV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share your experiences with friends and family." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBw-Zf-3bl">
-                                <rect key="frame" x="8" y="435" width="304" height="45"/>
-                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
-                                <color key="textColor" red="0.60779035091400146" green="0.60787814855575562" blue="0.60776275396347046" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2D7-Sa-K2c">
-                                <rect key="frame" x="135" y="410.5" width="50" height="2"/>
-                                <color key="backgroundColor" red="0.97254901959999995" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="2" id="cNr-ej-rt7"/>
-                                    <constraint firstAttribute="width" secondItem="2D7-Sa-K2c" secondAttribute="height" multiplier="20:1" constant="10" id="uSi-6c-UaU"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share memories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YAz-yJ-8I2">
-                                <rect key="frame" x="85" y="372.5" width="150" height="26"/>
-                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="18"/>
-                                <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" image="airplane" translatesAutoresizingMaskIntoConstraints="NO" id="1zl-C2-jCl">
-                                <rect key="frame" x="83" y="190" width="154" height="154"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="2D7-Sa-K2c" firstAttribute="centerX" secondItem="DBw-Zf-3bl" secondAttribute="centerX" id="2aX-Ln-Fhu"/>
-                            <constraint firstItem="2D7-Sa-K2c" firstAttribute="top" secondItem="YAz-yJ-8I2" secondAttribute="bottom" constant="12" id="4FM-pi-Mlb"/>
-                            <constraint firstItem="YAz-yJ-8I2" firstAttribute="top" secondItem="1zl-C2-jCl" secondAttribute="bottom" constant="28.5" id="815-ZP-UhY"/>
-                            <constraint firstItem="mzv-uh-CB9" firstAttribute="bottom" secondItem="DBw-Zf-3bl" secondAttribute="bottom" id="G6Z-OK-CW5"/>
-                            <constraint firstItem="2D7-Sa-K2c" firstAttribute="width" secondItem="2D7-Sa-K2c" secondAttribute="height" multiplier="20:1" constant="10" id="RXN-p6-8YK"/>
-                            <constraint firstItem="1zl-C2-jCl" firstAttribute="centerX" secondItem="2D7-Sa-K2c" secondAttribute="centerX" id="Rjo-WG-lgA"/>
-                            <constraint firstItem="mzv-uh-CB9" firstAttribute="trailing" secondItem="DBw-Zf-3bl" secondAttribute="trailing" constant="8" id="eO9-h8-9ZA"/>
-                            <constraint firstItem="YAz-yJ-8I2" firstAttribute="centerX" secondItem="2D7-Sa-K2c" secondAttribute="centerX" id="ldm-ip-xHD"/>
-                            <constraint firstItem="1zl-C2-jCl" firstAttribute="width" secondItem="1zl-C2-jCl" secondAttribute="height" multiplier="1:1" id="stF-La-Vk0"/>
-                            <constraint firstItem="DBw-Zf-3bl" firstAttribute="leading" secondItem="mzv-uh-CB9" secondAttribute="leading" constant="8" id="u28-VO-k4i"/>
-                            <constraint firstItem="DBw-Zf-3bl" firstAttribute="top" secondItem="2D7-Sa-K2c" secondAttribute="bottom" constant="22.5" id="vbM-9l-WNO"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="mzv-uh-CB9"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VJq-af-rxS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-196" y="-781.25937031484261"/>
+            <point key="canvasLocation" x="-885" y="-760"/>
         </scene>
         <!--Sign UpVC-->
         <scene sceneID="iAw-jQ-O28">
@@ -568,6 +532,72 @@ so you can charish the moments!</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Acn-et-4uE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="544.79999999999995" y="-781.25937031484261"/>
+        </scene>
+        <!--Features View Controller-->
+        <scene sceneID="fIO-W0-z0O">
+            <objects>
+                <viewController storyboardIdentifier="FeaturesViewController" id="iBJ-i0-CbV" customClass="FeaturesViewController" customModule="MyTravels" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WOZ-6p-TlO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share memories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BU5-d5-yGW">
+                                <rect key="frame" x="85" y="226" width="150" height="26"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="18"/>
+                                <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Share your experiences with friends and family." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kHI-st-ytk">
+                                <rect key="frame" x="8" y="288.5" width="304" height="35.5"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                <color key="textColor" red="0.6077903509" green="0.6078781486" blue="0.60776275400000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6QK-Po-bgM">
+                                <rect key="frame" x="135" y="264" width="50" height="2"/>
+                                <color key="backgroundColor" red="0.97254901959999995" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="N8K-ki-KYm"/>
+                                    <constraint firstAttribute="width" secondItem="6QK-Po-bgM" secondAttribute="height" multiplier="20:1" constant="10" id="UDb-hM-eFM"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" image="airplane" translatesAutoresizingMaskIntoConstraints="NO" id="h0M-L7-fKt">
+                                <rect key="frame" x="83" y="60" width="154" height="154"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="h0M-L7-fKt" secondAttribute="height" multiplier="1:1" id="iQf-eU-Bjn"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q62-ge-K74">
+                                <rect key="frame" x="256" y="404" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.032125217740000003" green="1" blue="3.3306690740000002e-16" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3ZM-Nd-OSB"/>
+                                    <constraint firstAttribute="width" secondItem="Q62-ge-K74" secondAttribute="height" multiplier="1:1" id="cRq-QH-s2c"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="h0M-L7-fKt" firstAttribute="centerX" secondItem="kHI-st-ytk" secondAttribute="centerX" id="3Qu-jt-oN9"/>
+                            <constraint firstItem="Q62-ge-K74" firstAttribute="top" relation="greaterThanOrEqual" secondItem="kHI-st-ytk" secondAttribute="bottom" constant="80" id="5aT-IG-nar"/>
+                            <constraint firstItem="kHI-st-ytk" firstAttribute="top" secondItem="6QK-Po-bgM" secondAttribute="bottom" constant="22.5" id="5oO-lk-SRn"/>
+                            <constraint firstItem="BU5-d5-yGW" firstAttribute="top" secondItem="h0M-L7-fKt" secondAttribute="bottom" constant="12" id="5qc-JY-XRt"/>
+                            <constraint firstItem="BU5-d5-yGW" firstAttribute="centerX" secondItem="6QK-Po-bgM" secondAttribute="centerX" id="B3h-cm-UCw"/>
+                            <constraint firstItem="h0M-L7-fKt" firstAttribute="centerY" secondItem="ONo-fc-H9M" secondAttribute="centerY" priority="250" constant="-50" id="Dhn-fO-Du7"/>
+                            <constraint firstItem="ONo-fc-H9M" firstAttribute="trailing" secondItem="kHI-st-ytk" secondAttribute="trailing" constant="8" id="Djp-oE-QE2"/>
+                            <constraint firstItem="h0M-L7-fKt" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ONo-fc-H9M" secondAttribute="top" constant="40" id="Og8-kZ-g0E"/>
+                            <constraint firstItem="6QK-Po-bgM" firstAttribute="top" secondItem="BU5-d5-yGW" secondAttribute="bottom" constant="12" id="gFZ-7A-Ogk"/>
+                            <constraint firstItem="Q62-ge-K74" firstAttribute="trailing" secondItem="ONo-fc-H9M" secondAttribute="trailing" constant="-24" id="hkR-D2-9vU"/>
+                            <constraint firstItem="kHI-st-ytk" firstAttribute="leading" secondItem="ONo-fc-H9M" secondAttribute="leading" constant="8" id="jGa-cP-lXa"/>
+                            <constraint firstItem="6QK-Po-bgM" firstAttribute="centerX" secondItem="kHI-st-ytk" secondAttribute="centerX" id="uFq-t3-FYR"/>
+                            <constraint firstItem="ONo-fc-H9M" firstAttribute="bottom" secondItem="Q62-ge-K74" secondAttribute="bottom" constant="36" id="y7f-hq-U9U"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ONo-fc-H9M"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fKd-oG-Qt6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-231" y="-760"/>
         </scene>
     </scenes>
     <resources>
