@@ -12,10 +12,11 @@ class OnboardingParentViewController: UIViewController {
 
     // MARK: - Properties
     
+    @IBOutlet weak var topRightSkipButton: UIButton!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var skipButton: UIButton!
+    @IBOutlet weak var bottomLeftSkipButton: UIButton!
     
     lazy var pageViewController: OnboardingPageViewController? = {
         guard let pageViewController = self.children.first as? OnboardingPageViewController else { return nil }
@@ -34,6 +35,8 @@ class OnboardingParentViewController: UIViewController {
         nextButton.layer.cornerRadius = nextButton.frame.width / 2
         nextButton.clipsToBounds = true
         pageViewController?.onboardingDelegate = self
+        let signUpVC = pageViewController?.orderedViewControllers[2] as? SignUpVC
+        signUpVC
         NotificationCenter.default.addObserver(forName: Constants.viewWillAppearForVC, object: nil, queue: nil) { [weak self] (notification) in
             self?.handle(notification)
         }
@@ -47,6 +50,15 @@ class OnboardingParentViewController: UIViewController {
     func handle(_ notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
         currentViewController = userInfo["viewController"] as? UIViewController
+        if currentViewController is SignUpVC {
+            topRightSkipButton.isHidden = false
+            nextButton.isHidden = true
+            bottomLeftSkipButton.isHidden = true
+        } else {
+            topRightSkipButton.isHidden = true
+            nextButton.isHidden = false
+            bottomLeftSkipButton.isHidden = false
+        }
     }
     
     @IBAction func skipButtonTapped(_ sender: Any) {

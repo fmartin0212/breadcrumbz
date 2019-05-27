@@ -89,7 +89,7 @@ extension ProfileViewController {
 extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -102,13 +102,13 @@ extension ProfileViewController: UITableViewDataSource {
         case 1:
             cell.basicLabel.text = "Location"
             cell.basicSwitch.isHidden = false
+//        case 2:
+//            cell.basicLabel.text = "Push Notifications"
+//            cell.basicSwitch.isHidden = false
         case 2:
-            cell.basicLabel.text = "Push Notifications"
-            cell.basicSwitch.isHidden = false
-        case 3:
             cell.basicLabel.text = "Terms of Service"
             cell.accessoryType = .disclosureIndicator
-        case 4:
+        case 3:
             cell.basicLabel.text = "Privacy Policy"
             cell.accessoryType = .disclosureIndicator
         default:

@@ -10,6 +10,9 @@ import UIKit
 
 class SignUpVC: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var bySigningLabel: UILabel!
+    @IBOutlet weak var termsAndPrivacyStackView: UIStackView!
     @IBOutlet var allTextfields: [FMTextField]!
     // MARK: - Outlets
     @IBOutlet weak var nameLabel: UILabel!
@@ -29,20 +32,21 @@ class SignUpVC: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var logInSignUpButton: UIButton!
     @IBOutlet weak var stackView: UIStackView!
-    var bottomConstraintToStackView: NSLayoutConstraint {
-        return NSLayoutConstraint(item: submitButton, attribute: .top, relatedBy: .equal, toItem: stackView, attribute: .bottom, multiplier: 1.0, constant: 20)
-    }
+    @IBOutlet weak var signUpButtonTopConstraint: NSLayoutConstraint!
     var state: State = .signUp {
         didSet {
             updateViews()
         }
     }
     var isOnboarding = true
+    lazy var loginButtonTopConstraint: NSLayoutConstraint = {
+        NSLayoutConstraint(item: self.submitButton as Any, attribute: .top, relatedBy: .equal, toItem: self.stackView, attribute: .bottom, multiplier: 1.0, constant: 12)
+    }()
+    var signUpButtonTopConstraintPersister: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bottomConstraintToStackView.isActive = true
-        
+        signUpButtonTopConstraintPersister = signUpButtonTopConstraint
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,21 +89,37 @@ class SignUpVC: UIViewController {
         switch state {
         case .logIn:
             UIView.animate(withDuration: 0.25) {
+                self.nameTextField.keyboardType = .emailAddress
+                self.emailTextField.textContentType = .password
+                self.emailTextField.isSecureTextEntry = true
                 self.usernameStackView.isHidden = true
                 self.passwordStackView.isHidden = true
                 self.confirmPasswordStackView.isHidden = true
+                self.bySigningLabel.isHidden = true
+                self.termsAndPrivacyStackView.isHidden = true
+                self.signUpButtonTopConstraint.isActive = false
+                self.signUpButtonTopConstraintPersister?.isActive = false
+                self.loginButtonTopConstraint.isActive = true
+                
                 self.view.layoutIfNeeded()
             }
             self.nameLabel.text = "Email"
             self.emailLabel.text = "Password"
             self.submitButton.setTitle("Log In", for: .normal)
             logInSignUpButton.setTitle("Sign Up", for: .normal)
-            
+         
         case .signUp:
             UIView.animate(withDuration: 0.25) {
+                self.nameTextField.keyboardType = .default
+                self.emailTextField.textContentType = .emailAddress
+                self.emailTextField.isSecureTextEntry = false
                 self.usernameStackView.isHidden = false
                 self.passwordStackView.isHidden = false
                 self.confirmPasswordStackView.isHidden = false
+                self.bySigningLabel.isHidden = false
+                self.termsAndPrivacyStackView.isHidden = false
+                self.signUpButtonTopConstraintPersister?.isActive = true
+                self.loginButtonTopConstraint.isActive = false
                 self.view.layoutIfNeeded()
             }
             self.nameLabel.text = "Name"
