@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ProfileViewController: UIViewController {
 
@@ -19,10 +20,12 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var logOutButton: UIButton!
+    @IBOutlet weak var photoBackgroundView: UIView!
     @IBOutlet weak var profilePhoto: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        formatViews()
         updateViews()
         title = "Profile"
         let basicCell = UINib(nibName: "BasicTableViewCell", bundle: nil)
@@ -62,6 +65,12 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController {
     
+    func formatViews() {
+        photoBackgroundView.layer.cornerRadius = photoBackgroundView.frame.width / 2
+        photoBackgroundView.layer.borderColor = UIColor.black.cgColor
+        photoBackgroundView.layer.borderWidth = 1
+    }
+    
     func updateViews() {
         guard let loggedInUser = InternalUserController.shared.loggedInUser else { return }
         
@@ -77,10 +86,16 @@ extension ProfileViewController {
             profilePhoto.image = photo
             
         }
+        
+        let fetchRequest: NSFetchRequest<Photo> = NSFetchRequest(entityName: "Photo")
+//        fetchRequest.predicate = NSPredicate(format: "%K == %@", loggedInUser.uuid!)
+        let photo = try? fetchRequest.execute()
+        print("foo")
     }
     
     func clearViews() {
-        profilePhoto.image = UIImage(named:"ProfileTabBarButton_Unselected")
+        profilePhoto.image = UIImage(named:"User")
+        profilePhoto.contentMode = .center
         usernameLabel.text = ""
         nameLabel.text = ""
     }

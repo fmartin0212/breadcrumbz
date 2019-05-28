@@ -149,7 +149,6 @@ class SignUpVC: UIViewController {
                     self?.disableLoadingState(loadingView)
                     self?.presentStandardAlertController(withTitle: "Oops!", message: error.rawValue)
                 }
-                
             case .success(_):
                 DispatchQueue.main.async {
                     self?.disableLoadingState(loadingView)

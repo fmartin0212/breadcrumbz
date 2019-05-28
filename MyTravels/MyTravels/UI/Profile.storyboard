@@ -172,7 +172,11 @@
                         <viewLayoutGuide key="safeArea" id="Rax-G0-Bex"/>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="IqL-L8-iFw">
-                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="36p-95-SGM"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="36p-95-SGM">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="d3a-nj-MMW" id="Xqs-ga-X0v"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addPhotoButton" destination="bks-W7-zYm" id="lem-6w-GzY"/>
@@ -234,10 +238,10 @@
                                 <rect key="frame" x="0.0" y="116" width="375" height="551"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d7z-gK-u7x">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="foz-HB-5rt">
-                                                <rect key="frame" x="261" y="34" width="90" height="108"/>
+                                                <rect key="frame" x="261" y="24" width="90" height="108"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="Cfd-x3-TJ7">
                                                         <rect key="frame" x="0.0" y="0.0" width="90" height="48"/>
@@ -276,7 +280,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cfg-Kz-PPf">
-                                                <rect key="frame" x="24" y="111" width="213" height="42.5"/>
+                                                <rect key="frame" x="24" y="110" width="213" height="42.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WRd-B8-O0w">
                                                         <rect key="frame" x="0.0" y="0.0" width="213" height="25.5"/>
@@ -293,14 +297,14 @@
                                                 </subviews>
                                             </stackView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ucg-AP-HB8">
-                                                <rect key="frame" x="24" y="172" width="327" height="250"/>
+                                                <rect key="frame" x="24" y="171" width="327" height="200"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="250" id="SKf-lb-MXO"/>
+                                                    <constraint firstAttribute="height" constant="200" id="SKf-lb-MXO"/>
                                                 </constraints>
                                             </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9lW-jP-xZy" customClass="FMButton" customModule="MyTravels" customModuleProvider="target">
-                                                <rect key="frame" x="24" y="446" width="327" height="50"/>
+                                                <rect key="frame" x="24" y="438" width="327" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="7BL-m6-OmZ"/>
                                                 </constraints>
@@ -313,19 +317,32 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KLy-aw-xXg">
-                                                <rect key="frame" x="24" y="497" width="327" height="32"/>
+                                                <rect key="frame" x="24" y="489" width="327" height="32"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                 <state key="normal" title="Delete account">
                                                     <color key="titleColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                             </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0IY-cf-MYR">
-                                                <rect key="frame" x="18" y="24" width="75" height="75"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WxO-VP-jLz" userLabel="PhotoBackgroundVIew">
+                                                <rect key="frame" x="18" y="24" width="80" height="80"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="User" translatesAutoresizingMaskIntoConstraints="NO" id="0IY-cf-MYR">
+                                                        <rect key="frame" x="2.5" y="2.5" width="75" height="75"/>
+                                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="75" id="LPv-dE-Cfb"/>
+                                                            <constraint firstAttribute="width" secondItem="0IY-cf-MYR" secondAttribute="height" multiplier="1:1" id="gvO-1q-k20"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="75" id="LPv-dE-Cfb"/>
-                                                    <constraint firstAttribute="width" secondItem="0IY-cf-MYR" secondAttribute="height" multiplier="1:1" id="gvO-1q-k20"/>
+                                                    <constraint firstAttribute="width" secondItem="WxO-VP-jLz" secondAttribute="height" multiplier="1:1" id="8fW-z4-fnb"/>
+                                                    <constraint firstAttribute="height" constant="80" id="ULk-Sn-qa5"/>
+                                                    <constraint firstItem="0IY-cf-MYR" firstAttribute="centerX" secondItem="WxO-VP-jLz" secondAttribute="centerX" id="p3U-0a-1ah"/>
+                                                    <constraint firstItem="0IY-cf-MYR" firstAttribute="centerY" secondItem="WxO-VP-jLz" secondAttribute="centerY" id="zXu-EU-EXe"/>
                                                 </constraints>
-                                            </imageView>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -337,15 +354,15 @@
                                             <constraint firstItem="9lW-jP-xZy" firstAttribute="trailing" secondItem="Ucg-AP-HB8" secondAttribute="trailing" id="A1G-zb-3xe"/>
                                             <constraint firstItem="9lW-jP-xZy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Ucg-AP-HB8" secondAttribute="bottom" constant="24" id="Gfb-ck-jtL"/>
                                             <constraint firstItem="KLy-aw-xXg" firstAttribute="top" secondItem="9lW-jP-xZy" secondAttribute="bottom" constant="1" id="Lga-x3-LJD"/>
-                                            <constraint firstItem="0IY-cf-MYR" firstAttribute="top" secondItem="d7z-gK-u7x" secondAttribute="top" constant="24" id="MCI-CL-Vs0"/>
                                             <constraint firstItem="Ucg-AP-HB8" firstAttribute="top" secondItem="cfg-Kz-PPf" secondAttribute="bottom" constant="18.5" id="PHZ-Kg-j8L"/>
+                                            <constraint firstItem="foz-HB-5rt" firstAttribute="top" secondItem="WxO-VP-jLz" secondAttribute="top" id="RXj-PJ-eml"/>
                                             <constraint firstAttribute="trailing" secondItem="foz-HB-5rt" secondAttribute="trailing" constant="24" id="Re1-pO-nNp"/>
-                                            <constraint firstItem="cfg-Kz-PPf" firstAttribute="top" secondItem="0IY-cf-MYR" secondAttribute="bottom" constant="12" id="YWK-hm-IDS"/>
                                             <constraint firstItem="cfg-Kz-PPf" firstAttribute="leading" secondItem="d7z-gK-u7x" secondAttribute="leading" constant="24" id="c99-GM-Qfg"/>
+                                            <constraint firstItem="cfg-Kz-PPf" firstAttribute="top" secondItem="WxO-VP-jLz" secondAttribute="bottom" constant="6" id="in4-eJ-aOT"/>
                                             <constraint firstItem="KLy-aw-xXg" firstAttribute="trailing" secondItem="9lW-jP-xZy" secondAttribute="trailing" id="lZq-hS-4gp"/>
-                                            <constraint firstItem="foz-HB-5rt" firstAttribute="top" secondItem="0IY-cf-MYR" secondAttribute="top" constant="10" id="qVh-wn-rMX"/>
                                             <constraint firstAttribute="bottom" secondItem="KLy-aw-xXg" secondAttribute="bottom" constant="30" id="u53-m1-3ex"/>
-                                            <constraint firstItem="0IY-cf-MYR" firstAttribute="leading" secondItem="d7z-gK-u7x" secondAttribute="leading" constant="18" id="w9W-oN-wer"/>
+                                            <constraint firstItem="WxO-VP-jLz" firstAttribute="top" secondItem="d7z-gK-u7x" secondAttribute="top" constant="24" id="vT3-bN-3wt"/>
+                                            <constraint firstItem="WxO-VP-jLz" firstAttribute="leading" secondItem="d7z-gK-u7x" secondAttribute="leading" constant="18" id="xqx-Lh-bk3"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -372,6 +389,7 @@
                     <connections>
                         <outlet property="logOutButton" destination="9lW-jP-xZy" id="Jlp-xL-p73"/>
                         <outlet property="nameLabel" destination="WRd-B8-O0w" id="W8J-72-12W"/>
+                        <outlet property="photoBackgroundView" destination="WxO-VP-jLz" id="LFN-8M-Y5G"/>
                         <outlet property="profilePhoto" destination="0IY-cf-MYR" id="Icj-JZ-wM4"/>
                         <outlet property="tableView" destination="Ucg-AP-HB8" id="iut-cE-GNr"/>
                         <outlet property="tripsLoggedLabel" destination="GPX-yQ-OjS" id="jhB-17-x4T"/>
@@ -385,6 +403,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="User" width="22" height="24"/>
         <image name="uploadcloud" width="88" height="50"/>
     </resources>
 </document>

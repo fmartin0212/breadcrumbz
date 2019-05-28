@@ -242,23 +242,23 @@ final class PhotoController {
     func savePhoto(photo: UIImage,
                    for user: InternalUser,
                    completion: @escaping (Result<Bool, FireError>) -> Void) {
-        guard let imageAsData = photo.jpegData(compressionQuality: 0.1) else { completion(.failure(.generic)) ; return }
+        guard let imageAsData = photo.jpegData(compressionQuality: 0.1),
+            let loggedInUserUID = user.uuid
+            else { completion(.failure(.generic)) ; return }
         
         let photo = Photo(photo: imageAsData, place: nil, trip: nil)
-        
+        photo.uid = loggedInUserUID
         firebaseStorageService.save(photo) { [weak self] (result) in
             switch result {
-                
             case .failure(let error):
                 completion(.failure(error))
-                
             case .success(let path):
-                self?.firestoreService.update(object: user, fieldsAndCriteria: ["photoPath" : [path]], with: .update, completion: { (result) in
+                self?.firestoreService.update(object: user, fieldsAndCriteria: ["photoUID" : path], with: .update, completion: { (result) in
                     switch result {
                     case .failure(let error):
                         completion(.failure(error))
                     case .success(_):
-                        CoreDataManager.delete(object: photo)
+                        CoreDataManager.save()
                         completion(.success(true))
                     }
                 })

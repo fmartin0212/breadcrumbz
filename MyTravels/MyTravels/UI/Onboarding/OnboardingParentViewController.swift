@@ -35,8 +35,6 @@ class OnboardingParentViewController: UIViewController {
         nextButton.layer.cornerRadius = nextButton.frame.width / 2
         nextButton.clipsToBounds = true
         pageViewController?.onboardingDelegate = self
-        let signUpVC = pageViewController?.orderedViewControllers[2] as? SignUpVC
-        signUpVC
         NotificationCenter.default.addObserver(forName: Constants.viewWillAppearForVC, object: nil, queue: nil) { [weak self] (notification) in
             self?.handle(notification)
         }
@@ -50,10 +48,11 @@ class OnboardingParentViewController: UIViewController {
     func handle(_ notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
         currentViewController = userInfo["viewController"] as? UIViewController
-        if currentViewController is SignUpVC {
+        if let signUpVC = currentViewController as? SignUpVC {
             topRightSkipButton.isHidden = false
             nextButton.isHidden = true
             bottomLeftSkipButton.isHidden = true
+            signUpVC.scrollView.delegate = self
         } else {
             topRightSkipButton.isHidden = true
             nextButton.isHidden = false
@@ -78,5 +77,27 @@ class OnboardingParentViewController: UIViewController {
 extension OnboardingParentViewController: OnboardingPageViewControllerDelegate {
     func viewControllerAppeared(viewController: UIViewController) {
         self.currentViewController = viewController
+    }
+}
+
+extension OnboardingParentViewController: UIScrollViewDelegate {
+
+//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        if scrollView.contentOffset.y > 40 {
+//            topRightSkipButton.isHidden = true
+//        }
+//    }
+    
+//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+//        print(scrollView.contentOffset)
+//   
+//    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y <= 40 {
+            topRightSkipButton.isHidden = false
+        } else {
+            topRightSkipButton.isHidden = true
+        }
     }
 }

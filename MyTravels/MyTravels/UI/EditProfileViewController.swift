@@ -34,17 +34,22 @@ class EditProfileViewController: UIViewController, ScrollableViewController {
         super.viewDidLoad()
         allTextFields.forEach { $0.delegate = self }
         
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (notification) in
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] (notification) in
             guard let userInfo = notification.userInfo else { return }
             let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
-            self.adjustScrollView(keyboardFrame: keyboardFrame!)
+            self?.adjustScrollView(keyboardFrame: keyboardFrame!)
         }
         
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (notification) in
-            self.scrollView.contentInset = UIEdgeInsets.zero
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { [weak self] (notification) in
+            self?.scrollView.contentInset = UIEdgeInsets.zero
         }
         imagePicker.delegate = self
+        imagePicker.allowsEditing = true
         addPhotoButton.layer.cornerRadius = addPhotoButton.frame.width / 2
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        
     }
     
     @IBAction func addPhotoButtonTapped(_ sender: Any) {
@@ -70,7 +75,9 @@ extension EditProfileViewController : UIImagePickerControllerDelegate, UINavigat
             loadingView.loadingLabel.text = "Saving"
             
             guard let loggedInUser = InternalUserController.shared.loggedInUser
-                else { return }
+                else { self.disableLoadingState(loadingView) ; return }
+            
+            //            if loggedInUser.photoURL
             
             InternalUserController.shared.saveProfilePhoto(photo: profilePicture!, for: loggedInUser) { [weak self] (result) in
                 switch result {

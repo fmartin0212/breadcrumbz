@@ -82,10 +82,8 @@ class InternalUserController {
         
         firebaseAuthService.login(withEmail: email, and: password) { [weak self] (result) in
             switch result {
-                
             case .failure(let error):
                 completion(.failure(error))
-                
             case .success(let user):
                 self?.firestoreService.fetch(uuid: user.uid, field: nil, criteria: nil, queryType: nil) { (result: Result<[InternalUser], FireError>) in
                     switch result {
@@ -131,7 +129,6 @@ class InternalUserController {
                 case .failure(let error):
                     completion(.failure(error))
                 case .success(let image):
-                    
                     completion(.success(image))
                 }
             }

@@ -341,17 +341,17 @@ so you can charish the moments!</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="rSr-yD-uqO">
-                                                <rect key="frame" x="162.33333333333334" y="677.66666666666663" width="50.333333333333343" height="28"/>
+                                                <rect key="frame" x="160.33333333333334" y="677.66666666666663" width="54.333333333333343" height="29"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46w-ID-Q0G">
-                                                        <rect key="frame" x="0.0" y="0.0" width="11.333333333333334" height="28"/>
-                                                        <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="12"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="12.333333333333334" height="29"/>
+                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDS-a4-isN">
-                                                        <rect key="frame" x="18.333333333333314" y="0.0" width="32" height="28"/>
-                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="11"/>
+                                                        <rect key="frame" x="19.333333333333314" y="0.0" width="35" height="29"/>
+                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                                         <state key="normal" title="Log In"/>
                                                         <connections>
                                                             <action selector="logInSignUpButtonTapped:" destination="leN-ly-T71" eventType="touchUpInside" id="iZq-Lm-ldu"/>
@@ -596,19 +596,21 @@ so you can charish the moments!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share memories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BU5-d5-yGW">
-                                <rect key="frame" x="141.33333333333331" y="417" width="131.33333333333331" height="21"/>
+                                <rect key="frame" x="132" y="417" width="150" height="25.333333333333314"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="18"/>
                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Share your experiences with friends and family." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kHI-st-ytk">
-                                <rect key="frame" x="8" y="474.66666666666669" width="398" height="18.666666666666686"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kHI-st-ytk">
+                                <rect key="frame" x="8" y="479" width="398" height="45"/>
+                                <string key="text">Share your experiences with 
+friends and family.</string>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                 <color key="textColor" red="0.6077903509" green="0.6078781486" blue="0.60776275400000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6QK-Po-bgM">
-                                <rect key="frame" x="182" y="450" width="50" height="2"/>
+                                <rect key="frame" x="182" y="454.33333333333331" width="50" height="2"/>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="N8K-ki-KYm"/>
@@ -651,7 +653,7 @@ so you can charish the moments!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fKd-oG-Qt6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-231" y="-760"/>
+            <point key="canvasLocation" x="-231.8840579710145" y="-760.59782608695662"/>
         </scene>
     </scenes>
     <resources>

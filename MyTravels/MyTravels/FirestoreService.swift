@@ -149,31 +149,31 @@ public struct FirestoreService: FirestoreServiceProtocol {
                 completion(.success([object]))
                 return
             }
-        }
-        
-        guard let field = field,
-            let criteria = criteria,
-            let queryType = queryType
-            else { completion(.failure(.fetchingFromStore)) ; return }
-        
-        let query: Query
-        switch queryType {
-        case .fieldEqual:
-            query = T.collectionReference.whereField(field, isEqualTo: criteria)
-        case .fieldArrayContains:
-            query = T.collectionReference.whereField(field, arrayContains: criteria)
-        }
-        query.getDocuments { (snapshot, error) in
-            if let error = error {
-                print("Error fetching objects from Firestore: \(error.localizedDescription)")
-                completion(.failure(.fetchingFromStore))
-                return
+        } else {
+            guard let field = field,
+                let criteria = criteria,
+                let queryType = queryType
+                else { completion(.failure(.fetchingFromStore)) ; return }
+            
+            let query: Query
+            switch queryType {
+            case .fieldEqual:
+                query = T.collectionReference.whereField(field, isEqualTo: criteria)
+            case .fieldArrayContains:
+                query = T.collectionReference.whereField(field, arrayContains: criteria)
             }
-            guard let snapshot = snapshot,
-                snapshot.documents.count > 0
-                else { completion(.success([])) ; return }
-            let objects = snapshot.documents.compactMap { T(dictionary: $0.data(), uuid: $0.documentID) }
-            completion(.success(objects))
+            query.getDocuments { (snapshot, error) in
+                if let error = error {
+                    print("Error fetching objects from Firestore: \(error.localizedDescription)")
+                    completion(.failure(.fetchingFromStore))
+                    return
+                }
+                guard let snapshot = snapshot,
+                    snapshot.documents.count > 0
+                    else { completion(.success([])) ; return }
+                let objects = snapshot.documents.compactMap { T(dictionary: $0.data(), uuid: $0.documentID) }
+                completion(.success(objects))
+            }
         }
     }
 }
