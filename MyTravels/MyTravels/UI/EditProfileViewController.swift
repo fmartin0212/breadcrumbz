@@ -27,7 +27,7 @@ class EditProfileViewController: UIViewController, ScrollableViewController {
     @IBOutlet weak var confirmPasswordTextFIeld: FMTextField!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet var allTextFields: [FMTextField]!
-    
+    var profileImage: UIImage?
     let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
@@ -46,14 +46,43 @@ class EditProfileViewController: UIViewController, ScrollableViewController {
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         addPhotoButton.layer.cornerRadius = addPhotoButton.frame.width / 2
+        addPhotoButton.clipsToBounds = true
+        updateViews()
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+        guard let name = nameTextField.text,
+            !name.isEmpty,
+            let username = usernameTextField.text,
+            !username.isEmpty,
+            // FIXME: - Present alert controller
+            let loggedInUser = InternalUserController.shared.loggedInUser
+            else { return }
         
+        let updateFieldsAndCriteria = ["firstName": name, "username" : username]
+        let loadingView = self.enableLoadingState()
+        FirestoreService().update(object: loggedInUser, fieldsAndCriteria: updateFieldsAndCriteria, with: .update) { [weak self] (result) in
+            self?.disableLoadingState(loadingView)
+            self?.navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func addPhotoButtonTapped(_ sender: Any) {
         present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func updateViews() {
+        guard let loggedInUser = InternalUserController.shared.loggedInUser else { return }
+        nameTextField.text = loggedInUser.firstName
+        usernameTextField.text = loggedInUser.username
+        emailTextField.text = loggedInUser.email
+        guard let profileImage = profileImage else { return }
+        updateAndFormatImageView(with: profileImage)
+    }
+    
+    func updateAndFormatImageView(with image: UIImage) {
+        addPhotoButton.contentMode = .scaleAspectFit
+        addPhotoButton.setImage(image, for: .normal)
     }
 }
 
@@ -69,24 +98,32 @@ extension EditProfileViewController : UIImagePickerControllerDelegate, UINavigat
         addPhotoButton.setImage(profilePicture, for: .normal)
         addPhotoButton.clipsToBounds = true
         addPhotoButton.layer.cornerRadius = addPhotoButton.frame.width / 2
-        picker.dismiss(animated: true) {
+        picker.dismiss(animated: true) { [weak self] in
             // Present the loading view
-            let loadingView = self.presentLoadingView()
+            guard let loadingView = self?.enableLoadingState() else { return }
             loadingView.loadingLabel.text = "Saving"
             
             guard let loggedInUser = InternalUserController.shared.loggedInUser
-                else { self.disableLoadingState(loadingView) ; return }
+                else { self?.disableLoadingState(loadingView) ; return }
             
-            //            if loggedInUser.photoURL
-            
+            if let profileImage = self?.profileImage {
+                let fmImage = FMImage(image: profileImage)
+                FirebaseStorageService().delete(object: fmImage, completion: { (result) in
+                    switch result {
+                    case .success(_):
+                        return
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                })
+            }
             InternalUserController.shared.saveProfilePhoto(photo: profilePicture!, for: loggedInUser) { [weak self] (result) in
                 switch result {
                 case .failure(_):
                     self?.presentStandardAlertController(withTitle: "Something went wrong", message: FireError.generic.rawValue)
                 case .success(_):
                     DispatchQueue.main.async {
-                        NotificationCenter.default.post(Notification(name: Notification.Name("profilePictureUpdatedNotification")))
-                        loadingView.removeFromSuperview()
+                        self?.disableLoadingState(loadingView)
                         self?.dismiss(animated: true, completion: nil)
                     }
                 }

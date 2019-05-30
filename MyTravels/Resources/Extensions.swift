@@ -35,7 +35,8 @@ extension UIViewController {
         self.present(tripListNavigationController, animated: true, completion: nil)
     }
     
-    @discardableResult func presentLoadingView() -> LoadingView {
+    @discardableResult
+    fileprivate func presentLoadingView() -> LoadingView {
         
         // Initialize the loading view.
         let loadingView: LoadingView = UIView.fromNib()
@@ -54,14 +55,16 @@ extension UIViewController {
         return loadingView
     }
     
-    func toggleEnabledNavBarItems() {
+    fileprivate func toggleEnabledNavBarItems() {
         guard let navigationController = navigationController else { return }
         navigationController.navigationBar.isUserInteractionEnabled = !navigationController.navigationBar.isUserInteractionEnabled
+        print("nav bar toggled")
     }
     
-    func toggleEnabledTabBarItems() {
+    fileprivate func toggleEnabledTabBarItems() {
         guard let tabBarController = tabBarController else { return }
         tabBarController.tabBar.isUserInteractionEnabled = !tabBarController.tabBar.isUserInteractionEnabled
+        print("tab bar toggled")
     }
     
     @discardableResult func enableLoadingState() -> LoadingView {

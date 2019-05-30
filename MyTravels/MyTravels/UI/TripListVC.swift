@@ -202,6 +202,9 @@ extension TripListVC {
     }
     
     private func setupViews() {
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: "Poppins-Bold", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor(red: 248/255, green: 89/255, blue: 89/255, alpha: 1)]
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font : UIFont(name: "Poppins-Bold", size: 28)!, NSAttributedString.Key.foregroundColor : UIColor(red: 248/255, green: 89/255, blue: 89/255, alpha: 1)]
+
         if state == .shared {
             self.title = "Shared"
             

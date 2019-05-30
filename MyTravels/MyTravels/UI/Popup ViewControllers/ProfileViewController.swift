@@ -33,15 +33,6 @@ class ProfileViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
     }
-        
-    // MARK: - Actions
-//    
-//    @IBAction func profileButtonTapped(_ sender: Any) {
-//        let imagePickerController = UIImagePickerController()
-//        imagePickerController.allowsEditing = true
-//        imagePickerController.delegate = self
-//        present(imagePickerController, animated: true, completion: nil)
-//    }
     
     @IBAction func logOutButtonTapped(_ sender: Any) {
         let confirmationAlertController = UIAlertController(title: "Log out", message: "Are you sure you would like to log out?", preferredStyle: .alert)
@@ -79,18 +70,22 @@ extension ProfileViewController {
         tripsLoggedLabel.text = "\(TripController.shared.trips.count)"
         tripsSharedLabel.text = "\(loggedInUser.sharedTripIDs?.count ?? 0)"
         
-        if let photo = loggedInUser.photo {
-            profilePhoto.clipsToBounds = true
-            profilePhoto.layer.cornerRadius = profilePhoto.frame.width / 2
-            profilePhoto.contentMode = .scaleAspectFill
-            profilePhoto.image = photo
-            
-        }
-        
-        let fetchRequest: NSFetchRequest<Photo> = NSFetchRequest(entityName: "Photo")
-//        fetchRequest.predicate = NSPredicate(format: "%K == %@", loggedInUser.uuid!)
-        let photo = try? fetchRequest.execute()
-        print("foo")
+        guard let loggedInUserPhotoUID = loggedInUser.photoURL else { return }
+        PhotoController.shared.fetchPhoto(withPath: loggedInUserPhotoUID, completion: { [weak self] (result) in
+            switch result {
+            case .success(let photo):
+                DispatchQueue.main.async {
+                    self?.profilePhoto.clipsToBounds = true
+                    self?.profilePhoto.layer.cornerRadius = (self?.profilePhoto.frame.width)! / 2
+                    self?.profilePhoto.contentMode = .scaleAspectFill
+                    self?.profilePhoto.image = photo
+                    self?.profilePhoto.image = photo
+                    self?.photoBackgroundView.layer.borderWidth = 0
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        })
     }
     
     func clearViews() {
@@ -138,9 +133,17 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            let editProfileVC = UIStoryboard.profile.instantiateViewController(withIdentifier: "EditProfile")
+            guard let editProfileVC = UIStoryboard.profile.instantiateViewController(withIdentifier: "EditProfile") as? EditProfileViewController else { return }
+            if let image = profilePhoto.image {
+                editProfileVC.profileImage = image
+            }
             navigationController?.pushViewController(editProfileVC, animated: true)
-        // FIXME: - Need to add for terms of service & privacy policy
+        case 2:
+            let genericScrollingLabelVC = GenericScrollingLabelViewController(legalInfo: .termsOfService, nibName: "GenericScrollingLabelVC")
+            navigationController?.pushViewController(genericScrollingLabelVC, animated: true)
+        case 3:
+             let genericScrollingLabelVC = GenericScrollingLabelViewController(legalInfo: .privacyPolicy, nibName: "GenericScrollingLabelVC")
+            navigationController?.pushViewController(genericScrollingLabelVC, animated: true)
         default:
             return
         }

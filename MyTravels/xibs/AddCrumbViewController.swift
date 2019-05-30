@@ -222,7 +222,10 @@ extension AddCrumbViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
         if indexPath.row > 0 {
-            cell.addPhotoButton.setImage(UIImage(named: "uploadcloudonly"), for: .normal)
+            cell.addPhotoButton.setImage(UIImage(named: "imageDefault"), for: .normal)
+            cell.addPhotoButton.contentHorizontalAlignment = .center
+            cell.addPhotoButton.contentVerticalAlignment = .center
+            cell.addPhotoButton.imageView?.contentMode = .center
         }
         
         cell.delegate = self
@@ -232,16 +235,16 @@ extension AddCrumbViewController: UICollectionViewDataSource {
         return cell
     }
 }
-
+//312
 extension AddCrumbViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == 0 {
-            return CGSize(width: collectionView.frame.width, height: 200)
+            return CGSize(width: collectionView.frame.width, height: (collectionView.frame.width) * 0.70)
         } else {
             let width = collectionView.frame.width / 3
             let minSpacInterimSpacing: CGFloat = 8
-            return CGSize(width: width - minSpacInterimSpacing, height: width)
+            return CGSize(width: width - minSpacInterimSpacing, height: (collectionView.frame.width) * 0.30)
         }
     }
     
