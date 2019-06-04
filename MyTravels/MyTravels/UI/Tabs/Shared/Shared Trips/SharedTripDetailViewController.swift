@@ -215,7 +215,6 @@ extension SharedTripDetailViewController {
             let blockAction = UIAlertAction(title: "Block", style: .destructive, handler: { (_) in
                 
                 let loadingView = self.enableLoadingState()
-                loadingView.loadingLabel.text = "Blocking user"
                 
                 InternalUserController.shared.blockUserWith(creatorID: self.sharedTrip!.creatorID, completion: { (result) in
                     switch result {

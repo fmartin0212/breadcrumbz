@@ -140,8 +140,6 @@ class SignUpVC: UIViewController {
             else { return }
         
         let loadingView = enableLoadingState()
-        loadingView.loadingLabel.text = "Logging in"
-        
         InternalUserController.shared.login(withEmail: email, password: password) { [weak self] (result) in
             switch result {
             case .failure(let error):
@@ -180,9 +178,7 @@ class SignUpVC: UIViewController {
             else { return }
         
         if password == confirmPassword {
-            let loadingView = self.enableLoadingState()
-            loadingView.loadingLabel.text = "Creating account"
-            
+            let loadingView = self.enableLoadingState()            
             InternalUserController.shared.createNewUserWith(firstName: name, lastName: "", username: username, email: email, password: password) { (result) in
                 
                 switch result {

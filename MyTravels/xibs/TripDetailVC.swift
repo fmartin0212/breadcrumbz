@@ -173,7 +173,6 @@ extension TripDetailVC {
             
             guard let receiver = alertController.textFields?[0].text else { return }
             let loadingView = self?.enableLoadingState()
-            loadingView?.loadingLabel.text = "Sharing"
             TripController.shared.share(trip: self?.trip as! Trip, withReceiver: receiver, completion: { (success) in
                 DispatchQueue.main.async { [weak self] in
                     guard let loadingView = loadingView else { return }
@@ -202,9 +201,7 @@ extension TripDetailVC {
             
             let blockAction = UIAlertAction(title: "Block", style: .destructive, handler: { (_) in
                 guard let sharedTrip = self.trip as? SharedTrip else { return }
-                let loadingView = self.enableLoadingState()
-                loadingView.loadingLabel.text = "Blocking user"
-                
+                let loadingView = self.enableLoadingState()                
                 InternalUserController.shared.blockUserWith(creatorID: sharedTrip.creatorID, completion: { (result) in
                     switch result {
                     case .failure(let error):

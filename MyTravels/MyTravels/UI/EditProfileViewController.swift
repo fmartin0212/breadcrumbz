@@ -100,9 +100,7 @@ extension EditProfileViewController : UIImagePickerControllerDelegate, UINavigat
         addPhotoButton.layer.cornerRadius = addPhotoButton.frame.width / 2
         picker.dismiss(animated: true) { [weak self] in
             // Present the loading view
-            guard let loadingView = self?.enableLoadingState() else { return }
-            loadingView.loadingLabel.text = "Saving"
-            
+            guard let loadingView = self?.enableLoadingState() else { return }            
             guard let loggedInUser = InternalUserController.shared.loggedInUser
                 else { self?.disableLoadingState(loadingView) ; return }
             
