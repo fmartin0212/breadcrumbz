@@ -29,12 +29,12 @@ extension FirestoreSyncable {
     }
 }
 
-protocol FirestoreRetrievable: FirestoreSyncable {
-    init?(dictionary: [String : Any], uuid: String)
-}
-
 protocol FirestoreSavable: FirestoreSyncable {
     var dictionary: [String : Any] { get }
+}
+
+protocol FirestoreRetrievable: FirestoreSyncable {
+    init?(dictionary: [String : Any], uuid: String)
 }
 
 enum FirestoreQueryType {
@@ -47,6 +47,7 @@ enum FirestoreUpdateType {
     case arrayAddition
     case arrayDeletion
 }
+
 public struct FirestoreService: FirestoreServiceProtocol {
     
     func save<T: FirestoreSavable>(object: T,

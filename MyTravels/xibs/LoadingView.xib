@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -35,6 +35,44 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xnz-sc-dWt">
+                    <rect key="frame" x="87" y="188" width="240" height="128"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="IIT-NS-EO4">
+                            <rect key="frame" x="30" y="46" width="192" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u0s-q3-pen">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <color key="backgroundColor" red="0.97254901959999995" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="F2E-ch-Eb0"/>
+                                        <constraint firstAttribute="width" constant="50" id="S99-IF-PVH"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cxS-PC-g3w">
+                                    <rect key="frame" x="71" y="0.0" width="50" height="50"/>
+                                    <color key="backgroundColor" red="0.97254901959999995" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qU2-Tb-frZ">
+                                    <rect key="frame" x="142" y="0.0" width="50" height="50"/>
+                                    <color key="backgroundColor" red="0.97254901959999995" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="cxS-PC-g3w" firstAttribute="width" secondItem="u0s-q3-pen" secondAttribute="width" id="6AG-ZA-X79"/>
+                                <constraint firstItem="cxS-PC-g3w" firstAttribute="height" secondItem="u0s-q3-pen" secondAttribute="height" id="KiD-0T-tX3"/>
+                                <constraint firstItem="qU2-Tb-frZ" firstAttribute="height" secondItem="u0s-q3-pen" secondAttribute="height" id="lpz-RV-uH0"/>
+                                <constraint firstItem="qU2-Tb-frZ" firstAttribute="width" secondItem="u0s-q3-pen" secondAttribute="width" id="zcy-dc-D0o"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="128" id="Kj4-qv-JqQ"/>
+                        <constraint firstAttribute="width" constant="240" id="Zc9-WV-4Oo"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -43,6 +81,8 @@
                 <constraint firstItem="wCm-UP-bEx" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="2ws-EA-BtQ"/>
                 <constraint firstItem="DDv-fb-p21" firstAttribute="centerX" secondItem="wCm-UP-bEx" secondAttribute="centerX" id="5Xb-jr-qE3"/>
                 <constraint firstItem="wCm-UP-bEx" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.17" id="DWq-Uk-GM1"/>
+                <constraint firstItem="Xnz-sc-dWt" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="PSs-kG-iTg"/>
+                <constraint firstItem="Xnz-sc-dWt" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="144" id="R2A-uB-PFe"/>
                 <constraint firstItem="620-93-eix" firstAttribute="top" secondItem="DDv-fb-p21" secondAttribute="bottom" constant="7.0000000000000568" id="YiP-6c-AT1"/>
                 <constraint firstItem="DDv-fb-p21" firstAttribute="trailing" secondItem="wCm-UP-bEx" secondAttribute="trailing" id="jIP-j7-cnG"/>
                 <constraint firstItem="DDv-fb-p21" firstAttribute="centerY" secondItem="wCm-UP-bEx" secondAttribute="centerY" id="wNm-uf-J51"/>
@@ -51,8 +91,11 @@
             <connections>
                 <outlet property="blackView" destination="wCm-UP-bEx" id="BY8-Zg-qx2"/>
                 <outlet property="loadingLabel" destination="DDv-fb-p21" id="4et-Pi-RAt"/>
+                <outlet property="view2" destination="cxS-PC-g3w" id="06F-OP-bW3"/>
+                <outlet property="view3" destination="qU2-Tb-frZ" id="rrk-S3-YrO"/>
+                <outlet property="viewOne" destination="u0s-q3-pen" id="8g0-Tc-sDw"/>
             </connections>
-            <point key="canvasLocation" x="4" y="-99"/>
+            <point key="canvasLocation" x="2.8985507246376816" y="-99.107142857142847"/>
         </view>
     </objects>
 </document>

@@ -47,9 +47,6 @@ class Constants {
     static let privacyPolicy =
     
     """
-Privacy Policy
-==============
-
 Effective date: May 28, 2019
 
 Breadcrumbz ("us", "we", or "our") operates the Breadcrumbz mobile application

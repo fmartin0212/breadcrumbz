@@ -99,7 +99,7 @@ extension ProfileViewController {
 extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,16 +109,16 @@ extension ProfileViewController: UITableViewDataSource {
         case 0:
             cell.basicLabel.text = "Edit Profile"
             cell.accessoryType = .disclosureIndicator
-        case 1:
-            cell.basicLabel.text = "Location"
-            cell.basicSwitch.isHidden = false
+//        case 1:
+//            cell.basicLabel.text = "Location"
+//            cell.basicSwitch.isHidden = false
 //        case 2:
 //            cell.basicLabel.text = "Push Notifications"
 //            cell.basicSwitch.isHidden = false
-        case 2:
+        case 1:
             cell.basicLabel.text = "Terms of Service"
             cell.accessoryType = .disclosureIndicator
-        case 3:
+        case 2:
             cell.basicLabel.text = "Privacy Policy"
             cell.accessoryType = .disclosureIndicator
         default:
@@ -138,10 +138,10 @@ extension ProfileViewController: UITableViewDelegate {
                 editProfileVC.profileImage = image
             }
             navigationController?.pushViewController(editProfileVC, animated: true)
-        case 2:
+        case 1:
             let genericScrollingLabelVC = GenericScrollingLabelViewController(legalInfo: .termsOfService, nibName: "GenericScrollingLabelVC")
             navigationController?.pushViewController(genericScrollingLabelVC, animated: true)
-        case 3:
+        case 2:
              let genericScrollingLabelVC = GenericScrollingLabelViewController(legalInfo: .privacyPolicy, nibName: "GenericScrollingLabelVC")
             navigationController?.pushViewController(genericScrollingLabelVC, animated: true)
         default:

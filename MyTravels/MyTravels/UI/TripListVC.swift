@@ -13,7 +13,6 @@ final class TripListVC: UIViewController {
 
     // MARK: - Constants & Variables
     
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     let tripObjectManager = TripObjectManager()
     lazy var activityIndicator = UIActivityIndicatorView()

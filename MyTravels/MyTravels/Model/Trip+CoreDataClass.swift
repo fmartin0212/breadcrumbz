@@ -27,7 +27,6 @@ public class Trip: NSManagedObject, FirebaseDBSavable, FirestoreSavable, TripObj
             "creatorName" : InternalUserController.shared.loggedInUser!.firstName,
             "creatorUsername" : InternalUserController.shared.loggedInUser!.username,
             "creatorID" : InternalUserController.shared.loggedInUser!.uuid ?? ""
-//            "places" : self.placesDictionary
         ]
     }
     
