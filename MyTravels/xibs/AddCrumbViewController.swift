@@ -142,6 +142,9 @@ extension AddCrumbViewController {
             NSLayoutConstraint(item: checkmarkView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 16),
             NSLayoutConstraint(item: checkmarkView, attribute: .width, relatedBy: .equal, toItem: checkmarkView, attribute: .height, multiplier: 1.0, constant: 0)
             ])
+        UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+            self.checkmarkView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        }, completion: nil)
     }
 }
 
@@ -235,7 +238,7 @@ extension AddCrumbViewController: UICollectionViewDataSource {
         return cell
     }
 }
-//312
+
 extension AddCrumbViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

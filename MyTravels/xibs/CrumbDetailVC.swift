@@ -13,11 +13,9 @@ class CrumbDetailVC: UIViewController {
     
     // MARK: - Properties
     
-    var crumb: CrumbObject?
+    var crumb: CrumbObject
     
     var photos: [UIImage] = []
-    var cellIndex: Int = 0
-    var willDisplayCellIndex = 0
     
     @IBOutlet weak var imageCollectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
@@ -53,7 +51,6 @@ class CrumbDetailVC: UIViewController {
     }
     
     func updateViews() {
-        guard let crumb = crumb else { return }
         fetchPhotos(for: crumb)
         name.text = crumb.name
         address.text = crumb.address
@@ -110,6 +107,7 @@ extension CrumbDetailVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath)
         guard photos.count > 0 else { return UICollectionViewCell() }
+        pageControl.currentPage = indexPath.row
         let photo = photos[indexPath.row]
         let photoImageView = UIImageView(image: photo)
         photoImageView.contentMode = .scaleAspectFill
@@ -130,28 +128,5 @@ extension CrumbDetailVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
-    }
-}
-
-extension CrumbDetailVC: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if willDisplayCellIndex == cellIndex {
-            cellIndex = indexPath.row
-            return
-        }
-      
-        var newIndex = cellIndex
-        print(cellIndex)
-        cellIndex < indexPath.row ? (newIndex -= 1) : (newIndex += 1)
-        print(newIndex)
-        pageControl.currentPage = newIndex
-        cellIndex = newIndex
-        print("willEndDisplay: \(indexPath.row)")
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        willDisplayCellIndex = indexPath.row
-        print("willDisplay: \(indexPath.row)")
     }
 }

@@ -62,7 +62,7 @@ class OnboardingParentViewController: UIViewController {
     
     @IBAction func skipButtonTapped(_ sender: Any) {
         UserDefaults.standard.setValue(true, forKey: "userSkippedSignUp")
-        presentTripListVC()
+        Coordinator().presentMainTabBar()
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {

@@ -15,7 +15,6 @@ class SharedTripsListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     private let refreshControl = UIRefreshControl()
     private var profileButton: UIButton?
-    lazy var noSharedTripsView: NoSharedTripsView = UIView.fromNib()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +38,7 @@ class SharedTripsListViewController: UIViewController {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
         
-        checkForNoSharedTrips()
+//        checkForNoSharedTrips()
     }
     
     // MARK: - Functions
@@ -63,7 +62,7 @@ class SharedTripsListViewController: UIViewController {
     @objc func refreshTableView() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
-            self.checkForNoSharedTrips()
+//            self.checkForNoSharedTrips()
         }
     }
     
@@ -131,17 +130,17 @@ extension SharedTripsListViewController : UITableViewDelegate {
 
 extension SharedTripsListViewController {
     
-    func checkForNoSharedTrips() {
-        if SharedTripsController.shared.sharedTrips.count == 0 {
-            view.addSubview(noSharedTripsView)
-            noSharedTripsView.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint(item: noSharedTripsView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
-            NSLayoutConstraint(item: noSharedTripsView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
-            NSLayoutConstraint(item: noSharedTripsView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
-            NSLayoutConstraint(item: noSharedTripsView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
-        } else {
-            noSharedTripsView.removeFromSuperview()
-        }
-    }
+//    func checkForNoSharedTrips() {
+//        if SharedTripsController.shared.sharedTrips.count == 0 {
+//            view.addSubview(noSharedTripsView)
+//            noSharedTripsView.translatesAutoresizingMaskIntoConstraints = false
+//
+//            NSLayoutConstraint(item: noSharedTripsView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+//            NSLayoutConstraint(item: noSharedTripsView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
+//            NSLayoutConstraint(item: noSharedTripsView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
+//            NSLayoutConstraint(item: noSharedTripsView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+//        } else {
+//            noSharedTripsView.removeFromSuperview()
+//        }
+//    }
 }

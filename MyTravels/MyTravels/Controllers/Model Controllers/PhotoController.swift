@@ -128,7 +128,7 @@ final class PhotoController {
             case .failure(let error):
                 completion(.failure(error))
             case .success(let path):
-                self?.firestoreService.update(object: trip, fieldsAndCriteria: ["photoPath" : path], with: .update, completion: { (result) in
+                self?.firestoreService.update(object: trip, fieldsAndCriteria: ["photoUID" : path], with: .update, completion: { (result) in
                     switch result {
                     case .failure(let error):
                         completion(.failure(error))

@@ -152,6 +152,8 @@ extension TripsListViewController: NSFetchedResultsControllerDelegate {
         case .update:
             guard let indexPath = indexPath else { return }
             tableView.reloadRows(at: [indexPath], with: .automatic)
+        @unknown default:
+            return
         }
     }
 }

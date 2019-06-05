@@ -37,7 +37,7 @@ class EmptyTripStateView: UIView {
     private func updateViews() {
         if state == .shared {
             tripImageView.image = UIImage(named: "airplane")
-            topLabel.text = "No shared trips!"
+            topLabel.text = "You're not following any trips!"
             bottomLabel.text = "When someone shares a trip with you, you'll see it here."
             getStartedButton.isHidden = true
         }

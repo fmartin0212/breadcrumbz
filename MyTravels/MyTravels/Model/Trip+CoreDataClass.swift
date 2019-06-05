@@ -29,15 +29,9 @@ public class Trip: NSManagedObject, FirebaseDBSavable, FirestoreSavable, TripObj
             "creatorID" : InternalUserController.shared.loggedInUser!.uuid ?? ""
         ]
     }
-    
-//    var placesDictionary: [String : [String : Any]] {
-//        var dictionary = [String : [String : Any]]()
-//        guard let places = self.places?.allObjects as? [Place] else { return dictionary }
-//        places.forEach {
-//            dictionary[$0.name] = $0.dictionary
-//        }
-//        return dictionary
-//    }
+    var crumbCount: Int {
+        return self.places?.count ?? 0
+    }
     
     convenience init(name: String, location: String, tripDescription: String?, startDate: Date, endDate: Date, context: NSManagedObjectContext = CoreDataStack.context) {
         

@@ -28,6 +28,9 @@ class SharedTrip: FirebaseDBRetrievable, FirestoreRetrievable, TripObject {
     var places: [SharedPlace] = []
     var isAcceptedTrip: Bool = true
     var placeIDs: [String] = []
+    var crumbCount: Int {
+        return self.placeIDs.count
+    }
     
     
     required init?(dictionary: [String : Any], uuid: String) {
@@ -52,13 +55,12 @@ class SharedTrip: FirebaseDBRetrievable, FirestoreRetrievable, TripObject {
         self.creatorID = creatorID
         self.uuid = uuid
         
-        if let photoUID = dictionary["photoUID"] as? String {
-            self.photoUID = photoUID
-        }
+        photoUID = dictionary["photoUID"] as? String
         
-        if let placeIDs = dictionary["placeIDs"] as? [String] {
+        if let placeIDs = dictionary["crumbUIDs"] as? [String] {
             self.placeIDs = placeIDs
         }
+    
     }
     
     init?(snapshot: DataSnapshot) {

@@ -38,6 +38,7 @@ final class TripListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.presentEmptyTripStateView()
         setupViews()
         let nib = UINib(nibName: "TripCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TripCell")
@@ -55,15 +56,15 @@ final class TripListVC: UIViewController {
                 }
             case .failure(let error):
                 DispatchQueue.main.async { [weak self] in
-                    self?.presentStandardAlertController(withTitle: "Uh Oh", message: error.localizedDescription)
+                print("error retrieving shared trips")
                 }
             }
         }
-//
-//        for trip in TripController.shared.trips {
-//            trip.uid = nil
-//            CoreDataManager.save()
-//        }
+
+        for trip in TripController.shared.trips {
+            trip.uid = nil
+            CoreDataManager.save()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,6 +101,9 @@ extension TripListVC: UITableViewDataSource {
         
         let trip = trips[indexPath.row]
         cell.trip = trip
+        
+        cell.crumbCountLabel.text = "\(trip.crumbCount)"
+        cell.crumbsLabel.text = trip.crumbCount == 1 ? "Crumb" : "Crumbs"
         
         tripObjectManager.fetchPhoto(for: trip) { [weak cell] (result) in
             switch result {

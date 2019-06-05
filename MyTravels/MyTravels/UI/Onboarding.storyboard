@@ -118,7 +118,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWt-JE-Px0">
-                                <rect key="frame" x="126.66666666666667" y="417" width="160.66666666666663" height="21"/>
+                                <rect key="frame" x="116.33333333333333" y="417" width="181.33333333333337" height="25.333333333333314"/>
                                 <string key="text">Log travel moments
 
 </string>
@@ -127,7 +127,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfa-tj-xig">
-                                <rect key="frame" x="8" y="474.66666666666669" width="398" height="37.333333333333314"/>
+                                <rect key="frame" x="8" y="479" width="398" height="45"/>
                                 <string key="text">Log the best places you traveled
 so you can charish the moments!</string>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
@@ -135,7 +135,7 @@ so you can charish the moments!</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PAe-nT-BRC">
-                                <rect key="frame" x="182" y="450" width="50" height="2"/>
+                                <rect key="frame" x="182" y="454.33333333333331" width="50" height="2"/>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="2Sr-tA-Wd8"/>
@@ -341,7 +341,7 @@ so you can charish the moments!</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="rSr-yD-uqO">
-                                                <rect key="frame" x="160.33333333333334" y="677.66666666666663" width="54.333333333333343" height="29"/>
+                                                <rect key="frame" x="158" y="677.66666666666663" width="59.333333333333343" height="29"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46w-ID-Q0G">
                                                         <rect key="frame" x="0.0" y="0.0" width="12.333333333333334" height="29"/>
@@ -350,9 +350,9 @@ so you can charish the moments!</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDS-a4-isN">
-                                                        <rect key="frame" x="19.333333333333314" y="0.0" width="35" height="29"/>
+                                                        <rect key="frame" x="19.333333333333343" y="0.0" width="40" height="29"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
-                                                        <state key="normal" title="Log In"/>
+                                                        <state key="normal" title="Sign In"/>
                                                         <connections>
                                                             <action selector="logInSignUpButtonTapped:" destination="leN-ly-T71" eventType="touchUpInside" id="iZq-Lm-ldu"/>
                                                         </connections>
@@ -419,6 +419,7 @@ so you can charish the moments!</string>
                         <outlet property="passwordTextField" destination="Abq-Ot-VfP" id="0IO-gV-cyI"/>
                         <outlet property="scrollView" destination="va5-UY-vc5" id="pHs-pZ-CPZ"/>
                         <outlet property="signUpButtonTopConstraint" destination="N4Q-ae-q5B" id="tVk-YD-i0S"/>
+                        <outlet property="signUpLabel" destination="GZK-VG-tRf" id="VAu-U8-kgJ"/>
                         <outlet property="stackView" destination="ysT-x5-CG9" id="x69-S5-PEa"/>
                         <outlet property="submitButton" destination="5PN-Yt-YKR" id="w5P-QY-P1F"/>
                         <outlet property="termsAndPrivacyStackView" destination="hjz-J6-mNe" id="Sgq-5P-YOe"/>

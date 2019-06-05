@@ -37,6 +37,7 @@ class TripTableViewCell: UITableViewCell {
     @IBOutlet weak var crumbBackgroundView: UIView!
     @IBOutlet weak var crumbCountLabel: UILabel!
     @IBOutlet weak var viewLineSeparator: UIView!
+    @IBOutlet weak var crumbsLabel: UILabel!
     
     }
 

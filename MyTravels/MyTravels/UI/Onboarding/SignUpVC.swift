@@ -10,6 +10,7 @@ import UIKit
 
 class SignUpVC: UIViewController {
     
+    @IBOutlet weak var signUpLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bySigningLabel: UILabel!
     @IBOutlet weak var termsAndPrivacyStackView: UIStackView!
@@ -105,11 +106,14 @@ class SignUpVC: UIViewController {
             }
             self.nameLabel.text = "Email"
             self.emailLabel.text = "Password"
-            self.submitButton.setTitle("Log In", for: .normal)
+            self.submitButton.setTitle("Sign In", for: .normal)
             logInSignUpButton.setTitle("Sign Up", for: .normal)
+            signUpLabel.text = "Sign in"
          
         case .signUp:
             UIView.animate(withDuration: 0.25) {
+                self.nameTextField.text = nil
+                self.emailTextField.text = nil
                 self.nameTextField.keyboardType = .default
                 self.emailTextField.textContentType = .emailAddress
                 self.emailTextField.isSecureTextEntry = false
@@ -125,7 +129,8 @@ class SignUpVC: UIViewController {
             self.nameLabel.text = "Name"
             self.emailLabel.text = "Email"
             self.submitButton.setTitle("Get Started", for: .normal)
-            logInSignUpButton.setTitle("Log In", for: .normal)
+            signUpLabel.text = "Sign Up"
+            logInSignUpButton.setTitle("Sign In", for: .normal)
         default:
             return
         }
@@ -154,10 +159,7 @@ class SignUpVC: UIViewController {
                         NotificationCenter.default.post(name: Constants.userLoggedInNotif, object: nil)
                         self?.dismiss(animated: true, completion: nil)
                     } else {
-                        let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController
-                        let tripListVC = ((tabBarController?.customizableViewControllers?.first! as! UINavigationController).viewControllers.first!) as! TripsListViewController
-                        //                        tripListVC.fromSignUpVC = true
-                        self?.present(tabBarController!, animated: true, completion: nil)
+                        Coordinator().presentMainTabBar()
                     }
                 }
             }

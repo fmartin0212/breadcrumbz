@@ -41,6 +41,7 @@
 		B73880002285097A00D875AA /* AddPhotoPathToCrumbOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7387FFF2285097A00D875AA /* AddPhotoPathToCrumbOp.swift */; };
 		B73880022285192A00D875AA /* AddCrumbUIDsToTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73880012285192A00D875AA /* AddCrumbUIDsToTrip.swift */; };
 		B739261320362E5F0050B580 /* SharedTripsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B739261220362E5F0050B580 /* SharedTripsController.swift */; };
+		B7504D3222A87C810002D11E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7504D3122A87C800002D11E /* Coordinator.swift */; };
 		B75E335C20D3150500839678 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E335B20D3150500839678 /* SignUpViewController.swift */; };
 		B75E335E20D316DD00839678 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E335D20D316DD00839678 /* TextFieldTableViewCell.swift */; };
 		B76107182212331D001F79B6 /* Poppins-ExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B76107172212331A001F79B6 /* Poppins-ExtraLightItalic.otf */; };
@@ -67,8 +68,6 @@
 		B7AC408A221B6C0100645BC2 /* CrumbTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AC4089221B6C0100645BC2 /* CrumbTableViewCell.swift */; };
 		B7B0C36E203724F30031A92A /* SharedTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B0C36D203724F30031A92A /* SharedTrip.swift */; };
 		B7B0C3702037446E0031A92A /* SharedPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B0C36F2037446E0031A92A /* SharedPlace.swift */; };
-		B7B1A93C21CD319300544056 /* NoSharedTripsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7B1A93B21CD319300544056 /* NoSharedTripsView.xib */; };
-		B7B1A93E21CD334700544056 /* NoSharedTripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B1A93D21CD334700544056 /* NoSharedTripsView.swift */; };
 		B7BA6F5521F82424004A3C70 /* TripDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7BA6F5421F82424004A3C70 /* TripDetailCell.xib */; };
 		B7BA6FCC22009408004A3C70 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7BA6FCB22009408004A3C70 /* Profile.storyboard */; };
 		B7BDA845202A29F50080B81B /* EditPlaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */; };
@@ -179,6 +178,7 @@
 		B7387FFF2285097A00D875AA /* AddPhotoPathToCrumbOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoPathToCrumbOp.swift; sourceTree = "<group>"; };
 		B73880012285192A00D875AA /* AddCrumbUIDsToTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCrumbUIDsToTrip.swift; sourceTree = "<group>"; };
 		B739261220362E5F0050B580 /* SharedTripsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripsController.swift; sourceTree = "<group>"; };
+		B7504D3122A87C800002D11E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Coordinator.swift; path = "/Users/frankmartin/Desktop/iOS/Personal Projects/breadcrumbz/MyTravels/MyTravels/Coordinator.swift"; sourceTree = "<absolute>"; };
 		B75E335B20D3150500839678 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B75E335D20D316DD00839678 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		B76107172212331A001F79B6 /* Poppins-ExtraLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLightItalic.otf"; sourceTree = "<group>"; };
@@ -204,8 +204,6 @@
 		B7AC4089221B6C0100645BC2 /* CrumbTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrumbTableViewCell.swift; sourceTree = "<group>"; };
 		B7B0C36D203724F30031A92A /* SharedTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTrip.swift; sourceTree = "<group>"; };
 		B7B0C36F2037446E0031A92A /* SharedPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPlace.swift; sourceTree = "<group>"; };
-		B7B1A93B21CD319300544056 /* NoSharedTripsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoSharedTripsView.xib; sourceTree = "<group>"; };
-		B7B1A93D21CD334700544056 /* NoSharedTripsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSharedTripsView.swift; sourceTree = "<group>"; };
 		B7BA6F5421F82424004A3C70 /* TripDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripDetailCell.xib; sourceTree = "<group>"; };
 		B7BA6FCB22009408004A3C70 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlaceTableViewController.swift; sourceTree = "<group>"; };
@@ -428,6 +426,7 @@
 			children = (
 				B7F898EF229D9A030012121A /* FMImage.swift */,
 				B7F898F1229DC3FD0012121A /* GenericScrollingLabelVC.xib */,
+				B7504D3122A87C800002D11E /* Coordinator.swift */,
 				B7F898F3229DC6C70012121A /* GenericScrollingLabelViewController.swift */,
 				B737CD792291DA750007FF80 /* FMCloseButton.swift */,
 				B7336E882263E9E000143812 /* CacheManager.swift */,
@@ -544,8 +543,6 @@
 				B7C0B599220C75BA009FAAEB /* AddTrip.xib */,
 				B7C83FC421C1FA3B00A9F86C /* LoadingView.swift */,
 				B7C83FC021C1F88700A9F86C /* LoadingView.xib */,
-				B7B1A93D21CD334700544056 /* NoSharedTripsView.swift */,
-				B7B1A93B21CD319300544056 /* NoSharedTripsView.xib */,
 				B7AC4085221B4DC300645BC2 /* CrumbTableViewCell.xib */,
 				B7AC4089221B6C0100645BC2 /* CrumbTableViewCell.swift */,
 			);
@@ -737,7 +734,6 @@
 				B7C0AA082210F9450030A5B1 /* Poppins-SemiBold.otf in Resources */,
 				B77E4F7320C835EF007EB266 /* Assets.xcassets in Resources */,
 				B7C0B59A220C75BB009FAAEB /* AddTrip.xib in Resources */,
-				B7B1A93C21CD319300544056 /* NoSharedTripsView.xib in Resources */,
 				B761071A22123634001F79B6 /* Poppins-ExtraLight.otf in Resources */,
 				B7C10CBA2020D19500818430 /* Main.storyboard in Resources */,
 				B7C83FC121C1F88700A9F86C /* LoadingView.xib in Resources */,
@@ -833,7 +829,6 @@
 				B73804FB2224EA3700CD9E59 /* AddCrumbViewController.swift in Sources */,
 				B7FC2DA222722B520086CC3B /* SaveCoreDataOperation.swift in Sources */,
 				B72E239E228896F1002CA1EC /* AddFollowerUIDToTrip.swift in Sources */,
-				B7B1A93E21CD334700544056 /* NoSharedTripsView.swift in Sources */,
 				B7F88E32223DB3DB00BD16DC /* CrumbDetailVC.swift in Sources */,
 				B7FC2DAC22722B7B0086CC3B /* TaskCompleteOp.swift in Sources */,
 				B737CD7F229217370007FF80 /* UpdateTripOp.swift in Sources */,
@@ -900,6 +895,7 @@
 				B737CD74228C85870007FF80 /* TripObjectManager.swift in Sources */,
 				B7336E8522631DE000143812 /* FirebaseAuthService.swift in Sources */,
 				B76B2F722245D50F00E688F4 /* EmptyTripStateView.swift in Sources */,
+				B7504D3222A87C810002D11E /* Coordinator.swift in Sources */,
 				B762265521EFC9510045F260 /* FirebaseSyncable.swift in Sources */,
 				B7DA1B71202E140C0007497A /* Place+CoreDataClass.swift in Sources */,
 				B7DA1B72202E140C0007497A /* Place+CoreDataProperties.swift in Sources */,

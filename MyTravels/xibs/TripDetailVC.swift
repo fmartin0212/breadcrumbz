@@ -147,7 +147,7 @@ extension TripDetailVC {
         tripLocationLabel.text = trip.location
         tripStartDateLabel.text = "\((trip.startDate as Date).short()) - "
         tripEndDateLabel.text = (trip.endDate as Date).short()
-        tripDescription.text = trip.tripDescription
+        tripDescription.text = trip.tripDescription == "" ? "No trip description." : trip.tripDescription
     }
     
     private func formatViews() {
@@ -160,7 +160,7 @@ extension TripDetailVC {
             addCrumbButton.layer.cornerRadius = addCrumbButton.frame.width / 2
             addCrumbButton.layer.borderColor = #colorLiteral(red: 0.9725490196, green: 0.3490196078, blue: 0.3490196078, alpha: 1)
             addCrumbButton.layer.borderWidth = 1.5
-            navigationItem.rightBarButtonItem = editBarButtonItem
+//            navigationItem.rightBarButtonItem = editBarButtonItem
         }
     }
     

@@ -213,14 +213,8 @@
                                         <outletCollection property="gestureRecognizers" destination="LUe-Wh-eSe" appends="YES" id="SRh-1U-G7v"/>
                                     </connections>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JtY-KO-crv">
-                                    <rect key="frame" x="152" y="502" width="26" height="20.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bNL-nn-Z9b" userLabel="endDateView">
-                                    <rect key="frame" x="186" y="452" width="120" height="120"/>
+                                    <rect key="frame" x="190" y="452" width="120" height="120"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imP-Dy-bba">
                                             <rect key="frame" x="12" y="12" width="13.5" height="18.5"/>
@@ -280,13 +274,19 @@
                                         <action selector="removeButtonTapped:" destination="-1" eventType="touchUpInside" id="gsf-qp-CEr"/>
                                     </connections>
                                 </button>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="datesArrow" translatesAutoresizingMaskIntoConstraints="NO" id="WVh-GY-Azl">
+                                    <rect key="frame" x="148" y="502.5" width="38" height="15"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="38" id="T8c-GR-vHK"/>
+                                        <constraint firstAttribute="height" constant="15" id="ewP-gK-1So"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="bNL-nn-Z9b" firstAttribute="top" secondItem="p0e-8X-0cu" secondAttribute="top" id="2dT-78-wqa"/>
                                 <constraint firstItem="Kb7-dQ-CbC" firstAttribute="top" secondItem="EGI-zh-Qus" secondAttribute="bottom" constant="24" id="2ja-of-YYE"/>
                                 <constraint firstItem="KKo-67-9je" firstAttribute="trailing" secondItem="EGI-zh-Qus" secondAttribute="trailing" constant="-4" id="4q8-Kf-aga"/>
-                                <constraint firstItem="JtY-KO-crv" firstAttribute="leading" secondItem="p0e-8X-0cu" secondAttribute="trailing" constant="8" id="6PN-1D-PNh"/>
                                 <constraint firstItem="p0e-8X-0cu" firstAttribute="width" secondItem="p0e-8X-0cu" secondAttribute="height" multiplier="1:1" id="A9q-6n-Qtl"/>
                                 <constraint firstAttribute="height" priority="1" constant="1000" id="ATc-Lu-xH0"/>
                                 <constraint firstAttribute="bottom" secondItem="DEu-hf-yfT" secondAttribute="bottom" constant="100" id="CK4-4R-gsD"/>
@@ -294,7 +294,8 @@
                                 <constraint firstItem="DEu-hf-yfT" firstAttribute="trailing" secondItem="EGI-zh-Qus" secondAttribute="trailing" id="E8R-BJ-uax"/>
                                 <constraint firstItem="EGI-zh-Qus" firstAttribute="top" secondItem="UvZ-Yl-oqF" secondAttribute="top" constant="24" id="HHq-RJ-TvO"/>
                                 <constraint firstItem="p0e-8X-0cu" firstAttribute="leading" secondItem="QN8-jC-Cl6" secondAttribute="leading" id="Jbh-wy-ai6"/>
-                                <constraint firstItem="JtY-KO-crv" firstAttribute="centerY" secondItem="p0e-8X-0cu" secondAttribute="centerY" id="N8h-UZ-ZSe"/>
+                                <constraint firstItem="WVh-GY-Azl" firstAttribute="centerY" secondItem="04f-z8-v1A" secondAttribute="centerY" id="Mmo-0k-Ye9"/>
+                                <constraint firstItem="bNL-nn-Z9b" firstAttribute="leading" secondItem="WVh-GY-Azl" secondAttribute="trailing" constant="4" id="N11-d3-tfx"/>
                                 <constraint firstItem="fuK-yH-IaU" firstAttribute="trailing" secondItem="EGI-zh-Qus" secondAttribute="trailing" id="NBB-wT-x4f"/>
                                 <constraint firstItem="fuK-yH-IaU" firstAttribute="leading" secondItem="EGI-zh-Qus" secondAttribute="leading" id="Vxw-wM-Nex"/>
                                 <constraint firstItem="fuK-yH-IaU" firstAttribute="top" secondItem="p0e-8X-0cu" secondAttribute="bottom" constant="24" id="b6l-ha-jIP"/>
@@ -303,9 +304,9 @@
                                 <constraint firstItem="bNL-nn-Z9b" firstAttribute="width" secondItem="bNL-nn-Z9b" secondAttribute="height" multiplier="1:1" id="eso-aJ-kOL"/>
                                 <constraint firstItem="p0e-8X-0cu" firstAttribute="top" secondItem="QN8-jC-Cl6" secondAttribute="bottom" constant="8" id="hWG-H6-Xyq"/>
                                 <constraint firstAttribute="trailing" secondItem="EGI-zh-Qus" secondAttribute="trailing" constant="24" id="jaw-jz-rzD"/>
+                                <constraint firstItem="WVh-GY-Azl" firstAttribute="leading" secondItem="04f-z8-v1A" secondAttribute="trailing" constant="4" id="kS2-gS-kdz"/>
                                 <constraint firstItem="DEu-hf-yfT" firstAttribute="top" secondItem="qpv-Mq-bQP" secondAttribute="bottom" constant="32" id="nLr-Kp-7Fc"/>
                                 <constraint firstItem="QN8-jC-Cl6" firstAttribute="leading" secondItem="EGI-zh-Qus" secondAttribute="leading" id="oQ2-6T-zmy"/>
-                                <constraint firstItem="bNL-nn-Z9b" firstAttribute="leading" secondItem="JtY-KO-crv" secondAttribute="trailing" constant="8" id="rtP-Je-fJo"/>
                                 <constraint firstItem="QN8-jC-Cl6" firstAttribute="top" secondItem="Kb7-dQ-CbC" secondAttribute="bottom" constant="24" id="s49-Vh-73r"/>
                                 <constraint firstItem="EGI-zh-Qus" firstAttribute="leading" secondItem="UvZ-Yl-oqF" secondAttribute="leading" constant="24" id="tDe-tJ-3rQ"/>
                                 <constraint firstItem="Kb7-dQ-CbC" firstAttribute="leading" secondItem="EGI-zh-Qus" secondAttribute="leading" id="tuT-Bk-BVi"/>
@@ -355,7 +356,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="-434.39999999999998" y="769.11544227886066"/>
+            <point key="canvasLocation" x="-435.50724637681162" y="768.75"/>
         </view>
         <tapGestureRecognizer id="LUe-Wh-eSe">
             <connections>
@@ -369,6 +370,7 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
+        <image name="datesArrow" width="19" height="18"/>
         <image name="imageDefault" width="88" height="88"/>
     </resources>
 </document>

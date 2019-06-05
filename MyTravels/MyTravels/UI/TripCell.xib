@@ -149,7 +149,8 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="crumbBackgroundView" destination="473-NK-38Y" id="Fau-xV-xY1"/>
-                <outlet property="crumbCountLabel" destination="Knv-du-xpB" id="7E6-Wi-nMX"/>
+                <outlet property="crumbCountLabel" destination="Knv-du-xpB" id="UVq-AK-JEd"/>
+                <outlet property="crumbsLabel" destination="KoX-50-3NR" id="gw8-9C-Owo"/>
                 <outlet property="tripDatesLabel" destination="8ub-Sg-5Vt" id="JvU-U2-M7x"/>
                 <outlet property="tripEndDateLabel" destination="823-mC-OQK" id="KnT-fO-QaP"/>
                 <outlet property="tripImageView" destination="7gk-0t-lfb" id="c4c-ip-zSb"/>
