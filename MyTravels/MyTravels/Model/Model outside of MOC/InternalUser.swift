@@ -68,7 +68,7 @@ class InternalUser: FirebaseDBSavable, FirestoreSavable, FirestoreRetrievable, F
             self.tripsFollowingUIDs = tripsFollowingUIDs.compactMap { $0 }
         }
         
-        if let blockedUserIDs = dictionary["blockedUserIDs"] as? [String] {
+        if let blockedUserIDs = dictionary["blockedUserUIDs"] as? [String] {
             self.blockedUserIDs = blockedUserIDs.compactMap { $0 }
         }
         

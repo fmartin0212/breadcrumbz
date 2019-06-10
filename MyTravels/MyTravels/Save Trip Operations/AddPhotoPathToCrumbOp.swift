@@ -25,6 +25,7 @@ class AddPhotoUIDsToCrumbOp: PSOperation {
     }
     
     override func execute() {
+        guard context.error == nil else { finish() ; return }
         firestoreService.update(object: crumb, fieldsAndCriteria: ["photoUIDs" : [photoPath]], with: .arrayAddition) { [weak self] (result) in
             switch result {
             case .success(_):

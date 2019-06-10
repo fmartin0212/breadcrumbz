@@ -32,7 +32,8 @@ class AddTripIDToReceiverOp: PSOperation {
     }
     
     override func execute() {
-        guard let receiver = context.receiver,
+        guard context.error == nil,
+            let receiver = context.receiver,
         let tripUUID = context.trip.uuid
         else { finish() ; return }
         context.firestoreService.update(object: receiver, fieldsAndCriteria: ["tripsFollowingUIDs" : [tripUUID]], with: .arrayAddition) { [weak self] (result) in

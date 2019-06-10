@@ -18,9 +18,11 @@ class CheckIfBlockedOp: GroupOperation {
         self.context = context
         
         let fetchReceiverOp = FetchReceiverOp(receiverUsername: receiverUsername, context: context)
+        let checkIfLoggedInUserBlockedOp = CheckIfLoggedInUserBlockedOp(context: context)
         let addTripIDToReceiverOp = AddTripIDToReceiverOp(context: context)
-        addTripIDToReceiverOp.addDependency(fetchReceiverOp)
-        super.init(operations: [fetchReceiverOp, addTripIDToReceiverOp])
+        checkIfLoggedInUserBlockedOp.addDependency(fetchReceiverOp)
+        addTripIDToReceiverOp.addDependency(checkIfLoggedInUserBlockedOp)
+        super.init(operations: [fetchReceiverOp, checkIfLoggedInUserBlockedOp, addTripIDToReceiverOp])
     }
 }
 
@@ -50,19 +52,17 @@ class FetchReceiverOp: PSOperation {
 }
 
 class CheckIfLoggedInUserBlockedOp: PSOperation {
-    
-    let receiver: InternalUser?
+
     let context: SaveTripContext
     
-    init(receiver: InternalUser?, context: SaveTripContext) {
-        self.receiver = receiver
+    init(context: SaveTripContext) {
         self.context = context
         super.init()
     }
     
     override func execute() {
-        guard context.error != nil,
-            let receiver = receiver,
+        guard context.error == nil,
+            let receiver = context.receiver,
             let receiversBlockedUIDs = receiver.blockedUserIDs,
             receiversBlockedUIDs.count != 0,
             let loggedInUser = InternalUserController.shared.loggedInUser,

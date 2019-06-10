@@ -136,16 +136,18 @@ class InternalUserController {
     
     func blockUserWith(creatorID: String, completion: @escaping (Result<Bool, FireError>) -> Void) {
         
-        guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(.failure(.generic)) ; return }
+        guard let loggedInUser = InternalUserController.shared.loggedInUser,
+        let loggedInUserUID = loggedInUser.uuid
+        else { completion(.failure(.generic)) ; return }
         // Add user to loggedInUser's blocked list
-        firestoreService.update(object: loggedInUser, fieldsAndCriteria: ["blockedUserIDs" : [creatorID]], with: .arrayAddition) { [weak self] (result) in
+        firestoreService.update(object: loggedInUser, fieldsAndCriteria: ["blockedUserUIDs" : [creatorID]], with: .arrayAddition) { [weak self] (result) in
             switch result {
                 
             case .failure(let error):
                 completion(.failure(error))
                 
             case .success(_):
-                self?.firestoreService.fetch(uuid: nil, field: "uuid", criteria: creatorID, queryType: .fieldEqual, completion: { (result: Result<[InternalUser], FireError>) in
+                self?.firestoreService.fetch(uuid: creatorID, field: nil, criteria: nil, queryType: nil, completion: { (result: Result<[InternalUser], FireError>) in
                     switch result {
                         
                     case .failure(let error):
@@ -156,12 +158,20 @@ class InternalUserController {
                             let blockedUserSharedTripIDs = blockedUser.sharedTripIDs
                             else { completion(.failure(.generic)) ; return }
                         
-                        self?.firestoreService.update(object: loggedInUser, fieldsAndCriteria: ["participantTripIDs" : blockedUserSharedTripIDs], with: .arrayDeletion, completion: { (result) in
+                        self?.firestoreService.update(object: loggedInUser, fieldsAndCriteria: ["tripsFollowingUIDs" : blockedUserSharedTripIDs], with: .arrayDeletion, completion: { (result) in
                             switch result {
                             case .failure(let error):
                                 completion(.failure(error))
+                                return
                             case .success(_):
-                                completion(.success(true))
+                                self?.firestoreService.updateMultipleObjects(collection: Constants.trip, firestoreUIDs: blockedUserSharedTripIDs, field: "followerUIDs", criteria: loggedInUserUID, .arrayDeletion, completion: { (result) in
+                                    switch result {
+                                    case .success(_):
+                                        completion(.success(true))
+                                    case .failure(let error):
+                                        completion(.failure(error))
+                                    }
+                                })
                             }
                         })
                     }

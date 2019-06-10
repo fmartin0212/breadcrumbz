@@ -23,7 +23,8 @@ class UpdateUserOperation: PSOperation {
     }
 
     override func execute() {
-        guard let user = InternalUserController.shared.loggedInUser,
+        guard context.error == nil,
+            let user = InternalUserController.shared.loggedInUser,
             let tripUUID = trip.uuid
             else { finish() ; return }
         firestoreService.update(object: user, fieldsAndCriteria: ["sharedTripIDs" : [tripUUID]], with: .arrayAddition) { [weak self] (result) in

@@ -20,6 +20,7 @@ class SavePlaceOperation: PSOperation {
     }
     
     override func execute() {
+        guard context.error == nil else { finish() ; return }
         context.firestoreService.save(object: place) { [weak self] (result) in
             switch result {
             case .failure(let error):

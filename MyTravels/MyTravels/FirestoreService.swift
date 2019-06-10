@@ -13,6 +13,7 @@ import FirebaseAuth
 protocol FirestoreServiceProtocol {
     func save<T: FirestoreSavable>(object: T, completion: @escaping(Result<String, FireError>) -> Void)
     func update<T: FirestoreSavable>(object: T, fieldsAndCriteria: [String : Any], with updateType: FirestoreUpdateType, completion: @escaping (Result<Bool, FireError>) -> Void)
+    func updateMultipleObjects(collection: String, firestoreUIDs: [String], field: String, criteria: String, _ updateType: FirestoreUpdateType, completion: @escaping (Result<Bool, FireError>) -> Void)
     func delete<T: FirestoreSavable>(object: T, completion: @escaping (Result<Bool, FireError>) -> Void)
     func fetch<T: FirestoreRetrievable>(uuid: String?, field: String?, criteria: String?, queryType: FirestoreQueryType?, completion: @escaping (Result<[T], FireError>) -> Void)
 }
@@ -174,6 +175,26 @@ public struct FirestoreService: FirestoreServiceProtocol {
                     else { completion(.success([])) ; return }
                 let objects = snapshot.documents.compactMap { T(dictionary: $0.data(), uuid: $0.documentID) }
                 completion(.success(objects))
+            }
+        }
+    }
+    
+    func updateMultipleObjects(collection: String,
+                               firestoreUIDs: [String],
+                               field: String,
+                               criteria: String,
+                               _ updateType: FirestoreUpdateType,
+                               completion: @escaping (Result<Bool, FireError>) -> Void) {
+        let batch = Firestore.firestore().batch()
+        firestoreUIDs.forEach {
+            let ref = Firestore.firestore().collection(collection).document($0)
+            batch.updateData([field : FieldValue.arrayRemove([criteria])], forDocument: ref)
+        }
+        batch.commit { (error) in
+            if let _ = error {
+                completion(.failure(.updating))
+            } else {
+                completion(.success(true))
             }
         }
     }

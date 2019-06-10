@@ -21,7 +21,8 @@ class AddFollowerUIDToTripOp: PSOperation {
     }
     
     override func execute() {
-        guard let receiver = context.receiver,
+        guard context.error == nil,
+            let receiver = context.receiver,
             let receiverUID = receiver.uuid
             else { finish() ; return }
         context.firestoreService.update(object: trip, fieldsAndCriteria: ["followerUIDs" : [receiverUID]], with: .arrayAddition) { [weak self] (result) in
