@@ -64,37 +64,37 @@ class SharedPlaceDetailTableViewController: UITableViewController {
         
         addAnnotation(for: sharedPlace)
         
-        if sharedPlace.photos.count > 0 {
-            guard let mainPhoto = sharedPlace.photos.first else { return }
-            sharedPlaceMainPhotoImageView.image = mainPhoto
-            sharedPlaceNameLabel.text = sharedPlace.name.uppercased()
-            sharedPlaceAddressLabel.text = sharedPlace.address
-            updateStarsImageViews(sharedPlace: sharedPlace)
-            
-        } else {
-            var placeholderImage = UIImage()
-//            if sharedPlace.type == "Lodging" {
-//                guard let lodgingPlaceholderImage = UIImage(named: "Lodging") else { return }
-//                placeholderImage = lodgingPlaceholderImage
-//            } else if sharedPlace.type == "Restaurant" {
-//                guard let restaurantPlaceholderImage = UIImage(named: "Restaurant") else { return }
-//                placeholderImage = restaurantPlaceholderImage
-//            } else if sharedPlace.type == "Activity" {
-//                guard let activityPlaceholderImage = UIImage(named: "Activity") else { return }
-//                placeholderImage = activityPlaceholderImage
-//            }
-            
-            sharedPlaceMainPhotoImageView.image = placeholderImage
-            sharedPlaceNameLabel.text = sharedPlace.name
-            sharedPlaceAddressLabel.text = sharedPlace.address
-            updateStarsImageViews(sharedPlace: sharedPlace)
-        }
-        
-        if sharedPlace.comments == "Comments" {
-            sharedPlaceCommentsTextView.text = ""
-        } else {
-            sharedPlaceCommentsTextView.text = sharedPlace.comments
-        }
+//        if sharedPlace.photoUIDs?.count > 0 {
+//            guard let mainPhoto = sharedPlace.photoUIDs?.first else { return }
+//            sharedPlaceMainPhotoImageView.image = mainPhoto
+//            sharedPlaceNameLabel.text = sharedPlace.name.uppercased()
+//            sharedPlaceAddressLabel.text = sharedPlace.address
+//            updateStarsImageViews(sharedPlace: sharedPlace)
+//            
+//        } else {
+//            var placeholderImage = UIImage()
+////            if sharedPlace.type == "Lodging" {
+////                guard let lodgingPlaceholderImage = UIImage(named: "Lodging") else { return }
+////                placeholderImage = lodgingPlaceholderImage
+////            } else if sharedPlace.type == "Restaurant" {
+////                guard let restaurantPlaceholderImage = UIImage(named: "Restaurant") else { return }
+////                placeholderImage = restaurantPlaceholderImage
+////            } else if sharedPlace.type == "Activity" {
+////                guard let activityPlaceholderImage = UIImage(named: "Activity") else { return }
+////                placeholderImage = activityPlaceholderImage
+////            }
+//            
+//            sharedPlaceMainPhotoImageView.image = placeholderImage
+//            sharedPlaceNameLabel.text = sharedPlace.name
+//            sharedPlaceAddressLabel.text = sharedPlace.address
+//            updateStarsImageViews(sharedPlace: sharedPlace)
+//        }
+//        
+//        if sharedPlace.comments == "Comments" {
+//            sharedPlaceCommentsTextView.text = ""
+//        } else {
+//            sharedPlaceCommentsTextView.text = sharedPlace.comments
+//        }
     }
     
     func updateStarsImageViews(sharedPlace: SharedPlace) {
@@ -178,7 +178,7 @@ extension SharedPlaceDetailTableViewController: UICollectionViewDelegate, UIColl
         guard let sharedPlace = sharedPlace
             else { return 0 }
         
-        return sharedPlace.photos.count
+        return 0
         
     }
     
@@ -189,7 +189,7 @@ extension SharedPlaceDetailTableViewController: UICollectionViewDelegate, UIColl
         guard let sharedPlace = sharedPlace
             else { return UICollectionViewCell() }
         
-        cell.sharedPlacePhoto = sharedPlace.photos[indexPath.row]
+//        cell.sharedPlacePhoto = sharedPlace.photos[indexPath.row]
         
         return cell
     }

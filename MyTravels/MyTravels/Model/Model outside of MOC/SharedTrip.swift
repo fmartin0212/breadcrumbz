@@ -9,14 +9,12 @@
 import UIKit
 import FirebaseDatabase
 
-class SharedTrip: FirebaseDBRetrievable, TripObject {
-    
+class SharedTrip: FirebaseDBRetrievable, FirestoreRetrievable, TripObject {
+    internal static var collectionName: String = "Trip"
     var uuid: String?
-    
     static var referenceName: String {
         return "Trip"
     }
-    
     var name: String
     var location: String
     var tripDescription: String?
@@ -25,11 +23,14 @@ class SharedTrip: FirebaseDBRetrievable, TripObject {
     let creatorName: String
     let creatorUsername: String
     let creatorID: String
-    var photoID: String?
+    var photoUID: String?
     var photo: UIImage?
     var places: [SharedPlace] = []
     var isAcceptedTrip: Bool = true
     var placeIDs: [String] = []
+    var crumbCount: Int {
+        return self.placeIDs.count
+    }
     
     
     required init?(dictionary: [String : Any], uuid: String) {
@@ -54,14 +55,12 @@ class SharedTrip: FirebaseDBRetrievable, TripObject {
         self.creatorID = creatorID
         self.uuid = uuid
         
-        if let photoIDDictionary = dictionary["photoID"] as? [String : Bool],
-            let photoID = photoIDDictionary.keys.first {
-            self.photoID = photoID
-        }
+        photoUID = dictionary["photoUID"] as? String
         
-        if let placeIDs = dictionary["placeIDs"] as? [String : Bool] {
-            self.placeIDs = placeIDs.compactMap { $0.key }
+        if let placeIDs = dictionary["crumbUIDs"] as? [String] {
+            self.placeIDs = placeIDs
         }
+    
     }
     
     init?(snapshot: DataSnapshot) {
@@ -87,18 +86,17 @@ class SharedTrip: FirebaseDBRetrievable, TripObject {
         self.creatorUsername = creatorUsername
         self.creatorID = creatorID
         
-        if let photoIDDictionary = tripDictionary["photoID"] as? [String : Bool],
-            let photoID = photoIDDictionary.keys.first {
-            self.photoID = photoID
+        if let photoUID = tripDictionary["photoUID"] as? String {
+            self.photoUID = photoUID
         }
         
-        if let placeIDs = tripDictionary["placeIDs"] as? [String : Bool] {
-            self.placeIDs = placeIDs.compactMap { $0.key }
+        if let placeIDs = tripDictionary["placeIDs"] as? [String] {
+            self.placeIDs = placeIDs
         }
         
-        SharedPlaceController.parsePlacesFrom(tripDictionary: tripDictionary) { (places) in
-            self.places = places
-        }
+//        SharedPlaceController.parsePlacesFrom(tripDictionary: tripDictionary) { (places) in
+//            self.places = places
+//        }
     }
 }
 

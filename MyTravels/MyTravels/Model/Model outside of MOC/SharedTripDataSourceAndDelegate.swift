@@ -29,7 +29,7 @@ extension SharedTripDataSourceAndDelegate: UITableViewDataSource {
         
         let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
         
-        cell.sharedTrip = sharedTrip
+//        cell.sharedTrip = sharedTrip
         
         return cell
         
@@ -41,9 +41,9 @@ extension SharedTripDataSourceAndDelegate: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {        
         let trip = SharedTripsController.shared.sharedTrips[indexPath.row]
-        let tripDetailVC = TripDetailVC(nibName: "TripDetail", bundle: nil)
-        tripDetailVC.trip = trip
-        viewController.navigationController?.pushViewController(tripDetailVC, animated: true)
+//        let tripDetailVC = TripDetailVC(nibName: "TripDetail", bundle: nil)
+//        tripDetailVC.trip = trip
+//        viewController.navigationController?.pushViewController(tripDetailVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

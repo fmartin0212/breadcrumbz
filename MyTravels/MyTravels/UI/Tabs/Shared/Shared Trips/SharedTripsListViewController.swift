@@ -15,14 +15,13 @@ class SharedTripsListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     private let refreshControl = UIRefreshControl()
     private var profileButton: UIButton?
-    lazy var noSharedTripsView: NoSharedTripsView = UIView.fromNib()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         extendedLayoutIncludesOpaqueBars = true
         tableView.refreshControl = refreshControl
         tableView.addSubview(refreshControl)
-        refreshControl.addTarget(self, action: #selector(fetchSharedTrips), for: .valueChanged)
+//        refreshControl.addTarget(self, action: #selector(fetchSharedTrips), for: .valueChanged)
 //        NotificationCenter.default.addObserver(self, selector: #selector(refreshViews), name: Constants.sharedTripsReceivedNotif, object: nil)
         
         // Set tableview properties
@@ -39,7 +38,7 @@ class SharedTripsListViewController: UIViewController {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
         
-        checkForNoSharedTrips()
+//        checkForNoSharedTrips()
     }
     
     // MARK: - Functions
@@ -47,39 +46,39 @@ class SharedTripsListViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-    
-    @objc func fetchSharedTrips() {
-        SharedTripsController.shared.fetchSharedTrips { (success) in
-            if success {
-                DispatchQueue.main.async {
-                    self.checkForNoSharedTrips()
-                    self.tableView.reloadData()
-                    self.refreshControl.endRefreshing()                    
-                }
-            }
-        }
-    }
-    
+//    
+//    @objc func fetchSharedTrips() {
+//        SharedTripsController.shared.fetchSharedTrips { (success) in
+//            if success {
+//                DispatchQueue.main.async {
+//                    self.checkForNoSharedTrips()
+//                    self.tableView.reloadData()
+//                    self.refreshControl.endRefreshing()
+//                }
+//            }
+//        }
+//    }
+//
     @objc func refreshTableView() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
-            self.checkForNoSharedTrips()
+//            self.checkForNoSharedTrips()
         }
     }
     
     @objc func profileButtonTapped() {
         
-        if let _ = InternalUserController.shared.loggedInUser {
-            let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "profileVC")
-            UIView.animate(withDuration: 2) {
-                self.present(profileVC, animated: true, completion: nil)
-            }
-        } else {
-            let signUpVC = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "SignUp") as! SignUpViewController
-            signUpVC.loadViewIfNeeded()
-            signUpVC.skipButton.isHidden = true
-            self.present(signUpVC, animated: true, completion: nil)
-        }
+//        if let _ = InternalUserController.shared.loggedInUser {
+//            let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "profileVC")
+//            UIView.animate(withDuration: 2) {
+//                self.present(profileVC, animated: true, completion: nil)
+//            }
+//        } else {
+//            let signUpVC = UIStoryboard(name: "Onboarding", bundle: nil).instantiateViewController(withIdentifier: "SignUp") as! SignUpViewController
+//            signUpVC.loadViewIfNeeded()
+//            signUpVC.skipButton.isHidden = true
+//            self.present(signUpVC, animated: true, completion: nil)
+//        }
     }
     
     // MARK: - Navigation
@@ -110,7 +109,7 @@ extension SharedTripsListViewController: UITableViewDataSource {
         
         let sharedTrip = SharedTripsController.shared.sharedTrips[indexPath.row]
         
-        cell.sharedTrip = sharedTrip
+//        cell.sharedTrip = sharedTrip
         
         return cell
         
@@ -131,17 +130,17 @@ extension SharedTripsListViewController : UITableViewDelegate {
 
 extension SharedTripsListViewController {
     
-    func checkForNoSharedTrips() {
-        if SharedTripsController.shared.sharedTrips.count == 0 {
-            view.addSubview(noSharedTripsView)
-            noSharedTripsView.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint(item: noSharedTripsView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
-            NSLayoutConstraint(item: noSharedTripsView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
-            NSLayoutConstraint(item: noSharedTripsView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
-            NSLayoutConstraint(item: noSharedTripsView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
-        } else {
-            noSharedTripsView.removeFromSuperview()
-        }
-    }
+//    func checkForNoSharedTrips() {
+//        if SharedTripsController.shared.sharedTrips.count == 0 {
+//            view.addSubview(noSharedTripsView)
+//            noSharedTripsView.translatesAutoresizingMaskIntoConstraints = false
+//
+//            NSLayoutConstraint(item: noSharedTripsView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+//            NSLayoutConstraint(item: noSharedTripsView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
+//            NSLayoutConstraint(item: noSharedTripsView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
+//            NSLayoutConstraint(item: noSharedTripsView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+//        } else {
+//            noSharedTripsView.removeFromSuperview()
+//        }
+//    }
 }

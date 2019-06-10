@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -54,7 +54,7 @@
                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </collectionViewFlowLayout>
                                 </collectionView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Crumb Type)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQg-nG-UIr">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="(Crumb Type)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQg-nG-UIr">
                                     <rect key="frame" x="260" y="292" width="101" height="20"/>
                                     <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                     <color key="textColor" red="0.60779035091400146" green="0.60787814855575562" blue="0.60776275396347046" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -66,14 +66,14 @@
                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Crumb Name)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIh-46-51i">
-                                    <rect key="frame" x="24" y="292" width="141" height="25.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Crumb Name)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIh-46-51i">
+                                    <rect key="frame" x="24" y="292" width="224" height="25.5"/>
                                     <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="18"/>
                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="dbr-4s-RyR">
-                                    <rect key="frame" x="168" y="260" width="39" height="37"/>
+                                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="1" translatesAutoresizingMaskIntoConstraints="NO" id="dbr-4s-RyR">
+                                    <rect key="frame" x="184" y="260" width="7" height="37"/>
                                     <color key="pageIndicatorTintColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="currentPageIndicatorTintColor" red="0.97254901959999995" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </pageControl>
@@ -130,6 +130,7 @@
                                 <constraint firstAttribute="bottom" secondItem="sGY-jC-TED" secondAttribute="bottom" constant="30" id="XD2-Bs-4rc"/>
                                 <constraint firstItem="5hL-ZX-fOO" firstAttribute="top" secondItem="RRN-oR-guy" secondAttribute="bottom" constant="26.5" id="XOI-cU-X88"/>
                                 <constraint firstItem="dbr-4s-RyR" firstAttribute="top" secondItem="hGj-Tz-xyu" secondAttribute="bottom" id="Zmt-B1-Y4e"/>
+                                <constraint firstItem="NIh-46-51i" firstAttribute="trailing" secondItem="hQg-nG-UIr" secondAttribute="leading" constant="-12" id="acx-wZ-9so"/>
                                 <constraint firstAttribute="trailing" secondItem="hQg-nG-UIr" secondAttribute="trailing" constant="14" id="bg3-4g-TzS"/>
                                 <constraint firstItem="hQg-nG-UIr" firstAttribute="top" secondItem="NIh-46-51i" secondAttribute="top" id="bkf-UF-pTd"/>
                                 <constraint firstItem="5hL-ZX-fOO" firstAttribute="leading" secondItem="NIh-46-51i" secondAttribute="leading" id="gjb-nu-Ixb"/>

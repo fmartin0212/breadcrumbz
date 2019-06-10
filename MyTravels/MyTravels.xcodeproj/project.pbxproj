@@ -15,12 +15,33 @@
 		B71248D4222A292B00D6C4A5 /* ViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71248D3222A292B00D6C4A5 /* ViewControllerProtocols.swift */; };
 		B71248D6222B60DB00D6C4A5 /* FMLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71248D5222B60DB00D6C4A5 /* FMLineView.swift */; };
 		B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */; };
+		B720BCFC22934EE400C1AC34 /* TripContextProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B720BCFB22934EE400C1AC34 /* TripContextProtocol.swift */; };
+		B720BCFE229799C600C1AC34 /* Poppins-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B720BCFD229797CC00C1AC34 /* Poppins-Bold.otf */; };
 		B725034F20D9B64C00744B23 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B725034E20D9B64C00744B23 /* ProfileViewController.swift */; };
-		B7336E812262D93A00143812 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E802262D93A00143812 /* FirebaseService.swift */; };
+		B72E239A2285C49A002CA1EC /* UpdateReceiverOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72E23992285C49A002CA1EC /* UpdateReceiverOp.swift */; };
+		B72E239E228896F1002CA1EC /* AddFollowerUIDToTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72E239D228896F1002CA1EC /* AddFollowerUIDToTrip.swift */; };
+		B72E23A32289196A002CA1EC /* CheckIfBlockedOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72E23A22289196A002CA1EC /* CheckIfBlockedOp.swift */; };
+		B7336E812262D93A00143812 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E802262D93A00143812 /* FirestoreService.swift */; };
+		B7336E8322631D5200143812 /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E8222631D5200143812 /* FirebaseStorageService.swift */; };
+		B7336E8522631DE000143812 /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E8422631DE000143812 /* FirebaseAuthService.swift */; };
+		B7336E8722632A9500143812 /* FireErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E8622632A9500143812 /* FireErrors.swift */; };
+		B7336E892263E9E000143812 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7336E882263E9E000143812 /* CacheManager.swift */; };
 		B735428D2174E36300D9A68D /* Trip+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B735428C2174E36200D9A68D /* Trip+CoreDataProperties.swift */; };
+		B737CD72228B58D50007FF80 /* UploadTripPhotoOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737CD71228B58D50007FF80 /* UploadTripPhotoOp.swift */; };
+		B737CD74228C85870007FF80 /* TripObjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737CD73228C85870007FF80 /* TripObjectManager.swift */; };
+		B737CD76228C90250007FF80 /* CrumbObjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737CD75228C90250007FF80 /* CrumbObjectManager.swift */; };
+		B737CD78228F114F0007FF80 /* SaveTripOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737CD77228F114E0007FF80 /* SaveTripOperation.swift */; };
+		B737CD7A2291DA760007FF80 /* FMCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737CD792291DA750007FF80 /* FMCloseButton.swift */; };
+		B737CD7C22920C5A0007FF80 /* UpdateTripGroupOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737CD7B22920C5A0007FF80 /* UpdateTripGroupOp.swift */; };
+		B737CD7F229217370007FF80 /* UpdateTripOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737CD7E229217370007FF80 /* UpdateTripOp.swift */; };
+		B737CD8122921ACF0007FF80 /* UpdateTripContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737CD8022921ACF0007FF80 /* UpdateTripContext.swift */; };
+		B737CD8322921EDE0007FF80 /* UpdateTripPhotoGroupOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737CD8222921EDE0007FF80 /* UpdateTripPhotoGroupOp.swift */; };
 		B73804F52224E37B00CD9E59 /* AddCrumb.xib in Resources */ = {isa = PBXBuildFile; fileRef = B73804F42224E37B00CD9E59 /* AddCrumb.xib */; };
 		B73804FB2224EA3700CD9E59 /* AddCrumbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73804FA2224EA3700CD9E59 /* AddCrumbViewController.swift */; };
+		B73880002285097A00D875AA /* AddPhotoPathToCrumbOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7387FFF2285097A00D875AA /* AddPhotoPathToCrumbOp.swift */; };
+		B73880022285192A00D875AA /* AddCrumbUIDsToTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73880012285192A00D875AA /* AddCrumbUIDsToTrip.swift */; };
 		B739261320362E5F0050B580 /* SharedTripsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B739261220362E5F0050B580 /* SharedTripsController.swift */; };
+		B7504D3222A87C810002D11E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7504D3122A87C800002D11E /* Coordinator.swift */; };
 		B75E335C20D3150500839678 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E335B20D3150500839678 /* SignUpViewController.swift */; };
 		B75E335E20D316DD00839678 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E335D20D316DD00839678 /* TextFieldTableViewCell.swift */; };
 		B76107182212331D001F79B6 /* Poppins-ExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B76107172212331A001F79B6 /* Poppins-ExtraLightItalic.otf */; };
@@ -47,8 +68,6 @@
 		B7AC408A221B6C0100645BC2 /* CrumbTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AC4089221B6C0100645BC2 /* CrumbTableViewCell.swift */; };
 		B7B0C36E203724F30031A92A /* SharedTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B0C36D203724F30031A92A /* SharedTrip.swift */; };
 		B7B0C3702037446E0031A92A /* SharedPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B0C36F2037446E0031A92A /* SharedPlace.swift */; };
-		B7B1A93C21CD319300544056 /* NoSharedTripsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7B1A93B21CD319300544056 /* NoSharedTripsView.xib */; };
-		B7B1A93E21CD334700544056 /* NoSharedTripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B1A93D21CD334700544056 /* NoSharedTripsView.swift */; };
 		B7BA6F5521F82424004A3C70 /* TripDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7BA6F5421F82424004A3C70 /* TripDetailCell.xib */; };
 		B7BA6FCC22009408004A3C70 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7BA6FCB22009408004A3C70 /* Profile.storyboard */; };
 		B7BDA845202A29F50080B81B /* EditPlaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */; };
@@ -59,13 +78,12 @@
 		B7C0B597220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0B595220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift */; };
 		B7C0B598220BC7AB009FAAEB /* MyTravels.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = B7C10CBB2020D19500818430 /* MyTravels.xcdatamodeld */; };
 		B7C0B59A220C75BB009FAAEB /* AddTrip.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7C0B599220C75BA009FAAEB /* AddTrip.xib */; };
-		B7C0B59C220CB393009FAAEB /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0B59B220CB393009FAAEB /* AddTripViewController.swift */; };
+		B7C0B59C220CB393009FAAEB /* AddTripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0B59B220CB393009FAAEB /* AddTripVC.swift */; };
 		B7C0E3C22232EDBA00438299 /* TripDataSourceAndDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0E3C12232EDBA00438299 /* TripDataSourceAndDelegate.swift */; };
 		B7C0E3C42232EDC300438299 /* SharedTripDataSourceAndDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0E3C32232EDC300438299 /* SharedTripDataSourceAndDelegate.swift */; };
 		B7C0E3C8223458A700438299 /* Trip+CrumbProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0E3C7223458A700438299 /* Trip+CrumbProtocols.swift */; };
 		B7C0E3CA2234999A00438299 /* TripListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7C0E3C92234999A00438299 /* TripListVC.xib */; };
 		B7C0E3CC22349A2D00438299 /* TripListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0E3CB22349A2D00438299 /* TripListVC.swift */; };
-		B7C0E3CE22349F8F00438299 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C0E3CD22349F8F00438299 /* MainTabBarController.swift */; };
 		B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CB42020D19500818430 /* AppDelegate.swift */; };
 		B7C10CB72020D19500818430 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C10CB62020D19500818430 /* CreateAccountViewController.swift */; };
 		B7C10CBA2020D19500818430 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7C10CB82020D19500818430 /* Main.storyboard */; };
@@ -109,8 +127,18 @@
 		B7F88E36223F2E3100BD16DC /* BasicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F88E35223F2E3100BD16DC /* BasicTableViewCell.xib */; };
 		B7F88E38223F2E4000BD16DC /* BasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F88E37223F2E4000BD16DC /* BasicTableViewCell.swift */; };
 		B7F88E3A224085A200BD16DC /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F88E39224085A200BD16DC /* EditProfileViewController.swift */; };
+		B7F898F0229D9A030012121A /* FMImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F898EF229D9A030012121A /* FMImage.swift */; };
+		B7F898F2229DC3FD0012121A /* GenericScrollingLabelVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7F898F1229DC3FD0012121A /* GenericScrollingLabelVC.xib */; };
+		B7F898F4229DC6C70012121A /* GenericScrollingLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F898F3229DC6C70012121A /* GenericScrollingLabelViewController.swift */; };
 		B7F92BCF20291DEE0021A8CA /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F92BCE20291DEE0021A8CA /* PhotoController.swift */; };
 		B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */; };
+		B7FC2DA222722B520086CC3B /* SaveCoreDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DA122722B520086CC3B /* SaveCoreDataOperation.swift */; };
+		B7FC2DA422722B590086CC3B /* SavePhotoOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DA322722B590086CC3B /* SavePhotoOperation.swift */; };
+		B7FC2DA622722B620086CC3B /* UpdateUserOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DA522722B620086CC3B /* UpdateUserOperation.swift */; };
+		B7FC2DA822722B6C0086CC3B /* UploadPlacesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DA722722B6C0086CC3B /* UploadPlacesOperation.swift */; };
+		B7FC2DAC22722B7B0086CC3B /* TaskCompleteOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DAB22722B7B0086CC3B /* TaskCompleteOp.swift */; };
+		B7FC2DAE22722B810086CC3B /* SaveTripContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DAD22722B810086CC3B /* SaveTripContext.swift */; };
+		B7FC2DB022728F710086CC3B /* SavePlaceOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DAF22728F710086CC3B /* SavePlaceOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,12 +151,33 @@
 		B71248D3222A292B00D6C4A5 /* ViewControllerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocols.swift; sourceTree = "<group>"; };
 		B71248D5222B60DB00D6C4A5 /* FMLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FMLineView.swift; path = MyTravels/UI/FMLineView.swift; sourceTree = SOURCE_ROOT; };
 		B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		B720BCFB22934EE400C1AC34 /* TripContextProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripContextProtocol.swift; sourceTree = "<group>"; };
+		B720BCFD229797CC00C1AC34 /* Poppins-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.otf"; sourceTree = "<group>"; };
 		B725034E20D9B64C00744B23 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		B7336E802262D93A00143812 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		B72E23992285C49A002CA1EC /* UpdateReceiverOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateReceiverOp.swift; sourceTree = "<group>"; };
+		B72E239D228896F1002CA1EC /* AddFollowerUIDToTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFollowerUIDToTrip.swift; sourceTree = "<group>"; };
+		B72E23A22289196A002CA1EC /* CheckIfBlockedOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckIfBlockedOp.swift; sourceTree = "<group>"; };
+		B7336E802262D93A00143812 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		B7336E8222631D5200143812 /* FirebaseStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
+		B7336E8422631DE000143812 /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
+		B7336E8622632A9500143812 /* FireErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireErrors.swift; sourceTree = "<group>"; };
+		B7336E882263E9E000143812 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		B735428C2174E36200D9A68D /* Trip+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B737CD71228B58D50007FF80 /* UploadTripPhotoOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTripPhotoOp.swift; sourceTree = "<group>"; };
+		B737CD73228C85870007FF80 /* TripObjectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripObjectManager.swift; sourceTree = "<group>"; };
+		B737CD75228C90250007FF80 /* CrumbObjectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrumbObjectManager.swift; sourceTree = "<group>"; };
+		B737CD77228F114E0007FF80 /* SaveTripOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveTripOperation.swift; sourceTree = "<group>"; };
+		B737CD792291DA750007FF80 /* FMCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMCloseButton.swift; sourceTree = "<group>"; };
+		B737CD7B22920C5A0007FF80 /* UpdateTripGroupOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTripGroupOp.swift; sourceTree = "<group>"; };
+		B737CD7E229217370007FF80 /* UpdateTripOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTripOp.swift; sourceTree = "<group>"; };
+		B737CD8022921ACF0007FF80 /* UpdateTripContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTripContext.swift; sourceTree = "<group>"; };
+		B737CD8222921EDE0007FF80 /* UpdateTripPhotoGroupOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTripPhotoGroupOp.swift; sourceTree = "<group>"; };
 		B73804F42224E37B00CD9E59 /* AddCrumb.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCrumb.xib; sourceTree = "<group>"; };
 		B73804FA2224EA3700CD9E59 /* AddCrumbViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCrumbViewController.swift; sourceTree = "<group>"; };
+		B7387FFF2285097A00D875AA /* AddPhotoPathToCrumbOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoPathToCrumbOp.swift; sourceTree = "<group>"; };
+		B73880012285192A00D875AA /* AddCrumbUIDsToTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCrumbUIDsToTrip.swift; sourceTree = "<group>"; };
 		B739261220362E5F0050B580 /* SharedTripsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripsController.swift; sourceTree = "<group>"; };
+		B7504D3122A87C800002D11E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Coordinator.swift; path = "/Users/frankmartin/Desktop/iOS/Personal Projects/breadcrumbz/MyTravels/MyTravels/Coordinator.swift"; sourceTree = "<absolute>"; };
 		B75E335B20D3150500839678 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B75E335D20D316DD00839678 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		B76107172212331A001F79B6 /* Poppins-ExtraLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLightItalic.otf"; sourceTree = "<group>"; };
@@ -154,8 +203,6 @@
 		B7AC4089221B6C0100645BC2 /* CrumbTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrumbTableViewCell.swift; sourceTree = "<group>"; };
 		B7B0C36D203724F30031A92A /* SharedTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTrip.swift; sourceTree = "<group>"; };
 		B7B0C36F2037446E0031A92A /* SharedPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPlace.swift; sourceTree = "<group>"; };
-		B7B1A93B21CD319300544056 /* NoSharedTripsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoSharedTripsView.xib; sourceTree = "<group>"; };
-		B7B1A93D21CD334700544056 /* NoSharedTripsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSharedTripsView.swift; sourceTree = "<group>"; };
 		B7BA6F5421F82424004A3C70 /* TripDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripDetailCell.xib; sourceTree = "<group>"; };
 		B7BA6FCB22009408004A3C70 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		B7BDA844202A29F50080B81B /* EditPlaceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlaceTableViewController.swift; sourceTree = "<group>"; };
@@ -167,13 +214,12 @@
 		B7C0B594220BC2EF009FAAEB /* PlaceType+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceType+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B7C0B595220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaceType+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B7C0B599220C75BA009FAAEB /* AddTrip.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTrip.xib; sourceTree = "<group>"; };
-		B7C0B59B220CB393009FAAEB /* AddTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripViewController.swift; sourceTree = "<group>"; };
+		B7C0B59B220CB393009FAAEB /* AddTripVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripVC.swift; sourceTree = "<group>"; };
 		B7C0E3C12232EDBA00438299 /* TripDataSourceAndDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDataSourceAndDelegate.swift; sourceTree = "<group>"; };
 		B7C0E3C32232EDC300438299 /* SharedTripDataSourceAndDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripDataSourceAndDelegate.swift; sourceTree = "<group>"; };
 		B7C0E3C7223458A700438299 /* Trip+CrumbProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trip+CrumbProtocols.swift"; sourceTree = "<group>"; };
 		B7C0E3C92234999A00438299 /* TripListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripListVC.xib; sourceTree = "<group>"; };
 		B7C0E3CB22349A2D00438299 /* TripListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripListVC.swift; sourceTree = "<group>"; };
-		B7C0E3CD22349F8F00438299 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		B7C10CB12020D19500818430 /* MyTravels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTravels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7C10CB42020D19500818430 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7C10CB62020D19500818430 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -221,8 +267,18 @@
 		B7F88E35223F2E3100BD16DC /* BasicTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicTableViewCell.xib; sourceTree = "<group>"; };
 		B7F88E37223F2E4000BD16DC /* BasicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTableViewCell.swift; sourceTree = "<group>"; };
 		B7F88E39224085A200BD16DC /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		B7F898EF229D9A030012121A /* FMImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMImage.swift; sourceTree = "<group>"; };
+		B7F898F1229DC3FD0012121A /* GenericScrollingLabelVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericScrollingLabelVC.xib; sourceTree = "<group>"; };
+		B7F898F3229DC6C70012121A /* GenericScrollingLabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericScrollingLabelViewController.swift; sourceTree = "<group>"; };
 		B7F92BCE20291DEE0021A8CA /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
 		B7FBD1A92028E38800AA9738 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		B7FC2DA122722B520086CC3B /* SaveCoreDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCoreDataOperation.swift; sourceTree = "<group>"; };
+		B7FC2DA322722B590086CC3B /* SavePhotoOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePhotoOperation.swift; sourceTree = "<group>"; };
+		B7FC2DA522722B620086CC3B /* UpdateUserOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserOperation.swift; sourceTree = "<group>"; };
+		B7FC2DA722722B6C0086CC3B /* UploadPlacesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPlacesOperation.swift; sourceTree = "<group>"; };
+		B7FC2DAB22722B7B0086CC3B /* TaskCompleteOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCompleteOp.swift; sourceTree = "<group>"; };
+		B7FC2DAD22722B810086CC3B /* SaveTripContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTripContext.swift; sourceTree = "<group>"; };
+		B7FC2DAF22728F710086CC3B /* SavePlaceOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePlaceOperation.swift; sourceTree = "<group>"; };
 		D8CD1BB41D947506D15EDEB5 /* Pods-MyTravels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTravels.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -250,6 +306,8 @@
 		B719FFA120AA3FF20072CF75 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				B737CD73228C85870007FF80 /* TripObjectManager.swift */,
+				B737CD75228C90250007FF80 /* CrumbObjectManager.swift */,
 				B78BC0752159740300827394 /* FirebaseManager.swift */,
 				B719FF9A20A9FD7F0072CF75 /* CoreDataManager.swift */,
 			);
@@ -302,6 +360,17 @@
 			path = Places;
 			sourceTree = "<group>";
 		};
+		B737CD7D22920C5F0007FF80 /* Update Trip Operations */ = {
+			isa = PBXGroup;
+			children = (
+				B737CD7B22920C5A0007FF80 /* UpdateTripGroupOp.swift */,
+				B737CD8222921EDE0007FF80 /* UpdateTripPhotoGroupOp.swift */,
+				B737CD8022921ACF0007FF80 /* UpdateTripContext.swift */,
+				B737CD7E229217370007FF80 /* UpdateTripOp.swift */,
+			);
+			path = "Update Trip Operations";
+			sourceTree = "<group>";
+		};
 		B745843F203B7B1A00A686E7 /* Model outside of MOC */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,6 +378,7 @@
 				B7B0C36D203724F30031A92A /* SharedTrip.swift */,
 				B7C0E3C12232EDBA00438299 /* TripDataSourceAndDelegate.swift */,
 				B7C0E3C32232EDC300438299 /* SharedTripDataSourceAndDelegate.swift */,
+				B7DA1B6B202E140C0007497A /* Place+CoreDataClass.swift */,
 				B7B0C36F2037446E0031A92A /* SharedPlace.swift */,
 			);
 			path = "Model outside of MOC";
@@ -324,6 +394,7 @@
 				B7C0AA0B221100700030A5B1 /* Poppins-Regular.otf */,
 				B76107172212331A001F79B6 /* Poppins-ExtraLightItalic.otf */,
 				B761071922123634001F79B6 /* Poppins-ExtraLight.otf */,
+				B720BCFD229797CC00C1AC34 /* Poppins-Bold.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -351,8 +422,19 @@
 		B7C10CB32020D19500818430 /* MyTravels */ = {
 			isa = PBXGroup;
 			children = (
-				B7336E802262D93A00143812 /* FirebaseService.swift */,
+				B7F898EF229D9A030012121A /* FMImage.swift */,
+				B7F898F1229DC3FD0012121A /* GenericScrollingLabelVC.xib */,
+				B7504D3122A87C800002D11E /* Coordinator.swift */,
+				B7F898F3229DC6C70012121A /* GenericScrollingLabelViewController.swift */,
+				B737CD792291DA750007FF80 /* FMCloseButton.swift */,
+				B7336E882263E9E000143812 /* CacheManager.swift */,
+				B7336E802262D93A00143812 /* FirestoreService.swift */,
+				B7336E8622632A9500143812 /* FireErrors.swift */,
+				B7336E8422631DE000143812 /* FirebaseAuthService.swift */,
+				B7FC2D9E22722B3B0086CC3B /* Save Trip Operations */,
+				B7336E8222631D5200143812 /* FirebaseStorageService.swift */,
 				B7C10CD420214D4200818430 /* MyTravels.entitlements */,
+				B737CD7D22920C5F0007FF80 /* Update Trip Operations */,
 				B7C10CDB20214F6900818430 /* Model */,
 				B7DA1B79202E2A020007497A /* Controllers */,
 				B7C10CDA20214F5400818430 /* UI */,
@@ -389,7 +471,6 @@
 				B7F88E39224085A200BD16DC /* EditProfileViewController.swift */,
 				B7F88E33223F23C300BD16DC /* FMButton.swift */,
 				B7C0E3C92234999A00438299 /* TripListVC.xib */,
-				B7C0E3CD22349F8F00438299 /* MainTabBarController.swift */,
 				B7C0E3CB22349A2D00438299 /* TripListVC.swift */,
 				B7655AF822273B3D002D33F7 /* FMTextField.swift */,
 				B7655AFC22274182002D33F7 /* FMTextView.swift */,
@@ -416,7 +497,6 @@
 				B745843F203B7B1A00A686E7 /* Model outside of MOC */,
 				B7DA1B69202E140C0007497A /* Trip+CoreDataClass.swift */,
 				B735428C2174E36200D9A68D /* Trip+CoreDataProperties.swift */,
-				B7DA1B6B202E140C0007497A /* Place+CoreDataClass.swift */,
 				B7DA1B6C202E140C0007497A /* Place+CoreDataProperties.swift */,
 				B7C0B594220BC2EF009FAAEB /* PlaceType+CoreDataClass.swift */,
 				B7C0B595220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift */,
@@ -454,14 +534,12 @@
 				B73804FA2224EA3700CD9E59 /* AddCrumbViewController.swift */,
 				B7F88E2F223D857C00BD16DC /* CrumbDetail.xib */,
 				B7F88E31223DB3DB00BD16DC /* CrumbDetailVC.swift */,
-				B7C0B599220C75BA009FAAEB /* AddTrip.xib */,
 				B7F88E2B223D4B2100BD16DC /* ImageCollectionViewCell.xib */,
 				B7F88E2D223D4C0E00BD16DC /* ImageCollectionViewCell.swift */,
-				B7C0B59B220CB393009FAAEB /* AddTripViewController.swift */,
+				B7C0B59B220CB393009FAAEB /* AddTripVC.swift */,
+				B7C0B599220C75BA009FAAEB /* AddTrip.xib */,
 				B7C83FC421C1FA3B00A9F86C /* LoadingView.swift */,
 				B7C83FC021C1F88700A9F86C /* LoadingView.xib */,
-				B7B1A93D21CD334700544056 /* NoSharedTripsView.swift */,
-				B7B1A93B21CD319300544056 /* NoSharedTripsView.xib */,
 				B7AC4085221B4DC300645BC2 /* CrumbTableViewCell.xib */,
 				B7AC4089221B6C0100645BC2 /* CrumbTableViewCell.swift */,
 			);
@@ -491,12 +569,12 @@
 		B7F75C0520577C2900C876A0 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				B76B2F6B22432B6500E688F4 /* OnboardingParentViewController.swift */,
 				B7F75C06205842E600C876A0 /* OnboardingPageViewController.swift */,
 				B7F75C082058521C00C876A0 /* ExplanationViewController.swift */,
 				B7F75C0A2058523300C876A0 /* FeaturesViewController.swift */,
 				B7C10CB62020D19500818430 /* CreateAccountViewController.swift */,
 				B75E335B20D3150500839678 /* SignUpViewController.swift */,
-				B76B2F6B22432B6500E688F4 /* OnboardingParentViewController.swift */,
 				B774A1C521BDA85E008D7483 /* Constants.swift */,
 			);
 			path = Onboarding;
@@ -545,6 +623,28 @@
 				B7F75C162058771900C876A0 /* SharedPlaceDetailTableViewController.swift */,
 			);
 			path = "Shared Places";
+			sourceTree = "<group>";
+		};
+		B7FC2D9E22722B3B0086CC3B /* Save Trip Operations */ = {
+			isa = PBXGroup;
+			children = (
+				B737CD77228F114E0007FF80 /* SaveTripOperation.swift */,
+				B72E23A22289196A002CA1EC /* CheckIfBlockedOp.swift */,
+				B7FC2DA122722B520086CC3B /* SaveCoreDataOperation.swift */,
+				B7FC2DA522722B620086CC3B /* UpdateUserOperation.swift */,
+				B7FC2DA722722B6C0086CC3B /* UploadPlacesOperation.swift */,
+				B72E239D228896F1002CA1EC /* AddFollowerUIDToTrip.swift */,
+				B737CD71228B58D50007FF80 /* UploadTripPhotoOp.swift */,
+				B7FC2DAF22728F710086CC3B /* SavePlaceOperation.swift */,
+				B7FC2DA322722B590086CC3B /* SavePhotoOperation.swift */,
+				B7387FFF2285097A00D875AA /* AddPhotoPathToCrumbOp.swift */,
+				B73880012285192A00D875AA /* AddCrumbUIDsToTrip.swift */,
+				B72E23992285C49A002CA1EC /* UpdateReceiverOp.swift */,
+				B7FC2DAB22722B7B0086CC3B /* TaskCompleteOp.swift */,
+				B7FC2DAD22722B810086CC3B /* SaveTripContext.swift */,
+				B720BCFB22934EE400C1AC34 /* TripContextProtocol.swift */,
+			);
+			path = "Save Trip Operations";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -626,11 +726,11 @@
 				B7C0AA0A2210FE6E0030A5B1 /* Poppins-ExtraBoldItalic.otf in Resources */,
 				B761071C2212378E001F79B6 /* Poppins-Medium.otf in Resources */,
 				B76107182212331D001F79B6 /* Poppins-ExtraLightItalic.otf in Resources */,
+				B7F898F2229DC3FD0012121A /* GenericScrollingLabelVC.xib in Resources */,
 				B7BA6FCC22009408004A3C70 /* Profile.storyboard in Resources */,
 				B7C0AA082210F9450030A5B1 /* Poppins-SemiBold.otf in Resources */,
 				B77E4F7320C835EF007EB266 /* Assets.xcassets in Resources */,
 				B7C0B59A220C75BB009FAAEB /* AddTrip.xib in Resources */,
-				B7B1A93C21CD319300544056 /* NoSharedTripsView.xib in Resources */,
 				B761071A22123634001F79B6 /* Poppins-ExtraLight.otf in Resources */,
 				B7C10CBA2020D19500818430 /* Main.storyboard in Resources */,
 				B7C83FC121C1F88700A9F86C /* LoadingView.xib in Resources */,
@@ -643,6 +743,7 @@
 				B73804F52224E37B00CD9E59 /* AddCrumb.xib in Resources */,
 				B7BA6F5521F82424004A3C70 /* TripDetailCell.xib in Resources */,
 				B7F88E2C223D4B2100BD16DC /* ImageCollectionViewCell.xib in Resources */,
+				B720BCFE229799C600C1AC34 /* Poppins-Bold.otf in Resources */,
 				B761071B2212378C001F79B6 /* Poppins-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -657,17 +758,27 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MyTravels/Pods-MyTravels-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/PSOperations/PSOperations.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PSOperations.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -701,8 +812,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B73880022285192A00D875AA /* AddCrumbUIDsToTrip.swift in Sources */,
 				B7B0C3702037446E0031A92A /* SharedPlace.swift in Sources */,
 				B7C0E3CC22349A2D00438299 /* TripListVC.swift in Sources */,
+				B7FC2DAE22722B810086CC3B /* SaveTripContext.swift in Sources */,
 				B7073BE520DAF03D001B1F9F /* AddACrumbTableViewCell.swift in Sources */,
 				B7DA1B6F202E140C0007497A /* Trip+CoreDataClass.swift in Sources */,
 				B7C83FC521C1FA3B00A9F86C /* LoadingView.swift in Sources */,
@@ -711,26 +824,39 @@
 				B7F75C0B2058523300C876A0 /* FeaturesViewController.swift in Sources */,
 				B7C0B596220BC2EF009FAAEB /* PlaceType+CoreDataClass.swift in Sources */,
 				B73804FB2224EA3700CD9E59 /* AddCrumbViewController.swift in Sources */,
-				B7B1A93E21CD334700544056 /* NoSharedTripsView.swift in Sources */,
+				B7FC2DA222722B520086CC3B /* SaveCoreDataOperation.swift in Sources */,
+				B72E239E228896F1002CA1EC /* AddFollowerUIDToTrip.swift in Sources */,
 				B7F88E32223DB3DB00BD16DC /* CrumbDetailVC.swift in Sources */,
+				B7FC2DAC22722B7B0086CC3B /* TaskCompleteOp.swift in Sources */,
+				B737CD7F229217370007FF80 /* UpdateTripOp.swift in Sources */,
 				B7D652432027F5C300E975F1 /* CreateTripTableViewController.swift in Sources */,
+				B72E23A32289196A002CA1EC /* CheckIfBlockedOp.swift in Sources */,
 				B7C10CCF2020FD4B00818430 /* TripController.swift in Sources */,
+				B7F898F0229D9A030012121A /* FMImage.swift in Sources */,
 				B7C0B597220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift in Sources */,
 				B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */,
 				B7D652392024E24A00E975F1 /* TypeSelectionViewController.swift in Sources */,
+				B737CD7C22920C5A0007FF80 /* UpdateTripGroupOp.swift in Sources */,
 				B7655AF922273B3D002D33F7 /* FMTextField.swift in Sources */,
 				B7C0E3C8223458A700438299 /* Trip+CrumbProtocols.swift in Sources */,
 				B70E7D1921F408C100B2228A /* Photo+CoreDataProperties.swift in Sources */,
 				B7F7CF44217685150097198C /* SharedPlaceController.swift in Sources */,
 				B7655B2A22277B9B002D33F7 /* SignUpVC.swift in Sources */,
+				B737CD8322921EDE0007FF80 /* UpdateTripPhotoGroupOp.swift in Sources */,
 				B7DA1B78202E1AE20007497A /* InternalUser.swift in Sources */,
+				B7336E8722632A9500143812 /* FireErrors.swift in Sources */,
 				B70E7D1521F408A000B2228A /* Photo+CoreDataClass.swift in Sources */,
 				B7F75C20205A14D800C876A0 /* SharedTripDetailTableViewCell.swift in Sources */,
 				B7B0C36E203724F30031A92A /* SharedTrip.swift in Sources */,
+				B72E239A2285C49A002CA1EC /* UpdateReceiverOp.swift in Sources */,
 				B711157920549859000868BD /* TripDetailTableViewCell.swift in Sources */,
+				B737CD76228C90250007FF80 /* CrumbObjectManager.swift in Sources */,
+				B7F898F4229DC6C70012121A /* GenericScrollingLabelViewController.swift in Sources */,
 				B71248D4222A292B00D6C4A5 /* ViewControllerProtocols.swift in Sources */,
 				B7DA1B822030E70C0007497A /* SearchViewController.swift in Sources */,
 				B7F75C07205842E600C876A0 /* OnboardingPageViewController.swift in Sources */,
+				B73880002285097A00D875AA /* AddPhotoPathToCrumbOp.swift in Sources */,
+				B7FC2DA422722B590086CC3B /* SavePhotoOperation.swift in Sources */,
 				B7DA1B7D202E2B900007497A /* InternalUserController.swift in Sources */,
 				B7655AFD22274182002D33F7 /* FMTextView.swift in Sources */,
 				B7F88E38223F2E4000BD16DC /* BasicTableViewCell.swift in Sources */,
@@ -739,12 +865,15 @@
 				B7F75C0D205871ED00C876A0 /* SharedTripsListViewController.swift in Sources */,
 				B7F88E3A224085A200BD16DC /* EditProfileViewController.swift in Sources */,
 				B7D652412026DF0E00E975F1 /* PlaceDetailTableViewController.swift in Sources */,
-				B7336E812262D93A00143812 /* FirebaseService.swift in Sources */,
+				B720BCFC22934EE400C1AC34 /* TripContextProtocol.swift in Sources */,
+				B7336E812262D93A00143812 /* FirestoreService.swift in Sources */,
 				B7C10CB72020D19500818430 /* CreateAccountViewController.swift in Sources */,
 				B7F75C092058521C00C876A0 /* ExplanationViewController.swift in Sources */,
 				B7BDA845202A29F50080B81B /* EditPlaceTableViewController.swift in Sources */,
 				B7C10CB52020D19500818430 /* AppDelegate.swift in Sources */,
 				B7F88E2E223D4C0E00BD16DC /* ImageCollectionViewCell.swift in Sources */,
+				B7FC2DA822722B6C0086CC3B /* UploadPlacesOperation.swift in Sources */,
+				B737CD78228F114F0007FF80 /* SaveTripOperation.swift in Sources */,
 				B7AC4088221B681600645BC2 /* TripDetailVC.swift in Sources */,
 				B7FBD1AA2028E38900AA9738 /* PhotoCollectionViewCell.swift in Sources */,
 				B7C10CD12020FD5500818430 /* PlaceController.swift in Sources */,
@@ -755,10 +884,14 @@
 				B735428D2174E36300D9A68D /* Trip+CoreDataProperties.swift in Sources */,
 				B725034F20D9B64C00744B23 /* ProfileViewController.swift in Sources */,
 				B7C10CCD2020EFB000818430 /* TripTableViewCell.swift in Sources */,
-				B7C0B59C220CB393009FAAEB /* AddTripViewController.swift in Sources */,
+				B7C0B59C220CB393009FAAEB /* AddTripVC.swift in Sources */,
+				B737CD8122921ACF0007FF80 /* UpdateTripContext.swift in Sources */,
 				B7C0E3C42232EDC300438299 /* SharedTripDataSourceAndDelegate.swift in Sources */,
-				B7C0E3CE22349F8F00438299 /* MainTabBarController.swift in Sources */,
+				B7336E8322631D5200143812 /* FirebaseStorageService.swift in Sources */,
+				B737CD74228C85870007FF80 /* TripObjectManager.swift in Sources */,
+				B7336E8522631DE000143812 /* FirebaseAuthService.swift in Sources */,
 				B76B2F722245D50F00E688F4 /* EmptyTripStateView.swift in Sources */,
+				B7504D3222A87C810002D11E /* Coordinator.swift in Sources */,
 				B762265521EFC9510045F260 /* FirebaseSyncable.swift in Sources */,
 				B7DA1B71202E140C0007497A /* Place+CoreDataClass.swift in Sources */,
 				B7DA1B72202E140C0007497A /* Place+CoreDataProperties.swift in Sources */,
@@ -767,16 +900,21 @@
 				B796DD3A204B5F9500CAF093 /* MapViewController.swift in Sources */,
 				B7D6523D202620E700E975F1 /* PlaceTableViewCell.swift in Sources */,
 				B75E335C20D3150500839678 /* SignUpViewController.swift in Sources */,
+				B737CD7A2291DA760007FF80 /* FMCloseButton.swift in Sources */,
 				B75E335E20D316DD00839678 /* TextFieldTableViewCell.swift in Sources */,
 				B71248D6222B60DB00D6C4A5 /* FMLineView.swift in Sources */,
 				B7C0E3C22232EDBA00438299 /* TripDataSourceAndDelegate.swift in Sources */,
 				B76B2F6C22432B6500E688F4 /* OnboardingParentViewController.swift in Sources */,
+				B7FC2DA622722B620086CC3B /* UpdateUserOperation.swift in Sources */,
 				B7AC408A221B6C0100645BC2 /* CrumbTableViewCell.swift in Sources */,
+				B7FC2DB022728F710086CC3B /* SavePlaceOperation.swift in Sources */,
 				B77E4F7120C6D482007EB266 /* Extensions.swift in Sources */,
 				B7D6523F2026526700E975F1 /* ViewControllerExtensions.swift in Sources */,
+				B7336E892263E9E000143812 /* CacheManager.swift in Sources */,
 				B7C10CD3202111A300818430 /* CoreDataStack.swift in Sources */,
 				B7DA1B7F202F9FBC0007497A /* FetchViewController.swift in Sources */,
 				B774A1C621BDA85E008D7483 /* Constants.swift in Sources */,
+				B737CD72228B58D50007FF80 /* UploadTripPhotoOp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -917,6 +1055,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W53Z73CT67;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -936,6 +1075,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W53Z73CT67;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

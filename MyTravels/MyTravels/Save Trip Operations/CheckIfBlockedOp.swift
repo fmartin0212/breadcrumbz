@@ -1,0 +1,78 @@
+//
+//  CheckIfBlockedOp.swift
+//  MyTravels
+//
+//  Created by Frank Martin on 5/12/19.
+//  Copyright © 2019 Frank Martin Jr. All rights reserved.
+//
+
+import Foundation
+import PSOperations
+
+class CheckIfBlockedOp: GroupOperation {
+    let receiverUsername: String
+    let context: SaveTripContext
+    
+    init(receiverUsername: String, context: SaveTripContext) {
+        self.receiverUsername = receiverUsername
+        self.context = context
+        
+        let fetchReceiverOp = FetchReceiverOp(receiverUsername: receiverUsername, context: context)
+        let checkIfLoggedInUserBlockedOp = CheckIfLoggedInUserBlockedOp(context: context)
+        let addTripIDToReceiverOp = AddTripIDToReceiverOp(context: context)
+        checkIfLoggedInUserBlockedOp.addDependency(fetchReceiverOp)
+        addTripIDToReceiverOp.addDependency(checkIfLoggedInUserBlockedOp)
+        super.init(operations: [fetchReceiverOp, checkIfLoggedInUserBlockedOp, addTripIDToReceiverOp])
+    }
+}
+
+class FetchReceiverOp: PSOperation {
+    let receiverUsername: String
+    let context: SaveTripContext
+    
+    init(receiverUsername: String, context: SaveTripContext) {
+        self.receiverUsername = receiverUsername
+        self.context = context
+        super.init()
+    }
+    
+    override func execute() {
+        context.firestoreService.fetch(uuid: nil, field: "username", criteria: receiverUsername, queryType: .fieldEqual) { [weak self] (result: Result<[InternalUser], FireError>) in
+            switch result {
+            case .success(let receiverUserArray):
+                guard let receiver = receiverUserArray.first else { self?.finish() ; return }
+                self?.context.receiver = receiver
+                self?.finish()
+            case .failure(let error):
+                self?.context.error = error
+                self?.finish()
+            }
+        }
+    }
+}
+
+class CheckIfLoggedInUserBlockedOp: PSOperation {
+
+    let context: SaveTripContext
+    
+    init(context: SaveTripContext) {
+        self.context = context
+        super.init()
+    }
+    
+    override func execute() {
+        guard context.error == nil,
+            let receiver = context.receiver,
+            let receiversBlockedUIDs = receiver.blockedUserIDs,
+            receiversBlockedUIDs.count != 0,
+            let loggedInUser = InternalUserController.shared.loggedInUser,
+            let loggedInUserUID = loggedInUser.uuid
+            else { finish() ; return }
+        if receiversBlockedUIDs.contains(loggedInUserUID) {
+            context.error = .loggedInUserBlocked
+            finish()
+        } else {
+            finish()
+        }
+    }
+}

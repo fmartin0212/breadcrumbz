@@ -13,16 +13,20 @@ import CoreData
 final class CoreDataManager {
   
     static func save() {
-        do {
-            try CoreDataStack.context.save()
-        } catch let error {
-            print("Error saving Managed Object Context: \(error)")
+        DispatchQueue.main.async {
+            do {
+                try CoreDataStack.context.save()
+            } catch let error {
+                print("Error saving Managed Object Context: \(error)")
+            }
         }
     }
     
     static func delete<T: NSManagedObject>(object: T) {
-            object.managedObjectContext?.delete(object)
+        DispatchQueue.main.async {
+            CoreDataStack.context.delete(object)
             save()
+        }
     }
 }
 

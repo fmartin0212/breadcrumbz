@@ -9,7 +9,8 @@
 import UIKit
 import FirebaseDatabase
 
-class InternalUser: FirebaseDBSavable, FirebaseDBRetrievable {
+class InternalUser: FirebaseDBSavable, FirestoreSavable, FirestoreRetrievable, FirebaseDBRetrievable {
+    internal static var collectionName: String = "User"
     
     let firstName: String
     let lastName: String?
@@ -17,7 +18,7 @@ class InternalUser: FirebaseDBSavable, FirebaseDBRetrievable {
     let email: String
     var photoURL: String?
     var photo: UIImage?
-    var participantTripIDs: [String]?
+    var tripsFollowingUIDs: [String]?
     var blockedUserIDs: [String]?
     var sharedTripIDs: [String]?
     
@@ -55,25 +56,24 @@ class InternalUser: FirebaseDBSavable, FirebaseDBRetrievable {
         self.email = email
         self.uuid = uuid
         
-        if let photoURL = dictionary["photoURL"] as? String {
+        if let photoURL = dictionary["photoPath"] as? String {
             self.photoURL = photoURL
-            InternalUserController.shared.fetchProfilePhoto(from: photoURL) { (photo) in
-                guard let photo = photo else { return }
-                self.photo = photo
-                NotificationCenter.default.post(Notification(name: Notification.Name("profilePictureUpdatedNotification")))
-            }
+//            InternalUserController.shared.fetchProfilePhoto(from: photoURL) { (result   ) in
+//                self.photo = photo
+//                NotificationCenter.default.post(Notification(name: Notification.Name("profilePictureUpdatedNotification")))
+//            }
         }
         
-        if let participantTripIDs = dictionary["participantTripIDs"] as? [String : Any] {
-            self.participantTripIDs = participantTripIDs.compactMap { $0.key }
+        if let tripsFollowingUIDs = dictionary["tripsFollowingUIDs"] as? [String] {
+            self.tripsFollowingUIDs = tripsFollowingUIDs.compactMap { $0 }
         }
         
-        if let blockedUserIDs = dictionary["blockedUserIDs"] as? [String : Any] {
-            self.blockedUserIDs = blockedUserIDs.compactMap { $0.key }
+        if let blockedUserIDs = dictionary["blockedUserUIDs"] as? [String] {
+            self.blockedUserIDs = blockedUserIDs.compactMap { $0 }
         }
         
-        if let sharedTripIDs = dictionary["sharedTripIDs"] as? [String : Any] {
-            self.sharedTripIDs = sharedTripIDs.compactMap { $0.key }
+        if let sharedTripIDs = dictionary["sharedTripIDs"] as? [String] {
+            self.sharedTripIDs = sharedTripIDs.compactMap { $0 }
         }
     }
     
@@ -89,7 +89,6 @@ class InternalUser: FirebaseDBSavable, FirebaseDBRetrievable {
             
             else { return nil }
         
-        
         self.firstName = firstName
         self.lastName = lastName
         self.username = username
@@ -97,18 +96,14 @@ class InternalUser: FirebaseDBSavable, FirebaseDBRetrievable {
         
         if let photoURL = tripDict["photoURL"] as? String {
             self.photoURL = photoURL
-            InternalUserController.shared.fetchProfilePhoto(from: photoURL) { (photo) in
-                guard let photo = photo else { return }
-                self.photo = photo
-            }
         }
         
-        if let participantTripIDs = tripDict["participantTripIDs"] as? [String : Any] {
-            self.participantTripIDs = participantTripIDs.compactMap { $0.key }
+        if let participantTripIDs = tripDict["tripsFollowingUIDs"] as? [String] {
+            self.tripsFollowingUIDs = participantTripIDs.compactMap { $0 }
         }
         
-        if let blockedUserIDs = tripDict["blockedUserIDs"] as? [String : Any] {
-            self.blockedUserIDs = blockedUserIDs.compactMap { $0.key }
+        if let blockedUserIDs = tripDict["blockedUserIDs"] as? [String] {
+            self.blockedUserIDs = blockedUserIDs.compactMap { $0}
         }
         
     }

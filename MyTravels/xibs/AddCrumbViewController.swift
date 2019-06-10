@@ -88,12 +88,10 @@ class AddCrumbViewController: UIViewController, ScrollableViewController {
             !name.isEmpty,
             let address = addressTextField.text,
             !address.isEmpty,
-            // FIXME : -
-            let placeType = Place.types(rawValue: "restaurant"),
             let trip = trip
         else { return }
         
-        let place = PlaceController.shared.createNewPlaceWith(name: name, type: placeType, address: address, comments: commentsTextView.text, rating: 0, trip: trip as! Trip)
+        let place = PlaceController.shared.createNewPlaceWith(name: name, type: type, address: address, comments: commentsTextView.text, rating: 0, trip: trip as! Trip)
         PhotoController.shared.add(photos: self.photos, place: place)
         self.dismiss(animated: true, completion: nil)
         
@@ -123,7 +121,7 @@ extension AddCrumbViewController {
     }
     
     func setType(for button: UIButton) {
-        guard let typeString = button.restorationIdentifier,
+        guard let typeString = button.titleLabel?.text?.lowercased(),
             let type = Place.types(rawValue: typeString)
             else { return }
         
@@ -144,6 +142,9 @@ extension AddCrumbViewController {
             NSLayoutConstraint(item: checkmarkView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 16),
             NSLayoutConstraint(item: checkmarkView, attribute: .width, relatedBy: .equal, toItem: checkmarkView, attribute: .height, multiplier: 1.0, constant: 0)
             ])
+        UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+            self.checkmarkView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        }, completion: nil)
     }
 }
 
@@ -224,7 +225,10 @@ extension AddCrumbViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
         if indexPath.row > 0 {
-            cell.addPhotoButton.setImage(UIImage(named: "uploadcloudonly"), for: .normal)
+            cell.addPhotoButton.setImage(UIImage(named: "imageDefault"), for: .normal)
+            cell.addPhotoButton.contentHorizontalAlignment = .center
+            cell.addPhotoButton.contentVerticalAlignment = .center
+            cell.addPhotoButton.imageView?.contentMode = .center
         }
         
         cell.delegate = self
@@ -239,11 +243,11 @@ extension AddCrumbViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == 0 {
-            return CGSize(width: collectionView.frame.width, height: 200)
+            return CGSize(width: collectionView.frame.width, height: (collectionView.frame.width) * 0.70)
         } else {
             let width = collectionView.frame.width / 3
             let minSpacInterimSpacing: CGFloat = 8
-            return CGSize(width: width - minSpacInterimSpacing, height: width)
+            return CGSize(width: width - minSpacInterimSpacing, height: (collectionView.frame.width) * 0.30)
         }
     }
     

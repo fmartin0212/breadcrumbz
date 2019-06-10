@@ -35,7 +35,8 @@ extension UIViewController {
         self.present(tripListNavigationController, animated: true, completion: nil)
     }
     
-    @discardableResult func presentLoadingView() -> LoadingView {
+    @discardableResult
+    fileprivate func presentLoadingView() -> LoadingView {
         
         // Initialize the loading view.
         let loadingView: LoadingView = UIView.fromNib()
@@ -54,19 +55,21 @@ extension UIViewController {
         return loadingView
     }
     
-    func toggleEnabledNavBarItems() {
+    fileprivate func toggleEnabledNavBarItems() {
         guard let navigationController = navigationController else { return }
         navigationController.navigationBar.isUserInteractionEnabled = !navigationController.navigationBar.isUserInteractionEnabled
+        print("nav bar toggled")
     }
     
-    func toggleEnabledTabBarItems() {
+    fileprivate func toggleEnabledTabBarItems() {
         guard let tabBarController = tabBarController else { return }
         tabBarController.tabBar.isUserInteractionEnabled = !tabBarController.tabBar.isUserInteractionEnabled
+        print("tab bar toggled")
     }
     
     @discardableResult func enableLoadingState() -> LoadingView {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         let loadingView = presentLoadingView()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         toggleEnabledNavBarItems()
         toggleEnabledTabBarItems()
         return loadingView
@@ -78,6 +81,7 @@ extension UIViewController {
         toggleEnabledTabBarItems()
         loadingView.removeFromSuperview()
     }
+    
     
     func presentStandardAlertController(withTitle title: String, message: String, completion: (() -> Void)? = nil) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -117,6 +121,10 @@ extension UIImage {
         return renderer.image { rendererContext in
             draw(in: CGRect(origin: .zero, size: newSize))
         }
+    }
+    
+    func addToImageCache(path: String) {
+        CacheManager.shared.addImage(path: path, image: self)
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ProfileViewController: UIViewController {
 
@@ -19,10 +20,12 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var logOutButton: UIButton!
+    @IBOutlet weak var photoBackgroundView: UIView!
     @IBOutlet weak var profilePhoto: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        formatViews()
         updateViews()
         title = "Profile"
         let basicCell = UINib(nibName: "BasicTableViewCell", bundle: nil)
@@ -30,15 +33,6 @@ class ProfileViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
     }
-        
-    // MARK: - Actions
-//    
-//    @IBAction func profileButtonTapped(_ sender: Any) {
-//        let imagePickerController = UIImagePickerController()
-//        imagePickerController.allowsEditing = true
-//        imagePickerController.delegate = self
-//        present(imagePickerController, animated: true, completion: nil)
-//    }
     
     @IBAction func logOutButtonTapped(_ sender: Any) {
         let confirmationAlertController = UIAlertController(title: "Log out", message: "Are you sure you would like to log out?", preferredStyle: .alert)
@@ -62,6 +56,12 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController {
     
+    func formatViews() {
+        photoBackgroundView.layer.cornerRadius = photoBackgroundView.frame.width / 2
+        photoBackgroundView.layer.borderColor = UIColor.black.cgColor
+        photoBackgroundView.layer.borderWidth = 1
+    }
+    
     func updateViews() {
         guard let loggedInUser = InternalUserController.shared.loggedInUser else { return }
         
@@ -70,17 +70,27 @@ extension ProfileViewController {
         tripsLoggedLabel.text = "\(TripController.shared.trips.count)"
         tripsSharedLabel.text = "\(loggedInUser.sharedTripIDs?.count ?? 0)"
         
-        if let photo = loggedInUser.photo {
-            profilePhoto.clipsToBounds = true
-            profilePhoto.layer.cornerRadius = profilePhoto.frame.width / 2
-            profilePhoto.contentMode = .scaleAspectFill
-            profilePhoto.image = photo
-            
-        }
+        guard let loggedInUserPhotoUID = loggedInUser.photoURL else { return }
+        PhotoController.shared.fetchPhoto(withPath: loggedInUserPhotoUID, completion: { [weak self] (result) in
+            switch result {
+            case .success(let photo):
+                DispatchQueue.main.async {
+                    self?.profilePhoto.clipsToBounds = true
+                    self?.profilePhoto.layer.cornerRadius = (self?.profilePhoto.frame.width)! / 2
+                    self?.profilePhoto.contentMode = .scaleAspectFill
+                    self?.profilePhoto.image = photo
+                    self?.profilePhoto.image = photo
+                    self?.photoBackgroundView.layer.borderWidth = 0
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        })
     }
     
     func clearViews() {
-        profilePhoto.image = UIImage(named:"ProfileTabBarButton_Unselected")
+        profilePhoto.image = UIImage(named:"User")
+        profilePhoto.contentMode = .center
         usernameLabel.text = ""
         nameLabel.text = ""
     }
@@ -89,7 +99,7 @@ extension ProfileViewController {
 extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,16 +109,16 @@ extension ProfileViewController: UITableViewDataSource {
         case 0:
             cell.basicLabel.text = "Edit Profile"
             cell.accessoryType = .disclosureIndicator
+//        case 1:
+//            cell.basicLabel.text = "Location"
+//            cell.basicSwitch.isHidden = false
+//        case 2:
+//            cell.basicLabel.text = "Push Notifications"
+//            cell.basicSwitch.isHidden = false
         case 1:
-            cell.basicLabel.text = "Location"
-            cell.basicSwitch.isHidden = false
-        case 2:
-            cell.basicLabel.text = "Push Notifications"
-            cell.basicSwitch.isHidden = false
-        case 3:
             cell.basicLabel.text = "Terms of Service"
             cell.accessoryType = .disclosureIndicator
-        case 4:
+        case 2:
             cell.basicLabel.text = "Privacy Policy"
             cell.accessoryType = .disclosureIndicator
         default:
@@ -123,9 +133,17 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            let editProfileVC = UIStoryboard.profile.instantiateViewController(withIdentifier: "EditProfile")
+            guard let editProfileVC = UIStoryboard.profile.instantiateViewController(withIdentifier: "EditProfile") as? EditProfileViewController else { return }
+            if let image = profilePhoto.image {
+                editProfileVC.profileImage = image
+            }
             navigationController?.pushViewController(editProfileVC, animated: true)
-        // FIXME: - Need to add for terms of service & privacy policy
+        case 1:
+            let genericScrollingLabelVC = GenericScrollingLabelViewController(legalInfo: .termsOfService, nibName: "GenericScrollingLabelVC")
+            navigationController?.pushViewController(genericScrollingLabelVC, animated: true)
+        case 2:
+             let genericScrollingLabelVC = GenericScrollingLabelViewController(legalInfo: .privacyPolicy, nibName: "GenericScrollingLabelVC")
+            navigationController?.pushViewController(genericScrollingLabelVC, animated: true)
         default:
             return
         }

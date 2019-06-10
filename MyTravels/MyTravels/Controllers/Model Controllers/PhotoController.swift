@@ -24,8 +24,15 @@ final class PhotoController {
         
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
     }()
+    private let firebaseStorageService: FirebaseStorageServiceProtocol
+    private let firestoreService: FirestoreServiceProtocol
     
     var photos: [Photo] = []
+    
+    init() {
+        self.firebaseStorageService = FirebaseStorageService()
+        self.firestoreService = FirestoreService()
+    }
     
     // CRUD Functions
     
@@ -97,95 +104,40 @@ final class PhotoController {
      - parameter completion: A completion block that passes a boolean which informs the caller of whether the photos were successfully saved to Firebase Storage.
      */
     func savePhotos(for trip: Trip,
-                    completion: @escaping (Bool) -> Void) {
+                    completion: @escaping (Result<Bool, FireError>) -> Void) {
         
         // Save the trip photo to the database reference.
-        saveTripPhoto(trip) { (success) in
-            if success {
-                
-                // Save the trip's places' photos.
-                //                self.savePlacePhotos(for: trip, completion: { (success) in
-                completion(true)
-                //                })
+        saveTripPhoto(trip) { (result) in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(_):
+                completion(.success(true))
             }
         }
     }
     
+    
     func saveTripPhoto(_ trip: Trip,
-                       completion: @escaping (Bool) -> Void) {
+                       completion: @escaping (Result<Bool, FireError>) -> Void) {
         
-        guard let tripPhoto = trip.photo else { completion(true) ; return }
+        guard let tripPhoto = trip.photo else { completion(.failure(.generic)) ; return }
         
-        FirebaseManager.save(tripPhoto) { (metadata, errorMessage) in
-            if let _ = errorMessage {
-                completion(false)
-            } else if let metadata = metadata {
-                metadata.downloadURL()
-                let children = [Constants.photoID]
-                let values = [tripPhoto.uid : true]
-                
-                FirebaseManager.update(trip, atChildren: children, withValues: values, completion: { (errorMessage) in
-                    if let _ = errorMessage {
-                        completion(false)
-                        return
-                    } else {
-                        completion(true)
+        firebaseStorageService.save(tripPhoto) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let path):
+                self?.firestoreService.update(object: trip, fieldsAndCriteria: ["photoUID" : path], with: .update, completion: { (result) in
+                    switch result {
+                    case .failure(let error):
+                        completion(.failure(error))
+                    case .success(_):
+                        completion(.success(true))
                     }
                 })
             }
         }
-    }
-    
-    func savePlacePhotos(for trip: Trip,
-                         completion: @escaping (Bool) -> Void) {
-        // FIXME : - Need to update completions/error messages
-        if let places = trip.places?.allObjects as? [Place] {
-            
-            for place in places {
-                
-                if let photos = place.photos?.allObjects as? [Photo] {
-                    
-                    let dispatchGroup = DispatchGroup()
-                    
-                    let photoDictionary = [String : Any]()
-                    
-                    for photo in photos {
-                        
-                        dispatchGroup.enter()
-                        
-                        FirebaseManager.save(photo) { (metadata, errorMessage) in
-                            if let _ = errorMessage {
-                                
-                            }
-                            
-                            let value: [String : Any] = [photo.uid : metadata?.downloadURL()?.absoluteString as Any]
-                            
-                            dispatchGroup.enter()
-                            
-                            let databaseRef = Constants.databaseRef.child(Constants.trip).child(trip.uid!).child(Constants.places).child(place.name)
-                            
-                            FirebaseManager.updateObject(at: databaseRef, value: value, completion: { (errorMessage) in
-                                if let _ = errorMessage {
-                                    
-                                }
-                            })
-                            FirebaseManager.save(photoDictionary, to: databaseRef, completion: { (error) in
-                                if let error = error {
-                                    print(error)
-                                    
-                                }
-                                dispatchGroup.leave()
-                            })
-                            dispatchGroup.leave()
-                        }
-                    }
-                    dispatchGroup.notify(queue: .main) {
-                        completion(true)
-                    }
-                }
-            }
-        }
-        completion(true)
     }
     
     func savePhotos(for place: Place,
@@ -193,65 +145,131 @@ final class PhotoController {
         guard let photos = place.photos?.allObjects as? [Photo] else { completion(false) ; return }
         
         let dispatchGroup = DispatchGroup()
-        var photoDict: [String : Any] = [:]
-        var int = 0
         for photo in photos {
-            int += 1
             dispatchGroup.enter()
-            FirebaseManager.save(photo) { (metadata, _) in
-                if let metadata = metadata {
-                    let downloadURL = metadata.downloadURL()?.absoluteString
-                    photoDict[String(int)] = downloadURL!
+            firebaseStorageService.save(photo) { [weak self] (result) in
+                switch result {
+                case .failure(let error):
+                    print("Error saving crumb photo: \(error.localizedDescription)")
+                    dispatchGroup.leave()
+                case .success(let path):
+                    dispatchGroup.enter()
+                    self?.firestoreService.update(object: place, fieldsAndCriteria: ["photoPaths" : [path]], with: .arrayAddition, completion: { (result) in
+                        switch result {
+                        case .failure(let error):
+                            print("Error updating crumb: \(error.localizedDescription)")
+                            dispatchGroup.leave()
+                        case .success(_):
+                            dispatchGroup.leave()
+                        }
+                    })
                 }
-                dispatchGroup.leave()
             }
         }
         dispatchGroup.notify(queue: .main) {
-            let child = "photoURLs"
-            FirebaseManager.update(place, atChildren: [child], withValues: photoDict, completion: { (errorMessage) in
-                if let _ = errorMessage {
-                    completion(false)
-                } else {
-                    completion(true)
-                }
-            })
+            completion(true)
         }
     }
     
-    func fetchPhotos(for crumb: CrumbObject, completion: @escaping ([UIImage]?) -> Void) {
+    func fetchPhoto(for trip: TripObject, completion: @escaping (Result<UIImage, FireError>) -> Void) {
+        if let sharedTrip = trip as? SharedTrip {
+            if let photoUID = sharedTrip.photoUID,
+                photoUID != "" {
+                fetchPhoto(withPath: photoUID) { (result) in
+                    switch result {
+                    case .success(let photo):
+                        completion(.success(photo))
+                    case .failure(_):
+                        print("Something went wrong fetching a trip's photo")
+                    }
+                }
+            } else {
+                completion(.failure(.generic))
+            }
+        } else {
+            let trip = trip as! Trip
+            guard let photo = trip.photo else { completion(.failure(.generic)) ; return }
+            completion(.success(photo.image))
+        }
+    }
+    
+    func fetchPhotos(for crumb: CrumbObject, completion: @escaping (Result<[UIImage], FireError>) -> Void) {
         if let crumb = crumb as? Place,
             let photosObjects = crumb.photos?.allObjects as? [Photo],
             photosObjects.count >= 1 {
             let photos = photosObjects.compactMap { UIImage(data: $0.data) }
-            completion(photos)
+            completion(.success(photos))
             return
         }
         guard let sharedCrumb = crumb as? SharedPlace,
-            let photoURLs = sharedCrumb.photoURLs,
-            photoURLs.count > 0
-            else { completion(nil) ; return }
-        var photos: [UIImage] = []
+            let photoPaths = sharedCrumb.photoUIDs,
+            photoPaths.count > 0
+            else { completion(.failure(.generic)) ; return }
+        var photoDatum: [Data] = []
         let dispatchGroup = DispatchGroup()
-        for photoURL in photoURLs {
+        for photoPath in photoPaths {
             dispatchGroup.enter()
-            let dataTask = URLSession.shared.dataTask(with: URL(string: photoURL)!) { (data, _, error) in
-                if let _ = error {
+            firebaseStorageService.fetchFromStorage(path: photoPath) { (result) in
+                switch result {
+                case .failure(_):
+                    dispatchGroup.leave()
+                case .success(let photoData):
+                    photoDatum.append(photoData)
                     dispatchGroup.leave()
                 }
-                guard let data = data,
-                    let photo = UIImage(data: data)
-                    else { return }
-                photos.append(photo)
-                dispatchGroup.leave()
-                
             }
-            dataTask.resume()
         }
-        
         dispatchGroup.notify(queue: .main) {
-            completion(photos)
+            let photos = photoDatum.compactMap { UIImage(data: $0) }
+            completion(.success(photos))
         }
     }
+    
+    func fetchPhoto(withPath path: String,
+                    completion: @escaping (Result<UIImage, FireError>) -> Void) {
+        firebaseStorageService.fetchFromStorage(path: path) { (result) in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let data):
+                guard let image = UIImage(data: data) else { completion(.failure(.generic)) ; return }
+                image.addToImageCache(path: path)
+                completion(.success(image))
+            }
+        }
+    }
+    
+    func savePhoto(photo: UIImage,
+                   for user: InternalUser,
+                   completion: @escaping (Result<Bool, FireError>) -> Void) {
+        guard let imageAsData = photo.jpegData(compressionQuality: 0.1),
+            let loggedInUserUID = user.uuid
+            else { completion(.failure(.generic)) ; return }
+        
+        let photo = Photo(photo: imageAsData, place: nil, trip: nil)
+        photo.uid = loggedInUserUID
+        firebaseStorageService.save(photo) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+            case .success(let path):
+                self?.firestoreService.update(object: user, fieldsAndCriteria: ["photoUID" : path], with: .update, completion: { (result) in
+                    switch result {
+                    case .failure(let error):
+                        completion(.failure(error))
+                    case .success(_):
+                        CoreDataManager.save()
+                        completion(.success(true))
+                    }
+                })
+            }
+        }
+    }
+    
+    func updatePhoto(for trip: Trip, with image: UIImage) {
+        
+    }
 }
+
 
 

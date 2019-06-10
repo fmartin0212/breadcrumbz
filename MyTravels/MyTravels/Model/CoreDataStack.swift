@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-enum CoreDataStack {
+struct CoreDataStack {
     
     // Init the stack with persistent container
     static let container: NSPersistentContainer = {
@@ -24,6 +24,12 @@ enum CoreDataStack {
     }()
     
     static var context : NSManagedObjectContext { return container.viewContext }
+    
+    static var updateContext: NSManagedObjectContext = {
+        let _updateContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        _updateContext.parent = CoreDataStack.context
+        return _updateContext
+    }()
 }
 
 

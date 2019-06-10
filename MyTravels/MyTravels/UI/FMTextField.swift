@@ -14,9 +14,9 @@ class FMTextField: UITextField {
         super.awakeFromNib()
         
         self.layer.cornerRadius = 4
-        self.borderStyle = .none
-       
+        
         // Border
+        self.borderStyle = .none
         self.layer.borderColor = UIColor.lightGray.cgColor
         self.layer.borderWidth = 0.3
         

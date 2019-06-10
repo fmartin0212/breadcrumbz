@@ -14,6 +14,7 @@ protocol TripObject {
     var endDate: NSDate { get set }
     var location: String { get set }
     var tripDescription: String? { get set }
+    var crumbCount: Int { get }
 }
 
 protocol CrumbObject {

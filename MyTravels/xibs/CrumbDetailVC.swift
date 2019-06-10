@@ -12,16 +12,10 @@ import MapKit
 class CrumbDetailVC: UIViewController {
     
     // MARK: - Properties
-    var crumb: CrumbObject? {
-        didSet {
-            loadViewIfNeeded()
-            updateViews()
-        }
-    }
+    
+    var crumb: CrumbObject
     
     var photos: [UIImage] = []
-    var cellIndex: Int = 0
-    var willDisplayCellIndex = 0
     
     @IBOutlet weak var imageCollectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
@@ -31,10 +25,11 @@ class CrumbDetailVC: UIViewController {
     @IBOutlet weak var comments: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(crumb: CrumbObject, nibName: String) {
+        self.crumb = crumb
+        super.init(nibName: nibName, bundle: nil)
     }
-    
+  
     required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
@@ -45,6 +40,7 @@ class CrumbDetailVC: UIViewController {
         imageCollectionView.dataSource = self
         imageCollectionView.delegate = self
         formatViews()
+        updateViews()
     }
     
     func formatViews() {
@@ -55,23 +51,25 @@ class CrumbDetailVC: UIViewController {
     }
     
     func updateViews() {
-        guard let crumb = crumb else { return }
         fetchPhotos(for: crumb)
         name.text = crumb.name
         address.text = crumb.address
-        comments.text = crumb.address
+        comments.text = crumb.comments
         type.text = crumb.type?.rawValue
         addAnnotation(for: crumb)
     }
     
     func fetchPhotos(for crumb: CrumbObject) {
-        PhotoController.shared.fetchPhotos(for: crumb) { (photos) in
-            guard let photos = photos  else { return }
-            self.photos = photos
-            
-            DispatchQueue.main.async {
-                self.pageControl.numberOfPages = photos.count
-                self.imageCollectionView.reloadData()
+        PhotoController.shared.fetchPhotos(for: crumb) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .success(let photos):
+                self?.photos = photos
+                DispatchQueue.main.async {
+                    self?.pageControl.numberOfPages = photos.count
+                    self?.imageCollectionView.reloadData()
+                }
             }
         }
     }
@@ -108,7 +106,8 @@ extension CrumbDetailVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath)
-       guard photos.count > 0 else { return UICollectionViewCell() }
+        guard photos.count > 0 else { return UICollectionViewCell() }
+        pageControl.currentPage = indexPath.row
         let photo = photos[indexPath.row]
         let photoImageView = UIImageView(image: photo)
         photoImageView.contentMode = .scaleAspectFill
@@ -129,28 +128,5 @@ extension CrumbDetailVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
-    }
-}
-
-extension CrumbDetailVC: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if willDisplayCellIndex == cellIndex {
-            cellIndex = indexPath.row
-            return
-        }
-      
-        var newIndex = cellIndex
-        print(cellIndex)
-        cellIndex < indexPath.row ? (newIndex -= 1) : (newIndex += 1)
-        print(newIndex)
-        pageControl.currentPage = newIndex
-        cellIndex = newIndex
-        print("willEndDisplay: \(indexPath.row)")
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        willDisplayCellIndex = indexPath.row
-        print("willDisplay: \(indexPath.row)")
     }
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import PSOperations
 
 class TripController {
     
@@ -16,13 +17,19 @@ class TripController {
     static var shared = TripController()
     var frc: NSFetchedResultsController<Trip> = {
         let fetchRequest: NSFetchRequest<Trip> = Trip.fetchRequest()
-        
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startDate", ascending: false)]
-        
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
     }()
     
     var trips: [Trip] = []
+    let firestoreService: FirestoreServiceProtocol
+    let firebaseStorageService: FirebaseStorageServiceProtocol
+    let operationQueue = PSOperationQueue()
+    
+    init() {
+        self.firestoreService = FirestoreService()
+        self.firebaseStorageService = FirebaseStorageService()
+    }
     
     // MARK: - CRUD Functions
     
@@ -47,6 +54,25 @@ class TripController {
         CoreDataManager.save()
         
         return trip
+    }
+    
+    func update(trip: Trip,
+                with photo: Photo?,
+                name: String,
+                location: String,
+                tripDescription: String?,
+                startDate: Date,
+                endDate: Date,
+                completion: @escaping (Result<Bool, FireError>) -> Void) {
+        trip.photo = photo
+        trip.name = name
+        trip.location = location
+        trip.tripDescription = tripDescription
+        trip.startDate = startDate as NSDate
+        trip.endDate = endDate as NSDate
+        
+        
+        
     }
     
     /**
@@ -84,44 +110,36 @@ class TripController {
      - parameter completion: A completion block which passes a boolean to inform the caller of whether the trip was successfully shared.
      */
     func share(trip: Trip,
-               withReceiver receiveUsername: String,
-               completion: @escaping (Bool) -> Void) {
+               withReceiver receiverUsername: String,
+               completion: @escaping (Result<Bool, FireError>) -> Void) {
         
         // Check for a logged in user
-        guard let loggedInUser = InternalUserController.shared.loggedInUser else { return completion(false) }
+        guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(.failure(.generic)) ; return }
         
-        // Check to see if the receiver has blocked the loggedInUser
-        self.checkIfBlocked(receiverUsername: receiveUsername) { (isBlocked) in
-            if isBlocked {
-                completion(false)
-                return
-            }
-            
-            if let tripID = trip.uid {
-                // Trip has already been saved to the database, only a child needs to be saved on the receiver.
-                self.addTripIDToReceiver(tripID: tripID, receiver: receiveUsername) { (success) in
-                    if success {
-                        completion(true)
-                        return
-                    } else {
-                        print("Something went wrong with adding a tripID to a user in: ", #function)
-                        completion(false)
-                    }
+        if trip.uid != nil {
+            // Trip has already been saved to the database, only a child needs to be saved on the receiver.
+            let shareTripOperation = ShareTripOperation(trip: trip, service: firestoreService, storageService: firebaseStorageService, receiverUsername: receiverUsername) { (result) in
+                switch result {
+                case .failure(let error):
+                    completion(.failure(error))
+                case .success(_):
+                    print("asd")
+                    completion(.success(true))
                 }
-            } else {
-                
-                // Trip has not been saved to the database, so we need to save a new Trip child and a child on the receiver.
-                let creatorName = loggedInUser.firstName
-                
-                self.upload(trip: trip, creatorName: creatorName) { (success) in
-                    if success {
-                        guard let tripID = trip.uid else { completion(false) ; return }
-                        self.addTripIDToReceiver(tripID: tripID, receiver: receiveUsername, completion: { (success) in
-                            if success {
-                                completion(true)
-                            }
-                        })
-                    }
+            }
+            operationQueue.addOperation(shareTripOperation)
+        } else {
+            
+            // Trip has not been saved to the database, so we need to save a new Trip child and a child on the receiver.
+            let creatorName = loggedInUser.firstName
+            
+            self.upload(trip: trip, receiverUUID: receiverUsername, creatorName: creatorName) { (result) in
+                switch result {
+                case .failure(let error):
+                    completion(.failure(error))
+                case .success(_):
+                    print("asd")
+                    completion(.success(true))
                 }
             }
         }
@@ -134,43 +152,16 @@ class TripController {
      - parameter completion: A completion block which passes a boolean to indicate whether the trip was successfully saved to the Firebase database.
      */
     func upload(trip: Trip,
+                receiverUUID: String,
                 creatorName: String,
-                completion: @escaping (Bool) -> Void) {
+                completion: @escaping (Result<Bool, FireError>) -> Void) {
         
-        FirebaseManager.save(trip) { (errorMessage, tripUUID) in
-            if let errorMessage = errorMessage {
-                print(errorMessage)
-                completion(false)
-                return
-            }
-            trip.uuid = tripUUID
-            trip.uid = trip.uuid
-            CoreDataManager.save()
-            
-            if let tripUUID = tripUUID {
-                let children = [Constants.sharedTripIDs]
-                let values = [tripUUID : true]
-                FirebaseManager.update(InternalUserController.shared.loggedInUser!, atChildren: children, withValues: values, completion: { (_) in
-                    
-                    // Save the trip's photos to Firebase storage.
-                    PhotoController.shared.savePhotos(for: trip, completion: { (success) in
-                        if success {
-                            PlaceController.shared.uploadPlaces(for: trip, completion: { (placeIDs) in
-                                let child = "placeIDs"
-                                FirebaseManager.update(trip, atChildren: [child], withValues: placeIDs, completion: { (errorMessage) in
-                                    if let _ = errorMessage {
-                                        completion(false)
-                                    } else {
-                                        completion(true)
-                                    }
-                                })
-                            })
-                            
-                        }
-                    })
-                })
-            }
-        }
+        guard InternalUserController.shared.loggedInUser != nil else { completion(.failure(.generic)) ; return }
+        
+        let save = SaveTripOperation(trip: trip, receiverUsername: receiverUUID, service: firestoreService, storageService: firebaseStorageService, completion: completion)
+        
+        operationQueue.addOperation(save)
+      
     }
     
     /**
@@ -179,21 +170,40 @@ class TripController {
      - parameter receiver: The username of the receiver.
      - parameter completion: A completion block that passes a boolean to the caller to inform the caller of whether the save was successful.
      */
-    func addTripIDToReceiver(tripID: String,
+    func addTripIDToReceiver(for trip: Trip,
                              receiver: String,
-                             completion: @escaping (Bool) -> Void) {
+                             completion: @escaping (Result<Bool, FireError>) -> Void) {
+        guard let loggedInUser = InternalUserController.shared.loggedInUser else { completion(.failure(.generic)) ; return }
         
-        FirebaseManager.fetch(uuid: nil, atChildKey: "username", withQuery: receiver) { (user: InternalUser?) in
-            guard let user = user else { completion(false) ; return }
-            let participantTripIDDictionary: [String : Bool] = [tripID : true]
-            FirebaseManager.update(user, atChildren: ["participantTripIDs"], withValues: participantTripIDDictionary, completion: { (errorMessage) in
-                if let _ = errorMessage {
-                    completion(false)
-                    return
-                }
-                completion(true)
-            })
-        }
+        firestoreService.fetch(uuid: nil, field: "username", criteria: receiver, queryType: .fieldEqual, completion: { [weak self] (result: Result<[InternalUser], FireError>) in
+            switch result {
+                
+            case .failure(let error):
+                completion(.failure(error))
+                
+            case .success(let internalUserArray):
+                guard internalUserArray.count > 0,
+                    let internalUser = internalUserArray.first
+                    else { completion(.failure(.generic)) ; return }
+                self?.firestoreService.update(object: internalUser, fieldsAndCriteria: ["tripsFollowingIDs" : trip.uid ?? ""], with: .update, completion: { (result) in
+                    switch result {
+                        
+                    case .failure(let error):
+                        completion(.failure(error))
+                        
+                    case .success(_):
+                        self?.firestoreService.update(object: trip, fieldsAndCriteria: ["followers" : [loggedInUser.uuid ?? ""]], with: .arrayAddition, completion: { (result) in
+                            switch result {
+                            case .failure(let error):
+                                completion(.failure(error))
+                            case .success(_):
+                                completion(.success(true))
+                            }
+                        })
+                    }
+                })
+            }
+        })
     }
     
     /**
@@ -214,5 +224,7 @@ class TripController {
         }
     }
 }
+
+
 
 
