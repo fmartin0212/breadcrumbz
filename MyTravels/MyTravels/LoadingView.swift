@@ -20,7 +20,7 @@ final class LoadingView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         blackView.layer.cornerRadius = 7
-        blackView.layer.opacity = 0.5
+        blackView.layer.opacity = 0.3
         self.backgroundColor = nil
         viewOne.layer.cornerRadius = viewOne.frame.width / 2
         view2.layer.cornerRadius = view2.frame.width / 2

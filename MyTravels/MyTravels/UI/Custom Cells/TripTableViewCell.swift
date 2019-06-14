@@ -55,7 +55,12 @@ extension TripTableViewCell {
     func updateImageView(with photo: UIImage) {
         DispatchQueue.main.async { [weak self] in
             self?.tripImageView.contentMode = .scaleAspectFill
-            self?.tripImageView.image = photo
+            self?.tripImageView.image = photo                    
         }
+    }
+    
+    override func prepareForReuse() {
+        tripImageView.image = UIImage(named: "imageDefault")
+        tripImageView.contentMode = .center
     }
 }

@@ -161,7 +161,6 @@ class TripController {
         let save = SaveTripOperation(trip: trip, receiverUsername: receiverUUID, service: firestoreService, storageService: firebaseStorageService, completion: completion)
         
         operationQueue.addOperation(save)
-      
     }
     
     /**

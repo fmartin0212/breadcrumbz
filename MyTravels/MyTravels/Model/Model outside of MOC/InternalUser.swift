@@ -20,7 +20,7 @@ class InternalUser: FirebaseDBSavable, FirestoreSavable, FirestoreRetrievable, F
     var photo: UIImage?
     var tripsFollowingUIDs: [String]?
     var blockedUserIDs: [String]?
-    var sharedTripIDs: [String]?
+    var sharedTripIDs: [String] = []
     
     // MARK: - Firebase Retrievable
     var uuid: String?

@@ -25,11 +25,13 @@ class UpdateUserOperation: PSOperation {
     override func execute() {
         guard context.error == nil,
             let user = InternalUserController.shared.loggedInUser,
-            let tripUUID = trip.uuid
+            let tripUUID = trip.uuid,
+            !user.sharedTripIDs.contains(tripUUID)
             else { finish() ; return }
         firestoreService.update(object: user, fieldsAndCriteria: ["sharedTripIDs" : [tripUUID]], with: .arrayAddition) { [weak self] (result) in
             switch result {
             case .success(_):
+                InternalUserController.shared.loggedInUser?.sharedTripIDs.append(tripUUID)
                 self?.finish()
             case .failure(let error):
                 self?.context.error = error

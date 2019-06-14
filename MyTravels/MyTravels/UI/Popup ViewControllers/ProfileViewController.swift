@@ -34,6 +34,11 @@ class ProfileViewController: UIViewController {
         tableView.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        updateViews()
+    }
+    
     @IBAction func logOutButtonTapped(_ sender: Any) {
         let confirmationAlertController = UIAlertController(title: "Log out", message: "Are you sure you would like to log out?", preferredStyle: .alert)
         
@@ -68,7 +73,7 @@ extension ProfileViewController {
         usernameLabel.text = loggedInUser.username
         nameLabel.text = loggedInUser.firstName
         tripsLoggedLabel.text = "\(TripController.shared.trips.count)"
-        tripsSharedLabel.text = "\(loggedInUser.sharedTripIDs?.count ?? 0)"
+        tripsSharedLabel.text = "\(loggedInUser.sharedTripIDs.count)"
         
         guard let loggedInUserPhotoUID = loggedInUser.photoURL else { return }
         PhotoController.shared.fetchPhoto(withPath: loggedInUserPhotoUID, completion: { [weak self] (result) in

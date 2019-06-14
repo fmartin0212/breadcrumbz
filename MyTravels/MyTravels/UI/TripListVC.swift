@@ -15,12 +15,13 @@ final class TripListVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     let tripObjectManager = TripObjectManager()
-    lazy var activityIndicator = UIActivityIndicatorView()
+    lazy var refreshControl = UIRefreshControl()
     var profileButton: UIButton?
     var emptyTripStateView: EmptyTripStateView?
     var trips: [TripObject] = []
     var state: State = .managed
-
+    var deletedIndexPath: IndexPath?
+    
     init(state: State, nibName: String) {
         self.state = state
         super.init(nibName: nibName, bundle: nil)
@@ -38,7 +39,7 @@ final class TripListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.presentEmptyTripStateView()
+        let loadingView = self.enableLoadingState()
         setupViews()
         let nib = UINib(nibName: "TripCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TripCell")
@@ -49,7 +50,7 @@ final class TripListVC: UIViewController {
         tripObjectManager.fetchTrips(for: state) { (result) in
             switch result {
             case .success(let trips):
-                self.trips = trips
+                self.trips = trips.sorted { ($0.startDate as Date) > ($1.startDate as Date)  }
                 DispatchQueue.main.async { [weak self] in
                     self?.refreshViews()
                     self?.tableView.reloadData()
@@ -58,6 +59,9 @@ final class TripListVC: UIViewController {
                 DispatchQueue.main.async { [weak self] in
                 print("error retrieving shared trips")
                 }
+            }
+            DispatchQueue.main.async {
+                self.disableLoadingState(loadingView)
             }
         }
 
@@ -93,7 +97,6 @@ extension TripListVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TripCell", for: indexPath) as! TripTableViewCell
-        
         // Cell and cell element formatting
         cell.selectionStyle = .none
         cell.crumbBackgroundView.layer.cornerRadius = cell.crumbBackgroundView.frame.width / 2
@@ -116,15 +119,19 @@ extension TripListVC: UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let trip = trips[indexPath.row]
             trips.remove(at: indexPath.row)
             TripController.shared.delete(trip: trip as! Trip)
+            deletedIndexPath = indexPath
         }
     }
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView,
+                   canEditRowAt indexPath: IndexPath) -> Bool {
         if state == .shared { return false }
         else { return true }
     }
@@ -174,20 +181,6 @@ extension TripListVC {
         }
     }
     
-    private func presentActivityIndicator() {
-        view.addSubview(activityIndicator)
-        view.bringSubviewToFront(activityIndicator)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint(item: activityIndicator, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0).isActive = true
-        NSLayoutConstraint(item: activityIndicator, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1.0, constant: 0).isActive = true
-        activityIndicator.startAnimating()
-        activityIndicator.isHidden = false
-    }
-    
-    private func removeActivityIndicator() {
-        activityIndicator.removeFromSuperview()
-    }
-    
     private func refreshViews() {
         let tripsIsEmpty = trips.count == 0 ? true : false
         if !tripsIsEmpty {
@@ -209,8 +202,9 @@ extension TripListVC {
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font : UIFont(name: "Poppins-Bold", size: 28)!, NSAttributedString.Key.foregroundColor : UIColor(red: 248/255, green: 89/255, blue: 89/255, alpha: 1)]
 
         if state == .shared {
-            self.title = "Shared"
-            
+            self.title = "Following"
+            refreshControl.addTarget(self, action: #selector(fetchTrips), for: .valueChanged)
+            tableView.refreshControl = refreshControl
         } else {
             self.title = "My Trips"
             self.navigationItem.rightBarButtonItem = addButton
@@ -222,6 +216,27 @@ extension TripListVC {
         let addTripVC = AddTripVC(trip: nil, state: .add, nibName: "AddTrip")
         self.present(addTripVC, animated: true, completion: nil)
     }
+    
+    @objc private func fetchTrips() {
+        refreshControl.beginRefreshing()
+        guard state == .shared else { return }
+        tripObjectManager.fetchTrips(for: .shared) { (result) in
+            DispatchQueue.main.async {
+                self.refreshControl.endRefreshing()
+            }
+            switch result {
+            case .success(let trips):
+                self.trips = trips.sorted { ($0.startDate as Date) > ($1.startDate as Date)  }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+                return
+            }
+           
+        }
+    }
 }
 
 extension TripListVC: NSFetchedResultsControllerDelegate {
@@ -230,8 +245,8 @@ extension TripListVC: NSFetchedResultsControllerDelegate {
         
         switch type {
         case .delete:
-            guard let indexPath = indexPath else { return }
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            guard let deletedIndexPath = deletedIndexPath else { return }
+            tableView.deleteRows(at: [deletedIndexPath], with: .fade)
             refreshViews()
         case .insert:
             guard let newIndexPath = newIndexPath,

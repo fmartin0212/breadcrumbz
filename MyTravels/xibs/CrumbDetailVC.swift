@@ -54,7 +54,7 @@ class CrumbDetailVC: UIViewController {
         fetchPhotos(for: crumb)
         name.text = crumb.name
         address.text = crumb.address
-        comments.text = crumb.comments
+        comments.text = crumb.comments != "" ? crumb.comments : "There are no comments for this crumb."
         type.text = crumb.type?.rawValue
         addAnnotation(for: crumb)
     }
@@ -130,3 +130,8 @@ extension CrumbDetailVC: UICollectionViewDelegateFlowLayout {
         return 0
     }
 }
+
+extension CrumbDetailVC: UIScrollViewDelegate {
+    
+}
+

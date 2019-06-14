@@ -22,7 +22,7 @@ class Coordinator {
         tripTabBarController.setViewControllers([myTripsNavigationController, mySharedTripsNavigationController, profileVC], animated: true)
         tripTabBarController.tabBar.items!.first!.title = "My Trips"
         tripTabBarController.tabBar.items!.first!.image = UIImage(named: "MyTrips")
-        tripTabBarController.tabBar.items![1].title = "Shared"
+        tripTabBarController.tabBar.items![1].title = "Following"
         tripTabBarController.tabBar.items![1].image = UIImage(named: "Shared")
         tripTabBarController.tabBar.items![2].title = "Profile"
         tripTabBarController.tabBar.items![2].image = UIImage(named: "User")

@@ -155,16 +155,16 @@ class InternalUserController {
                         
                     case .success(let blockedUserArray):
                         guard let blockedUser = blockedUserArray.first,
-                            let blockedUserSharedTripIDs = blockedUser.sharedTripIDs
+                            blockedUser.sharedTripIDs.count > 0
                             else { completion(.failure(.generic)) ; return }
                         
-                        self?.firestoreService.update(object: loggedInUser, fieldsAndCriteria: ["tripsFollowingUIDs" : blockedUserSharedTripIDs], with: .arrayDeletion, completion: { (result) in
+                        self?.firestoreService.update(object: loggedInUser, fieldsAndCriteria: ["tripsFollowingUIDs" :  blockedUser.sharedTripIDs], with: .arrayDeletion, completion: { (result) in
                             switch result {
                             case .failure(let error):
                                 completion(.failure(error))
                                 return
                             case .success(_):
-                                self?.firestoreService.updateMultipleObjects(collection: Constants.trip, firestoreUIDs: blockedUserSharedTripIDs, field: "followerUIDs", criteria: loggedInUserUID, .arrayDeletion, completion: { (result) in
+                                self?.firestoreService.updateMultipleObjects(collection: Constants.trip, firestoreUIDs:  blockedUser.sharedTripIDs, field: "followerUIDs", criteria: loggedInUserUID, .arrayDeletion, completion: { (result) in
                                     switch result {
                                     case .success(_):
                                         completion(.success(true))

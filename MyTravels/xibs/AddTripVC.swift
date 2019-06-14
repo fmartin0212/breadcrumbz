@@ -42,13 +42,13 @@ final class AddTripVC: UIViewController, ScrollableViewController {
     
     var startDatePicker = UIDatePicker()
     var endDatePicker = UIDatePicker()
-    var startDate: Date? {
+    var startDate: Date = Date() {
         didSet {
             endDatePicker.minimumDate = startDate
             endDate = startDate
         }
     }
-    var endDate: Date?
+    var endDate: Date = Date()
     var selectedTextField: UITextField?
     var selectedTextView: UITextView?
     var trip: Trip?
@@ -81,7 +81,8 @@ final class AddTripVC: UIViewController, ScrollableViewController {
         startMonthTextField.tag = 8
         endDatePicker.addTarget(self, action: #selector(setDate(sender:)), for: .valueChanged)
         endMonthTextField.tag = 9
-        
+        setupViews()
+        updateViews()
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (notification) in
             guard let userInfo = notification.userInfo else { return }
             let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
@@ -98,9 +99,6 @@ final class AddTripVC: UIViewController, ScrollableViewController {
             self.saveBottomContraint.constant = 100
             
         }
-        
-        setupViews()
-        updateViews()
     }
     
     // MARK: - Actions
@@ -111,7 +109,6 @@ final class AddTripVC: UIViewController, ScrollableViewController {
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         save()
-        
     }
     
     @IBAction func saveBarButtonItemTapped(_ sender: Any) {
@@ -180,13 +177,15 @@ extension AddTripVC {
     }
     
     func updateViews() {
+        setDateViews(for: startDate)
+        setDateViews(for: endDate)
         guard let trip = trip else { return }
         nameTextField.text = trip.name
         locationTextField.text = trip.location
         startDate = trip.startDate as Date
         endDate = trip.endDate as Date
-        setDateViews(for: startDate!)
-        setDateViews(for: endDate!)
+        setDateViews(for: startDate)
+        setDateViews(for: endDate)
         descriptionTextView.text = trip.tripDescription
         guard let photo = trip.photo else { return }
         addPhotoButton.setImage(photo.image, for: .normal)
@@ -197,12 +196,15 @@ extension AddTripVC {
         let day = "\(dateComponents.day!)"
         let dayOfWeek = Calendar.current.weekdaySymbols[dateComponents.weekday! - 1]
         let month = String(Calendar.current.monthSymbols[dateComponents.month! - 1].prefix(3))
+        print("hit \(startDate) \(endDate)")
         switch date {
         case startDate:
+            print("startDatePIcker case hit")
             startDayLabel.text = day
             startDayOfWeekLabel.text = dayOfWeek
             startMonthTextField.text = month
         case endDate:
+            print("endDatePicker case hit")
             endDayLabel.text = day
             endDayOfWeekLabel.text = dayOfWeek
             endMonthTextField.text = month
@@ -238,10 +240,10 @@ extension AddTripVC {
     }
     
     func save() {
-        guard let name = nameTextField.text, !name.isEmpty,
-            let location = locationTextField.text, !location.isEmpty,
-            let startDate = startDate,
-            let endDate = endDate
+        guard let name = nameTextField.text,
+            !name.isEmpty,
+            let location = locationTextField.text,
+            !location.isEmpty
             else { return }
         
         let image: UIImage? = addPhotoButton.currentImage == UIImage(named: "imageDefault") ? nil : addPhotoButton.currentImage
