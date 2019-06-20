@@ -30,9 +30,6 @@ class DeleteTripGroupOp: GroupOperation {
         let context = DeleteTripContext(trip: trip)
         let deleteTripFromCloudOp = DeleteTripFromCloudOp(context: context)
         
-        
-        
-        let deleteTripCrumbsFromCoreDataOp = DeleteTripCrumbsFromCoreDataOp(context: context)
         let deleteTripFromCoreDataOp = DeleteTripFromCoreDataOp(context: context)
         
         super.init(operations: [deleteTripFromCoreDataOp, deleteTripFromCloudOp])

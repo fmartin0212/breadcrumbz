@@ -18,10 +18,21 @@ class DeleteCrumbsGroupOp: GroupOperation {
     }
 }
 
-class DeleteCrumbGroupOp: GroupOperation {
+class DeleteCrumbParentGroupOp: GroupOperation {
     init(crumb: Place, context: TripContextProtocol) {
         let deleteCrumbPhotosGroupOp = DeleteCrumbPhotosGroupOp(crumb: crumb, context: context)
-        super.init(operations: [deleteCrumbPhotosGroupOp])
+        let deleteCrumbGroupOp = DeleteCrumbGroupOp(crumb: crumb, context: context)
+        super.init(operations: [deleteCrumbPhotosGroupOp, deleteCrumbGroupOp])
+    }
+}
+
+class DeleteCrumbGroupOp: GroupOperation {
+    
+    init(crumb: Place, context: TripContextProtocol) {
+        let deleteCrumbFromCloudOp = DeleteCrumbFromCloudOp(crumb: crumb, context: context)
+        let deleteCrumbFromCoreDataOp = DeleteObjectFromCoreData(object: crumb)
+        deleteCrumbFromCoreDataOp.addDependency(deleteCrumbFromCloudOp)
+        super.init(operations: [deleteCrumbFromCloudOp, deleteCrumbFromCoreDataOp])
     }
 }
 
@@ -53,7 +64,6 @@ class DeleteCrumbPhotosFromCloudOp: GroupOperation {
         } else { super.init(operations: []) }
     }
 }
-
 
 class DeleteTripCrumbsFromCloudOp: PSOperation {
     let context: DeleteTripContext
