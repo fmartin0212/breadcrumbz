@@ -15,7 +15,7 @@ protocol FirestoreServiceProtocol {
     func update<T: FirestoreSavable>(object: T, fieldsAndCriteria: [String : Any], with updateType: FirestoreUpdateType, completion: @escaping (Result<Bool, FireError>) -> Void)
     func updateMultipleObjects(collection: String, firestoreUIDs: [String], field: String, criteria: String, _ updateType: FirestoreUpdateType, completion: @escaping (Result<Bool, FireError>) -> Void)
     func delete<T: FirestoreSavable>(object: T, completion: @escaping (Result<Bool, FireError>) -> Void)
-    func batchDelete(collection: String, firestoreUIDs: [String], completion: @escaping (Result<Bool, FireError>) -> Void) {
+    func batchDelete(collection: String, firestoreUIDs: [String], completion: @escaping (Result<Bool, FireError>) -> Void)
     func fetch<T: FirestoreRetrievable>(uuid: String?, field: String?, criteria: String?, queryType: FirestoreQueryType?, completion: @escaping (Result<[T], FireError>) -> Void)
     
 }

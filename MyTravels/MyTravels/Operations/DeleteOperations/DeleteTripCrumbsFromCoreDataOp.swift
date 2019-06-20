@@ -9,19 +9,11 @@
 import Foundation
 import PSOperations
 
-class DeleteTripCrumbsFromCoreDataOp: PSOperation {
-    let context: DeleteTripContext
-    
+class DeleteCrumbsFrom: GroupOperation {
     init(context: DeleteTripContext) {
-        self.context = context
-    }
-    
-    override func execute() {
-        guard let crumbs = context.trip.places?.allObjects as? [Place],
-            crumbs.count > 0
-            else { finish() ; return }
-        crumbs.forEach { CoreDataManager.delete(object: $0) }
-        finish()
+        let crumbs = context.trip.places?.allObjects as! [Place]
+        let deleteObjectFromCloudOps = crumbs.map { DeleteCrumbFromCloudOp(crumb: $0, context: context) }
+        super.init(operations: deleteObjectFromCloudOps)
     }
 }
 

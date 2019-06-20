@@ -145,6 +145,9 @@
 		B7FFBEFA22BAFFB500676D69 /* DeleteTripCrumbsFromCoreDataOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBEF922BAFFB500676D69 /* DeleteTripCrumbsFromCoreDataOp.swift */; };
 		B7FFBEFC22BB013100676D69 /* DeleteTripPhotoFromCoreDataOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBEFB22BB013100676D69 /* DeleteTripPhotoFromCoreDataOp.swift */; };
 		B7FFBEFE22BB0B5400676D69 /* DeleteTripCrumbsFromCloudOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBEFD22BB0B5400676D69 /* DeleteTripCrumbsFromCloudOp.swift */; };
+		B7FFBF0022BB190B00676D69 /* DeleteObjectFromStorageOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBEFF22BB190B00676D69 /* DeleteObjectFromStorageOp.swift */; };
+		B7FFBF0222BB1F3600676D69 /* DeleteObjectFromCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBF0122BB1F3600676D69 /* DeleteObjectFromCoreData.swift */; };
+		B7FFBF0622BB289500676D69 /* DeleteCrumbFromCloudOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBF0522BB289500676D69 /* DeleteCrumbFromCloudOp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -291,6 +294,9 @@
 		B7FFBEF922BAFFB500676D69 /* DeleteTripCrumbsFromCoreDataOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripCrumbsFromCoreDataOp.swift; sourceTree = "<group>"; };
 		B7FFBEFB22BB013100676D69 /* DeleteTripPhotoFromCoreDataOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripPhotoFromCoreDataOp.swift; sourceTree = "<group>"; };
 		B7FFBEFD22BB0B5400676D69 /* DeleteTripCrumbsFromCloudOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripCrumbsFromCloudOp.swift; sourceTree = "<group>"; };
+		B7FFBEFF22BB190B00676D69 /* DeleteObjectFromStorageOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteObjectFromStorageOp.swift; sourceTree = "<group>"; };
+		B7FFBF0122BB1F3600676D69 /* DeleteObjectFromCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteObjectFromCoreData.swift; sourceTree = "<group>"; };
+		B7FFBF0522BB289500676D69 /* DeleteCrumbFromCloudOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCrumbFromCloudOp.swift; sourceTree = "<group>"; };
 		D8CD1BB41D947506D15EDEB5 /* Pods-MyTravels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTravels.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -666,6 +672,7 @@
 				B7FFBEFD22BB0B5400676D69 /* DeleteTripCrumbsFromCloudOp.swift */,
 				B7FFBEFB22BB013100676D69 /* DeleteTripPhotoFromCoreDataOp.swift */,
 				B7FFBEF522BAFC1B00676D69 /* DeleteTripFromCoreDataOp.swift */,
+				B7FFBF0522BB289500676D69 /* DeleteCrumbFromCloudOp.swift */,
 				B7FFBEF922BAFFB500676D69 /* DeleteTripCrumbsFromCoreDataOp.swift */,
 				B7FFBEF722BAFD7D00676D69 /* DeleteTripFromCloudOp.swift */,
 			);
@@ -675,6 +682,8 @@
 		B7FFBEF422BAFAD100676D69 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				B7FFBF0122BB1F3600676D69 /* DeleteObjectFromCoreData.swift */,
+				B7FFBEFF22BB190B00676D69 /* DeleteObjectFromStorageOp.swift */,
 				B7FC2D9E22722B3B0086CC3B /* Save Trip Operations */,
 				B7FFBEF322BAFAC100676D69 /* DeleteOperations */,
 			);
@@ -871,6 +880,7 @@
 				B7C0B597220BC2EF009FAAEB /* PlaceType+CoreDataProperties.swift in Sources */,
 				B719FF9B20A9FD7F0072CF75 /* CoreDataManager.swift in Sources */,
 				B7D652392024E24A00E975F1 /* TypeSelectionViewController.swift in Sources */,
+				B7FFBF0622BB289500676D69 /* DeleteCrumbFromCloudOp.swift in Sources */,
 				B737CD7C22920C5A0007FF80 /* UpdateTripGroupOp.swift in Sources */,
 				B7655AF922273B3D002D33F7 /* FMTextField.swift in Sources */,
 				B7C0E3C8223458A700438299 /* Trip+CrumbProtocols.swift in Sources */,
@@ -916,6 +926,7 @@
 				B7D6523B202514C700E975F1 /* CreateNewPlaceTableViewController.swift in Sources */,
 				B7F88E34223F23C300BD16DC /* FMButton.swift in Sources */,
 				B7F75C172058771900C876A0 /* SharedPlaceDetailTableViewController.swift in Sources */,
+				B7FFBF0022BB190B00676D69 /* DeleteObjectFromStorageOp.swift in Sources */,
 				B78BC0762159740300827394 /* FirebaseManager.swift in Sources */,
 				B735428D2174E36300D9A68D /* Trip+CoreDataProperties.swift in Sources */,
 				B725034F20D9B64C00744B23 /* ProfileViewController.swift in Sources */,
@@ -928,6 +939,7 @@
 				B7336E8522631DE000143812 /* FirebaseAuthService.swift in Sources */,
 				B76B2F722245D50F00E688F4 /* EmptyTripStateView.swift in Sources */,
 				B7FFBEFA22BAFFB500676D69 /* DeleteTripCrumbsFromCoreDataOp.swift in Sources */,
+				B7FFBF0222BB1F3600676D69 /* DeleteObjectFromCoreData.swift in Sources */,
 				B7504D3222A87C810002D11E /* Coordinator.swift in Sources */,
 				B762265521EFC9510045F260 /* FirebaseSyncable.swift in Sources */,
 				B7DA1B71202E140C0007497A /* Place+CoreDataClass.swift in Sources */,

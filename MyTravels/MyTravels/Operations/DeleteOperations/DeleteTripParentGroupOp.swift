@@ -9,14 +9,18 @@
 import Foundation
 import PSOperations
 
-class DeleteTripContext {
+class DeleteTripContext: TripContextProtocol {
     let trip: Trip
-    let firestoreService: FirestoreServiceProtocol
     var error: FireError?
+    let firestoreService: FirestoreServiceProtocol
+    var firebaseStorageService: FirebaseStorageServiceProtocol
     
-    init(trip: Trip, firestoreService: FirestoreServiceProtocol = FirestoreService()) {
+    init(trip: Trip,
+         firestoreService: FirestoreServiceProtocol = FirestoreService(),
+         firebaseStorageService: FirebaseStorageService = FirebaseStorageService()) {
         self.trip = trip
         self.firestoreService = firestoreService
+        self.firebaseStorageService = firebaseStorageService
     }
 }
 

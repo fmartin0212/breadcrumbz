@@ -9,6 +9,52 @@
 import Foundation
 import PSOperations
 
+class DeleteCrumbsGroupOp: GroupOperation {
+    init(context: DeleteTripContext) {
+        if let crumbs = context.trip.places?.allObjects as? [Place],
+            crumbs.count > 0 {
+            super.init(operations: [])
+        } else { super.init(operations: []) }
+    }
+}
+
+class DeleteCrumbGroupOp: GroupOperation {
+    init(crumb: Place, context: TripContextProtocol) {
+        let deleteCrumbPhotosGroupOp = DeleteCrumbPhotosGroupOp(crumb: crumb, context: context)
+        super.init(operations: [deleteCrumbPhotosGroupOp])
+    }
+}
+
+class DeleteCrumbPhotosGroupOp: GroupOperation {
+    init(crumb: Place, context: TripContextProtocol) {
+        let deleteCrumbPhotosFromCloudGroupOp = DeleteCrumbPhotosFromCloudOp(crumb: crumb, context: context)
+        let deleteCrumbPhotosFromCoreDataOp = DeleteCrumbPhotosFromCoreDataOp(crumb: crumb)
+        deleteCrumbPhotosFromCoreDataOp.addDependency(deleteCrumbPhotosFromCloudGroupOp)
+        super.init(operations: [deleteCrumbPhotosFromCloudGroupOp, deleteCrumbPhotosFromCoreDataOp])
+    }
+}
+
+class DeleteCrumbPhotosFromCoreDataOp: GroupOperation {
+    init(crumb: Place) {
+        if let allCrumbPhotos = crumb.photos?.allObjects.compactMap({ ($0 as? Photo) }),
+            allCrumbPhotos.count > 0 {
+            let deleteObjectOps = allCrumbPhotos.map { DeleteObjectFromCoreData(object: $0) }
+            super.init(operations: deleteObjectOps)
+        } else { super.init(operations: []) }
+    }
+}
+
+class DeleteCrumbPhotosFromCloudOp: GroupOperation {
+    init(crumb: Place, context: TripContextProtocol) {
+        if let allCrumbPhotos = crumb.photos?.allObjects.compactMap({ ($0 as? Photo) }),
+            allCrumbPhotos.count > 0 {
+            let deleteObjectOps = allCrumbPhotos.map { DeleteObjectFromStorageOp(object: $0, context: context) }
+            super.init(operations: deleteObjectOps)
+        } else { super.init(operations: []) }
+    }
+}
+
+
 class DeleteTripCrumbsFromCloudOp: PSOperation {
     let context: DeleteTripContext
     
