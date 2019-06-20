@@ -25,14 +25,17 @@ class DeleteTripContext: TripContextProtocol {
 }
 
 class DeleteTripGroupOp: GroupOperation {
-    
     init(trip: Trip, completion: @escaping (Result<Bool, FireError>) -> Void) {
         let context = DeleteTripContext(trip: trip)
+        let deleteTripPhotoFromCloudOp = DeleteTripPhotoFromCloudOp(context: context)
+        let deleteTripPhotoFromCoreDataOp = DeleteTripPhotoFromCloudOp(context: context)
+        let deleteAllCrumbsGroupOp = DeleteTripCrumbsGroupOp(context: context)
         let deleteTripFromCloudOp = DeleteTripFromCloudOp(context: context)
-        
-        let deleteTripFromCoreDataOp = DeleteTripFromCoreDataOp(context: context)
-        
-        super.init(operations: [deleteTripFromCoreDataOp, deleteTripFromCloudOp])
+        let deleteTripFromCoreDataOp = DeleteObjectFromCoreData(object: context.trip)
+        deleteTripPhotoFromCoreDataOp.addDependency(deleteTripPhotoFromCloudOp)
+        deleteTripFromCloudOp.addDependency(deleteAllCrumbsGroupOp)
+        deleteTripFromCoreDataOp.addDependency(deleteTripFromCloudOp)
+        super.init(operations: [deleteTripPhotoFromCloudOp, deleteTripPhotoFromCoreDataOp, deleteAllCrumbsGroupOp, deleteTripFromCoreDataOp, deleteTripFromCloudOp])
     }
 }
 

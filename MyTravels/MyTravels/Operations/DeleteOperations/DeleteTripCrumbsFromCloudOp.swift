@@ -9,19 +9,11 @@
 import Foundation
 import PSOperations
 
-class DeleteCrumbsGroupOp: GroupOperation {
-    init(context: DeleteTripContext) {
-        if let crumbs = context.trip.places?.allObjects as? [Place],
-            crumbs.count > 0 {
-            super.init(operations: [])
-        } else { super.init(operations: []) }
-    }
-}
-
 class DeleteCrumbParentGroupOp: GroupOperation {
     init(crumb: Place, context: TripContextProtocol) {
         let deleteCrumbPhotosGroupOp = DeleteCrumbPhotosGroupOp(crumb: crumb, context: context)
         let deleteCrumbGroupOp = DeleteCrumbGroupOp(crumb: crumb, context: context)
+        deleteCrumbGroupOp.addDependency(deleteCrumbPhotosGroupOp)
         super.init(operations: [deleteCrumbPhotosGroupOp, deleteCrumbGroupOp])
     }
 }
@@ -65,6 +57,36 @@ class DeleteCrumbPhotosFromCloudOp: GroupOperation {
     }
 }
 
+/*
+ Deletes all of the crumbs from both the cloud and local persistence for a trip.
+*/
+class DeleteTripCrumbsGroupOp: GroupOperation {
+    init(context: DeleteTripContext) {
+        if let crumbs = context.trip.places?.allObjects as? [Place],
+            crumbs.count > 0,
+            crumbs.first?.uid != nil {
+            let deleteTripCrumbsFromCloudOp = DeleteTripCrumbsFromCloudOp(context: context)
+            let deleteTripCrumbsFromCoreDataOp = DeleteTripCrumbsFromCoreDataOp(context: context)
+            deleteTripCrumbsFromCoreDataOp.addDependency(deleteTripCrumbsFromCloudOp)
+            super.init(operations: [deleteTripCrumbsFromCloudOp, deleteTripCrumbsFromCoreDataOp])
+        } else { super.init(operations: []) }
+    }
+}
+
+class DeleteTripCrumbsFromCoreDataOp: PSOperation {
+    let context: TripContextProtocol
+    
+    init(context: TripContextProtocol) {
+        self.context = context
+    }
+    
+    override func execute() {
+        let crumbs = context.trip.places?.allObjects as! [Place]
+        crumbs.forEach { CoreDataManager.delete(object: $0) }
+        finish()
+    }
+}
+
 class DeleteTripCrumbsFromCloudOp: PSOperation {
     let context: DeleteTripContext
     
@@ -73,12 +95,7 @@ class DeleteTripCrumbsFromCloudOp: PSOperation {
     }
     
     override func execute() {
-        guard context.error != nil,
-            let crumbs = context.trip.places?.allObjects as? [Place],
-            crumbs.count > 0,
-            crumbs.first?.uid != nil
-            else { finish() ; return }
-        
+        let crumbs = context.trip.places?.allObjects as! [Place]
         let crumbUIDs = crumbs.map { $0.uid ?? "" }
         context.firestoreService.batchDelete(collection: Place.collectionName, firestoreUIDs: crumbUIDs) { [weak self] (result) in
             switch result {

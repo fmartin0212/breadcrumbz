@@ -139,7 +139,7 @@
 		B7FC2DAC22722B7B0086CC3B /* TaskCompleteOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DAB22722B7B0086CC3B /* TaskCompleteOp.swift */; };
 		B7FC2DAE22722B810086CC3B /* SaveTripContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DAD22722B810086CC3B /* SaveTripContext.swift */; };
 		B7FC2DB022728F710086CC3B /* SavePlaceOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DAF22728F710086CC3B /* SavePlaceOperation.swift */; };
-		B7FFBEF222BAFABD00676D69 /* DeleteTripParentGroupOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBEF122BAFABD00676D69 /* DeleteTripParentGroupOp.swift */; };
+		B7FFBEF222BAFABD00676D69 /* DeleteTripGroupOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBEF122BAFABD00676D69 /* DeleteTripGroupOp.swift */; };
 		B7FFBEF622BAFC1B00676D69 /* DeleteTripFromCoreDataOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBEF522BAFC1B00676D69 /* DeleteTripFromCoreDataOp.swift */; };
 		B7FFBEF822BAFD7D00676D69 /* DeleteTripFromCloudOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBEF722BAFD7D00676D69 /* DeleteTripFromCloudOp.swift */; };
 		B7FFBEFA22BAFFB500676D69 /* DeleteTripCrumbsFromCoreDataOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBEF922BAFFB500676D69 /* DeleteTripCrumbsFromCoreDataOp.swift */; };
@@ -148,6 +148,7 @@
 		B7FFBF0022BB190B00676D69 /* DeleteObjectFromStorageOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBEFF22BB190B00676D69 /* DeleteObjectFromStorageOp.swift */; };
 		B7FFBF0222BB1F3600676D69 /* DeleteObjectFromCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBF0122BB1F3600676D69 /* DeleteObjectFromCoreData.swift */; };
 		B7FFBF0622BB289500676D69 /* DeleteCrumbFromCloudOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBF0522BB289500676D69 /* DeleteCrumbFromCloudOp.swift */; };
+		B7FFBF0822BC464900676D69 /* DeleteTripPhotoFromCloudOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBF0722BC464900676D69 /* DeleteTripPhotoFromCloudOp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -288,7 +289,7 @@
 		B7FC2DAB22722B7B0086CC3B /* TaskCompleteOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCompleteOp.swift; sourceTree = "<group>"; };
 		B7FC2DAD22722B810086CC3B /* SaveTripContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTripContext.swift; sourceTree = "<group>"; };
 		B7FC2DAF22728F710086CC3B /* SavePlaceOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePlaceOperation.swift; sourceTree = "<group>"; };
-		B7FFBEF122BAFABD00676D69 /* DeleteTripParentGroupOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripParentGroupOp.swift; sourceTree = "<group>"; };
+		B7FFBEF122BAFABD00676D69 /* DeleteTripGroupOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripGroupOp.swift; sourceTree = "<group>"; };
 		B7FFBEF522BAFC1B00676D69 /* DeleteTripFromCoreDataOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripFromCoreDataOp.swift; sourceTree = "<group>"; };
 		B7FFBEF722BAFD7D00676D69 /* DeleteTripFromCloudOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripFromCloudOp.swift; sourceTree = "<group>"; };
 		B7FFBEF922BAFFB500676D69 /* DeleteTripCrumbsFromCoreDataOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripCrumbsFromCoreDataOp.swift; sourceTree = "<group>"; };
@@ -297,6 +298,7 @@
 		B7FFBEFF22BB190B00676D69 /* DeleteObjectFromStorageOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteObjectFromStorageOp.swift; sourceTree = "<group>"; };
 		B7FFBF0122BB1F3600676D69 /* DeleteObjectFromCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteObjectFromCoreData.swift; sourceTree = "<group>"; };
 		B7FFBF0522BB289500676D69 /* DeleteCrumbFromCloudOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCrumbFromCloudOp.swift; sourceTree = "<group>"; };
+		B7FFBF0722BC464900676D69 /* DeleteTripPhotoFromCloudOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripPhotoFromCloudOp.swift; sourceTree = "<group>"; };
 		D8CD1BB41D947506D15EDEB5 /* Pods-MyTravels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTravels.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -668,7 +670,8 @@
 		B7FFBEF322BAFAC100676D69 /* DeleteOperations */ = {
 			isa = PBXGroup;
 			children = (
-				B7FFBEF122BAFABD00676D69 /* DeleteTripParentGroupOp.swift */,
+				B7FFBEF122BAFABD00676D69 /* DeleteTripGroupOp.swift */,
+				B7FFBF0722BC464900676D69 /* DeleteTripPhotoFromCloudOp.swift */,
 				B7FFBEFD22BB0B5400676D69 /* DeleteTripCrumbsFromCloudOp.swift */,
 				B7FFBEFB22BB013100676D69 /* DeleteTripPhotoFromCoreDataOp.swift */,
 				B7FFBEF522BAFC1B00676D69 /* DeleteTripFromCoreDataOp.swift */,
@@ -870,7 +873,7 @@
 				B7FC2DA222722B520086CC3B /* SaveCoreDataOperation.swift in Sources */,
 				B72E239E228896F1002CA1EC /* AddFollowerUIDToTrip.swift in Sources */,
 				B7F88E32223DB3DB00BD16DC /* CrumbDetailVC.swift in Sources */,
-				B7FFBEF222BAFABD00676D69 /* DeleteTripParentGroupOp.swift in Sources */,
+				B7FFBEF222BAFABD00676D69 /* DeleteTripGroupOp.swift in Sources */,
 				B7FC2DAC22722B7B0086CC3B /* TaskCompleteOp.swift in Sources */,
 				B737CD7F229217370007FF80 /* UpdateTripOp.swift in Sources */,
 				B7D652432027F5C300E975F1 /* CreateTripTableViewController.swift in Sources */,
@@ -932,6 +935,7 @@
 				B725034F20D9B64C00744B23 /* ProfileViewController.swift in Sources */,
 				B7C10CCD2020EFB000818430 /* TripTableViewCell.swift in Sources */,
 				B7C0B59C220CB393009FAAEB /* AddTripVC.swift in Sources */,
+				B7FFBF0822BC464900676D69 /* DeleteTripPhotoFromCloudOp.swift in Sources */,
 				B737CD8122921ACF0007FF80 /* UpdateTripContext.swift in Sources */,
 				B7C0E3C42232EDC300438299 /* SharedTripDataSourceAndDelegate.swift in Sources */,
 				B7336E8322631D5200143812 /* FirebaseStorageService.swift in Sources */,
