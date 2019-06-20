@@ -14,7 +14,6 @@ class CrumbDetailVC: UIViewController {
     // MARK: - Properties
     
     var crumb: CrumbObject
-    
     var photos: [UIImage] = []
     
     @IBOutlet weak var imageCollectionView: UICollectionView!
@@ -107,7 +106,6 @@ extension CrumbDetailVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath)
         guard photos.count > 0 else { return UICollectionViewCell() }
-        pageControl.currentPage = indexPath.row
         let photo = photos[indexPath.row]
         let photoImageView = UIImageView(image: photo)
         photoImageView.contentMode = .scaleAspectFill
@@ -117,7 +115,6 @@ extension CrumbDetailVC: UICollectionViewDataSource {
 }
 
 extension CrumbDetailVC: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: imageCollectionView.frame.width, height: imageCollectionView.frame.height)
     }
@@ -132,6 +129,8 @@ extension CrumbDetailVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension CrumbDetailVC: UIScrollViewDelegate {
-    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageIndex = round(scrollView.contentOffset.x/view.frame.width)
+        pageControl.currentPage = Int(pageIndex)
+    }
 }
-

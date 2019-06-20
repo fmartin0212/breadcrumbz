@@ -15,7 +15,9 @@ protocol FirestoreServiceProtocol {
     func update<T: FirestoreSavable>(object: T, fieldsAndCriteria: [String : Any], with updateType: FirestoreUpdateType, completion: @escaping (Result<Bool, FireError>) -> Void)
     func updateMultipleObjects(collection: String, firestoreUIDs: [String], field: String, criteria: String, _ updateType: FirestoreUpdateType, completion: @escaping (Result<Bool, FireError>) -> Void)
     func delete<T: FirestoreSavable>(object: T, completion: @escaping (Result<Bool, FireError>) -> Void)
+    func batchDelete(collection: String, firestoreUIDs: [String], completion: @escaping (Result<Bool, FireError>) -> Void) {
     func fetch<T: FirestoreRetrievable>(uuid: String?, field: String?, criteria: String?, queryType: FirestoreQueryType?, completion: @escaping (Result<[T], FireError>) -> Void)
+    
 }
 
 protocol FirestoreSyncable {
@@ -185,6 +187,7 @@ public struct FirestoreService: FirestoreServiceProtocol {
                                criteria: String,
                                _ updateType: FirestoreUpdateType,
                                completion: @escaping (Result<Bool, FireError>) -> Void) {
+        
         let batch = Firestore.firestore().batch()
         firestoreUIDs.forEach {
             let ref = Firestore.firestore().collection(collection).document($0)
@@ -198,6 +201,24 @@ public struct FirestoreService: FirestoreServiceProtocol {
             }
         }
     }
+    
+    func batchDelete(collection: String,
+                     firestoreUIDs: [String],
+                     completion: @escaping (Result<Bool, FireError>) -> Void) {
+        let batch = Firestore.firestore().batch()
+        firestoreUIDs.forEach {
+            let ref = Firestore.firestore().collection(collection).document($0)
+            batch.deleteDocument(ref)
+        }
+        batch.commit { (error) in
+            if let _ = error {
+                completion(.failure(.updating))
+            } else {
+                completion(.success(true))
+            }
+        }
+    }
 }
+
 
 

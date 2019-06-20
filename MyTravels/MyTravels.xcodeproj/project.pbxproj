@@ -139,6 +139,12 @@
 		B7FC2DAC22722B7B0086CC3B /* TaskCompleteOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DAB22722B7B0086CC3B /* TaskCompleteOp.swift */; };
 		B7FC2DAE22722B810086CC3B /* SaveTripContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DAD22722B810086CC3B /* SaveTripContext.swift */; };
 		B7FC2DB022728F710086CC3B /* SavePlaceOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FC2DAF22728F710086CC3B /* SavePlaceOperation.swift */; };
+		B7FFBEF222BAFABD00676D69 /* DeleteTripParentGroupOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBEF122BAFABD00676D69 /* DeleteTripParentGroupOp.swift */; };
+		B7FFBEF622BAFC1B00676D69 /* DeleteTripFromCoreDataOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBEF522BAFC1B00676D69 /* DeleteTripFromCoreDataOp.swift */; };
+		B7FFBEF822BAFD7D00676D69 /* DeleteTripFromCloudOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBEF722BAFD7D00676D69 /* DeleteTripFromCloudOp.swift */; };
+		B7FFBEFA22BAFFB500676D69 /* DeleteTripCrumbsFromCoreDataOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBEF922BAFFB500676D69 /* DeleteTripCrumbsFromCoreDataOp.swift */; };
+		B7FFBEFC22BB013100676D69 /* DeleteTripPhotoFromCoreDataOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBEFB22BB013100676D69 /* DeleteTripPhotoFromCoreDataOp.swift */; };
+		B7FFBEFE22BB0B5400676D69 /* DeleteTripCrumbsFromCloudOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FFBEFD22BB0B5400676D69 /* DeleteTripCrumbsFromCloudOp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -279,6 +285,12 @@
 		B7FC2DAB22722B7B0086CC3B /* TaskCompleteOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCompleteOp.swift; sourceTree = "<group>"; };
 		B7FC2DAD22722B810086CC3B /* SaveTripContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTripContext.swift; sourceTree = "<group>"; };
 		B7FC2DAF22728F710086CC3B /* SavePlaceOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePlaceOperation.swift; sourceTree = "<group>"; };
+		B7FFBEF122BAFABD00676D69 /* DeleteTripParentGroupOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripParentGroupOp.swift; sourceTree = "<group>"; };
+		B7FFBEF522BAFC1B00676D69 /* DeleteTripFromCoreDataOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripFromCoreDataOp.swift; sourceTree = "<group>"; };
+		B7FFBEF722BAFD7D00676D69 /* DeleteTripFromCloudOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripFromCloudOp.swift; sourceTree = "<group>"; };
+		B7FFBEF922BAFFB500676D69 /* DeleteTripCrumbsFromCoreDataOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripCrumbsFromCoreDataOp.swift; sourceTree = "<group>"; };
+		B7FFBEFB22BB013100676D69 /* DeleteTripPhotoFromCoreDataOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripPhotoFromCoreDataOp.swift; sourceTree = "<group>"; };
+		B7FFBEFD22BB0B5400676D69 /* DeleteTripCrumbsFromCloudOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTripCrumbsFromCloudOp.swift; sourceTree = "<group>"; };
 		D8CD1BB41D947506D15EDEB5 /* Pods-MyTravels.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTravels.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -431,7 +443,7 @@
 				B7336E802262D93A00143812 /* FirestoreService.swift */,
 				B7336E8622632A9500143812 /* FireErrors.swift */,
 				B7336E8422631DE000143812 /* FirebaseAuthService.swift */,
-				B7FC2D9E22722B3B0086CC3B /* Save Trip Operations */,
+				B7FFBEF422BAFAD100676D69 /* Operations */,
 				B7336E8222631D5200143812 /* FirebaseStorageService.swift */,
 				B7C10CD420214D4200818430 /* MyTravels.entitlements */,
 				B737CD7D22920C5F0007FF80 /* Update Trip Operations */,
@@ -647,6 +659,28 @@
 			path = "Save Trip Operations";
 			sourceTree = "<group>";
 		};
+		B7FFBEF322BAFAC100676D69 /* DeleteOperations */ = {
+			isa = PBXGroup;
+			children = (
+				B7FFBEF122BAFABD00676D69 /* DeleteTripParentGroupOp.swift */,
+				B7FFBEFD22BB0B5400676D69 /* DeleteTripCrumbsFromCloudOp.swift */,
+				B7FFBEFB22BB013100676D69 /* DeleteTripPhotoFromCoreDataOp.swift */,
+				B7FFBEF522BAFC1B00676D69 /* DeleteTripFromCoreDataOp.swift */,
+				B7FFBEF922BAFFB500676D69 /* DeleteTripCrumbsFromCoreDataOp.swift */,
+				B7FFBEF722BAFD7D00676D69 /* DeleteTripFromCloudOp.swift */,
+			);
+			path = DeleteOperations;
+			sourceTree = "<group>";
+		};
+		B7FFBEF422BAFAD100676D69 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				B7FC2D9E22722B3B0086CC3B /* Save Trip Operations */,
+				B7FFBEF322BAFAC100676D69 /* DeleteOperations */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -827,6 +861,7 @@
 				B7FC2DA222722B520086CC3B /* SaveCoreDataOperation.swift in Sources */,
 				B72E239E228896F1002CA1EC /* AddFollowerUIDToTrip.swift in Sources */,
 				B7F88E32223DB3DB00BD16DC /* CrumbDetailVC.swift in Sources */,
+				B7FFBEF222BAFABD00676D69 /* DeleteTripParentGroupOp.swift in Sources */,
 				B7FC2DAC22722B7B0086CC3B /* TaskCompleteOp.swift in Sources */,
 				B737CD7F229217370007FF80 /* UpdateTripOp.swift in Sources */,
 				B7D652432027F5C300E975F1 /* CreateTripTableViewController.swift in Sources */,
@@ -856,6 +891,7 @@
 				B7DA1B822030E70C0007497A /* SearchViewController.swift in Sources */,
 				B7F75C07205842E600C876A0 /* OnboardingPageViewController.swift in Sources */,
 				B73880002285097A00D875AA /* AddPhotoPathToCrumbOp.swift in Sources */,
+				B7FFBEFE22BB0B5400676D69 /* DeleteTripCrumbsFromCloudOp.swift in Sources */,
 				B7FC2DA422722B590086CC3B /* SavePhotoOperation.swift in Sources */,
 				B7DA1B7D202E2B900007497A /* InternalUserController.swift in Sources */,
 				B7655AFD22274182002D33F7 /* FMTextView.swift in Sources */,
@@ -891,9 +927,11 @@
 				B737CD74228C85870007FF80 /* TripObjectManager.swift in Sources */,
 				B7336E8522631DE000143812 /* FirebaseAuthService.swift in Sources */,
 				B76B2F722245D50F00E688F4 /* EmptyTripStateView.swift in Sources */,
+				B7FFBEFA22BAFFB500676D69 /* DeleteTripCrumbsFromCoreDataOp.swift in Sources */,
 				B7504D3222A87C810002D11E /* Coordinator.swift in Sources */,
 				B762265521EFC9510045F260 /* FirebaseSyncable.swift in Sources */,
 				B7DA1B71202E140C0007497A /* Place+CoreDataClass.swift in Sources */,
+				B7FFBEF622BAFC1B00676D69 /* DeleteTripFromCoreDataOp.swift in Sources */,
 				B7DA1B72202E140C0007497A /* Place+CoreDataProperties.swift in Sources */,
 				B7F75C152058769500C876A0 /* SharedTripDetailViewController.swift in Sources */,
 				B7D652452027FB4B00E975F1 /* ChooseDateViewController.swift in Sources */,
@@ -901,6 +939,7 @@
 				B7D6523D202620E700E975F1 /* PlaceTableViewCell.swift in Sources */,
 				B75E335C20D3150500839678 /* SignUpViewController.swift in Sources */,
 				B737CD7A2291DA760007FF80 /* FMCloseButton.swift in Sources */,
+				B7FFBEFC22BB013100676D69 /* DeleteTripPhotoFromCoreDataOp.swift in Sources */,
 				B75E335E20D316DD00839678 /* TextFieldTableViewCell.swift in Sources */,
 				B71248D6222B60DB00D6C4A5 /* FMLineView.swift in Sources */,
 				B7C0E3C22232EDBA00438299 /* TripDataSourceAndDelegate.swift in Sources */,
@@ -908,6 +947,7 @@
 				B7FC2DA622722B620086CC3B /* UpdateUserOperation.swift in Sources */,
 				B7AC408A221B6C0100645BC2 /* CrumbTableViewCell.swift in Sources */,
 				B7FC2DB022728F710086CC3B /* SavePlaceOperation.swift in Sources */,
+				B7FFBEF822BAFD7D00676D69 /* DeleteTripFromCloudOp.swift in Sources */,
 				B77E4F7120C6D482007EB266 /* Extensions.swift in Sources */,
 				B7D6523F2026526700E975F1 /* ViewControllerExtensions.swift in Sources */,
 				B7336E892263E9E000143812 /* CacheManager.swift in Sources */,

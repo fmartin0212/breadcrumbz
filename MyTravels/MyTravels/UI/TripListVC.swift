@@ -39,6 +39,8 @@ final class TripListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.addSubview(refreshControl)
+        tableView.refreshControl = refreshControl
         let loadingView = self.enableLoadingState()
         setupViews()
         let nib = UINib(nibName: "TripCell", bundle: nil)
@@ -223,18 +225,15 @@ extension TripListVC {
         tripObjectManager.fetchTrips(for: .shared) { (result) in
             DispatchQueue.main.async {
                 self.refreshControl.endRefreshing()
+                print("hi")
             }
             switch result {
             case .success(let trips):
                 self.trips = trips.sorted { ($0.startDate as Date) > ($1.startDate as Date)  }
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
             case .failure(let error):
                 print(error)
                 return
             }
-           
         }
     }
 }
