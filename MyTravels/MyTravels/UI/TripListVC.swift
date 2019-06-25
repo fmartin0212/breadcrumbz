@@ -39,8 +39,6 @@ final class TripListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.addSubview(refreshControl)
-        tableView.refreshControl = refreshControl
         let loadingView = self.enableLoadingState()
         setupViews()
         let nib = UINib(nibName: "TripCell", bundle: nil)
@@ -67,10 +65,10 @@ final class TripListVC: UIViewController {
             }
         }
 
-        for trip in TripController.shared.trips {
-            trip.uid = nil
-            CoreDataManager.save()
-        }
+//        for trip in TripController.shared.trips {
+//            trip.uid = nil
+//            CoreDataManager.save()
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -126,9 +124,7 @@ extension TripListVC: UITableViewDataSource {
                    forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let trip = trips[indexPath.row]
-            trips.remove(at: indexPath.row)
-            TripController.shared.delete(trip: trip as! Trip)
-            deletedIndexPath = indexPath
+            presentDeleteAlert(for: trip as! Trip, indexPath)
         }
     }
     
@@ -206,6 +202,7 @@ extension TripListVC {
         if state == .shared {
             self.title = "Following"
             refreshControl.addTarget(self, action: #selector(fetchTrips), for: .valueChanged)
+            tableView.addSubview(refreshControl)
             tableView.refreshControl = refreshControl
         } else {
             self.title = "My Trips"
@@ -236,6 +233,24 @@ extension TripListVC {
             }
         }
     }
+    
+    func presentDeleteAlert(for trip: Trip, _ indexPath: IndexPath) {
+        let title = "Are you sure?"
+        let message = trip.uid == nil ? "Your trip will be gone forever." : "Neither you nor your trip's followers will be able to see the trip again."
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] (_) in
+            let loadingView = self?.enableLoadingState()
+            TripController.shared.delete(trip: trip) { (result) in
+                self?.trips.remove(at: indexPath.row)
+                self?.deletedIndexPath = indexPath
+                self?.disableLoadingState(loadingView!)
+            }
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        present(alertController, animated: true, completion: nil)
+    }
 }
 
 extension TripListVC: NSFetchedResultsControllerDelegate {
@@ -249,9 +264,10 @@ extension TripListVC: NSFetchedResultsControllerDelegate {
             refreshViews()
         case .insert:
             guard let newIndexPath = newIndexPath,
-            let trip = anObject as? Trip
-            else { return }
+                let trip = anObject as? Trip
+                else { return }
             trips.append(trip)
+            refreshViews()
             tableView.insertRows(at: [newIndexPath], with: .automatic)
         case .move:
             guard let indexPath = indexPath,
@@ -291,6 +307,7 @@ extension TripListVC: AddTripVCDelegate {
     
     func saveButtonTapped(trip: TripObject) {
         DispatchQueue.main.async { [weak self] in
+            self?.trips.append(trip)
             self?.refreshViews()
         }
     }

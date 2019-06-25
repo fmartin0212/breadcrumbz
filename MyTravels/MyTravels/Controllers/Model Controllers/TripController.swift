@@ -79,10 +79,16 @@ class TripController {
      Deletes a trip from the Core Data persistent store.
      - parameter trip: The trip to be deleted.
      */
-    func delete(trip: Trip) {
-        
-        // Delete from Core Data
-        CoreDataManager.delete(object: trip)
+    func delete(trip: Trip, completion: @escaping (Result<Bool, FireError>) -> Void) {
+        let deleteTripGroupOp = DeleteTripGroupOp(trip: trip) { (result) in
+            switch result {
+            case .success(_):
+                completion(.success(true))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+        operationQueue.addOperation(deleteTripGroupOp)
     }
     
     /**

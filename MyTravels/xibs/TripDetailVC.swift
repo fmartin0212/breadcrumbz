@@ -18,11 +18,12 @@ final class TripDetailVC: UIViewController {
     @IBOutlet weak var tripStartDateLabel: UILabel!
     @IBOutlet weak var tripEndDateLabel: UILabel!
     @IBOutlet weak var tripDescription: UILabel!
+    @IBOutlet weak var crumbsLabel: UILabel!
     @IBOutlet weak var crumbsTableView: UITableView!
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var addCrumbButton: UIButton!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
-
+    
     private let crumbObjectManager = CrumbObjectManager()
     private var trip: TripObject
     private var photo: UIImage?

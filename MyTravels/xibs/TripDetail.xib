@@ -28,6 +28,7 @@
             <connections>
                 <outlet property="actionButton" destination="cqK-2r-0rY" id="Qs6-Pe-46i"/>
                 <outlet property="addCrumbButton" destination="xy0-8u-9D9" id="QJw-jK-wtS"/>
+                <outlet property="crumbsLabel" destination="qjN-Ne-RNR" id="Ear-PI-9cz"/>
                 <outlet property="crumbsTableView" destination="zzF-L7-dln" id="n4i-vq-hoB"/>
                 <outlet property="tableViewHeightConstraint" destination="YYQ-Z3-G6F" id="kP0-Pz-YtR"/>
                 <outlet property="tripDescription" destination="Mw3-zz-57d" id="HFK-Uu-1mQ"/>

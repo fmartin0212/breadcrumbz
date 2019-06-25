@@ -49,7 +49,7 @@ extension TripDataSourceAndDelegate: UITableViewDataSource {
         if editingStyle == .delete {
             guard let trips = TripController.shared.frc.fetchedObjects else { return }
             let trip = trips[indexPath.row]
-            TripController.shared.delete(trip: trip)
+//            TripController.shared.delete(trip: trip)
         }
     }
     

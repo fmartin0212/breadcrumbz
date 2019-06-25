@@ -19,5 +19,6 @@ class DeleteObjectFromCoreData: PSOperation {
     
     override func execute() {
         CoreDataManager.delete(object: object)
+        finish()
     }
 }

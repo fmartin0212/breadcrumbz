@@ -32,11 +32,31 @@ class DeleteTripGroupOp: GroupOperation {
         let deleteAllCrumbsGroupOp = DeleteTripCrumbsGroupOp(context: context)
         let deleteTripFromCloudOp = DeleteTripFromCloudOp(context: context)
         let deleteTripFromCoreDataOp = DeleteObjectFromCoreData(object: context.trip)
+        let doneOp = DoneOp(context: context, completion: completion)
         deleteTripPhotoFromCoreDataOp.addDependency(deleteTripPhotoFromCloudOp)
         deleteTripFromCloudOp.addDependency(deleteAllCrumbsGroupOp)
         deleteTripFromCoreDataOp.addDependency(deleteTripFromCloudOp)
-        super.init(operations: [deleteTripPhotoFromCloudOp, deleteTripPhotoFromCoreDataOp, deleteAllCrumbsGroupOp, deleteTripFromCoreDataOp, deleteTripFromCloudOp])
+        doneOp.addDependency(deleteTripFromCoreDataOp)
+        super.init(operations: [deleteTripPhotoFromCloudOp, deleteTripPhotoFromCoreDataOp, deleteAllCrumbsGroupOp, deleteTripFromCloudOp, deleteTripFromCoreDataOp, doneOp])
     }
 }
 
-
+class DoneOp: PSOperation {
+    let context: TripContextProtocol
+    let completion: (Result<Bool, FireError>) -> Void
+    
+    init(context: TripContextProtocol, completion: @escaping (Result<Bool, FireError>) -> Void) {
+        self.context = context
+        self.completion = completion
+    }
+    
+    override func execute() {
+        if let error = context.error {
+            completion(.failure(error))
+            finish()
+        } else {
+            completion(.success(true))
+            finish()
+        }
+    }
+}
