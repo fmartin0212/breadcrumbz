@@ -9,22 +9,16 @@
 import Foundation
 import PSOperations
 
-class DeleteCrumbParentGroupOp: GroupOperation {
-    init(crumb: Place, context: TripContextProtocol) {
-        let deleteCrumbPhotosGroupOp = DeleteCrumbPhotosGroupOp(crumb: crumb, context: context)
-        let deleteCrumbGroupOp = DeleteCrumbGroupOp(crumb: crumb, context: context)
-        deleteCrumbGroupOp.addDependency(deleteCrumbPhotosGroupOp)
-        super.init(operations: [deleteCrumbPhotosGroupOp, deleteCrumbGroupOp])
-    }
-}
-
 class DeleteCrumbGroupOp: GroupOperation {
-    
-    init(crumb: Place, context: TripContextProtocol) {
+    init(crumb: Place, context: TripContextProtocol, completion: @escaping (Result<Bool, FireError>) -> Void) {
+        let deleteCrumbPhotosGroupOp = DeleteCrumbPhotosGroupOp(crumb: crumb, context: context)
         let deleteCrumbFromCloudOp = DeleteCrumbFromCloudOp(crumb: crumb, context: context)
         let deleteCrumbFromCoreDataOp = DeleteObjectFromCoreData(object: crumb)
+        let doneOp = DoneOp(context: context, completion: completion)
+        deleteCrumbFromCloudOp.addDependency(deleteCrumbPhotosGroupOp)
         deleteCrumbFromCoreDataOp.addDependency(deleteCrumbFromCloudOp)
-        super.init(operations: [deleteCrumbFromCloudOp, deleteCrumbFromCoreDataOp])
+        doneOp.addDependency(deleteCrumbFromCoreDataOp)
+        super.init(operations: [deleteCrumbPhotosGroupOp, deleteCrumbFromCloudOp, deleteCrumbFromCoreDataOp, doneOp])
     }
 }
 

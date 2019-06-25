@@ -68,18 +68,20 @@ extension UIViewController {
     }
     
     @discardableResult func enableLoadingState() -> LoadingView {
-        let loadingView = presentLoadingView()
+        let loadingView = self.presentLoadingView()
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        toggleEnabledNavBarItems()
-        toggleEnabledTabBarItems()
+        self.toggleEnabledNavBarItems()
+        self.toggleEnabledTabBarItems()
         return loadingView
     }
     
     func disableLoadingState(_ loadingView: LoadingView) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        toggleEnabledNavBarItems()
-        toggleEnabledTabBarItems()
-        loadingView.removeFromSuperview()
+        DispatchQueue.main.async { [weak self] in
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            self?.toggleEnabledNavBarItems()
+            self?.toggleEnabledTabBarItems()
+            loadingView.removeFromSuperview()
+        }
     }
     
     
@@ -204,4 +206,3 @@ extension UIView {
         self.layer.shadowOffset = CGSize(width: 0, height: 2)
     }
 }
-

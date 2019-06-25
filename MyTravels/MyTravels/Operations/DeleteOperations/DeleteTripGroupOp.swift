@@ -43,7 +43,7 @@ class DeleteTripGroupOp: GroupOperation {
 
 class DoneOp: PSOperation {
     let context: TripContextProtocol
-    let completion: (Result<Bool, FireError>) -> Void
+    let completion: ((Result<Bool, FireError>) -> Void)?
     
     init(context: TripContextProtocol, completion: @escaping (Result<Bool, FireError>) -> Void) {
         self.context = context
@@ -52,10 +52,10 @@ class DoneOp: PSOperation {
     
     override func execute() {
         if let error = context.error {
-            completion(.failure(error))
+            completion?(.failure(error))
             finish()
         } else {
-            completion(.success(true))
+            completion?(.success(true))
             finish()
         }
     }

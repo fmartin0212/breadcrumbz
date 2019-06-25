@@ -242,9 +242,11 @@ extension TripListVC {
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] (_) in
             let loadingView = self?.enableLoadingState()
             TripController.shared.delete(trip: trip) { (result) in
-                self?.trips.remove(at: indexPath.row)
-                self?.deletedIndexPath = indexPath
-                self?.disableLoadingState(loadingView!)
+                DispatchQueue.main.async { [weak self] in
+                    self?.trips.remove(at: indexPath.row)
+                    self?.deletedIndexPath = indexPath
+                    self?.disableLoadingState(loadingView!)
+                }
             }
         }
         alertController.addAction(cancelAction)

@@ -118,6 +118,17 @@ extension TripDetailVC: UITableViewDataSource {
         cell.crumbImageView.image = image
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if state == .shared { return false }
+        else { return true }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+        }
+    }
 }
 
 extension TripDetailVC: UITableViewDelegate {
