@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import PSOperations
 
 class PlaceController {
     
@@ -22,6 +23,8 @@ class PlaceController {
     
     static var shared = PlaceController()
     let firestoreService: FirestoreServiceProtocol
+    let dispatchQueue = PSOperationQueue()
+    
     init() {
         firestoreService = FirestoreService()
     }
@@ -87,7 +90,16 @@ extension PlaceController {
      Deletes a place from the Core Data MOC.
      - parameter place : The place to be deleted.
      */
-    func delete(place: Place) {
+    func delete(place: Place, completion: @escaping (Result<Bool, FireError>) -> Void) {
+        let deleteCrumbGroupOp = DeleteCrumbGroupOp(crumb: place) { (result) in
+            switch result {
+            case .success(_):
+                completion(.success(true))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+        
         CoreDataManager.delete(object: place)
     }
     

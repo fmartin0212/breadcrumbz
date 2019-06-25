@@ -9,8 +9,8 @@
 import Foundation
 import PSOperations
 
-class DeleteTripContext: TripContextProtocol {
-    let trip: Trip
+class DeleteTripContext: TripContextProtocol {  
+    var trip: Trip
     var error: FireError?
     let firestoreService: FirestoreServiceProtocol
     var firebaseStorageService: FirebaseStorageServiceProtocol
@@ -42,10 +42,10 @@ class DeleteTripGroupOp: GroupOperation {
 }
 
 class DoneOp: PSOperation {
-    let context: TripContextProtocol
+    let context: OperationContextProtocol
     let completion: ((Result<Bool, FireError>) -> Void)?
     
-    init(context: TripContextProtocol, completion: @escaping (Result<Bool, FireError>) -> Void) {
+    init(context: OperationContextProtocol, completion: @escaping (Result<Bool, FireError>) -> Void) {
         self.context = context
         self.completion = completion
     }

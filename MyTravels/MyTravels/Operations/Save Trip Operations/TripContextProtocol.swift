@@ -8,8 +8,15 @@
 
 import Foundation
 
-protocol TripContextProtocol {
-    var trip: Trip { get }
+protocol TripContextProtocol: OperationContextProtocol {
+    var trip: Trip { get set }
+}
+
+protocol CrumbContext: OperationContextProtocol {
+    var crumb: Place { get set}
+}
+
+protocol OperationContextProtocol {
     var firestoreService: FirestoreServiceProtocol { get }
     var firebaseStorageService: FirebaseStorageServiceProtocol { get }
     var error: FireError? { get set }

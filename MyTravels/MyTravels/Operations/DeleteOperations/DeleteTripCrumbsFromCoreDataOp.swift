@@ -8,12 +8,12 @@
 
 import Foundation
 import PSOperations
-
-class DeleteCrumbsFrom: GroupOperation {
-    init(context: DeleteTripContext) {
-        let crumbs = context.trip.places?.allObjects as! [Place]
-        let deleteObjectFromCloudOps = crumbs.map { DeleteCrumbFromCloudOp(crumb: $0, context: context) }
-        super.init(operations: deleteObjectFromCloudOps)
-    }
-}
+//
+//class DeleteCrumbsFrom: GroupOperation {
+//    init(context: DeleteTripContext) {
+//        let crumbs = context.trip.places?.allObjects as! [Place]
+//        let deleteObjectFromCloudOps = crumbs.map { DeleteCrumbFromCloudOp(crumb: $0, context: context) }
+//        super.init(operations: deleteObjectFromCloudOps)
+//    }
+//}
 

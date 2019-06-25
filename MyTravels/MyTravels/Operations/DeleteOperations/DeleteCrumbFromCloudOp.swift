@@ -11,9 +11,9 @@ import PSOperations
 
 class DeleteCrumbFromCloudOp: PSOperation {
     let crumb: Place
-    let context: TripContextProtocol
+    let context: DeleteCrumbContext
     
-    init(crumb: Place, context: TripContextProtocol) {
+    init(crumb: Place, context: DeleteCrumbContext) {
         self.crumb = crumb
         self.context = context
     }

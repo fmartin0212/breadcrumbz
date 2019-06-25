@@ -291,7 +291,7 @@ extension TripDetailViewController: UITableViewDelegate {
         if editingStyle == .delete {
             guard let placeArray = array as? [[Place]] else { return }
             let place = placeArray[indexPath.section - 2][indexPath.row]
-            PlaceController.shared.delete(place: place)
+//            PlaceController.shared.delete(place: place) {
             setUpArrays()
         }
     }

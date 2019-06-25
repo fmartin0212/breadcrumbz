@@ -9,8 +9,22 @@
 import Foundation
 import PSOperations
 
+class DeleteCrumbContext: CrumbContext {
+    var crumb: Place
+    var firestoreService: FirestoreServiceProtocol
+    var firebaseStorageService: FirebaseStorageServiceProtocol
+    var error: FireError?
+    
+    init(crumb: Place, firestoreService: FirestoreServiceProtocol = FirestoreService(), firebaseStorageService: FirebaseStorageServiceProtocol = FirebaseStorageService()) {
+        self.crumb = crumb
+        self.firestoreService = firestoreService
+        self.firebaseStorageService = firebaseStorageService
+    }
+}
+
 class DeleteCrumbGroupOp: GroupOperation {
-    init(crumb: Place, context: TripContextProtocol, completion: @escaping (Result<Bool, FireError>) -> Void) {
+    init(crumb: Place, completion: @escaping (Result<Bool, FireError>) -> Void) {
+        let context = DeleteCrumbContext(crumb: crumb)
         let deleteCrumbPhotosGroupOp = DeleteCrumbPhotosGroupOp(crumb: crumb, context: context)
         let deleteCrumbFromCloudOp = DeleteCrumbFromCloudOp(crumb: crumb, context: context)
         let deleteCrumbFromCoreDataOp = DeleteObjectFromCoreData(object: crumb)
@@ -23,7 +37,7 @@ class DeleteCrumbGroupOp: GroupOperation {
 }
 
 class DeleteCrumbPhotosGroupOp: GroupOperation {
-    init(crumb: Place, context: TripContextProtocol) {
+    init(crumb: Place, context: DeleteCrumbContext) {
         let deleteCrumbPhotosFromCloudGroupOp = DeleteCrumbPhotosFromCloudOp(crumb: crumb, context: context)
         let deleteCrumbPhotosFromCoreDataOp = DeleteCrumbPhotosFromCoreDataOp(crumb: crumb)
         deleteCrumbPhotosFromCoreDataOp.addDependency(deleteCrumbPhotosFromCloudGroupOp)
@@ -42,7 +56,7 @@ class DeleteCrumbPhotosFromCoreDataOp: GroupOperation {
 }
 
 class DeleteCrumbPhotosFromCloudOp: GroupOperation {
-    init(crumb: Place, context: TripContextProtocol) {
+    init(crumb: Place, context: DeleteCrumbContext) {
         if let allCrumbPhotos = crumb.photos?.allObjects.compactMap({ ($0 as? Photo) }),
             allCrumbPhotos.count > 0 {
             let deleteObjectOps = allCrumbPhotos.map { DeleteObjectFromStorageOp(object: $0, context: context) }
@@ -80,6 +94,8 @@ class DeleteTripCrumbsFromCoreDataOp: PSOperation {
         finish()
     }
 }
+
+
 
 class DeleteTripCrumbsFromCloudOp: PSOperation {
     let context: DeleteTripContext

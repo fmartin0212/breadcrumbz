@@ -126,7 +126,8 @@ extension TripDetailVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            
+            let crumb = crumbs[indexPath.row] as! Place
+            presentCrumbDeleteAlert(for: crumb, indexPath: indexPath)
         }
     }
 }
@@ -148,7 +149,6 @@ extension TripDetailVC: UITableViewDelegate {
 }
 
 extension TripDetailVC {
-    
     private func updateViews() {
         if let photo = photo {
             tripImageView.image = photo
@@ -164,7 +164,6 @@ extension TripDetailVC {
     
     private func formatViews() {
         title = trip.name
-        
         if trip is SharedTrip {
             addCrumbButton.isHidden = true
             actionButton.setImage(UIImage(named: "more"), for: .normal)
@@ -177,7 +176,6 @@ extension TripDetailVC {
     }
     
     private func presentShareAlertController() {
-        
         let alertController = UIAlertController(title: "Share trip", message: "Enter a username below to share your trip", preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -205,7 +203,6 @@ extension TripDetailVC {
     }
     
     @objc private func actionButtonTapped() {
-        
         let actionAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let blockUserAction = UIAlertAction(title: "Block user", style: .default) { (_) in
@@ -239,6 +236,25 @@ extension TripDetailVC {
         actionAlertController.addAction(blockUserAction)
         actionAlertController.addAction(cancelAction)
         self.present(actionAlertController, animated: true, completion: nil)
+    }
+    
+    func presentCrumbDeleteAlert(for crumb: Place, indexPath: IndexPath) {
+        let title = "Are you sure?"
+        let message = crumb.uid == nil ? "Your crumb will be gone forever." : "Neither you nor your crumb's followers will be able to see the crumb again."
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] (_) in
+            let loadingView = self?.enableLoadingState()
+            PlaceController.shared.delete(place: crumb) { (result) in
+                DispatchQueue.main.async { [weak self] in
+                    self?.crumbs.remove(at: indexPath.row)
+                    self?.disableLoadingState(loadingView!)
+                }
+            }
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        present(alertController, animated: true, completion: nil)
     }
     
 }

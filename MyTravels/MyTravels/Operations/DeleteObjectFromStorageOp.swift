@@ -11,9 +11,9 @@ import PSOperations
 
 class DeleteObjectFromStorageOp: PSOperation {
     let object: FirebaseStorageSavable
-    let context: TripContextProtocol
+    let context: OperationContextProtocol
     
-    init(object: FirebaseStorageSavable, context: TripContextProtocol) {
+    init(object: FirebaseStorageSavable, context: OperationContextProtocol) {
         self.object = object
         self.context = context
     }
