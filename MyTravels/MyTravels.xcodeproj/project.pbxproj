@@ -41,7 +41,6 @@
 		B73880002285097A00D875AA /* AddPhotoPathToCrumbOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7387FFF2285097A00D875AA /* AddPhotoPathToCrumbOp.swift */; };
 		B73880022285192A00D875AA /* AddCrumbUIDsToTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73880012285192A00D875AA /* AddCrumbUIDsToTrip.swift */; };
 		B739261320362E5F0050B580 /* SharedTripsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B739261220362E5F0050B580 /* SharedTripsController.swift */; };
-		B7504D3222A87C810002D11E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7504D3122A87C800002D11E /* Coordinator.swift */; };
 		B75E335C20D3150500839678 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E335B20D3150500839678 /* SignUpViewController.swift */; };
 		B75E335E20D316DD00839678 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E335D20D316DD00839678 /* TextFieldTableViewCell.swift */; };
 		B76107182212331D001F79B6 /* Poppins-ExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B76107172212331A001F79B6 /* Poppins-ExtraLightItalic.otf */; };
@@ -110,6 +109,7 @@
 		B7DA1B7D202E2B900007497A /* InternalUserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B7C202E2B900007497A /* InternalUserController.swift */; };
 		B7DA1B7F202F9FBC0007497A /* FetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */; };
 		B7DA1B822030E70C0007497A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DA1B812030E70C0007497A /* SearchViewController.swift */; };
+		B7DF938422C6C21D007421BA /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DF938322C6C21D007421BA /* Coordinator.swift */; };
 		B7F75C0220577BB200C876A0 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F75C0120577BB200C876A0 /* Onboarding.storyboard */; };
 		B7F75C07205842E600C876A0 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C06205842E600C876A0 /* OnboardingPageViewController.swift */; };
 		B7F75C092058521C00C876A0 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F75C082058521C00C876A0 /* ExplanationViewController.swift */; };
@@ -187,7 +187,6 @@
 		B7387FFF2285097A00D875AA /* AddPhotoPathToCrumbOp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoPathToCrumbOp.swift; sourceTree = "<group>"; };
 		B73880012285192A00D875AA /* AddCrumbUIDsToTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCrumbUIDsToTrip.swift; sourceTree = "<group>"; };
 		B739261220362E5F0050B580 /* SharedTripsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTripsController.swift; sourceTree = "<group>"; };
-		B7504D3122A87C800002D11E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Coordinator.swift; path = "/Users/frankmartin/Desktop/iOS/Personal Projects/breadcrumbz/MyTravels/MyTravels/Coordinator.swift"; sourceTree = "<absolute>"; };
 		B75E335B20D3150500839678 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B75E335D20D316DD00839678 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		B76107172212331A001F79B6 /* Poppins-ExtraLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLightItalic.otf"; sourceTree = "<group>"; };
@@ -260,6 +259,7 @@
 		B7DA1B7C202E2B900007497A /* InternalUserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalUserController.swift; sourceTree = "<group>"; };
 		B7DA1B7E202F9FBC0007497A /* FetchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchViewController.swift; sourceTree = "<group>"; };
 		B7DA1B812030E70C0007497A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		B7DF938322C6C21D007421BA /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		B7F75C0120577BB200C876A0 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		B7F75C06205842E600C876A0 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		B7F75C082058521C00C876A0 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewController.swift; sourceTree = "<group>"; };
@@ -444,7 +444,7 @@
 			children = (
 				B7F898EF229D9A030012121A /* FMImage.swift */,
 				B7F898F1229DC3FD0012121A /* GenericScrollingLabelVC.xib */,
-				B7504D3122A87C800002D11E /* Coordinator.swift */,
+				B7DF938322C6C21D007421BA /* Coordinator.swift */,
 				B7F898F3229DC6C70012121A /* GenericScrollingLabelViewController.swift */,
 				B737CD792291DA750007FF80 /* FMCloseButton.swift */,
 				B7336E882263E9E000143812 /* CacheManager.swift */,
@@ -803,7 +803,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MyTravels/Pods-MyTravels-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
@@ -830,7 +830,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyTravels/Pods-MyTravels-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyTravels/Pods-MyTravels-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DFF1DB9B59DB479D49482023 /* [CP] Check Pods Manifest.lock */ = {
@@ -902,6 +902,7 @@
 				B7F898F4229DC6C70012121A /* GenericScrollingLabelViewController.swift in Sources */,
 				B71248D4222A292B00D6C4A5 /* ViewControllerProtocols.swift in Sources */,
 				B7DA1B822030E70C0007497A /* SearchViewController.swift in Sources */,
+				B7DF938422C6C21D007421BA /* Coordinator.swift in Sources */,
 				B7F75C07205842E600C876A0 /* OnboardingPageViewController.swift in Sources */,
 				B73880002285097A00D875AA /* AddPhotoPathToCrumbOp.swift in Sources */,
 				B7FFBEFE22BB0B5400676D69 /* DeleteTripCrumbsFromCloudOp.swift in Sources */,
@@ -944,7 +945,6 @@
 				B76B2F722245D50F00E688F4 /* EmptyTripStateView.swift in Sources */,
 				B7FFBEFA22BAFFB500676D69 /* DeleteTripCrumbsFromCoreDataOp.swift in Sources */,
 				B7FFBF0222BB1F3600676D69 /* DeleteObjectFromCoreData.swift in Sources */,
-				B7504D3222A87C810002D11E /* Coordinator.swift in Sources */,
 				B762265521EFC9510045F260 /* FirebaseSyncable.swift in Sources */,
 				B7DA1B71202E140C0007497A /* Place+CoreDataClass.swift in Sources */,
 				B7FFBEF622BAFC1B00676D69 /* DeleteTripFromCoreDataOp.swift in Sources */,
