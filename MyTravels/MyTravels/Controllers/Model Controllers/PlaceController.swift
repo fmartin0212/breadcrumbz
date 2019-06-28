@@ -23,7 +23,7 @@ class PlaceController {
     
     static var shared = PlaceController()
     let firestoreService: FirestoreServiceProtocol
-    let dispatchQueue = PSOperationQueue()
+    let operationQueue = PSOperationQueue()
     
     init() {
         firestoreService = FirestoreService()
@@ -99,8 +99,7 @@ extension PlaceController {
                 completion(.failure(error))
             }
         }
-        
-        CoreDataManager.delete(object: place)
+        operationQueue.addOperation(deleteCrumbGroupOp)
     }
     
     func uploadPlaces(for trip: Trip,
